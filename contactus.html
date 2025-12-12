@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Start Your Project | SCL DA</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        @font-face {
+            font-family: OpenSans-Regular;
+            src: url(/fonts/Rajdhani-Regular.ttf);
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --text: #1e293b;
+            --text-light: #64748b;
+            --bg: #ffffff;
+            --bg-alt: #f8fafc;
+            --border: #e2e8f0;
+            --success: #10b981;
+        }
+
+        body {
+            font-family: 'OpenSans-Regular' !important;
+            line-height: 1.6;
+            color: var(--text);
+            background: var(--bg);
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 100px 20px 120px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="60" height="60" xmlns="http://www.w3.org/2000/svg"><path d="M30 0L60 30L30 60L0 30Z" fill="rgba(255,255,255,0.03)"/></svg>');
+            opacity: 0.4;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 20px;
+            letter-spacing: -1px;
+        }
+
+        .hero .subtitle {
+            font-size: 1.5rem;
+            color: rgba(255,255,255,0.95);
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+
+        .hero .support-text {
+            font-size: 1.1rem;
+            color: rgba(255,255,255,0.85);
+            margin-bottom: 40px;
+        }
+
+        .cta-btn {
+            display: inline-block;
+            background: white;
+            color: var(--primary);
+            padding: 16px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+        }
+
+        .container {
+            max-width: 900px;
+            margin: -60px auto 0;
+            padding: 0 20px 80px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .form-card {
+            background: white;
+            border-radius: 16px;
+            padding: 50px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+        }
+
+        .form-section {
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: var(--text);
+        }
+
+        .radio-group {
+            display: grid;
+            gap: 15px;
+        }
+
+        .radio-option {
+            position: relative;
+        }
+
+        .radio-option input[type="radio"] {
+            position: absolute;
+            opacity: 0;
+        }
+
+        .radio-label {
+            display: block;
+            padding: 20px 25px;
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .radio-option input[type="radio"]:checked + .radio-label {
+            border-color: var(--primary);
+            background: rgba(99, 102, 241, 0.05);
+        }
+
+        .radio-label:hover {
+            border-color: var(--primary);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.15);
+        }
+
+        .radio-label strong {
+            display: block;
+            font-size: 1.1rem;
+            color: var(--text);
+            margin-bottom: 5px;
+        }
+
+        .radio-label span {
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            font-weight: 500;
+            margin-bottom: 8px;
+            color: var(--text);
+        }
+
+        .required {
+            color: #ef4444;
+        }
+
+        .optional {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            font-weight: 400;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 14px 18px;
+            border: 2px solid var(--border);
+            border-radius: 10px;
+            font-size: 1rem;
+            font-family: inherit;
+            transition: all 0.3s ease;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+        }
+
+        textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .file-upload {
+            position: relative;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .file-upload input[type="file"] {
+            position: absolute;
+            opacity: 0;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+        }
+
+        .file-upload-label {
+            display: block;
+            padding: 30px;
+            border: 2px dashed var(--border);
+            border-radius: 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .file-upload-label:hover {
+            border-color: var(--primary);
+            background: rgba(99, 102, 241, 0.03);
+        }
+
+        .submit-btn {
+            width: 100%;
+            background: var(--primary);
+            color: white;
+            padding: 18px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(99, 102, 241, 0.3);
+        }
+
+        .success-message {
+            display: none;
+            background: var(--success);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            margin-top: 20px;
+            font-weight: 500;
+        }
+
+        .trust-section {
+            background: var(--bg-alt);
+            padding: 80px 20px;
+            text-align: center;
+        }
+
+        .trust-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .trust-statement {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            margin-bottom: 40px;
+        }
+
+        .testimonial {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            color: var(--text);
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+
+        .testimonial-author {
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .contact-section {
+            padding: 80px 20px;
+            background: white;
+        }
+
+        .contact-content {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .contact-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 40px;
+            color: var(--text);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            text-align: left;
+        }
+
+        .contact-item {
+            padding: 25px;
+            background: var(--bg-alt);
+            border-radius: 12px;
+        }
+
+        .contact-item h3 {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+
+        .contact-item a {
+            color: var(--text);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .contact-item a:hover {
+            color: var(--primary);
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero .subtitle {
+                font-size: 1.2rem;
+            }
+
+            .form-card {
+                padding: 30px 20px;
+            }
+
+            .container {
+                padding: 0 15px 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Start Your Project With SCL DA</h1>
+            <p class="subtitle">We help brands, startups, and enterprises build, design, and scale digital experiences.</p>
+            <p class="support-text">Fill in the form and our team will respond within 24 hours.</p>
+            <a href="#enquiry-form" class="cta-btn">Enquire Now</a>
+        </div>
+    </section>
+
+    <div class="container">
+        <div class="form-card" id="enquiry-form">
+            <form id="contactForm" action="https://formsubmit.co/shinsalomboto45@gmail.com" method="POST">
+                <input type="hidden" name="_captcha" value="false">
+                <div class="form-section">
+                    <h2 class="section-title">What do you need? <span class="required">*</span></h2>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" id="development" name="service" value="Website Development" required>
+                            <label for="development" class="radio-label">
+                                <strong>Website Development</strong>
+                                <span>Perfect for ambitious businesses, professionals, and service brands who want to dominate their market with a premium online presence.</span>
+                            </label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="brand" name="service" value="E-Commerce Development">
+                            <label for="brand" class="radio-label">
+                                <strong>E-Commerce Development</strong>
+                                <span>For brands ready to sell online like the big players — 24/7, anywhere in the world.</span>
+                            </label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="marketing" name="service" value="Custom Platform Development">
+                            <label for="marketing" class="radio-label">
+                                <strong>Custom Platform Development</strong>
+                                <span>When off-the-shelf won’t cut it — SaaS products, membership sites, client portals, marketplaces, automation systems.</span>
+                            </label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="retainer" name="service" value="retainer">
+                            <label for="retainer" class="radio-label">
+                                <strong>Digiboost Care Plans</strong>
+                                <span>Ongoing monthly support, maintenance, or creative services.</span>
+                            </label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="other" name="service" value="other">
+                            <label for="other" class="radio-label">
+                                <strong>Something Else</strong>
+                                <span>General support or consultation.</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h2 class="section-title">Your Details</h2>
+                    
+                    <div class="form-group">
+                        <label for="fullName">Full Name <span class="required">*</span></label>
+                        <input type="text" id="fullName" name="fullName" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email Address <span class="required">*</span></label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone">Phone / WhatsApp Number <span class="optional">(for faster communication)</span></label>
+                        <input type="tel" id="phone" name="phone" placeholder="+27 XX XXX XXXX">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="company">Company Name <span class="optional">(optional)</span></label>
+                        <input type="text" id="company" name="company">
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h2 class="section-title">Project Information</h2>
+                    
+                    <div class="form-group">
+                        <label for="budget">Budget Range <span class="required">*</span></label>
+                        <select id="budget" name="budget" required>
+                            <option value="">Select your budget range</option>
+                            <option value="1500-5000">R1,500 – R5,000</option>
+                            <option value="5000-15000">R5,000 – R15,000</option>
+                            <option value="15000-35000">R15,000 – R35,000</option>
+                            <option value="35000-100000">R35,000 – R100,000</option>
+                            <option value="100000+">R100,000+</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="timeline">Project Timeline <span class="required">*</span></label>
+                        <select id="timeline" name="timeline" required>
+                            <option value="">Select your timeline</option>
+                            <option value="asap">As soon as possible</option>
+                            <option value="1-2weeks">1–2 weeks</option>
+                            <option value="1month">1 month</option>
+                            <option value="2-3months">2–3 months</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="description">Describe Your Project <span class="required">*</span></label>
+                        <textarea id="description" name="description" placeholder="Tell us more about what you're looking to build, design, or grow." required></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Upload Files <span class="optional">(optional - briefs, PDFs, screenshots, brand guides)</span></label>
+                        <div class="file-upload">
+                            <input type="file" id="files" name="files" multiple accept=".pdf,.doc,.docx,.png,.jpg,.jpeg">
+                            <label for="files" class="file-upload-label">
+                                <div>📎 Click to upload or drag files here</div>
+                                <div style="font-size: 0.9rem; color: var(--text-light); margin-top: 8px;">PDF, DOC, Images accepted</div>
+                            </label>
+                        </div>
+                        <div id="fileList" style="margin-top: 10px; font-size: 0.9rem; color: var(--text-light);"></div>
+                    </div>
+                </div>
+
+                <button type="submit" class="submit-btn">Submit Enquiry</button>
+                
+                <div class="success-message" id="successMessage">
+                    ✓ Thank you! Our team has received your enquiry. We will respond within 24 hours.
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <section class="trust-section">
+        <div class="trust-content">
+            <p class="trust-statement">Trusted by African innovators, creators, and fast-growing enterprises.</p>
+            
+            <div class="testimonial">
+                <p class="testimonial-text">"SCL DA transformed our digital presence completely. Their attention to detail and strategic thinking is exceptional."</p>
+                <p class="testimonial-author">— Jean Pierre L., CEO of Tongil Medicare (Pty) Ltd</p>
+            </div>
+            
+            <div class="testimonial">
+                <p class="testimonial-text">"Professional, efficient, and results-driven. They delivered beyond our expectations."</p>
+                <p class="testimonial-author">— Sine Shabala., Founder of Oneway Connect</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact-section">
+        <div class="contact-content">
+            <h2 class="contact-title">Get In Touch</h2>
+            <div class="contact-grid">
+                <div class="contact-item">
+                    <h3>Email</h3>
+                    <p><a href="mailto:contact@softwarecreativelabs.com">contact@softwarecreativelabs.com</a></p>
+                </div>
+                <div class="contact-item">
+                    <h3>WhatsApp</h3>
+                    <p><a href="https://wa.me/27740194690" target="_blank">Chat with us</a></p>
+                </div>
+                <div class="contact-item">
+                    <h3>Locations</h3>
+                    <p>Cape Town, South Africa<br>50 Long Street</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // File upload display
+        const fileInput = document.getElementById('files');
+        const fileList = document.getElementById('fileList');
+
+        fileInput.addEventListener('change', (e) => {
+            const files = Array.from(e.target.files);
+            if (files.length > 0) {
+                fileList.innerHTML = '<strong>Selected files:</strong><br>' + 
+                    files.map(f => `• ${f.name}`).join('<br>');
+            } else {
+                fileList.innerHTML = '';
+            }
+        });
+
+        // Smooth scroll for CTA button
+        document.querySelector('.cta-btn').addEventListener('click', (e) => {
+            e.preventDefault();
+            document.getElementById('enquiry-form').scrollIntoView({ 
+                behavior: 'smooth',
+                block: 'start'
+            });
+        });
+
+            // Form submission
+            document.getElementById('contactForm').addEventListener('submit', (e) => {
+                // Show success message
+                const successMsg = document.getElementById('successMessage');
+                successMsg.style.display = 'block';
+                
+                // Scroll to success message
+                successMsg.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+                // Reset form after a brief delay to let FormSubmit process
+                setTimeout(() => {
+                    e.target.reset();
+                    fileList.innerHTML = '';
+                    
+                    // Hide success message after 5 seconds
+                    setTimeout(() => {
+                        successMsg.style.display = 'none';
+                    }, 5000);
+                }, 1000);
+
+                // Allow form to submit to FormSubmit.co
+            });        // Add hover effects to form inputs
+        const inputs = document.querySelectorAll('input, select, textarea');
+        inputs.forEach(input => {
+            input.addEventListener('focus', function() {
+                this.style.transform = 'translateY(-1px)';
+            });
+            input.addEventListener('blur', function() {
+                this.style.transform = 'translateY(0)';
+            });
+        });
+    </script>
+</body>
+</html>

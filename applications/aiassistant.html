@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Intelligence – Gemini Chat</title>
+    <style>
+
+@font-face {
+
+font-family: scldafont;
+
+src:url(/fonts/Rajdhani-Light.ttf);
+
+font-weight: normal;
+font-style: normal;
+font-display: swap;
+}
+
+
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: scldafont;
+            background: url('/clientportal-background.jpg') no-repeat center center;
+            min-height: 100vh;
+            color: #333;
+        }
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 0 10px;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        .header {
+            text-align: center;
+            color: rgb(0, 0, 0);
+            background: linear-gradient(135deg, #FFFFFF 0%, #FFFFFF 100%);
+            padding: 32px 0 18px 0;
+            border-radius: 0 0 4px 4px;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            box-shadow: 0 2px 12px rgba(102,126,234,0.08);
+        }
+        .header h1 {
+            font-size: 2.2em;
+            margin-bottom: 8px;
+        }
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+        .chat-container {
+            flex: 1;
+            background: white;
+            border-radius: 4px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.10);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            margin: 24px 0 0 0;
+            min-height: 400px;
+        }
+        .chat-messages {
+            font-family: scldafont;
+            flex: 1;
+            overflow-y: auto;
+            padding: 28px 20px 20px 20px;
+            background: linear-gradient(to bottom, #ffffff, #f8f9ff);
+            position: relative;
+            scroll-behavior: smooth;
+            min-height: 300px;
+            max-height: 480px;
+        }
+        .message {
+            font-family: scldafont;
+            margin-bottom: 22px;
+            animation: fadeInUp 0.3s ease;
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .message.user { text-align: right; }
+        .message.ai { text-align: left; }
+        .message-content {
+            display: inline-block;
+            max-width: 85%;
+            padding: 15px 20px;
+            border-radius: 4px;
+            font-size: 15px;
+            line-height: 1.6;
+            word-wrap: break-word;
+            background: #f8f9ff;
+            color: #222;
+            font-family: scldafont;
+        }
+        .user .message-content {
+            font-family: scldafont;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+        .ai .message-content {
+            font-family: scldafont;
+            background: #fff;
+            color: #333;
+            border: 1px solid #e0e0e0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.07);
+        }
+        .file-message {
+            font-family: scldafont;
+            font-size: 0.97em;
+            color: #555;
+            background: #e8f4f8;
+            border-radius: 4px;
+            padding: 10px 16px;
+            margin: 8px 0;
+            display: inline-block;
+        }
+        .chat-input-sticky {
+            position: sticky;
+            bottom: 0;
+            background: #f8f9ff;
+            z-index: 10;
+            border-top: 1px solid #e0e0e0;
+            padding: 0;
+        }
+        .chat-input-container {
+            display: flex;
+            gap: 10px;
+            align-items: flex-end;
+            padding: 18px 18px 18px 18px;
+        }
+        .chat-input {
+            font-family: scldafont;
+            flex: 1;
+            padding: 12px 15px;
+            border: 2px solid #667eea;
+            border-radius: 4px;
+            font-size: 15px;
+            resize: none;
+            min-height: 20px;
+            max-height: 120px;
+            transition: all 0.3s ease;
+            background: white;
+        }
+        .chat-input:focus {
+            outline: none;
+            border-color: #764ba2;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+        .btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 12px 22px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-family: scldafont;
+        }
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.2);
+        }
+        .file-upload-label {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: #e8f4f8;
+            color: #667eea;
+            border-radius: 4px;
+            padding: 8px 14px;
+            cursor: pointer;
+            font-size: 1.1em;
+            border: 1.5px solid #667eea;
+            transition: background 0.2s;
+        }
+        .file-upload-label:hover {
+            background: #d0e6f7;
+        }
+        .file-input {
+            display: none;
+        }
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 20px;
+            color: #667eea;
+        }
+        .spinner {
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #667eea;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 10px;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .error {
+            background: #ffebee;
+            color: #c62828;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 10px 0;
+            border-left: 5px solid #c62828;
+        }
+        .scroll-to-latest {
+            position: absolute;
+            right: 24px;
+            bottom: 24px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5em;
+            box-shadow: 0 2px 8px rgba(102,126,234,0.18);
+            cursor: pointer;
+            z-index: 20;
+            opacity: 0.92;
+            transition: opacity 0.2s;
+        }
+        .scroll-to-latest.hide {
+            display: none;
+        }
+        @media (max-width: 768px) {
+            .container { padding: 0; }
+            .header h1 { font-size: 1.2em; }
+            .chat-container { margin: 10px 0 0 0; }
+            .chat-messages { max-height: 320px; }
+            .chat-input-container { padding: 10px; }
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.2.67/pdf.min.js"></script>
+    <!-- Google Translate API -->
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <img src="/images/SCL_Blue.png" style="width: 50%;">
+            <h1>AI Intelligence</h1>
+            <p>by Software Creative Labs</p>
+        </div>
+        <div class="chat-container">
+            <div class="chat-messages" id="chatMessages">
+                <div class="message ai">
+                    <div class="message-content" id="aiWelcomeMsg">
+                        Hello! I’m your AI Assistant. Ask me anything – from code to general knowledge, writing, ideas, and more!
+                    </div>
+                </div>
+                <button class="scroll-to-latest hide" id="scrollToLatestBtn" title="Scroll to latest">↓</button>
+            </div>
+            <div class="chat-input-sticky">
+                <div class="chat-input-container">
+                    <label for="fileInput" class="file-upload-label" title="Upload a text file">
+                        <span>📎</span> <span>File</span>
+                        <input type="file" id="fileInput" class="file-input" accept=".txt,.md,.csv,.json,.js,.py,.java,.c,.cpp,.html,.css,.ts,.tsx,.jsx,.xml,.sh,.php,.rb,.go,.rs,.swift,.kt,.sql,.pdf">
+                    </label>
+                    <textarea id="chatInput" class="chat-input" placeholder="Type your message... (Shift+Enter for newline)" rows="1"></textarea>
+                    <button onclick="sendMessage()" class="btn" id="sendBtn">Send</button>
+                </div>
+            </div>
+        </div>
+        <div id="loadingIndicator" class="loading">
+            <div class="spinner"></div>
+            Processing your request...
+        </div>
+    </div>
+    <script>
+        const API_KEY = 'AIzaSyDqrXG2P3VV025XwpLy_QBR0tJukXyTA6Y';
+        const API_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent';
+        let chatHistory = [];
+        let isTyping = false;
+        const chatMessages = document.getElementById('chatMessages');
+        const chatInput = document.getElementById('chatInput');
+        const scrollToLatestBtn = document.getElementById('scrollToLatestBtn');
+        // Type animation for AI
+        async function typeAnimation(element, text) {
+            element.innerHTML = '';
+            isTyping = true;
+            for (let i = 0; i < text.length; i++) {
+                element.innerHTML += text[i] === '\n' ? '<br>' : text[i];
+                await new Promise(r => setTimeout(r, 9 + Math.random()*18));
+            }
+            isTyping = false;
+        }
+        // Add message to chat
+        function addMessage(sender, content, animated=false) {
+            const messageElement = document.createElement('div');
+            messageElement.className = `message ${sender}`;
+            const messageContent = document.createElement('div');
+            messageContent.className = 'message-content';
+            if (sender === 'ai' && animated) {
+                chatMessages.appendChild(messageElement);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+                typeAnimation(messageContent, content);
+            } else {
+                messageContent.innerHTML = formatMessage(content);
+            }
+            messageElement.appendChild(messageContent);
+            chatMessages.appendChild(messageElement);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+            chatHistory.push({ sender, content });
+        }
+        // Format message content
+        function formatMessage(content) {
+            return content
+                .replace(/```([\s\S]*?)```/g, '<pre style="background:#222;color:#fff;padding:12px;border-radius:8px;overflow-x:auto;">$1</pre>')
+                .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                .replace(/\*(.*?)\*/g, '<em>$1</em>')
+                .replace(/\n/g, '<br>');
+        }
+        // Show/hide loading
+        function showLoading(show) {
+            document.getElementById('loadingIndicator').style.display = show ? 'block' : 'none';
+        }
+        // Show error
+        function showError(message) {
+            const errorDiv = document.createElement('div');
+            errorDiv.className = 'error';
+            errorDiv.textContent = message;
+            document.body.appendChild(errorDiv);
+            setTimeout(() => { document.body.removeChild(errorDiv); }, 5000);
+        }
+        // Send message
+        async function sendMessage() {
+            const input = chatInput;
+            const message = input.value.trim();
+            if (!message) return;
+            addMessage('user', message);
+            input.value = '';
+            input.style.height = 'auto';
+            showLoading(true);
+            try {
+                const historyText = chatHistory.map(m => (m.sender === 'user' ? 'User: ' : 'AI: ') + m.content).join('\n');
+                const prompt = `${historyText}\nUser: ${message}\nAI:`;
+                const response = await callGeminiAPI(prompt);
+                addMessage('ai', response, true);
+            } catch (error) {
+                addMessage('ai', 'Sorry, I encountered an error while processing your request.');
+                showError('Failed to get response: ' + error.message);
+            } finally {
+                showLoading(false);
+            }
+        }
+        // File upload
+        document.getElementById('fileInput').addEventListener('change', async function(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+            if (file.type === 'application/pdf' || /\.pdf$/i.test(file.name)) {
+                addMessage('user', `<span class='file-message'>📎 Uploaded file: <strong>${file.name}</strong> (PDF)</span>`);
+                showLoading(true);
+                try {
+                    const text = await extractPdfText(file);
+                    if (!text) throw new Error('No text found in PDF.');
+                    addMessage('user', `<pre style='background:#222;color:#fff;padding:12px;border-radius:8px;overflow-x:auto;'>${escapeHtml(text.slice(0, 2000))}${text.length > 2000 ? '\n... (truncated)' : ''}</pre>`);
+                    const historyText = chatHistory.map(m => (m.sender === 'user' ? 'User: ' : 'AI: ') + m.content).join('\n');
+                    const prompt = `${historyText}\nUser uploaded a PDF file named ${file.name} with the following extracted text:\n${text.slice(0, 8000)}\nAI: Please analyze, summarize, and answer any questions about this file.`;
+                    const response = await callGeminiAPI(prompt);
+                    addMessage('ai', response, true);
+                } catch (error) {
+                    addMessage('ai', 'Sorry, I could not extract text from the PDF.');
+                    showError('Failed to extract PDF text: ' + error.message);
+                } finally {
+                    showLoading(false);
+                }
+                return;
+            }
+            if (!file.type.startsWith('text') && !/\.(txt|md|csv|json|js|py|java|c|cpp|html|css|ts|tsx|jsx|xml|sh|php|rb|go|rs|swift|kt|sql)$/i.test(file.name)) {
+                addMessage('user', `<span class='file-message'>📎 Uploaded file: <strong>${file.name}</strong></span><br><pre style='background:#222;color:#fff;padding:12px;border-radius:8px;overflow-x:auto;'>${escapeHtml(file.name)}</pre>`);
+                addMessage('ai', 'Sorry, only text-based files are supported for analysis.');
+                return;
+            }
+            const reader = new FileReader();
+            reader.onload = async function(ev) {
+                const content = ev.target.result;
+                addMessage('user', `<span class='file-message'>📎 Uploaded file: <strong>${file.name}</strong></span><br><pre style='background:#222;color:#fff;padding:12px;border-radius:8px;overflow-x:auto;'>${escapeHtml(content.slice(0, 2000))}${content.length > 2000 ? '\n... (truncated)' : ''}</pre>`);
+                showLoading(true);
+                try {
+                    const historyText = chatHistory.map(m => (m.sender === 'user' ? 'User: ' : 'AI: ') + m.content).join('\n');
+                    const prompt = `${historyText}\nUser uploaded a file named ${file.name} with the following content:\n${content.slice(0, 8000)}\nAI: Please analyze, summarize, and answer any questions about this file.`;
+                    const response = await callGeminiAPI(prompt);
+                    addMessage('ai', response, true);
+                } catch (error) {
+                    addMessage('ai', 'Sorry, I encountered an error while processing your file.');
+                    showError('Failed to get response: ' + error.message);
+                } finally {
+                    showLoading(false);
+                }
+            };
+            reader.onerror = function() {
+                showError('Failed to read file.');
+            };
+            reader.readAsText(file);
+        });
+        // Type animation for welcome message
+        window.addEventListener('DOMContentLoaded', () => {
+            const welcome = document.getElementById('aiWelcomeMsg');
+            if (welcome) {
+                typeAnimation(welcome, welcome.textContent);
+            }
+        });
+        // Scroll to latest logic
+        function isAtBottom() {
+            return chatMessages.scrollHeight - chatMessages.scrollTop - chatMessages.clientHeight < 40;
+        }
+        function scrollToLatest() {
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+        chatMessages.addEventListener('scroll', () => {
+            if (!isAtBottom()) {
+                scrollToLatestBtn.classList.remove('hide');
+            } else {
+                scrollToLatestBtn.classList.add('hide');
+            }
+        });
+        scrollToLatestBtn.addEventListener('click', scrollToLatest);
+        // Input events
+        chatInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter' && !e.shiftKey && !isTyping) {
+                e.preventDefault();
+                sendMessage();
+            }
+        });
+        chatInput.addEventListener('input', function(e) {
+            e.target.style.height = 'auto';
+            e.target.style.height = Math.min(e.target.scrollHeight, 120) + 'px';
+        });
+        // Gemini API call
+        async function callGeminiAPI(prompt) {
+            const response = await fetch(`${API_URL}?key=${API_KEY}`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    contents: [{ parts: [{ text: prompt }] }],
+                    generationConfig: {
+                        temperature: 0.7,
+                        topK: 40,
+                        topP: 0.95,
+                        maxOutputTokens: 2048,
+                    }
+                })
+            });
+            if (!response.ok) throw new Error(`API call failed: ${response.status}`);
+            const data = await response.json();
+            if (!data.candidates || !data.candidates[0] || !data.candidates[0].content) throw new Error('Invalid response from API');
+            return data.candidates[0].content.parts[0].text;
+        }
+        // Escape HTML for code blocks
+        function escapeHtml(text) {
+            return text.replace(/[&<>"']/g, function(m) {
+                return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;','\'':'&#39;'})[m];
+            });
+        }
+        // PDF.js text extraction
+        async function extractPdfText(file) {
+            const arrayBuffer = await file.arrayBuffer();
+            const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
+            let text = '';
+            const maxPages = Math.min(pdf.numPages, 10);
+            for (let i = 1; i <= maxPages; i++) {
+                const page = await pdf.getPage(i);
+                const content = await page.getTextContent();
+                text += content.items.map(item => item.str).join(' ') + '\n';
+                if (text.length > 50000) break;
+            }
+            return text;
+        }
+    </script>
+    <!-- Language Translator Widget Styles -->
+    <style>
+        .translator-widget {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1001;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .translator-button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+            transition: all 0.3s ease;
+            font-weight: 600;
+            font-size: 14px;
+            border: none;
+            outline: none;
+        }
+
+        .translator-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+        }
+
+        .translator-button i {
+            font-size: 16px;
+        }
+
+        .translator-dropdown {
+            position: absolute;
+            top: 60px;
+            right: 0;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+            min-width: 280px;
+            max-height: 400px;
+            overflow: hidden;
+            transform: scale(0) translateY(-20px);
+            opacity: 0;
+            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .translator-dropdown.active {
+            transform: scale(1) translateY(0);
+            opacity: 1;
+        }
+
+        .translator-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .translator-header h4 {
+            margin: 0;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .close-translator {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            padding: 5px;
+            border-radius: 50%;
+            transition: background 0.2s;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .close-translator:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Google Translate Element Styling */
+        #google_translate_element {
+            padding: 15px 20px;
+        }
+
+        .goog-te-gadget {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+            font-size: 14px !important;
+        }
+
+        .goog-te-gadget-simple {
+            background: transparent !important;
+            border: none !important;
+            padding: 0 !important;
+        }
+
+        .goog-te-gadget-simple .goog-te-menu-value {
+            color: #333 !important;
+            font-size: 14px !important;
+            font-weight: 500 !important;
+        }
+
+        .goog-te-gadget-simple .goog-te-menu-value span:first-child {
+            color: #667eea !important;
+            font-weight: 600 !important;
+        }
+
+        .goog-te-gadget-simple .goog-te-menu-value span:last-child {
+            color: #666 !important;
+        }
+
+        .goog-te-gadget-simple .goog-te-menu-value:before {
+            content: "🌐 " !important;
+            margin-right: 5px !important;
+        }
+
+        /* Hide Google Translate banner */
+        .goog-te-banner-frame {
+            display: none !important;
+        }
+
+        body {
+            top: 0 !important;
+        }
+
+        /* Style the dropdown arrow */
+        .goog-te-gadget-simple .goog-te-menu-value:after {
+            content: " ▼" !important;
+            color: #667eea !important;
+            font-size: 12px !important;
+        }
+
+        .translator-footer {
+            padding: 15px 20px;
+            background: #f8f9fa;
+            display: flex;
+            justify-content: center;
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .reset-btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 600;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+            color: white;
+        }
+
+        .reset-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(255, 107, 107, 0.4);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .translator-widget {
+                top: 15px;
+                right: 15px;
+            }
+
+            .translator-button {
+                padding: 10px 16px;
+                font-size: 13px;
+            }
+
+            .translator-dropdown {
+                min-width: 260px;
+                right: -10px;
+            }
+
+            .reset-btn {
+                padding: 8px 16px;
+                font-size: 11px;
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .translator-widget {
+                top: 10px;
+                right: 10px;
+            }
+
+            .translator-button {
+                padding: 8px 12px;
+                font-size: 12px;
+            }
+
+            .translator-button span {
+                display: none;
+            }
+
+            .translator-dropdown {
+                min-width: 240px;
+                right: -20px;
+            }
+        }
+    </style>
+
+    <!-- Language Translator Widget -->
+    <div class="translator-widget">
+        <div class="translator-button" id="translatorBtn">
+            <i class="fa-solid fa-language"></i>
+            <span>Translate</span>
+        </div>
+        
+        <div class="translator-dropdown" id="translatorDropdown">
+            <div class="translator-header">
+                <h4>Choose Language</h4>
+                <button class="close-translator" id="closeTranslator">
+                    <i class="fa-solid fa-times"></i>
+                </button>
+            </div>
+            
+            <!-- Google Translate Element -->
+            <div id="google_translate_element"></div>
+            
+            <div class="translator-footer">
+                <button class="reset-btn" id="resetBtn">
+                    <i class="fa-solid fa-undo"></i>
+                    Reset to English
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Google Translate Widget JavaScript -->
+    <script>
+        // Google Translate Element Initialization
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'en',
+                includedLanguages: 'en,es,fr,de,it,pt,ru,zh,ja,ko,ar,hi',
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+                autoDisplay: false
+            }, 'google_translate_element');
+        }
+
+        // Simple Translator Widget Controller
+        class SimpleTranslator {
+            constructor() {
+                this.isOpen = false;
+                this.init();
+            }
+
+            init() {
+                this.translatorBtn = document.getElementById('translatorBtn');
+                this.translatorDropdown = document.getElementById('translatorDropdown');
+                this.closeTranslator = document.getElementById('closeTranslator');
+                this.resetBtn = document.getElementById('resetBtn');
+
+                this.bindEvents();
+            }
+
+            bindEvents() {
+                // Toggle dropdown
+                this.translatorBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    this.toggleDropdown();
+                });
+
+                // Close dropdown
+                this.closeTranslator.addEventListener('click', () => {
+                    this.closeDropdown();
+                });
+
+                // Reset button
+                this.resetBtn.addEventListener('click', () => {
+                    this.resetTranslation();
+                });
+
+                // Close dropdown when clicking outside
+                document.addEventListener('click', (e) => {
+                    if (!e.target.closest('.translator-widget') && this.isOpen) {
+                        this.closeDropdown();
+                    }
+                });
+
+                // Keyboard navigation
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === 'Escape' && this.isOpen) {
+                        this.closeDropdown();
+                    }
+                });
+            }
+
+            toggleDropdown() {
+                if (this.isOpen) {
+                    this.closeDropdown();
+                } else {
+                    this.openDropdown();
+                }
+            }
+
+            openDropdown() {
+                this.translatorDropdown.classList.add('active');
+                this.isOpen = true;
+            }
+
+            closeDropdown() {
+                this.translatorDropdown.classList.remove('active');
+                this.isOpen = false;
+            }
+
+            resetTranslation() {
+                // Reset Google Translate to English
+                if (window.google && window.google.translate) {
+                    const translateElement = document.querySelector('.goog-te-combo');
+                    if (translateElement) {
+                        translateElement.selectedIndex = 0;
+                        translateElement.dispatchEvent(new Event('change'));
+                    }
+                }
+
+                // Remove Google Translate banner
+                const banner = document.querySelector('.goog-te-banner-frame');
+                if (banner) {
+                    banner.remove();
+                }
+
+                // Reset body top position
+                document.body.style.top = '0px';
+
+                this.showNotification('Translation reset to English');
+            }
+
+            showNotification(message) {
+                // Create notification element
+                const notification = document.createElement('div');
+                notification.style.cssText = `
+                    position: fixed;
+                    top: 80px;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                    color: white;
+                    padding: 12px 24px;
+                    border-radius: 25px;
+                    font-size: 14px;
+                    font-weight: 600;
+                    z-index: 10000;
+                    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+                    animation: slideDown 0.3s ease;
+                `;
+                notification.textContent = message;
+                document.body.appendChild(notification);
+
+                // Remove notification after 3 seconds
+                setTimeout(() => {
+                    notification.style.animation = 'slideUp 0.3s ease';
+                    setTimeout(() => notification.remove(), 300);
+                }, 3000);
+            }
+        }
+
+        // Initialize the translator when DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            new SimpleTranslator();
+        });
+
+        // Add CSS animations for notifications
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideDown {
+                from {
+                    opacity: 0;
+                    transform: translateX(-50%) translateY(-20px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateX(-50%) translateY(0);
+                }
+            }
+            
+            @keyframes slideUp {
+                from {
+                    opacity: 1;
+                    transform: translateX(-50%) translateY(0);
+                }
+                to {
+                    opacity: 0;
+                    transform: translateX(-50%) translateY(-20px);
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,1553 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- Google Translate API -->
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+</head>
+<body>
+    	
+
+
+						 <!-- quoatation form goes here -->
+
+						
+  
+  
+  <style>
+    :root {
+      --primary: #1e348d;
+      --primary-dark: #3641b5;
+      --secondary: #5a78ff;
+      --gray-light: #f8f9fa;
+      --gray: #e9ecef;
+      --text: #333;
+      --success: #30adbe;
+      --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      --radius: 8px;
+    }
+    
+	.container {
+    width: 2000px;
+    background: #fff;
+    border-radius: 5px;
+    padding: 50px 35px 10px 35px;
+}
+   
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    
+    header {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: white;
+      padding: 2rem 0;
+      text-align: center;
+      margin-bottom: 2rem;
+      box-shadow: var(--shadow);
+    }
+    
+    h1 {
+      font-size: 2.2rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+    
+    .subtitle {
+      font-size: 1.1rem;
+      opacity: 0.9;
+    }
+    
+    .card {
+      background: white;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 2rem;
+      margin-bottom: 2rem;
+    }
+    
+    .progress-bar {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 2rem;
+      position: relative;
+    }
+    
+    .progress-bar::before {
+      content: '';
+      position: absolute;
+      top: 15px;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background-color: var(--gray);
+      z-index: 1;
+    }
+    
+    .progress-step {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background-color: var(--gray);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      color: #777;
+      position: relative;
+      z-index: 2;
+    }
+    
+    .progress-step.active {
+      background-color: var(--primary);
+      color: white;
+    }
+    
+    .progress-step.completed {
+      background-color: var(--success);
+      color: white;
+    }
+    
+    .progress-line {
+      position: absolute;
+      height: 4px;
+      background-color: var(--primary);
+      transition: width 0.3s ease;
+      top: 15px;
+      left: 0;
+      z-index: 1;
+    }
+    
+    .step {
+      display: none;
+    }
+    
+    .step.active {
+      display: block;
+      animation: fadeIn 0.5s;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    h2 {
+      font-size: 1.5rem;
+      margin-bottom: 1.5rem;
+      color: #fff;
+    }
+    
+    .form-group {
+      margin-bottom: 1.2rem;
+    }
+    
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+    }
+    
+    input, select, textarea {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ddd;
+      border-radius: var(--radius);
+      font-size: 1rem;
+      transition: border 0.3s;
+    }
+    
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(78, 84, 200, 0.1);
+    }
+    
+    textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+    
+    .checkbox-group {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 10px;
+    }
+    
+    .checkbox-item {
+      display: flex;
+      align-items: center;
+      background-color: var(--gray-light);
+      padding: 10px;
+      border-radius: var(--radius);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    
+    .checkbox-item:hover {
+      background-color: var(--gray);
+    }
+    
+    .checkbox-item input {
+      width: auto;
+      margin-right: 10px;
+    }
+    
+    .btn-container {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 2rem;
+    }
+    
+    .btn {
+      display: inline-block;
+      background-color: var(--primary);
+      color: white;
+      padding: 12px 24px;
+      border: none;
+      border-radius: var(--radius);
+      font-size: 1rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    
+    .btn:hover {
+      background-color: var(--primary-dark);
+      transform: translateY(-2px);
+    }
+    
+    .btn-outline {
+      background-color: transparent;
+      border: 1px solid var(--primary);
+      color: var(--primary);
+    }
+    
+    .btn-outline:hover {
+      background-color: rgba(78, 84, 200, 0.1);
+    }
+    
+    .file-input-container {
+      position: relative;
+      border: 2px dashed #ddd;
+      border-radius: var(--radius);
+      padding: 20px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    
+    .file-input-container:hover {
+      border-color: var(--primary);
+    }
+    
+    .file-input-container i {
+      font-size: 2rem;
+      color: #888;
+      margin-bottom: 10px;
+    }
+    
+    .file-input {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      opacity: 0;
+      cursor: pointer;
+    }
+    
+    .file-list {
+      margin-top: 15px;
+    }
+    
+    .file-item {
+      display: flex;
+      align-items: center;
+      background-color: var(--gray-light);
+      padding: 8px 12px;
+      border-radius: var(--radius);
+      margin-bottom: 8px;
+    }
+    
+    .file-item i {
+      margin-right: 10px;
+      color: var(--primary);
+    }
+    
+    .file-name {
+      flex-grow: 1;
+    }
+    
+    .remove-file {
+      color: #dc3545;
+      cursor: pointer;
+      padding: 5px;
+    }
+    
+    /* Invoice styles */
+    .invoice {
+      display: none;
+      animation: fadeIn 0.5s;
+    }
+    
+    .invoice-header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 2rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--gray);
+    }
+    
+    .invoice-company {
+      font-size: 0.9rem;
+      color: #111111;
+    }
+    
+    .invoice-details {
+      text-align: right;
+    }
+    
+    .invoice-client {
+      margin-bottom: 2rem;
+    }
+    
+    .invoice-project {
+      margin-bottom: 2rem;
+    }
+    
+    .invoice-items {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 2rem;
+    }
+    
+    .invoice-items th {
+      background-color: var(--gray-light);
+      padding: 12px;
+      text-align: left;
+    }
+    
+    .invoice-items td {
+      padding: 12px;
+      border-bottom: 1px solid var(--gray);
+    }
+    
+    .invoice-total {
+      text-align: right;
+      font-size: 1.2rem;
+      font-weight: bold;
+      margin-bottom: 2rem;
+    }
+    
+    .payment-button {
+      display: block;
+      background-color: var(--success);
+      color: white;
+      padding: 15px 30px;
+      border: none;
+      border-radius: var(--radius);
+      font-size: 1.1rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s;
+      text-align: center;
+      text-decoration: none;
+      margin: 0 auto;
+      max-width: 200px;
+    }
+    
+    .payment-button:hover {
+      opacity: 0.9;
+      transform: translateY(-2px);
+    }
+    
+    /* Summary styles */
+    .summary-item {
+      display: flex;
+      margin-bottom: 1rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--gray);
+    }
+    
+    .summary-label {
+      width: 160px;
+      font-weight: 500;
+    }
+    
+    .summary-value {
+      flex-grow: 1;
+    }
+    
+    .edit-btn {
+      color: var(--primary);
+      cursor: pointer;
+      margin-left: 10px;
+    }
+    
+    .alert {
+      padding: 10px 15px;
+      background-color: #f8d7da;
+      color: #721c24;
+      border-radius: var(--radius);
+      margin-bottom: 1rem;
+      display: none;
+    }
+
+    .pricing-note {
+      font-size: 0.9rem;
+      color: #666;
+      text-align: center;
+      margin-top: 1rem;
+    }
+
+    /* Custom select styling */
+    .service-options {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+    
+    .service-option {
+      border: 2px solid var(--gray);
+      border-radius: var(--radius);
+      padding: 20px 15px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    
+    .service-option i {
+      font-size: 2rem;
+      color: var(--primary);
+      margin-bottom: 10px;
+      display: block;
+    }
+    
+    .service-option.selected {
+      border-color: var(--primary);
+      background-color: rgba(78, 84, 200, 0.05);
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 15px;
+      }
+      
+      .card {
+        padding: 1.5rem;
+      }
+      
+      .service-options, .checkbox-group {
+        grid-template-columns: 1fr 1fr;
+      }
+      
+      .btn-container {
+        flex-direction: column;
+        gap: 10px;
+      }
+      
+      .btn {
+        width: 100%;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .service-options, .checkbox-group {
+        grid-template-columns: 1fr;
+      }
+      
+      .progress-bar {
+        overflow-x: auto;
+        padding-bottom: 10px;
+      }
+    }
+  </style>
+				
+
+  
+
+						<div class="container">
+							<div class="card" id="formCard">
+							  <div class="progress-bar">
+								<div class="progress-line" id="progressLine"></div>
+								<div class="progress-step active" id="step1Indicator">1</div>
+								<div class="progress-step" id="step2Indicator">2</div>
+								<div class="progress-step" id="step3Indicator">3</div>
+								<div class="progress-step" id="step4Indicator">4</div>
+								<div class="progress-step" id="step5Indicator">5</div>
+								<div class="progress-step" id="step6Indicator">6</div>
+							  </div>
+						
+							  <div class="alert" id="formAlert"></div>
+						
+							  <form id="projectForm">
+								<div class="step active" id="step1">
+								  <h2 style="color: #3641b5;">Choose a Project Option to Build Your Quote</h2>
+								  <div class="service-options">
+									<div class="service-option" data-value="Logo Design">
+									  <i class="fas fa-paint-brush"></i>
+									 Brand Identity Design Project
+									</div>
+									<div class="service-option" data-value="Website Design">
+									  <i class="fas fa-globe"></i>
+									  Website Development Project
+									</div>
+									<div class="service-option" data-value="Branding">
+									  <i class="fas fa-copyright"></i>
+									  Social Media Project
+									</div>
+									<div class="service-option" data-value="Content Creation">
+									  <i class="fas fa-pen-fancy"></i>
+									  Video Production & Editing Project
+									</div>
+									<div class="service-option" data-value="Content Creation">
+									  <i class="fas fa-pen-fancy"></i>
+									 Translation & Voiceover Project
+									</div>
+									<div class="service-option" data-value="Content Creation">
+									  <i class="fas fa-pen-fancy"></i>
+									  SaaS or Product UI Design Project
+									</div>
+									<div class="service-option" data-value="Content Creation">
+									  <i class="fas fa-pen-fancy"></i>
+									  Custom IT Systems Project
+									</div>
+									<div class="service-option" data-value="Content Creation">
+									  <i class="fas fa-pen-fancy"></i>
+									  IT Strategy & Integration Project
+									</div>
+								  </div>
+								  <input type="hidden" id="service" value="">
+								  <div class="btn-container">
+									<div></div> <!-- Empty div for spacing -->
+									<button type="button" class="btn" onclick="nextStep(1)">Next <i class="fas fa-arrow-right"></i></button>
+								  </div>
+								</div>
+						
+								<div class="step" id="step2">
+								  <h2>Client Information</h2>
+								  <div class="form-group">
+									<label for="name">Full Name or Company</label>
+									<input type="text" id="name" placeholder="Your name or company name">
+								  </div>
+								  <div class="form-group">
+									<label for="email">Email Address</label>
+									<input type="email" id="email" placeholder="Your email address">
+								  </div>
+								  <div class="form-group">
+									<label for="phone">Phone (optional)</label>
+									<input type="tel" id="phone" placeholder="Your phone number">
+								  </div>
+								  <div class="form-group">
+									<label for="industry">Industry / Niche</label>
+									<input type="text" id="industry" placeholder="Your business industry or niche">
+								  </div>
+								  <div class="btn-container">
+									<button type="button" class="btn btn-outline" onclick="prevStep(2)"><i class="fas fa-arrow-left"></i> Previous</button>
+									<button type="button" class="btn" onclick="nextStep(2)">Next <i class="fas fa-arrow-right"></i></button>
+								  </div>
+								</div>
+						
+								<div class="step" id="step3">
+								  <h2>Project Brief</h2>
+								  <div class="form-group">
+									<label for="projectTitle">Project Title</label>
+									<input type="text" id="projectTitle" placeholder="Give your project a name">
+								  </div>
+								  <div class="form-group">
+									<label for="description">Project Description</label>
+									<textarea id="description" placeholder="Tell us about your project, goals, and expectations"></textarea>
+								  </div>
+								  <div class="form-group">
+									<label>Reference Files (optional)</label>
+									<div class="file-input-container">
+									  <i class="fas fa-cloud-upload-alt"></i>
+									  <p>Drag & drop files here or click to browse</p>
+									  <input type="file" id="fileInput" class="file-input" multiple>
+									</div>
+									<div class="file-list" id="fileList"></div>
+								  </div>
+								  <div class="btn-container">
+									<button type="button" class="btn btn-outline" onclick="prevStep(3)"><i class="fas fa-arrow-left"></i> Previous</button>
+									<button type="button" class="btn" onclick="nextStep(3)">Next <i class="fas fa-arrow-right"></i></button>
+								  </div>
+								</div>
+						
+								<div class="step" id="step4">
+								  <h2>Scope & Deliverables</h2>
+								  <div class="form-group">
+									<label>Select Required Deliverables</label>
+									<div class="checkbox-group">
+									  <label class="checkbox-item">
+										<input type="checkbox" value="Logo" class="deliverable"> Logo Files
+									  </label>
+									  <label class="checkbox-item">
+										<input type="checkbox" value="Website" class="deliverable"> Website
+									  </label>
+									  <label class="checkbox-item">
+										<input type="checkbox" value="Social Media Kit" class="deliverable"> Social Media Kit
+									  </label>
+									  <label class="checkbox-item">
+										<input type="checkbox" value="Business Cards" class="deliverable"> Business Cards
+									  </label>
+									  <label class="checkbox-item">
+										<input type="checkbox" value="Brand Guidelines" class="deliverable"> Brand Guidelines
+									  </label>
+									  <label class="checkbox-item">
+										<input type="checkbox" value="Marketing Materials" class="deliverable"> Marketing Materials
+									  </label>
+									</div>
+								  </div>
+								  <div class="form-group">
+									<label for="revisions">Number of Revisions</label>
+									<select id="revisions">
+									  <option value="2">2 Revisions</option>
+									  <option value="3" selected>3 Revisions</option>
+									  <option value="5">5 Revisions</option>
+									  <option value="unlimited">Unlimited Revisions</option>
+									</select>
+								  </div>
+								  <div class="form-group">
+									<label for="platform">Platform or Format</label>
+									<input type="text" id="platform" placeholder="e.g., Web, Print, Social Media, All Platforms">
+								  </div>
+								  <div class="btn-container">
+									<button type="button" class="btn btn-outline" onclick="prevStep(4)"><i class="fas fa-arrow-left"></i> Previous</button>
+									<button type="button" class="btn" onclick="nextStep(4)">Next <i class="fas fa-arrow-right"></i></button>
+								  </div>
+								</div>
+						
+								<div class="step" id="step5">
+								  <h2>Timeline</h2>
+								  <div class="form-group">
+									<label for="startDate">Desired Start Date</label>
+									<input type="date" id="startDate">
+								  </div>
+								  <div class="form-group">
+									<label for="deadline">Available Completion Dates</label>
+									<input type="date" id="deadline">
+								  </div>
+								  <div class="form-group">
+									<label for="timezone">Your Time Zone</label>
+									<select id="timezone">
+									  <option value="">Select Your Time Zone</option>
+									  <option value="GMT-8">Pacific Time (GMT-8)</option>
+									  <option value="GMT-7">Mountain Time (GMT-7)</option>
+									  <option value="GMT-6">Central Time (GMT-6)</option>
+									  <option value="GMT-5">Eastern Time (GMT-5)</option>
+									  <option value="GMT">Greenwich Mean Time (GMT)</option>
+									  <option value="GMT+1">Central European Time (GMT+1)</option>
+									  <option value="GMT+2">South African Standard Time (GMT+2)</option>
+									  <option value="GMT+3">East Africa Time (GMT+3)</option>
+									  <option value="GMT+5:30">India Standard Time (GMT+5:30)</option>
+									  <option value="GMT+8">China Standard Time (GMT+8)</option>
+									  <option value="GMT+9">Japan Standard Time (GMT+9)</option>
+									  <option value="GMT+10">Australian Eastern Time (GMT+10)</option>
+									</select>
+								  </div>
+								  <div class="form-group">
+									<label for="priority">Project Priority</label>
+									<select id="priority">
+									  <option value="Standard">Standard Priority</option>
+									  <option value="Rush">Rush Priority (+25% fee)</option>
+									  <option value="Urgent">Urgent Priority (+50% fee)</option>
+									</select>
+								  </div>
+								  <div class="btn-container">
+									<button type="button" class="btn btn-outline" onclick="prevStep(5)"><i class="fas fa-arrow-left"></i> Previous</button>
+									<button type="button" class="btn" onclick="nextStep(5)">Next <i class="fas fa-arrow-right"></i></button>
+								  </div>
+								</div>
+						
+								<div class="step" id="step6">
+								  <h2>Review & Confirm</h2>
+								  <div id="summary"></div>
+								  <div class="pricing-note">* Final pricing may vary based on project complexity and specific requirements</div>
+								  <div class="btn-container">
+									<button type="button" class="btn btn-outline" onclick="prevStep(6)"><i class="fas fa-arrow-left"></i> Previous</button>
+									<button type="button" class="btn" onclick="generateInvoice()">Confirm & Generate Invoice</button>
+								  </div>
+								</div>
+							  </form>
+							</div>
+						
+							<div class="card invoice" id="invoiceCard">
+							  <div class="invoice-header">
+								<div class="invoice-company">
+									<img src="/images/SCL_Blue.png" alt="SCL Digital Logo" style="height: 60px; margin-bottom: 5px;">
+									<div>
+										<h1 style="font-size: 1.0rem;">SCL Digital Agency (Pty) Ltd</h1>
+										<address>
+										  18 Lodge Rd, Ottery , Cape Town, South Africa, 7808<br>
+										  Phone: +27 68 860 2242<br>
+										  Email: Contact@scl-agency.net</a><br>
+										  Website:www.scl-agency.net</a>
+										</address>
+									</div>
+									
+								  </div>
+								  
+								<div class="invoice-details">
+								  <div><strong>Invoice #:</strong> <span id="invoiceNumber"></span></div>
+								  <div><strong>Date:</strong> <span id="invoiceDate"></span></div>
+								</div>
+							  </div>
+						
+							  <div class="invoice-client" id="invoiceClient"></div>
+							  <div class="invoice-project" id="invoiceProject"></div>
+						
+							  <table class="invoice-items">
+								<thead>
+								  <tr>
+									<th>Item</th>
+									<th>Description</th>
+									<th>Amount (ZAR)</th>
+								  </tr>
+								</thead>
+								<tbody id="invoiceItems"></tbody>
+							  </table>
+						
+							  <div class="invoice-total">Total Due: ZAR <span id="invoiceTotal"></span></div>
+						
+							  <a href="https://softwarecreativelabs.com/payments.html" class="payment-button" target="_blank">
+								Pay Now <i class="fas fa-credit-card"></i>
+							  </a>
+							</div>
+						  </div>
+						
+						  <script>
+							// Initialize date fields with today's date and a default deadline (2 weeks)
+							document.addEventListener('DOMContentLoaded', function() {
+							  const today = new Date();
+							  const twoWeeksLater = new Date();
+							  twoWeeksLater.setDate(today.getDate() + 14);
+							  
+							  document.getElementById('startDate').valueAsDate = today;
+							  document.getElementById('deadline').valueAsDate = twoWeeksLater;
+							  
+							  // Set up service option selection
+							  const serviceOptions = document.querySelectorAll('.service-option');
+							  serviceOptions.forEach(option => {
+								option.addEventListener('click', function() {
+								  serviceOptions.forEach(o => o.classList.remove('selected'));
+								  this.classList.add('selected');
+								  document.getElementById('service').value = this.getAttribute('data-value');
+								});
+							  });
+							  
+							  // Initialize file upload
+							  const fileInput = document.getElementById('fileInput');
+							  const fileList = document.getElementById('fileList');
+							  
+							  fileInput.addEventListener('change', function() {
+								updateFileList();
+							  });
+							  
+							  function updateFileList() {
+								fileList.innerHTML = '';
+								for (let i = 0; i < fileInput.files.length; i++) {
+								  const file = fileInput.files[i];
+								  const fileItem = document.createElement('div');
+								  fileItem.className = 'file-item';
+								  
+								  const icon = document.createElement('i');
+								  icon.className = getFileIcon(file.name);
+								  
+								  const fileName = document.createElement('div');
+								  fileName.className = 'file-name';
+								  fileName.textContent = file.name;
+								  
+								  const removeBtn = document.createElement('div');
+								  removeBtn.className = 'remove-file';
+								  removeBtn.innerHTML = '<i class="fas fa-times"></i>';
+								  removeBtn.onclick = function() {
+									// Note: This is simplified, actual file removal would need a different approach
+									fileItem.remove();
+								  };
+								  
+								  fileItem.appendChild(icon);
+								  fileItem.appendChild(fileName);
+								  fileItem.appendChild(removeBtn);
+								  fileList.appendChild(fileItem);
+								}
+							  }
+							  
+							  function getFileIcon(filename) {
+								const extension = filename.split('.').pop().toLowerCase();
+								switch (extension) {
+								  case 'pdf': return 'fas fa-file-pdf';
+								  case 'doc':
+								  case 'docx': return 'fas fa-file-word';
+								  case 'xls':
+								  case 'xlsx': return 'fas fa-file-excel';
+								  case 'jpg':
+								  case 'jpeg':
+								  case 'png':
+								  case 'gif': return 'fas fa-file-image';
+								  default: return 'fas fa-file';
+								}
+							  }
+							});
+						
+							let currentStep = 1;
+							const totalSteps = 6;
+						
+							function showAlert(message) {
+							  const alertBox = document.getElementById('formAlert');
+							  alertBox.textContent = message;
+							  alertBox.style.display = 'block';
+							  
+							  setTimeout(() => {
+								alertBox.style.display = 'none';
+							  }, 3000);
+							}
+						
+							function validateStep(step) {
+							  switch(step) {
+								case 1:
+								  if (!document.getElementById('service').value) {
+									showAlert('Please select a service to continue');
+									return false;
+								  }
+								  break;
+								case 2:
+								  if (!document.getElementById('name').value) {
+									showAlert('Please enter your name or company name');
+									return false;
+								  }
+								  if (!document.getElementById('email').value) {
+									showAlert('Please enter your email address');
+									return false;
+								  }
+								  if (!document.getElementById('industry').value) {
+									showAlert('Please enter your industry or niche');
+									return false;
+								  }
+								  break;
+								case 3:
+								  if (!document.getElementById('projectTitle').value) {
+									showAlert('Please enter a project title');
+									return false;
+								  }
+								  if (!document.getElementById('description').value) {
+									showAlert('Please provide a project description');
+									return false;
+								  }
+								  break;
+								case 4:
+								  const deliverables = document.querySelectorAll('.deliverable:checked');
+								  if (deliverables.length === 0) {
+									showAlert('Please select at least one deliverable');
+									return false;
+								  }
+								  if (!document.getElementById('platform').value) {
+									showAlert('Please specify the platform or format');
+									return false;
+								  }
+								  break;
+								case 5:
+								  if (!document.getElementById('startDate').value) {
+									showAlert('Please select a start date');
+									return false;
+								  }
+								  if (!document.getElementById('deadline').value) {
+									showAlert('Please select a deadline');
+									return false;
+								  }
+								  break;
+							  }
+							  return true;
+							}
+						
+							function updateProgress() {
+							  // Update progress line width
+							  const progressPercentage = ((currentStep - 1) / (totalSteps - 1)) * 100;
+							  document.getElementById('progressLine').style.width = `${progressPercentage}%`;
+							  
+							  // Update step indicators
+							  for (let i = 1; i <= totalSteps; i++) {
+								const indicator = document.getElementById(`step${i}Indicator`);
+								indicator.classList.remove('active', 'completed');
+								
+								if (i < currentStep) {
+								  indicator.classList.add('completed');
+								  indicator.innerHTML = '<i class="fas fa-check"></i>';
+								} else if (i === currentStep) {
+								  indicator.classList.add('active');
+								  indicator.textContent = i;
+								} else {
+								  indicator.textContent = i;
+								}
+							  }
+							}
+						
+							function nextStep(step) {
+							  if (!validateStep(step)) return;
+							  
+							  if (step === 5) {
+								// Generate summary before showing the final step
+								generateSummary();
+							  }
+							  
+							  document.getElementById(`step${step}`).classList.remove('active');
+							  document.getElementById(`step${step + 1}`).classList.add('active');
+							  currentStep = step + 1;
+							  updateProgress();
+							}
+						
+							function prevStep(step) {
+							  document.getElementById(`step${step}`).classList.remove('active');
+							  document.getElementById(`step${step - 1}`).classList.add('active');
+							  currentStep = step - 1;
+							  updateProgress();
+							}
+						
+							function jumpToStep(step) {
+							  document.getElementById(`step${currentStep}`).classList.remove('active');
+							  document.getElementById(`step${step}`).classList.add('active');
+							  currentStep = step;
+							  updateProgress();
+							}
+						
+							function generateSummary() {
+							  const service = document.getElementById('service').value;
+							  const name = document.getElementById('name').value;
+							  const email = document.getElementById('email').value;
+							  const phone = document.getElementById('phone').value || 'Not provided';
+							  const industry = document.getElementById('industry').value;
+							  const title = document.getElementById('projectTitle').value;
+							  const desc = document.getElementById('description').value;
+							  const revisions = document.getElementById('revisions').value;
+							  const platform = document.getElementById('platform').value;
+							  const startDate = document.getElementById('startDate').value;
+							  const deadline = document.getElementById('deadline').value;
+							  const timezone = document.getElementById('timezone').value || 'Not specified';
+							  const priority = document.getElementById('priority').value;
+							  
+							  const deliverables = [...document.querySelectorAll('.deliverable:checked')].map(el => el.value);
+							  
+							  let summaryHTML = `
+								<div class="summary-item">
+								  <div class="summary-label">Service</div>
+								  <div class="summary-value">${service}</div>
+								  <div class="edit-btn" onclick="jumpToStep(1)"><i class="fas fa-edit"></i></div>
+								</div>
+								<div class="summary-item">
+								  <div class="summary-label">Client</div>
+								  <div class="summary-value">${name}<br>${email}<br>${phone}<br>${industry}</div>
+								  <div class="edit-btn" onclick="jumpToStep(2)"><i class="fas fa-edit"></i></div>
+								</div>
+								<div class="summary-item">
+								  <div class="summary-label">Project</div>
+								  <div class="summary-value"><strong>${title}</strong><br>${desc.substring(0, 100)}${desc.length > 100 ? '...' : ''}</div>
+								  <div class="edit-btn" onclick="jumpToStep(3)"><i class="fas fa-edit"></i></div>
+								</div>
+								<div class="summary-item">
+								  <div class="summary-label">Deliverables</div>
+								  <div class="summary-value">${deliverables.join(', ')}<br>Revisions: ${revisions}<br>Platform: ${platform}</div>
+								  <div class="edit-btn" onclick="jumpToStep(4)"><i class="fas fa-edit"></i></div>
+								</div>
+								<div class="summary-item">
+								  <div class="summary-label">Timeline</div>
+								  <div class="summary-value">Start: ${formatDate(startDate)}<br>Deadline: ${formatDate(deadline)}<br>Time Zone: ${timezone}<br>Priority: ${priority}</div>
+								  <div class="edit-btn" onclick="jumpToStep(5)"><i class="fas fa-edit"></i></div>
+								</div>
+								<div class="summary-item">
+								  <div class="summary-label">Estimated Cost</div>
+								  <div class="summary-value"><strong>ZAR ${calculateCost()}</strong></div>
+								</div>
+							  `;
+							  
+							  document.getElementById('summary').innerHTML = summaryHTML;
+							}
+						
+							function formatDate(dateString) {
+							  const date = new Date(dateString);
+							  return date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+							}
+						
+							function calculateCost() {
+							  const service = document.getElementById('service').value;
+							  const deliverables = document.querySelectorAll('.deliverable:checked').length;
+							  const priority = document.getElementById('priority').value;
+							  
+							  // Base cost for different services
+							  let baseCost;
+							  switch(service) {
+								case 'Logo Design':
+								  baseCost = 3500;
+								  break;
+								case 'Website Design':
+								  baseCost = 8500;
+								  break;
+								case 'Branding':
+								  baseCost = 7500;
+								  break;
+								case 'Content Creation':
+								  baseCost = 5000;
+								  break;
+								default:
+								  baseCost = 5000;
+							  }
+							  
+							  // Add cost for additional deliverables
+							  const deliverablesCost = deliverables * 1500;
+							  
+							  // Priority multiplier
+							  let priorityMultiplier = 1;
+							  if (priority === 'Rush') {
+								priorityMultiplier = 1.25;
+							  } else if (priority === 'Urgent') {
+								priorityMultiplier = 1.5;
+							  }
+							  
+							  const totalCost = (baseCost + deliverablesCost) * priorityMultiplier;
+							  return totalCost.toLocaleString();
+							}
+						
+							function generateInvoice() {
+							  const service = document.getElementById('service').value;
+							  const name = document.getElementById('name').value;
+							  const email = document.getElementById('email').value;
+							  const phone = document.getElementById('phone').value || 'Not provided';
+							  const industry = document.getElementById('industry').value;
+							  const title = document.getElementById('projectTitle').value;
+							  const desc = document.getElementById('description').value;
+							  const revisions = document.getElementById('revisions').value;
+							  const platform = document.getElementById('platform').value;
+							  const startDate = document.getElementById('startDate').value;
+							  const deadline = document.getElementById('deadline').value;
+							  const timezone = document.getElementById('timezone').value || 'Not specified';
+							  const priority = document.getElementById('priority').value;
+							  const deliverables = [...document.querySelectorAll('.deliverable:checked')].map(el => el.value);
+							  
+							  // Generate invoice number
+							  const invoiceNum = 'SCL-' + new Date().getTime().toString().substring(5);
+							  const invoiceDate = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+							  
+							  // Set invoice header details
+							  document.getElementById('invoiceNumber').textContent = invoiceNum;
+							  document.getElementById('invoiceDate').textContent = invoiceDate;
+							  
+							  // Set client details
+							  document.getElementById('invoiceClient').innerHTML = `
+								<h3>Client Information</h3>
+								<p>
+								  <strong>${name}</strong><br>
+								  Email: ${email}<br>
+								  Phone: ${phone}<br>
+								  Industry: ${industry}
+								</p>
+							  `;
+							  
+							  // Set project details
+							  document.getElementById('invoiceProject').innerHTML = `
+								<h3>Project: ${title}</h3>
+								<p>${desc}</p>
+								<p>
+								  <strong>Timeline:</strong> ${formatDate(startDate)} to ${formatDate(deadline)}<br>
+								  <strong>Time Zone:</strong> ${timezone}<br>
+								  <strong>Priority:</strong> ${priority}<br>
+								  <strong>Platform:</strong> ${platform}<br>
+								  <strong>Revisions:</strong> ${revisions}
+								</p>
+							  `;
+							  
+							  // Generate invoice items
+							  const invoiceItems = document.getElementById('invoiceItems');
+							  invoiceItems.innerHTML = '';
+							  
+							  // Add base service as the first item
+							  let baseCost;
+							  switch(service) {
+								case 'Logo Design':
+								  baseCost = 3500;
+								  break;
+								case 'Website Design':
+								  baseCost = 8500;
+								  break;
+								case 'Branding':
+								  baseCost = 7500;
+								  break;
+								case 'Content Creation':
+								  baseCost = 5000;
+								  break;
+								default:
+								  baseCost = 5000;
+							  }
+							  
+							  // Add base service as first item
+							  const baseRow = document.createElement('tr');
+							  baseRow.innerHTML = `
+								<td>${service}</td>
+								<td>Base ${service} package including project management and consultations</td>
+								<td>${baseCost.toLocaleString()}</td>
+							  `;
+							  invoiceItems.appendChild(baseRow);
+							  
+							  // Add each deliverable as an item
+							  let deliverablesCost = 0;
+							  deliverables.forEach(deliverable => {
+								const deliverableCost = 1500;
+								deliverablesCost += deliverableCost;
+								
+								const row = document.createElement('tr');
+								row.innerHTML = `
+								  <td>${deliverable}</td>
+								  <td>${deliverable} creation and implementation</td>
+								  <td>${deliverableCost.toLocaleString()}</td>
+								`;
+								invoiceItems.appendChild(row);
+							  });
+							  
+							  // Add priority fee if applicable
+							  let priorityFee = 0;
+							  if (priority === 'Rush') {
+								priorityFee = (baseCost + deliverablesCost) * 0.25;
+								const priorityRow = document.createElement('tr');
+								priorityRow.innerHTML = `
+								  <td>Rush Priority</td>
+								  <td>25% Rush Fee for expedited timeline</td>
+								  <td>${priorityFee.toLocaleString()}</td>
+								`;
+								invoiceItems.appendChild(priorityRow);
+							  } else if (priority === 'Urgent') {
+								priorityFee = (baseCost + deliverablesCost) * 0.5;
+								const priorityRow = document.createElement('tr');
+								priorityRow.innerHTML = `
+								  <td>Urgent Priority</td>
+								  <td>50% Urgent Fee for immediate attention</td>
+								  <td>${priorityFee.toLocaleString()}</td>
+								`;
+								invoiceItems.appendChild(priorityRow);
+							  }
+							  
+							  // Calculate and display total
+							  const totalCost = baseCost + deliverablesCost + priorityFee;
+							  document.getElementById('invoiceTotal').textContent = totalCost.toLocaleString();
+							  
+							  // Hide form and show invoice
+							  document.getElementById('formCard').style.display = 'none';
+							  document.getElementById('invoiceCard').style.display = 'block';
+							}
+						  </script>
+
+					
+                        <!-- quoatation form goes here -->
+
+				
+    <!-- Language Translator Widget Styles -->
+    <style>
+        .translator-widget {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1001;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .translator-button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+            transition: all 0.3s ease;
+            font-weight: 600;
+            font-size: 14px;
+            border: none;
+            outline: none;
+        }
+
+        .translator-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+        }
+
+        .translator-button i {
+            font-size: 16px;
+        }
+
+        .translator-dropdown {
+            position: absolute;
+            top: 60px;
+            right: 0;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+            min-width: 280px;
+            max-height: 400px;
+            overflow: hidden;
+            transform: scale(0) translateY(-20px);
+            opacity: 0;
+            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .translator-dropdown.active {
+            transform: scale(1) translateY(0);
+            opacity: 1;
+        }
+
+        .translator-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .translator-header h4 {
+            margin: 0;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .close-translator {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            padding: 5px;
+            border-radius: 50%;
+            transition: background 0.2s;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .close-translator:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Google Translate Element Styling */
+        #google_translate_element {
+            padding: 15px 20px;
+        }
+
+        .goog-te-gadget {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+            font-size: 14px !important;
+        }
+
+        .goog-te-gadget-simple {
+            background: transparent !important;
+            border: none !important;
+            padding: 0 !important;
+        }
+
+        .goog-te-gadget-simple .goog-te-menu-value {
+            color: #333 !important;
+            font-size: 14px !important;
+            font-weight: 500 !important;
+        }
+
+        .goog-te-gadget-simple .goog-te-menu-value span:first-child {
+            color: #667eea !important;
+            font-weight: 600 !important;
+        }
+
+        .goog-te-gadget-simple .goog-te-menu-value span:last-child {
+            color: #666 !important;
+        }
+
+        .goog-te-gadget-simple .goog-te-menu-value:before {
+            content: "🌐 " !important;
+            margin-right: 5px !important;
+        }
+
+        /* Hide Google Translate banner */
+        .goog-te-banner-frame {
+            display: none !important;
+        }
+
+        body {
+            top: 0 !important;
+        }
+
+        /* Style the dropdown arrow */
+        .goog-te-gadget-simple .goog-te-menu-value:after {
+            content: " ▼" !important;
+            color: #667eea !important;
+            font-size: 12px !important;
+        }
+
+        .translator-footer {
+            padding: 15px 20px;
+            background: #f8f9fa;
+            display: flex;
+            justify-content: center;
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .reset-btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 600;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+            color: white;
+        }
+
+        .reset-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(255, 107, 107, 0.4);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .translator-widget {
+                top: 15px;
+                right: 15px;
+            }
+
+            .translator-button {
+                padding: 10px 16px;
+                font-size: 13px;
+            }
+
+            .translator-dropdown {
+                min-width: 260px;
+                right: -10px;
+            }
+
+            .reset-btn {
+                padding: 8px 16px;
+                font-size: 11px;
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .translator-widget {
+                top: 10px;
+                right: 10px;
+            }
+
+            .translator-button {
+                padding: 8px 12px;
+                font-size: 12px;
+            }
+
+            .translator-button span {
+                display: none;
+            }
+
+            .translator-dropdown {
+                min-width: 240px;
+                right: -20px;
+            }
+        }
+    </style>
+
+    <!-- Language Translator Widget -->
+    <div class="translator-widget">
+        <div class="translator-button" id="translatorBtn">
+            <i class="fa-solid fa-language"></i>
+            <span>Translate</span>
+        </div>
+        
+        <div class="translator-dropdown" id="translatorDropdown">
+            <div class="translator-header">
+                <h4>Choose Language</h4>
+                <button class="close-translator" id="closeTranslator">
+                    <i class="fa-solid fa-times"></i>
+                </button>
+            </div>
+            
+            <!-- Google Translate Element -->
+            <div id="google_translate_element"></div>
+            
+            <div class="translator-footer">
+                <button class="reset-btn" id="resetBtn">
+                    <i class="fa-solid fa-undo"></i>
+                    Reset to English
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Google Translate Widget JavaScript -->
+    <script>
+        // Google Translate Element Initialization
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'en',
+                includedLanguages: 'en,es,fr,de,it,pt,ru,zh,ja,ko,ar,hi',
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+                autoDisplay: false
+            }, 'google_translate_element');
+        }
+
+        // Simple Translator Widget Controller
+        class SimpleTranslator {
+            constructor() {
+                this.isOpen = false;
+                this.init();
+            }
+
+            init() {
+                this.translatorBtn = document.getElementById('translatorBtn');
+                this.translatorDropdown = document.getElementById('translatorDropdown');
+                this.closeTranslator = document.getElementById('closeTranslator');
+                this.resetBtn = document.getElementById('resetBtn');
+
+                this.bindEvents();
+            }
+
+            bindEvents() {
+                // Toggle dropdown
+                this.translatorBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    this.toggleDropdown();
+                });
+
+                // Close dropdown
+                this.closeTranslator.addEventListener('click', () => {
+                    this.closeDropdown();
+                });
+
+                // Reset button
+                this.resetBtn.addEventListener('click', () => {
+                    this.resetTranslation();
+                });
+
+                // Close dropdown when clicking outside
+                document.addEventListener('click', (e) => {
+                    if (!e.target.closest('.translator-widget') && this.isOpen) {
+                        this.closeDropdown();
+                    }
+                });
+
+                // Keyboard navigation
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === 'Escape' && this.isOpen) {
+                        this.closeDropdown();
+                    }
+                });
+            }
+
+            toggleDropdown() {
+                if (this.isOpen) {
+                    this.closeDropdown();
+                } else {
+                    this.openDropdown();
+                }
+            }
+
+            openDropdown() {
+                this.translatorDropdown.classList.add('active');
+                this.isOpen = true;
+            }
+
+            closeDropdown() {
+                this.translatorDropdown.classList.remove('active');
+                this.isOpen = false;
+            }
+
+            resetTranslation() {
+                // Reset Google Translate to English
+                if (window.google && window.google.translate) {
+                    const translateElement = document.querySelector('.goog-te-combo');
+                    if (translateElement) {
+                        translateElement.selectedIndex = 0;
+                        translateElement.dispatchEvent(new Event('change'));
+                    }
+                }
+
+                // Remove Google Translate banner
+                const banner = document.querySelector('.goog-te-banner-frame');
+                if (banner) {
+                    banner.remove();
+                }
+
+                // Reset body top position
+                document.body.style.top = '0px';
+
+                this.showNotification('Translation reset to English');
+            }
+
+            showNotification(message) {
+                // Create notification element
+                const notification = document.createElement('div');
+                notification.style.cssText = `
+                    position: fixed;
+                    top: 80px;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                    color: white;
+                    padding: 12px 24px;
+                    border-radius: 25px;
+                    font-size: 14px;
+                    font-weight: 600;
+                    z-index: 10000;
+                    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+                    animation: slideDown 0.3s ease;
+                `;
+                notification.textContent = message;
+                document.body.appendChild(notification);
+
+                // Remove notification after 3 seconds
+                setTimeout(() => {
+                    notification.style.animation = 'slideUp 0.3s ease';
+                    setTimeout(() => notification.remove(), 300);
+                }, 3000);
+            }
+        }
+
+        // Initialize the translator when DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            new SimpleTranslator();
+        });
+
+        // Add CSS animations for notifications
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideDown {
+                from {
+                    opacity: 0;
+                    transform: translateX(-50%) translateY(-20px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateX(-50%) translateY(0);
+                }
+            }
+            
+            @keyframes slideUp {
+                from {
+                    opacity: 1;
+                    transform: translateX(-50%) translateY(0);
+                }
+                to {
+                    opacity: 0;
+                    transform: translateX(-50%) translateY(-20px);
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,2321 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - SCL Digital Agency</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon">
+    <link rel="icon" href="/images/favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="css/main.css">
+
+    <style>
+        :root {
+            --primary: #1e348d;
+            --primary-dark: #3641b5;
+            --secondary: #5a78ff;
+            --gray-light: #f8f9fa;
+            --gray: #e9ecef;
+            --text: #333;
+            --success: #30adbe;
+            --warning: #ffc107;
+            --danger: #dc3545;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --radius: 8px;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .checkout-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 400px;
+            gap: 30px;
+        }
+
+        .checkout-main {
+            background: white;
+            border-radius: var(--radius);
+            padding: 30px;
+            box-shadow: var(--shadow);
+        }
+
+        /* Validation error style for inputs */
+        .input-error {
+            border: 1px solid var(--danger) !important;
+            box-shadow: 0 0 6px rgba(220, 53, 69, 0.12) !important;
+        }
+
+        .checkout-sidebar {
+            background: white;
+            border-radius: var(--radius);
+            padding: 30px;
+            box-shadow: var(--shadow);
+            height: fit-content;
+            position: sticky;
+            top: 20px;
+        }
+
+        .checkout-header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid var(--gray-light);
+        }
+
+        .checkout-header h1 {
+            color: var(--primary);
+            margin-bottom: 10px;
+            font-size: 2rem;
+        }
+
+        .checkout-header p {
+            color: #666;
+            font-size: 1.1rem;
+        }
+
+        .checkout-steps {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .checkout-steps::before {
+            content: '';
+            position: absolute;
+            top: 15px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background-color: var(--gray);
+            z-index: 1;
+        }
+
+        .step {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            background-color: var(--gray);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: #777;
+            position: relative;
+            z-index: 2;
+            transition: all 0.3s ease;
+        }
+
+        .step.active {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .step.completed {
+            background-color: var(--success);
+            color: white;
+        }
+
+        .step-label {
+            position: absolute;
+            top: 45px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.8rem;
+            color: #666;
+            white-space: nowrap;
+        }
+
+        .checkout-section {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .checkout-section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            color: var(--text);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--gray-light);
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--text);
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--gray);
+            border-radius: var(--radius);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            box-sizing: border-box;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(78, 84, 200, 0.1);
+        }
+
+        textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .login-toggle {
+            text-align: center;
+            margin: 20px 0;
+            padding: 20px;
+            background: var(--gray-light);
+            border-radius: var(--radius);
+        }
+
+        .login-toggle a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .login-toggle a:hover {
+            text-decoration: underline;
+        }
+
+        .payment-methods {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .payment-method {
+            border: 2px solid var(--gray);
+            border-radius: var(--radius);
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .payment-method:hover {
+            border-color: var(--primary);
+            background-color: rgba(78, 84, 200, 0.05);
+        }
+
+        .payment-method.selected {
+            border-color: var(--primary);
+            background-color: rgba(78, 84, 200, 0.1);
+        }
+
+        .payment-method.selected::after {
+            content: '\f00c';
+            font-family: 'Font Awesome 5 Free';
+            font-weight: 900;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            color: var(--primary);
+        }
+
+        .payment-method i {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .payment-method h4 {
+            margin: 10px 0;
+            color: var(--text);
+        }
+
+        .payment-method p {
+            font-size: 0.9rem;
+            color: #666;
+            margin: 0;
+        }
+
+        .card-details {
+            display: none;
+            margin-top: 20px;
+            padding: 20px;
+            background: var(--gray-light);
+            border-radius: var(--radius);
+        }
+
+        .card-details.active {
+            display: block;
+        }
+
+        #paypal-button-container {
+            min-height: 50px;
+            margin-top: 16px;
+            display: none;
+        }
+
+        #paypal-fallback-payment {
+            display: none;
+            background: linear-gradient(135deg, #fff5e6 0%, #ffe6d5 100%);
+            border: 2px solid #ff9800;
+            padding: 20px;
+            border-radius: var(--radius);
+            margin-top: 16px;
+            text-align: center;
+        }
+
+        #paypal-fallback-payment.show {
+            display: block;
+        }
+
+        #paypal-fallback-payment h4 {
+            color: #d32f2f;
+            margin-top: 0;
+            font-size: 1.1rem;
+        }
+
+        #paypal-fallback-payment p {
+            color: #666;
+            margin: 10px 0;
+        }
+
+        .card-row {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 15px;
+        }
+
+        .bank-details {
+            display: none;
+            margin-top: 20px;
+            padding: 20px;
+            background: var(--gray-light);
+            border-radius: var(--radius);
+        }
+
+        .bank-details.active {
+            display: block;
+        }
+
+        .bank-info {
+            background: white;
+            padding: 15px;
+            border-radius: var(--radius);
+            margin-bottom: 15px;
+        }
+
+        .bank-info h4 {
+            margin: 0 0 10px 0;
+            color: var(--primary);
+        }
+
+        .bank-info p {
+            margin: 5px 0;
+            font-family: monospace;
+            font-size: 0.9rem;
+        }
+
+        .order-summary {
+            margin-bottom: 30px;
+        }
+
+        .order-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid var(--gray-light);
+        }
+
+        .order-item:last-child {
+            border-bottom: none;
+        }
+
+        .order-item-info h4 {
+            margin: 0 0 5px 0;
+            color: var(--text);
+        }
+
+        .order-item-info p {
+            margin: 0;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .order-item-price {
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        .order-total {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 2px solid var(--gray-light);
+            text-align: right;
+        }
+
+        .order-total h3 {
+            margin: 0;
+            color: var(--text);
+            font-size: 1.3rem;
+        }
+
+        .order-total .total-amount {
+            font-size: 1.8rem;
+            color: var(--primary);
+            font-weight: bold;
+        }
+
+        .btn-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+            gap: 15px;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: var(--radius);
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .btn-success {
+            background-color: var(--success);
+            color: white;
+        }
+
+        .btn-success:hover {
+            background-color: #218838;
+            transform: translateY(-2px);
+        }
+
+        .btn:disabled {
+            background-color: var(--gray);
+            color: #666;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .success-message {
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .success-message i {
+            font-size: 4rem;
+            color: var(--success);
+            margin-bottom: 20px;
+        }
+
+        .success-message h2 {
+            color: var(--success);
+            margin-bottom: 15px;
+        }
+
+        .success-message p {
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        .activation-notice-step4 {
+            background: linear-gradient(135deg, #fffbea 0%, #fff9e6 100%);
+            border: 2px solid #ffc107;
+            padding: 25px;
+            border-radius: var(--radius);
+            margin: 30px 0;
+            text-align: left;
+        }
+
+        .activation-notice-step4 h3 {
+            color: #ff9800;
+            margin-top: 0;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+
+        .activation-n .order-number {
+            background: var(--gray-light);
+            padding: 15px;
+            border-radius: var(--radius);
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .order-number h3 {
+            margin: 0 0 10px 0;
+            color: var(--text);
+        }
+
+        .order-number .number {
+            font-size: 1.5rem;
+            color: var(--primary);
+            font-weight: bold;
+            font-family: monospace;
+        }
+
+        .alert {
+            padding: 15px;
+            border-radius: var(--radius);
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .alert-success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .alert-error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .loading i {
+            font-size: 2rem;
+            color: var(--primary);
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .checkout-container {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .card-row {
+                grid-template-columns: 1fr;
+            }
+
+            .btn-container {
+                flex-direction: column;
+            }
+
+            .checkout-steps {
+                overflow-x: auto;
+                padding-bottom: 10px;
+            }
+
+            .step-label {
+                font-size: 0.7rem;
+            }
+        }
+
+        .back-to-services {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .back-to-services a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .back-to-services a:hover {
+            text-decoration: underline;
+        }
+
+        .order-summary-box {
+            background: #f8f9fa;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(30, 52, 141, 0.07);
+            padding: 28px 24px 18px 24px;
+            margin-bottom: 30px;
+            min-width: 260px;
+        }
+
+        .order-summary-box h3 {
+            color: #1e348d;
+            margin-top: 0;
+            margin-bottom: 18px;
+            font-size: 1.3rem;
+            font-weight: 700;
+            letter-spacing: 0.02em;
+        }
+
+        .order-summary-list {
+            margin: 0 0 18px 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .order-summary-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            border-bottom: 1px solid #e9ecef;
+            padding: 10px 0;
+        }
+
+        .order-summary-item:last-child {
+            border-bottom: none;
+        }
+
+        .order-summary-item-details {
+            flex: 1;
+        }
+
+        .order-summary-item-title {
+            font-weight: 600;
+            color: #222;
+            margin-bottom: 2px;
+        }
+
+        .order-summary-item-desc {
+            color: #666;
+            font-size: 0.95em;
+            margin-bottom: 2px;
+        }
+
+        .order-summary-item-qty {
+            color: #888;
+            font-size: 0.95em;
+        }
+
+        .order-summary-item-price {
+            font-weight: 600;
+            color: #1e348d;
+            min-width: 80px;
+            text-align: right;
+        }
+
+        .order-summary-total {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 1.15em;
+            font-weight: 700;
+            color: #1e348d;
+            margin-top: 18px;
+            padding-top: 12px;
+            border-top: 2px solid #e9ecef;
+        }
+
+        .order-summary-empty {
+            color: #888;
+            text-align: center;
+            padding: 18px 0;
+            font-size: 1.05em;
+        }
+    </style>
+    <!-- Google Translate API -->
+    <script type="text/javascript"
+        src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+</head>
+
+<body>
+    <div class="checkout-container">
+        <div class="checkout-main">
+            <div class="checkout-header">
+                <h1>Checkout</h1>
+                <p>Complete your order and secure your digital services</p>
+            </div>
+
+            <div class="checkout-steps">
+                <div class="step active" id="step-1">
+                    <span>1</span>
+                    <div class="step-label">Account</div>
+                </div>
+                <div class="step" id="step-2">
+                    <span>2</span>
+                    <div class="step-label">Billing</div>
+                </div>
+                <div class="step" id="step-3">
+                    <span>3</span>
+                    <div class="step-label">Payment</div>
+                </div>
+                <div class="step" id="step-4">
+                    <span>4</span>
+                    <div class="step-label">Complete</div>
+                </div>
+            </div>
+
+            <div id="alert-container"></div>
+
+            <!-- Step 1: Account Creation -->
+            <div class="checkout-section active" id="section-1">
+                <h2 class="section-title">Create Your Account</h2>
+                <p>Please enter your personal details to create an account and proceed with checkout.</p>
+
+                <form id="account-form">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="firstName">First Name *</label>
+                            <input type="text" id="firstName" name="firstName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName">Last Name *</label>
+                            <input type="text" id="lastName" name="lastName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address *</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone Number *</label>
+                            <input type="tel" id="phone" name="phone" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password *</label>
+                            <input type="password" id="password" name="password" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="confirmPassword">Confirm Password *</label>
+                            <input type="password" id="confirmPassword" name="confirmPassword" required>
+                        </div>
+                    </div>
+
+                    <div class="login-toggle">
+                        <p>Already have an account? <a href="#" onclick="showLoginForm()">Sign in here</a></p>
+                    </div>
+
+                    <div class="btn-container">
+                        <button type="button" class="btn btn-outline" onclick="goBack()">Back to Services</button>
+                        <button type="button" class="btn btn-primary" onclick="nextStep(2)">Continue to Billing</button>
+                    </div>
+                    <div id="account-requirements" class="validation-help"
+                        style="margin-top:12px; color:#dc3545; font-size:0.95em;">
+                        <strong>Requirements:</strong>
+                        <ul style="margin:6px 0 0 18px;padding:0;">
+                            <li>First name and last name are required.</li>
+                            <li>A valid email address is required (used for order receipts).</li>
+                            <li>Phone number is required for contact about your order.</li>
+                            <li>Password and confirmation are required and must match.</li>
+                        </ul>
+                        <div id="account-validation-messages" style="margin-top:6px;"></div>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Step 2: Billing Information -->
+            <div class="checkout-section" id="section-2">
+                <h2 class="section-title">Billing Information</h2>
+                <p>Please provide your billing details for invoice generation.</p>
+
+                <form id="billing-form">
+                    <div class="form-group">
+                        <label for="companyName">Company Name (Optional)</label>
+                        <input type="text" id="companyName" name="companyName">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="billingAddress">Billing Address *</label>
+                        <input type="text" id="billingAddress" name="billingAddress" required>
+                    </div>
+
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="city">City *</label>
+                            <input type="text" id="city" name="city" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="postalCode">Postal Code *</label>
+                            <input type="text" id="postalCode" name="postalCode" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="province">Province *</label>
+                            <select id="province" name="province" required>
+                                <option value="">Select Province</option>
+                                <option value="gauteng">Gauteng</option>
+                                <option value="western-cape">Western Cape</option>
+                                <option value="kwazulu-natal">KwaZulu-Natal</option>
+                                <option value="eastern-cape">Eastern Cape</option>
+                                <option value="free-state">Free State</option>
+                                <option value="mpumalanga">Mpumalanga</option>
+                                <option value="limpopo">Limpopo</option>
+                                <option value="north-west">North West</option>
+                                <option value="northern-cape">Northern Cape</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="country">Country *</label>
+                            <select id="country" name="country" required>
+                                <option value="south-africa">South Africa</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="additionalNotes">Additional Notes (Optional)</label>
+                        <textarea id="additionalNotes" name="additionalNotes"
+                            placeholder="Any special requirements or additional information..."></textarea>
+                    </div>
+
+                    <div class="btn-container">
+                        <button type="button" class="btn btn-outline" onclick="prevStep(1)">Back</button>
+                        <button type="button" class="btn btn-primary" onclick="nextStep(3)">Continue to Payment</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Step 3: Payment Method -->
+            <div class="checkout-section" id="section-3">
+                <h2 class="section-title">Payment Method</h2>
+                <p>Please choose your preferred method of payment.</p>
+
+                <div class="payment-methods">
+                    <div class="payment-method" onclick="selectPaymentMethod(this,'card')">
+                        <i class="fas fa-credit-card"></i>
+                        <h4>Debit / Credit Card</h4>
+                        <p> Pay securely with your debit or credit card — processed by PayPal</p>
+                    </div>
+                    <div class="payment-method" onclick="selectPaymentMethod(this,'bank')">
+                        <i class="fas fa-university"></i>
+                        <h4>Bank Transfer</h4>
+                        <p>Direct bank transfer</p>
+                    </div>
+                </div>
+
+                <!-- Credit Card Details -->
+                <div class="card-details" id="card-details">
+                    <h3>Card Details</h3>
+                    <div class="form-group">
+                        <label for="cardNumber">Card Number *</label>
+                        <input type="text" id="cardNumber" name="cardNumber" placeholder="1234 5678 9012 3456"
+                            maxlength="19">
+                    </div>
+                    <div class="card-row">
+                        <div class="form-group">
+                            <label for="cardName">Name on Card *</label>
+                            <input type="text" id="cardName" name="cardName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="expiryDate">Expiry Date *</label>
+                            <input type="text" id="expiryDate" name="expiryDate" placeholder="MM/YY" maxlength="5">
+                        </div>
+                        <div class="form-group">
+                            <label for="cvv">CVV *</label>
+                            <input type="text" id="cvv" name="cvv" placeholder="123" maxlength="4">
+                        </div>
+                    </div>
+                    <!-- PayPal Card Button: will be rendered here and only shown when 'card' selected -->
+                    <div id="paypal-button-container" style="margin-top:16px;"></div>
+                    <div id="paypal-debug" style="margin-top:8px; font-size:13px; color:#666;
+                        border-left:3px solid #eee; padding-left:8px; display:none;"></div>
+                </div>
+
+                <!-- Bank Transfer Details -->
+                <div class="bank-details" id="bank-details">
+                    <h3>Bank Transfer Details</h3>
+                    <div class="bank-info">
+                        <h4>SCL Digital Agency (Pty) Ltd</h4>
+                        <p><strong>Bank:</strong> FNB / RMB</p>
+                        <p><strong>Account Holder:</strong> SCL Digital Agency (Pty) Ltd</p>
+                        <p><strong>Account Number:</strong> 63134146992</p>
+                        <p><strong>Branch Code:</strong> 250655</p>
+                        <p><strong>Swift Code:</strong> FIRNZAJJ</p>
+                        <p><strong>Account Type:</strong> Gold Business Account</p>
+                        <p><strong>Reference:</strong> <span id="bank-reference">ORDER-2024-001</span></p>
+                    </div>
+                    <p><strong>Please use the reference number above when making your payment.</strong></p>
+                    <div class="mb-3 mt-3">
+                        <label class="form-label">Upload Proof of Payment (PDF, PNG, JPG)</label>
+                        <input type="file" id="paymentProofFile" accept="application/pdf,image/png,image/jpeg">
+                        <div class="mt-2">
+                            <button type="button" class="btn btn-sm btn-outline-primary"
+                                onclick="uploadPaymentProof()">Upload Proof</button>
+                            <small id="paymentProofStatus" class="text-muted ms-2"></small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="btn-container">
+                    <button type="button" class="btn btn-outline" onclick="prevStep(2)">Back</button>
+                    <button id="completeOrderBtn" type="button" class="btn btn-primary" onclick="nextStep(4)">Complete
+                        Order</button>
+                </div>
+            </div>
+
+            <!-- Step 4: Order Completion -->
+            <div class="checkout-section" id="section-4">
+                <div class="loading" id="loading">
+                    <i class="fas fa-spinner"></i>
+                    <p>Processing your order...</p>
+                </div>
+
+                <div class="success-message" id="success-message" style="display: none;">
+                    <i class="fas fa-check-circle"></i>
+                    <h2>Order Completed Successfully!</h2>
+                    <p>Thank you for choosing SCL Digital Agency. Your order has been processed and you will receive a
+                        confirmation email shortly.</p>
+
+                    <div class="order-number">
+                        <h3>Order Number</h3>
+                        <div class="number" id="order-number">ORDER-2024-001</div>
+                    </div>
+
+                    <p>We will contact you within 24 hours to discuss your project requirements and get started on your
+                        digital journey.</p>
+
+                    <div class="btn-container">
+                        <a href="our_services.html" class="btn btn-outline">Continue Shopping</a>
+                        <a href="index.html" class="btn btn-primary">Go to Homepage</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Order Summary Sidebar -->
+        <div class="checkout-sidebar">
+            <div class="order-summary-box" id="order-summary-box">
+                <!-- Order summary will be rendered here by JS -->
+            </div>
+            <div class="back-to-services">
+                <a href="our_services.html"><i class="fas fa-arrow-left"></i> Back to Services</a>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // Toggle PayPal debug output: set to true to enable debugging UI/logs
+        window.PAYPAL_DEBUG = window.PAYPAL_DEBUG || false;
+        (function () {
+            if (!window.PAYPAL_DEBUG) {
+                ['log', 'info', 'debug', 'warn'].forEach(fn => { if (console[fn]) console[fn] = function () { }; });
+            }
+        })();
+
+        let currentStep = 1;
+        let selectedPaymentMethod = '';
+        let orderData = {};
+
+        // Get cart data from localStorage or URL parameters
+        function getCartData() {
+            // First try URL parameters
+            const urlParams = new URLSearchParams(window.location.search);
+            const cartData = urlParams.get('cart');
+            if (cartData) {
+                try {
+                    // urlParams.get() already decodes the value, so we can parse directly
+                    return JSON.parse(cartData);
+                } catch (e) {
+                    console.error('Error parsing cart data from URL:', e);
+                    try {
+                        // Fallback: try decoding if it was double-encoded
+                        return JSON.parse(decodeURIComponent(cartData));
+                    } catch (e2) {
+                        const box = document.getElementById('order-summary-box');
+                        if (box) box.innerHTML = '<div class="alert alert-error">Error loading cart: ' + e.message + '</div>';
+                    }
+                }
+            }
+
+            // Fall back to localStorage
+            try {
+                const localCart = localStorage.getItem('scl_cart');
+                if (localCart) {
+                    return JSON.parse(localCart);
+                }
+            } catch (e) {
+                console.error('Error parsing cart data from localStorage:', e);
+            }
+
+            return [];
+        }
+
+        // Initialize checkout
+        function initializeCheckout() {
+            const cart = getCartData();
+            updateOrderSummary(cart);
+            generateBankReference();
+        }
+
+        // Update order summary
+        // Update order summary
+        function updateOrderSummary(cart) {
+            const summaryContainer = document.getElementById('order-summary-box');
+
+            if (!cart || cart.length === 0) {
+                let html = '<h3>Order Summary</h3>';
+                html += '<div class="order-summary-empty">No items in cart</div>';
+                html += '<div class="order-summary-total"><span>Total</span><span>ZAR 0</span></div>';
+                summaryContainer.innerHTML = html;
+                return;
+            }
+
+            let total = 0;
+            let html = '<h3>Order Summary</h3><ul class="order-summary-list">';
+
+            cart.forEach(item => {
+                const itemTotal = (item.price || 0) * (item.quantity || 1);
+                total += itemTotal;
+
+                html += `
+                    <li class="order-summary-item">
+                        <div class="order-summary-item-details">
+                            <div class="order-summary-item-title">${item.name}</div>
+                            <div class="order-summary-item-desc">${item.description || ''}</div>
+                            <div class="order-summary-item-qty">Qty: ${item.quantity || 1}</div>
+                        </div>
+                        <div class="order-summary-item-price">ZAR ${(itemTotal).toLocaleString()}</div>
+                    </li>
+                `;
+            });
+
+            html += '</ul>';
+            html += `<div class="order-summary-total"><span>Total</span><span>ZAR ${total.toLocaleString()}</span></div>`;
+            summaryContainer.innerHTML = html;
+        }
+
+        // Generate bank reference
+        function generateBankReference() {
+            const timestamp = new Date().getTime();
+            const reference = `ORDER-${new Date().getFullYear()}-${String(timestamp).slice(-6)}`;
+            document.getElementById('bank-reference').textContent = reference;
+            document.getElementById('order-number').textContent = reference;
+        }
+
+        // Navigation functions
+        function nextStep(step) {
+            if (!validateCurrentStep()) return;
+
+            // If we're moving from account creation (1) -> billing (2)
+            if (currentStep === 1 && step === 2) {
+                const existing = localStorage.getItem('scl_client');
+                if (existing) {
+                    // user already signed in
+                    currentStep = step;
+                    updateStepDisplay();
+                    return;
+                }
+
+                // Create account via API
+                const payload = {
+                    name: (document.getElementById('firstName').value + ' ' + document.getElementById('lastName').value).trim(),
+                    email: document.getElementById('email').value.trim(),
+                    password: document.getElementById('password').value.trim(),
+                    company: document.getElementById('companyName')?.value || null
+                };
+
+                fetch('../api/admin/clients.php', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                }).then(r => r.json()).then(resp => {
+                    if (resp.success) {
+                        // Immediately sign in the user using login endpoint to get full client record
+                        fetch('../api/login.php', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ email: payload.email, password: payload.password, user_type: 'client' })
+                        }).then(r2 => r2.json()).then(loginResp => {
+                            if (loginResp.success && loginResp.user) {
+                                localStorage.setItem('scl_client', JSON.stringify(loginResp.user));
+                            }
+                            currentStep = step;
+                            updateStepDisplay();
+                        }).catch(() => { currentStep = step; updateStepDisplay(); });
+                    } else {
+                        showError(resp.error || 'Failed to create account');
+                    }
+                }).catch(err => {
+                    showError('Error creating account: ' + err.message);
+                });
+
+                return;
+            }
+
+
+
+            currentStep = step;
+            updateStepDisplay();
+        }
+
+        function prevStep(step) {
+            currentStep = step;
+            updateStepDisplay();
+        }
+
+        function updateStepDisplay() {
+            // Update step indicators
+            for (let i = 1; i <= 4; i++) {
+                const stepElement = document.getElementById(`step-${i}`);
+                const sectionElement = document.getElementById(`section-${i}`);
+
+                if (i < currentStep) {
+                    stepElement.className = 'step completed';
+                    sectionElement.className = 'checkout-section';
+                } else if (i === currentStep) {
+                    stepElement.className = 'step active';
+                    sectionElement.className = 'checkout-section active';
+                } else {
+                    stepElement.className = 'step';
+                    sectionElement.className = 'checkout-section';
+                }
+            }
+
+            // Special handling for step 4
+            if (currentStep === 4) {
+                processOrder();
+            }
+        }
+
+        // Validation functions
+        function validateCurrentStep() {
+            switch (currentStep) {
+                case 1:
+                    return validateAccountForm();
+                case 2:
+                    return validateBillingForm();
+                case 3:
+                    return validatePaymentForm();
+                default:
+                    return true;
+            }
+        }
+
+        // Validate account creation step (step 1)
+        function validateAccountForm() {
+            const required = ['firstName', 'lastName', 'email', 'phone', 'password', 'confirmPassword'];
+            let isValid = true;
+            let firstInvalid = null;
+            const messages = [];
+
+            // Clear previous per-field highlights
+            required.forEach(field => {
+                const el = document.getElementById(field);
+                if (el) el.classList.remove('input-error');
+            });
+
+            // Check required fields
+            required.forEach(field => {
+                const el = document.getElementById(field);
+                if (!el) return;
+                if (!el.value || !String(el.value).trim()) {
+                    isValid = false;
+                    el.classList.add('input-error');
+                    if (!firstInvalid) firstInvalid = el;
+                    const label = field.charAt(0).toUpperCase() + field.slice(1);
+                    messages.push(`${label} is required.`);
+                }
+            });
+
+            const emailEl = document.getElementById('email');
+            const passwordEl = document.getElementById('password');
+            const confirmEl = document.getElementById('confirmPassword');
+
+            if (emailEl && emailEl.value && !isValidEmail(emailEl.value)) {
+                isValid = false;
+                emailEl.classList.add('input-error');
+                if (!firstInvalid) firstInvalid = emailEl;
+                messages.push('Email address appears to be invalid (example: you@domain.com).');
+            }
+
+            if (passwordEl && confirmEl && passwordEl.value && confirmEl.value && passwordEl.value !== confirmEl.value) {
+                isValid = false;
+                passwordEl.classList.add('input-error');
+                confirmEl.classList.add('input-error');
+                if (!firstInvalid) firstInvalid = passwordEl;
+                messages.push('Passwords do not match.');
+            }
+
+            if (passwordEl && passwordEl.value && passwordEl.value.length < 6) {
+                isValid = false;
+                passwordEl.classList.add('input-error');
+                if (!firstInvalid) firstInvalid = passwordEl;
+                messages.push('Password must be at least 6 characters long.');
+            }
+
+            // Update visible validation area under the form
+            const acctArea = document.getElementById('account-validation-messages');
+            if (acctArea) {
+                if (!isValid) {
+                    acctArea.innerHTML = '<ul style="margin:6px 0 0 18px;padding:0;">' + messages.map(m => `<li>${m}</li>`).join('') + '</ul>';
+                } else {
+                    acctArea.innerHTML = '';
+                }
+            }
+
+            if (!isValid) {
+                try { firstInvalid && firstInvalid.focus(); } catch (e) { }
+                if (!document.getElementById('alert-container').innerHTML) showError('Please complete the required fields');
+            }
+
+            return isValid;
+        }
+
+        function validateBillingForm() {
+            const required = ['billingAddress', 'city', 'postalCode', 'province', 'country'];
+            let isValid = true;
+
+            required.forEach(field => {
+                const element = document.getElementById(field);
+                if (!element.value.trim()) {
+                    showError(`${field.charAt(0).toUpperCase() + field.slice(1)} is required`);
+                    isValid = false;
+                }
+            });
+
+            return isValid;
+        }
+
+        function validatePaymentForm() {
+            if (!selectedPaymentMethod) {
+                showError('Please select a payment method');
+                return false;
+            }
+
+            // For card payments we use PayPal's card button/SDK, so no local card fields required here
+            if (selectedPaymentMethod === 'card') {
+                return true;
+            }
+
+            return true;
+        }
+
+        // Payment method selection
+        function selectPaymentMethod(el, method) {
+            selectedPaymentMethod = method;
+
+            // Update UI
+            document.querySelectorAll('.payment-method').forEach(e => e.classList.remove('selected'));
+            if (el && el.classList) el.classList.add('selected');
+
+            // Hide both details by default
+            document.getElementById('card-details').classList.remove('active');
+            document.getElementById('bank-details').classList.remove('active');
+            // Hide/show complete order button depending on method
+            const completeBtn = document.getElementById('completeOrderBtn');
+            if (method === 'card') {
+                // Show PayPal card button container and render it
+                document.getElementById('card-details').classList.add('active');
+
+                // Hide legacy card input fields (we use PayPal's card UI instead)
+                document.querySelectorAll('#card-details > .form-group, #card-details .card-row').forEach(el => {
+                    el.style.display = 'none';
+                });
+
+                const container = document.getElementById('paypal-button-container');
+                container.style.display = 'block';
+                if (completeBtn) completeBtn.style.display = 'none';
+
+                // Clear any previous content and ensure container is visible
+                container.innerHTML = '';
+
+                // NOW load and render the PayPal button when user selects card payment
+                loadAndRenderPayPalButton();
+            } else if (method === 'bank') {
+                // Show bank details and restore legacy card fields (hidden when card selected)
+                document.getElementById('bank-details').classList.add('active');
+                document.getElementById('paypal-button-container').style.display = 'none';
+                if (completeBtn) completeBtn.style.display = 'inline-block';
+
+                // Ensure legacy card inputs are visible if user navigates back
+                document.querySelectorAll('#card-details > .form-group, #card-details .card-row').forEach(el => {
+                    el.style.display = '';
+                });
+            }
+        }
+
+        // Load PayPal JS SDK dynamically (using client-id from company settings) and render card button
+        // Demo fallback client id (SANDBOX) - used only for local testing; do NOT commit secrets to repo.
+        const DEMO_PAYPAL_CLIENT_ID = 'AR8HvXVovw6J8Z1NOnhn_GdJxj6ZUEoYMZuNhdMypq06NbZrWekzO6P0M7rq3QUhTJrwE7Ou-5Mkjwbm';
+        let _paypalScriptLoaded = false;
+        let _paypalButtonsRendered = false;
+        let _paypalLoadAttempts = 0;
+        let _paypalLoadInProgress = false;
+        const MAX_PAYPAL_LOAD_ATTEMPTS = 5;
+
+        function loadAndRenderPayPalButton() {
+            console.log('loadAndRenderPayPalButton called, already loaded:', _paypalScriptLoaded, 'rendered:', _paypalButtonsRendered, 'in progress:', _paypalLoadInProgress);
+            debugLog('loadAndRenderPayPalButton called.');
+
+            if (_paypalButtonsRendered) {
+                console.log('PayPal button already rendered');
+                return;
+            }
+
+            if (_paypalLoadInProgress) {
+                console.log('PayPal loading already in progress, waiting...');
+                return;
+            }
+
+            // Check if PayPal SDK is already available
+            if (window.paypal && window.paypal.Buttons) {
+                console.log('PayPal SDK already available, rendering button');
+                renderPayPalButton();
+                return;
+            }
+
+            _paypalLoadInProgress = true;
+            _paypalLoadAttempts++;
+
+            if (_paypalLoadAttempts > MAX_PAYPAL_LOAD_ATTEMPTS) {
+                console.error('Max PayPal load attempts exceeded');
+                _paypalLoadInProgress = false;
+                showPayPalFallback();
+                return;
+            }
+
+            console.log('Loading PayPal SDK, attempt', _paypalLoadAttempts);
+            debugLog('Loading PayPal SDK, attempt ' + _paypalLoadAttempts);
+
+            // Fetch public PayPal settings (no secrets) and load SDK
+            fetch('../api/get_payment_settings.php')
+                .then(r => {
+                    if (!r.ok) throw new Error('Failed to fetch company settings: ' + r.status);
+                    return r.json();
+                })
+                .then(cfg => {
+                    debugLog('Fetched get_payment_settings.php: ' + JSON.stringify(cfg));
+                    let clientId = '';
+                    let currency = 'ZAR';
+                    try {
+                        clientId = cfg.data && cfg.data.paypal_client_id ? cfg.data.paypal_client_id : '';
+                        currency = cfg.data && cfg.data.currency ? cfg.data.currency : 'ZAR';
+                    } catch (e) {
+                        console.error('Error parsing payment settings:', e);
+                        clientId = '';
+                    }
+
+                    if (!clientId) {
+                        clientId = DEMO_PAYPAL_CLIENT_ID;
+                        console.warn('Using DEMO_PAYPAL_CLIENT_ID for PayPal SDK (sandbox)');
+                        debugLog('No clientId in settings — using DEMO sandbox client id');
+                    } else {
+                        console.log('Using PayPal Client ID from public settings');
+                        debugLog('Using clientId from public settings');
+                    }
+
+                    loadPayPalScript(clientId, currency);
+                })
+                .catch(err => {
+                    console.warn('Error fetching company settings, using demo client ID:', err.message);
+                    _paypalLoadInProgress = false;
+                    debugLog('Failed to fetch settings: ' + err.message);
+                    loadPayPalScript(DEMO_PAYPAL_CLIENT_ID, 'ZAR');
+                });
+        }
+
+        function loadPayPalScript(clientId, currency) {
+            console.log('loadPayPalScript called with clientId:', clientId.substring(0, 20) + '...', 'currency:', currency);
+            // Expose selected currency for use by createOrder/onApprove
+            window._paypalCurrency = currency || 'ZAR';
+            debugLog('Preparing to load PayPal SDK for currency: ' + window._paypalCurrency);
+
+            // Check if script is already being loaded or loaded
+            const existingScript = document.querySelector('script[src*="paypal.com/sdk/js"]');
+            if (existingScript) {
+                console.log('PayPal script already exists, checking if SDK is ready');
+                if (window.paypal && window.paypal.Buttons) {
+                    console.log('PayPal SDK is ready');
+                    _paypalLoadInProgress = false;
+                    _paypalScriptLoaded = true;
+                    renderPayPalButton();
+                    return;
+                } else {
+                    console.log('Script exists but SDK not ready, waiting...');
+                    // Wait for existing script to load
+                    const checkPayPal = setInterval(() => {
+                        if (window.paypal && window.paypal.Buttons) {
+                            console.log('PayPal SDK became available');
+                            clearInterval(checkPayPal);
+                            _paypalLoadInProgress = false;
+                            _paypalScriptLoaded = true;
+                            renderPayPalButton();
+                        }
+                    }, 100);
+                    // Timeout after 15 seconds
+                    setTimeout(() => {
+                        clearInterval(checkPayPal);
+                        if (!window.paypal || !window.paypal.Buttons) {
+                            console.error('PayPal SDK failed to load within timeout');
+                            _paypalLoadInProgress = false;
+                            showPayPalFallback();
+                        }
+                    }, 15000);
+                    return;
+                }
+            }
+
+            const script = document.createElement('script');
+            script.id = 'paypal-checkout-sdk';
+            // enable card funding so customers can pay with debit/credit directly
+            script.src = `https://www.paypal.com/sdk/js?client-id=${encodeURIComponent(clientId)}&components=buttons&currency=${encodeURIComponent(currency)}&intent=capture&commit=true&enable-funding=card&disable-funding=credit,paylater`;
+            script.async = true;
+            script.defer = false;
+
+            const src = `https://www.paypal.com/sdk/js?client-id=${encodeURIComponent(clientId)}&components=buttons&currency=${encodeURIComponent(currency)}&intent=capture&commit=true&enable-funding=card&disable-funding=credit,paylater`;
+            console.log('Creating and appending PayPal script');
+            debugLog('Appending PayPal SDK script: ' + src);
+
+            script.onload = () => {
+                console.log('PayPal script loaded, checking for SDK availability');
+                debugLog('PayPal SDK script onload triggered');
+                _paypalScriptLoaded = true;
+
+                // Give the SDK a moment to initialize
+                if (window.paypal && window.paypal.Buttons) {
+                    console.log('PayPal SDK available immediately');
+                    debugLog('PayPal SDK available immediately');
+                    _paypalLoadInProgress = false;
+                    renderPayPalButton();
+                } else {
+                    console.log('PayPal SDK not yet available, waiting...');
+                    debugLog('PayPal SDK not yet available after script load, waiting...');
+                    const checkSDK = setInterval(() => {
+                        if (window.paypal && window.paypal.Buttons) {
+                            console.log('PayPal SDK became available after script load');
+                            clearInterval(checkSDK);
+                            _paypalLoadInProgress = false;
+                            renderPayPalButton();
+                        }
+                    }, 50);
+
+                    setTimeout(() => {
+                        clearInterval(checkSDK);
+                        if (!window.paypal || !window.paypal.Buttons) {
+                            console.error('PayPal SDK failed to initialize after script load');
+                            _paypalLoadInProgress = false;
+                            showPayPalFallback();
+                        }
+                    }, 5000);
+                }
+            };
+
+            script.onerror = (err) => {
+                console.error('Failed to load PayPal script:', err);
+                debugLog('PayPal script.onerror: ' + (err && err.message ? err.message : JSON.stringify(err)));
+                _paypalLoadInProgress = false;
+                showPayPalFallback();
+            };
+
+            document.head.appendChild(script);
+        }
+
+        function renderPayPalButton() {
+            console.log('renderPayPalButton called');
+            debugLog('Attempting to render PayPal button');
+
+            if (!window.paypal || !window.paypal.Buttons) {
+                console.error('PayPal SDK not available for button rendering');
+                debugLog('PayPal SDK not available');
+                showPayPalFallback();
+                return;
+            }
+
+            if (_paypalButtonsRendered) {
+                console.log('PayPal button already rendered');
+                return;
+            }
+
+            // Mark rendering as in-progress to prevent re-entry
+            _paypalButtonsRendered = true;
+
+            try {
+                const container = document.getElementById('paypal-button-container');
+                if (!container) {
+                    console.error('Payment container not found');
+                    debugLog('Payment container not found');
+                    _paypalButtonsRendered = false;
+                    showPayPalFallback();
+                    return;
+                }
+
+                console.log('Creating PayPal Buttons instance');
+                debugLog('Creating PayPal Buttons instance');
+
+                // Set a timeout to show fallback if rendering takes too long
+                const renderTimeout = setTimeout(() => {
+                    if (_paypalButtonsRendered && !container.querySelector('button')) {
+                        console.warn('PayPal button rendering timeout - no button found after 8s');
+                        debugLog('PayPal button rendering timeout');
+                        _paypalButtonsRendered = false;
+                        showPayPalFallback();
+                    }
+                }, 8000);
+
+                try {
+                    const buttonsInstance = paypal.Buttons({
+                        fundingSource: paypal.FUNDING.CARD,
+                        style: {
+                            layout: 'vertical',
+                            color: 'black',
+                            shape: 'rect',
+                            label: 'pay'
+                        },
+                        createOrder: function () {
+                            debugLog('createOrder triggered');
+                            console.log('PayPal createOrder called');
+                            // Create order on server including cart items
+                            const total = calculateTotal();
+                            // store expected amount and currency for later validation
+                            window._paypalExpected = Number(total).toFixed(2);
+                            const currency = window._paypalCurrency || 'ZAR';
+                            const cart = getCartData();
+                            const items = (cart || []).map(i => ({
+                                name: i.name || 'Item',
+                                unit_amount: { currency_code: currency, value: Number(i.price || 0).toFixed(2) },
+                                quantity: String(i.quantity || 1)
+                            }));
+
+                            console.log('Creating PayPal order with total:', total, 'items:', items.length);
+                            debugLog('Creating PayPal order: amount=' + total + ' currency=' + currency + ' items=' + items.length);
+                            return fetch('../api/paypal_create_order.php', {
+                                method: 'POST',
+                                headers: { 'Content-Type': 'application/json' },
+                                body: JSON.stringify({ amount: total, currency: currency, items: items })
+                            })
+                                .then(r => {
+                                    console.log('PayPal create order response status:', r.status);
+                                    debugLog('create_order HTTP status: ' + r.status);
+                                    if (!r.ok) {
+                                        return r.text().then(text => {
+                                            debugLog('create_order error response: ' + text);
+                                            throw new Error('HTTP ' + r.status + ': ' + text);
+                                        });
+                                    }
+                                    return r.json();
+                                })
+                                .then(resp => {
+                                    console.log('PayPal create order response:', resp);
+                                    debugLog('create_order response: ' + JSON.stringify(resp));
+                                    if (resp.success && resp.order && resp.order.id) {
+                                        console.log('Order created:', resp.order.id);
+                                        return resp.order.id;
+                                    }
+                                    const errorMsg = resp.error || 'Failed to create order';
+                                    console.error('Create order failed:', errorMsg, resp.debug ? '\nDebug: ' + resp.debug : '');
+                                    throw new Error(errorMsg);
+                                })
+                                .catch(err => {
+                                    console.error('Error creating PayPal order:', err);
+                                    throw err;
+                                });
+                        },
+                        onApprove: function (data) {
+                            debugLog('onApprove triggered: ' + JSON.stringify(data));
+                            console.log('PayPal onApprove, orderID:', data.orderID);
+                            // Capture on server
+                            return fetch('../api/paypal_capture_order.php', {
+                                method: 'POST',
+                                headers: { 'Content-Type': 'application/json' },
+                                body: JSON.stringify({ orderID: data.orderID, expected_amount: window._paypalExpected || null, expected_currency: window._paypalCurrency || null })
+                            })
+                                .then(r => {
+                                    console.log('PayPal capture response status:', r.status);
+                                    debugLog('capture HTTP status: ' + r.status);
+                                    if (!r.ok) throw new Error('Network response was not ok: ' + r.status);
+                                    return r.json();
+                                })
+                                .then(resp => {
+                                    console.log('PayPal capture response:', resp);
+                                    debugLog('capture response: ' + JSON.stringify(resp));
+                                    if (resp.success) {
+                                        // Payment captured — mark order complete
+                                        console.log('Payment captured successfully');
+                                        showSuccess('Payment captured successfully');
+                                        // Store capture/result for later steps and advance to Step 4
+                                        try { window._lastPayPalCapture = resp; } catch (e) { }
+                                        // Move UI to step 4 which triggers processOrder()
+                                        nextStep(4);
+                                    } else {
+                                        showError(resp.error || 'Capture failed');
+                                    }
+                                })
+                                .catch(err => {
+                                    console.error('Error capturing PayPal payment:', err);
+                                    showError('Payment error: ' + err.message);
+                                });
+                        },
+                        onError: function (err) {
+                            console.error('PayPal onError:', err);
+                            debugLog('PayPal onError: ' + (err && err.message ? err.message : String(err)));
+                            showError('Payment error: ' + (err && err.message ? err.message : String(err)));
+                        },
+                        onCancel: function (data) {
+                            console.log('PayPal payment cancelled');
+                            debugLog('Payment cancelled by user');
+                            showError('Payment was cancelled');
+                        }
+                    });
+
+                    if (!buttonsInstance) {
+                        throw new Error('PayPal Buttons instance is null');
+                    }
+
+                    console.log('Calling render on Buttons instance');
+                    debugLog('Calling render on Buttons instance');
+                    const renderResult = buttonsInstance.render('#paypal-button-container');
+                    debugLog('render() returned: ' + (typeof renderResult === 'object' ? 'Promise/Object' : typeof renderResult));
+
+                    // Handle both promise and non-promise return from render()
+                    Promise.resolve(renderResult)
+                        .then(() => {
+                            clearTimeout(renderTimeout);
+                            console.log('PayPal button rendered successfully');
+                            debugLog('PayPal button rendered successfully ✓');
+                        })
+                        .catch(err => {
+                            clearTimeout(renderTimeout);
+                            console.error('Error rendering PayPal button:', err);
+                            debugLog('Error rendering PayPal button: ' + (err && err.message ? err.message : String(err)));
+                            _paypalButtonsRendered = false;
+                            showPayPalFallback();
+                        });
+                } catch (renderErr) {
+                    clearTimeout(renderTimeout);
+                    console.error('Exception during PayPal button creation:', renderErr);
+                    debugLog('Exception during button creation: ' + (renderErr && renderErr.message ? renderErr.message : String(renderErr)));
+                    _paypalButtonsRendered = false;
+                    showPayPalFallback();
+                }
+            } catch (err) {
+                console.error('Error in renderPayPalButton:', err);
+                debugLog('Error in renderPayPalButton: ' + (err && err.message ? err.message : String(err)));
+                _paypalButtonsRendered = false;
+                showPayPalFallback();
+            }
+        }
+
+        function showPayPalFallback() {
+            console.log('PayPal fallback invoked');
+            const container = document.getElementById('paypal-button-container');
+
+            // Hide existing buttons content while we try a retry
+            if (container) {
+                container.style.display = '';
+            }
+
+            // If we still have attempts left, try loading again (this will increment attempts elsewhere)
+            if (_paypalLoadAttempts < MAX_PAYPAL_LOAD_ATTEMPTS) {
+                console.log('Retrying PayPal SDK load (attempt ' + (_paypalLoadAttempts + 1) + ')');
+                _paypalLoadInProgress = false;
+                // slight delay before retrying
+                setTimeout(() => loadAndRenderPayPalButton(), 800);
+                return;
+            }
+
+            // If we've exhausted attempts, show a subtle inline notice instead of the big warning UI
+            if (container) {
+                container.innerHTML = '<div class="text-muted small">PayPal currently unavailable. Please try again later or choose an alternative payment method.</div>';
+            }
+
+            // Optionally notify user with existing error UI helper
+            showError('PayPal is currently unavailable. Please try again later or choose an alternative payment method.');
+            debugLog('Final fallback displayed to user');
+        }
+
+        // Simple on-page debug log helper (visible to user when enabled)
+        function debugLog(msg) {
+            try {
+                if (!window.PAYPAL_DEBUG) return;
+                console.log('[PAYPAL-DEBUG] ' + msg);
+                const dbg = document.getElementById('paypal-debug');
+                if (dbg) {
+                    dbg.style.display = 'block';
+                    const time = new Date().toLocaleTimeString();
+                    dbg.innerHTML = `<div>[${time}] ${escapeHtml(String(msg))}</div>` + dbg.innerHTML;
+                }
+            } catch (e) {
+                // ignore
+            }
+        }
+
+        function escapeHtml(s) {
+            return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+        }
+
+        // Process order
+        function processOrder() {
+            const loading = document.getElementById('loading');
+            const successMessage = document.getElementById('success-message');
+
+            loading.style.display = 'block';
+            successMessage.style.display = 'none';
+
+            // Simulate order processing
+            setTimeout(() => {
+                loading.style.display = 'none';
+                successMessage.style.display = 'block';
+
+                // Save order data
+                saveOrderData();
+
+                // Clear cart
+                localStorage.removeItem('cart');
+            }, 3000);
+        }
+
+        function calculateTotal() {
+            const cart = getCartData();
+            return cart.reduce((total, item) => total + (item.price * (item.quantity || 1)), 0);
+        }
+
+        // Save order data locally (basic stub to avoid runtime errors)
+        function saveOrderData() {
+            try {
+                const ref = document.getElementById('order-number')?.textContent || ('ORDER-' + Date.now());
+                const client = JSON.parse(localStorage.getItem('scl_client') || 'null');
+                const cart = getCartData() || [];
+                const order = {
+                    reference: ref,
+                    client: client,
+                    items: cart,
+                    total: calculateTotal(),
+                    created_at: new Date().toISOString()
+                };
+                localStorage.setItem('last_order', JSON.stringify(order));
+                console.log('Order saved locally', order);
+            } catch (e) { console.error('saveOrderData error', e); }
+        }
+
+        // Utility functions
+        function isValidEmail(email) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        }
+
+        function showError(message) {
+            const alertContainer = document.getElementById('alert-container');
+            alertContainer.innerHTML = `
+                <div class="alert alert-error">
+                    <i class="fas fa-exclamation-triangle"></i> ${message}
+                </div>
+            `;
+            setTimeout(() => {
+                alertContainer.innerHTML = '';
+            }, 5000);
+        }
+
+        function showSuccess(message) {
+            const alertContainer = document.getElementById('alert-container');
+            alertContainer.innerHTML = `
+                <div class="alert alert-success">
+                    <i class="fas fa-check-circle"></i> ${message}
+                </div>
+            `;
+            setTimeout(() => {
+                alertContainer.innerHTML = '';
+            }, 5000);
+        }
+
+        // Upload payment proof for bank transfers
+        function uploadPaymentProof() {
+            const fileInput = document.getElementById('paymentProofFile');
+            const status = document.getElementById('paymentProofStatus');
+            if (!fileInput || !fileInput.files || !fileInput.files.length) {
+                status.textContent = 'No file selected';
+                return;
+            }
+            const file = fileInput.files[0];
+            const fd = new FormData();
+            fd.append('proof', file);
+            // Include order reference and email if available
+            const ref = document.getElementById('order-number')?.textContent || '';
+            fd.append('order_ref', ref);
+            const client = JSON.parse(localStorage.getItem('scl_client') || 'null');
+            if (client && client.email) fd.append('email', client.email);
+
+            status.textContent = 'Uploading...';
+            fetch('../api/upload_payment_proof.php', { method: 'POST', body: fd })
+                .then(r => r.json())
+                .then(resp => {
+                    if (resp.success) {
+                        status.textContent = 'Uploaded';
+                        // store proof path on order in localStorage for later reference
+                        const orderKey = 'checkout_payment_proof_' + (ref || 'last');
+                        localStorage.setItem(orderKey, resp.file || '');
+                        showSuccess('Payment proof uploaded');
+                    } else {
+                        status.textContent = 'Upload failed';
+                        showError(resp.error || 'Upload failed');
+                    }
+                }).catch(err => {
+                    status.textContent = 'Upload error';
+                    showError('Upload error: ' + err.message);
+                });
+        }
+
+        function goBack() {
+            window.location.href = 'our_services.html';
+        }
+
+        function showLoginForm() {
+            // Show a simple login modal
+            const modalId = 'checkoutLoginModal';
+            let container = document.getElementById(modalId);
+            if (!container) {
+                container = document.createElement('div'); container.id = modalId;
+                container.innerHTML = `
+                                        <div class="modal" tabindex="-1" id="${modalId}">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header"><h5 class="modal-title">Client Sign In</h5><button type="button" class="btn-close" onclick="document.getElementById('${modalId}').style.display='none'"></button></div>
+                                                    <div class="modal-body">
+                                                        <div class="mb-2"><label>Email</label><input class="form-control" id="login_email"></div>
+                                                        <div class="mb-2"><label>Password</label><input type="password" class="form-control" id="login_password"></div>
+                                                        <div id="login_error" class="text-danger small"></div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" onclick="document.getElementById('${modalId}').style.display='none'">Cancel</button>
+                                                        <button type="button" class="btn btn-primary" onclick="submitCheckoutLogin()">Sign In</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>`;
+                document.body.appendChild(container);
+            }
+            document.getElementById(modalId).style.display = 'block';
+        }
+
+        function submitCheckoutLogin() {
+            const email = document.getElementById('login_email').value.trim();
+            const password = document.getElementById('login_password').value.trim();
+            const out = document.getElementById('login_error'); out.textContent = '';
+            if (!email || !password) { out.textContent = 'Email & password required'; return; }
+            fetch('../api/login.php', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ email, password, user_type: 'client' }) })
+                .then(r => r.json()).then(resp => {
+                    if (resp.success && resp.user) {
+                        localStorage.setItem('scl_client', JSON.stringify(resp.user));
+                        // Prefill account form
+                        const names = (resp.user.name || '').split(' ');
+                        document.getElementById('firstName').value = names.shift() || '';
+                        document.getElementById('lastName').value = names.join(' ') || '';
+                        document.getElementById('email').value = resp.user.email || '';
+                        document.getElementById('phone').value = resp.user.phone || '';
+                        document.getElementById('password').value = '';
+                        document.getElementById('confirmPassword').value = '';
+                        document.getElementById('checkoutLoginModal').style.display = 'none';
+                        showSuccess('Signed in successfully');
+                    } else {
+                        out.textContent = resp.error || 'Invalid credentials';
+                    }
+                }).catch(err => { out.textContent = err.message; });
+        }
+
+        // Card number formatting
+        document.getElementById('cardNumber')?.addEventListener('input', function (e) {
+            let value = e.target.value.replace(/\s+/g, '').replace(/[^0-9]/gi, '');
+            let formattedValue = value.match(/.{1,4}/g)?.join(' ') || value;
+            e.target.value = formattedValue;
+        });
+
+        // Expiry date formatting
+        document.getElementById('expiryDate')?.addEventListener('input', function (e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length >= 2) {
+                value = value.slice(0, 2) + '/' + value.slice(2, 4);
+            }
+            e.target.value = value;
+        });
+
+        // CVV formatting
+        document.getElementById('cvv')?.addEventListener('input', function (e) {
+            e.target.value = e.target.value.replace(/\D/g, '');
+        });
+
+        // Initialize checkout when page loads
+        document.addEventListener('DOMContentLoaded', function () {
+            initializeCheckout();
+        });
+    </script>
+    <!-- Language Translator Widget Styles -->
+    <style>
+        .translator-widget {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1001;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .translator-button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+            transition: all 0.3s ease;
+            font-weight: 600;
+            font-size: 14px;
+            border: none;
+            outline: none;
+        }
+
+        .translator-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+        }
+
+        .translator-button i {
+            font-size: 16px;
+        }
+
+        .translator-dropdown {
+            position: absolute;
+            top: 60px;
+            right: 0;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+            min-width: 280px;
+            max-height: 400px;
+            overflow: hidden;
+            transform: scale(0) translateY(-20px);
+            opacity: 0;
+            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .translator-dropdown.active {
+            transform: scale(1) translateY(0);
+            opacity: 1;
+        }
+
+        .translator-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .translator-header h4 {
+            margin: 0;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .close-translator {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            padding: 5px;
+            border-radius: 50%;
+            transition: background 0.2s;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .close-translator:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Google Translate Element Styling */
+        #google_translate_element {
+            padding: 15px 20px;
+        }
+
+        .goog-te-gadget {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+            font-size: 14px !important;
+        }
+
+        .goog-te-gadget-simple {
+            background: transparent !important;
+            border: none !important;
+            padding: 0 !important;
+        }
+
+        .goog-te-gadget-simple .goog-te-menu-value {
+            color: #333 !important;
+            font-size: 14px !important;
+            font-weight: 500 !important;
+        }
+
+        .goog-te-gadget-simple .goog-te-menu-value span:first-child {
+            color: #667eea !important;
+            font-weight: 600 !important;
+        }
+
+        .goog-te-gadget-simple .goog-te-menu-value span:last-child {
+            color: #666 !important;
+        }
+
+        .goog-te-gadget-simple .goog-te-menu-value:before {
+            content: "🌐 " !important;
+            margin-right: 5px !important;
+        }
+
+        /* Hide Google Translate banner */
+        .goog-te-banner-frame {
+            display: none !important;
+        }
+
+        body {
+            top: 0 !important;
+        }
+
+        /* Style the dropdown arrow */
+        .goog-te-gadget-simple .goog-te-menu-value:after {
+            content: " ▼" !important;
+            color: #667eea !important;
+            font-size: 12px !important;
+        }
+
+        .translator-footer {
+            padding: 15px 20px;
+            background: #f8f9fa;
+            display: flex;
+            justify-content: center;
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .reset-btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 600;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+            color: white;
+        }
+
+        .reset-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(255, 107, 107, 0.4);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .translator-widget {
+                top: 15px;
+                right: 15px;
+            }
+
+            .translator-button {
+                padding: 10px 16px;
+                font-size: 13px;
+            }
+
+            .translator-dropdown {
+                min-width: 260px;
+                right: -10px;
+            }
+
+            .reset-btn {
+                padding: 8px 16px;
+                font-size: 11px;
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .translator-widget {
+                top: 10px;
+                right: 10px;
+            }
+
+            .translator-button {
+                padding: 8px 12px;
+                font-size: 12px;
+            }
+
+            .translator-button span {
+                display: none;
+            }
+
+            .translator-dropdown {
+                min-width: 240px;
+                right: -20px;
+            }
+        }
+    </style>
+
+    <!-- Language Translator Widget -->
+    <div class="translator-widget">
+        <div class="translator-button" id="translatorBtn">
+            <i class="fa-solid fa-language"></i>
+            <span>Translate</span>
+        </div>
+
+        <div class="translator-dropdown" id="translatorDropdown">
+            <div class="translator-header">
+                <h4>Choose Language</h4>
+                <button class="close-translator" id="closeTranslator">
+                    <i class="fa-solid fa-times"></i>
+                </button>
+            </div>
+
+            <!-- Google Translate Element -->
+            <div id="google_translate_element"></div>
+
+            <div class="translator-footer">
+                <button class="reset-btn" id="resetBtn">
+                    <i class="fa-solid fa-undo"></i>
+                    Reset to English
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Google Translate Widget JavaScript -->
+    <script>
+        // Google Translate Element Initialization
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'en',
+                includedLanguages: 'en,es,fr,de,it,pt,ru,zh,ja,ko,ar,hi',
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+                autoDisplay: false
+            }, 'google_translate_element');
+        }
+
+        // Simple Translator Widget Controller
+        class SimpleTranslator {
+            constructor() {
+                this.isOpen = false;
+                this.init();
+            }
+
+            init() {
+                this.translatorBtn = document.getElementById('translatorBtn');
+                this.translatorDropdown = document.getElementById('translatorDropdown');
+                this.closeTranslator = document.getElementById('closeTranslator');
+                this.resetBtn = document.getElementById('resetBtn');
+
+                this.bindEvents();
+            }
+
+            bindEvents() {
+                // Toggle dropdown
+                this.translatorBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    this.toggleDropdown();
+                });
+
+                // Close dropdown
+                this.closeTranslator.addEventListener('click', () => {
+                    this.closeDropdown();
+                });
+
+                // Reset button
+                this.resetBtn.addEventListener('click', () => {
+                    this.resetTranslation();
+                });
+
+                // Close dropdown when clicking outside
+                document.addEventListener('click', (e) => {
+                    if (!e.target.closest('.translator-widget') && this.isOpen) {
+                        this.closeDropdown();
+                    }
+                });
+
+                // Keyboard navigation
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === 'Escape' && this.isOpen) {
+                        this.closeDropdown();
+                    }
+                });
+            }
+
+            toggleDropdown() {
+                if (this.isOpen) {
+                    this.closeDropdown();
+                } else {
+                    this.openDropdown();
+                }
+            }
+
+            openDropdown() {
+                this.translatorDropdown.classList.add('active');
+                this.isOpen = true;
+            }
+
+            closeDropdown() {
+                this.translatorDropdown.classList.remove('active');
+                this.isOpen = false;
+            }
+
+            resetTranslation() {
+                // Reset Google Translate to English
+                if (window.google && window.google.translate) {
+                    const translateElement = document.querySelector('.goog-te-combo');
+                    if (translateElement) {
+                        translateElement.selectedIndex = 0;
+                        translateElement.dispatchEvent(new Event('change'));
+                    }
+                }
+
+                // Remove Google Translate banner
+                const banner = document.querySelector('.goog-te-banner-frame');
+                if (banner) {
+                    banner.remove();
+                }
+
+                // Reset body top position
+                document.body.style.top = '0px';
+
+                this.showNotification('Translation reset to English');
+            }
+
+            showNotification(message) {
+                // Create notification element
+                const notification = document.createElement('div');
+                notification.style.cssText = `
+                    position: fixed;
+                    top: 80px;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                    color: white;
+                    padding: 12px 24px;
+                    border-radius: 25px;
+                    font-size: 14px;
+                    font-weight: 600;
+                    z-index: 10000;
+                    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+                    animation: slideDown 0.3s ease;
+                `;
+                notification.textContent = message;
+                document.body.appendChild(notification);
+
+                // Remove notification after 3 seconds
+                setTimeout(() => {
+                    notification.style.animation = 'slideUp 0.3s ease';
+                    setTimeout(() => notification.remove(), 300);
+                }, 3000);
+            }
+        }
+
+        // Initialize the translator when DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            new SimpleTranslator();
+        });
+
+        // Add CSS animations for notifications
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideDown {
+                from {
+                    opacity: 0;
+                    transform: translateX(-50%) translateY(-20px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateX(-50%) translateY(0);
+                }
+            }
+            
+            @keyframes slideUp {
+                from {
+                    opacity: 1;
+                    transform: translateX(-50%) translateY(0);
+                }
+                to {
+                    opacity: 0;
+                    transform: translateX(-50%) translateY(-20px);
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+
+</body>
+
+</html>

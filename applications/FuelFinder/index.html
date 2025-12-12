@@ -1,0 +1,1137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FuelFinder</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            max-width: 100vw;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Login Screen Styles */
+        .login-screen {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .login-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px 30px;
+            width: 100%;
+            max-width: 350px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            animation: slideUp 0.6s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .logo i {
+            font-size: 3em;
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        .logo h1 {
+            font-size: 1.8em;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .logo p {
+            color: #666;
+            font-size: 0.9em;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 15px 20px;
+            border: 2px solid #e1e5e9;
+            border-radius: 12px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .form-group label {
+            position: absolute;
+            left: 20px;
+            top: 15px;
+            color: #999;
+            transition: all 0.3s ease;
+            pointer-events: none;
+            font-size: 16px;
+        }
+
+        .form-group input:focus + label,
+        .form-group input:not(:placeholder-shown) + label {
+            transform: translateY(-30px) scale(0.8);
+            color: #667eea;
+            background: white;
+            padding: 0 5px;
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 15px;
+        }
+
+        .login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .forgot-password {
+            text-align: center;
+            color: #667eea;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        /* Main App Styles */
+        .main-app {
+            display: none;
+            background: #f8f9fa;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            padding-top: max(20px, env(safe-area-inset-top));
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+        }
+
+        .greeting h2 {
+            font-size: 1.2em;
+            font-weight: 600;
+        }
+
+        .greeting p {
+            font-size: 0.9em;
+            opacity: 0.9;
+        }
+
+        .logout-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .search-bar {
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 15px 50px 15px 20px;
+            border: none;
+            border-radius: 15px;
+            font-size: 16px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+        }
+
+        .search-btn {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #667eea;
+            border: none;
+            color: white;
+            padding: 10px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .map-container {
+            height: 300px;
+            margin: 20px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            position: relative;
+            background: #e9ecef;
+        }
+
+        .map-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            color: #666;
+            background: linear-gradient(45deg, #f1f3f4 25%, transparent 25%), 
+                        linear-gradient(-45deg, #f1f3f4 25%, transparent 25%), 
+                        linear-gradient(45deg, transparent 75%, #f1f3f4 75%), 
+                        linear-gradient(-45deg, transparent 75%, #f1f3f4 75%);
+            background-size: 20px 20px;
+            background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+        }
+
+        .map-placeholder i {
+            font-size: 3em;
+            margin-bottom: 10px;
+            color: #667eea;
+        }
+
+        .quick-actions {
+            margin: 0 20px 20px;
+        }
+
+        .quick-actions h3 {
+            margin-bottom: 15px;
+            color: #333;
+            font-size: 1.1em;
+        }
+
+        .action-buttons {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .action-btn {
+            background: white;
+            border: none;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .action-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .action-btn i {
+            font-size: 1.5em;
+            margin-bottom: 8px;
+            color: #667eea;
+        }
+
+        .action-btn span {
+            display: block;
+            color: #333;
+            font-weight: 500;
+            font-size: 0.9em;
+        }
+
+        .nearby-stations {
+            margin: 0 20px;
+            padding-bottom: 80px;
+        }
+
+        .nearby-stations h3 {
+            margin-bottom: 15px;
+            color: #333;
+            font-size: 1.1em;
+        }
+
+        .station-card {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .station-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .station-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 10px;
+        }
+
+        .station-info h4 {
+            color: #333;
+            font-size: 1.1em;
+            margin-bottom: 5px;
+        }
+
+        .station-info p {
+            color: #666;
+            font-size: 0.9em;
+        }
+
+        .station-distance {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.8em;
+            font-weight: 600;
+        }
+
+        .station-details {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+        }
+
+        .fuel-prices {
+            display: flex;
+            gap: 15px;
+        }
+
+        .price-item {
+            text-align: center;
+        }
+
+        .price-item span {
+            display: block;
+            font-size: 0.8em;
+            color: #666;
+        }
+
+        .price-item strong {
+            color: #333;
+            font-size: 0.9em;
+        }
+
+        .direction-btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9em;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+        }
+
+        .loading i {
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Mobile optimizations */
+        @media (max-width: 480px) {
+            .login-card {
+                padding: 30px 20px;
+            }
+            
+            .header {
+                padding: 15px;
+            }
+            
+            .map-container {
+                height: 250px;
+                margin: 15px;
+            }
+            
+            .quick-actions, .nearby-stations {
+                margin: 0 15px;
+            }
+        }
+    </style>
+    <!-- Google Translate API -->
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+</head>
+<body>
+    <div class="container">
+        <!-- Login Screen -->
+        <div class="login-screen" id="loginScreen">
+            <div class="login-card">
+                <div class="logo">
+                    <i class="fas fa-gas-pump"></i>
+                    <h1>FuelFinder</h1>
+                    <p>Find the nearest petrol stations</p>
+                </div>
+                <form id="loginForm">
+                    <div class="form-group">
+                        <input type="email" id="email" placeholder=" " required>
+                        <label for="email">Email Address</label>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" id="password" placeholder=" " required>
+                        <label for="password">Password</label>
+                    </div>
+                    <button type="submit" class="login-btn">
+                        <i class="fas fa-sign-in-alt"></i> Sign In
+                    </button>
+                    <a href="#" class="forgot-password">Forgot Password?</a>
+                </form>
+            </div>
+        </div>
+
+        <!-- Main App -->
+        <div class="main-app" id="mainApp">
+            <div class="header">
+                <div class="header-top">
+                    <div class="user-info">
+                        <div class="avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="greeting">
+                            <h2>Good Morning!</h2>
+                            <p id="userEmail">user@example.com</p>
+                        </div>
+                    </div>
+                    <button class="logout-btn" id="logoutBtn">
+                        <i class="fas fa-sign-out-alt"></i>
+                    </button>
+                </div>
+                <div class="search-bar">
+                    <input type="text" class="search-input" placeholder="Search location or station...">
+                    <button class="search-btn">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="content">
+                <div class="map-container">
+                    <div class="map-placeholder" id="mapPlaceholder">
+                        <i class="fas fa-map-marked-alt"></i>
+                        <p>Interactive map will load here</p>
+                        <small>Showing nearby petrol stations</small>
+                    </div>
+                </div>
+
+                <div class="quick-actions">
+                    <h3>Quick Actions</h3>
+                    <div class="action-buttons">
+                        <button class="action-btn" onclick="findNearest()">
+                            <i class="fas fa-location-arrow"></i>
+                            <span>Find Nearest</span>
+                        </button>
+                        <button class="action-btn" onclick="showPrices()">
+                            <i class="fas fa-chart-line"></i>
+                            <span>Compare Prices</span>
+                        </button>
+                        <button class="action-btn" onclick="showFilters()">
+                            <i class="fas fa-filter"></i>
+                            <span>Filter Stations</span>
+                        </button>
+                        <button class="action-btn" onclick="showFavorites()">
+                            <i class="fas fa-heart"></i>
+                            <span>Favorites</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="nearby-stations">
+                    <h3>Nearby Stations</h3>
+                    <div id="stationsList">
+                        <div class="loading">
+                            <i class="fas fa-spinner"></i>
+                            <p>Loading nearby stations...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Sample station data
+        const sampleStations = [
+            {
+                id: 1,
+                name: "Shell Station",
+                address: "123 Main Street, Cape Town",
+                distance: "0.3 km",
+                prices: {
+                    petrol95: "R21.45",
+                    petrol93: "R20.95",
+                    diesel: "R19.85"
+                },
+                rating: 4.5,
+                isOpen: true
+            },
+            {
+                id: 2,
+                name: "BP Express",
+                address: "456 Ocean Drive, Sea Point",
+                distance: "0.7 km",
+                prices: {
+                    petrol95: "R21.55",
+                    petrol93: "R21.05",
+                    diesel: "R19.95"
+                },
+                rating: 4.2,
+                isOpen: true
+            },
+            {
+                id: 3,
+                name: "Sasol Station",
+                address: "789 Park Road, Observatory",
+                distance: "1.2 km",
+                prices: {
+                    petrol95: "R21.35",
+                    petrol93: "R20.85",
+                    diesel: "R19.75"
+                },
+                rating: 4.0,
+                isOpen: false
+            }
+        ];
+
+        // Login functionality
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            // Simple validation (in real app, this would be server-side)
+            if (email && password) {
+                // Store user info
+                sessionStorage.setItem('userEmail', email);
+                
+                // Show main app
+                document.getElementById('loginScreen').style.display = 'none';
+                document.getElementById('mainApp').style.display = 'block';
+                
+                // Update user email in header
+                document.getElementById('userEmail').textContent = email;
+                
+                // Load stations after a delay to simulate loading
+                setTimeout(loadStations, 1500);
+            }
+        });
+
+        // Logout functionality
+        document.getElementById('logoutBtn').addEventListener('click', function() {
+            sessionStorage.clear();
+            document.getElementById('mainApp').style.display = 'none';
+            document.getElementById('loginScreen').style.display = 'flex';
+            
+            // Reset form
+            document.getElementById('loginForm').reset();
+        });
+
+        // Load stations
+        function loadStations() {
+            const stationsList = document.getElementById('stationsList');
+            stationsList.innerHTML = '';
+
+            sampleStations.forEach(station => {
+                const stationCard = document.createElement('div');
+                stationCard.className = 'station-card';
+                stationCard.innerHTML = `
+                    <div class="station-header">
+                        <div class="station-info">
+                            <h4>${station.name}</h4>
+                            <p>${station.address}</p>
+                        </div>
+                        <div class="station-distance">${station.distance}</div>
+                    </div>
+                    <div class="station-details">
+                        <div class="fuel-prices">
+                            <div class="price-item">
+                                <span>95</span>
+                                <strong>${station.prices.petrol95}</strong>
+                            </div>
+                            <div class="price-item">
+                                <span>93</span>
+                                <strong>${station.prices.petrol93}</strong>
+                            </div>
+                            <div class="price-item">
+                                <span>Diesel</span>
+                                <strong>${station.prices.diesel}</strong>
+                            </div>
+                        </div>
+                        <button class="direction-btn" onclick="getDirections(${station.id})">
+                            <i class="fas fa-directions"></i> Directions
+                        </button>
+                    </div>
+                `;
+                stationsList.appendChild(stationCard);
+            });
+        }
+
+        // Quick action functions
+        function findNearest() {
+            alert('Finding nearest stations based on your location...');
+            // In a real app, this would use geolocation API
+        }
+
+        function showPrices() {
+            alert('Comparing fuel prices across stations...');
+            // In a real app, this would show a price comparison view
+        }
+
+        function showFilters() {
+            alert('Showing station filters (brand, fuel type, amenities)...');
+            // In a real app, this would show filter options
+        }
+
+        function showFavorites() {
+            alert('Showing your favorite stations...');
+            // In a real app, this would show saved favorite stations
+        }
+
+        function getDirections(stationId) {
+            const station = sampleStations.find(s => s.id === stationId);
+            alert(`Getting directions to ${station.name}...`);
+            // In a real app, this would open maps with directions
+        }
+
+        // Check if user is already logged in
+        window.addEventListener('load', function() {
+            const savedEmail = sessionStorage.getItem('userEmail');
+            if (savedEmail) {
+                document.getElementById('loginScreen').style.display = 'none';
+                document.getElementById('mainApp').style.display = 'block';
+                document.getElementById('userEmail').textContent = savedEmail;
+                loadStations();
+            }
+        });
+
+        // Search functionality
+        document.querySelector('.search-btn').addEventListener('click', function() {
+            const searchTerm = document.querySelector('.search-input').value;
+            if (searchTerm) {
+                alert(`Searching for: ${searchTerm}`);
+                // In a real app, this would filter stations or search new locations
+            }
+        });
+
+        // Initialize map placeholder interaction
+        document.getElementById('mapPlaceholder').addEventListener('click', function() {
+            alert('In a real app, this would show an interactive map with Google Maps or similar service');
+        });
+
+        // Set dynamic greeting based on time
+        function setGreeting() {
+            const hour = new Date().getHours();
+            let greeting = 'Good Morning!';
+            
+            if (hour >= 12 && hour < 17) {
+                greeting = 'Good Afternoon!';
+            } else if (hour >= 17) {
+                greeting = 'Good Evening!';
+            }
+            
+            document.querySelector('.greeting h2').textContent = greeting;
+        }
+
+        setGreeting();
+    </script>
+    <!-- Language Translator Widget Styles -->
+    <style>
+        .translator-widget {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1001;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .translator-button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+            transition: all 0.3s ease;
+            font-weight: 600;
+            font-size: 14px;
+            border: none;
+            outline: none;
+        }
+
+        .translator-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+        }
+
+        .translator-button i {
+            font-size: 16px;
+        }
+
+        .translator-dropdown {
+            position: absolute;
+            top: 60px;
+            right: 0;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+            min-width: 280px;
+            max-height: 400px;
+            overflow: hidden;
+            transform: scale(0) translateY(-20px);
+            opacity: 0;
+            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .translator-dropdown.active {
+            transform: scale(1) translateY(0);
+            opacity: 1;
+        }
+
+        .translator-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .translator-header h4 {
+            margin: 0;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .close-translator {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            padding: 5px;
+            border-radius: 50%;
+            transition: background 0.2s;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .close-translator:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Google Translate Element Styling */
+        #google_translate_element {
+            padding: 15px 20px;
+        }
+
+        .goog-te-gadget {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+            font-size: 14px !important;
+        }
+
+        .goog-te-gadget-simple {
+            background: transparent !important;
+            border: none !important;
+            padding: 0 !important;
+        }
+
+        .goog-te-gadget-simple .goog-te-menu-value {
+            color: #333 !important;
+            font-size: 14px !important;
+            font-weight: 500 !important;
+        }
+
+        .goog-te-gadget-simple .goog-te-menu-value span:first-child {
+            color: #667eea !important;
+            font-weight: 600 !important;
+        }
+
+        .goog-te-gadget-simple .goog-te-menu-value span:last-child {
+            color: #666 !important;
+        }
+
+        .goog-te-gadget-simple .goog-te-menu-value:before {
+            content: "🌐 " !important;
+            margin-right: 5px !important;
+        }
+
+        /* Hide Google Translate banner */
+        .goog-te-banner-frame {
+            display: none !important;
+        }
+
+        body {
+            top: 0 !important;
+        }
+
+        /* Style the dropdown arrow */
+        .goog-te-gadget-simple .goog-te-menu-value:after {
+            content: " ▼" !important;
+            color: #667eea !important;
+            font-size: 12px !important;
+        }
+
+        .translator-footer {
+            padding: 15px 20px;
+            background: #f8f9fa;
+            display: flex;
+            justify-content: center;
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .reset-btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 600;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+            color: white;
+        }
+
+        .reset-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(255, 107, 107, 0.4);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .translator-widget {
+                top: 15px;
+                right: 15px;
+            }
+
+            .translator-button {
+                padding: 10px 16px;
+                font-size: 13px;
+            }
+
+            .translator-dropdown {
+                min-width: 260px;
+                right: -10px;
+            }
+
+            .reset-btn {
+                padding: 8px 16px;
+                font-size: 11px;
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .translator-widget {
+                top: 10px;
+                right: 10px;
+            }
+
+            .translator-button {
+                padding: 8px 12px;
+                font-size: 12px;
+            }
+
+            .translator-button span {
+                display: none;
+            }
+
+            .translator-dropdown {
+                min-width: 240px;
+                right: -20px;
+            }
+        }
+    </style>
+
+    <!-- Language Translator Widget -->
+    <div class="translator-widget">
+        <div class="translator-button" id="translatorBtn">
+            <i class="fa-solid fa-language"></i>
+            <span>Translate</span>
+        </div>
+        
+        <div class="translator-dropdown" id="translatorDropdown">
+            <div class="translator-header">
+                <h4>Choose Language</h4>
+                <button class="close-translator" id="closeTranslator">
+                    <i class="fa-solid fa-times"></i>
+                </button>
+            </div>
+            
+            <!-- Google Translate Element -->
+            <div id="google_translate_element"></div>
+            
+            <div class="translator-footer">
+                <button class="reset-btn" id="resetBtn">
+                    <i class="fa-solid fa-undo"></i>
+                    Reset to English
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Google Translate Widget JavaScript -->
+    <script>
+        // Google Translate Element Initialization
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'en',
+                includedLanguages: 'en,es,fr,de,it,pt,ru,zh,ja,ko,ar,hi',
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+                autoDisplay: false
+            }, 'google_translate_element');
+        }
+
+        // Simple Translator Widget Controller
+        class SimpleTranslator {
+            constructor() {
+                this.isOpen = false;
+                this.init();
+            }
+
+            init() {
+                this.translatorBtn = document.getElementById('translatorBtn');
+                this.translatorDropdown = document.getElementById('translatorDropdown');
+                this.closeTranslator = document.getElementById('closeTranslator');
+                this.resetBtn = document.getElementById('resetBtn');
+
+                this.bindEvents();
+            }
+
+            bindEvents() {
+                // Toggle dropdown
+                this.translatorBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    this.toggleDropdown();
+                });
+
+                // Close dropdown
+                this.closeTranslator.addEventListener('click', () => {
+                    this.closeDropdown();
+                });
+
+                // Reset button
+                this.resetBtn.addEventListener('click', () => {
+                    this.resetTranslation();
+                });
+
+                // Close dropdown when clicking outside
+                document.addEventListener('click', (e) => {
+                    if (!e.target.closest('.translator-widget') && this.isOpen) {
+                        this.closeDropdown();
+                    }
+                });
+
+                // Keyboard navigation
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === 'Escape' && this.isOpen) {
+                        this.closeDropdown();
+                    }
+                });
+            }
+
+            toggleDropdown() {
+                if (this.isOpen) {
+                    this.closeDropdown();
+                } else {
+                    this.openDropdown();
+                }
+            }
+
+            openDropdown() {
+                this.translatorDropdown.classList.add('active');
+                this.isOpen = true;
+            }
+
+            closeDropdown() {
+                this.translatorDropdown.classList.remove('active');
+                this.isOpen = false;
+            }
+
+            resetTranslation() {
+                // Reset Google Translate to English
+                if (window.google && window.google.translate) {
+                    const translateElement = document.querySelector('.goog-te-combo');
+                    if (translateElement) {
+                        translateElement.selectedIndex = 0;
+                        translateElement.dispatchEvent(new Event('change'));
+                    }
+                }
+
+                // Remove Google Translate banner
+                const banner = document.querySelector('.goog-te-banner-frame');
+                if (banner) {
+                    banner.remove();
+                }
+
+                // Reset body top position
+                document.body.style.top = '0px';
+
+                this.showNotification('Translation reset to English');
+            }
+
+            showNotification(message) {
+                // Create notification element
+                const notification = document.createElement('div');
+                notification.style.cssText = `
+                    position: fixed;
+                    top: 80px;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                    color: white;
+                    padding: 12px 24px;
+                    border-radius: 25px;
+                    font-size: 14px;
+                    font-weight: 600;
+                    z-index: 10000;
+                    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+                    animation: slideDown 0.3s ease;
+                `;
+                notification.textContent = message;
+                document.body.appendChild(notification);
+
+                // Remove notification after 3 seconds
+                setTimeout(() => {
+                    notification.style.animation = 'slideUp 0.3s ease';
+                    setTimeout(() => notification.remove(), 300);
+                }, 3000);
+            }
+        }
+
+        // Initialize the translator when DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            new SimpleTranslator();
+        });
+
+        // Add CSS animations for notifications
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideDown {
+                from {
+                    opacity: 0;
+                    transform: translateX(-50%) translateY(-20px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateX(-50%) translateY(0);
+                }
+            }
+            
+            @keyframes slideUp {
+                from {
+                    opacity: 1;
+                    transform: translateX(-50%) translateY(0);
+                }
+                to {
+                    opacity: 0;
+                    transform: translateX(-50%) translateY(-20px);
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+
+</body>
+</html>

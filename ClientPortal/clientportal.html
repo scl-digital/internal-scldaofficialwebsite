@@ -1,0 +1,1320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agency Client Portal</title>
+
+
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    <style>
+
+@font-face {
+
+font-family: scldafont;
+
+src:url(../fonts/Rajdhani-Light.ttf);
+
+font-weight: normal;
+font-style: normal;
+font-display: swap;
+}
+
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: scldafont;
+            background: url('background-image.png') no-repeat center center fixed;
+            background-size: cover;
+            background-blend-mode: overlay;
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Login Screen */
+        .login-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .login-form {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 4px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+            transform: translateY(0);
+            transition: transform 0.3s ease;
+        }
+
+        .login-form:hover {
+            transform: translateY(-5px);
+        }
+
+        .login-form h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #1e348d;
+            font-size: 28px;
+            font-weight: 600;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+            color: #4a5568;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            background: #f8f9fa;
+            font-family: scldafont;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #1e348d;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(90, 103, 216, 0.1);
+        }
+
+        .btn-primary {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, #1e348d, #1e348d);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-family: scldafont;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(90, 103, 216, 0.3);
+            font-family: scldafont;
+        }
+
+        /* Dashboard */
+        .dashboard {
+            display: none;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            border-radius: 4px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header h1 {
+            color: #1e348d;
+            font-size: 24px;
+            font-weight: 600;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #1e348d, #667eea);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .btn-logout {
+            padding: 8px 16px;
+            background: #e53e3e;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .btn-logout:hover {
+            background: #c53030;
+            transform: translateY(-1px);
+        }
+
+        .nav-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 10px;
+            border-radius: 4px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-tab {
+            padding: 12px 24px;
+            border: none;
+            background: transparent;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            color: #4a5568;
+        }
+
+        .nav-tab.active {
+            background: linear-gradient(135deg, #1e348d, #667eea);
+            color: white;
+            box-shadow: 0 5px 15px rgba(90, 103, 216, 0.3);
+        }
+
+        .nav-tab:hover:not(.active) {
+            background: rgba(90, 103, 216, 0.1);
+            color: #1e348d;
+        }
+
+        .tab-content {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            border-radius: 4px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            min-height: 500px;
+        }
+
+        .tab-pane {
+            display: none;
+        }
+
+        .tab-pane.active {
+            display: block;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        /* Project Cards */
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .project-card {
+            background: linear-gradient(135deg, #f8f9ff, #e8f4f8);
+            border: 1px solid #e2e8f0;
+            border-radius: 4px;
+            padding: 20px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .project-status {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 10px;
+        }
+
+        .status-active { background: #c6f6d5; color: #22543d; }
+        .status-pending { background: #fef2c7; color: #744210; }
+        .status-completed { background: #bee3f8; color: #1a365d; }
+
+        .project-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 10px;
+        }
+
+        .project-meta {
+            font-size: 14px;
+            color: #718096;
+            margin-bottom: 15px;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 6px;
+            background: #e2e8f0;
+            border-radius: 3px;
+            overflow: hidden;
+            margin-bottom: 10px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #48bb78, #68d391);
+            transition: width 0.3s ease;
+            border-radius: 3px;
+        }
+
+        /* Invoice Table */
+        .invoice-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .invoice-table th,
+        .invoice-table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .invoice-table th {
+            background: linear-gradient(135deg, #1e348d, #667eea);
+            color: white;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-size: 14px;
+        }
+
+        .invoice-table tr:hover {
+            background: #f8f9ff;
+        }
+
+        .btn-download {
+            padding: 6px 12px;
+            background: #38a169;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .btn-download:hover {
+            background: #2f855a;
+            transform: translateY(-1px);
+        }
+
+        /* Messages */
+        .message-container {
+            height: 400px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .messages-list {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+            background: #f8f9ff;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .message {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .message.user-message {
+            background: linear-gradient(135deg, #1e348d, #667eea);
+            color: white;
+            margin-left: 50px;
+        }
+
+        .message-header {
+            font-size: 12px;
+            color: #718096;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+
+        .user-message .message-header {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .message-input-container {
+            display: flex;
+            gap: 10px;
+        }
+
+        .message-input {
+            flex: 1;
+            padding: 12px 15px;
+            border: 2px solid #e2e8f0;
+            border-radius: 25px;
+            font-size: 14px;
+            background: white;
+        }
+
+        .message-input:focus {
+            outline: none;
+            border-color: #1e348d;
+        }
+
+        .btn-send {
+            padding: 12px 20px;
+            background: linear-gradient(135deg, #1e348d, #667eea);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .btn-send:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 5px 15px rgba(90, 103, 216, 0.3);
+        }
+        
+        /* Billing Portal Card Styling */
+        .billing-card {
+            background: linear-gradient(135deg, #f8f9ff, #e8f4f8);
+            border: 1px solid #e2e8f0;
+            border-radius: 4px;
+            padding: 20px;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        }
+        
+        .billing-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .error-message {
+            color: #e53e3e;
+            text-align: center;
+            margin-top: 10px;
+            font-size: 14px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .nav-tabs {
+                flex-wrap: wrap;
+            }
+            
+            .project-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .header {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+            
+            .invoice-table {
+                font-size: 14px;
+            }
+            
+            .invoice-table th,
+            .invoice-table td {
+                padding: 10px;
+            }
+        }
+    </style>
+    <!-- Google Translate API -->
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+</head>
+<body>
+    <!-- Login Screen -->
+    <div id="loginScreen" class="login-container">
+        <div class="login-form">
+            <div style="text-align: center;">
+                <img src="/images/SCL_Blue.png" style="width: 50%;">
+              </div>
+              
+            <h1>Client Portal</h1>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" required>
+                </div>
+                <button type="submit" class="btn-primary">Login </button>
+                <div id="loginError" class="error-message"></div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Dashboard -->
+    <div id="dashboard" class="dashboard">
+        <div class="container">
+            <div class="header">
+                <h1>Welcome back, <span id="clientName">John Doe</span></h1>
+                <div class="user-info">
+                    <div class="user-avatar" id="userAvatar">JD</div>
+                    <button class="btn-logout" onclick="logout()">Logout</button>
+                </div>
+            </div>
+
+            <div class="nav-tabs">
+                <button class="nav-tab active" onclick="switchTab('projects')">Projects</button>
+                <button class="nav-tab" onclick="switchTab('invoices')">Invoices</button>
+                <button class="nav-tab" onclick="switchTab('billing')">Billing Portal</button>
+                <button class="nav-tab" onclick="switchTab('messages')">Messages</button>
+                <button class="nav-tab" onclick="switchTab('files')">Files</button>
+            </div>
+
+            <div class="tab-content">
+                <!-- Projects Tab -->
+                <div id="projectsTab" class="tab-pane active">
+                    <h2>Your Projects</h2>
+                    <div class="project-grid" id="projectsGrid"></div>
+                </div>
+
+                <!-- Invoices Tab -->
+                <div id="invoicesTab" class="tab-pane">
+                    <h2>Invoices</h2>
+                    <table class="invoice-table">
+                        <thead>
+                            <tr>
+                                <th>Invoice #</th>
+                                <th>Date</th>
+                                <th>Amount</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="invoicesBody"></tbody>
+                    </table>
+                </div>
+
+                <!-- Billing Portal Tab -->
+                <div id="billingTab" class="tab-pane">
+                    <h2>Billing Portal</h2>
+                    <div class="text-center py-5">
+                        <div class="billing-card" style="max-width: 600px; margin: 0 auto;">
+                            <h3><i class="bi bi-credit-card" style="color: #1e348d;"></i> Complete Billing Management</h3>
+                            <p class="text-muted mb-4">Access your comprehensive billing portal with websites, domains, and email management.</p>
+                            <div class="row mb-4">
+                                <div class="col-md-4 mb-3">
+                                    <div class="text-center">
+                                        <i class="bi bi-globe" style="font-size: 2rem; color: #1e348d;"></i>
+                                        <h6 class="mt-2">Websites</h6>
+                                        <small class="text-muted">Manage your websites</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <div class="text-center">
+                                        <i class="bi bi-link-45deg" style="font-size: 2rem; color: #059669;"></i>
+                                        <h6 class="mt-2">Domains</h6>
+                                        <small class="text-muted">Domain management</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <div class="text-center">
+                                        <i class="bi bi-envelope" style="font-size: 2rem; color: #d97706;"></i>
+                                        <h6 class="mt-2">Email Accounts</h6>
+                                        <small class="text-muted">Email management</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="btn btn-primary btn-lg" onclick="openBillingPortal()">
+                                <i class="bi bi-box-arrow-up-right"></i> Open Billing Portal
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Messages Tab -->
+                <div id="messagesTab" class="tab-pane">
+                    <h2>Messages</h2>
+                    <div class="message-container">
+                        <div class="messages-list" id="messagesList"></div>
+                        <div class="message-input-container">
+                            <input type="text" class="message-input" id="messageInput" placeholder="Type your message...">
+                            <button class="btn-send" onclick="sendMessage()">Send</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Files Tab -->
+                <div id="filesTab" class="tab-pane">
+                    <h2>Files</h2>
+                    <form id="fileUploadForm" enctype="multipart/form-data" style="margin-bottom: 20px;">
+                        <input type="file" id="fileInput" name="file" required>
+                        <button type="submit" class="btn btn-primary">Upload</button>
+                        <span id="fileUploadStatus" style="margin-left: 10px;"></span>
+                    </form>
+                    <div id="filesList"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Remove mock data and simulateAPI
+        let currentUser = null;
+
+        async function safeJsonFetch(url, opts) {
+            const res = await fetch(url, opts);
+            const contentType = res.headers.get('content-type') || '';
+            const text = await res.text();
+            try {
+                if (contentType.includes('application/json')) {
+                    return JSON.parse(text);
+                }
+                return JSON.parse(text);
+            } catch (e) {
+                throw new Error(`Non-JSON response (${res.status}): ${text.slice(0, 200)}`);
+            }
+        }
+
+        // Show DB health badge on login form
+        (async function(){
+            try {
+                const res = await fetch('../api/health.php', { headers: { 'Content-Type': 'application/json' } });
+                const text = await res.text();
+                let ok = false;
+                try { const j = JSON.parse(text); ok = !!(j && j.success && j.db_connected); } catch(e){}
+                const badge = document.createElement('div');
+                badge.className = 'text-center mt-2';
+                badge.innerHTML = ok ? '<span class="badge bg-success">DB Connected</span>' : '<span class="badge bg-danger">DB Not Connected</span>';
+                document.getElementById('loginForm').appendChild(badge);
+            } catch(e){}
+        })();
+
+        // Authentication
+        document.getElementById('loginForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value.trim();
+            const errorDiv = document.getElementById('loginError');
+            try {
+                errorDiv.textContent = '';
+                const response = await safeJsonFetch('../api/login.php', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, password, user_type: 'client' })
+                });
+                const data = response;
+                if (data.success) {
+                    currentUser = data.user;
+                    document.getElementById('clientName').textContent = currentUser.name;
+                    document.getElementById('userAvatar').textContent = getInitials(currentUser.name);
+                    document.getElementById('loginScreen').style.display = 'none';
+                    document.getElementById('dashboard').style.display = 'block';
+                    await loadProjects();
+                    await loadInvoices();
+                    await loadMessages();
+                    await loadFiles(); // Load files on successful login
+                } else {
+                    const errorMsg = data.error || 'Login failed.';
+                    const debugInfo = data.debug ? '\nDebug: ' + JSON.stringify(data.debug, null, 2) : '';
+                    errorDiv.textContent = errorMsg + debugInfo;
+                }
+            } catch (error) {
+                errorDiv.textContent = 'Server error.';
+            }
+        });
+
+        function logout() {
+            currentUser = null;
+            document.getElementById('loginScreen').style.display = 'flex';
+            document.getElementById('dashboard').style.display = 'none';
+            document.getElementById('loginError').textContent = '';
+        }
+
+        function getInitials(name) {
+            return name.split(' ').map(n => n[0]).join('').toUpperCase();
+        }
+
+        // Tab switching
+        function switchTab(tabName) {
+            // Remove active class from all tabs and panes
+            document.querySelectorAll('.nav-tab').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.tab-pane').forEach(pane => pane.classList.remove('active'));
+            
+            // Add active class to clicked tab and corresponding pane
+            document.querySelector(`[onclick="switchTab('${tabName}')"]`).classList.add('active');
+            document.getElementById(tabName + 'Tab').classList.add('active');
+            // Load files if Files tab
+            if (tabName === 'files') loadFiles();
+        }
+
+        // Load projects
+        async function loadProjects() {
+            if (!currentUser) return;
+            try {
+                const response = await safeJsonFetch('../api/projects.php', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ client_id: currentUser.id })
+                });
+                const data = response;
+                const projectsGrid = document.getElementById('projectsGrid');
+                if (data.success) {
+                    projectsGrid.innerHTML = data.data.map(project => `
+                        <div class="project-card">
+                            <div class="project-status status-${project.status}">${project.status}</div>
+                            <div class="project-title">${project.title}</div>
+                            <div class="project-meta">
+                                <div>Start: ${project.start_date}</div>
+                                <div>Deadline: ${project.deadline}</div>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: ${project.progress}%"></div>
+                            </div>
+                            <div style="margin-top: 10px; font-size: 14px; color: #718096;">
+                                Progress: ${project.progress}%
+                            </div>
+                        </div>
+                    `).join('');
+                } else {
+                    projectsGrid.innerHTML = '<div>No projects found.</div>';
+                }
+            } catch (error) {
+                document.getElementById('projectsGrid').innerHTML = '<div>Error loading projects.</div>';
+            }
+        }
+
+        // Load invoices
+        async function loadInvoices() {
+            if (!currentUser) return;
+            try {
+                const response = await safeJsonFetch('../api/invoices.php', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ client_id: currentUser.id })
+                });
+                const data = response;
+                const invoicesBody = document.getElementById('invoicesBody');
+                if (data.success) {
+                    invoicesBody.innerHTML = data.data.map(invoice => `
+                        <tr>
+                            <td>${invoice.id}</td>
+                            <td>${invoice.date}</td>
+                            <td>${invoice.amount}</td>
+                            <td>
+                                <span class="project-status ${invoice.status.toLowerCase() === 'paid' ? 'status-completed' : 'status-pending'}">
+                                    ${invoice.status}
+                                </span>
+                            </td>
+                            <td>
+                                <button class="btn-download" onclick="downloadInvoice('${invoice.id}')">
+                                    Download
+                                </button>
+                            </td>
+                        </tr>
+                    `).join('');
+                } else {
+                    invoicesBody.innerHTML = '<tr><td colspan="5">No invoices found.</td></tr>';
+                }
+            } catch (error) {
+                document.getElementById('invoicesBody').innerHTML = '<tr><td colspan="5">Error loading invoices.</td></tr>';
+            }
+        }
+
+        // Load messages
+        async function loadMessages() {
+            if (!currentUser) return;
+            try {
+                const response = await safeJsonFetch('../api/messages.php', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ user_id: currentUser.id, user_type: 'client' })
+                });
+                const data = response;
+                const messagesList = document.getElementById('messagesList');
+                if (data.success) {
+                    messagesList.innerHTML = data.data.map(message => `
+                        <div class="message ${message.from_type === 'client' ? 'user-message' : ''}">
+                            <div class="message-header">${message.from_type === 'client' ? 'You' : 'Agency'} • ${message.timestamp}</div>
+                            <div>${message.message}</div>
+                        </div>
+                    `).join('');
+                    messagesList.scrollTop = messagesList.scrollHeight;
+                } else {
+                    messagesList.innerHTML = '<div>No messages found.</div>';
+                }
+            } catch (error) {
+                document.getElementById('messagesList').innerHTML = '<div>Error loading messages.</div>';
+            }
+        }
+
+        // Files Tab Logic
+        async function loadFiles() {
+            if (!currentUser) return;
+            const filesList = document.getElementById('filesList');
+            filesList.innerHTML = 'Loading...';
+            const res = await fetch('../api/list_files.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: `client_id=${encodeURIComponent(currentUser.id)}`
+            });
+            const data = await res.json();
+            if (data.success && data.data.length) {
+                filesList.innerHTML = `<ul class='list-group'>` + data.data.map(file =>
+                    `<li class='list-group-item d-flex justify-content-between align-items-center'>
+                        <span>${file.original_name}</span>
+                        <a href="/api/download_file.php?id=${file.id}" class="btn btn-sm btn-success" target="_blank">Download</a>
+                    </li>`
+                ).join('') + `</ul>`;
+            } else {
+                filesList.innerHTML = '<div>No files uploaded yet.</div>';
+            }
+        }
+        document.getElementById('fileUploadForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            if (!currentUser) return;
+            const fileInput = document.getElementById('fileInput');
+            const status = document.getElementById('fileUploadStatus');
+            if (!fileInput.files.length) return;
+            const formData = new FormData();
+            formData.append('file', fileInput.files[0]);
+            formData.append('client_id', currentUser.id);
+            status.textContent = 'Uploading...';
+            const res = await fetch('../api/upload_file.php', {
+                method: 'POST',
+                body: formData
+            });
+            const data = await res.json();
+            if (data.success) {
+                status.textContent = 'Upload successful!';
+                fileInput.value = '';
+                loadFiles();
+            } else {
+                status.textContent = data.error || 'Upload failed.';
+            }
+            setTimeout(() => { status.textContent = ''; }, 3000);
+        });
+
+        // Send message
+        async function sendMessage() {
+            const messageInput = document.getElementById('messageInput');
+            const message = messageInput.value.trim();
+            if (!message || !currentUser) return;
+            try {
+                // For now, send to staff_id 1 (admin/staff). You can update this logic as needed.
+                await fetch('../api/send_message.php', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        from_id: currentUser.id,
+                        to_id: 1,
+                        from_type: 'client',
+                        to_type: 'staff',
+                        message
+                    })
+                });
+                messageInput.value = '';
+                await loadMessages();
+            } catch (error) {
+                // Optionally show error
+            }
+        }
+
+        document.getElementById('messageInput').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+
+        // Download invoice (simulated)
+        function downloadInvoice(invoiceId) {
+            // In a real application, this would download the actual invoice file
+            alert(`Downloading invoice ${invoiceId}...`);
+            
+            // Simulate file download
+            const link = document.createElement('a');
+            link.href = 'data:text/plain;charset=utf-8,Invoice%20' + invoiceId + '%20Content';
+            link.download = `invoice-${invoiceId}.pdf`;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+        
+        // Open billing portal
+        function openBillingPortal() {
+            window.open('client-billing-portal.html', '_blank');
+        }
+    </script>
+    <!-- Language Translator Widget Styles -->
+    <style>
+        .translator-widget {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1001;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .translator-button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+            transition: all 0.3s ease;
+            font-weight: 600;
+            font-size: 14px;
+            border: none;
+            outline: none;
+        }
+
+        .translator-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+        }
+
+        .translator-button i {
+            font-size: 16px;
+        }
+
+        .translator-dropdown {
+            position: absolute;
+            top: 60px;
+            right: 0;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+            min-width: 280px;
+            max-height: 400px;
+            overflow: hidden;
+            transform: scale(0) translateY(-20px);
+            opacity: 0;
+            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .translator-dropdown.active {
+            transform: scale(1) translateY(0);
+            opacity: 1;
+        }
+
+        .translator-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .translator-header h4 {
+            margin: 0;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .close-translator {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            padding: 5px;
+            border-radius: 50%;
+            transition: background 0.2s;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .close-translator:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Google Translate Element Styling */
+        #google_translate_element {
+            padding: 15px 20px;
+        }
+
+        .goog-te-gadget {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+            font-size: 14px !important;
+        }
+
+        .goog-te-gadget-simple {
+            background: transparent !important;
+            border: none !important;
+            padding: 0 !important;
+        }
+
+        .goog-te-gadget-simple .goog-te-menu-value {
+            color: #333 !important;
+            font-size: 14px !important;
+            font-weight: 500 !important;
+        }
+
+        .goog-te-gadget-simple .goog-te-menu-value span:first-child {
+            color: #667eea !important;
+            font-weight: 600 !important;
+        }
+
+        .goog-te-gadget-simple .goog-te-menu-value span:last-child {
+            color: #666 !important;
+        }
+
+        .goog-te-gadget-simple .goog-te-menu-value:before {
+            content: "🌐 " !important;
+            margin-right: 5px !important;
+        }
+
+        /* Hide Google Translate banner */
+        .goog-te-banner-frame {
+            display: none !important;
+        }
+
+        body {
+            top: 0 !important;
+        }
+
+        /* Style the dropdown arrow */
+        .goog-te-gadget-simple .goog-te-menu-value:after {
+            content: " ▼" !important;
+            color: #667eea !important;
+            font-size: 12px !important;
+        }
+
+        .translator-footer {
+            padding: 15px 20px;
+            background: #f8f9fa;
+            display: flex;
+            justify-content: center;
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .reset-btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 600;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+            color: white;
+        }
+
+        .reset-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(255, 107, 107, 0.4);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .translator-widget {
+                top: 15px;
+                right: 15px;
+            }
+
+            .translator-button {
+                padding: 10px 16px;
+                font-size: 13px;
+            }
+
+            .translator-dropdown {
+                min-width: 260px;
+                right: -10px;
+            }
+
+            .reset-btn {
+                padding: 8px 16px;
+                font-size: 11px;
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .translator-widget {
+                top: 10px;
+                right: 10px;
+            }
+
+            .translator-button {
+                padding: 8px 12px;
+                font-size: 12px;
+            }
+
+            .translator-button span {
+                display: none;
+            }
+
+            .translator-dropdown {
+                min-width: 240px;
+                right: -20px;
+            }
+        }
+    </style>
+
+    <!-- Language Translator Widget -->
+    <div class="translator-widget">
+        <div class="translator-button" id="translatorBtn">
+            <i class="fa-solid fa-language"></i>
+            <span>Translate</span>
+        </div>
+        
+        <div class="translator-dropdown" id="translatorDropdown">
+            <div class="translator-header">
+                <h4>Choose Language</h4>
+                <button class="close-translator" id="closeTranslator">
+                    <i class="fa-solid fa-times"></i>
+                </button>
+            </div>
+            
+            <!-- Google Translate Element -->
+            <div id="google_translate_element"></div>
+            
+            <div class="translator-footer">
+                <button class="reset-btn" id="resetBtn">
+                    <i class="fa-solid fa-undo"></i>
+                    Reset to English
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Google Translate Widget JavaScript -->
+    <script>
+        // Google Translate Element Initialization
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'en',
+                includedLanguages: 'en,es,fr,de,it,pt,ru,zh,ja,ko,ar,hi',
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+                autoDisplay: false
+            }, 'google_translate_element');
+        }
+
+        // Simple Translator Widget Controller
+        class SimpleTranslator {
+            constructor() {
+                this.isOpen = false;
+                this.init();
+            }
+
+            init() {
+                this.translatorBtn = document.getElementById('translatorBtn');
+                this.translatorDropdown = document.getElementById('translatorDropdown');
+                this.closeTranslator = document.getElementById('closeTranslator');
+                this.resetBtn = document.getElementById('resetBtn');
+
+                this.bindEvents();
+            }
+
+            bindEvents() {
+                // Toggle dropdown
+                this.translatorBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    this.toggleDropdown();
+                });
+
+                // Close dropdown
+                this.closeTranslator.addEventListener('click', () => {
+                    this.closeDropdown();
+                });
+
+                // Reset button
+                this.resetBtn.addEventListener('click', () => {
+                    this.resetTranslation();
+                });
+
+                // Close dropdown when clicking outside
+                document.addEventListener('click', (e) => {
+                    if (!e.target.closest('.translator-widget') && this.isOpen) {
+                        this.closeDropdown();
+                    }
+                });
+
+                // Keyboard navigation
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === 'Escape' && this.isOpen) {
+                        this.closeDropdown();
+                    }
+                });
+            }
+
+            toggleDropdown() {
+                if (this.isOpen) {
+                    this.closeDropdown();
+                } else {
+                    this.openDropdown();
+                }
+            }
+
+            openDropdown() {
+                this.translatorDropdown.classList.add('active');
+                this.isOpen = true;
+            }
+
+            closeDropdown() {
+                this.translatorDropdown.classList.remove('active');
+                this.isOpen = false;
+            }
+
+            resetTranslation() {
+                // Reset Google Translate to English
+                if (window.google && window.google.translate) {
+                    const translateElement = document.querySelector('.goog-te-combo');
+                    if (translateElement) {
+                        translateElement.selectedIndex = 0;
+                        translateElement.dispatchEvent(new Event('change'));
+                    }
+                }
+
+                // Remove Google Translate banner
+                const banner = document.querySelector('.goog-te-banner-frame');
+                if (banner) {
+                    banner.remove();
+                }
+
+                // Reset body top position
+                document.body.style.top = '0px';
+
+                this.showNotification('Translation reset to English');
+            }
+
+            showNotification(message) {
+                // Create notification element
+                const notification = document.createElement('div');
+                notification.style.cssText = `
+                    position: fixed;
+                    top: 80px;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                    color: white;
+                    padding: 12px 24px;
+                    border-radius: 25px;
+                    font-size: 14px;
+                    font-weight: 600;
+                    z-index: 10000;
+                    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+                    animation: slideDown 0.3s ease;
+                `;
+                notification.textContent = message;
+                document.body.appendChild(notification);
+
+                // Remove notification after 3 seconds
+                setTimeout(() => {
+                    notification.style.animation = 'slideUp 0.3s ease';
+                    setTimeout(() => notification.remove(), 300);
+                }, 3000);
+            }
+        }
+
+        // Initialize the translator when DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            new SimpleTranslator();
+        });
+
+        // Add CSS animations for notifications
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideDown {
+                from {
+                    opacity: 0;
+                    transform: translateX(-50%) translateY(-20px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateX(-50%) translateY(0);
+                }
+            }
+            
+            @keyframes slideUp {
+                from {
+                    opacity: 1;
+                    transform: translateX(-50%) translateY(0);
+                }
+                to {
+                    opacity: 0;
+                    transform: translateX(-50%) translateY(-20px);
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+
+</body>
+</html>

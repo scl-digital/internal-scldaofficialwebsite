@@ -1,0 +1,1717 @@
+<!-- In God we Trust -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<!-- Required Meta Tags -->
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="description" content="Discover the full range of digital services at SCL Digital Agency, including branding, UI/UX design, web development, SaaS solutions, and digital marketing. We provide innovative solutions to help businesses grow, streamline operations, and enhance their online presence. Let’s bring your vision to life.">
+
+
+<meta name="keywords" content="Digital Agency, Branding, UI/UX Design, Web Development, Mobile App Development, Graphic Design, Content Strategy, SEO, Digital Marketing, Business Growth, Custom Software, SaaS Solutions, E-commerce Development, IT Consulting, SCL Digital Agency, Shinsa Lyonga Lomboto, South Africa, Cape Town, Creative Agency, Innovation, Tech Solutions, Visionary Business Support">
+
+<meta name="author" content="SCL Digital Agency (Pty) Ltd | Founded by Shinsa Lyonga Lomboto">
+
+<!-- Open Graph Meta Tags (for social media sharing) -->
+<meta property="og:title" content="Our Services - SCL Digital Agency">
+
+<meta property="og:description" content="Discover the full range of digital services at SCL Digital Agency, including branding, UI/UX design, web development, SaaS solutions, and digital marketing. We provide innovative solutions to help businesses grow, streamline operations, and enhance their online presence. Let’s bring your vision to life.">
+
+<meta property="og:image" content="/images/twitter-card.png"> <!-- Your Open Graph image URL -->
+<meta property="og:url" content="https://softwarecreativelabs.com">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Our Services - SCL Digital Agency (Pty) Ltd">
+
+<!-- Twitter Card Meta Tags (for Twitter sharing) -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Our Services - SCL Digital Agency (Pty) Ltd">
+
+<meta name="twitter:description" content="At SCL Digital Agency, we solve unique business challenges with innovative and tailored digital solutions. From branding and UI/UX design to web development and SaaS solutions, we help you grow, streamline operations, and enhance your online presence. Whether improving user experience, boosting efficiency, or increasing sales, we deliver measurable results that add real value to your business. Let’s turn your vision into impact.">
+
+<meta name="twitter:image" content="/images/twitter-card.png"> <!-- Your Twitter image URL -->
+<title>Services - SCL D A</title>
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+	<link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon">
+	<link rel="icon" href="/images/favicon.png" type="image/x-icon">
+	<link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
+	<link rel="stylesheet" href="css/swiper-bundle.min.css">
+	<link rel="stylesheet" href="css/font-awesome.min.css">
+	<link rel="stylesheet" href="css/magnific-popup.min.css">
+	<link rel="stylesheet" href="css/animate.min.css">
+	<link rel="stylesheet" href="css/main.css">
+
+
+
+
+<!-- services styling -->
+<style>
+ 
+  /* Services Section Styling */
+  .services-section {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 80px 20px;
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 60px;
+  }
+
+  .section-title {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    background: linear-gradient(90deg, #4776E6 0%, #8E54E9 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .section-subtitle {
+    font-size: 1.2rem;
+    color: #555;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  /* Slider container with proper overflow handling */
+  .slider-container {
+    position: relative;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 60px; /* Space for nav buttons */
+  }
+
+  /* Hide overflow on the wrapper to prevent scrollbars */
+  .slider-wrapper {
+    overflow: hidden;
+    margin: 0 auto;
+  }
+
+  /* Flex container for cards with fixed widths */
+  .services-slider {
+    display: flex;
+    transition: transform 0.5s ease;
+  }
+
+  /* Fixed width and proper margin for cards */
+  .service-card {
+    flex: 0 0 auto;
+    width: 100%; /* Will be calculated by JS for responsiveness */
+    padding: 40px 30px;
+    margin-right: 40px; /* Gap between cards */
+    background: white;
+    border-radius: 5px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    height: 100%; /* Fixed height for consistency */
+  }
+
+  .service-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+  }
+
+  .service-card:before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 5px;
+    width: 100%;
+    background: linear-gradient(90deg, #4776E6 0%, #8E54E9 100%);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.5s ease;
+    z-index: 0;
+  }
+
+  .service-card:hover:before {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+
+  .service-icon {
+    margin-bottom: 30px;
+    font-size: 48px;
+    padding: 15px;
+    border-radius: 12px;
+    background: rgb(255, 255, 255);
+    color: #6C63FF;
+    display: inline-block;
+  }
+
+  .service-title {
+    font-size: 1.0rem;
+    margin-bottom: 15px;
+    font-weight: 700;
+    color: #333;
+  }
+
+  .service-description {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #666;
+    margin-bottom: 20px;
+    flex-grow: 1;
+  }
+
+  .service-features {
+    list-style-type: none;
+    margin-bottom: 25px;
+  }
+
+  .service-features li {
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    color: #555;
+  }
+
+  .service-features li:before {
+    content: '✓';
+    margin-right: 10px;
+    color: #6C63FF;
+    font-weight: bold;
+  }
+
+  .service-link {
+    display: inline-block;
+    text-decoration: none;
+    color: #6C63FF;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    margin-top: auto;
+  }
+
+  .service-link:hover {
+    transform: translateX(5px);
+  }
+
+  /* Improved nav button positioning and visibility */
+  .slider-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 50px;
+    height: 50px;
+    background: white;
+    border: none;
+    border-radius: 50%;
+    font-size: 20px;
+    color: #6C63FF;
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    z-index: 5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+  }
+
+  .slider-nav:hover {
+    background: #6C63FF;
+    color: white;
+  }
+
+  .slider-nav:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  .prev-btn {
+    left: 0;
+  }
+
+  .next-btn {
+    right: 0;
+  }
+
+  .slider-dots {
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+    gap: 10px;
+  }
+
+  .slider-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #ccc;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: none;
+  }
+
+  .slider-dot.active {
+    background: #6C63FF;
+    transform: scale(1.2);
+  }
+
+  .cta-container {
+    margin-top: 80px;
+    text-align: center;
+  }
+
+  .cta-button {
+    display: inline-block;
+    padding: 16px 40px;
+    background: linear-gradient(90deg, #4776E6 0%, #8E54E9 100%);
+    color: white;
+    text-decoration: none;
+    border-radius: 30px;
+    font-weight: 600;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 20px rgba(108, 99, 255, 0.2);
+  }
+
+  .cta-button:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(108, 99, 255, 0.3);
+  }
+
+  /* Responsive styles */
+  @media screen and (max-width: 1200px) {
+    .service-card {
+      height: 500px;
+    }
+  }
+
+  @media screen and (max-width: 992px) {
+    .section-title {
+      font-size: 2.5rem;
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    .services-section {
+      padding: 60px 20px;
+    }
+    
+    .section-subtitle {
+      font-size: 1rem;
+    }
+    
+    .service-card {
+      height: 480px;
+    }
+  }
+
+  @media screen and (max-width: 480px) {
+    .section-title {
+      font-size: 2rem;
+    }
+    
+    .section-subtitle {
+      font-size: 0.9rem;
+    }
+    
+    .service-card {
+      padding: 30px 20px;
+      height: auto;
+      min-height: 450px;
+    }
+    
+    .slider-container {
+      padding: 0 40px;
+    }
+  }
+</style>
+
+<!-- services styling -->
+
+
+
+    <!-- Google Translate API -->
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+</head>
+<body>
+
+<div class="menu-overlay"></div>
+
+<main class="main">
+
+	<div class="s-about">
+		
+		<div class="sidebar">
+	<div class="menu-wrap">
+		<a href="index.html" class="sidebar-logo">
+			<img src="images/SCL_DA_Logo.png" alt="Sylvia">
+		</a>
+		<nav class="menu-nav">
+			<ul>
+				<ul>
+          <li><a href="index.html"><i class="fa-solid fa-house"></i> Home</a></li>
+					<li><a href="events-platform/eventspage.html"><i class="fa-solid fa-calendar-week"></i> Events</a></li>
+			        <li><a href="applications/products.html"><i class="fa-solid fa-cart-shopping"></i> Store</a></li>
+					<li><a href="services-platform/our_services.html"><i class="fa-solid fa-screwdriver-wrench"></i> Our Solutions</a></li>
+					<li><a href="case_studies.html"><i class="fa-regular fa-folder-open"></i> Customers</a></li>
+					<li><a href="about.html"><i class="fa-solid fa-building"></i>  About Us</a></li>
+      <hr>
+					<li><a href="quote.html"><i class="fa-solid fa-right-to-bracket"></i> Sign In</a></li>
+				</ul>
+			</ul>
+
+			<div class="menu-contacts">
+				<a href="/payments-system/payments.html" class="menu-contacts__item">
+					<span class="menu-contacts__icon">
+						<i class="fa-regular fa-credit-card"></i>
+					</span>
+					<p>Payment & Fees</p>
+				</a>
+
+				<a href="../AdminPortal/admin-login.html" class="menu-contacts__item">
+					<span class="menu-contacts__icon">
+						<i class="fa-solid fa-right-to-bracket"></i>
+					</span>
+					<p>Staff Portal</p>
+				</a>
+
+				<div class="menu-social">
+					
+
+					<a href="https://www.instagram.com/scl_agency/" target="_blank" class="menu-social__item">
+						
+						<svg xmlns="http://www.w3.org/2000/svg" height="24" width="26" viewBox="0 0 448 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path fill="#ffffff" d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"/></svg>
+
+					</a>
+
+					<a href="https://www.linkedin.com/company/scl-digital-agency/?viewAsMember=true" target="_blank" class="menu-social__item">
+						
+						<svg xmlns="http://www.w3.org/2000/svg" height="24" width="26" viewBox="0 0 448 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path fill="#ffffff" d="M100.3 448H7.4V148.9h92.9zM53.8 108.1C24.1 108.1 0 83.5 0 53.8a53.8 53.8 0 0 1 107.6 0c0 29.7-24.1 54.3-53.8 54.3zM447.9 448h-92.7V302.4c0-34.7-.7-79.2-48.3-79.2-48.3 0-55.7 37.7-55.7 76.7V448h-92.8V148.9h89.1v40.8h1.3c12.4-23.5 42.7-48.3 87.9-48.3 94 0 111.3 61.9 111.3 142.3V448z"/></svg>
+						
+					</a>
+
+
+					<a href="https://www.tiktok.com/@scl_digital_agency" target="_blank" class="menu-social__item">
+
+					
+				
+					<svg xmlns="http://www.w3.org/2000/svg" height="24" width="26" viewBox="0 0 448 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path fill="#ffffff" d="M448 209.9a210.1 210.1 0 0 1 -122.8-39.3V349.4A162.6 162.6 0 1 1 185 188.3V278.2a74.6 74.6 0 1 0 52.2 71.2V0l88 0a121.2 121.2 0 0 0 1.9 22.2h0A122.2 122.2 0 0 0 381 102.4a121.4 121.4 0 0 0 67 20.1z"/></svg>
+				
+				
+				
+				
+				</a>
+
+
+
+				</div>
+			</div>
+
+
+			
+			<div class="menu-close__wrap">
+				<a href="#" class="menu-close"><img style="transform: rotate(180deg);" src="images/arrow-right.svg" alt=""></a>
+			</div>
+		</nav>
+	</div>
+
+	<a href="index.html" class="logo">
+		<img src="images/SCL_DA_Icon_logo.png" alt="">
+	</a>
+
+	<a href="#" class="hamburger-button">
+		<span></span>
+		<span></span>
+		<span></span>
+	</a>
+</div>
+
+<div class="prelodaer-wrap">
+	<div class="preloader-item">
+		<img src="/images/SCLDA_Softwarecreativelabs.com_logo.png" alt="Preloader">
+	</div>
+</div>
+
+
+  <style>
+                hr {
+  background-color: #f5f5f5;
+  border: none;
+  display: block;
+  height: 2px;
+  margin: 1.5rem 0;
+}
+            </style>
+
+				<style>
+.left-avatar img {
+    width: 100%;  /* Fill the container */
+    height: auto; /* Maintain aspect ratio */
+    max-width: 1000px; /* Increase max width to make it wider */
+    object-fit: contain; /* Prevents cropping */
+}
+
+/* Mobile Optimization */
+@media screen and (max-width: 768px) {
+    .left-avatar img {
+        max-width: 600px; /* Slightly smaller on tablets */
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .left-avatar img {
+        max-width: 100%; /* Let it be flexible on smaller screens */
+    }
+}
+
+
+				</style>
+
+		   <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+     
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            color: white;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 10;
+            margin-bottom: 10px;
+        }
+
+        .header .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 30px;
+        }
+
+        .main-card {
+            background: white;
+            border-radius: 4px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+            transition: transform 0.3s ease;
+        }
+
+        .main-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .input-section {
+            margin-bottom: 30px;
+        }
+
+        .input-section h2 {
+            color: #2d3748;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+            text-align: center;
+        }
+
+        .input-group {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .input-wrapper {
+            flex: 1;
+            position: relative;
+        }
+
+        .input-wrapper input {
+            width: 100%;
+            padding: 15px 50px 15px 20px;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: #f8fafc;
+        }
+
+        .input-wrapper input:focus {
+            outline: none;
+            border-color: #667eea;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .input-wrapper::before {
+            content: "🌐";
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.2rem;
+        }
+
+        .scan-btn {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            min-width: 150px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .scan-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .scan-btn:active {
+            transform: translateY(0);
+        }
+
+        .scan-btn:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 20px;
+            color: #667eea;
+        }
+
+        .loading.active {
+            display: block;
+        }
+
+        .spinner {
+            border: 3px solid #f3f4f6;
+            border-top: 3px solid #667eea;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 15px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .results {
+            display: none;
+            animation: fadeInUp 0.6s ease;
+        }
+
+        .results.active {
+            display: block;
+        }
+
+        .score-display {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 30px;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            border-radius: 15px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .score-circle {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: 700;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .score-circle::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: conic-gradient(from 0deg, #ef4444 0deg, #1e348d 72deg, #1e348d 144deg, #1e348d 360deg);
+            border-radius: 50%;
+        }
+
+        .score-circle span {
+            position: relative;
+            z-index: 1;
+            background: white;
+            color: #2d3748;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .score-label {
+            font-size: 1.2rem;
+            color: #4a5568;
+            margin-bottom: 10px;
+        }
+
+        .score-description {
+            font-size: 1rem;
+            color: #718096;
+        }
+
+        .recommendations {
+            margin-bottom: 30px;
+        }
+
+        .recommendations h3 {
+            color: #2d3748;
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+        }
+
+        .recommendation-item {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .recommendation-item:hover {
+            background: white;
+            border-color: #667eea;
+            transform: translateX(5px);
+        }
+
+        .recommendation-item h4 {
+            color: #2d3748;
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+        }
+
+        .recommendation-item p {
+            color: #4a5568;
+            font-size: 0.95rem;
+        }
+
+        .priority {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .priority.high {
+            background: #fed7d7;
+            color: #c53030;
+        }
+
+        .priority.medium {
+            background: #fef2c7;
+            color: #d69e2e;
+        }
+
+        .priority.low {
+            background: #c6f6d5;
+            color: #2f855a;
+        }
+
+        .monetization-section {
+            background: linear-gradient(135deg, #2d3748 0%, #4a5568 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        .monetization-section h3 {
+            margin-bottom: 20px;
+            font-size: 1.4rem;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .cta-btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .cta-btn.primary {
+            background: #667eea;
+            color: white;
+        }
+
+        .cta-btn.secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .feature-card {
+            background: rgba(255,255,255,0.1);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: left;
+        }
+
+        .feature-card h4 {
+            margin-bottom: 10px;
+            color: #e2e8f0;
+        }
+
+        .feature-card p {
+            color: #cbd5e0;
+            font-size: 0.9rem;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .main-card {
+                padding: 20px;
+            }
+
+            .input-group {
+                flex-direction: column;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>		
+
+
+  <!-- Services slider section -->
+
+  <section class="services-section">
+   
+  <div class="container">
+        <div class="header">
+            <h1>SCL DA Brand Score AI™</h1>
+            <div class="subtitle">Instant AI-powered brand audit that reveals your online brand strength</div>
+        </div>
+
+        <div class="main-card">
+            <div class="input-section">
+                <h2>How Strong is Your Brand?</h2>
+                <div class="input-group">
+                    <div class="input-wrapper">
+                        <input type="url" id="websiteUrl" placeholder="Enter your website URL (e.g., https://example.com)" required>
+                    </div>
+                    <button class="scan-btn" id="scanBtn" onclick="scanWebsite()">
+                        <span id="btnText">Scan Brand</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="loading" id="loading">
+                <div class="spinner"></div>
+                <p>Analyzing your brand... This may take a moment.</p>
+            </div>
+
+            <div class="results" id="results">
+                <div class="score-display">
+                    <div class="score-circle">
+                        <span id="scoreValue">0</span>
+                    </div>
+                    <div class="score-label">Brand Strength Score</div>
+                    <div class="score-description" id="scoreDescription">Your brand analysis results</div>
+                </div>
+
+                <div class="recommendations">
+                    <h3>🎯 Key Recommendations</h3>
+                    <div id="recommendationsList"></div>
+                </div>
+
+                <div class="monetization-section">
+                    <h3>🚀 Ready to Transform Your Brand?</h3>
+                    <p>This free scan reveals just the surface. Get the complete picture with our professional brand audit.</p>
+                    
+                    <div class="features-grid">
+                        <div class="feature-card">
+                            <h4>💼 Pro Report (R299)</h4>
+                            <p>Complete brand audit PDF with UX/UI breakdown, competitor analysis, and detailed action plan</p>
+                        </div>
+                        <div class="feature-card">
+                            <h4>📞 Strategy Session</h4>
+                            <p>30-minute consultation to discuss your brand's potential and custom solutions</p>
+                        </div>
+                        <div class="feature-card">
+                            <h4>🔧 Full Brand Refresh</h4>
+                            <p>Complete brand transformation by SCL Digital Agency - from strategy to execution</p>
+                        </div>
+                    </div>
+
+                    <div class="cta-buttons">
+                        <a href="#" class="cta-btn primary" onclick="purchaseReport()">Get Full Report (R299)</a>
+                        <a href="#" class="cta-btn secondary" onclick="bookConsultation()">Book Free Consultation</a>
+                        <a href="#" class="cta-btn secondary" onclick="shareResults()">Share Results</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+   
+  </section>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Get elements
+      const sliderWrapper = document.querySelector('.slider-wrapper');
+      const slider = document.querySelector('.services-slider');
+      const slides = document.querySelectorAll('.service-card');
+      const prevBtn = document.querySelector('.prev-btn');
+      const nextBtn = document.querySelector('.next-btn');
+      const dotsContainer = document.querySelector('.slider-dots');
+      
+      // State variables
+      let currentIndex = 0;
+      let slidesPerView = 3;
+      let slideWidth = 0;
+      let totalSlides = 0;
+      let sliderPosition = 0;
+      
+      // Calculate dimensions and setup slider
+      function setupSlider() {
+        // Determine slides per view based on screen width
+        if (window.innerWidth >= 1200) {
+          slidesPerView = 3;
+        } else if (window.innerWidth >= 768) {
+          slidesPerView = 2;
+        } else {
+          slidesPerView = 1;
+        }
+        
+        // Calculate total number of pages
+        totalSlides = Math.ceil(slides.length / slidesPerView);
+        
+        // Set width for each slide
+        const containerWidth = sliderWrapper.clientWidth;
+        slideWidth = (containerWidth / slidesPerView) - (40 * (slidesPerView - 1) / slidesPerView);
+        
+        // Set each slide width and margin
+        slides.forEach(slide => {
+          slide.style.width = `${slideWidth}px`;
+        });
+        
+        // Update dots
+        updateDots();
+        
+        // Reset to first slide when resizing
+        goToSlide(0);
+        
+        // Update button states
+        updateNavButtons();
+      }
+      
+      // Create dot indicators
+      function updateDots() {
+        dotsContainer.innerHTML = '';
+        
+        for (let i = 0; i < totalSlides; i++) {
+          const dot = document.createElement('button');
+          dot.classList.add('slider-dot');
+          dot.setAttribute('aria-label', `Go to slide ${i + 1}`);
+          if (i === currentIndex) {
+            dot.classList.add('active');
+          }
+          
+          dot.addEventListener('click', () => goToSlide(i));
+          dotsContainer.appendChild(dot);
+        }
+      }
+      
+      // Go to specific slide
+      function goToSlide(index) {
+        if (index < 0 || index >= totalSlides) return;
+        
+        currentIndex = index;
+        sliderPosition = -(currentIndex * slidesPerView * (slideWidth + 40));
+        
+        // Handle edge case for last page
+        const remainingSlides = slides.length - (currentIndex * slidesPerView);
+        if (remainingSlides < slidesPerView) {
+          sliderPosition = -((slides.length - slidesPerView) * (slideWidth + 40));
+        }
+        
+        // Apply transform
+        slider.style.transform = `translateX(${sliderPosition}px)`;
+        
+        // Update active dot
+        document.querySelectorAll('.slider-dot').forEach((dot, i) => {
+          dot.classList.toggle('active', i === currentIndex);
+        });
+        
+        // Update button states
+        updateNavButtons();
+      }
+      
+      // Update navigation button states
+      function updateNavButtons() {
+        prevBtn.disabled = currentIndex === 0;
+        nextBtn.disabled = currentIndex === totalSlides - 1;
+      }
+      
+      // Event listeners for buttons
+      prevBtn.addEventListener('click', () => {
+        if (currentIndex > 0) {
+          goToSlide(currentIndex - 1);
+        }
+      });
+      
+      nextBtn.addEventListener('click', () => {
+        if (currentIndex < totalSlides - 1) {
+          goToSlide(currentIndex + 1);
+        }
+      });
+      
+      // Initialize slider
+      setupSlider();
+      
+      // Handle window resize
+      let resizeTimer;
+      window.addEventListener('resize', () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(setupSlider, 250);
+      });
+    });
+  </script>
+
+
+  <!-- Services slider section -->
+
+
+    <script>
+        // Store current analysis results
+        let currentAnalysis = null;
+
+        // Brand analysis function
+        async function scanWebsite() {
+            const urlInput = document.getElementById('websiteUrl');
+            const url = urlInput.value.trim();
+            
+            if (!url) {
+                alert('Please enter a website URL');
+                return;
+            }
+
+            // Validate URL format
+            try {
+                new URL(url);
+            } catch (e) {
+                alert('Please enter a valid URL (e.g., https://example.com)');
+                return;
+            }
+
+            // Show loading state
+            document.getElementById('loading').classList.add('active');
+            document.getElementById('results').classList.remove('active');
+            document.getElementById('scanBtn').disabled = true;
+            document.getElementById('btnText').textContent = 'Analyzing...';
+
+            // Simulate analysis (in real implementation, this would call your API)
+            try {
+                const analysis = await performBrandAnalysis(url);
+                displayResults(analysis);
+            } catch (error) {
+                alert('Error analyzing website. Please try again.');
+                console.error('Analysis error:', error);
+            } finally {
+                // Hide loading state
+                document.getElementById('loading').classList.remove('active');
+                document.getElementById('scanBtn').disabled = false;
+                document.getElementById('btnText').textContent = 'Scan Brand';
+            }
+        }
+
+        // Simulate brand analysis (replace with actual API call)
+        async function performBrandAnalysis(url) {
+            // Simulate API delay
+            await new Promise(resolve => setTimeout(resolve, 3000));
+            
+            // Mock analysis results
+            const mockAnalysis = {
+                url: url,
+                score: Math.floor(Math.random() * 40) + 45, // Random score 45-85
+                checks: {
+                    logo: Math.random() > 0.3,
+                    colors: Math.random() > 0.4,
+                    mobile: Math.random() > 0.2,
+                    speed: Math.random() > 0.5,
+                    metadata: Math.random() > 0.3,
+                    fonts: Math.random() > 0.4,
+                    social: Math.floor(Math.random() * 5)
+                }
+            };
+
+            return mockAnalysis;
+        }
+
+        // Display analysis results
+        function displayResults(analysis) {
+            currentAnalysis = analysis;
+            
+            // Update score display
+            document.getElementById('scoreValue').textContent = analysis.score;
+            
+            // Update score description
+            let description = '';
+            if (analysis.score >= 80) {
+                description = 'Excellent! Your brand has strong online presence.';
+            } else if (analysis.score >= 60) {
+                description = 'Good foundation with room for improvement.';
+            } else if (analysis.score >= 40) {
+                description = 'Your brand needs attention to compete effectively.';
+            } else {
+                description = 'Significant improvements needed for brand strength.';
+            }
+            document.getElementById('scoreDescription').textContent = description;
+
+            // Generate recommendations
+            const recommendations = generateRecommendations(analysis);
+            displayRecommendations(recommendations);
+
+            // Show results
+            document.getElementById('results').classList.add('active');
+        }
+
+        // Generate recommendations based on analysis
+        function generateRecommendations(analysis) {
+            const recommendations = [];
+
+            if (!analysis.checks.logo) {
+                recommendations.push({
+                    title: 'Add Professional Logo',
+                    description: 'Your website lacks a clear, professional logo. A strong logo builds brand recognition and trust.',
+                    priority: 'high'
+                });
+            }
+
+            if (!analysis.checks.colors) {
+                recommendations.push({
+                    title: 'Establish Brand Colors',
+                    description: 'Inconsistent color usage weakens brand identity. Define a primary color palette and use it consistently.',
+                    priority: 'high'
+                });
+            }
+
+            if (!analysis.checks.mobile) {
+                recommendations.push({
+                    title: 'Optimize for Mobile',
+                    description: 'Your site isn\'t mobile-friendly. With 60% of traffic from mobile, this is crucial for brand perception.',
+                    priority: 'high'
+                });
+            }
+
+            if (!analysis.checks.speed) {
+                recommendations.push({
+                    title: 'Improve Page Speed',
+                    description: 'Slow loading times hurt user experience and brand perception. Optimize images and reduce file sizes.',
+                    priority: 'medium'
+                });
+            }
+
+            if (!analysis.checks.metadata) {
+                recommendations.push({
+                    title: 'Add SEO Metadata',
+                    description: 'Missing title tags and meta descriptions reduce discoverability and professional appearance.',
+                    priority: 'medium'
+                });
+            }
+
+            if (!analysis.checks.fonts) {
+                recommendations.push({
+                    title: 'Standardize Typography',
+                    description: 'Too many fonts create visual chaos. Stick to 2-3 complementary fonts for better brand consistency.',
+                    priority: 'medium'
+                });
+            }
+
+            if (analysis.checks.social < 3) {
+                recommendations.push({
+                    title: 'Expand Social Presence',
+                    description: 'Limited social media integration reduces brand reach. Add links to key platforms where your audience engages.',
+                    priority: 'low'
+                });
+            }
+
+            // Always show at least 3 recommendations
+            if (recommendations.length < 3) {
+                recommendations.push({
+                    title: 'Enhance Brand Storytelling',
+                    description: 'Your brand story isn\'t clear enough. Develop compelling messaging that resonates with your target audience.',
+                    priority: 'medium'
+                });
+            }
+
+            return recommendations.slice(0, 5); // Limit to 5 recommendations
+        }
+
+        // Display recommendations
+        function displayRecommendations(recommendations) {
+            const container = document.getElementById('recommendationsList');
+            container.innerHTML = '';
+
+            recommendations.forEach(rec => {
+                const item = document.createElement('div');
+                item.className = 'recommendation-item';
+                item.innerHTML = `
+                    <div class="priority ${rec.priority}">${rec.priority.toUpperCase()}</div>
+                    <h4>${rec.title}</h4>
+                    <p>${rec.description}</p>
+                `;
+                container.appendChild(item);
+            });
+        }
+
+        // Monetization functions
+        function purchaseReport() {
+            alert('🎉 Redirecting to purchase full brand audit report...\n\nThis would typically:\n• Process payment (R299)\n• Generate comprehensive PDF report\n• Email detailed analysis\n• Include competitor insights');
+        }
+
+        function bookConsultation() {
+            alert('📞 Booking consultation...\n\nThis would typically:\n• Open calendar booking system\n• Collect contact information\n• Send meeting confirmation\n• Prepare personalized brand strategy');
+        }
+
+        function shareResults() {
+            if (currentAnalysis) {
+                const shareText = `I just analyzed my brand with SCL DA Brand Score AI™ and scored ${currentAnalysis.score}/100! 🎯\n\nCheck your brand strength: ${window.location.href}`;
+                
+                if (navigator.share) {
+                    navigator.share({
+                        title: 'My Brand Score Results',
+                        text: shareText,
+                        url: window.location.href
+                    });
+                } else {
+                    navigator.clipboard.writeText(shareText);
+                    alert('✅ Results copied to clipboard! Share with your network.');
+                }
+            }
+        }
+
+        // Allow Enter key to trigger scan
+        document.getElementById('websiteUrl').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                scanWebsite();
+            }
+        });
+
+        // Auto-focus on input
+        document.getElementById('websiteUrl').focus();
+    </script>
+
+
+
+
+
+
+
+</main>
+
+
+
+<!-- Calendly badge widget begin -->
+
+<script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
+<script type="text/javascript">window.onload = function() { Calendly.initBadgeWidget({ url: 'https://calendly.com/scldigital', text: 'Schedule a Call', color: '#FFFFFF', textColor: '#1e348d', branding: false }); }</script>
+<!-- Calendly badge widget end -->
+ 
+<script src="js/jquery-3.7.0.min.js"></script>
+<script src="js/swiper-bundle.min.js"></script>
+<script src="js/wow.min.js"></script>
+<script src="js/masonry.pkgd.min.js"></script>
+<script src="js/imagesloaded.pkgd.min.js"></script>
+<script src="js/magnific-popup.min.js"></script>
+<script src="js/blazy.min.js"></script>
+<script src="js/parazoom.min.js"></script>
+<script src="js/script.js"></script>
+    <!-- Language Translator Widget Styles -->
+    <style>
+        .translator-widget {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1001;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .translator-button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+            transition: all 0.3s ease;
+            font-weight: 600;
+            font-size: 14px;
+            border: none;
+            outline: none;
+        }
+
+        .translator-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+        }
+
+        .translator-button i {
+            font-size: 16px;
+        }
+
+        .translator-dropdown {
+            position: absolute;
+            top: 60px;
+            right: 0;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+            min-width: 280px;
+            max-height: 400px;
+            overflow: hidden;
+            transform: scale(0) translateY(-20px);
+            opacity: 0;
+            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .translator-dropdown.active {
+            transform: scale(1) translateY(0);
+            opacity: 1;
+        }
+
+        .translator-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .translator-header h4 {
+            margin: 0;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .close-translator {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            padding: 5px;
+            border-radius: 50%;
+            transition: background 0.2s;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .close-translator:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Google Translate Element Styling */
+        #google_translate_element {
+            padding: 15px 20px;
+        }
+
+        .goog-te-gadget {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+            font-size: 14px !important;
+        }
+
+        .goog-te-gadget-simple {
+            background: transparent !important;
+            border: none !important;
+            padding: 0 !important;
+        }
+
+        .goog-te-gadget-simple .goog-te-menu-value {
+            color: #333 !important;
+            font-size: 14px !important;
+            font-weight: 500 !important;
+        }
+
+        .goog-te-gadget-simple .goog-te-menu-value span:first-child {
+            color: #667eea !important;
+            font-weight: 600 !important;
+        }
+
+        .goog-te-gadget-simple .goog-te-menu-value span:last-child {
+            color: #666 !important;
+        }
+
+        .goog-te-gadget-simple .goog-te-menu-value:before {
+            content: "🌐 " !important;
+            margin-right: 5px !important;
+        }
+
+        /* Hide Google Translate banner */
+        .goog-te-banner-frame {
+            display: none !important;
+        }
+
+        body {
+            top: 0 !important;
+        }
+
+        /* Style the dropdown arrow */
+        .goog-te-gadget-simple .goog-te-menu-value:after {
+            content: " ▼" !important;
+            color: #667eea !important;
+            font-size: 12px !important;
+        }
+
+        .translator-footer {
+            padding: 15px 20px;
+            background: #f8f9fa;
+            display: flex;
+            justify-content: center;
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .reset-btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 600;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+            color: white;
+        }
+
+        .reset-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(255, 107, 107, 0.4);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .translator-widget {
+                top: 15px;
+                right: 15px;
+            }
+
+            .translator-button {
+                padding: 10px 16px;
+                font-size: 13px;
+            }
+
+            .translator-dropdown {
+                min-width: 260px;
+                right: -10px;
+            }
+
+            .reset-btn {
+                padding: 8px 16px;
+                font-size: 11px;
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .translator-widget {
+                top: 10px;
+                right: 10px;
+            }
+
+            .translator-button {
+                padding: 8px 12px;
+                font-size: 12px;
+            }
+
+            .translator-button span {
+                display: none;
+            }
+
+            .translator-dropdown {
+                min-width: 240px;
+                right: -20px;
+            }
+        }
+    </style>
+
+    <!-- Language Translator Widget -->
+    <div class="translator-widget">
+        <div class="translator-button" id="translatorBtn">
+            <i class="fa-solid fa-language"></i>
+            <span>Translate</span>
+        </div>
+        
+        <div class="translator-dropdown" id="translatorDropdown">
+            <div class="translator-header">
+                <h4>Choose Language</h4>
+                <button class="close-translator" id="closeTranslator">
+                    <i class="fa-solid fa-times"></i>
+                </button>
+            </div>
+            
+            <!-- Google Translate Element -->
+            <div id="google_translate_element"></div>
+            
+            <div class="translator-footer">
+                <button class="reset-btn" id="resetBtn">
+                    <i class="fa-solid fa-undo"></i>
+                    Reset to English
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Google Translate Widget JavaScript -->
+    <script>
+        // Google Translate Element Initialization
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'en',
+                includedLanguages: 'en,es,fr,de,it,pt,ru,zh,ja,ko,ar,hi',
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+                autoDisplay: false
+            }, 'google_translate_element');
+        }
+
+        // Simple Translator Widget Controller
+        class SimpleTranslator {
+            constructor() {
+                this.isOpen = false;
+                this.init();
+            }
+
+            init() {
+                this.translatorBtn = document.getElementById('translatorBtn');
+                this.translatorDropdown = document.getElementById('translatorDropdown');
+                this.closeTranslator = document.getElementById('closeTranslator');
+                this.resetBtn = document.getElementById('resetBtn');
+
+                this.bindEvents();
+            }
+
+            bindEvents() {
+                // Toggle dropdown
+                this.translatorBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    this.toggleDropdown();
+                });
+
+                // Close dropdown
+                this.closeTranslator.addEventListener('click', () => {
+                    this.closeDropdown();
+                });
+
+                // Reset button
+                this.resetBtn.addEventListener('click', () => {
+                    this.resetTranslation();
+                });
+
+                // Close dropdown when clicking outside
+                document.addEventListener('click', (e) => {
+                    if (!e.target.closest('.translator-widget') && this.isOpen) {
+                        this.closeDropdown();
+                    }
+                });
+
+                // Keyboard navigation
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === 'Escape' && this.isOpen) {
+                        this.closeDropdown();
+                    }
+                });
+            }
+
+            toggleDropdown() {
+                if (this.isOpen) {
+                    this.closeDropdown();
+                } else {
+                    this.openDropdown();
+                }
+            }
+
+            openDropdown() {
+                this.translatorDropdown.classList.add('active');
+                this.isOpen = true;
+            }
+
+            closeDropdown() {
+                this.translatorDropdown.classList.remove('active');
+                this.isOpen = false;
+            }
+
+            resetTranslation() {
+                // Reset Google Translate to English
+                if (window.google && window.google.translate) {
+                    const translateElement = document.querySelector('.goog-te-combo');
+                    if (translateElement) {
+                        translateElement.selectedIndex = 0;
+                        translateElement.dispatchEvent(new Event('change'));
+                    }
+                }
+
+                // Remove Google Translate banner
+                const banner = document.querySelector('.goog-te-banner-frame');
+                if (banner) {
+                    banner.remove();
+                }
+
+                // Reset body top position
+                document.body.style.top = '0px';
+
+                this.showNotification('Translation reset to English');
+            }
+
+            showNotification(message) {
+                // Create notification element
+                const notification = document.createElement('div');
+                notification.style.cssText = `
+                    position: fixed;
+                    top: 80px;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                    color: white;
+                    padding: 12px 24px;
+                    border-radius: 25px;
+                    font-size: 14px;
+                    font-weight: 600;
+                    z-index: 10000;
+                    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+                    animation: slideDown 0.3s ease;
+                `;
+                notification.textContent = message;
+                document.body.appendChild(notification);
+
+                // Remove notification after 3 seconds
+                setTimeout(() => {
+                    notification.style.animation = 'slideUp 0.3s ease';
+                    setTimeout(() => notification.remove(), 300);
+                }, 3000);
+            }
+        }
+
+        // Initialize the translator when DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            new SimpleTranslator();
+        });
+
+        // Add CSS animations for notifications
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideDown {
+                from {
+                    opacity: 0;
+                    transform: translateX(-50%) translateY(-20px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateX(-50%) translateY(0);
+                }
+            }
+            
+            @keyframes slideUp {
+                from {
+                    opacity: 1;
+                    transform: translateX(-50%) translateY(0);
+                }
+                to {
+                    opacity: 0;
+                    transform: translateX(-50%) translateY(-20px);
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+
+</body>
+</html>

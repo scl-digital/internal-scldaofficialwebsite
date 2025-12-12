@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SCL Digital Agency - Team Member Application</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+
+        .header .star {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .form-content {
+            padding: 40px 30px;
+        }
+
+        .section {
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            font-size: 1.4em;
+            color: #667eea;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #667eea;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 500;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        input[type="date"],
+        input[type="number"],
+        textarea,
+        select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 6px;
+            font-size: 14px;
+            transition: border-color 0.3s;
+        }
+
+        input:focus,
+        textarea:focus,
+        select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .radio-group,
+        .checkbox-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 10px;
+        }
+
+        .radio-item,
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        input[type="radio"],
+        input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .info-box {
+            background: #f0f4ff;
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            border-left: 4px solid #667eea;
+        }
+
+        .info-box p {
+            margin-bottom: 5px;
+            color: #555;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+
+        @media (max-width: 600px) {
+            .grid-2 {
+                grid-template-columns: 1fr;
+            }
+
+            .header h1 {
+                font-size: 1.5em;
+            }
+
+            .form-content {
+                padding: 30px 20px;
+            }
+        }
+
+        .success-message {
+            display: none;
+            background: #4caf50;
+            color: white;
+            padding: 20px;
+            border-radius: 6px;
+            margin-top: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="star">⭐</div>
+            <h1>SCL DIGITAL AGENCY</h1>
+            <p>Team Member Application Form</p>
+        </div>
+
+        <div class="form-content">
+            <form id="applicationForm" action="https://formsubmit.co/shinsalomboto45@gmail.com" method="POST">
+                <!-- Hidden FormSubmit Configuration -->
+                <input type="hidden" name="_captcha" value="false">
+                <input type="hidden" name="_next" value="https://scldigital.agency/thank-you">
+                <input type="text" name="_honey" style="display:none">
+
+                <!-- Section 1: Personal Information -->
+                <div class="section">
+                    <h2 class="section-title">1. Personal Information</h2>
+                    
+                    <div class="form-group">
+                        <label for="fullName">Full Name *</label>
+                        <input type="text" id="fullName" name="fullName" required>
+                    </div>
+
+                    <div class="grid-2">
+                        <div class="form-group">
+                            <label for="email">Email Address *</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="phone">Phone Number *</label>
+                            <input type="tel" id="phone" name="phone" required>
+                        </div>
+                    </div>
+
+                    <div class="grid-2">
+                        <div class="form-group">
+                            <label for="dob">Date of Birth *</label>
+                            <input type="date" id="dob" name="dob" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="gender">Gender (optional)</label>
+                            <select id="gender" name="gender">
+                                <option value="">Select...</option>
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                                <option value="other">Other</option>
+                                <option value="prefer-not">Prefer not to say</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="address">Physical Address (City, Country) *</label>
+                        <input type="text" id="address" name="address" placeholder="e.g., Cape Town, South Africa" required>
+                    </div>
+                </div>
+
+                <!-- Section 2: Education & Skills -->
+                <div class="section">
+                    <h2 class="section-title">2. Education & Skills</h2>
+                    
+                    <div class="form-group">
+                        <label>Current Education Status *</label>
+                        <div class="radio-group">
+                            <div class="radio-item">
+                                <input type="radio" id="highschool" name="education" value="highschool" required>
+                                <label for="highschool">High School</label>
+                            </div>
+                            <div class="radio-item">
+                                <input type="radio" id="college" name="education" value="college">
+                                <label for="college">College / University</label>
+                            </div>
+                            <div class="radio-item">
+                                <input type="radio" id="completed" name="education" value="completed">
+                                <label for="completed">Completed</label>
+                            </div>
+                            <div class="radio-item">
+                                <input type="radio" id="bootcamp" name="education" value="bootcamp">
+                                <label for="bootcamp">Bootcamp / Self-Taught</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grid-2">
+                        <div class="form-group">
+                            <label for="course">Course / Field of Study</label>
+                            <input type="text" id="course" name="course">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="institution">Institution Name</label>
+                            <input type="text" id="institution" name="institution">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Technical Skills (select all that apply) *</label>
+                        <div class="checkbox-group">
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="frontend" name="skills" value="frontend">
+                                <label for="frontend">Frontend Development</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="backend" name="skills" value="backend">
+                                <label for="backend">Backend Development</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="mobile" name="skills" value="mobile">
+                                <label for="mobile">Mobile Development</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="uiux" name="skills" value="uiux">
+                                <label for="uiux">UI/UX Design</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="branding" name="skills" value="branding">
+                                <label for="branding">Branding / Graphics</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="architecture" name="skills" value="architecture">
+                                <label for="architecture">System Architecture</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="data" name="skills" value="data">
+                                <label for="data">Data & Databases</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="automation" name="skills" value="automation">
+                                <label for="automation">Automation / Integrations</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="ai" name="skills" value="ai">
+                                <label for="ai">AI / Machine Learning</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="cyber" name="skills" value="cyber">
+                                <label for="cyber">Cybersecurity</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="marketing" name="skills" value="marketing">
+                                <label for="marketing">Digital Marketing</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="topSkills">List your top 3 strongest skills *</label>
+                        <textarea id="topSkills" name="topSkills" placeholder="1.&#10;2.&#10;3." required></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="portfolio">Portfolio / GitHub / LinkedIn (optional)</label>
+                        <textarea id="portfolio" name="portfolio" placeholder="Paste your links here..."></textarea>
+                    </div>
+                </div>
+
+                <!-- Section 3: Experience -->
+                <div class="section">
+                    <h2 class="section-title">3. Experience</h2>
+                    
+                    <div class="form-group">
+                        <label>Do you have previous experience working on projects? *</label>
+                        <div class="radio-group">
+                            <div class="radio-item">
+                                <input type="radio" id="expYes" name="experience" value="yes" required>
+                                <label for="expYes">Yes</label>
+                            </div>
+                            <div class="radio-item">
+                                <input type="radio" id="expNo" name="experience" value="no">
+                                <label for="expNo">No</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="expDescription">If Yes, briefly describe your experience</label>
+                        <textarea id="expDescription" name="expDescription"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Have you worked with a team before? *</label>
+                        <div class="radio-group">
+                            <div class="radio-item">
+                                <input type="radio" id="teamYes" name="teamWork" value="yes" required>
+                                <label for="teamYes">Yes</label>
+                            </div>
+                            <div class="radio-item">
+                                <input type="radio" id="teamNo" name="teamWork" value="no">
+                                <label for="teamNo">No</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 4: Availability -->
+                <div class="section">
+                    <h2 class="section-title">4. Availability</h2>
+                    
+                    <div class="form-group">
+                        <label>How many hours per week can you commit? *</label>
+                        <div class="radio-group">
+                            <div class="radio-item">
+                                <input type="radio" id="hours1" name="hours" value="4-6" required>
+                                <label for="hours1">4–6 hours</label>
+                            </div>
+                            <div class="radio-item">
+                                <input type="radio" id="hours2" name="hours" value="6-10">
+                                <label for="hours2">6–10 hours</label>
+                            </div>
+                            <div class="radio-item">
+                                <input type="radio" id="hours3" name="hours" value="10-15">
+                                <label for="hours3">10–15 hours</label>
+                            </div>
+                            <div class="radio-item">
+                                <input type="radio" id="hours4" name="hours" value="15+">
+                                <label for="hours4">15+ hours</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Which days are you most available? *</label>
+                        <div class="checkbox-group">
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="mon" name="days" value="monday">
+                                <label for="mon">Monday</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="tue" name="days" value="tuesday">
+                                <label for="tue">Tuesday</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="wed" name="days" value="wednesday">
+                                <label for="wed">Wednesday</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="thu" name="days" value="thursday">
+                                <label for="thu">Thursday</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="fri" name="days" value="friday">
+                                <label for="fri">Friday</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="sat" name="days" value="saturday">
+                                <label for="sat">Saturday</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="sun" name="days" value="sunday">
+                                <label for="sun">Sunday</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 5: Role Interest -->
+                <div class="section">
+                    <h2 class="section-title">5. Role Interest</h2>
+                    
+                    <div class="form-group">
+                        <label>Which role(s) are you interested in? *</label>
+                        <div class="checkbox-group">
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="roleFrontend" name="roles" value="frontend">
+                                <label for="roleFrontend">Frontend Developer</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="roleBackend" name="roles" value="backend">
+                                <label for="roleBackend">Backend Developer</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="roleMobile" name="roles" value="mobile">
+                                <label for="roleMobile">Mobile Developer</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="roleDesigner" name="roles" value="designer">
+                                <label for="roleDesigner">UI/UX Designer</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="roleContent" name="roles" value="content">
+                                <label for="roleContent">Content Creator</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="roleProject" name="roles" value="project">
+                                <label for="roleProject">Project Assistant</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="roleAdmin" name="roles" value="admin">
+                                <label for="roleAdmin">Admin / Operations</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="roleAny" name="roles" value="any">
+                                <label for="roleAny">Anything that helps the company grow</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="whyJoin">Why do you want to join SCL Digital Agency? *</label>
+                        <textarea id="whyJoin" name="whyJoin" required></textarea>
+                    </div>
+                </div>
+
+                <!-- Section 6: Compensation Expectation -->
+                <div class="section">
+                    <h2 class="section-title">6. Compensation Expectation</h2>
+                    
+                    <div class="info-box">
+                        <p><strong>You understand that SCL currently offers:</strong></p>
+                        <p>✔ Revenue Share</p>
+                        <p>✔ Deferred Payment</p>
+                        <p>✔ Equity in internal projects</p>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Which compensation model are you comfortable with? *</label>
+                        <div class="checkbox-group">
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="compRevenue" name="compensation" value="revenue">
+                                <label for="compRevenue">Revenue Share</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="compDeferred" name="compensation" value="deferred">
+                                <label for="compDeferred">Deferred Payment</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="compEquity" name="compensation" value="equity">
+                                <label for="compEquity">Equity-Based</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="compAny" name="compensation" value="any">
+                                <label for="compAny">Any of the above</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="minAmount">Minimum amount you expect per project (optional)</label>
+                        <input type="text" id="minAmount" name="minAmount" placeholder="e.g., $500">
+                    </div>
+                </div>
+
+                <!-- Section 7: Personal Drive & Ambition -->
+                <div class="section">
+                    <h2 class="section-title">7. Personal Drive & Ambition</h2>
+                    
+                    <div class="form-group">
+                        <label for="achieve">What do you want to achieve in the next 12 months? *</label>
+                        <textarea id="achieve" name="achieve" required></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="motivation">What motivates you to build digital products? *</label>
+                        <textarea id="motivation" name="motivation" required></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="value">What value can you bring to the team? *</label>
+                        <textarea id="value" name="value" required></textarea>
+                    </div>
+                </div>
+
+                <!-- Section 8: Final Section -->
+                <div class="section">
+                    <h2 class="section-title">8. Final Section</h2>
+                    
+                    <div class="form-group">
+                        <label>Are you ready to commit to a growing agency? *</label>
+                        <div class="radio-group">
+                            <div class="radio-item">
+                                <input type="radio" id="commitYes" name="commit" value="yes" required>
+                                <label for="commitYes">Yes</label>
+                            </div>
+                            <div class="radio-item">
+                                <input type="radio" id="commitNo" name="commit" value="no">
+                                <label for="commitNo">No</label>
+                            </div>
+                            <div class="radio-item">
+                                <input type="radio" id="commitMore" name="commit" value="more">
+                                <label for="commitMore">I want to hear more first</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grid-2">
+                        <div class="form-group">
+                            <label for="signature">Signature / Full Name *</label>
+                            <input type="text" id="signature" name="signature" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="signDate">Date *</label>
+                            <input type="date" id="signDate" name="signDate" required>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit" class="submit-btn">Submit Application</button>
+
+                <div id="successMessage" class="success-message">
+                    ✅ Application submitted successfully! We'll be in touch soon.
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('applicationForm').addEventListener('submit', function(e) {
+            // Validate that at least one skill is selected
+            const skills = document.querySelectorAll('input[name="skills"]:checked');
+            if (skills.length === 0) {
+                e.preventDefault();
+                alert('Please select at least one technical skill.');
+                return;
+            }
+
+            // Validate that at least one day is selected
+            const days = document.querySelectorAll('input[name="days"]:checked');
+            if (days.length === 0) {
+                e.preventDefault();
+                alert('Please select at least one available day.');
+                return;
+            }
+
+            // Validate that at least one role is selected
+            const roles = document.querySelectorAll('input[name="roles"]:checked');
+            if (roles.length === 0) {
+                e.preventDefault();
+                alert('Please select at least one role of interest.');
+                return;
+            }
+
+            // Validate that at least one compensation model is selected
+            const compensation = document.querySelectorAll('input[name="compensation"]:checked');
+            if (compensation.length === 0) {
+                e.preventDefault();
+                alert('Please select at least one compensation model.');
+                return;
+            }
+
+            // Form will submit to FormSubmit.co
+        });
+
+        // Set today's date as default for signature date
+        document.getElementById('signDate').valueAsDate = new Date();
+    </script>
+</body>
+</html>

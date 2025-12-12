@@ -1,0 +1,1457 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SCL DA: Africa Digital Fusion Summit</title>
+  <link rel="stylesheet" href="event-style.css">
+  <!-- Bootstrap CSS -->
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  <script src="paypal-integration.js"></script>
+  <style>
+    .banner-ad {
+      position: fixed;
+      top: 50%;
+
+      transform: translateY(-50%);
+      width: 200px;
+      height: 750px;
+      z-index: 9999;
+      background: #fff;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.15);
+      border-radius: 4px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .banner-ad-left {
+      left: 25px;
+    }
+
+    .banner-ad-right {
+      right: 25px;
+    }
+
+    .banner-ad-carousel {
+      width: 100%;
+      height: 100%;
+      position: relative;
+    }
+
+    .banner-ad-slide {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      opacity: 0;
+      transition: opacity 0.5s;
+
+      align-items: center;
+      justify-content: center;
+    }
+
+    .banner-ad-slide.active {
+      opacity: 1;
+      z-index: 1;
+    }
+  </style>
+  <!-- Google Translate API -->
+  <script type="text/javascript"
+    src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+</head>
+
+<body>
+  <div class="banner-ad banner-ad-left" id="leftAd">
+    <div class="banner-ad-carousel" id="leftBannerCarousel">
+      <div class="banner-ad-slide active"><a href="#"><img id="leftAdImg" src="banner1.png" alt="Ad 1"
+            style="width:100%;height:100%;object-fit:cover;"></a></div>
+    </div>
+  </div>
+  <div class="banner-ad banner-ad-right" id="rightAd">
+    <div class="banner-ad-carousel" id="rightBannerCarousel">
+      <div class="banner-ad-slide active"><a href="#"><img id="rightAdImg" src="banner2.png" alt="Ad 2"
+            style="width:100%;height:100%;object-fit:cover;"></a></div>
+    </div>
+  </div>
+  <script>
+    function startBannerCarousel(carouselId) {
+      const carousel = document.getElementById(carouselId);
+      const slides = carousel.querySelectorAll('.banner-ad-slide');
+      let idx = 0;
+      setInterval(() => {
+        slides[idx].classList.remove('active');
+        idx = (idx + 1) % slides.length;
+        slides[idx].classList.add('active');
+      }, 4000);
+    }
+    startBannerCarousel('leftBannerCarousel');
+    startBannerCarousel('rightBannerCarousel');
+  </script>
+  <div class='wrapper'>
+    <div class='navigation'>
+
+      <div class='navTop'>
+        <a href='#'>
+          <img src='event-images/summit-24-logo.png' width='120' alt='logo'>
+        </a>
+      </div>
+
+
+
+      <div class='navBottom'>
+        <a href='' id='over'><i class="bi bi-play-btn-fill"></i> Summit Preview</a>
+        <a href='' id='agenda'><i class="bi bi-calendar-heart-fill"></i> Event Schedule</a>
+        <a href='' id='disc'><i class="bi bi-info-square-fill"></i> About the Event</a>
+        <a href='' id='there'><i class="bi bi-geo-alt-fill"></i> Location</a>
+        <a href='' id='speakers'><i class="bi bi-person-hearts"></i> Keynotes & Hosts</a>
+        <a href='' id='sponsors'><i class="bi bi-tag-fill"></i> Our Partners</a>
+        <a href='' id='rsvp'><i class="bi bi-ticket-detailed-fill"></i> Purchase Tickets</a>
+      </div>
+
+    </div>
+
+    <div class='contents'>
+      <div class='cTitle'>
+        <h1 id="eventTitle">Event Name:</h1>
+      </div>
+
+      <div class='cbanner' id="videoContainer">
+        <iframe id="eventVideo" width="100%" height="100%" src="" title="Summit Preview" frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+      </div>
+
+      <div class='sect overview'>
+
+      </div>
+
+      <div class='sect agenda' id="eventAgenda">
+        <h2>Agenda</h2>
+        <div id="agendaContent"></div>
+      </div>
+
+      <div class='sect discussions' id="eventOverviewDetails">
+        <h2>Overview</h2>
+        <div id="overviewContent"></div>
+      </div>
+
+      <div class='sect there' id="eventLocation">
+        <h2>Location</h2>
+        <div id="mapEmbed"></div>
+      </div>
+
+      <div class='sect speakers' id="speakersSection">
+        <h2>Speakers</h2>
+        <div id="speakersList"></div>
+      </div>
+
+
+      <div class='sect sponsors' id="partnersSection">
+        <h2>Our Partners</h2>
+        <div id="partnersList"></div>
+      </div>
+
+      <div class='sect rsvp'>
+        <h2>Purchase Tickets</h2>
+
+        <style>
+          :root {
+            --primary: #4361ee;
+            --primary-light: #4895ef;
+            --primary-dark: #3a0ca3;
+            --success: #4cc9f0;
+            --danger: #f72585;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --gray: #6c757d;
+            --border-radius: 12px;
+            --box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+          }
+
+          * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+          }
+
+          body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding: 0;
+            margin: 0;
+            background-color: #f0f2f5;
+            color: var(--dark);
+            line-height: 1.6;
+          }
+
+          .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+          }
+
+          header {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 30px 0;
+            border-radius: 0 0 var(--border-radius) var(--border-radius);
+            margin-bottom: 30px;
+            text-align: center;
+          }
+
+          h1,
+          h2,
+          h3,
+          h4 {
+            margin-bottom: 20px;
+            font-weight: 600;
+          }
+
+          .card {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 30px;
+            margin-bottom: 30px;
+          }
+
+          .progress-container {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+            margin-bottom: 40px;
+            max-width: 400px;
+            margin: 0 auto 40px;
+          }
+
+          .progress-container::before {
+            content: '';
+            background-color: #e0e0e0;
+            position: absolute;
+            top: 50%;
+            left: 0;
+            transform: translateY(-50%);
+            height: 4px;
+            width: 100%;
+            z-index: 0;
+          }
+
+          .progress {
+            background-color: var(--primary);
+            position: absolute;
+            top: 50%;
+            left: 0;
+            transform: translateY(-50%);
+            height: 4px;
+            width: 0%;
+            z-index: 1;
+            transition: 0.4s ease;
+          }
+
+          .step {
+            background-color: #e0e0e0;
+            color: #333;
+            border-radius: 50%;
+            height: 30px;
+            width: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 3px solid #e0e0e0;
+            transition: 0.4s ease;
+            position: relative;
+            z-index: 2;
+          }
+
+          .step.active {
+            border-color: var(--primary);
+            background-color: var(--primary);
+            color: white;
+          }
+
+          .step-label {
+            position: absolute;
+            top: 40px;
+            font-size: 14px;
+            color: var(--gray);
+          }
+
+          .step.active .step-label {
+            color: var(--primary);
+            font-weight: 600;
+          }
+
+          .form-step {
+            display: none;
+          }
+
+          .form-step.active {
+            display: block;
+            animation: fadeIn 0.5s ease-in-out;
+          }
+
+          @keyframes fadeIn {
+            from {
+              opacity: 0;
+              transform: translateY(20px);
+            }
+
+            to {
+              opacity: 1;
+              transform: translateY(0);
+            }
+          }
+
+          .form-group {
+            margin-bottom: 25px;
+          }
+
+          label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--gray);
+          }
+
+          input,
+          select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border 0.3s;
+          }
+
+          input:focus,
+          select:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.1);
+          }
+
+          .guest-info {
+            background-color: rgba(242, 245, 250, 0.8);
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: var(--border-radius);
+            border-left: 4px solid var(--primary-light);
+            animation: slideIn 0.3s ease-in-out;
+          }
+
+          @keyframes slideIn {
+            from {
+              opacity: 0;
+              transform: translateX(-20px);
+            }
+
+            to {
+              opacity: 1;
+              transform: translateX(0);
+            }
+          }
+
+          .guest-info h4 {
+            display: flex;
+            align-items: center;
+            color: var(--primary-dark);
+            margin-bottom: 15px;
+          }
+
+          .guest-info h4 i {
+            margin-right: 10px;
+          }
+
+          .button-group {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+          }
+
+          .button {
+            padding: 12px 25px;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            transition: all 0.3s;
+          }
+
+          .button:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(67, 97, 238, 0.2);
+          }
+
+          .button.secondary {
+            background-color: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+          }
+
+          .button.secondary:hover {
+            background-color: rgba(67, 97, 238, 0.1);
+          }
+
+          .button i {
+            margin-right: 8px;
+          }
+
+          .ticket-counter {
+            display: flex;
+            align-items: center;
+            max-width: 180px;
+          }
+
+          .counter-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--light);
+            border: 1px solid #ddd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 18px;
+            transition: all 0.2s;
+          }
+
+          .counter-btn:hover {
+            background-color: var(--primary-light);
+            color: white;
+            border-color: var(--primary-light);
+          }
+
+          .counter-input {
+            width: 60px;
+            text-align: center;
+            border: none;
+            font-size: 18px;
+            font-weight: 600;
+            padding: 0;
+            margin: 0 10px;
+          }
+
+          .counter-input:focus {
+            box-shadow: none;
+          }
+
+          .invoice-box {
+            background-color: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 30px;
+          }
+
+          .invoice-header {
+            display: flex;
+            justify-content: space-between;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+            margin-bottom: 20px;
+          }
+
+          .invoice-details {
+            margin-bottom: 30px;
+          }
+
+          .invoice-details p {
+            margin-bottom: 10px;
+          }
+
+          .invoice-guests {
+            margin-bottom: 30px;
+          }
+
+          .invoice-total {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+          }
+
+          .payment-methods {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+          }
+
+          .payment-method {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            flex: 1;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+          }
+
+          .payment-method:hover {
+            border-color: var(--primary);
+            background-color: rgba(67, 97, 238, 0.05);
+          }
+
+          .payment-method.selected {
+            border-color: var(--primary);
+            background-color: rgba(67, 97, 238, 0.1);
+          }
+
+          .payment-method i {
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: var(--primary);
+          }
+
+          .text-center {
+            text-align: center;
+          }
+
+          .fade-in {
+            animation: fadeIn 0.5s;
+          }
+
+          @media (max-width: 768px) {
+            .button-group {
+              flex-direction: column;
+              gap: 15px;
+            }
+
+            .button {
+              width: 100%;
+              justify-content: center;
+            }
+
+            .payment-methods {
+              flex-direction: column;
+            }
+          }
+        </style>
+        <!--booking system-->
+
+        <div class="container">
+          <div class="progress-container">
+            <div class="progress" id="progress"></div>
+            <div class="step active" data-step="1">
+              1
+              <span class="step-label">Details</span>
+            </div>
+            <div class="step" data-step="2">
+              2
+              <span class="step-label">Review</span>
+            </div>
+            <div class="step" data-step="3">
+              3
+              <span class="step-label">Payment</span>
+            </div>
+          </div>
+
+          <form id="bookingForm">
+            <!-- Step 1: Main Info -->
+            <div class="form-step active" id="step-1">
+              <div class="card">
+                <h2>Your Information</h2>
+
+                <div class="form-group">
+                  <label for="name">Full Name</label>
+                  <input type="text" id="name" name="name" placeholder="Enter your full name" required>
+                </div>
+
+                <div class="form-group">
+                  <label for="email">Email Address</label>
+                  <input type="email" id="email" name="email" placeholder="Enter your email address" required>
+                </div>
+
+                <div class="form-group">
+                  <label for="organization">Organization / Role</label>
+                  <input type="text" id="organization" name="organization"
+                    placeholder="Enter your organization or role">
+                </div>
+
+                <div class="form-group">
+                  <label for="ticketCount">Number of Tickets</label>
+                  <div class="ticket-counter">
+                    <div class="counter-btn" id="decreaseTickets">-</div>
+                    <input type="number" id="ticketCount" name="tickets" class="counter-input" min="1" value="1"
+                      required>
+                    <div class="counter-btn" id="increaseTickets">+</div>
+                  </div>
+                </div>
+              </div>
+
+              <div id="guestFields"></div>
+
+              <div class="button-group">
+                <div></div> <!-- Placeholder for alignment -->
+                <button type="button" class="button" id="nextBtn">
+                  <i class="fas fa-arrow-right"></i> Continue to Review
+                </button>
+              </div>
+            </div>
+
+            <!-- Step 2: Invoice Preview -->
+            <div class="form-step" id="step-2">
+              <div class="card">
+                <h2>Review Your Booking</h2>
+                <div class="invoice-box" id="invoicePreview"></div>
+              </div>
+
+              <div class="button-group">
+                <button type="button" class="button secondary" id="backBtn">
+                  <i class="fas fa-arrow-left"></i> Back
+                </button>
+                <button type="button" class="button" id="toPaymentBtn">
+                  <i class="fas fa-credit-card"></i> Continue to Payment
+                </button>
+              </div>
+            </div>
+
+            <!-- Step 3: Payment -->
+            <div class="form-step" id="step-3">
+              <div class="card">
+                <h2>Payment Method</h2>
+                <p>Pay securely with PayPal - Debit or Credit Card</p>
+
+                <!-- PayPal Button Container -->
+                <div id="paypal-button-container" style="margin-top:20px; min-height:50px;"></div>
+
+                <!-- PayPal Fallback Message -->
+                <div id="paypal-fallback-payment"
+                  style="display:none; background: linear-gradient(135deg, #fff5e6 0%, #ffe6d5 100%); border: 2px solid #ff9800; padding: 20px; border-radius: 8px; margin-top: 16px; text-align: center;">
+                  <h4 style="color: #d32f2f; margin-top: 0; font-size: 1.1rem;">PayPal Currently Unavailable</h4>
+                  <p style="color: #666; margin: 10px 0;">Please try again later or contact us for alternative payment
+                    methods.</p>
+                </div>
+              </div>
+
+              <div class="button-group">
+                <button type="button" class="button secondary" id="backToReviewBtn">
+                  <i class="fas fa-arrow-left"></i> Back
+                </button>
+              </div>
+            </div>
+          </form>
+
+          <div class="text-center" style="margin-top: 40px; color: var(--gray);">
+            <p>&copy; 2025 SCL Digital Agency (Pty) Ltd All rights reserved.</p>
+          </div>
+        </div>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q"
+          crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+        <script>
+          // DOM Elements
+          const guestFields = document.getElementById("guestFields");
+          const ticketInput = document.getElementById("ticketCount");
+          const form = document.getElementById("bookingForm");
+          const progress = document.getElementById("progress");
+          const steps = document.querySelectorAll(".step");
+
+          // Navigation buttons
+          const nextBtn = document.getElementById("nextBtn");
+          const backBtn = document.getElementById("backBtn");
+          const toPaymentBtn = document.getElementById("toPaymentBtn");
+          const backToReviewBtn = document.getElementById("backToReviewBtn");
+          const payNowBtn = document.getElementById("payNowBtn");
+
+          // Counter buttons
+          const decreaseBtn = document.getElementById("decreaseTickets");
+          const increaseBtn = document.getElementById("increaseTickets");
+
+          // Current active step
+          let currentStep = 1;
+
+          // Event Listeners
+          nextBtn.addEventListener("click", () => goToStep(2));
+          backBtn.addEventListener("click", () => goToStep(1));
+          toPaymentBtn.addEventListener("click", () => goToStep(3));
+          backToReviewBtn.addEventListener("click", () => goToStep(2));
+
+          decreaseBtn.addEventListener("click", () => {
+            const current = parseInt(ticketInput.value);
+            if (current > 1) {
+              ticketInput.value = current - 1;
+              updateGuestFields();
+            }
+          });
+
+          increaseBtn.addEventListener("click", () => {
+            const current = parseInt(ticketInput.value);
+            ticketInput.value = current + 1;
+            updateGuestFields();
+          });
+
+          ticketInput.addEventListener("input", updateGuestFields);
+
+          // Payment method selection
+          const paymentMethods = document.querySelectorAll(".payment-method");
+          paymentMethods.forEach(method => {
+            method.addEventListener("click", () => {
+              // Remove selected class from all methods
+              paymentMethods.forEach(m => m.classList.remove("selected"));
+              // Add selected class to clicked method
+              method.classList.add("selected");
+
+              // Show payment details based on selected method
+              const paymentType = method.getAttribute("data-method");
+              const paymentDetails = document.getElementById("paymentDetails");
+              paymentDetails.style.display = "block";
+
+              // Different form based on payment method
+              if (paymentType === "card") {
+                paymentDetails.innerHTML = `
+          <h3>Credit Card Details</h3>
+          <div class="form-group">
+            <label>Card Number</label>
+            <input type="text" placeholder="1234 5678 9012 3456" maxlength="19">
+          </div>
+          <div style="display: flex; gap: 15px;">
+            <div class="form-group" style="flex: 1;">
+              <label>Expiry Date</label>
+              <input type="text" placeholder="MM/YY" maxlength="5">
+            </div>
+            <div class="form-group" style="flex: 1;">
+              <label>CVC</label>
+              <input type="text" placeholder="123" maxlength="3">
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Cardholder Name</label>
+            <input type="text" placeholder="Name as appears on card">
+          </div>
+        `;
+              } else if (paymentType === "paypal") {
+                paymentDetails.innerHTML = `
+          <div class="text-center">
+            <h3>PayPal</h3>
+            <p>Click the "Complete Payment" button to be redirected to PayPal.</p>
+            <img src="/api/placeholder/200/80" alt="PayPal" style="margin-top: 15px;">
+          </div>
+        `;
+              } else if (paymentType === "bank") {
+                paymentDetails.innerHTML = `
+          <h3>Bank Transfer Details</h3>
+          <div class="form-group">
+            <p><strong>Bank Name:</strong> Global Bank</p>
+            <p><strong>Account Name:</strong> Event Company Ltd</p>
+            <p><strong>Account Number:</strong> 1234567890</p>
+            <p><strong>Branch Code:</strong> 12345</p>
+            <p><strong>Reference:</strong> Please use your email as reference</p>
+          </div>
+          <div class="form-group">
+            <label>Upload Proof of Payment (Optional)</label>
+            <input type="file">
+          </div>
+        `;
+              }
+            });
+          });
+
+          // Complete payment button
+          payNowBtn.addEventListener("click", () => {
+            const selectedMethod = document.querySelector(".payment-method.selected");
+            if (!selectedMethod) {
+              alert("Please select a payment method.");
+              return;
+            }
+
+            // Normally this would redirect to payment processor or submit form
+            alert("Thank you for your booking! Payment process would begin here.");
+          });
+
+          // Generate PDF
+          document.getElementById("invoicePreview").addEventListener("click", function (e) {
+            if (e.target && e.target.id === "downloadPdfBtn") {
+              generatePDF();
+            }
+          });
+
+          // Step navigation function
+          function goToStep(step) {
+            // Validate current step before proceeding
+            if (step > currentStep && currentStep === 1) {
+              // Check if form fields are filled
+              const name = document.getElementById("name").value;
+              const email = document.getElementById("email").value;
+
+              if (!name || !email) {
+                alert("Please fill in all required fields.");
+                return;
+              }
+            }
+
+            // Hide all steps
+            document.querySelectorAll(".form-step").forEach(s => {
+              s.classList.remove("active");
+            });
+
+            // Show target step
+            document.getElementById(`step-${step}`).classList.add("active");
+
+            // Update progress bar
+            updateProgress(step);
+
+            // If moving to step 2, generate invoice
+            if (step === 2) {
+              generateInvoice();
+            }
+
+            // If moving to step 3, load PayPal button
+            if (step === 3) {
+              loadAndRenderPayPalButton();
+            }
+
+            currentStep = step;
+
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          }
+
+          // Update progress indicator
+          function updateProgress(step) {
+            // Update active state for steps
+            steps.forEach(s => {
+              const stepNum = parseInt(s.getAttribute("data-step"));
+              if (stepNum <= step) {
+                s.classList.add("active");
+              } else {
+                s.classList.remove("active");
+              }
+            });
+
+            // Update progress bar width
+            const progressWidth = ((step - 1) / (steps.length - 1)) * 100;
+            progress.style.width = `${progressWidth}%`;
+          }
+
+          // Generate guest input fields
+          function updateGuestFields() {
+            const count = parseInt(ticketInput.value);
+            guestFields.innerHTML = "";
+
+            for (let i = 2; i <= count; i++) {
+              const div = document.createElement("div");
+              div.classList.add("guest-info");
+              div.innerHTML = `
+        <h4><i class="fas fa-user-plus"></i> Guest #${i} Details</h4>
+        <div class="form-group">
+          <label>Full Name</label>
+          <input type="text" name="guest${i}_name" placeholder="Enter guest's full name" required>
+        </div>
+        <div class="form-group">
+          <label>Email Address</label>
+          <input type="email" name="guest${i}_email" placeholder="Enter guest's email" required>
+        </div>
+        <div class="form-group">
+          <label>Role/Organization</label>
+          <input type="text" name="guest${i}_role" placeholder="Enter guest's role or organization">
+        </div>
+      `;
+              guestFields.appendChild(div);
+            }
+          }
+
+          // Generate invoice preview
+          function generateInvoice() {
+            const formData = new FormData(form);
+            const name = formData.get("name");
+            const email = formData.get("email");
+            const org = formData.get("organization") || "Not specified";
+            const ticketCount = parseInt(formData.get("tickets"));
+
+            let guestsList = "";
+            for (let i = 2; i <= ticketCount; i++) {
+              const guestName = formData.get("guest" + i + "_name") || "";
+              const guestEmail = formData.get("guest" + i + "_email") || "";
+              const guestRole = formData.get("guest" + i + "_role") || "Not specified";
+
+              guestsList += `
+        <div style="margin-bottom: 15px; padding-bottom: 15px; border-bottom: 1px solid #eee;">
+          <p><strong>Guest #${i}:</strong> ${guestName}</p>
+          <p><strong>Email:</strong> ${guestEmail}</p>
+          <p><strong>Role/Organization:</strong> ${guestRole}</p>
+        </div>
+      `;
+            }
+
+            const ticketPrice = 200;
+            const subtotal = ticketCount * ticketPrice;
+            const tax = subtotal * 0.15; // 15% tax
+            const total = subtotal + tax;
+
+            const today = new Date().toLocaleDateString('en-US', {
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric'
+            });
+
+            document.getElementById("invoicePreview").innerHTML = `
+      <div class="invoice-header">
+        <div>
+          <h3>Invoice #INV-${Math.floor(Math.random() * 10000)}</h3>
+          <p>${today}</p>
+        </div>
+        <div>
+          <button type="button" class="button secondary" id="downloadPdfBtn">
+            <i class="fas fa-download"></i> Download PDF
+          </button>
+        </div>
+      </div>
+      
+      <div class="invoice-details">
+        <p><strong>Name:</strong> ${name}</p>
+        <p><strong>Email:</strong> ${email}</p>
+        <p><strong>Organization:</strong> ${org}</p>
+      </div>
+      
+      <div class="invoice-guests">
+        <h4>Ticket Information</h4>
+        <div style="margin-bottom: 15px; padding-bottom: 15px; border-bottom: 1px solid #eee;">
+          <p><strong>Main Attendee:</strong> ${name}</p>
+          <p><strong>Email:</strong> ${email}</p>
+          <p><strong>Role/Organization:</strong> ${org}</p>
+        </div>
+        ${guestsList}
+      </div>
+      
+      <div>
+        <h4>Order Summary</h4>
+        <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+          <span>Tickets (${ticketCount} x R${ticketPrice})</span>
+          <span>R${subtotal}</span>
+        </div>
+        <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+          <span>Tax (15%)</span>
+          <span>R${tax.toFixed(2)}</span>
+        </div>
+        <div class="invoice-total">
+          <span>Total</span>
+          <span>R${total.toFixed(2)}</span>
+        </div>
+      </div>
+    `;
+          }
+
+          // Generate PDF file
+          function generatePDF() {
+            const { jsPDF } = window.jspdf;
+            const pdf = new jsPDF();
+
+            // Add logo and header
+            pdf.setFontSize(20);
+            pdf.text("Event Booking Invoice", 20, 20);
+
+            // Add invoice content
+            pdf.setFontSize(12);
+            const content = document.getElementById("invoicePreview").innerText;
+
+            // Split content into lines that fit on PDF
+            const splitText = pdf.splitTextToSize(content, 180);
+            pdf.text(splitText, 15, 40);
+
+            // Save PDF
+            pdf.save("event-booking-invoice.pdf");
+          }
+        </script>
+
+
+        <!--booking system-->
+
+      </div>
+
+    </div>
+  </div>
+  <script src="/event-script.js"></script>
+  <script>
+    function getParam(name) {
+      const url = new URL(window.location.href);
+      return url.searchParams.get(name);
+    }
+
+    async function loadEvent() {
+      const id = getParam('id');
+      if (!id) { return; }
+      const res = await fetch(`../api/admin/events.php?id=${id}`);
+      const json = await res.json();
+      if (!json.success) { return; }
+      const e = json.data;
+      const titleEl = document.getElementById('eventTitle');
+      if (titleEl) titleEl.textContent = e.title || 'Event';
+      const vid = document.getElementById('eventVideo');
+      if (vid && e.video_url) { vid.src = e.video_url; }
+      const overview = document.getElementById('overviewContent');
+      if (overview && e.overview) { overview.innerHTML = e.overview; }
+      const agenda = document.getElementById('agendaContent');
+      if (agenda && e.agenda) { agenda.innerHTML = e.agenda; }
+      const map = document.getElementById('mapEmbed');
+      if (map && e.map_embed) { map.innerHTML = e.map_embed; }
+      const leftImg = document.getElementById('leftAdImg');
+      if (leftImg && e.ad_left_url) { leftImg.src = e.ad_left_url; }
+      const leftLink = document.querySelector('#leftAd a');
+      if (leftLink && e.ad_left_link) { leftLink.href = e.ad_left_link; }
+      const rightImg = document.getElementById('rightAdImg');
+      if (rightImg && e.ad_right_url) { rightImg.src = e.ad_right_url; }
+      const rightLink = document.querySelector('#rightAd a');
+      if (rightLink && e.ad_right_link) { rightLink.href = e.ad_right_link; }
+
+      const speakersList = document.getElementById('speakersList');
+      if (speakersList) {
+        speakersList.innerHTML = '';
+        (e.speakers || []).forEach(s => {
+          const div = document.createElement('div');
+          div.className = 'speaker';
+          if (s.image_url) {
+            div.style.backgroundImage = `url(${s.image_url})`;
+            div.style.backgroundSize = '100%';
+          }
+          div.innerHTML = `<div class='description'><p>${s.name}<br>${s.position || ''}</p></div>`;
+          speakersList.appendChild(div);
+        });
+      }
+
+      const partnersList = document.getElementById('partnersList');
+      if (partnersList) {
+        partnersList.innerHTML = '';
+        (e.partners || []).forEach(p => {
+          const div = document.createElement('div');
+          div.className = 'sponsor';
+          if (p.image_url) {
+            div.style.backgroundImage = `url(${p.image_url})`;
+            div.style.backgroundSize = '100%';
+          }
+          div.innerHTML = `<div class='description'><p>${p.name}</p></div>`;
+          partnersList.appendChild(div);
+        });
+      }
+    }
+    document.addEventListener('DOMContentLoaded', loadEvent);
+  </script>
+
+
+  <!-- Language Translator Widget Styles -->
+  <style>
+    .translator-widget {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 1001;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .translator-button {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 12px 20px;
+      border-radius: 25px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+      transition: all 0.3s ease;
+      font-weight: 600;
+      font-size: 14px;
+      border: none;
+      outline: none;
+    }
+
+    .translator-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+    }
+
+    .translator-button i {
+      font-size: 16px;
+    }
+
+    .translator-dropdown {
+      position: absolute;
+      top: 60px;
+      right: 0;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+      min-width: 280px;
+      max-height: 400px;
+      overflow: hidden;
+      transform: scale(0) translateY(-20px);
+      opacity: 0;
+      transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+      border: 1px solid rgba(0, 0, 0, 0.1);
+    }
+
+    .translator-dropdown.active {
+      transform: scale(1) translateY(0);
+      opacity: 1;
+    }
+
+    .translator-header {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .translator-header h4 {
+      margin: 0;
+      font-size: 16px;
+      font-weight: 600;
+    }
+
+    .close-translator {
+      background: none;
+      border: none;
+      color: white;
+      cursor: pointer;
+      padding: 5px;
+      border-radius: 50%;
+      transition: background 0.2s;
+      width: 30px;
+      height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .close-translator:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    /* Google Translate Element Styling */
+    #google_translate_element {
+      padding: 15px 20px;
+    }
+
+    .goog-te-gadget {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+      font-size: 14px !important;
+    }
+
+    .goog-te-gadget-simple {
+      background: transparent !important;
+      border: none !important;
+      padding: 0 !important;
+    }
+
+    .goog-te-gadget-simple .goog-te-menu-value {
+      color: #333 !important;
+      font-size: 14px !important;
+      font-weight: 500 !important;
+    }
+
+    .goog-te-gadget-simple .goog-te-menu-value span:first-child {
+      color: #667eea !important;
+      font-weight: 600 !important;
+    }
+
+    .goog-te-gadget-simple .goog-te-menu-value span:last-child {
+      color: #666 !important;
+    }
+
+    .goog-te-gadget-simple .goog-te-menu-value:before {
+      content: "🌐 " !important;
+      margin-right: 5px !important;
+    }
+
+    /* Hide Google Translate banner */
+    .goog-te-banner-frame {
+      display: none !important;
+    }
+
+    body {
+      top: 0 !important;
+    }
+
+    /* Style the dropdown arrow */
+    .goog-te-gadget-simple .goog-te-menu-value:after {
+      content: " ▼" !important;
+      color: #667eea !important;
+      font-size: 12px !important;
+    }
+
+    .translator-footer {
+      padding: 15px 20px;
+      background: #f8f9fa;
+      display: flex;
+      justify-content: center;
+      border-top: 1px solid rgba(0, 0, 0, 0.1);
+    }
+
+    .reset-btn {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 600;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+      color: white;
+    }
+
+    .reset-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(255, 107, 107, 0.4);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .translator-widget {
+        top: 15px;
+        right: 15px;
+      }
+
+      .translator-button {
+        padding: 10px 16px;
+        font-size: 13px;
+      }
+
+      .translator-dropdown {
+        min-width: 260px;
+        right: -10px;
+      }
+
+      .reset-btn {
+        padding: 8px 16px;
+        font-size: 11px;
+        width: 100%;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .translator-widget {
+        top: 10px;
+        right: 10px;
+      }
+
+      .translator-button {
+        padding: 8px 12px;
+        font-size: 12px;
+      }
+
+      .translator-button span {
+        display: none;
+      }
+
+      .translator-dropdown {
+        min-width: 240px;
+        right: -20px;
+      }
+    }
+  </style>
+
+  <!-- Language Translator Widget -->
+  <div class="translator-widget">
+    <div class="translator-button" id="translatorBtn">
+      <i class="fa-solid fa-language"></i>
+      <span>Translate</span>
+    </div>
+
+    <div class="translator-dropdown" id="translatorDropdown">
+      <div class="translator-header">
+        <h4>Choose Language</h4>
+        <button class="close-translator" id="closeTranslator">
+          <i class="fa-solid fa-times"></i>
+        </button>
+      </div>
+
+      <!-- Google Translate Element -->
+      <div id="google_translate_element"></div>
+
+      <div class="translator-footer">
+        <button class="reset-btn" id="resetBtn">
+          <i class="fa-solid fa-undo"></i>
+          Reset to English
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Google Translate Widget JavaScript -->
+  <script>
+    // Google Translate Element Initialization
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({
+        pageLanguage: 'en',
+        includedLanguages: 'en,es,fr,de,it,pt,ru,zh,ja,ko,ar,hi',
+        layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+        autoDisplay: false
+      }, 'google_translate_element');
+    }
+
+    // Simple Translator Widget Controller
+    class SimpleTranslator {
+      constructor() {
+        this.isOpen = false;
+        this.init();
+      }
+
+      init() {
+        this.translatorBtn = document.getElementById('translatorBtn');
+        this.translatorDropdown = document.getElementById('translatorDropdown');
+        this.closeTranslator = document.getElementById('closeTranslator');
+        this.resetBtn = document.getElementById('resetBtn');
+
+        this.bindEvents();
+      }
+
+      bindEvents() {
+        // Toggle dropdown
+        this.translatorBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          this.toggleDropdown();
+        });
+
+        // Close dropdown
+        this.closeTranslator.addEventListener('click', () => {
+          this.closeDropdown();
+        });
+
+        // Reset button
+        this.resetBtn.addEventListener('click', () => {
+          this.resetTranslation();
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', (e) => {
+          if (!e.target.closest('.translator-widget') && this.isOpen) {
+            this.closeDropdown();
+          }
+        });
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape' && this.isOpen) {
+            this.closeDropdown();
+          }
+        });
+      }
+
+      toggleDropdown() {
+        if (this.isOpen) {
+          this.closeDropdown();
+        } else {
+          this.openDropdown();
+        }
+      }
+
+      openDropdown() {
+        this.translatorDropdown.classList.add('active');
+        this.isOpen = true;
+      }
+
+      closeDropdown() {
+        this.translatorDropdown.classList.remove('active');
+        this.isOpen = false;
+      }
+
+      resetTranslation() {
+        // Reset Google Translate to English
+        if (window.google && window.google.translate) {
+          const translateElement = document.querySelector('.goog-te-combo');
+          if (translateElement) {
+            translateElement.selectedIndex = 0;
+            translateElement.dispatchEvent(new Event('change'));
+          }
+        }
+
+        // Remove Google Translate banner
+        const banner = document.querySelector('.goog-te-banner-frame');
+        if (banner) {
+          banner.remove();
+        }
+
+        // Reset body top position
+        document.body.style.top = '0px';
+
+        this.showNotification('Translation reset to English');
+      }
+
+      showNotification(message) {
+        // Create notification element
+        const notification = document.createElement('div');
+        notification.style.cssText = `
+                    position: fixed;
+                    top: 80px;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                    color: white;
+                    padding: 12px 24px;
+                    border-radius: 25px;
+                    font-size: 14px;
+                    font-weight: 600;
+                    z-index: 10000;
+                    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+                    animation: slideDown 0.3s ease;
+                `;
+        notification.textContent = message;
+        document.body.appendChild(notification);
+
+        // Remove notification after 3 seconds
+        setTimeout(() => {
+          notification.style.animation = 'slideUp 0.3s ease';
+          setTimeout(() => notification.remove(), 300);
+        }, 3000);
+      }
+    }
+
+    // Initialize the translator when DOM is loaded
+    document.addEventListener('DOMContentLoaded', () => {
+      new SimpleTranslator();
+    });
+
+    // Add CSS animations for notifications
+    const style = document.createElement('style');
+    style.textContent = `
+            @keyframes slideDown {
+                from {
+                    opacity: 0;
+                    transform: translateX(-50%) translateY(-20px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateX(-50%) translateY(0);
+                }
+            }
+            
+            @keyframes slideUp {
+                from {
+                    opacity: 1;
+                    transform: translateX(-50%) translateY(0);
+                }
+                to {
+                    opacity: 0;
+                    transform: translateX(-50%) translateY(-20px);
+                }
+            }
+        `;
+    document.head.appendChild(style);
+  </script>
+
+</body>
+
+</html>

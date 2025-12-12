@@ -1,0 +1,1425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Client Billing Portal - SCL Digital</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    <style>
+        @font-face {
+            font-family: scldafont;
+            src: url(./fonts/Rajdhani-Light.ttf);
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
+        
+        body {
+            font-family: scldafont;
+            background: url('background-image.png') no-repeat center center fixed;
+            background-size: cover;
+            min-height: 100vh;
+        }
+        
+        .login-container {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .login-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+        }
+        
+        .dashboard {
+            display: none;
+            background: rgba(248, 250, 252, 0.95);
+            min-height: 100vh;
+        }
+        
+        .navbar {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .sidebar {
+            background: linear-gradient(135deg, #1e348d, #2563eb);
+            min-height: calc(100vh - 76px);
+            padding: 1.5rem 1rem;
+        }
+        
+        .nav-link {
+            color: #cbd5e1;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+            padding: 12px 16px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .nav-link.active, .nav-link:hover {
+            background: rgba(255, 255, 255, 0.15);
+            color: #fff;
+        }
+        
+        .billing-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e2e8f0;
+            margin-bottom: 1.5rem;
+        }
+        
+        .balance-card {
+            background: linear-gradient(135deg, #1e348d, #2563eb);
+            color: white;
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .balance-amount {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        
+        .next-payment {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .status-badge {
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        
+        .status-paid { background: #d1fae5; color: #059669; }
+        .status-pending { background: #fef3c7; color: #d97706; }
+        .status-overdue { background: #fee2e2; color: #dc2626; }
+        
+        .payment-method-card {
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 1rem;
+        }
+        
+        .payment-method-card:hover {
+            border-color: #1e348d;
+            background: #f8fafc;
+        }
+        
+        .payment-method-card.selected {
+            border-color: #1e348d;
+            background: #f0f4ff;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #1e348d, #2563eb);
+            border: none;
+            border-radius: 8px;
+            padding: 12px 24px;
+            font-weight: 500;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(30, 52, 141, 0.3);
+        }
+    </style>
+    <!-- Google Translate API -->
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+</head>
+<body>
+    <!-- Login Screen -->
+    <div id="loginScreen" class="login-container">
+        <div class="login-card">
+            <div class="text-center mb-4">
+                <img src="SCL_Blue.png" style="width: 60%;" alt="SCL Digital">
+            </div>
+            <h2 class="text-center mb-4" style="color: #1e348d;">Client Billing Portal</h2>
+            <form id="loginForm">
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email Address</label>
+                    <input type="email" class="form-control" id="email" required>
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="password" required>
+                </div>
+                <button type="submit" class="btn btn-primary w-100">
+                    <i class="bi bi-box-arrow-in-right"></i> Login to Portal
+                </button>
+                <div id="loginError" class="text-danger text-center mt-2"></div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Dashboard -->
+    <div id="dashboard" class="dashboard">
+        <!-- Top Navigation -->
+        <nav class="navbar navbar-expand-lg">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#" style="color: #1e348d; font-weight: bold;">
+                    <img src="SCL_Blue.png" height="70" alt="SCL"> Billing Portal
+                </a>
+                <div class="d-flex align-items-center gap-3">
+                    <span class="text-muted">Welcome, <strong id="clientName">John Doe</strong></span>
+                    <button class="btn btn-outline-danger btn-sm" onclick="logout()">
+                        <i class="bi bi-box-arrow-right"></i> Logout
+                    </button>
+                </div>
+            </div>
+        </nav>
+
+        <div class="container-fluid">
+            <div class="row">
+                <!-- Sidebar -->
+                <nav class="col-md-2 d-none d-md-block sidebar">
+                    <div class="nav flex-column">
+                        <a class="nav-link active" href="#" onclick="loadTab('billing')">
+                            <i class="bi bi-credit-card"></i> Billing Overview
+                        </a>
+                        <a class="nav-link" href="#" onclick="loadTab('invoices')">
+                            <i class="bi bi-receipt"></i> Invoice History
+                        </a>
+                        <a class="nav-link" href="#" onclick="loadTab('payments')">
+                            <i class="bi bi-wallet2"></i> Make Payment
+                        </a>
+                        <a class="nav-link" href="#" onclick="loadTab('websites')">
+                            <i class="bi bi-globe"></i> Websites
+                        </a>
+                        <a class="nav-link" href="#" onclick="loadTab('domains')">
+                            <i class="bi bi-link-45deg"></i> Domains
+                        </a>
+                        <a class="nav-link" href="#" onclick="loadTab('emails')">
+                            <i class="bi bi-envelope"></i> Email Accounts
+                        </a>
+                        <a class="nav-link" href="#" onclick="loadTab('projects')">
+                            <i class="bi bi-kanban"></i> Project Tracker
+                        </a>
+                        <a class="nav-link" href="#" onclick="loadTab('profile')">
+                            <i class="bi bi-person-gear"></i> Account Settings
+                        </a>
+                        <a class="nav-link" href="#" onclick="loadTab('support')">
+                            <i class="bi bi-headset"></i> Support
+                        </a>
+                    </div>
+                </nav>
+
+                <!-- Main Content -->
+                <main class="col-md-10 ms-sm-auto px-md-4">
+                    <div class="py-4" id="mainContent">
+                        <!-- Billing Overview -->
+                        <div id="billingContent">
+                            <!-- Current Balance Card -->
+                            <div class="balance-card">
+                                <h3><i class="bi bi-wallet"></i> Current Balance</h3>
+                                <div class="balance-amount">R 5,250.00</div>
+                                <p class="mb-0">Outstanding Amount</p>
+                                <div class="next-payment">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <span><i class="bi bi-calendar-event"></i> Next Payment Due:</span>
+                                        <strong>October 1, 2024</strong>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Quick Actions -->
+                            <div class="row mb-4">
+                                <div class="col-md-4 mb-3">
+                                    <div class="billing-card text-center">
+                                        <i class="bi bi-credit-card-2-front" style="font-size: 2rem; color: #1e348d;"></i>
+                                        <h5 class="mt-3">Make Payment</h5>
+                                        <p class="text-muted">Pay your outstanding balance</p>
+                                        <button class="btn btn-primary" onclick="loadTab('payments')">Pay Now</button>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <div class="billing-card text-center">
+                                        <i class="bi bi-file-earmark-text" style="font-size: 2rem; color: #059669;"></i>
+                                        <h5 class="mt-3">View Invoices</h5>
+                                        <p class="text-muted">Download and view invoices</p>
+                                        <button class="btn btn-outline-primary" onclick="loadTab('invoices')">View All</button>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <div class="billing-card text-center">
+                                        <i class="bi bi-arrow-repeat" style="font-size: 2rem; color: #d97706;"></i>
+                                        <h5 class="mt-3">Auto-Pay Setup</h5>
+                                        <p class="text-muted">Set up automatic payments</p>
+                                        <button class="btn btn-outline-primary" onclick="setupAutoPay()">Setup</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Recent Invoices -->
+                            <div class="billing-card">
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <h5><i class="bi bi-clock-history"></i> Recent Invoices</h5>
+                                    <button class="btn btn-sm btn-outline-primary" onclick="loadTab('invoices')">View All</button>
+                                </div>
+                                <div class="table-responsive">
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Invoice #</th>
+                                                <th>Date</th>
+                                                <th>Amount</th>
+                                                <th>Status</th>
+                                                <th>Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td><strong>INV-2024-001</strong></td>
+                                                <td>Aug 1, 2024</td>
+                                                <td>R 5,000.00</td>
+                                                <td><span class="status-badge status-paid">Paid</span></td>
+                                                <td>
+                                                    <button class="btn btn-sm btn-outline-primary">Download PDF</button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>INV-2024-002</strong></td>
+                                                <td>Sep 1, 2024</td>
+                                                <td>R 5,250.00</td>
+                                                <td><span class="status-badge status-pending">Pending</span></td>
+                                                <td>
+                                                    <button class="btn btn-sm btn-primary" onclick="payInvoice('INV-2024-002')">Pay Now</button>
+                                                    <button class="btn btn-sm btn-outline-secondary">Download PDF</button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <!-- Payment History -->
+                            <div class="billing-card">
+                                <h5><i class="bi bi-credit-card"></i> Recent Payments</h5>
+                                <div class="table-responsive">
+                                    <table class="table table-sm">
+                                        <thead>
+                                            <tr>
+                                                <th>Date</th>
+                                                <th>Amount</th>
+                                                <th>Method</th>
+                                                <th>Reference</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Aug 5, 2024</td>
+                                                <td>R 5,000.00</td>
+                                                <td><i class="bi bi-credit-card text-primary"></i> PayFast</td>
+                                                <td>PF_12345678</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Jul 3, 2024</td>
+                                                <td>R 4,800.00</td>
+                                                <td><i class="bi bi-bank text-success"></i> Bank Transfer</td>
+                                                <td>BT_87654321</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Websites Panel -->
+                        <div id="websitesContent" style="display: none;">
+                            <div class="d-flex justify-content-between align-items-center mb-4">
+                                <h3><i class="bi bi-globe"></i> Your Websites</h3>
+                                <button class="btn btn-primary" onclick="addWebsite()">
+                                    <i class="bi bi-plus-circle"></i> Add Website
+                                </button>
+                            </div>
+                            
+                            <div class="row" id="websitesGrid">
+                                <div class="col-md-6 mb-3">
+                                    <div class="billing-card">
+                                        <div class="d-flex justify-content-between align-items-start mb-3">
+                                            <h5><i class="bi bi-globe text-primary"></i> example.com</h5>
+                                            <span class="status-badge status-paid">Live</span>
+                                        </div>
+                                        <div class="mb-3">
+                                            <small class="text-muted">Domain:</small><br>
+                                            <strong>example.com</strong>
+                                        </div>
+                                        <div class="mb-3">
+                                            <small class="text-muted">Hosting:</small><br>
+                                            <span>Shared Hosting - Premium Plan</span>
+                                        </div>
+                                        <div class="mb-3">
+                                            <small class="text-muted">Last Updated:</small><br>
+                                            <span>September 15, 2024</span>
+                                        </div>
+                                        <div class="d-flex gap-2">
+                                            <button class="btn btn-sm btn-outline-primary" onclick="visitWebsite('https://example.com')">
+                                                <i class="bi bi-box-arrow-up-right"></i> Visit
+                                            </button>
+                                            <button class="btn btn-sm btn-outline-secondary" onclick="manageWebsite('example.com')">
+                                                <i class="bi bi-gear"></i> Manage
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-md-6 mb-3">
+                                    <div class="billing-card">
+                                        <div class="d-flex justify-content-between align-items-start mb-3">
+                                            <h5><i class="bi bi-globe text-warning"></i> staging.example.com</h5>
+                                            <span class="status-badge status-pending">Staging</span>
+                                        </div>
+                                        <div class="mb-3">
+                                            <small class="text-muted">Domain:</small><br>
+                                            <strong>staging.example.com</strong>
+                                        </div>
+                                        <div class="mb-3">
+                                            <small class="text-muted">Hosting:</small><br>
+                                            <span>Development Environment</span>
+                                        </div>
+                                        <div class="mb-3">
+                                            <small class="text-muted">Last Updated:</small><br>
+                                            <span>September 20, 2024</span>
+                                        </div>
+                                        <div class="d-flex gap-2">
+                                            <button class="btn btn-sm btn-outline-primary" onclick="visitWebsite('https://staging.example.com')">
+                                                <i class="bi bi-box-arrow-up-right"></i> Visit
+                                            </button>
+                                            <button class="btn btn-sm btn-outline-secondary" onclick="manageWebsite('staging.example.com')">
+                                                <i class="bi bi-gear"></i> Manage
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Domains Panel -->
+                        <div id="domainsContent" style="display: none;">
+                            <div class="d-flex justify-content-between align-items-center mb-4">
+                                <h3><i class="bi bi-link-45deg"></i> Domain Management</h3>
+                                <button class="btn btn-primary" onclick="registerDomain()">
+                                    <i class="bi bi-plus-circle"></i> Register Domain
+                                </button>
+                            </div>
+                            
+                            <div class="billing-card mb-4">
+                                <h5><i class="bi bi-info-circle"></i> Domain Overview</h5>
+                                <div class="row" id="domainStats">
+                                    <div class="col-md-3">
+                                        <div class="text-center">
+                                            <h4 class="text-primary" id="activeDomainsCount">0</h4>
+                                            <small class="text-muted">Active Domains</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="text-center">
+                                            <h4 class="text-success" id="autoRenewalCount">0</h4>
+                                            <small class="text-muted">Auto-Renewal</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="text-center">
+                                            <h4 class="text-warning" id="expiringSoonCount">0</h4>
+                                            <small class="text-muted">Expiring Soon</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="text-center">
+                                            <h4 class="text-info" id="pendingCount">0</h4>
+                                            <small class="text-muted">Pending</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Domain</th>
+                                            <th>Status</th>
+                                            <th>Expiry Date</th>
+                                            <th>Auto-Renewal</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="domainsTableBody">
+                                        <tr>
+                                            <td colspan="5" class="text-center py-4">
+                                                <div class="spinner-border text-primary" role="status">
+                                                    <span class="visually-hidden">Loading domains...</span>
+                                                </div>
+                                                <p class="mt-2 text-muted">Loading domains...</p>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- Email Accounts Panel -->
+                        <div id="emailsContent" style="display: none;">
+                            <div class="d-flex justify-content-between align-items-center mb-4">
+                                <h3><i class="bi bi-envelope"></i> Email Accounts</h3>
+                                <button class="btn btn-primary" onclick="addEmailAccount()">
+                                    <i class="bi bi-plus-circle"></i> Add Email Account
+                                </button>
+                            </div>
+                            
+                            <div class="billing-card mb-4">
+                                <h5><i class="bi bi-info-circle"></i> Email Overview</h5>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <div class="text-center">
+                                            <h4 class="text-primary">5</h4>
+                                            <small class="text-muted">Total Accounts</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="text-center">
+                                            <h4 class="text-success">4</h4>
+                                            <small class="text-muted">Active</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="text-center">
+                                            <h4 class="text-info">10GB</h4>
+                                            <small class="text-muted">Storage Used</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="text-center">
+                                            <h4 class="text-warning">50GB</h4>
+                                            <small class="text-muted">Total Storage</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row" id="emailsGrid">
+                                <div class="col-md-6 mb-3">
+                                    <div class="billing-card">
+                                        <div class="d-flex justify-content-between align-items-start mb-3">
+                                            <h5><i class="bi bi-envelope text-primary"></i> admin@example.com</h5>
+                                            <span class="status-badge status-paid">Active</span>
+                                        </div>
+                                        <div class="mb-3">
+                                            <small class="text-muted">Storage:</small><br>
+                                            <div class="progress" style="height: 8px;">
+                                                <div class="progress-bar" style="width: 60%"></div>
+                                            </div>
+                                            <small>3.2GB / 5GB used</small>
+                                        </div>
+                                        <div class="mb-3">
+                                            <small class="text-muted">Last Login:</small><br>
+                                            <span>September 20, 2024</span>
+                                        </div>
+                                        <div class="d-flex gap-2">
+                                            <button class="btn btn-sm btn-outline-primary" onclick="accessEmail('admin@example.com')">
+                                                <i class="bi bi-box-arrow-in-right"></i> Access
+                                            </button>
+                                            <button class="btn btn-sm btn-outline-secondary" onclick="manageEmail('admin@example.com')">
+                                                <i class="bi bi-gear"></i> Manage
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-md-6 mb-3">
+                                    <div class="billing-card">
+                                        <div class="d-flex justify-content-between align-items-start mb-3">
+                                            <h5><i class="bi bi-envelope text-success"></i> support@example.com</h5>
+                                            <span class="status-badge status-paid">Active</span>
+                                        </div>
+                                        <div class="mb-3">
+                                            <small class="text-muted">Storage:</small><br>
+                                            <div class="progress" style="height: 8px;">
+                                                <div class="progress-bar bg-success" style="width: 40%"></div>
+                                            </div>
+                                            <small>2.1GB / 5GB used</small>
+                                        </div>
+                                        <div class="mb-3">
+                                            <small class="text-muted">Last Login:</small><br>
+                                            <span>September 19, 2024</span>
+                                        </div>
+                                        <div class="d-flex gap-2">
+                                            <button class="btn btn-sm btn-outline-primary" onclick="accessEmail('support@example.com')">
+                                                <i class="bi bi-box-arrow-in-right"></i> Access
+                                            </button>
+                                            <button class="btn btn-sm btn-outline-secondary" onclick="manageEmail('support@example.com')">
+                                                <i class="bi bi-gear"></i> Manage
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-md-6 mb-3">
+                                    <div class="billing-card">
+                                        <div class="d-flex justify-content-between align-items-start mb-3">
+                                            <h5><i class="bi bi-envelope text-warning"></i> info@example.com</h5>
+                                            <span class="status-badge status-pending">Suspended</span>
+                                        </div>
+                                        <div class="mb-3">
+                                            <small class="text-muted">Storage:</small><br>
+                                            <div class="progress" style="height: 8px;">
+                                                <div class="progress-bar bg-warning" style="width: 80%"></div>
+                                            </div>
+                                            <small>4.0GB / 5GB used</small>
+                                        </div>
+                                        <div class="mb-3">
+                                            <small class="text-muted">Last Login:</small><br>
+                                            <span>August 15, 2024</span>
+                                        </div>
+                                        <div class="d-flex gap-2">
+                                            <button class="btn btn-sm btn-outline-warning" onclick="reactivateEmail('info@example.com')">
+                                                <i class="bi bi-arrow-clockwise"></i> Reactivate
+                                            </button>
+                                            <button class="btn btn-sm btn-outline-secondary" onclick="manageEmail('info@example.com')">
+                                                <i class="bi bi-gear"></i> Manage
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </div>
+    </div>
+
+    <!-- Payment Modal -->
+    <div class="modal fade" id="paymentModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header" style="background: linear-gradient(135deg, #1e348d, #2563eb); color: white;">
+                    <h5 class="modal-title">Make Payment</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="text-center mb-4">
+                        <h4>Amount Due: <span class="text-primary">R 5,250.00</span></h4>
+                    </div>
+                    
+                    <h6>Select Payment Method:</h6>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <div class="payment-method-card" onclick="selectPaymentMethod('payfast')">
+                                <i class="bi bi-credit-card" style="font-size: 2rem; color: #ff6b35;"></i>
+                                <h6 class="mt-2">PayFast</h6>
+                                <small class="text-muted">Credit/Debit Card</small>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <div class="payment-method-card" onclick="selectPaymentMethod('paypal')">
+                                <i class="bi bi-paypal" style="font-size: 2rem; color: #0070ba;"></i>
+                                <h6 class="mt-2">PayPal</h6>
+                                <small class="text-muted">PayPal Account</small>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="d-grid">
+                        <button class="btn btn-primary btn-lg" onclick="processPayment()">
+                            <i class="bi bi-shield-check"></i> Proceed to Secure Payment
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        async function apiRequest(url, method = 'GET', body) {
+            const opts = { method, headers: { 'Content-Type': 'application/json' } };
+            if (body) opts.body = JSON.stringify(body);
+            const res = await fetch(url, opts);
+            const contentType = res.headers.get('content-type') || '';
+            const text = await res.text();
+            try {
+                if (contentType.includes('application/json')) {
+                    return JSON.parse(text);
+                }
+                // Fallback: try JSON parse anyway
+                return JSON.parse(text);
+            } catch (e) {
+                throw new Error(`Non-JSON response (${res.status}): ${text.slice(0, 200)}`);
+            }
+        }
+
+        // Use relative API base so it works when served from /ClientPortal/
+        const API_BASE = '../api';
+
+        let currentUser = null;
+        
+        // Login functionality
+        document.getElementById('loginForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value.trim();
+            try {
+                const resp = await apiRequest(`${API_BASE}/login.php`, 'POST', { email, password, user_type: 'client' });
+                if (!resp.success) { 
+                    const errorMsg = resp.error || 'Invalid credentials';
+                    const debugInfo = resp.debug ? '\nDebug: ' + JSON.stringify(resp.debug, null, 2) : '';
+                    document.getElementById('loginError').textContent = errorMsg + debugInfo; 
+                    return; 
+                }
+                currentUser = resp.user;
+                document.getElementById('clientName').textContent = currentUser.name || currentUser.email;
+                document.getElementById('loginScreen').style.display = 'none';
+                document.getElementById('dashboard').style.display = 'block';
+                await loadClientSummary();
+            } catch (err) {
+                document.getElementById('loginError').textContent = 'Login failed: ' + err.message;
+            }
+        });
+
+        // Show DB health badge
+        (async function(){
+            try {
+                const res = await fetch(`${API_BASE}/health.php`, { headers: { 'Content-Type': 'application/json' } });
+                const text = await res.text();
+                let ok = false; let msg = '';
+                try { const j = JSON.parse(text); ok = !!(j && j.success && j.db_connected); msg = ok ? 'Connected' : 'Not connected'; }
+                catch(e){ msg = 'Non-JSON'; }
+                const badge = document.createElement('div');
+                badge.className = 'text-center mt-2';
+                badge.innerHTML = ok ? '<span class="badge bg-success">DB Connected</span>' : '<span class="badge bg-danger">DB Not Connected</span>';
+                document.getElementById('loginForm').appendChild(badge);
+            } catch(e){}
+        })();
+
+        async function loadClientSummary() {
+            if (!currentUser || !currentUser.id) return;
+            const resp = await apiRequest(`${API_BASE}/client_balance.php?client_id=` + encodeURIComponent(currentUser.id));
+            if (!resp.success) return;
+            // Update balance
+            const balanceEls = document.querySelectorAll('.balance-amount');
+            balanceEls.forEach(el => el.textContent = 'R ' + Number(resp.balance || 0).toFixed(2));
+            // Update recent invoices table if visible
+            const tableBody = document.querySelector('#billingContent table tbody');
+            if (tableBody) {
+                tableBody.innerHTML = '';
+                (resp.invoices || []).forEach(inv => {
+                    const tr = document.createElement('tr');
+                    tr.innerHTML = `
+                        <td><strong>${inv.invoice_number}</strong></td>
+                        <td>${inv.issue_date}</td>
+                        <td>R ${Number(inv.total_amount).toFixed(2)}</td>
+                        <td><span class="status-badge status-${inv.status}">${inv.status}</span></td>
+                        <td>
+                            <a class="btn btn-sm btn-outline-primary" target="_blank" href="${API_BASE}/download_invoice.php?invoice_id=${inv.id}">Download</a>
+                        </td>
+                    `;
+                    tableBody.appendChild(tr);
+                });
+            }
+        }
+        
+        function logout() {
+            if (confirm('Are you sure you want to logout?')) {
+                currentUser = null;
+                document.getElementById('loginScreen').style.display = 'flex';
+                document.getElementById('dashboard').style.display = 'none';
+            }
+        }
+        
+        function loadTab(tabName) {
+            // Update active nav
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active');
+            });
+            document.querySelector(`[onclick="loadTab('${tabName}')"]`).classList.add('active');
+            
+            // Hide all content panels
+            document.getElementById('billingContent').style.display = 'none';
+            document.getElementById('websitesContent').style.display = 'none';
+            document.getElementById('domainsContent').style.display = 'none';
+            document.getElementById('emailsContent').style.display = 'none';
+            
+            // Load content based on tab
+            const content = document.getElementById('mainContent');
+            
+            if (tabName === 'billing') {
+                document.getElementById('billingContent').style.display = 'block';
+                loadClientSummary();
+            } else if (tabName === 'websites') {
+                document.getElementById('websitesContent').style.display = 'block';
+                loadWebsites();
+            } else if (tabName === 'domains') {
+                document.getElementById('domainsContent').style.display = 'block';
+                loadDomains();
+            } else if (tabName === 'emails') {
+                document.getElementById('emailsContent').style.display = 'block';
+                loadEmails();
+            } else if (tabName === 'payments') {
+                showPaymentModal();
+            } else if (tabName === 'projects') {
+                window.open('project-tracker.html', '_blank');
+            } else {
+                content.innerHTML = `
+                    <div class="text-center py-5">
+                        <div class="spinner-border text-primary" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                        <h4 class="mt-3">Loading ${tabName}...</h4>
+                        <p class="text-muted">This section is ready for implementation.</p>
+                    </div>
+                `;
+            }
+        }
+        
+        function showPaymentModal() {
+            const modal = new bootstrap.Modal(document.getElementById('paymentModal'));
+            modal.show();
+        }
+        
+        function payInvoice(invoiceId) {
+            showPaymentModal();
+        }
+        
+        function selectPaymentMethod(method) {
+            document.querySelectorAll('.payment-method-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+            event.currentTarget.classList.add('selected');
+        }
+        
+        function processPayment() {
+            alert('Redirecting to secure payment gateway...\n\nThis would integrate with PayFast, Stripe, or PayPal APIs for actual payment processing.');
+        }
+        
+        function setupAutoPay() {
+            alert('Auto-Pay Setup - This would configure automatic monthly payments for the client.');
+        }
+        
+        // Websites Panel Functions
+        function loadWebsites() {
+            // This would load websites from API
+            console.log('Loading websites...');
+        }
+        
+        function addWebsite() {
+            alert('Add Website - This would open a form to add a new website.');
+        }
+        
+        function visitWebsite(url) {
+            window.open(url, '_blank');
+        }
+        
+        function manageWebsite(domain) {
+            alert(`Manage Website: ${domain} - This would open website management tools.`);
+        }
+        
+        // Domains Panel Functions
+        async function loadDomains() {
+            console.log('🔄 Loading domains...');
+            try {
+                // Get client ID from session or use a default for demo
+                const clientId = getCurrentClientId() || 1; // Default to client ID 1 for demo
+                console.log('👤 Client ID:', clientId);
+                
+                const apiUrl = `../api/domains_public.php?client_id=${clientId}`;
+                console.log('🌐 API URL:', apiUrl);
+                
+                const response = await fetch(apiUrl);
+                console.log('📡 Response status:', response.status);
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                const data = await response.json();
+                console.log('📊 API Response:', data);
+                
+                if (data.success) {
+                    console.log('✅ Domains loaded successfully:', data.data.length, 'domains');
+                    displayClientDomains(data.data);
+                    updateClientDomainStats(data.stats);
+                } else {
+                    console.error('❌ API Error:', data.error);
+                    showFallbackDomains();
+                }
+            } catch (error) {
+                console.error('❌ Error loading domains:', error);
+                showFallbackDomains();
+            }
+        }
+
+        function getCurrentClientId() {
+            // This would get the actual client ID from the session
+            // For now, return a default value
+            return 1;
+        }
+
+        function displayClientDomains(domains) {
+            console.log('🎨 Displaying domains:', domains);
+            const tbody = document.getElementById('domainsTableBody');
+            
+            if (!tbody) {
+                console.error('❌ domainsTableBody element not found!');
+                return;
+            }
+            
+            if (domains.length === 0) {
+                tbody.innerHTML = `
+                    <tr>
+                        <td colspan="5" class="text-center py-4">
+                            <i class="bi bi-globe text-muted" style="font-size: 3rem;"></i>
+                            <h5 class="mt-3 text-muted">No domains found</h5>
+                            <p class="text-muted">You don't have any domains registered yet.</p>
+                            <button class="btn btn-primary" onclick="registerDomain()">
+                                <i class="bi bi-plus-circle"></i> Register Your First Domain
+                            </button>
+                        </td>
+                    </tr>
+                `;
+                return;
+            }
+
+            tbody.innerHTML = domains.map(domain => `
+                <tr>
+                    <td><strong>${domain.domain_name}</strong></td>
+                    <td>
+                        <span class="status-badge status-${domain.status.toLowerCase()}">${domain.status}</span>
+                    </td>
+                    <td>${domain.expiry_date ? new Date(domain.expiry_date).toLocaleDateString() : 'N/A'}</td>
+                    <td>
+                        ${domain.auto_renewal ? 
+                            '<i class="bi bi-check-circle text-success"></i> Enabled' : 
+                            '<i class="bi bi-x-circle text-danger"></i> Disabled'
+                        }
+                    </td>
+                    <td>
+                        <button class="btn btn-sm btn-outline-primary" onclick="manageDomain('${domain.domain_name}')">
+                            <i class="bi bi-gear"></i> Manage
+                        </button>
+                        <button class="btn btn-sm btn-outline-secondary" onclick="renewDomain('${domain.domain_name}')">
+                            <i class="bi bi-arrow-clockwise"></i> Renew
+                        </button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        function updateClientDomainStats(stats) {
+            console.log('📊 Updating domain stats:', stats);
+            document.getElementById('activeDomainsCount').textContent = stats.active || 0;
+            document.getElementById('autoRenewalCount').textContent = stats.auto_renewal || 0;
+            document.getElementById('expiringSoonCount').textContent = stats.expiring_soon || 0;
+            document.getElementById('pendingCount').textContent = stats.pending || 0;
+        }
+
+        function showFallbackDomains() {
+            // Fallback to static content if API fails
+            const tbody = document.getElementById('domainsTableBody');
+            tbody.innerHTML = `
+                <tr>
+                    <td><strong>example.com</strong></td>
+                    <td><span class="status-badge status-paid">Active</span></td>
+                    <td>March 15, 2025</td>
+                    <td><i class="bi bi-check-circle text-success"></i> Enabled</td>
+                    <td>
+                        <button class="btn btn-sm btn-outline-primary" onclick="manageDomain('example.com')">
+                            <i class="bi bi-gear"></i> Manage
+                        </button>
+                        <button class="btn btn-sm btn-outline-secondary" onclick="renewDomain('example.com')">
+                            <i class="bi bi-arrow-clockwise"></i> Renew
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>staging.example.com</strong></td>
+                    <td><span class="status-badge status-pending">Expiring</span></td>
+                    <td>October 30, 2024</td>
+                    <td><i class="bi bi-x-circle text-danger"></i> Disabled</td>
+                    <td>
+                        <button class="btn btn-sm btn-outline-primary" onclick="manageDomain('staging.example.com')">
+                            <i class="bi bi-gear"></i> Manage
+                        </button>
+                        <button class="btn btn-sm btn-primary" onclick="renewDomain('staging.example.com')">
+                            <i class="bi bi-arrow-clockwise"></i> Renew Now
+                        </button>
+                    </td>
+                </tr>
+            `;
+            
+            // Update stats with fallback data
+            document.getElementById('activeDomainsCount').textContent = '1';
+            document.getElementById('autoRenewalCount').textContent = '1';
+            document.getElementById('expiringSoonCount').textContent = '1';
+            document.getElementById('pendingCount').textContent = '0';
+        }
+        
+        function registerDomain() {
+            alert('Register Domain - This would open a domain registration form.');
+        }
+        
+        function manageDomain(domain) {
+            alert(`Manage Domain: ${domain} - This would open domain management tools.`);
+        }
+        
+        function renewDomain(domain) {
+            alert(`Renew Domain: ${domain} - This would process domain renewal.`);
+        }
+        
+        // Email Panel Functions
+        function loadEmails() {
+            // This would load email accounts from API
+            console.log('Loading email accounts...');
+        }
+        
+        function addEmailAccount() {
+            alert('Add Email Account - This would open a form to create a new email account.');
+        }
+        
+        function accessEmail(email) {
+            alert(`Access Email: ${email} - This would open webmail interface.`);
+        }
+        
+        function manageEmail(email) {
+            alert(`Manage Email: ${email} - This would open email management tools.`);
+        }
+        
+        function reactivateEmail(email) {
+            alert(`Reactivate Email: ${email} - This would reactivate the suspended email account.`);
+        }
+    </script>
+    <!-- Language Translator Widget Styles -->
+    <style>
+        .translator-widget {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1001;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .translator-button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+            transition: all 0.3s ease;
+            font-weight: 600;
+            font-size: 14px;
+            border: none;
+            outline: none;
+        }
+
+        .translator-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+        }
+
+        .translator-button i {
+            font-size: 16px;
+        }
+
+        .translator-dropdown {
+            position: absolute;
+            top: 60px;
+            right: 0;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+            min-width: 280px;
+            max-height: 400px;
+            overflow: hidden;
+            transform: scale(0) translateY(-20px);
+            opacity: 0;
+            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .translator-dropdown.active {
+            transform: scale(1) translateY(0);
+            opacity: 1;
+        }
+
+        .translator-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .translator-header h4 {
+            margin: 0;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .close-translator {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            padding: 5px;
+            border-radius: 50%;
+            transition: background 0.2s;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .close-translator:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Google Translate Element Styling */
+        #google_translate_element {
+            padding: 15px 20px;
+        }
+
+        .goog-te-gadget {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+            font-size: 14px !important;
+        }
+
+        .goog-te-gadget-simple {
+            background: transparent !important;
+            border: none !important;
+            padding: 0 !important;
+        }
+
+        .goog-te-gadget-simple .goog-te-menu-value {
+            color: #333 !important;
+            font-size: 14px !important;
+            font-weight: 500 !important;
+        }
+
+        .goog-te-gadget-simple .goog-te-menu-value span:first-child {
+            color: #667eea !important;
+            font-weight: 600 !important;
+        }
+
+        .goog-te-gadget-simple .goog-te-menu-value span:last-child {
+            color: #666 !important;
+        }
+
+        .goog-te-gadget-simple .goog-te-menu-value:before {
+            content: "🌐 " !important;
+            margin-right: 5px !important;
+        }
+
+        /* Hide Google Translate banner */
+        .goog-te-banner-frame {
+            display: none !important;
+        }
+
+        body {
+            top: 0 !important;
+        }
+
+        /* Style the dropdown arrow */
+        .goog-te-gadget-simple .goog-te-menu-value:after {
+            content: " ▼" !important;
+            color: #667eea !important;
+            font-size: 12px !important;
+        }
+
+        .translator-footer {
+            padding: 15px 20px;
+            background: #f8f9fa;
+            display: flex;
+            justify-content: center;
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .reset-btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 600;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+            color: white;
+        }
+
+        .reset-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(255, 107, 107, 0.4);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .translator-widget {
+                top: 15px;
+                right: 15px;
+            }
+
+            .translator-button {
+                padding: 10px 16px;
+                font-size: 13px;
+            }
+
+            .translator-dropdown {
+                min-width: 260px;
+                right: -10px;
+            }
+
+            .reset-btn {
+                padding: 8px 16px;
+                font-size: 11px;
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .translator-widget {
+                top: 10px;
+                right: 10px;
+            }
+
+            .translator-button {
+                padding: 8px 12px;
+                font-size: 12px;
+            }
+
+            .translator-button span {
+                display: none;
+            }
+
+            .translator-dropdown {
+                min-width: 240px;
+                right: -20px;
+            }
+        }
+    </style>
+
+    <!-- Language Translator Widget -->
+    <div class="translator-widget">
+        <div class="translator-button" id="translatorBtn">
+            <i class="fa-solid fa-language"></i>
+            <span>Translate</span>
+        </div>
+        
+        <div class="translator-dropdown" id="translatorDropdown">
+            <div class="translator-header">
+                <h4>Choose Language</h4>
+                <button class="close-translator" id="closeTranslator">
+                    <i class="fa-solid fa-times"></i>
+                </button>
+            </div>
+            
+            <!-- Google Translate Element -->
+            <div id="google_translate_element"></div>
+            
+            <div class="translator-footer">
+                <button class="reset-btn" id="resetBtn">
+                    <i class="fa-solid fa-undo"></i>
+                    Reset to English
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Google Translate Widget JavaScript -->
+    <script>
+        // Google Translate Element Initialization
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'en',
+                includedLanguages: 'en,es,fr,de,it,pt,ru,zh,ja,ko,ar,hi',
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+                autoDisplay: false
+            }, 'google_translate_element');
+        }
+
+        // Simple Translator Widget Controller
+        class SimpleTranslator {
+            constructor() {
+                this.isOpen = false;
+                this.init();
+            }
+
+            init() {
+                this.translatorBtn = document.getElementById('translatorBtn');
+                this.translatorDropdown = document.getElementById('translatorDropdown');
+                this.closeTranslator = document.getElementById('closeTranslator');
+                this.resetBtn = document.getElementById('resetBtn');
+
+                this.bindEvents();
+            }
+
+            bindEvents() {
+                // Toggle dropdown
+                this.translatorBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    this.toggleDropdown();
+                });
+
+                // Close dropdown
+                this.closeTranslator.addEventListener('click', () => {
+                    this.closeDropdown();
+                });
+
+                // Reset button
+                this.resetBtn.addEventListener('click', () => {
+                    this.resetTranslation();
+                });
+
+                // Close dropdown when clicking outside
+                document.addEventListener('click', (e) => {
+                    if (!e.target.closest('.translator-widget') && this.isOpen) {
+                        this.closeDropdown();
+                    }
+                });
+
+                // Keyboard navigation
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === 'Escape' && this.isOpen) {
+                        this.closeDropdown();
+                    }
+                });
+            }
+
+            toggleDropdown() {
+                if (this.isOpen) {
+                    this.closeDropdown();
+                } else {
+                    this.openDropdown();
+                }
+            }
+
+            openDropdown() {
+                this.translatorDropdown.classList.add('active');
+                this.isOpen = true;
+            }
+
+            closeDropdown() {
+                this.translatorDropdown.classList.remove('active');
+                this.isOpen = false;
+            }
+
+            resetTranslation() {
+                // Reset Google Translate to English
+                if (window.google && window.google.translate) {
+                    const translateElement = document.querySelector('.goog-te-combo');
+                    if (translateElement) {
+                        translateElement.selectedIndex = 0;
+                        translateElement.dispatchEvent(new Event('change'));
+                    }
+                }
+
+                // Remove Google Translate banner
+                const banner = document.querySelector('.goog-te-banner-frame');
+                if (banner) {
+                    banner.remove();
+                }
+
+                // Reset body top position
+                document.body.style.top = '0px';
+
+                this.showNotification('Translation reset to English');
+            }
+
+            showNotification(message) {
+                // Create notification element
+                const notification = document.createElement('div');
+                notification.style.cssText = `
+                    position: fixed;
+                    top: 80px;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                    color: white;
+                    padding: 12px 24px;
+                    border-radius: 25px;
+                    font-size: 14px;
+                    font-weight: 600;
+                    z-index: 10000;
+                    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+                    animation: slideDown 0.3s ease;
+                `;
+                notification.textContent = message;
+                document.body.appendChild(notification);
+
+                // Remove notification after 3 seconds
+                setTimeout(() => {
+                    notification.style.animation = 'slideUp 0.3s ease';
+                    setTimeout(() => notification.remove(), 300);
+                }, 3000);
+            }
+        }
+
+        // Initialize the translator when DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            new SimpleTranslator();
+        });
+
+        // Add CSS animations for notifications
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideDown {
+                from {
+                    opacity: 0;
+                    transform: translateX(-50%) translateY(-20px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateX(-50%) translateY(0);
+                }
+            }
+            
+            @keyframes slideUp {
+                from {
+                    opacity: 1;
+                    transform: translateX(-50%) translateY(0);
+                }
+                to {
+                    opacity: 0;
+                    transform: translateX(-50%) translateY(-20px);
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+
+</body>
+</html>

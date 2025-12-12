@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Successful - SCL Digital</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .success-container {
+            max-width: 600px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+            animation: slideUp 0.5s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .success-header {
+            background: linear-gradient(135deg, #1e348d 0%, #3641b5 100%);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+        }
+
+        .success-icon {
+            font-size: 80px;
+            animation: checkmark 0.8s ease-in-out;
+        }
+
+        @keyframes checkmark {
+            0% {
+                transform: scale(0);
+            }
+
+            50% {
+                transform: scale(1.2);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .success-body {
+            padding: 40px 30px;
+        }
+
+        .booking-detail {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .booking-detail:last-child {
+            border-bottom: none;
+        }
+
+        .detail-label {
+            font-weight: 600;
+            color: #666;
+        }
+
+        .detail-value {
+            color: #333;
+            font-weight: 500;
+        }
+
+        .booking-reference {
+            font-size: 24px;
+            font-weight: bold;
+            color: #1e348d;
+            text-align: center;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+
+        .btn-download {
+            background: linear-gradient(135deg, #30adbe 0%, #2563eb 100%);
+            border: none;
+            padding: 15px 40px;
+            font-size: 18px;
+            font-weight: 600;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-download:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(48, 173, 190, 0.4);
+        }
+
+        .btn-home {
+            background: #6c757d;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="success-container">
+        <div class="success-header">
+            <div class="success-icon">
+                <i class="bi bi-check-circle-fill"></i>
+            </div>
+            <h1 class="mt-3">Payment Successful!</h1>
+            <p class="mb-0">Your booking has been confirmed</p>
+        </div>
+
+        <div class="success-body">
+            <div class="booking-reference">
+                <small style="font-size: 14px; color: #666; display: block; margin-bottom: 5px;">Booking
+                    Reference</small>
+                <span id="bookingRef">Loading...</span>
+            </div>
+
+            <div class="booking-details">
+                <div class="booking-detail">
+                    <span class="detail-label">Customer Name</span>
+                    <span class="detail-value" id="customerName">-</span>
+                </div>
+                <div class="booking-detail">
+                    <span class="detail-label">Email</span>
+                    <span class="detail-value" id="customerEmail">-</span>
+                </div>
+                <div class="booking-detail">
+                    <span class="detail-label">Number of Tickets</span>
+                    <span class="detail-value" id="ticketCount">-</span>
+                </div>
+                <div class="booking-detail">
+                    <span class="detail-label">Total Amount</span>
+                    <span class="detail-value" id="totalAmount">-</span>
+                </div>
+                <div class="booking-detail">
+                    <span class="detail-label">Payment Status</span>
+                    <span class="detail-value text-success"><i class="bi bi-check-circle"></i> Completed</span>
+                </div>
+            </div>
+
+            <div class="alert alert-info mt-4" id="emailAlert">
+                <i class="bi bi-envelope"></i> <span id="emailMessage">Checking email status...</span>
+            </div>
+
+            <div class="d-grid gap-3 mt-4">
+                <button class="btn btn-primary btn-download" id="downloadBtn">
+                    <i class="bi bi-download"></i> Download Your Ticket
+                </button>
+                <a href="eventspage.html" class="btn btn-secondary btn-home">
+                    <i class="bi bi-house"></i> Back to Events
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Get booking data from URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const bookingData = {
+            booking_reference: urlParams.get('ref'),
+            customer_name: urlParams.get('name'),
+            customer_email: urlParams.get('email'),
+            ticket_count: urlParams.get('tickets'),
+            total_amount: urlParams.get('amount'),
+            currency: urlParams.get('currency') || 'ZAR',
+            email_sent: urlParams.get('email_sent') === 'true'
+        };
+
+        // Populate the page
+        document.getElementById('bookingRef').textContent = bookingData.booking_reference || 'N/A';
+        document.getElementById('customerName').textContent = bookingData.customer_name || 'N/A';
+        document.getElementById('customerEmail').textContent = bookingData.customer_email || 'N/A';
+        document.getElementById('ticketCount').textContent = bookingData.ticket_count || 'N/A';
+        document.getElementById('totalAmount').textContent = `${bookingData.currency} ${parseFloat(bookingData.total_amount || 0).toFixed(2)}`;
+
+        // Email status message
+        const emailAlert = document.getElementById('emailAlert');
+        const emailMessage = document.getElementById('emailMessage');
+        if (bookingData.email_sent) {
+            emailAlert.className = 'alert alert-success mt-4';
+            emailMessage.innerHTML = `<strong>Email Sent!</strong> Your ticket has been sent to ${bookingData.customer_email}`;
+        } else {
+            emailAlert.className = 'alert alert-warning mt-4';
+            emailMessage.innerHTML = '<strong>Email Pending:</strong> Your ticket will be sent shortly. You can download it below.';
+        }
+
+        // Download ticket button
+        document.getElementById('downloadBtn').addEventListener('click', () => {
+            if (bookingData.booking_reference) {
+                window.location.href = `../api/download_ticket.php?ref=${encodeURIComponent(bookingData.booking_reference)}`;
+            } else {
+                alert('Booking reference not found. Please contact support.');
+            }
+        });
+
+        // Confetti effect (optional)
+        setTimeout(() => {
+            console.log('🎉 Payment successful!');
+        }, 500);
+    </script>
+</body>
+
+</html>

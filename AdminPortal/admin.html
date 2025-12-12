@@ -1,0 +1,1836 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SCL DA Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    <style>
+
+@font-face {
+
+font-family: scldafont;
+
+src:url(./fonts/Rajdhani-Medium.ttf);
+
+font-weight: normal;
+font-style: normal;
+font-display: swap;
+}
+
+
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: scldafont;
+            background: #f8fafc;
+            color: #334155;
+            overflow-x: hidden;
+        }
+
+        .container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 260px;
+            background: url(background-image.png) no-repeat center center fixed;
+            color: white;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .sidebar.collapsed {
+            width: 70px;
+        }
+
+        .sidebar-header {
+            padding: 24px 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #1e348d, #1d4ed8);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .brand-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            transition: opacity 0.3s ease;
+        }
+
+        .sidebar.collapsed .brand-name {
+            opacity: 0;
+            display: none;
+        }
+
+        .nav-menu {
+            padding: 20px 0;
+        }
+
+        .nav-item {
+            margin: 4px 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
+            border-radius: 8px;
+            color: #cbd5e1;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 14px;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            background: #FFFFFF;
+            color: #1e293b;
+            transform: translateX(4px);
+        }
+
+        .nav-icon {
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+        }
+
+        .sidebar.collapsed .nav-text {
+            opacity: 0;
+            display: none;
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            margin-left: 260px;
+            transition: margin-left 0.3s ease;
+        }
+
+        .sidebar.collapsed + .main-content {
+            margin-left: 70px;
+        }
+
+        /* Top Header */
+        .top-header {
+            background: white;
+            padding: 16px 24px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .menu-toggle {
+            background: none;
+            border: none;
+            font-size: 20px;
+            color: #64748b;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+
+        .menu-toggle:hover {
+            background: #f1f5f9;
+            color: #1e348d;
+        }
+
+        .page-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #1e293b;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .search-box {
+            display: flex;
+            align-items: center;
+            background: #f1f5f9;
+            border-radius: 8px;
+            padding: 8px 12px;
+            gap: 8px;
+            width: 300px;
+        }
+
+        .search-input {
+            border: none;
+            background: none;
+            outline: none;
+            flex: 1;
+            font-size: 14px;
+        }
+
+        .notification-btn {
+            position: relative;
+            background: none;
+            border: none;
+            font-size: 20px;
+            color: #64748b;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 6px;
+        }
+
+        .notification-badge {
+            position: absolute;
+            top: 4px;
+            right: 4px;
+            background: #ef4444;
+            color: white;
+            font-size: 10px;
+            padding: 2px 6px;
+            border-radius: 10px;
+            min-width: 16px;
+            text-align: center;
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            padding: 6px 12px;
+            border-radius: 8px;
+            transition: background 0.3s ease;
+        }
+
+        .user-profile:hover {
+            background: #f1f5f9;
+        }
+
+        .user-avatar {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, #1e348d, #1d4ed8);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        /* Dashboard Content */
+        .dashboard-content {
+            padding: 24px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 24px;
+            margin-bottom: 32px;
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: 4px;
+            padding: 24px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e2e8f0;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--accent-color);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .stat-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .stat-title {
+            font-size: 14px;
+            font-weight: 500;
+            color: #64748b;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .stat-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            color: white;
+            background: var(--accent-color);
+        }
+
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 10;
+            color: #1e293b;
+            margin-bottom: 8px;
+        }
+
+        .stat-change {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 14px;
+        }
+
+        .stat-change.positive {
+            color: #059669;
+        }
+
+        .stat-change.negative {
+            color: #dc2626;
+        }
+
+        /* Charts and Tables Section */
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin-bottom: 32px;
+        }
+
+        .chart-card, .activity-card {
+            background: white;
+            border-radius: 4px;
+            padding: 24px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e2e8f0;
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #1e293b;
+        }
+
+        .chart-placeholder {
+            height: 300px;
+            background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #64748b;
+            font-size: 14px;
+            border: 2px dashed #cbd5e1;
+        }
+
+        /* Activity Feed */
+        .activity-item {
+            display: flex;
+            gap: 12px;
+            padding: 16px 0;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        .activity-item:last-child {
+            border-bottom: none;
+        }
+
+        .activity-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #1e348d, #1d4ed8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .activity-content {
+            flex: 1;
+        }
+
+        .activity-text {
+            font-size: 14px;
+            margin-bottom: 4px;
+        }
+
+        .activity-time {
+            font-size: 12px;
+            color: #64748b;
+        }
+
+        /* Data Table */
+        .table-card {
+            background: white;
+            border-radius: 4px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e2e8f0;
+            overflow: hidden;
+        }
+
+        .table-header {
+            padding: 24px;
+            border-bottom: 1px solid #e2e8f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .table-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .btn {
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .btn-primary {
+            background: #1e348d;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #2563eb;
+        }
+
+        .btn-secondary {
+            background: #f1f5f9;
+            color: #64748b;
+        }
+
+        .btn-secondary:hover {
+            background: #e2e8f0;
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .data-table th {
+            background: #f8fafc;
+            padding: 16px;
+            text-align: left;
+            font-weight: 600;
+            color: #374151;
+            font-size: 14px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .data-table td {
+            padding: 16px;
+            border-bottom: 1px solid #f1f5f9;
+            font-size: 14px;
+        }
+
+        .data-table tbody tr:hover {
+            background: #f8fafc;
+        }
+
+        .status-badge {
+            padding: 4px 12px;
+            border-radius: 16px;
+            font-size: 12px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .status-active {
+            background: #d1fae5;
+            color: #059669;
+        }
+
+        .status-pending {
+            background: #fef3c7;
+            color: #d97706;
+        }
+
+        .status-inactive {
+            background: #fee2e2;
+            color: #dc2626;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.show {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            max-width: 500px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .modal-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #1e293b;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: #64748b;
+            cursor: pointer;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 14px;
+            font-weight: 500;
+            color: #374151;
+            margin-bottom: 6px;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            font-size: 14px;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #1e348d;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .sidebar {
+                transform: translateX(-100%);
+            }
+
+            .sidebar.open {
+                transform: translateX(0);
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
+
+            .search-box {
+                width: 200px;
+            }
+
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .table-header {
+                flex-direction: column;
+                gap: 16px;
+                align-items: flex-start;
+            }
+        }
+    </style>
+    <!-- Google Translate API -->
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+</head>
+<body>
+    <style>
+        .sidebar-logo {
+    display: flex;
+    justify-content: center; /* Centers horizontally */
+    align-items: center;     /* Centers vertically if needed */
+    padding: 10px;           /* Optional spacing */
+}
+
+.sidebar-logo img {
+    max-width: 200px;  /* Fixed size while keeping aspect ratio */
+    height: auto;
+    display: block;
+}
+
+    </style>
+    <div class="container">
+        <!-- Sidebar -->
+        <nav class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <a href="index.html" class="sidebar-logo">
+                    <img src="images/SCLDALOGOV3.png" alt="Sylvia">
+                </a>
+            </div>
+            <div class="nav-menu">
+                <div class="nav-item">
+                    <a href="#" class="nav-link active" data-page="dashboard">
+                        <span class="nav-icon"><i class="bi bi-speedometer"></i></span>
+                        <span class="nav-text">Dashboard</span>
+                    </a>
+                </div>
+                <div class="nav-item">
+                    <a href="#" class="nav-link" data-page="users">
+                        <span class="nav-icon"><i class="bi bi-people-fill"></i></span>
+                        <span class="nav-text">Clients</span>
+                    </a>
+                </div>
+                <div class="nav-item">
+                    <a href="#" class="nav-link" data-page="customers">
+                        <span class="nav-icon"><i class="bi bi-ui-checks"></i></span>
+                        <span class="nav-text">Projects</span>
+                    </a>
+                </div>
+                <div class="nav-item">
+                    <a href="#" class="nav-link" data-page="services">
+                        <span class="nav-icon"><i class="bi bi-file-earmark-ppt-fill"></i></span>
+                        <span class="nav-text">Products & Services</span>
+                    </a>
+                </div>
+                <div class="nav-item">
+                    <a href="#" class="nav-link" data-page="orders">
+                        <span class="nav-icon"><i class="bi bi-cash-coin"></i></span>
+                        <span class="nav-text">Finance</span>
+                    </a>
+                </div>
+                <div class="nav-item">
+                    <a href="#" class="nav-link" data-page="analytics">
+                        <span class="nav-icon"><i class="bi bi-calendar-check-fill"></i></span>
+                        <span class="nav-text">Calendar</span>
+                    </a>
+                </div>
+                <div class="nav-item">
+                    <a href="#" class="nav-link" data-page="settings">
+                        <span class="nav-icon"><i class="bi bi-archive-fill"></i></span>
+                        <span class="nav-text">Assets</span>
+                    </a>
+                </div>
+                <div class="nav-item">
+                    <a href="#" class="nav-link" data-page="reports">
+                        <span class="nav-icon"><i class="bi bi-gear-fill"></i></span>
+                        <span class="nav-text">Settings</span>
+                    </a>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Top Header -->
+            <header class="top-header">
+                <div class="header-left">
+                    <button class="menu-toggle" id="menuToggle">☰</button>
+                    <h1 class="page-title" id="pageTitle">Dashboard</h1>
+                </div>
+                <div class="header-right">
+                    <div class="search-box">
+                        <span><i class="bi bi-search"></i></span>
+                        <input type="text" class="search-input" placeholder="Search...">
+                    </div>
+                    <button class="notification-btn">
+                        <i class="bi bi-bell-fill"></i>
+                        <span class="notification-badge">3</span>
+                    </button>
+                    <div class="user-profile">
+                        <div class="user-avatar">SL</div>
+                        <span>Shinsa L</span>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Dashboard Content -->
+            <main class="dashboard-content" id="dashboardContent">
+                <!-- Stats Grid -->
+                <div class="stats-grid">
+                    <div class="stat-card" style="--accent-color: #1e348d;">
+                        <div class="stat-header">
+                            <span class="stat-title">Income Revenue</span>
+                            <div class="stat-icon"><i class="bi bi-cash-stack"></i></div>
+                        </div>
+                        <div class="stat-value">R 910,549,329</div>
+                        <div class="stat-change positive">
+                            <span>↗️</span>
+                            <span>+12% from last month</span>
+                        </div>
+                    </div>
+                    <div class="stat-card" style="--accent-color: #1e348d;">
+                        <div class="stat-header">
+                            <span class="stat-title">Pending Invoices</span>
+                            <div class="stat-icon"><i class="bi bi-receipt"></i></div>
+                        </div>
+                        <div class="stat-value">R 120,444,329</div>
+                        <div class="stat-change positive">
+                            <span>↗️</span>
+                            <span>+8% from last month</span>
+                        </div>
+                    </div>
+                    <div class="stat-card" style="--accent-color: #1e348d;">
+                        <div class="stat-header">
+                            <span class="stat-title">Active Projects</span>
+                            <div class="stat-icon"><i class="bi bi-ui-checks"></i></div>
+                        </div>
+                        <div class="stat-value">7</div>
+                        <div class="stat-change negative">
+                            <span>↘️</span>
+                            <span>-3% from last month</span>
+                        </div>
+                    </div>
+                    <div class="stat-card" style="--accent-color: #1e348d;">
+                        <div class="stat-header">
+                            <span class="stat-title">Total Clients</span>
+                            <div class="stat-icon"><i class="bi bi-people-fill"></i></div>
+                        </div>
+                        <div class="stat-value">2,229</div>
+                        <div class="stat-change positive">
+                            <span>↗️</span>
+                            <span>+0.5% from last month</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Charts and Activity -->
+                <div class="content-grid">
+                    <div class="chart-card">
+                        <div class="card-header">
+                            <h3 class="card-title">Revenue Overview</h3>
+                            <button class="btn btn-secondary">📥 Export</button>
+                        </div>
+                        <div class="chart-placeholder">
+                            Interactive Chart Would Go Here
+                            <br>
+                            (Revenue: $54,329 | Growth: +8%)
+                        </div>
+                    </div>
+                    <div class="activity-card">
+                        <div class="card-header">
+                            <h3 class="card-title">Recent Activity</h3>
+                        </div>
+                        <div class="activity-feed">
+                            <div class="activity-item">
+                                <div class="activity-avatar">JD</div>
+                                <div class="activity-content">
+                                    <div class="activity-text">John Doe completed order #1234</div>
+                                    <div class="activity-time">2 minutes ago</div>
+                                </div>
+                            </div>
+                            <div class="activity-item">
+                                <div class="activity-avatar">SM</div>
+                                <div class="activity-content">
+                                    <div class="activity-text">Sarah Miller updated customer profile</div>
+                                    <div class="activity-time">1 hour ago</div>
+                                </div>
+                            </div>
+                            <div class="activity-item">
+                                <div class="activity-avatar">MJ</div>
+                                <div class="activity-content">
+                                    <div class="activity-text">Mike Johnson created new report</div>
+                                    <div class="activity-time">3 hours ago</div>
+                                </div>
+                            </div>
+                            <div class="activity-item">
+                                <div class="activity-avatar">LB</div>
+                                <div class="activity-content">
+                                    <div class="activity-text">Lisa Brown processed refund</div>
+                                    <div class="activity-time">1 day ago</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Data Table -->
+                <div class="table-card">
+                    <div class="table-header">
+                        <h3 class="card-title">Recent Clients</h3>
+                        <div class="table-actions">
+                            <button class="btn btn-secondary">📥 Export</button>
+                            <button class="btn btn-primary" id="addCustomerBtn">+ Add Customer</button>
+                        </div>
+                    </div>
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Status</th>
+                                <th>Orders</th>
+                                <th>Total Spent</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Alice Johnson</td>
+                                <td>alice@example.com</td>
+                                <td><span class="status-badge status-active">Active</span></td>
+                                <td>12</td>
+                                <td>$1,234</td>
+                                <td>
+                                    <button class="btn btn-secondary">✏️ Edit</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Bob Smith</td>
+                                <td>bob@example.com</td>
+                                <td><span class="status-badge status-pending">Pending</span></td>
+                                <td>3</td>
+                                <td>$456</td>
+                                <td>
+                                    <button class="btn btn-secondary">✏️ Edit</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Carol Davis</td>
+                                <td>carol@example.com</td>
+                                <td><span class="status-badge status-active">Active</span></td>
+                                <td>8</td>
+                                <td>$890</td>
+                                <td>
+                                    <button class="btn btn-secondary">✏️ Edit</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>David Wilson</td>
+                                <td>david@example.com</td>
+                                <td><span class="status-badge status-inactive">Inactive</span></td>
+                                <td>1</td>
+                                <td>$123</td>
+                                <td>
+                                    <button class="btn btn-secondary">✏️ Edit</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal" id="customerModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Add New Customer</h3>
+                <button class="close-btn" id="closeModal">&times;</button>
+            </div>
+            <form id="customerForm">
+                <div class="form-group">
+                    <label class="form-label">Full Name</label>
+                    <input type="text" class="form-input" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Email Address</label>
+                    <input type="email" class="form-input" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Phone Number</label>
+                    <input type="tel" class="form-input">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Company</label>
+                    <input type="text" class="form-input">
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Create Customer</button>
+                    <button type="button" class="btn btn-secondary" id="cancelBtn">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Sample data for different pages
+        const pageData = {
+            dashboard: {
+                title: 'Dashboard',
+                content: `
+                    <!-- This is the current dashboard content -->
+                `
+            },
+            users: {
+                title: 'User Management',
+                content: `
+                    <div class="table-card">
+                        <div class="table-header">
+                            <h3 class="card-title">All Users</h3>
+                            <div class="table-actions">
+                                <button class="btn btn-secondary">📥 Export</button>
+                                <button class="btn btn-primary">+ Add User</button>
+                            </div>
+                        </div>
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>User ID</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Role</th>
+                                    <th>Status</th>
+                                    <th>Last Login</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>#001</td>
+                                    <td>John Doe</td>
+                                    <td>john@example.com</td>
+                                    <td>Admin</td>
+                                    <td><span class="status-badge status-active">Active</span></td>
+                                    <td>2 hours ago</td>
+                                    <td><button class="btn btn-secondary">✏️ Edit</button></td>
+                                </tr>
+                                <tr>
+                                    <td>#002</td>
+                                    <td>Jane Smith</td>
+                                    <td>jane@example.com</td>
+                                    <td>Manager</td>
+                                    <td><span class="status-badge status-active">Active</span></td>
+                                    <td>1 day ago</td>
+                                    <td><button class="btn btn-secondary">✏️ Edit</button></td>
+                                </tr>
+                                <tr>
+                                    <td>#003</td>
+                                    <td>Mike Johnson</td>
+                                    <td>mike@example.com</td>
+                                    <td>User</td>
+                                    <td><span class="status-badge status-pending">Pending</span></td>
+                                    <td>3 days ago</td>
+                                    <td><button class="btn btn-secondary">✏️ Edit</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                `
+            },
+            services: {
+                title: 'Products & Services',
+                content: `
+                    <div class="table-card">
+                        <div class="table-header">
+                            <h3 class="card-title">Manage Services & Plans</h3>
+                            <div class="table-actions">
+                                <button class="btn btn-primary" id="addServiceBtn">+ Add Service</button>
+                            </div>
+                        </div>
+                        <div id="servicesContainer" style="padding: 20px;">
+                            <p style="text-align: center; color: #64748b;">Loading services...</p>
+                        </div>
+                    </div>
+
+                    <!-- Service Edit Modal -->
+                    <div class="modal" id="serviceModal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:1000;align-items:center;justify-content:center;">
+                        <div style="background:white;border-radius:8px;padding:30px;max-width:700px;width:90%;max-height:90vh;overflow-y:auto;box-shadow:0 10px 40px rgba(0,0,0,0.2);">
+                            <h2 style="margin:0 0 20px 0;color:#1e293b;">Service Details</h2>
+                            <form id="serviceForm" style="display:flex;flex-direction:column;gap:16px;">
+                                <input type="hidden" id="serviceId" name="serviceId">
+                                
+                                <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+                                    <div>
+                                        <label style="display:block;font-weight:600;margin-bottom:6px;color:#334155;">Service Name *</label>
+                                        <input type="text" id="serviceName" name="serviceName" required style="width:100%;padding:8px 12px;border:1px solid #cbd5e1;border-radius:6px;font-size:14px;box-sizing:border-box;">
+                                    </div>
+                                    <div>
+                                        <label style="display:block;font-weight:600;margin-bottom:6px;color:#334155;">Price (ZAR) *</label>
+                                        <input type="number" id="servicePrice" name="servicePrice" required step="0.01" min="0" style="width:100%;padding:8px 12px;border:1px solid #cbd5e1;border-radius:6px;font-size:14px;box-sizing:border-box;">
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <label style="display:block;font-weight:600;margin-bottom:6px;color:#334155;">Billing Period</label>
+                                    <select id="billingPeriod" name="billingPeriod" style="width:100%;padding:8px 12px;border:1px solid #cbd5e1;border-radius:6px;font-size:14px;box-sizing:border-box;">
+                                        <option value="month">Month</option>
+                                        <option value="year">Year</option>
+                                        <option value="one-time">One-time</option>
+                                    </select>
+                                </div>
+
+                                <div>
+                                    <label style="display:block;font-weight:600;margin-bottom:6px;color:#334155;">Description</label>
+                                    <textarea id="serviceDescription" name="serviceDescription" rows="3" style="width:100%;padding:8px 12px;border:1px solid #cbd5e1;border-radius:6px;font-size:14px;box-sizing:border-box;font-family:inherit;"></textarea>
+                                </div>
+
+                                <div>
+                                    <label style="display:block;font-weight:600;margin-bottom:6px;color:#334155;">Image URL</label>
+                                    <input type="url" id="serviceImage" name="serviceImage" style="width:100%;padding:8px 12px;border:1px solid #cbd5e1;border-radius:6px;font-size:14px;box-sizing:border-box;">
+                                </div>
+
+                                <div>
+                                    <label style="display:block;font-weight:600;margin-bottom:6px;color:#334155;">Details URL</label>
+                                    <input type="url" id="serviceDetails" name="serviceDetails" style="width:100%;padding:8px 12px;border:1px solid #cbd5e1;border-radius:6px;font-size:14px;box-sizing:border-box;">
+                                </div>
+
+                                <div>
+                                    <label style="display:block;font-weight:600;margin-bottom:6px;color:#334155;">What You Get (Features) - One per line</label>
+                                    <textarea id="serviceFeatures" name="serviceFeatures" rows="4" placeholder="Feature 1&#10;Feature 2&#10;Feature 3" style="width:100%;padding:8px 12px;border:1px solid #cbd5e1;border-radius:6px;font-size:14px;box-sizing:border-box;font-family:monospace;"></textarea>
+                                </div>
+
+                                <div>
+                                    <label style="display:block;font-weight:600;margin-bottom:6px;color:#334155;">What Else You Should Know (Notes) - One per line</label>
+                                    <textarea id="serviceNotes" name="serviceNotes" rows="4" placeholder="Note 1&#10;Note 2&#10;Note 3" style="width:100%;padding:8px 12px;border:1px solid #cbd5e1;border-radius:6px;font-size:14px;box-sizing:border-box;font-family:monospace;"></textarea>
+                                </div>
+
+                                <div>
+                                    <label style="display:block;font-weight:600;margin-bottom:6px;color:#334155;">
+                                        <input type="checkbox" id="serviceActive" name="serviceActive" checked> Active
+                                    </label>
+                                </div>
+
+                                <div style="display:flex;gap:10px;margin-top:20px;">
+                                    <button type="submit" class="btn btn-primary" style="flex:1;">Save Service</button>
+                                    <button type="button" class="btn btn-secondary" id="closeServiceModal" style="flex:1;">Cancel</button>
+                                    <button type="button" class="btn btn-danger" id="deleteServiceBtn" style="flex:1;background:#dc2626;display:none;">Delete</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <style>
+                        .table-card {
+                            background: white;
+                            border-radius: 8px;
+                            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+                            border: 1px solid #e2e8f0;
+                            padding: 24px;
+                        }
+
+                        .table-header {
+                            display: flex;
+                            justify-content: space-between;
+                            align-items: center;
+                            margin-bottom: 24px;
+                            border-bottom: 1px solid #e2e8f0;
+                            padding-bottom: 16px;
+                        }
+
+                        .card-title {
+                            font-size: 1.25rem;
+                            font-weight: 600;
+                            color: #1e293b;
+                            margin: 0;
+                        }
+
+                        .table-actions {
+                            display: flex;
+                            gap: 12px;
+                        }
+
+                        .btn {
+                            padding: 10px 16px;
+                            border-radius: 6px;
+                            border: none;
+                            cursor: pointer;
+                            font-weight: 600;
+                            font-size: 14px;
+                            transition: all 0.2s ease;
+                        }
+
+                        .btn-primary {
+                            background: #1e348d;
+                            color: white;
+                        }
+
+                        .btn-primary:hover {
+                            background: #1a2d7a;
+                        }
+
+                        .btn-secondary {
+                            background: #f1f5f9;
+                            color: #334155;
+                        }
+
+                        .btn-secondary:hover {
+                            background: #e2e8f0;
+                        }
+
+                        .btn-danger {
+                            background: #dc2626;
+                            color: white;
+                        }
+
+                        .btn-danger:hover {
+                            background: #b91c1c;
+                        }
+
+                        .service-grid {
+                            display: grid;
+                            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+                            gap: 20px;
+                        }
+
+                        .service-item {
+                            background: white;
+                            border: 1px solid #e2e8f0;
+                            border-radius: 8px;
+                            padding: 16px;
+                            cursor: pointer;
+                            transition: all 0.3s ease;
+                        }
+
+                        .service-item:hover {
+                            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+                            transform: translateY(-2px);
+                        }
+
+                        .service-name {
+                            font-weight: 700;
+                            color: #1e293b;
+                            margin: 0 0 8px 0;
+                            font-size: 16px;
+                        }
+
+                        .service-price {
+                            font-weight: 700;
+                            color: #1e348d;
+                            font-size: 18px;
+                            margin: 0 0 8px 0;
+                        }
+
+                        .service-billing {
+                            font-size: 12px;
+                            color: #64748b;
+                            margin: 0 0 12px 0;
+                        }
+
+                        .service-status {
+                            display: inline-block;
+                            padding: 4px 8px;
+                            border-radius: 4px;
+                            font-size: 12px;
+                            font-weight: 600;
+                        }
+
+                        .status-active {
+                            background: #d1fae5;
+                            color: #065f46;
+                        }
+
+                        .status-inactive {
+                            background: #fee2e2;
+                            color: #991b1b;
+                        }
+
+                        .modal {
+                            animation: fadeIn 0.3s ease;
+                        }
+
+                        @keyframes fadeIn {
+                            from {
+                                opacity: 0;
+                            }
+                            to {
+                                opacity: 1;
+                            }
+                        }
+                    </style>
+
+                    <script>
+                        const API_URL = '../api';
+
+                        // Load services on page load
+                        function loadServices() {
+                            fetch(\`\${API_URL}/services.php\`)
+                                .then(r => r.json())
+                                .then(res => {
+                                    if (res.success && res.data) {
+                                        renderServices(res.data);
+                                    }
+                                })
+                                .catch(e => console.error('Error loading services:', e));
+                        }
+
+                        function renderServices(services) {
+                            const container = document.getElementById('servicesContainer');
+                            if (!services || services.length === 0) {
+                                container.innerHTML = '<p style="text-align: center; color: #64748b;">No services found. Click "Add Service" to create one.</p>';
+                                return;
+                            }
+
+                            let html = '<div class="service-grid">';
+                            services.forEach(svc => {
+                                const status = svc.is_active ? 'Active' : 'Inactive';
+                                const statusClass = svc.is_active ? 'status-active' : 'status-inactive';
+                                html += \`
+                                    <div class="service-item" onclick="editService(\${svc.id})">
+                                        <h3 class="service-name">\${svc.name || 'Unnamed'}</h3>
+                                        <div class="service-price">ZAR \${(svc.price_amount || 0).toFixed(2)}</div>
+                                        <div class="service-billing">/\${svc.billing_period || 'month'}</div>
+                                        <span class="service-status \${statusClass}">\${status}</span>
+                                    </div>
+                                \`;
+                            });
+                            html += '</div>';
+                            container.innerHTML = html;
+                        }
+
+                        function openServiceModal(serviceId = null) {
+                            const modal = document.getElementById('serviceModal');
+                            modal.style.display = 'flex';
+                            
+                            if (serviceId) {
+                                loadServiceData(serviceId);
+                            } else {
+                                document.getElementById('serviceForm').reset();
+                                document.getElementById('serviceId').value = '';
+                                document.getElementById('deleteServiceBtn').style.display = 'none';
+                            }
+                        }
+
+                        function closeServiceModal() {
+                            document.getElementById('serviceModal').style.display = 'none';
+                        }
+
+                        function loadServiceData(serviceId) {
+                            fetch(\`\${API_URL}/services.php?id=\${serviceId}\`)
+                                .then(r => r.json())
+                                .then(res => {
+                                    if (res.success && res.data) {
+                                        const svc = res.data;
+                                        document.getElementById('serviceId').value = svc.id;
+                                        document.getElementById('serviceName').value = svc.name || '';
+                                        document.getElementById('servicePrice').value = svc.price_amount || 0;
+                                        document.getElementById('billingPeriod').value = svc.billing_period || 'month';
+                                        document.getElementById('serviceDescription').value = svc.description || '';
+                                        document.getElementById('serviceImage').value = svc.image_url || '';
+                                        document.getElementById('serviceDetails').value = svc.details_url || '';
+                                        document.getElementById('serviceActive').checked = svc.is_active == 1;
+                                        
+                                        // Parse and display features and notes
+                                        let features = [];
+                                        let notes = [];
+                                        try {
+                                            if (svc.features) {
+                                                features = typeof svc.features === 'string' ? JSON.parse(svc.features) : svc.features;
+                                            }
+                                            if (svc.notes) {
+                                                notes = typeof svc.notes === 'string' ? JSON.parse(svc.notes) : svc.notes;
+                                            }
+                                        } catch(e) {
+                                            console.warn('Error parsing features/notes:', e);
+                                        }
+                                        
+                                        document.getElementById('serviceFeatures').value = Array.isArray(features) ? features.join('\\n') : '';
+                                        document.getElementById('serviceNotes').value = Array.isArray(notes) ? notes.join('\\n') : '';
+                                        
+                                        document.getElementById('deleteServiceBtn').style.display = 'block';
+                                    }
+                                })
+                                .catch(e => console.error('Error loading service:', e));
+                        }
+
+                        function editService(serviceId) {
+                            openServiceModal(serviceId);
+                        }
+
+                        function deleteService() {
+                            const serviceId = document.getElementById('serviceId').value;
+                            if (!serviceId || !confirm('Are you sure you want to delete this service?')) return;
+
+                            fetch(\`\${API_URL}/admin/services.php\`, {
+                                method: 'DELETE',
+                                headers: { 'Content-Type': 'application/json' },
+                                body: JSON.stringify({ id: serviceId })
+                            })
+                            .then(r => r.json())
+                            .then(res => {
+                                if (res.success) {
+                                    alert('Service deleted successfully');
+                                    closeServiceModal();
+                                    loadServices();
+                                } else {
+                                    alert('Error deleting service: ' + (res.error || 'Unknown error'));
+                                }
+                            })
+                            .catch(e => {
+                                console.error('Error:', e);
+                                alert('Error deleting service');
+                            });
+                        }
+
+                        document.getElementById('serviceForm').addEventListener('submit', function(e) {
+                            e.preventDefault();
+                            
+                            const features = document.getElementById('serviceFeatures').value
+                                .split('\\n')
+                                .map(f => f.trim())
+                                .filter(f => f);
+                            
+                            const notes = document.getElementById('serviceNotes').value
+                                .split('\\n')
+                                .map(n => n.trim())
+                                .filter(n => n);
+
+                            const data = {
+                                id: document.getElementById('serviceId').value || null,
+                                name: document.getElementById('serviceName').value,
+                                price_amount: parseFloat(document.getElementById('servicePrice').value),
+                                billing_period: document.getElementById('billingPeriod').value,
+                                description: document.getElementById('serviceDescription').value,
+                                image_url: document.getElementById('serviceImage').value,
+                                details_url: document.getElementById('serviceDetails').value,
+                                features: JSON.stringify(features),
+                                notes: JSON.stringify(notes),
+                                is_active: document.getElementById('serviceActive').checked ? 1 : 0
+                            };
+
+                            const method = data.id ? 'PUT' : 'POST';
+                            const url = \`\${API_URL}/admin/services.php\`;
+
+                            fetch(url, {
+                                method: method,
+                                headers: { 'Content-Type': 'application/json' },
+                                body: JSON.stringify(data)
+                            })
+                            .then(r => r.json())
+                            .then(res => {
+                                if (res.success) {
+                                    alert(data.id ? 'Service updated successfully' : 'Service created successfully');
+                                    closeServiceModal();
+                                    loadServices();
+                                } else {
+                                    alert('Error saving service: ' + (res.error || 'Unknown error'));
+                                }
+                            })
+                            .catch(e => {
+                                console.error('Error:', e);
+                                alert('Error saving service');
+                            });
+                        });
+
+                        document.getElementById('addServiceBtn').addEventListener('click', function() {
+                            openServiceModal();
+                        });
+
+                        document.getElementById('closeServiceModal').addEventListener('click', closeServiceModal);
+                        document.getElementById('deleteServiceBtn').addEventListener('click', deleteService);
+
+                        // Load services when this page is displayed
+                        setTimeout(() => loadServices(), 100);
+                    </script>
+                `
+            }
+        };
+
+        // Navigation functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const navItems = document.querySelectorAll('.nav-item');
+            const mainContent = document.querySelector('.main-content');
+            const pageTitle = document.querySelector('.page-title');
+
+            navItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    const page = this.getAttribute('data-page');
+                    if (pageData[page]) {
+                        pageTitle.textContent = pageData[page].title;
+                        mainContent.innerHTML = pageData[page].content;
+                    }
+                });
+            });
+        });
+    </script>
+    <!-- Language Translator Widget Styles -->
+    <style>
+        .translator-widget {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1001;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .translator-button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+            transition: all 0.3s ease;
+            font-weight: 600;
+            font-size: 14px;
+            border: none;
+            outline: none;
+        }
+
+        .translator-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+        }
+
+        .translator-button i {
+            font-size: 16px;
+        }
+
+        .translator-dropdown {
+            position: absolute;
+            top: 60px;
+            right: 0;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+            min-width: 280px;
+            max-height: 400px;
+            overflow: hidden;
+            transform: scale(0) translateY(-20px);
+            opacity: 0;
+            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .translator-dropdown.active {
+            transform: scale(1) translateY(0);
+            opacity: 1;
+        }
+
+        .translator-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .translator-header h4 {
+            margin: 0;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .close-translator {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            padding: 5px;
+            border-radius: 50%;
+            transition: background 0.2s;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .close-translator:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Google Translate Element Styling */
+        #google_translate_element {
+            padding: 15px 20px;
+        }
+
+        .goog-te-gadget {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+            font-size: 14px !important;
+        }
+
+        .goog-te-gadget-simple {
+            background: transparent !important;
+            border: none !important;
+            padding: 0 !important;
+        }
+
+        .goog-te-gadget-simple .goog-te-menu-value {
+            color: #333 !important;
+            font-size: 14px !important;
+            font-weight: 500 !important;
+        }
+
+        .goog-te-gadget-simple .goog-te-menu-value span:first-child {
+            color: #667eea !important;
+            font-weight: 600 !important;
+        }
+
+        .goog-te-gadget-simple .goog-te-menu-value span:last-child {
+            color: #666 !important;
+        }
+
+        .goog-te-gadget-simple .goog-te-menu-value:before {
+            content: "🌐 " !important;
+            margin-right: 5px !important;
+        }
+
+        /* Hide Google Translate banner */
+        .goog-te-banner-frame {
+            display: none !important;
+        }
+
+        body {
+            top: 0 !important;
+        }
+
+        /* Style the dropdown arrow */
+        .goog-te-gadget-simple .goog-te-menu-value:after {
+            content: " ▼" !important;
+            color: #667eea !important;
+            font-size: 12px !important;
+        }
+
+        .translator-footer {
+            padding: 15px 20px;
+            background: #f8f9fa;
+            display: flex;
+            justify-content: center;
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .reset-btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 600;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+            color: white;
+        }
+
+        .reset-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(255, 107, 107, 0.4);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .translator-widget {
+                top: 15px;
+                right: 15px;
+            }
+
+            .translator-button {
+                padding: 10px 16px;
+                font-size: 13px;
+            }
+
+            .translator-dropdown {
+                min-width: 260px;
+                right: -10px;
+            }
+
+            .reset-btn {
+                padding: 8px 16px;
+                font-size: 11px;
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .translator-widget {
+                top: 10px;
+                right: 10px;
+            }
+
+            .translator-button {
+                padding: 8px 12px;
+                font-size: 12px;
+            }
+
+            .translator-button span {
+                display: none;
+            }
+
+            .translator-dropdown {
+                min-width: 240px;
+                right: -20px;
+            }
+        }
+    </style>
+
+    <!-- Language Translator Widget -->
+    <div class="translator-widget">
+        <div class="translator-button" id="translatorBtn">
+            <i class="fa-solid fa-language"></i>
+            <span>Translate</span>
+        </div>
+        
+        <div class="translator-dropdown" id="translatorDropdown">
+            <div class="translator-header">
+                <h4>Choose Language</h4>
+                <button class="close-translator" id="closeTranslator">
+                    <i class="fa-solid fa-times"></i>
+                </button>
+            </div>
+            
+            <!-- Google Translate Element -->
+            <div id="google_translate_element"></div>
+            
+            <div class="translator-footer">
+                <button class="reset-btn" id="resetBtn">
+                    <i class="fa-solid fa-undo"></i>
+                    Reset to English
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Google Translate Widget JavaScript -->
+    <script>
+        // Google Translate Element Initialization
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'en',
+                includedLanguages: 'en,es,fr,de,it,pt,ru,zh,ja,ko,ar,hi',
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+                autoDisplay: false
+            }, 'google_translate_element');
+        }
+
+        // Simple Translator Widget Controller
+        class SimpleTranslator {
+            constructor() {
+                this.isOpen = false;
+                this.init();
+            }
+
+            init() {
+                this.translatorBtn = document.getElementById('translatorBtn');
+                this.translatorDropdown = document.getElementById('translatorDropdown');
+                this.closeTranslator = document.getElementById('closeTranslator');
+                this.resetBtn = document.getElementById('resetBtn');
+
+                this.bindEvents();
+            }
+
+            bindEvents() {
+                // Toggle dropdown
+                this.translatorBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    this.toggleDropdown();
+                });
+
+                // Close dropdown
+                this.closeTranslator.addEventListener('click', () => {
+                    this.closeDropdown();
+                });
+
+                // Reset button
+                this.resetBtn.addEventListener('click', () => {
+                    this.resetTranslation();
+                });
+
+                // Close dropdown when clicking outside
+                document.addEventListener('click', (e) => {
+                    if (!e.target.closest('.translator-widget') && this.isOpen) {
+                        this.closeDropdown();
+                    }
+                });
+
+                // Keyboard navigation
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === 'Escape' && this.isOpen) {
+                        this.closeDropdown();
+                    }
+                });
+            }
+
+            toggleDropdown() {
+                if (this.isOpen) {
+                    this.closeDropdown();
+                } else {
+                    this.openDropdown();
+                }
+            }
+
+            openDropdown() {
+                this.translatorDropdown.classList.add('active');
+                this.isOpen = true;
+            }
+
+            closeDropdown() {
+                this.translatorDropdown.classList.remove('active');
+                this.isOpen = false;
+            }
+
+            resetTranslation() {
+                // Reset Google Translate to English
+                if (window.google && window.google.translate) {
+                    const translateElement = document.querySelector('.goog-te-combo');
+                    if (translateElement) {
+                        translateElement.selectedIndex = 0;
+                        translateElement.dispatchEvent(new Event('change'));
+                    }
+                }
+
+                // Remove Google Translate banner
+                const banner = document.querySelector('.goog-te-banner-frame');
+                if (banner) {
+                    banner.remove();
+                }
+
+                // Reset body top position
+                document.body.style.top = '0px';
+
+                this.showNotification('Translation reset to English');
+            }
+
+            showNotification(message) {
+                // Create notification element
+                const notification = document.createElement('div');
+                notification.style.cssText = `
+                    position: fixed;
+                    top: 80px;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                    color: white;
+                    padding: 12px 24px;
+                    border-radius: 25px;
+                    font-size: 14px;
+                    font-weight: 600;
+                    z-index: 10000;
+                    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+                    animation: slideDown 0.3s ease;
+                `;
+                notification.textContent = message;
+                document.body.appendChild(notification);
+
+                // Remove notification after 3 seconds
+                setTimeout(() => {
+                    notification.style.animation = 'slideUp 0.3s ease';
+                    setTimeout(() => notification.remove(), 300);
+                }, 3000);
+            }
+        }
+
+        // Initialize the translator when DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            new SimpleTranslator();
+        });
+
+        // Add CSS animations for notifications
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideDown {
+                from {
+                    opacity: 0;
+                    transform: translateX(-50%) translateY(-20px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateX(-50%) translateY(0);
+                }
+            }
+            
+            @keyframes slideUp {
+                from {
+                    opacity: 1;
+                    transform: translateX(-50%) translateY(0);
+                }
+                to {
+                    opacity: 0;
+                    transform: translateX(-50%) translateY(-20px);
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+
+</body>
+</html>

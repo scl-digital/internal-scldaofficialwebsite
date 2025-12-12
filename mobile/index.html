@@ -1,0 +1,297 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+  <title>SCL — Mobile</title>
+  <meta name="description" content="Software Creative Labs — Build. Ship. Grow." />
+  <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+      body{font-family:'Rajdhani',system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;font-weight:400}
+    </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="animate-in">
+     <div class="brand">
+    <img src="/images/SCL_DA_preloader_logo.png" alt="SCL Logo" class="brand-logo">
+</div>
+
+<style>
+  .brand {
+    display: flex;
+    align-items: center;
+}
+
+.brand-logo {
+    width: 120px;   /* adjust size */
+    height: auto;   /* keeps proportions */
+}
+
+</style>
+
+      <a href="about.html" style="font-size:14px;font-weight:600;color:var(--text-muted)">About</a>
+    </header>
+
+    <section class="hero animate-in delay-1">
+      <h1>SCL Digital Agency</h1>
+      <p>softwarecreativelabs.com</p>
+      <div style="position:absolute; right:20px; bottom:20px; width:48px; height:48px; background:var(--primary-gradient); border-radius:12px; display:flex; align-items:center; justify-content:center; box-shadow:0 4px 12px rgba(37,99,235,0.3)">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </div>
+    </section>
+
+    <!-- Mobile banner: dynamically loaded -->
+    <section class="section animate-in delay-2" style="margin-bottom:24px">
+      <div id="mobileBanner" style="position:relative;overflow:hidden;border-radius:4px;background:#000;min-height:180px;box-shadow:var(--glass-shadow)"> 
+        <div id="mobileBannerSlides" style="display:flex;transition:transform 500ms cubic-bezier(0.25, 1, 0.5, 1);will-change:transform;height:100%;">
+          <!-- slides injected here -->
+          <div style="min-width:100%;padding:20px;display:flex;align-items:center;justify-content:center;height:180px">
+            <div style="text-align:center;opacity:.7">
+              <div style="font-weight:600;font-size:14px;color:white">Loading updates...</div>
+            </div>
+          </div>
+        </div>
+        
+        <div style="position:absolute; bottom:12px; left:0; right:0; display:flex; justify-content:center; gap:6px" id="mobileBannerDots"></div>
+      </div>
+    </section>
+
+    <div class="quick-grid animate-in delay-3">
+      <a class="card" href="services-platform/our_services.html">
+        <div class="card-icon" style="background: linear-gradient(135deg, #3b82f6, #1d4ed8)">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v6M6 12h12M4 20h16" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div>
+          <div class="card-title">Services</div>
+          <div class="card-subtitle">What we do</div>
+        </div>
+      </a>
+      
+      <a class="card" href="applications/products.html">
+        <div class="card-icon" style="background: linear-gradient(135deg, #f97316, #ea580c)">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>
+        </div>
+        <div>
+          <div class="card-title">Products</div>
+          <div class="card-subtitle">Apps & tools</div>
+        </div>
+      </a>
+
+         <a class="card" href="applications/products.html">
+        <div class="card-icon" style="background: linear-gradient(135deg, #f97316, #ea580c)">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>
+        </div>
+        <div>
+          <div class="card-title">Our Plans</div>
+          <div class="card-subtitle">Our Plans</div>
+        </div>
+      </a>
+
+
+      <a class="card" href="applications/products.html">
+        <div class="card-icon" style="background: linear-gradient(135deg, #f97316, #ea580c)">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>
+        </div>
+        <div>
+          <div class="card-title">Client Portal</div>
+          <div class="card-subtitle">Client Portal</div>
+        </div>
+      </a>
+
+      <a class="card" href="case_studies.html">
+        <div class="card-icon" style="background: linear-gradient(135deg, #10b981, #059669)">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7h18M6 11h12M9 15h6" stroke-linecap="round"/></svg>
+        </div>
+        <div>
+          <div class="card-title">Case Studies</div>
+          <div class="card-subtitle">Success stories</div>
+        </div>
+      </a>
+
+      <a class="card" href="events-platform/eventspage.html">
+        <div class="card-icon" style="background: linear-gradient(135deg, #8b5cf6, #7c3aed)">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4" stroke-linecap="round"/></svg>
+        </div>
+        <div>
+          <div class="card-title">Events</div>
+          <div class="card-subtitle">Upcoming</div>
+        </div>
+      </a>
+    </div>
+
+    <section class="section animate-in delay-4">
+      <div class="section-header">
+        <h2>Our Expertise</h2>
+      </div>
+      <div class="expertise-grid">
+        <div class="expertise-item">
+          <div class="e-icon" style="background: linear-gradient(135deg, #3b82f6, #2563eb)">WEB</div>
+          <div class="e-content">
+            <div class="e-title">Website Development</div>
+            <div class="e-desc">Mobile-first interfaces, accessible patterns, and design systems.</div>
+          </div>
+        </div>
+        <div class="expertise-item">
+          <div class="e-icon" style="background: linear-gradient(135deg, #f472b6, #db2777)">Ecom</div>
+          <div class="e-content">
+            <div class="e-title">E-Commerce Development</div>
+            <div class="e-desc">Cross-platform code, performant builds, and CI/CD pipelines.</div>
+          </div>
+        </div>
+        <div class="expertise-item">
+          <div class="e-icon" style="background: linear-gradient(135deg, #10b981, #059669)">STR</div>
+          <div class="e-content">
+            <div class="e-title">Custom Platform Development</div>
+            <div class="e-desc">Roadmaps, discovery, and product-market fit research.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section animate-in delay-4">
+      <div class="section-header">
+        <h2>Success Stories</h2>
+        <a href="case_studies.html" class="section-link">View All</a>
+      </div>
+      <div class="portfolio-scroll">
+        <a href="case_studies.html" class="portfolio-card">
+          <img src="../images/Our Clients/placeholder-1.jpg" alt="Retail App" class="portfolio-img">
+          <div class="portfolio-content">
+            <div class="portfolio-title">Retail App Redesign</div>
+            <div class="portfolio-desc">40% uplift in conversion after simplifying mobile flows.</div>
+          </div>
+        </a>
+        <a href="case_studies.html" class="portfolio-card">
+          <img src="../images/Our Clients/placeholder-2.jpg" alt="B2B Portal" class="portfolio-img">
+          <div class="portfolio-content">
+            <div class="portfolio-title">B2B Component Library</div>
+            <div class="portfolio-desc">Reduced engineering time with a reusable design system.</div>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <section class="section animate-in delay-4">
+      <div class="section-header">
+        <h2>Our Process</h2>
+      </div>
+      <div class="process-steps">
+        <div class="process-step">
+          <div class="step-dot"></div>
+          <div class="step-title">Discover</div>
+          <div class="step-desc">User research, workshops, and goal alignment.</div>
+        </div>
+        <div class="process-step">
+          <div class="step-dot"></div>
+          <div class="step-title">Design</div>
+          <div class="step-desc">Prototypes, motion, and accessible UI patterns.</div>
+        </div>
+        <div class="process-step">
+          <div class="step-dot"></div>
+          <div class="step-title">Build</div>
+          <div class="step-desc">Ship iterative releases with telemetry and tests.</div>
+        </div>
+        <div class="process-step">
+          <div class="step-dot"></div>
+          <div class="step-title">Launch</div>
+          <div class="step-desc">Measure, optimize, and scale the product.</div>
+        </div>
+      </div>
+    </section>
+
+    <div class="cta-box animate-in delay-4">
+      <h2 style="font-size:22px; margin-bottom:8px; color:white">Ready to start?</h2>
+      <p style="color:var(--text-muted); margin-bottom:20px">Let's build something amazing together.</p>
+      <a href="sclda-application-form.html" class="btn-primary">Get a Quote</a>
+      <a href="contactus.html" class="btn-secondary">Contact Us</a>
+    </div>
+
+  </div>
+
+  <nav class="bottom-nav">
+    <a href="index.html" class="bn-item active">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" stroke-linecap="round" stroke-linejoin="round"/><polyline points="9 22 9 12 15 12 15 22" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span>Home</span>
+    </a>
+    <a href="services-platform/our_services.html" class="bn-item">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640"><!--!Font Awesome Free v7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path fill="#ffffff" d="M296.5 69.2C311.4 62.3 328.6 62.3 343.5 69.2L562.1 170.2C570.6 174.1 576 182.6 576 192C576 201.4 570.6 209.9 562.1 213.8L343.5 314.8C328.6 321.7 311.4 321.7 296.5 314.8L77.9 213.8C69.4 209.8 64 201.3 64 192C64 182.7 69.4 174.1 77.9 170.2L296.5 69.2zM112.1 282.4L276.4 358.3C304.1 371.1 336 371.1 363.7 358.3L528 282.4L562.1 298.2C570.6 302.1 576 310.6 576 320C576 329.4 570.6 337.9 562.1 341.8L343.5 442.8C328.6 449.7 311.4 449.7 296.5 442.8L77.9 341.8C69.4 337.8 64 329.3 64 320C64 310.7 69.4 302.1 77.9 298.2L112 282.4zM77.9 426.2L112 410.4L276.3 486.3C304 499.1 335.9 499.1 363.6 486.3L527.9 410.4L562 426.2C570.5 430.1 575.9 438.6 575.9 448C575.9 457.4 570.5 465.9 562 469.8L343.4 570.8C328.5 577.7 311.3 577.7 296.4 570.8L77.9 469.8C69.4 465.8 64 457.3 64 448C64 438.7 69.4 430.1 77.9 426.2z"/></svg>
+      <span>Pricing</span>
+    </a>
+    <a href="applications/products.html" class="bn-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="2" y="3" width="20" height="14" rx="2" ry="2" stroke-linecap="round" stroke-linejoin="round"/><line x1="8" y1="21" x2="16" y2="21" stroke-linecap="round" stroke-linejoin="round"/><line x1="12" y1="17" x2="12" y2="21" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span>Products</span>
+    </a>
+    <a href="events-platform/eventspage.html" class="bn-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="4" width="18" height="18" rx="2" ry="2" stroke-linecap="round" stroke-linejoin="round"/><line x1="16" y1="2" x2="16" y2="6" stroke-linecap="round" stroke-linejoin="round"/><line x1="8" y1="2" x2="8" y2="6" stroke-linecap="round" stroke-linejoin="round"/><line x1="3" y1="10" x2="21" y2="10" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span>Events</span>
+    </a>
+  </nav>
+
+<script>
+// Mobile banner loader
+(function(){
+  const api = 'api/banners_public.php';
+  const container = document.getElementById('mobileBannerSlides');
+  const dotsWrap = document.getElementById('mobileBannerDots');
+  let slides = [];
+  let idx = 0;
+  let autoTimer = null;
+
+  function sanitize(str){ return String(str||'').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+  function renderSlides(banners){
+    if(!Array.isArray(banners) || banners.length===0){
+      banners = [{title:'Build Beyond Limits.',subtitle:'Web Development',description:'From sleek websites to powerful platforms.',image_url:'../images/Office2.webp',button_text:'Start',button_link:'about.html'}];
+    }
+
+    slides = banners.map(b=>({
+      title: sanitize(b.title),
+      subtitle: sanitize(b.subtitle),
+      description: sanitize(b.description),
+      image: b.image_url || '../images/Office2.webp',
+      button_text: sanitize(b.button_text),
+      button_link: b.button_link || '#'
+    }));
+
+    container.innerHTML = slides.map(s=>`
+      <div style="min-width:100%;box-sizing:border-box;position:relative;display:flex;align-items:flex-end;height:100%;">
+        <div style="position:absolute;inset:0;background-size:cover;background-position:center;background-image:url('${s.image}');filter:brightness(.6);"></div>
+        <div style="position:relative;padding:20px;color:#fff;width:100%;z-index:2">
+          ${s.subtitle?`<div style="font-size:11px;text-transform:uppercase;letter-spacing:1px;opacity:.9;margin-bottom:4px;font-weight:600">${s.subtitle}</div>`:''}
+          <div style="font-weight:800;font-size:22px;line-height:1.1;margin-bottom:6px;text-shadow:0 2px 10px rgba(0,0,0,0.3)">${s.title}</div>
+          ${s.button_text?`<a href="${s.button_link}" style="display:inline-block;margin-top:8px;padding:6px 12px;background:rgba(255,255,255,0.2);backdrop-filter:blur(4px);color:#fff;border-radius:8px;text-decoration:none;font-weight:600;font-size:12px;border:1px solid rgba(255,255,255,0.3)">${s.button_text}</a>`:''}
+        </div>
+      </div>
+    `).join('');
+
+    dotsWrap.innerHTML = slides.map((_,i)=>`<div style="width:6px;height:6px;border-radius:50%;background:${i===0?'#fff':'rgba(255,255,255,0.4)'};transition:all 0.3s"></div>`).join('');
+    
+    startAuto();
+  }
+
+  function show(i){ 
+    idx = i; 
+    container.style.transform = `translateX(${-i*100}%)`; 
+    Array.from(dotsWrap.children).forEach((d,ii)=> d.style.background = ii===idx? '#fff':'rgba(255,255,255,0.4)'); 
+  }
+  
+  function startAuto(){ 
+    if(autoTimer) clearInterval(autoTimer);
+    autoTimer = setInterval(()=>{ show((idx+1)%slides.length); }, 5000); 
+  }
+
+  // fetch banners
+  fetch(api, {cache:'no-store'}).then(r=>r.json()).then(json=>{
+    if(json && json.success && Array.isArray(json.data)){
+      renderSlides(json.data);
+    } else {
+      renderSlides([]);
+    }
+  }).catch(err=>{ console.error('Banner load error',err); renderSlides([]); });
+
+})();
+</script>
+</body>
+</html>

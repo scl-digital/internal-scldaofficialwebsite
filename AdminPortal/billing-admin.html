@@ -1,0 +1,2783 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Billing Admin Dashboard - SCL Digital</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    <style>
+        @font-face {
+            font-family: scldafont;
+            src: url(./fonts/Rajdhani-Medium.ttf);
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
+        
+        body { 
+            font-family: scldafont;
+            background: #f8fafc; 
+        }
+        
+        .sidebar { 
+            min-height: 100vh; 
+            background: linear-gradient(135deg, #1e348d, #2563eb);
+            color: #fff; 
+            padding: 2rem 1rem; 
+        }
+        
+        .sidebar .nav-link { 
+            color: #cbd5e1; 
+            margin-bottom: 0.5rem; 
+            border-radius: 8px; 
+            padding: 12px 16px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .sidebar .nav-link.active, .sidebar .nav-link:hover { 
+            background: rgba(255,255,255,0.15); 
+            color: #fff; 
+        }
+        
+        .stat-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            border-left: 4px solid var(--accent-color);
+            transition: all 0.3s ease;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+        }
+        
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #1e293b;
+        }
+        
+        .stat-label {
+            color: #64748b;
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #1e348d, #2563eb);
+            border: none;
+            border-radius: 8px;
+        }
+        
+        .status-badge {
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        
+        .status-paid { background: #d1fae5; color: #059669; }
+        .status-pending { background: #fef3c7; color: #d97706; }
+        .status-overdue { background: #fee2e2; color: #dc2626; }
+    </style>
+    <!-- Google Translate API -->
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    <!-- Project Manager CSS -->
+    <link rel="stylesheet" href="css/project-manager.css">
+    <style>
+        /* Toast Notifications */
+        #toastContainer {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 9999;
+            max-width: 400px;
+        }
+        
+        /* Project Manager */
+        .project-manager {
+            padding: 20px 0;
+        }
+        
+        .project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #e5e7eb;
+        }
+        
+        .project-controls {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        
+        .project-table tbody tr:hover {
+            background-color: #f9fafb;
+        }
+        
+        .activity-item {
+            padding: 8px;
+            border-left: 3px solid #3B82F6;
+            margin-bottom: 8px;
+            background-color: #f9fafb;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <script>
+        (function(){
+            try {
+                const raw = localStorage.getItem('scl_admin');
+                const data = raw ? JSON.parse(raw) : null;
+                if (!data || (data.role||'') !== 'admin') {
+                    window.location.replace('admin-login.html');
+                }
+            } catch (e) {
+                window.location.replace('admin-login.html');
+            }
+        })();
+        function sclLogout(){
+            try { localStorage.removeItem('scl_admin'); } catch(e){}
+            window.location.href = 'admin-login.html';
+        }
+    </script>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <nav class="col-md-2 d-none d-md-block sidebar">
+                <div class="text-center mb-4">
+                    <img src="SCLDALOGOV3.png" alt="SCL DA" style="max-width: 120px;">
+                </div>
+                <div class="nav flex-column">
+                    <a class="nav-link active" href="#" onclick="loadTab('dashboard')">
+                        <i class="bi bi-speedometer2"></i> Dashboard
+                    </a>
+                    <a class="nav-link" href="#" onclick="loadTab('clients')">
+                        <i class="bi bi-people"></i> Client Management
+                    </a>
+                    <a class="nav-link" href="#" onclick="loadTab('projects')">
+                        <i class="bi bi-kanban"></i> Project Management
+                    </a>
+                    <a class="nav-link" href="#" onclick="loadTab('invoices')">
+                        <i class="bi bi-receipt"></i> Invoice Management
+                    </a>
+                    <a class="nav-link" href="#" onclick="loadTab('payments')">
+                        <i class="bi bi-credit-card"></i> Payment Tracking
+                    </a>
+                    <a class="nav-link" href="#" onclick="loadTab('automation')">
+                        <i class="bi bi-gear"></i> Billing Automation
+                    </a>
+                    <a class="nav-link" href="#" onclick="loadTab('reports')">
+                        <i class="bi bi-graph-up"></i> Financial Reports
+                    </a>
+                    <a class="nav-link" href="#" onclick="loadTab('events')">
+                        <i class="bi bi-calendar-event"></i> Event Management
+                    </a>
+                    <a class="nav-link" href="#" onclick="loadTab('services')">
+                        <i class="bi bi-grid"></i> Services Management
+                    </a>
+                    <a class="nav-link" href="#" onclick="loadTab('products')">
+                        <i class="bi bi-bag"></i> App Store Products
+                    </a>
+                    <a class="nav-link" href="#" onclick="loadTab('bulkemail')">
+                        <i class="bi bi-envelope-paper"></i> Bulk Email Sender
+                    </a>
+                    <a class="nav-link" href="#" onclick="loadTab('banners')">
+                        <i class="bi bi-image"></i> Banner Management
+                    </a>
+                    <a class="nav-link" href="#" onclick="loadTab('domains')">
+                        <i class="bi bi-globe"></i> Domain Management
+                    </a>
+                    <a class="nav-link" href="#" onclick="loadTab('settings')">
+                        <i class="bi bi-gear-fill"></i> Company Settings
+                    </a>
+                </div>
+            </nav>
+
+            <!-- Main Content -->
+            <main class="col-md-10 ms-sm-auto">
+                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                    <h1 class="h2" id="pageTitle">Billing & Payment Dashboard</h1>
+                    <div class="btn-toolbar mb-2 mb-md-0">
+                        <div class="btn-group me-2">
+                            <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown">
+                                <i class="bi bi-bell"></i> Notifications
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#"><i class="bi bi-exclamation-triangle text-warning"></i> 3 Overdue invoices</a></li>
+                                <li><a class="dropdown-item" href="#"><i class="bi bi-credit-card text-success"></i> New payment received</a></li>
+                            </ul>
+                        </div>
+                        <button type="button" class="btn btn-sm btn-primary" onclick="showQuickActions()">
+                            <i class="bi bi-lightning"></i> Quick Actions
+                        </button>
+                        <button type="button" class="btn btn-sm btn-outline-danger ms-2" onclick="sclLogout()">
+                            <i class="bi bi-box-arrow-right"></i> Logout
+                        </button>
+                    </div>
+                </div>
+
+                <div id="mainContent">
+                    <!-- Dashboard Stats -->
+                    <div class="row mb-4">
+                        <div class="col-md-3 mb-3">
+                            <div class="stat-card" style="--accent-color: #059669;">
+                                <div class="stat-value">R 922,847,329</div>
+                                <div class="stat-label">Total Revenue</div>
+                                <small class="text-success"><i class="bi bi-arrow-up"></i> +12.5% from last month</small>
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <div class="stat-card" style="--accent-color: #d97706;">
+                                <div class="stat-value">R 456,890</div>
+                                <div class="stat-label">Pending Invoices</div>
+                                <small class="text-warning"><i class="bi bi-clock"></i> 23 pending payments</small>
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <div class="stat-card" style="--accent-color: #dc2626;">
+                                <div class="stat-value">R 89,450</div>
+                                <div class="stat-label">Overdue Amount</div>
+                                <small class="text-danger"><i class="bi bi-exclamation-triangle"></i> 5 overdue invoices</small>
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <div class="stat-card" style="--accent-color: #1e348d;">
+                                <div class="stat-value">127</div>
+                                <div class="stat-label">Active Clients</div>
+                                <small class="text-primary"><i class="bi bi-people"></i> +8 new this month</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Quick Actions Row -->
+                    <div class="row mb-4">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5><i class="bi bi-lightning-charge"></i> Quick Actions</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-2 mb-2">
+                                            <button class="btn btn-outline-primary w-100" onclick="createInvoice()">
+                                                <i class="bi bi-plus-circle"></i><br>Create Invoice
+                                            </button>
+                                        </div>
+                                        <div class="col-md-2 mb-2">
+                                            <button class="btn btn-outline-success w-100" onclick="addClient()">
+                                                <i class="bi bi-person-plus"></i><br>Add Client
+                                            </button>
+                                        </div>
+                                        <div class="col-md-2 mb-2">
+                                            <button class="btn btn-outline-warning w-100" onclick="sendReminders()">
+                                                <i class="bi bi-envelope"></i><br>Send Reminders
+                                            </button>
+                                        </div>
+                                        <div class="col-md-2 mb-2">
+                                            <button class="btn btn-outline-info w-100" onclick="runAutomation()">
+                                                <i class="bi bi-gear"></i><br>Run Automation
+                                            </button>
+                                        </div>
+                                        <div class="col-md-2 mb-2">
+                                            <button class="btn btn-outline-secondary w-100" onclick="exportReports()">
+                                                <i class="bi bi-download"></i><br>Export Reports
+                                            </button>
+                                        </div>
+                                        <div class="col-md-2 mb-2">
+                                            <button class="btn btn-outline-dark w-100" onclick="viewSettings()">
+                                                <i class="bi bi-sliders"></i><br>Settings
+                                            </button>
+                                        </div>
+                                        <div class="col-md-2 mb-2">
+                                            <button class="btn btn-outline-primary w-100" onclick="loadTab('bulkemail')">
+                                                <i class="bi bi-envelope-paper"></i><br>Bulk Email
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Recent Activity Table -->
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-header d-flex justify-content-between align-items-center">
+                                    <h5><i class="bi bi-clock-history"></i> Recent Invoices</h5>
+                                    <button class="btn btn-sm btn-primary" onclick="loadTab('invoices')">View All</button>
+                                </div>
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>Invoice #</th>
+                                                    <th>Client</th>
+                                                    <th>Amount</th>
+                                                    <th>Status</th>
+                                                    <th>Due Date</th>
+                                                    <th>Actions</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td><strong>INV-2024-001</strong></td>
+                                                    <td>Acme Corporation</td>
+                                                    <td>R 15,000.00</td>
+                                                    <td><span class="status-badge status-paid">Paid</span></td>
+                                                    <td>2024-09-15</td>
+                                                    <td>
+                                                        <button class="btn btn-sm btn-outline-primary">View</button>
+                                                        <button class="btn btn-sm btn-outline-secondary">PDF</button>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>INV-2024-002</strong></td>
+                                                    <td>Tech Solutions Ltd</td>
+                                                    <td>R 8,500.00</td>
+                                                    <td><span class="status-badge status-pending">Pending</span></td>
+                                                    <td>2024-09-20</td>
+                                                    <td>
+                                                        <button class="btn btn-sm btn-outline-primary">View</button>
+                                                        <button class="btn btn-sm btn-outline-warning">Remind</button>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>INV-2024-003</strong></td>
+                                                    <td>Digital Marketing Co</td>
+                                                    <td>R 12,000.00</td>
+                                                    <td><span class="status-badge status-overdue">Overdue</span></td>
+                                                    <td>2024-08-30</td>
+                                                    <td>
+                                                        <button class="btn btn-sm btn-outline-danger">Follow Up</button>
+                                                        <button class="btn btn-sm btn-outline-secondary">PDF</button>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Add Client Modal -->
+    <div class="modal fade" id="addClientModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Add Client</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label class="form-label">Name</label>
+                        <input type="text" class="form-control" id="ac_name">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Email (username)</label>
+                        <input type="email" class="form-control" id="ac_email">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Password</label>
+                        <input type="text" class="form-control" id="ac_password">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Company</label>
+                        <input type="text" class="form-control" id="ac_company">
+                    </div>
+                    <div id="ac_error" class="text-danger"></div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button class="btn btn-primary" onclick="submitAddClient()">Save Client</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Create Invoice Modal -->
+    <div class="modal fade" id="createInvoiceModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Create Invoice</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label class="form-label">Client</label>
+                        <select id="ci_client" class="form-select"></select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Services</label>
+                        <div id="ci_services_container">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="ci_service_loading" disabled>
+                                <label class="form-check-label" for="ci_service_loading">Loading services...</label>
+                            </div>
+                        </div>
+                        <small class="form-text text-muted">Select one or more services for this invoice</small>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Amount</label>
+                        <input type="number" step="0.01" class="form-control" id="ci_amount" placeholder="Auto-calculated from services">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Due Date</label>
+                        <input type="date" class="form-control" id="ci_due">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Description</label>
+                        <textarea class="form-control" id="ci_desc" rows="3" placeholder="Additional notes or description"></textarea>
+                    </div>
+                    <div id="ci_error" class="text-danger"></div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button class="btn btn-primary" onclick="submitCreateInvoice()">Create</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Payment Modal -->
+    <div class="modal fade" id="paymentModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Payment Details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Payment ID: <strong>PAY-2024-001</strong></p>
+                    <p>Client: <strong>Tech Solutions Ltd</strong></p>
+                    <p>Amount: <strong>R 12,000.00</strong></p>
+                    <p>Date: <strong>2024-09-25</strong></p>
+                    <p>Status: <span class="badge bg-success">Paid</span></p>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        async function apiRequest(url, method = 'GET', body) {
+            const opts = { method, headers: { 'Content-Type': 'application/json', 'X-ADMIN-API': '1' } };
+            if (body) opts.body = JSON.stringify(body);
+            const res = await fetch(url, opts);
+            return res.json();
+        }
+
+        // Use relative API base so it works from /AdminPortal/
+        // Auto-detect the correct API path based on current location
+        const currentPath = window.location.pathname;
+        const API_BASE = currentPath.includes('/AdminPortal/') ? '../api' : '/api';
+
+        // Load management UIs
+        async function renderClients() {
+            const target = document.getElementById('mainContent');
+            target.innerHTML = `
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                  <h4>Client Management</h4>
+                  <button class="btn btn-primary" onclick="openAddClient()"><i class="bi bi-person-plus"></i> Add Client</button>
+                </div>
+                <div class="table-responsive">
+                  <table class="table table-hover" id="clientsTable">
+                    <thead><tr><th>Name</th><th>Email</th><th>Company</th><th>Created</th><th>Actions</th></tr></thead>
+                    <tbody></tbody>
+                  </table>
+                </div>`;
+            const resp = await apiRequest(`${API_BASE}/admin/clients.php`);
+            if (!resp.success) { target.innerHTML += `<div class="text-danger">${resp.error||'Failed to load'}</div>`; return; }
+            const tbody = target.querySelector('#clientsTable tbody');
+            (resp.data||[]).forEach(c => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                  <td><input class="form-control form-control-sm" value="${c.name||''}" data-field="name" data-id="${c.id}"></td>
+                  <td><input class="form-control form-control-sm" value="${c.email||''}" data-field="email" data-id="${c.id}"></td>
+                  <td><input class="form-control form-control-sm" value="${c.company||''}" data-field="company" data-id="${c.id}"></td>
+                  <td>${(c.created_at||'').slice(0,10)}</td>
+                  <td>
+                    <button class="btn btn-sm btn-outline-primary" onclick="saveClientRow(${c.id}, this)">Save</button>
+                    <button class="btn btn-sm btn-outline-warning ms-1" onclick="resetClientPassword(${c.id})">Reset Password</button>
+                    <button class="btn btn-sm btn-outline-danger ms-1" onclick="deleteClient(${c.id}, '${c.name}')">Delete</button>
+                  </td>`;
+                tbody.appendChild(tr);
+            });
+        }
+
+        async function renderInvoices() {
+            const target = document.getElementById('mainContent');
+            target.innerHTML = `
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                  <h4>Invoice Management</h4>
+                  <button class="btn btn-primary" onclick="openCreateInvoice()"><i class="bi bi-receipt"></i> Create Invoice</button>
+                </div>
+                <div class="table-responsive">
+                  <table class="table table-hover" id="invoicesTable">
+                    <thead><tr><th>Number</th><th>Client</th><th>Total</th><th>Status</th><th>Issue</th><th>Due</th><th>Actions</th></tr></thead>
+                    <tbody></tbody>
+                  </table>
+                </div>`;
+            const resp = await apiRequest(`${API_BASE}/admin/invoices.php`);
+            if (!resp.success) { target.innerHTML += `<div class="text-danger">${resp.error||'Failed to load'}</div>`; return; }
+            const tbody = target.querySelector('#invoicesTable tbody');
+            (resp.data||[]).forEach(i => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                  <td>${i.invoice_number}</td>
+                  <td>${i.client_name} <small class="text-muted">(${i.client_email})</small></td>
+                  <td>R ${Number(i.total_amount).toFixed(2)}</td>
+                  <td>
+                    <select class="form-select form-select-sm" data-field="status" data-id="${i.id}">
+                      ${['draft','sent','paid','overdue','cancelled'].map(s=>`<option ${s===i.status?'selected':''}>${s}</option>`).join('')}
+                    </select>
+                  </td>
+                  <td><input class="form-control form-control-sm" value="${i.issue_date}" data-field="issue_date" data-id="${i.id}"></td>
+                  <td><input class="form-control form-control-sm" value="${i.due_date}" data-field="due_date" data-id="${i.id}"></td>
+                  <td>
+                    <a class="btn btn-sm btn-outline-secondary" target="_blank" href="${API_BASE}/download_invoice.php?invoice_id=${i.id}">Download</a>
+                    <button class="btn btn-sm btn-outline-primary" onclick="saveInvoiceRow(${i.id}, this)">Save</button>
+                    <button class="btn btn-sm btn-outline-danger" onclick="deleteInvoice(${i.id}, '${i.invoice_number}')">Delete</button>
+                  </td>`;
+                tbody.appendChild(tr);
+            });
+        }
+
+        async function renderEvents() {
+            const target = document.getElementById('mainContent');
+            target.innerHTML = `
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                  <h4>Event Management</h4>
+                  <button class="btn btn-primary" onclick="openCreateEvent()"><i class="bi bi-calendar-plus"></i> New Event</button>
+                </div>
+                <div class="table-responsive">
+                  <table class="table table-hover" id="eventsTable">
+                    <thead><tr><th>Title</th><th>Type</th><th>Date</th><th>Location</th><th>Status</th><th>Links</th><th>Actions</th></tr></thead>
+                    <tbody></tbody>
+                  </table>
+                </div>`;
+            const resp = await apiRequest(`${API_BASE}/admin/events.php`);
+            if (!resp.success) { target.innerHTML += `<div class="text-danger">${resp.error||'Failed to load'}</div>`; return; }
+            const tbody = target.querySelector('#eventsTable tbody');
+            (resp.data||[]).forEach(e => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                  <td style="min-width:220px;"><input class="form-control form-control-sm" value="${e.title||''}" data-field="title" data-id="${e.id}"></td>
+                  <td style="min-width:130px;"><input class="form-control form-control-sm" value="${e.event_type||''}" data-field="event_type" data-id="${e.id}" placeholder="workshop, conference"></td>
+                  <td><input type="datetime-local" class="form-control form-control-sm" value="${(e.event_date||'').replace(' ','T').slice(0,16)}" data-field="event_date" data-id="${e.id}"></td>
+                  <td><input class="form-control form-control-sm" value="${e.location||''}" data-field="location" data-id="${e.id}"></td>
+                  <td>
+                    <select class="form-select form-select-sm" data-field="status" data-id="${e.id}">
+                      ${['draft','published','archived'].map(s=>`<option ${s===(e.status||'')?'selected':''}>${s}</option>`).join('')}
+                    </select>
+                  </td>
+                  <td style="min-width:220px;">
+                    <div class="d-flex gap-1 flex-wrap">
+                      <a class="btn btn-sm btn-outline-secondary" target="_blank" href="${e.image_url||'#'}">Image</a>
+                      <a class="btn btn-sm btn-outline-secondary" target="_blank" href="${e.pdf_url||'#'}">PDF</a>
+                      <a class="btn btn-sm btn-outline-secondary" target="_blank" href="../events-platform/events.html?id=${e.id}">Preview</a>
+                    </div>
+                  </td>
+                  <td>
+                    <button class="btn btn-sm btn-outline-primary" onclick="saveEventRow(${e.id}, this)">Save</button>
+                    <button class="btn btn-sm btn-outline-secondary ms-1" onclick="openEditEvent(${e.id})">Edit Details</button>
+                    <button class="btn btn-sm btn-outline-danger ms-1" onclick="deleteEvent(${e.id}, '${e.title}')">Delete</button>
+                  </td>`;
+                tbody.appendChild(tr);
+            });
+        }
+
+        async function openCreateEvent() {
+            const html = `
+              <div class="modal fade" id="createEventModal" tabindex="-1">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title">Create Event</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                      <div class="mb-3">
+                        <label class="form-label">Client (optional)</label>
+                        <select id="ev_client" class="form-select"></select>
+                      </div>
+                      <div class="mb-3">
+                        <label class="form-label">Title</label>
+                        <input type="text" class="form-control" id="ev_title">
+                      </div>
+                      <div class="mb-3">
+                        <label class="form-label">Date & Time</label>
+                        <input type="datetime-local" class="form-control" id="ev_date">
+                      </div>
+                      <div class="mb-3">
+                        <label class="form-label">Location</label>
+                        <input type="text" class="form-control" id="ev_location">
+                      </div>
+                      <div class="mb-3">
+                        <label class="form-label">Status</label>
+                        <select id="ev_status" class="form-select">
+                          <option value="draft">draft</option>
+                          <option value="published">published</option>
+                          <option value="archived">archived</option>
+                        </select>
+                      </div>
+                      <div class="mb-3">
+                        <label class="form-label">Description</label>
+                        <textarea class="form-control" id="ev_desc" rows="3"></textarea>
+                      </div>
+                      <div id="ev_error" class="text-danger"></div>
+                    </div>
+                    <div class="modal-footer">
+                      <button class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                      <button class="btn btn-primary" onclick="submitCreateEvent()">Create</button>
+                    </div>
+                  </div>
+                </div>
+              </div>`;
+            const containerId = 'createEventContainer';
+            let container = document.getElementById(containerId);
+            if (!container) { container = document.createElement('div'); container.id = containerId; document.body.appendChild(container); }
+            container.innerHTML = html;
+            const sel = document.getElementById('ev_client');
+            sel.innerHTML = '<option value="">No client</option>';
+            const resp = await apiRequest(`${API_BASE}/admin/clients.php`);
+            (resp.data||[]).forEach(c=>{
+                const opt=document.createElement('option');
+                opt.value=c.id; opt.textContent=`${c.name} (${c.email})`;
+                sel.appendChild(opt);
+            });
+            new bootstrap.Modal(document.getElementById('createEventModal')).show();
+        }
+
+        async function submitCreateEvent() {
+            const client_id = document.getElementById('ev_client').value;
+            const title = document.getElementById('ev_title').value.trim();
+            const event_date = document.getElementById('ev_date').value || null;
+            const location = document.getElementById('ev_location').value || null;
+            const status = document.getElementById('ev_status').value;
+            const description = document.getElementById('ev_desc').value || null;
+            const out = document.getElementById('ev_error');
+            out.textContent='';
+            if (!title) { out.textContent='Title is required'; return; }
+            const payload = { title, event_date, location, status, description };
+            if (client_id) payload.client_id = client_id;
+            const resp = await apiRequest(`${API_BASE}/admin/events.php`, 'POST', payload);
+            if (!resp.success) { out.textContent = resp.error||'Failed to create event'; return; }
+            bootstrap.Modal.getInstance(document.getElementById('createEventModal')).hide();
+            renderEvents();
+        }
+
+        async function saveEventRow(id, btn) {
+            const row = btn.closest('tr');
+            const payload = {
+                id,
+                title: row.querySelector('input[data-field="title"]').value,
+                event_type: row.querySelector('input[data-field="event_type"]').value,
+                event_date: row.querySelector('input[data-field="event_date"]').value,
+                location: row.querySelector('input[data-field="location"]').value,
+                status: row.querySelector('select[data-field="status"]').value
+            };
+            const resp = await apiRequest(`${API_BASE}/admin/events.php`, 'PUT', payload);
+            if (!resp.success) { alert(resp.error||'Save failed'); return; }
+            alert('Saved');
+        }
+
+        function openEditEvent(id){
+            const html = `
+              <div class="modal fade" id="editEventModal" tabindex="-1">
+                <div class="modal-dialog modal-lg">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title">Edit Event Details</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                      <div class="row g-2">
+                        <div class="col-md-6">
+                          <label class="form-label">Hero Image URL</label>
+                          <input class="form-control" id="ev_image_url">
+                        </div>
+                        <div class="col-md-6">
+                          <label class="form-label">Details PDF URL</label>
+                          <input class="form-control" id="ev_pdf_url">
+                        </div>
+                        <div class="col-md-12">
+                          <label class="form-label">Summit Preview Video (YouTube embed URL)</label>
+                          <input class="form-control" id="ev_video_url" placeholder="https://www.youtube.com/embed/...">
+                        </div>
+                        <div class="col-md-12">
+                          <label class="form-label">Agenda (plain text or HTML)</label>
+                          <textarea class="form-control" id="ev_agenda" rows="4"></textarea>
+                        </div>
+                        <div class="col-md-12">
+                          <label class="form-label">Overview (HTML allowed)</label>
+                          <textarea class="form-control" id="ev_overview" rows="4"></textarea>
+                        </div>
+                        <div class="col-md-12">
+                          <label class="form-label">Map Embed (iframe embed code or URL)</label>
+                          <textarea class="form-control" id="ev_map_embed" rows="3"></textarea>
+                        </div>
+                        <div class="col-md-6">
+                          <label class="form-label">Left Ad Image URL</label>
+                          <input class="form-control" id="ev_ad_left_url">
+                        </div>
+                        <div class="col-md-6">
+                          <label class="form-label">Left Ad Link</label>
+                          <input class="form-control" id="ev_ad_left_link">
+                        </div>
+                        <div class="col-md-6">
+                          <label class="form-label">Right Ad Image URL</label>
+                          <input class="form-control" id="ev_ad_right_url">
+                        </div>
+                        <div class="col-md-6">
+                          <label class="form-label">Right Ad Link</label>
+                          <input class="form-control" id="ev_ad_right_link">
+                        </div>
+                      </div>
+                      <div id="evd_error" class="text-danger mt-2"></div>
+                    </div>
+                    <div class="modal-footer">
+                      <button class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                      <button class="btn btn-primary" onclick="submitEditEvent(${id})">Save Details</button>
+                    </div>
+                  </div>
+                </div>
+              </div>`;
+            let container = document.getElementById('editEventContainer');
+            if (!container) { container = document.createElement('div'); container.id = 'editEventContainer'; document.body.appendChild(container); }
+            container.innerHTML = html;
+            // Prefill from API
+            apiRequest(`${API_BASE}/admin/events.php?id=${id}`).then(resp=>{
+                if(resp.success){
+                    const d = resp.data;
+                    document.getElementById('ev_image_url').value = d.image_url||'';
+                    document.getElementById('ev_pdf_url').value = d.pdf_url||'';
+                    document.getElementById('ev_video_url').value = d.video_url||'';
+                    document.getElementById('ev_agenda').value = d.agenda||'';
+                    document.getElementById('ev_overview').value = d.overview||'';
+                    document.getElementById('ev_map_embed').value = d.map_embed||'';
+                    document.getElementById('ev_ad_left_url').value = d.ad_left_url||'';
+                    document.getElementById('ev_ad_left_link').value = d.ad_left_link||'';
+                    document.getElementById('ev_ad_right_url').value = d.ad_right_url||'';
+                    document.getElementById('ev_ad_right_link').value = d.ad_right_link||'';
+                }
+                new bootstrap.Modal(document.getElementById('editEventModal')).show();
+            });
+        }
+
+        async function submitEditEvent(id){
+            const out = document.getElementById('evd_error');
+            out.textContent = '';
+            const payload = {
+                id,
+                image_url: document.getElementById('ev_image_url').value.trim()||null,
+                pdf_url: document.getElementById('ev_pdf_url').value.trim()||null,
+                video_url: document.getElementById('ev_video_url').value.trim()||null,
+                agenda: document.getElementById('ev_agenda').value,
+                overview: document.getElementById('ev_overview').value,
+                map_embed: document.getElementById('ev_map_embed').value,
+                ad_left_url: document.getElementById('ev_ad_left_url').value.trim()||null,
+                ad_left_link: document.getElementById('ev_ad_left_link').value.trim()||null,
+                ad_right_url: document.getElementById('ev_ad_right_url').value.trim()||null,
+                ad_right_link: document.getElementById('ev_ad_right_link').value.trim()||null
+            };
+            const resp = await apiRequest(`${API_BASE}/admin/events.php`, 'PUT', payload);
+            if (!resp.success) { out.textContent = resp.error||'Save failed'; return; }
+            bootstrap.Modal.getInstance(document.getElementById('editEventModal')).hide();
+            renderEvents();
+        }
+
+        function renderProjects() {
+            // Initialize Database-Integrated ProjectManager
+            const target = document.getElementById('mainContent');
+            target.innerHTML = '<div id="projectManagerContainer"></div>';
+            
+            // Create new ProjectManagerDB instance (database-integrated)
+            if (window.projectManagerDB) {
+                // Reload data
+                window.projectManagerDB.loadProjects().then(() => {
+                    window.projectManagerDB.render();
+                });
+            } else {
+                setTimeout(() => {
+                    if (!window.projectManagerDB) {
+                        window.projectManagerDB = new ProjectManagerDB('#projectManagerContainer', API_BASE);
+                    } else {
+                        window.projectManagerDB.loadProjects().then(() => {
+                            window.projectManagerDB.render();
+                        });
+                    }
+                }, 100);
+            }
+        }
+
+        function openAddClient() {
+            const modal = new bootstrap.Modal(document.getElementById('addClientModal'));
+            document.getElementById('ac_name').value='';
+            document.getElementById('ac_email').value='';
+            document.getElementById('ac_password').value='';
+            document.getElementById('ac_company').value='';
+            document.getElementById('ac_error').textContent='';
+            modal.show();
+        }
+
+        async function submitAddClient() {
+            const name = document.getElementById('ac_name').value.trim();
+            const email = document.getElementById('ac_email').value.trim();
+            const password = document.getElementById('ac_password').value.trim();
+            const company = document.getElementById('ac_company').value.trim();
+            const out = document.getElementById('ac_error');
+            out.textContent='';
+            if (!name || !email || !password) { out.textContent='Name, Email and Password are required'; return; }
+            const resp = await apiRequest(`${API_BASE}/admin/clients.php`,'POST',{name,email,password,company});
+            if (!resp.success) { out.textContent = resp.error||'Failed to add client'; return; }
+            bootstrap.Modal.getInstance(document.getElementById('addClientModal')).hide();
+            renderClients();
+        }
+
+        async function saveClientRow(id, btn) {
+            const row = btn.closest('tr');
+            const name = row.querySelector('input[data-field="name"]').value;
+            const email = row.querySelector('input[data-field="email"]').value;
+            const company = row.querySelector('input[data-field="company"]').value;
+            const resp = await apiRequest(`${API_BASE}/admin/clients.php`,'PUT',{id,name,email,company});
+            if (!resp.success) { alert(resp.error||'Save failed'); return; }
+            alert('Saved');
+        }
+
+        async function resetClientPassword(id) {
+            const newPassword = prompt('Enter new password for this client:');
+            if (!newPassword || newPassword.trim() === '') return;
+            
+            const resp = await apiRequest(`${API_BASE}/admin/clients.php`, 'PATCH', {id, password: newPassword});
+            if (!resp.success) { alert(resp.error || 'Password reset failed'); return; }
+            alert('Password reset successfully. Client can now login with: ' + newPassword);
+        }
+
+        async function deleteClient(id, name) {
+            if (!confirm(`Are you sure you want to delete client "${name}"?\n\nThis will permanently remove:\n- Client account\n- All associated projects\n- All invoices and payment records\n- All messages and files\n\nThis action cannot be undone!`)) {
+                return;
+            }
+            
+            const resp = await apiRequest(`${API_BASE}/admin/clients.php`, 'DELETE', {id});
+            if (!resp.success) { 
+                alert(resp.error || 'Delete failed'); 
+                return; 
+            }
+            
+            alert('Client deleted successfully');
+            renderClients();
+        }
+
+        async function deleteProject(id, title) {
+            if (!confirm(`Are you sure you want to delete project "${title}"?\n\nThis will permanently remove the project and all associated data.\n\nThis action cannot be undone!`)) {
+                return;
+            }
+            
+            const resp = await apiRequest(`${API_BASE}/admin/projects.php`, 'DELETE', {id});
+            if (!resp.success) { 
+                alert(resp.error || 'Delete failed'); 
+                return; 
+            }
+            
+            alert('Project deleted successfully');
+            renderProjects();
+        }
+
+        async function deleteEvent(id, title) {
+            if (!confirm(`Are you sure you want to delete event "${title}"?\n\nThis will permanently remove the event.\n\nThis action cannot be undone!`)) {
+                return;
+            }
+            
+            const resp = await apiRequest(`${API_BASE}/admin/events.php`, 'DELETE', {id});
+            if (!resp.success) { 
+                alert(resp.error || 'Delete failed'); 
+                return; 
+            }
+            
+            alert('Event deleted successfully');
+            renderEvents();
+        }
+
+        async function openCreateInvoice() {
+            const sel = document.getElementById('ci_client');
+            sel.innerHTML = '';
+            const resp = await apiRequest(`${API_BASE}/admin/clients.php`);
+            (resp.data||[]).forEach(c=>{
+                const opt=document.createElement('option');
+                opt.value=c.id; opt.textContent=`${c.name} (${c.email})`;
+                sel.appendChild(opt);
+            });
+            
+            // Load services
+            await loadServicesForInvoice();
+            
+            document.getElementById('ci_amount').value='';
+            document.getElementById('ci_due').value=new Date().toISOString().slice(0,10);
+            document.getElementById('ci_desc').value='';
+            document.getElementById('ci_error').textContent='';
+            new bootstrap.Modal(document.getElementById('createInvoiceModal')).show();
+        }
+
+        async function loadServicesForInvoice() {
+            const container = document.getElementById('ci_services_container');
+            try {
+                const resp = await apiRequest(`${API_BASE}/admin/services.php`);
+                if (resp.success && resp.data) {
+                    container.innerHTML = '';
+                    resp.data.forEach(service => {
+                        if (service.is_active) {
+                            const div = document.createElement('div');
+                            div.className = 'form-check';
+                            div.innerHTML = `
+                                <input class="form-check-input service-checkbox" type="checkbox" 
+                                       id="ci_service_${service.id}" 
+                                       value="${service.id}" 
+                                       data-price="${service.price_amount || 0}"
+                                       onchange="calculateInvoiceTotal()">
+                                <label class="form-check-label" for="ci_service_${service.id}">
+                                    ${service.name} - R${parseFloat(service.price_amount || 0).toFixed(2)}
+                                </label>
+                            `;
+                            container.appendChild(div);
+                        }
+                    });
+                } else {
+                    container.innerHTML = '<div class="text-muted">No services available</div>';
+                }
+            } catch (error) {
+                container.innerHTML = '<div class="text-danger">Error loading services</div>';
+            }
+        }
+
+        function calculateInvoiceTotal() {
+            const checkboxes = document.querySelectorAll('.service-checkbox:checked');
+            let total = 0;
+            checkboxes.forEach(checkbox => {
+                total += parseFloat(checkbox.dataset.price || 0);
+            });
+            document.getElementById('ci_amount').value = total.toFixed(2);
+        }
+
+        async function submitCreateInvoice() {
+            const client_id = document.getElementById('ci_client').value;
+            const amount = parseFloat(document.getElementById('ci_amount').value||'0');
+            const due_date = document.getElementById('ci_due').value;
+            const description = document.getElementById('ci_desc').value;
+            const out = document.getElementById('ci_error');
+            out.textContent='';
+            
+            if (!client_id || !amount || !due_date) { 
+                out.textContent='Client, Amount, and Due Date are required'; 
+                return; 
+            }
+            
+            // Get selected services
+            const selectedServices = [];
+            const checkboxes = document.querySelectorAll('.service-checkbox:checked');
+            checkboxes.forEach(checkbox => {
+                selectedServices.push({
+                    service_id: checkbox.value,
+                    service_name: checkbox.nextElementSibling.textContent.split(' - ')[0],
+                    price: parseFloat(checkbox.dataset.price || 0)
+                });
+            });
+            
+            const resp = await apiRequest(`${API_BASE}/create_invoice.php`,'POST',{
+                client_id,
+                amount,
+                due_date,
+                description,
+                status:'sent',
+                services: selectedServices
+            });
+            
+            if (!resp.success) { 
+                out.textContent = resp.error||'Failed to create invoice'; 
+                return; 
+            }
+            
+            bootstrap.Modal.getInstance(document.getElementById('createInvoiceModal')).hide();
+            renderInvoices();
+            window.open(`${API_BASE}/download_invoice.php?invoice_id=${resp.invoice_id}`,'_blank');
+        }
+
+        async function saveInvoiceRow(id, btn) {
+            const row = btn.closest('tr');
+            const status = row.querySelector('select[data-field="status"]').value;
+            const issue_date = row.querySelector('input[data-field="issue_date"]').value;
+            const due_date = row.querySelector('input[data-field="due_date"]').value;
+            const resp = await apiRequest(`${API_BASE}/admin/invoices.php`,'PUT',{id,status,issue_date,due_date});
+            if (!resp.success) { alert(resp.error||'Save failed'); return; }
+            alert('Saved');
+        }
+
+        async function deleteInvoice(id, invoiceNumber) {
+            if (!confirm(`Are you sure you want to delete invoice ${invoiceNumber}?\n\nThis action cannot be undone and will also delete all associated invoice items.`)) {
+                return;
+            }
+            
+            try {
+                const resp = await apiRequest(`${API_BASE}/admin/invoices.php`, 'DELETE', {id});
+                if (resp.success) {
+                    showNotification(`Invoice ${invoiceNumber} deleted successfully!`, 'success');
+                    renderInvoices();
+                } else {
+                    showNotification('Error deleting invoice: ' + (resp.error || 'Unknown error'), 'error');
+                }
+            } catch (error) {
+                showNotification('Error deleting invoice: ' + error.message, 'error');
+            }
+        }
+ 
+        function loadTab(tabName) {
+            // Update active nav
+            document.querySelectorAll('.sidebar .nav-link').forEach(link => {
+                link.classList.remove('active');
+            });
+            document.querySelector(`[onclick="loadTab('${tabName}')"]`).classList.add('active');
+            
+            // Update page title
+            const titles = {
+                'dashboard': 'Billing & Payment Dashboard',
+                'clients': 'Client Management',
+                'projects': 'Project Management', 
+                'invoices': 'Invoice Management', 
+                'payments': 'Payment Tracking',
+                'automation': 'Billing Automation',
+                'reports': 'Financial Reports',
+                'events': 'Event Management',
+                'services': 'Services Management',
+                'products': 'App Store Products',
+                'bulkemail': 'Bulk Email Sender',
+                'banners': 'Banner Management',
+                'domains': 'Domain Management',
+                'settings': 'Company Settings'
+            };
+            document.getElementById('pageTitle').textContent = titles[tabName];
+            
+            // Load content (placeholder for now)
+            if (tabName === 'clients') { renderClients(); return; }
+            if (tabName === 'projects') { renderProjects(); return; }
+            if (tabName === 'events') { renderEvents(); return; }
+            if (tabName === 'services') { renderServices(); return; }
+            if (tabName === 'invoices') { renderInvoices(); return; }
+            if (tabName === 'bulkemail') { renderBulkEmail(); return; }
+            if (tabName === 'products') { renderProducts(); return; }
+            if (tabName === 'banners') { renderBanners(); return; }
+            if (tabName === 'domains') { renderDomains(); return; }
+            if (tabName === 'settings') { renderSettings(); return; }
+            if (tabName !== 'dashboard') {
+                document.getElementById('mainContent').innerHTML = `
+                    <div class="text-center py-5">
+                        <div class="spinner-border text-primary" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                        <h4 class="mt-3">Loading ${titles[tabName]}...</h4>
+                        <p class="text-muted">This section will contain the ${tabName} management interface.</p>
+                    </div>
+                `;
+            }
+        }
+
+        async function renderServices(){
+            const target = document.getElementById('mainContent');
+            target.innerHTML = `
+              <div class="d-flex justify-content-between align-items-center mb-3">
+                <h4>Services Management</h4>
+                <button class="btn btn-primary" onclick="openCreateService()"><i class="bi bi-plus-circle"></i> New Service</button>
+              </div>
+              <div class="table-responsive">
+                <table class="table table-hover" id="servicesTable">
+                  <thead>
+                    <tr>
+                      <th>Name</th><th>Slug</th><th>Category</th><th>Price</th><th>Period</th><th>Active</th><th>Image</th><th>Details Link</th><th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody></tbody>
+                </table>
+              </div>`;
+            const res = await apiRequest(`${API_BASE}/admin/services.php`);
+            if(!res.success){ target.innerHTML += `<div class="text-danger">${res.error||'Failed to load services'}</div>`; return; }
+            const tbody = target.querySelector('#servicesTable tbody');
+            (res.data||[]).forEach(s=>{
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                  <td style="min-width:200px;"><input class="form-control form-control-sm" value="${s.name||''}" data-field="name" data-id="${s.id}"></td>
+                  <td><input class="form-control form-control-sm" value="${s.slug||''}" data-field="slug" data-id="${s.id}"></td>
+                  <td><input class="form-control form-control-sm" value="${s.category||''}" data-field="category" data-id="${s.id}"></td>
+                  <td style="max-width:120px"><input type="number" step="0.01" class="form-control form-control-sm" value="${s.price_amount||0}" data-field="price_amount" data-id="${s.id}"></td>
+                  <td style="max-width:120px"><input class="form-control form-control-sm" value="${s.price_period||''}" data-field="price_period" data-id="${s.id}" placeholder="month/Year"></td>
+                  <td>
+                    <select class="form-select form-select-sm" data-field="is_active" data-id="${s.id}">
+                      <option value="1" ${String(s.is_active)==='1'?'selected':''}>Yes</option>
+                      <option value="0" ${String(s.is_active)==='0'?'selected':''}>No</option>
+                    </select>
+                  </td>
+                  <td style="min-width:220px;"><input class="form-control form-control-sm" value="${s.image_url||''}" data-field="image_url" data-id="${s.id}" placeholder="/images/...">
+                  </td>
+                  <td style="min-width:220px;"><input class="form-control form-control-sm" value="${s.details_url||''}" data-field="details_url" data-id="${s.id}" placeholder="/services-platform/our_services.html#...">
+                  </td>
+                  <td>
+                    <button class="btn btn-sm btn-outline-primary" onclick="saveServiceRow(${s.id}, this)">Save</button>
+                    <button class="btn btn-sm btn-outline-secondary ms-1" onclick="openEditService(${s.id})">Edit Details</button>
+                    <button class="btn btn-sm btn-outline-danger ms-1" onclick="deleteService(${s.id})">Delete</button>
+                  </td>`;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function openCreateService(){
+            const html = `
+            <div class="modal fade" id="createServiceModal" tabindex="-1">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header"><h5 class="modal-title">Create Service</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+                  <div class="modal-body">
+                    <div class="mb-2"><label class="form-label">Name</label><input id="sv_name" class="form-control"></div>
+                    <div class="mb-2"><label class="form-label">Slug</label><input id="sv_slug" class="form-control" placeholder="development/design/..."></div>
+                    <div class="mb-2"><label class="form-label">Category</label><input id="sv_category" class="form-control" value="Our Services"></div>
+                    <div class="mb-2"><label class="form-label">Price Amount</label><input id="sv_price_amount" type="number" step="0.01" class="form-control" value="0"></div>
+                    <div class="mb-2"><label class="form-label">Price Period</label><input id="sv_price_period" class="form-control" placeholder="month/Year"></div>
+                    <div class="mb-2"><label class="form-label">Image URL</label><input id="sv_image_url" class="form-control" placeholder="/images/... or /images/Services/... "></div>
+                    <div class="mb-2"><label class="form-label">Details URL</label><input id="sv_details_url" class="form-control" placeholder="/services-platform/our_services.html#..."></div>
+                    <div class="form-check"><input id="sv_active" type="checkbox" class="form-check-input" checked><label for="sv_active" class="form-check-label">Active</label></div>
+                    <div id="sv_err" class="text-danger mt-2"></div>
+                  </div>
+                  <div class="modal-footer"><button class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button><button class="btn btn-primary" onclick="submitCreateService()">Create</button></div>
+                </div>
+              </div>
+            </div>`;
+            let c = document.getElementById('createServiceContainer'); if(!c){ c=document.createElement('div'); c.id='createServiceContainer'; document.body.appendChild(c);} c.innerHTML = html;
+            new bootstrap.Modal(document.getElementById('createServiceModal')).show();
+        }
+
+        async function submitCreateService(){
+            const name = document.getElementById('sv_name').value.trim();
+            const slug = document.getElementById('sv_slug').value.trim()||null;
+            const category = document.getElementById('sv_category').value.trim()||null;
+            const price_amount = parseFloat(document.getElementById('sv_price_amount').value||'0');
+            const price_period = document.getElementById('sv_price_period').value.trim()||null;
+            const image_url = document.getElementById('sv_image_url').value.trim()||null;
+            const details_url = document.getElementById('sv_details_url').value.trim()||null;
+            const is_active = document.getElementById('sv_active').checked ? 1 : 0;
+            const out = document.getElementById('sv_err'); out.textContent='';
+            if(!name){ out.textContent='Name is required'; return; }
+            const resp = await apiRequest(`${API_BASE}/admin/services.php`,'POST',{name,slug,category,price_amount,price_period,image_url,details_url,is_active});
+            if(!resp.success){ out.textContent = resp.error||'Create failed'; return; }
+            bootstrap.Modal.getInstance(document.getElementById('createServiceModal')).hide();
+            renderServices();
+        }
+
+        async function saveServiceRow(id, btn){
+            const row = btn.closest('tr');
+            const payload = {
+              id,
+              name: row.querySelector('input[data-field="name"]').value,
+              slug: row.querySelector('input[data-field="slug"]').value,
+              category: row.querySelector('input[data-field="category"]').value,
+              price_amount: parseFloat(row.querySelector('input[data-field="price_amount"]').value||'0'),
+              price_period: row.querySelector('input[data-field="price_period"]').value,
+              image_url: row.querySelector('input[data-field="image_url"]').value,
+              details_url: row.querySelector('input[data-field="details_url"]').value,
+              is_active: parseInt(row.querySelector('select[data-field="is_active"]').value||'1',10)
+            };
+            const resp = await apiRequest(`${API_BASE}/admin/services.php`, 'PUT', payload);
+            if(!resp.success){ alert(resp.error||'Save failed'); return; }
+            alert('Saved');
+        }
+
+        async function openEditService(id){
+            const r = await apiRequest(`${API_BASE}/admin/services.php?id=${id}`);
+            if(!r.success || !r.data){ alert('Failed to load'); return; }
+            const s = r.data;
+            let features = [];
+            let notes = [];
+            try {
+              if(s.features) features = typeof s.features === 'string' ? JSON.parse(s.features) : s.features;
+              if(s.notes) notes = typeof s.notes === 'string' ? JSON.parse(s.notes) : s.notes;
+            } catch(e) {}
+            
+            const html = `
+            <div class="modal fade" id="editServiceModal" tabindex="-1">
+              <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                  <div class="modal-header"><h5 class="modal-title">Edit Service</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+                  <div class="modal-body" style="max-height: 70vh; overflow-y: auto;">
+                    <div class="mb-2"><label class="form-label">Name</label><input id="es_name" class="form-control" value="${s.name||''}"></div>
+                    <div class="mb-2"><label class="form-label">Slug</label><input id="es_slug" class="form-control" value="${s.slug||''}"></div>
+                    <div class="mb-2"><label class="form-label">Category</label><input id="es_category" class="form-control" value="${s.category||''}"></div>
+                    <div class="mb-2"><label class="form-label">Price Amount</label><input id="es_price_amount" type="number" step="0.01" class="form-control" value="${s.price_amount||0}"></div>
+                    <div class="mb-2"><label class="form-label">Price Period</label><input id="es_price_period" class="form-control" value="${s.price_period||''}"></div>
+                    <div class="mb-2"><label class="form-label">Image URL</label><input id="es_image_url" class="form-control" value="${s.image_url||''}"></div>
+                    <div class="mb-2"><label class="form-label">Details URL</label><input id="es_details_url" class="form-control" value="${s.details_url||''}"></div>
+                    <div class="form-check mb-3"><input id="es_active" type="checkbox" class="form-check-input" ${String(s.is_active)==='1'?'checked':''}><label for="es_active" class="form-check-label">Active</label></div>
+                    
+                    <hr>
+                    <h6 class="mb-2">What You Get (Features)</h6>
+                    <div id="es_features_container" style="display:flex;flex-direction:column;gap:8px;margin-bottom:12px;">
+                      ${features.map((f, i) => `<input type="text" class="form-control form-control-sm es_feature" value="${f||''}" data-index="${i}">`).join('')}
+                    </div>
+                    <button type="button" class="btn btn-sm btn-outline-secondary mb-3" onclick="addFeatureField('es_features_container')">+ Add Feature</button>
+                    
+                    <h6 class="mb-2">What Else You Should Know (Notes)</h6>
+                    <div id="es_notes_container" style="display:flex;flex-direction:column;gap:8px;margin-bottom:12px;">
+                      ${notes.map((n, i) => `<input type="text" class="form-control form-control-sm es_note" value="${n||''}" data-index="${i}">`).join('')}
+                    </div>
+                    <button type="button" class="btn btn-sm btn-outline-secondary mb-3" onclick="addNoteField('es_notes_container')">+ Add Note</button>
+                    
+                    <div id="es_err" class="text-danger mt-2"></div>
+                  </div>
+                  <div class="modal-footer"><button class="btn btn-secondary" data-bs-dismiss="modal">Close</button><button class="btn btn-primary" onclick="submitEditService(${s.id})">Save</button></div>
+                </div>
+              </div>
+            </div>`;
+            let c = document.getElementById('editServiceContainer'); if(!c){ c=document.createElement('div'); c.id='editServiceContainer'; document.body.appendChild(c);} c.innerHTML = html;
+            new bootstrap.Modal(document.getElementById('editServiceModal')).show();
+        }
+        
+        function addFeatureField(containerId){
+            const container = document.getElementById(containerId);
+            const input = document.createElement('input');
+            input.type = 'text';
+            input.className = 'form-control form-control-sm es_feature';
+            input.placeholder = 'Enter feature';
+            container.appendChild(input);
+        }
+        
+        function addNoteField(containerId){
+            const container = document.getElementById(containerId);
+            const input = document.createElement('input');
+            input.type = 'text';
+            input.className = 'form-control form-control-sm es_note';
+            input.placeholder = 'Enter note';
+            container.appendChild(input);
+        }
+
+        async function submitEditService(id){
+            const features = Array.from(document.querySelectorAll('.es_feature')).map(inp => inp.value.trim()).filter(v => v);
+            const notes = Array.from(document.querySelectorAll('.es_note')).map(inp => inp.value.trim()).filter(v => v);
+            
+            const payload = {
+              id,
+              name: document.getElementById('es_name').value.trim(),
+              slug: document.getElementById('es_slug').value.trim(),
+              category: document.getElementById('es_category').value.trim(),
+              price_amount: parseFloat(document.getElementById('es_price_amount').value||'0'),
+              price_period: document.getElementById('es_price_period').value.trim(),
+              image_url: document.getElementById('es_image_url').value.trim(),
+              details_url: document.getElementById('es_details_url').value.trim(),
+              is_active: document.getElementById('es_active').checked ? 1 : 0,
+              features: JSON.stringify(features),
+              notes: JSON.stringify(notes)
+            };
+            const resp = await apiRequest(`${API_BASE}/admin/services.php`, 'PUT', payload);
+            if(!resp.success){ document.getElementById('es_err').textContent = resp.error||'Save failed'; return; }
+            bootstrap.Modal.getInstance(document.getElementById('editServiceModal')).hide();
+            renderServices();
+        }
+
+        async function deleteService(id){
+            if(!confirm('Delete this service?')) return;
+            const resp = await apiRequest(`${API_BASE}/admin/services.php`, 'DELETE', {id});
+            if(!resp.success){ alert(resp.error||'Delete failed'); return; }
+            renderServices();
+        }
+
+        function renderBulkEmail() {
+            const target = document.getElementById('mainContent');
+            const src = `../applications/Bulk Email Sender/index.html`;
+            target.innerHTML = `
+                <div class="card">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0"><i class="bi bi-envelope-paper"></i> Bulk Email Sender</h5>
+                        <a class="btn btn-sm btn-primary" target="_blank" href="${src}"><i class="bi bi-box-arrow-up-right"></i> Open in new tab</a>
+                    </div>
+                    <div class="card-body p-0" style="height: calc(100vh - 260px);">
+                        <iframe src="${src}" style="width:100%;height:100%;border:0;" title="Bulk Email Sender"></iframe>
+                    </div>
+                </div>
+            `;
+        }
+        
+        // Quick action functions
+        async function createInvoice() { openCreateInvoice(); }
+        
+        async function addClient() { openAddClient(); }
+ 
+        function sendReminders() {
+            alert('Sending payment reminders to overdue clients...');
+        }
+        
+        function runAutomation() {
+            alert('Running billing automation tasks...');
+        }
+        
+        function exportReports() {
+            alert('Exporting financial reports...');
+        }
+        
+        function viewSettings() {
+            loadTab('settings');
+        }
+        
+        function showQuickActions() {
+            alert('Quick Actions Menu');
+        }
+
+        async function renderProducts(){
+            const target = document.getElementById('mainContent');
+            target.innerHTML = `
+              <div class="d-flex justify-content-between align-items-center mb-3">
+                <h4>App Store Products</h4>
+                <button class="btn btn-primary" onclick="openCreateProduct()"><i class="bi bi-plus-circle"></i> New Product</button>
+              </div>
+              <div class="table-responsive">
+                <table class="table table-hover" id="productsTable">
+                  <thead>
+                    <tr>
+                      <th>Title</th><th>Category</th><th>Price</th><th>Period</th><th>Badge</th><th>Featured</th><th>Image</th><th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody></tbody>
+                </table>
+              </div>`;
+            const res = await apiRequest(`${API_BASE}/admin/products.php`);
+            if(!res.success){ target.innerHTML += `<div class="text-danger">${res.error||'Failed to load products'}</div>`; return; }
+            const tbody = target.querySelector('#productsTable tbody');
+            (res.data||[]).forEach(p=>{
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                  <td style="min-width:220px;"><input class="form-control form-control-sm" value="${p.title||''}" data-field="title" data-id="${p.id}"></td>
+                  <td><input class="form-control form-control-sm" value="${p.category||''}" data-field="category" data-id="${p.id}"></td>
+                  <td style="max-width:120px"><input type="number" step="0.01" class="form-control form-control-sm" value="${p.price_amount||0}" data-field="price_amount" data-id="${p.id}"></td>
+                  <td style="max-width:120px"><input class="form-control form-control-sm" value="${p.price_period||''}" data-field="price_period" data-id="${p.id}" placeholder="month/Year"></td>
+                  <td><input class="form-control form-control-sm" value="${p.badge||''}" data-field="badge" data-id="${p.id}" placeholder="Featured/Coming Soon"></td>
+                  <td>
+                    <select class="form-select form-select-sm" data-field="is_featured" data-id="${p.id}">
+                      <option value="0" ${String(p.is_featured)==='0'?'selected':''}>No</option>
+                      <option value="1" ${String(p.is_featured)==='1'?'selected':''}>Yes</option>
+                    </select>
+                  </td>
+                  <td style="min-width:220px;">
+                    <input class="form-control form-control-sm" value="${p.image_url||''}" data-field="image_url" data-id="${p.id}" placeholder="/images/...">
+                  </td>
+                  <td>
+                    <button class="btn btn-sm btn-outline-primary" onclick="saveProductRow(${p.id}, this)">Save</button>
+                    <button class="btn btn-sm btn-outline-secondary ms-1" onclick="openEditProduct(${p.id})">Edit Details</button>
+                    <button class="btn btn-sm btn-outline-danger ms-1" onclick="deleteProduct(${p.id})">Delete</button>
+                  </td>`;
+                tbody.appendChild(tr);
+            });
+        }
+
+        async function saveProductRow(id, btn){
+            const row = btn.closest('tr');
+            const payload = {
+              id,
+              title: row.querySelector('input[data-field="title"]').value,
+              category: row.querySelector('input[data-field="category"]').value,
+              price_amount: parseFloat(row.querySelector('input[data-field="price_amount"]').value||'0'),
+              price_period: row.querySelector('input[data-field="price_period"]').value,
+              badge: row.querySelector('input[data-field="badge"]').value,
+              is_featured: parseInt(row.querySelector('select[data-field="is_featured"]').value||'0',10),
+              image_url: row.querySelector('input[data-field="image_url"]').value
+            };
+            const resp = await apiRequest(`${API_BASE}/admin/products.php`, 'PUT', payload);
+            if(!resp.success){ alert(resp.error||'Save failed'); return; }
+            alert('Saved');
+        }
+
+        function openCreateProduct(){
+            const html = `
+            <div class="modal fade" id="createProductModal" tabindex="-1">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header"><h5 class="modal-title">Create Product</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+                  <div class="modal-body">
+                    <div class="mb-2"><label class="form-label">Title</label><input id="pr_title" class="form-control"></div>
+                    <div class="mb-2"><label class="form-label">Category</label><input id="pr_category" class="form-control" placeholder="Finance, Events & Ticketing"></div>
+                    <div class="mb-2"><label class="form-label">Price Amount</label><input id="pr_price_amount" type="number" step="0.01" class="form-control" value="0"></div>
+                    <div class="mb-2"><label class="form-label">Price Period</label><input id="pr_price_period" class="form-control" placeholder="month/Year"></div>
+                    <div class="mb-2"><label class="form-label">Image URL</label><input id="pr_image_url" class="form-control" placeholder="/images/... or /slider1.jpg"></div>
+                    <div id="pr_err" class="text-danger"></div>
+                  </div>
+                  <div class="modal-footer"><button class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button><button class="btn btn-primary" onclick="submitCreateProduct()">Create</button></div>
+                </div>
+              </div>
+            </div>`;
+            let c = document.getElementById('createProductContainer');
+            if(!c){ c=document.createElement('div'); c.id='createProductContainer'; document.body.appendChild(c); }
+            c.innerHTML = html;
+            new bootstrap.Modal(document.getElementById('createProductModal')).show();
+        }
+
+        async function submitCreateProduct(){
+            const title = document.getElementById('pr_title').value.trim();
+            const category = document.getElementById('pr_category').value.trim();
+            const price_amount = parseFloat(document.getElementById('pr_price_amount').value||'0');
+            const price_period = document.getElementById('pr_price_period').value.trim();
+            const image_url = document.getElementById('pr_image_url').value.trim();
+            const out = document.getElementById('pr_err'); out.textContent='';
+            if(!title){ out.textContent='Title is required'; return; }
+            const resp = await apiRequest(`${API_BASE}/admin/products.php`,'POST',{title,category,price_amount,price_period,image_url,is_featured:0});
+            if(!resp.success){ out.textContent = resp.error||'Create failed'; return; }
+            bootstrap.Modal.getInstance(document.getElementById('createProductModal')).hide();
+            renderProducts();
+        }
+
+        async function openEditProduct(id){
+            const r = await apiRequest(`${API_BASE}/admin/products.php?id=${id}`);
+            if(!r.success || !r.data){ alert('Failed to load'); return; }
+            const p = r.data;
+            const html = `
+            <div class="modal fade" id="editProductModal" tabindex="-1">
+              <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                  <div class="modal-header"><h5 class="modal-title">Edit Product Details</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+                  <div class="modal-body">
+                    <div class="row g-2">
+                      <div class="col-md-6"><label class="form-label">Title</label><input id="ep_title" class="form-control" value="${p.title||''}"></div>
+                      <div class="col-md-6"><label class="form-label">Category</label><input id="ep_category" class="form-control" value="${p.category||''}"></div>
+                      <div class="col-md-6"><label class="form-label">Price Amount</label><input id="ep_price_amount" type="number" step="0.01" class="form-control" value="${p.price_amount||0}"></div>
+                      <div class="col-md-6"><label class="form-label">Price Period</label><input id="ep_price_period" class="form-control" value="${p.price_period||''}"></div>
+                      <div class="col-md-12"><label class="form-label">Description</label><textarea id="ep_description" class="form-control" rows="4">${p.description||''}</textarea></div>
+                      <div class="col-md-6"><label class="form-label">Hero / Image URL</label><input id="ep_image_url" class="form-control" value="${p.image_url||''}"></div>
+                      <div class="col-md-6"><label class="form-label">Background URL</label><input id="ep_background_url" class="form-control" value="${p.background_url||''}"></div>
+                      <div class="col-md-6"><label class="form-label">Primary CTA Text</label><input id="ep_cta_primary_text" class="form-control" value="${p.cta_primary_text||''}"></div>
+                      <div class="col-md-6"><label class="form-label">Primary CTA Link</label><input id="ep_cta_primary_link" class="form-control" value="${p.cta_primary_link||''}"></div>
+                      <div class="col-md-6"><label class="form-label">Secondary CTA Text</label><input id="ep_cta_secondary_text" class="form-control" value="${p.cta_secondary_text||''}"></div>
+                      <div class="col-md-6"><label class="form-label">Secondary CTA Link</label><input id="ep_cta_secondary_link" class="form-control" value="${p.cta_secondary_link||''}"></div>
+                      <div class="col-md-4"><label class="form-label">Badge</label><input id="ep_badge" class="form-control" value="${p.badge||''}"></div>
+                      <div class="col-md-4"><label class="form-label">Icon (FA class)</label><input id="ep_icon_class" class="form-control" value="${p.icon_class||''}" placeholder="fa-solid fa-wallet"></div>
+                      <div class="col-md-4"><label class="form-label">Featured</label><select id="ep_is_featured" class="form-select"><option value="0" ${String(p.is_featured)==='0'?'selected':''}>No</option><option value="1" ${String(p.is_featured)==='1'?'selected':''}>Yes</option></select></div>
+                    </div>
+                    <div id="ep_err" class="text-danger mt-2"></div>
+                  </div>
+                  <div class="modal-footer"><button class="btn btn-secondary" data-bs-dismiss="modal">Close</button><button class="btn btn-primary" onclick="submitEditProduct(${p.id})">Save</button></div>
+                </div>
+              </div>
+            </div>`;
+            let c = document.getElementById('editProductContainer'); if(!c){ c=document.createElement('div'); c.id='editProductContainer'; document.body.appendChild(c);} c.innerHTML = html;
+            new bootstrap.Modal(document.getElementById('editProductModal')).show();
+        }
+
+        async function submitEditProduct(id){
+            const payload = {
+              id,
+              title: document.getElementById('ep_title').value.trim(),
+              category: document.getElementById('ep_category').value.trim(),
+              price_amount: parseFloat(document.getElementById('ep_price_amount').value||'0'),
+              price_period: document.getElementById('ep_price_period').value.trim(),
+              description: document.getElementById('ep_description').value,
+              image_url: document.getElementById('ep_image_url').value.trim(),
+              background_url: document.getElementById('ep_background_url').value.trim(),
+              cta_primary_text: document.getElementById('ep_cta_primary_text').value.trim(),
+              cta_primary_link: document.getElementById('ep_cta_primary_link').value.trim(),
+              cta_secondary_text: document.getElementById('ep_cta_secondary_text').value.trim(),
+              cta_secondary_link: document.getElementById('ep_cta_secondary_link').value.trim(),
+              badge: document.getElementById('ep_badge').value.trim(),
+              icon_class: document.getElementById('ep_icon_class').value.trim(),
+              is_featured: parseInt(document.getElementById('ep_is_featured').value||'0',10)
+            };
+            const resp = await apiRequest(`${API_BASE}/admin/products.php`, 'PUT', payload);
+            if(!resp.success){ document.getElementById('ep_err').textContent = resp.error||'Save failed'; return; }
+            bootstrap.Modal.getInstance(document.getElementById('editProductModal')).hide();
+            renderProducts();
+        }
+
+        async function deleteProduct(id){
+            if(!confirm('Delete this product?')) return;
+            const resp = await apiRequest(`${API_BASE}/admin/products.php`, 'DELETE', {id});
+            if(!resp.success){ alert(resp.error||'Delete failed'); return; }
+            renderProducts();
+        }
+    </script>
+    <!-- Language Translator Widget Styles -->
+    <style>
+        .translator-widget {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1001;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .translator-button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+            transition: all 0.3s ease;
+            font-weight: 600;
+            font-size: 14px;
+            border: none;
+            outline: none;
+        }
+
+        .translator-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+        }
+
+        .translator-button i {
+            font-size: 16px;
+        }
+
+        .translator-dropdown {
+            position: absolute;
+            top: 60px;
+            right: 0;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+            min-width: 280px;
+            max-height: 400px;
+            overflow: hidden;
+            transform: scale(0) translateY(-20px);
+            opacity: 0;
+            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .translator-dropdown.active {
+            transform: scale(1) translateY(0);
+            opacity: 1;
+        }
+
+        .translator-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .translator-header h4 {
+            margin: 0;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .close-translator {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            padding: 5px;
+            border-radius: 50%;
+            transition: background 0.2s;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .close-translator:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Google Translate Element Styling */
+        #google_translate_element {
+            padding: 15px 20px;
+        }
+
+        .goog-te-gadget {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+            font-size: 14px !important;
+        }
+
+        .goog-te-gadget-simple {
+            background: transparent !important;
+            border: none !important;
+            padding: 0 !important;
+        }
+
+        .goog-te-gadget-simple .goog-te-menu-value {
+            color: #333 !important;
+            font-size: 14px !important;
+            font-weight: 500 !important;
+        }
+
+        .goog-te-gadget-simple .goog-te-menu-value span:first-child {
+            color: #667eea !important;
+            font-weight: 600 !important;
+        }
+
+        .goog-te-gadget-simple .goog-te-menu-value span:last-child {
+            color: #666 !important;
+        }
+
+        .goog-te-gadget-simple .goog-te-menu-value:before {
+            content: "🌐 " !important;
+            margin-right: 5px !important;
+        }
+
+        /* Hide Google Translate banner */
+        .goog-te-banner-frame {
+            display: none !important;
+        }
+
+        body {
+            top: 0 !important;
+        }
+
+        /* Style the dropdown arrow */
+        .goog-te-gadget-simple .goog-te-menu-value:after {
+            content: " ▼" !important;
+            color: #667eea !important;
+            font-size: 12px !important;
+        }
+
+        .translator-footer {
+            padding: 15px 20px;
+            background: #f8f9fa;
+            display: flex;
+            justify-content: center;
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .reset-btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 600;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+            color: white;
+        }
+
+        .reset-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(255, 107, 107, 0.4);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .translator-widget {
+                top: 15px;
+                right: 15px;
+            }
+
+            .translator-button {
+                padding: 10px 16px;
+                font-size: 13px;
+            }
+
+            .translator-dropdown {
+                min-width: 260px;
+                right: -10px;
+            }
+
+            .reset-btn {
+                padding: 8px 16px;
+                font-size: 11px;
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .translator-widget {
+                top: 10px;
+                right: 10px;
+            }
+
+            .translator-button {
+                padding: 8px 12px;
+                font-size: 12px;
+            }
+
+            .translator-button span {
+                display: none;
+            }
+
+            .translator-dropdown {
+                min-width: 240px;
+                right: -20px;
+            }
+        }
+    </style>
+
+    <!-- Language Translator Widget -->
+    <div class="translator-widget">
+        <div class="translator-button" id="translatorBtn">
+            <i class="fa-solid fa-language"></i>
+            <span>Translate</span>
+        </div>
+        
+        <div class="translator-dropdown" id="translatorDropdown">
+            <div class="translator-header">
+                <h4>Choose Language</h4>
+                <button class="close-translator" id="closeTranslator">
+                    <i class="fa-solid fa-times"></i>
+                </button>
+            </div>
+            
+            <!-- Google Translate Element -->
+            <div id="google_translate_element"></div>
+            
+            <div class="translator-footer">
+                <button class="reset-btn" id="resetBtn">
+                    <i class="fa-solid fa-undo"></i>
+                    Reset to English
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Google Translate Widget JavaScript -->
+    <script>
+        // Google Translate Element Initialization
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'en',
+                includedLanguages: 'en,es,fr,de,it,pt,ru,zh,ja,ko,ar,hi',
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+                autoDisplay: false
+            }, 'google_translate_element');
+        }
+
+        // Simple Translator Widget Controller
+        class SimpleTranslator {
+            constructor() {
+                this.isOpen = false;
+                this.init();
+            }
+
+            init() {
+                this.translatorBtn = document.getElementById('translatorBtn');
+                this.translatorDropdown = document.getElementById('translatorDropdown');
+                this.closeTranslator = document.getElementById('closeTranslator');
+                this.resetBtn = document.getElementById('resetBtn');
+
+                this.bindEvents();
+            }
+
+            bindEvents() {
+                // Toggle dropdown
+                this.translatorBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    this.toggleDropdown();
+                });
+
+                // Close dropdown
+                this.closeTranslator.addEventListener('click', () => {
+                    this.closeDropdown();
+                });
+
+                // Reset button
+                this.resetBtn.addEventListener('click', () => {
+                    this.resetTranslation();
+                });
+
+                // Close dropdown when clicking outside
+                document.addEventListener('click', (e) => {
+                    if (!e.target.closest('.translator-widget') && this.isOpen) {
+                        this.closeDropdown();
+                    }
+                });
+
+                // Keyboard navigation
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === 'Escape' && this.isOpen) {
+                        this.closeDropdown();
+                    }
+                });
+            }
+
+            toggleDropdown() {
+                if (this.isOpen) {
+                    this.closeDropdown();
+                } else {
+                    this.openDropdown();
+                }
+            }
+
+            openDropdown() {
+                this.translatorDropdown.classList.add('active');
+                this.isOpen = true;
+            }
+
+            closeDropdown() {
+                this.translatorDropdown.classList.remove('active');
+                this.isOpen = false;
+            }
+
+            resetTranslation() {
+                // Reset Google Translate to English
+                if (window.google && window.google.translate) {
+                    const translateElement = document.querySelector('.goog-te-combo');
+                    if (translateElement) {
+                        translateElement.selectedIndex = 0;
+                        translateElement.dispatchEvent(new Event('change'));
+                    }
+                }
+
+                // Remove Google Translate banner
+                const banner = document.querySelector('.goog-te-banner-frame');
+                if (banner) {
+                    banner.remove();
+                }
+
+                // Reset body top position
+                document.body.style.top = '0px';
+
+                this.showNotification('Translation reset to English');
+            }
+
+            showNotification(message) {
+                // Create notification element
+                const notification = document.createElement('div');
+                notification.style.cssText = `
+                    position: fixed;
+                    top: 80px;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                    color: white;
+                    padding: 12px 24px;
+                    border-radius: 25px;
+                    font-size: 14px;
+                    font-weight: 600;
+                    z-index: 10000;
+                    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+                    animation: slideDown 0.3s ease;
+                `;
+                notification.textContent = message;
+                document.body.appendChild(notification);
+
+                // Remove notification after 3 seconds
+                setTimeout(() => {
+                    notification.style.animation = 'slideUp 0.3s ease';
+                    setTimeout(() => notification.remove(), 300);
+                }, 3000);
+            }
+        }
+
+        // Initialize the translator when DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            new SimpleTranslator();
+            // Auto-open specific tab if hash provided
+            try {
+                const hash = (location.hash||'').replace('#','');
+                if (hash === 'services') { loadTab('services'); }
+            } catch(e){}
+        });
+
+        // Add CSS animations for notifications
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideDown {
+                from {
+                    opacity: 0;
+                    transform: translateX(-50%) translateY(-20px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateX(-50%) translateY(0);
+                }
+            }
+            
+            @keyframes slideUp {
+                from {
+                    opacity: 1;
+                    transform: translateX(-50%) translateY(0);
+                }
+                to {
+                    opacity: 0;
+                    transform: translateX(-50%) translateY(-20px);
+                }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Company Settings Management
+        async function renderSettings() {
+            const target = document.getElementById('mainContent');
+            target.innerHTML = `
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h4>Company Settings</h4>
+                    <button class="btn btn-primary" onclick="saveCompanySettings()">
+                        <i class="bi bi-save"></i> Save Settings
+                    </button>
+                </div>
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5><i class="bi bi-building"></i> Company Information</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Company Name</label>
+                                        <input type="text" class="form-control" id="cs_company_name" placeholder="SCL Digital Agency (Pty) Ltd">
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Company Email</label>
+                                        <input type="email" class="form-control" id="cs_company_email" placeholder="info@softwarecreativelabs.com">
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Phone Number</label>
+                                        <input type="text" class="form-control" id="cs_company_phone" placeholder="+27 21 123 4567">
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Website</label>
+                                        <input type="url" class="form-control" id="cs_company_website" placeholder="https://softwarecreativelabs.com">
+                                    </div>
+                                    <div class="col-12 mb-3">
+                                        <label class="form-label">Address</label>
+                                        <textarea class="form-control" id="cs_company_address" rows="3" placeholder="Cape Town, South Africa"></textarea>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Tax Number</label>
+                                        <input type="text" class="form-control" id="cs_tax_number" placeholder="Tax/VAT Number">
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Registration Number</label>
+                                        <input type="text" class="form-control" id="cs_registration_number" placeholder="Company Registration Number">
+                                    </div>
+                                    <div class="col-12 mb-3">
+                                        <label class="form-label">Bank Details</label>
+                                        <textarea class="form-control" id="cs_bank_details" rows="4" placeholder="Bank Name, Account Number, Branch Code, etc."></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="card mt-4">
+                            <div class="card-header">
+                                <h5><i class="bi bi-image"></i> Logo Settings</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="mb-3">
+                                    <label class="form-label">Logo URL</label>
+                                    <input type="url" class="form-control" id="cs_logo_url" placeholder="/images/SCL_Blue.png">
+                                    <small class="form-text text-muted">Path to your company logo (will appear on invoices)</small>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Logo Preview</label>
+                                    <div id="logo_preview" class="border p-3 text-center" style="min-height: 100px; background: #f8f9fa;">
+                                        <img id="logo_preview_img" src="" alt="Logo Preview" style="max-height: 80px; max-width: 200px;" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                                        <div id="logo_preview_placeholder" style="display: none;">No logo selected</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="card mt-4">
+                            <div class="card-header">
+                                <h5><i class="bi bi-paypal"></i> PayPal Configuration</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="mb-3">
+                                    <label class="form-label">PayPal Client ID</label>
+                                    <input type="text" class="form-control" id="cs_paypal_client_id" placeholder="PayPal Client ID">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">PayPal Client Secret</label>
+                                    <input type="text" class="form-control" id="cs_paypal_client_secret" placeholder="PayPal Client Secret">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Enabled</label>
+                                    <div>
+                                        <input type="checkbox" id="cs_paypal_enabled"> <label for="cs_paypal_enabled" class="ms-1">Enable PayPal on website</label>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Currency</label>
+                                    <input type="text" class="form-control" id="cs_currency" placeholder="ZAR">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Mode</label>
+                                    <select class="form-select" id="cs_paypal_mode">
+                                        <option value="sandbox">Sandbox</option>
+                                        <option value="live">Live</option>
+                                    </select>
+                                </div>
+                                <small class="form-text text-muted">These credentials are used by server-side PayPal integrations. Keep the secret safe.</small>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5><i class="bi bi-info-circle"></i> Invoice Preview</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="border p-3" style="background: white; font-size: 12px;">
+                                    <div class="d-flex justify-content-between align-items-start mb-3">
+                                        <div>
+                                            <strong id="preview_invoice_number">Invoice INV-2024-001</strong>
+                                            <div class="text-muted">Issue: 2024-01-15 | Due: 2024-02-15</div>
+                                        </div>
+                                        <div class="text-end">
+                                            <img id="preview_logo" src="" alt="Logo" style="max-height: 40px; max-width: 120px;" onerror="this.style.display='none'">
+                                            <div><strong id="preview_company_name">SCL Digital Agency</strong></div>
+                                            <div class="text-muted" id="preview_company_email">info@softwarecreativelabs.com</div>
+                                            <div class="text-muted" id="preview_company_phone">+27 21 123 4567</div>
+                                        </div>
+                                    </div>
+                                    <div class="border-top pt-2">
+                                        <strong>Bill To:</strong><br>
+                                        <div>Client Name<br>client@example.com</div>
+                                    </div>
+                                </div>
+                                <small class="text-muted">This is how your company information will appear on invoices</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            // Load current settings
+            await loadCompanySettings();
+        }
+
+        async function loadCompanySettings() {
+            try {
+                const resp = await apiRequest(`${API_BASE}/company_settings.php`);
+                if (resp.success && resp.data) {
+                    const data = resp.data;
+                    document.getElementById('cs_company_name').value = data.company_name || '';
+                    document.getElementById('cs_company_email').value = data.company_email || '';
+                    document.getElementById('cs_company_phone').value = data.company_phone || '';
+                    document.getElementById('cs_company_website').value = data.company_website || '';
+                    document.getElementById('cs_company_address').value = data.company_address || '';
+                    document.getElementById('cs_tax_number').value = data.tax_number || '';
+                    document.getElementById('cs_registration_number').value = data.registration_number || '';
+                    document.getElementById('cs_bank_details').value = data.bank_details || '';
+                    document.getElementById('cs_logo_url').value = data.logo_url || '';
+                    document.getElementById('cs_paypal_client_id').value = data.paypal_client_id || '';
+                    document.getElementById('cs_paypal_client_secret').value = data.paypal_client_secret || '';
+                    document.getElementById('cs_paypal_enabled').checked = (data.paypal_enabled == '1' || data.paypal_enabled === 1 || data.paypal_enabled === 'true');
+                    document.getElementById('cs_currency').value = data.currency || 'ZAR';
+                    document.getElementById('cs_paypal_mode').value = data.paypal_mode || 'sandbox';
+                    
+                    // Update preview
+                    updateCompanyPreview();
+                }
+            } catch (error) {
+                console.error('Error loading company settings:', error);
+            }
+        }
+
+        function updateCompanyPreview() {
+            const logoUrl = document.getElementById('cs_logo_url').value;
+            const companyName = document.getElementById('cs_company_name').value;
+            const companyEmail = document.getElementById('cs_company_email').value;
+            const companyPhone = document.getElementById('cs_company_phone').value;
+            
+            // Update preview elements
+            document.getElementById('preview_logo').src = logoUrl;
+            document.getElementById('preview_company_name').textContent = companyName || 'Company Name';
+            document.getElementById('preview_company_email').textContent = companyEmail || 'email@company.com';
+            document.getElementById('preview_company_phone').textContent = companyPhone || '+27 21 123 4567';
+            
+            // Update logo preview
+            const logoPreview = document.getElementById('logo_preview_img');
+            const logoPlaceholder = document.getElementById('logo_preview_placeholder');
+            if (logoUrl) {
+                logoPreview.src = logoUrl;
+                logoPreview.style.display = 'block';
+                logoPlaceholder.style.display = 'none';
+            } else {
+                logoPreview.style.display = 'none';
+                logoPlaceholder.style.display = 'block';
+            }
+        }
+
+        async function saveCompanySettings() {
+            const data = {
+                company_name: document.getElementById('cs_company_name').value,
+                company_email: document.getElementById('cs_company_email').value,
+                company_phone: document.getElementById('cs_company_phone').value,
+                company_website: document.getElementById('cs_company_website').value,
+                company_address: document.getElementById('cs_company_address').value,
+                tax_number: document.getElementById('cs_tax_number').value,
+                registration_number: document.getElementById('cs_registration_number').value,
+                bank_details: document.getElementById('cs_bank_details').value,
+                logo_url: document.getElementById('cs_logo_url').value
+            };
+            // Include PayPal config
+            data.paypal_client_id = document.getElementById('cs_paypal_client_id').value;
+            data.paypal_client_secret = document.getElementById('cs_paypal_client_secret').value;
+            data.paypal_mode = document.getElementById('cs_paypal_mode').value;
+                data.paypal_enabled = document.getElementById('cs_paypal_enabled').checked ? 1 : 0;
+                data.currency = document.getElementById('cs_currency').value || 'ZAR';
+            
+            try {
+                const resp = await apiRequest(`${API_BASE}/company_settings.php`, 'PUT', data);
+                if (resp.success) {
+                    showNotification('Company settings saved successfully!', 'success');
+                } else {
+                    showNotification('Error saving settings: ' + (resp.error || 'Unknown error'), 'error');
+                }
+            } catch (error) {
+                showNotification('Error saving settings: ' + error.message, 'error');
+            }
+        }
+
+        // Banner Management Functions
+        async function renderBanners() {
+            const target = document.getElementById('mainContent');
+            target.innerHTML = `
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h4><i class="bi bi-image"></i> Banner Management</h4>
+                    <button class="btn btn-primary" onclick="showBannerModal()">
+                        <i class="bi bi-plus-circle"></i> Add New Banner
+                    </button>
+                </div>
+                
+                <div class="row" id="bannersList">
+                    <div class="col-12 text-center py-5">
+                        <div class="spinner-border text-primary" role="status">
+                            <span class="visually-hidden">Loading banners...</span>
+                        </div>
+                        <p class="mt-3 text-muted">Loading banners...</p>
+                    </div>
+                </div>
+            `;
+            
+            await loadBanners();
+        }
+
+        async function loadBanners() {
+            try {
+                const response = await apiRequest(`${API_BASE}/banners.php`, 'GET');
+                if (response.success) {
+                    displayBanners(response.data);
+                } else {
+                    showNotification('Error loading banners: ' + response.error, 'error');
+                }
+            } catch (error) {
+                showNotification('Error loading banners: ' + error.message, 'error');
+            }
+        }
+
+        function displayBanners(banners) {
+            const container = document.getElementById('bannersList');
+            
+            if (banners.length === 0) {
+                container.innerHTML = `
+                    <div class="col-12 text-center py-5">
+                        <i class="bi bi-image text-muted" style="font-size: 3rem;"></i>
+                        <h5 class="mt-3 text-muted">No banners found</h5>
+                        <p class="text-muted">Create your first banner to get started.</p>
+                        <button class="btn btn-primary" onclick="showBannerModal()">
+                            <i class="bi bi-plus-circle"></i> Add First Banner
+                        </button>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = banners.map(banner => `
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="card h-100">
+                        <div class="card-img-top" style="height: 200px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); display: flex; align-items: center; justify-content: center; color: white; position: relative;">
+                            ${banner.image_url ? 
+                                `<img src="${banner.image_url}" alt="${banner.title}" style="width: 100%; height: 100%; object-fit: cover;">` :
+                                `<i class="bi bi-image" style="font-size: 3rem;"></i>`
+                            }
+                            <div class="position-absolute top-0 end-0 m-2">
+                                <span class="badge ${banner.is_active ? 'bg-success' : 'bg-secondary'}">
+                                    ${banner.is_active ? 'Active' : 'Inactive'}
+                                </span>
+                            </div>
+                        </div>
+                        <div class="card-body d-flex flex-column">
+                            <h6 class="card-title">${banner.title}</h6>
+                            ${banner.subtitle ? `<p class="card-text text-muted small">${banner.subtitle}</p>` : ''}
+                            ${banner.description ? `<p class="card-text small">${banner.description.substring(0, 100)}${banner.description.length > 100 ? '...' : ''}</p>` : ''}
+                            <div class="mt-auto">
+                                <div class="d-flex gap-2">
+                                    <button class="btn btn-sm btn-outline-primary" onclick="editBanner(${banner.id})">
+                                        <i class="bi bi-pencil"></i> Edit
+                                    </button>
+                                    <button class="btn btn-sm btn-outline-danger" onclick="deleteBanner(${banner.id})">
+                                        <i class="bi bi-trash"></i> Delete
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function showBannerModal(banner = null) {
+            const isEdit = banner !== null;
+            const modalHtml = `
+                <div class="modal fade" id="bannerModal" tabindex="-1">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">
+                                    <i class="bi bi-image"></i> ${isEdit ? 'Edit Banner' : 'Add New Banner'}
+                                </h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form id="bannerForm">
+                                    <div class="row">
+                                        <div class="col-md-6 mb-3">
+                                            <label for="banner_title" class="form-label">Title *</label>
+                                            <input type="text" class="form-control" id="banner_title" value="${banner?.title || ''}" required>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label for="banner_subtitle" class="form-label">Subtitle</label>
+                                            <input type="text" class="form-control" id="banner_subtitle" value="${banner?.subtitle || ''}">
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="banner_description" class="form-label">Description</label>
+                                        <textarea class="form-control" id="banner_description" rows="3">${banner?.description || ''}</textarea>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="banner_image_url" class="form-label">Image URL</label>
+                                        <input type="url" class="form-control" id="banner_image_url" value="${banner?.image_url || ''}" placeholder="https://example.com/image.jpg">
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6 mb-3">
+                                            <label for="banner_button_text" class="form-label">Button Text</label>
+                                            <input type="text" class="form-control" id="banner_button_text" value="${banner?.button_text || ''}">
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label for="banner_button_link" class="form-label">Button Link</label>
+                                            <input type="url" class="form-control" id="banner_button_link" value="${banner?.button_link || ''}">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6 mb-3">
+                                            <label for="banner_sort_order" class="form-label">Sort Order</label>
+                                            <input type="number" class="form-control" id="banner_sort_order" value="${banner?.sort_order || 0}">
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <div class="form-check mt-4">
+                                                <input class="form-check-input" type="checkbox" id="banner_is_active" ${banner?.is_active ? 'checked' : ''}>
+                                                <label class="form-check-label" for="banner_is_active">
+                                                    Active
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                <button type="button" class="btn btn-primary" onclick="saveBanner(${banner?.id || null})">
+                                    <i class="bi bi-check-circle"></i> ${isEdit ? 'Update Banner' : 'Create Banner'}
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            // Remove existing modal if any
+            const existingModal = document.getElementById('bannerModal');
+            if (existingModal) {
+                existingModal.remove();
+            }
+            
+            // Add modal to body
+            document.body.insertAdjacentHTML('beforeend', modalHtml);
+            
+            // Show modal
+            const modal = new bootstrap.Modal(document.getElementById('bannerModal'));
+            modal.show();
+        }
+
+        async function saveBanner(bannerId) {
+            const data = {
+                title: document.getElementById('banner_title').value,
+                subtitle: document.getElementById('banner_subtitle').value,
+                description: document.getElementById('banner_description').value,
+                image_url: document.getElementById('banner_image_url').value,
+                button_text: document.getElementById('banner_button_text').value,
+                button_link: document.getElementById('banner_button_link').value,
+                sort_order: parseInt(document.getElementById('banner_sort_order').value) || 0,
+                is_active: document.getElementById('banner_is_active').checked
+            };
+
+            if (!data.title.trim()) {
+                showNotification('Title is required', 'error');
+                return;
+            }
+
+            try {
+                const url = bannerId ? `${API_BASE}/banners.php` : `${API_BASE}/banners.php`;
+                const method = bannerId ? 'PUT' : 'POST';
+                
+                if (bannerId) {
+                    data.id = bannerId;
+                }
+
+                const response = await apiRequest(url, method, data);
+                
+                if (response.success) {
+                    showNotification(bannerId ? 'Banner updated successfully!' : 'Banner created successfully!', 'success');
+                    bootstrap.Modal.getInstance(document.getElementById('bannerModal')).hide();
+                    await loadBanners();
+                } else {
+                    showNotification('Error saving banner: ' + response.error, 'error');
+                }
+            } catch (error) {
+                showNotification('Error saving banner: ' + error.message, 'error');
+            }
+        }
+
+        async function editBanner(bannerId) {
+            try {
+                const response = await apiRequest(`${API_BASE}/banners.php`, 'GET');
+                if (response.success) {
+                    const banner = response.data.find(b => b.id === bannerId);
+                    if (banner) {
+                        showBannerModal(banner);
+                    } else {
+                        showNotification('Banner not found', 'error');
+                    }
+                } else {
+                    showNotification('Error loading banner: ' + response.error, 'error');
+                }
+            } catch (error) {
+                showNotification('Error loading banner: ' + error.message, 'error');
+            }
+        }
+
+        async function deleteBanner(bannerId) {
+            if (!confirm('Are you sure you want to delete this banner? This action cannot be undone.')) {
+                return;
+            }
+
+            try {
+                const response = await apiRequest(`${API_BASE}/banners.php?id=${bannerId}`, 'DELETE');
+                if (response.success) {
+                    showNotification('Banner deleted successfully!', 'success');
+                    await loadBanners();
+                } else {
+                    showNotification('Error deleting banner: ' + response.error, 'error');
+                }
+            } catch (error) {
+                showNotification('Error deleting banner: ' + error.message, 'error');
+            }
+        }
+
+        // Domain Management Functions
+        async function renderDomains() {
+            const target = document.getElementById('mainContent');
+            target.innerHTML = `
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h4><i class="bi bi-globe"></i> Domain Management</h4>
+                    <div class="d-flex gap-2">
+                        <select class="form-select" id="clientFilter" onchange="filterDomainsByClient()" style="width: auto;">
+                            <option value="">All Clients</option>
+                        </select>
+                        <button class="btn btn-primary" onclick="showDomainModal()">
+                            <i class="bi bi-plus-circle"></i> Add Domain
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Domain Statistics -->
+                <div class="row mb-4" id="domainStats">
+                    <div class="col-md-3 mb-3">
+                        <div class="stat-card" style="--accent-color: #059669;">
+                            <div class="stat-value" id="totalDomains">0</div>
+                            <div class="stat-label">Total Domains</div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <div class="stat-card" style="--accent-color: #2563eb;">
+                            <div class="stat-value" id="activeDomains">0</div>
+                            <div class="stat-label">Active Domains</div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <div class="stat-card" style="--accent-color: #d97706;">
+                            <div class="stat-value" id="autoRenewal">0</div>
+                            <div class="stat-label">Auto-Renewal</div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <div class="stat-card" style="--accent-color: #dc2626;">
+                            <div class="stat-value" id="expiringSoon">0</div>
+                            <div class="stat-label">Expiring Soon</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Domains Table -->
+                <div class="card">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Domain</th>
+                                        <th>Client</th>
+                                        <th>Status</th>
+                                        <th>Expiry Date</th>
+                                        <th>Auto-Renewal</th>
+                                        <th>Registrar</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="domainsTableBody">
+                                    <tr>
+                                        <td colspan="7" class="text-center py-4">
+                                            <div class="spinner-border text-primary" role="status">
+                                                <span class="visually-hidden">Loading domains...</span>
+                                            </div>
+                                            <p class="mt-2 text-muted">Loading domains...</p>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            await loadClientsForFilter();
+            await loadDomains();
+        }
+
+        async function loadClientsForFilter() {
+            try {
+                const response = await apiRequest(`${API_BASE}/admin/clients.php`, 'GET');
+                if (response.success) {
+                    const clientFilter = document.getElementById('clientFilter');
+                    clientFilter.innerHTML = '<option value="">All Clients</option>' + 
+                        response.data.map(client => `<option value="${client.id}">${client.name}</option>`).join('');
+                }
+            } catch (error) {
+                console.error('Error loading clients:', error);
+            }
+        }
+
+        async function loadDomains(clientId = null) {
+            try {
+                const url = clientId ? `${API_BASE}/domains.php?client_id=${clientId}` : `${API_BASE}/domains.php`;
+                const response = await apiRequest(url, 'GET');
+                
+                if (response.success) {
+                    displayDomains(response.data);
+                    updateDomainStats(response.stats);
+                } else {
+                    showNotification('Error loading domains: ' + response.error, 'error');
+                }
+            } catch (error) {
+                showNotification('Error loading domains: ' + error.message, 'error');
+            }
+        }
+
+        function displayDomains(domains) {
+            const tbody = document.getElementById('domainsTableBody');
+            
+            if (domains.length === 0) {
+                tbody.innerHTML = `
+                    <tr>
+                        <td colspan="7" class="text-center py-4">
+                            <i class="bi bi-globe text-muted" style="font-size: 3rem;"></i>
+                            <h5 class="mt-3 text-muted">No domains found</h5>
+                            <p class="text-muted">Add your first domain to get started.</p>
+                            <button class="btn btn-primary" onclick="showDomainModal()">
+                                <i class="bi bi-plus-circle"></i> Add First Domain
+                            </button>
+                        </td>
+                    </tr>
+                `;
+                return;
+            }
+
+            tbody.innerHTML = domains.map(domain => `
+                <tr>
+                    <td>
+                        <strong>${domain.domain_name}</strong>
+                        ${domain.notes ? `<br><small class="text-muted">${domain.notes}</small>` : ''}
+                    </td>
+                    <td>${domain.client_name || 'Unknown Client'}</td>
+                    <td>
+                        <span class="status-badge status-${domain.status.toLowerCase()}">${domain.status}</span>
+                    </td>
+                    <td>${domain.expiry_date ? new Date(domain.expiry_date).toLocaleDateString() : 'N/A'}</td>
+                    <td>
+                        <span class="badge ${domain.auto_renewal ? 'bg-success' : 'bg-secondary'}">
+                            ${domain.auto_renewal ? 'Enabled' : 'Disabled'}
+                        </span>
+                    </td>
+                    <td>${domain.registrar || 'N/A'}</td>
+                    <td>
+                        <div class="btn-group btn-group-sm">
+                            <button class="btn btn-outline-primary" onclick="editDomain(${domain.id})">
+                                <i class="bi bi-pencil"></i>
+                            </button>
+                            <button class="btn btn-outline-danger" onclick="deleteDomain(${domain.id})">
+                                <i class="bi bi-trash"></i>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        function updateDomainStats(stats) {
+            document.getElementById('totalDomains').textContent = stats.total || 0;
+            document.getElementById('activeDomains').textContent = stats.active || 0;
+            document.getElementById('autoRenewal').textContent = stats.auto_renewal || 0;
+            document.getElementById('expiringSoon').textContent = stats.expiring_soon || 0;
+        }
+
+        function filterDomainsByClient() {
+            const clientId = document.getElementById('clientFilter').value;
+            loadDomains(clientId || null);
+        }
+
+        function showDomainModal(domain = null) {
+            const isEdit = domain !== null;
+            const modalHtml = `
+                <div class="modal fade" id="domainModal" tabindex="-1">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">
+                                    <i class="bi bi-globe"></i> ${isEdit ? 'Edit Domain' : 'Add New Domain'}
+                                </h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form id="domainForm">
+                                    <div class="row">
+                                        <div class="col-md-6 mb-3">
+                                            <label for="domain_client_id" class="form-label">Client *</label>
+                                            <select class="form-select" id="domain_client_id" required>
+                                                <option value="">Select Client</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label for="domain_name" class="form-label">Domain Name *</label>
+                                            <input type="text" class="form-control" id="domain_name" value="${domain?.domain_name || ''}" required placeholder="example.com">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6 mb-3">
+                                            <label for="domain_status" class="form-label">Status</label>
+                                            <select class="form-select" id="domain_status">
+                                                <option value="Pending" ${domain?.status === 'Pending' ? 'selected' : ''}>Pending</option>
+                                                <option value="Active" ${domain?.status === 'Active' ? 'selected' : ''}>Active</option>
+                                                <option value="Expired" ${domain?.status === 'Expired' ? 'selected' : ''}>Expired</option>
+                                                <option value="Suspended" ${domain?.status === 'Suspended' ? 'selected' : ''}>Suspended</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label for="domain_registrar" class="form-label">Registrar</label>
+                                            <input type="text" class="form-control" id="domain_registrar" value="${domain?.registrar || ''}" placeholder="GoDaddy, Namecheap, etc.">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6 mb-3">
+                                            <label for="domain_registration_date" class="form-label">Registration Date</label>
+                                            <input type="date" class="form-control" id="domain_registration_date" value="${domain?.registration_date || ''}">
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label for="domain_expiry_date" class="form-label">Expiry Date</label>
+                                            <input type="date" class="form-control" id="domain_expiry_date" value="${domain?.expiry_date || ''}">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6 mb-3">
+                                            <label for="domain_renewal_price" class="form-label">Renewal Price</label>
+                                            <input type="number" step="0.01" class="form-control" id="domain_renewal_price" value="${domain?.renewal_price || ''}" placeholder="0.00">
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <div class="form-check mt-4">
+                                                <input class="form-check-input" type="checkbox" id="domain_auto_renewal" ${domain?.auto_renewal ? 'checked' : ''}>
+                                                <label class="form-check-label" for="domain_auto_renewal">
+                                                    Auto-Renewal
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="domain_notes" class="form-label">Notes</label>
+                                        <textarea class="form-control" id="domain_notes" rows="3">${domain?.notes || ''}</textarea>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                <button type="button" class="btn btn-primary" onclick="saveDomain(${domain?.id || null})">
+                                    <i class="bi bi-check-circle"></i> ${isEdit ? 'Update Domain' : 'Create Domain'}
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            // Remove existing modal if any
+            const existingModal = document.getElementById('domainModal');
+            if (existingModal) {
+                existingModal.remove();
+            }
+            
+            // Add modal to body
+            document.body.insertAdjacentHTML('beforeend', modalHtml);
+            
+            // Load clients for dropdown
+            loadClientsForDomainModal(domain?.client_id);
+            
+            // Show modal
+            const modal = new bootstrap.Modal(document.getElementById('domainModal'));
+            modal.show();
+        }
+
+        async function loadClientsForDomainModal(selectedClientId = null) {
+            try {
+                const response = await apiRequest(`${API_BASE}/admin/clients.php`, 'GET');
+                if (response.success) {
+                    const clientSelect = document.getElementById('domain_client_id');
+                    clientSelect.innerHTML = '<option value="">Select Client</option>' + 
+                        response.data.map(client => 
+                            `<option value="${client.id}" ${client.id == selectedClientId ? 'selected' : ''}>${client.name}</option>`
+                        ).join('');
+                }
+            } catch (error) {
+                console.error('Error loading clients:', error);
+            }
+        }
+
+        async function saveDomain(domainId) {
+            const data = {
+                client_id: document.getElementById('domain_client_id').value,
+                domain_name: document.getElementById('domain_name').value,
+                status: document.getElementById('domain_status').value,
+                registrar: document.getElementById('domain_registrar').value,
+                registration_date: document.getElementById('domain_registration_date').value,
+                expiry_date: document.getElementById('domain_expiry_date').value,
+                renewal_price: document.getElementById('domain_renewal_price').value,
+                auto_renewal: document.getElementById('domain_auto_renewal').checked,
+                notes: document.getElementById('domain_notes').value
+            };
+
+            if (!data.client_id || !data.domain_name.trim()) {
+                showNotification('Client and Domain Name are required', 'error');
+                return;
+            }
+
+            try {
+                const url = domainId ? `${API_BASE}/domains.php` : `${API_BASE}/domains.php`;
+                const method = domainId ? 'PUT' : 'POST';
+                
+                if (domainId) {
+                    data.id = domainId;
+                }
+
+                const response = await apiRequest(url, method, data);
+                
+                if (response.success) {
+                    showNotification(domainId ? 'Domain updated successfully!' : 'Domain created successfully!', 'success');
+                    bootstrap.Modal.getInstance(document.getElementById('domainModal')).hide();
+                    await loadDomains();
+                } else {
+                    showNotification('Error saving domain: ' + response.error, 'error');
+                }
+            } catch (error) {
+                showNotification('Error saving domain: ' + error.message, 'error');
+            }
+        }
+
+        async function editDomain(domainId) {
+            try {
+                const response = await apiRequest(`${API_BASE}/domains.php`, 'GET');
+                if (response.success) {
+                    const domain = response.data.find(d => d.id === domainId);
+                    if (domain) {
+                        showDomainModal(domain);
+                    } else {
+                        showNotification('Domain not found', 'error');
+                    }
+                } else {
+                    showNotification('Error loading domain: ' + response.error, 'error');
+                }
+            } catch (error) {
+                showNotification('Error loading domain: ' + error.message, 'error');
+            }
+        }
+
+        async function deleteDomain(domainId) {
+            if (!confirm('Are you sure you want to delete this domain? This action cannot be undone.')) {
+                return;
+            }
+
+            try {
+                const response = await apiRequest(`${API_BASE}/domains.php?id=${domainId}`, 'DELETE');
+                if (response.success) {
+                    showNotification('Domain deleted successfully!', 'success');
+                    await loadDomains();
+                } else {
+                    showNotification('Error deleting domain: ' + response.error, 'error');
+                }
+            } catch (error) {
+                showNotification('Error deleting domain: ' + error.message, 'error');
+            }
+        }
+
+        // Add event listeners for real-time preview updates
+        document.addEventListener('DOMContentLoaded', () => {
+            // Add event listeners for company settings preview updates
+            const previewFields = ['cs_company_name', 'cs_company_email', 'cs_company_phone', 'cs_logo_url'];
+            previewFields.forEach(fieldId => {
+                const element = document.getElementById(fieldId);
+                if (element) {
+                    element.addEventListener('input', updateCompanyPreview);
+                }
+            });
+        });
+    </script>
+    <!-- Project Manager JavaScript - Database Integrated -->
+    <script src="js/project-manager-db.js"></script>
+    <!-- Legacy Project Manager JavaScript (fallback) -->
+    <script src="js/project-manager.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,995 @@
+<!-- In God we Trust -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Events - SCL Digital Agency</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="../css/main.css">
+  <style>
+    .events-hero {
+      background: linear-gradient(135deg, rgba(22, 122, 198, 0.9), rgba(30, 52, 141, 0.287)), url('../images/Tech Event.jpg');
+      background-size: cover;
+      background-position: center;
+      padding: 120px 0 80px;
+      text-align: center;
+      color: white;
+      position: relative;
+    }
+
+    .events-hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.3);
+      z-index: 1;
+    }
+
+    .events-hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .events-hero h1 {
+      font-size: 3.5rem;
+      font-weight: 0;
+      margin-bottom: 20px;
+
+    }
+
+    .events-hero p {
+      font-size: 1.3rem;
+      margin-bottom: 30px;
+      opacity: 0.95;
+    }
+
+    .events-nav {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border-radius: 4px;
+      padding: 8px;
+      display: inline-flex;
+      margin-bottom: 40px;
+    }
+
+    .events-nav button {
+      background: transparent;
+      border: none;
+      color: white;
+      padding: 12px 24px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-weight: 500;
+    }
+
+    .events-nav button.active {
+      background: rgba(255, 255, 255, 0.2);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .events-nav button:hover {
+      background: rgba(255, 255, 255, 0.15);
+    }
+
+    .events-section {
+      padding: 80px 0;
+      background: #f8f9fa;
+    }
+
+    .events-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .events-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 400px));
+      gap: 30px;
+      margin-top: 50px;
+      align-items: stretch;
+      justify-content: center;
+    }
+
+    .event-card {
+      background: white;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+      position: relative;
+      height: 100%;
+      width: 100%;
+      max-width: 400px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .event-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    }
+
+    .event-card.upcoming {
+      border-left: 5px solid #1e348d;
+    }
+
+    .event-card.past {
+      border-left: 5px solid #6c757d;
+      opacity: 1;
+    }
+
+    .event-image {
+      height: 200px;
+      background: linear-gradient(45deg, #167ac6, #1e348d);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .event-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+
+    .event-card:hover .event-image img {
+      transform: scale(1.1);
+    }
+
+    .event-date-badge {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: rgba(255, 255, 255, 0.9);
+      color: #333;
+      padding: 8px 15px;
+      border-radius: 20px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      backdrop-filter: blur(10px);
+    }
+
+    .event-content {
+      padding: 25px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .event-category {
+      display: inline-block;
+      background: linear-gradient(45deg, #167ac6, #1e348d);
+      color: white;
+      padding: 6px 15px;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      margin-bottom: 15px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .event-title {
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+      color: #333;
+      line-height: 1.3;
+    }
+
+    .event-description {
+      color: #666;
+      margin-bottom: 20px;
+      line-height: 1.6;
+      flex: 1;
+      min-height: 60px;
+    }
+
+    .event-meta {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      margin-bottom: 20px;
+      font-size: 0.9rem;
+      color: #777;
+    }
+
+    .event-meta i {
+      color: #167ac6;
+      margin-right: 5px;
+    }
+
+    .event-actions {
+      display: flex;
+      gap: 10px;
+      margin-top: auto;
+    }
+
+    .btn-event {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-primary {
+      background: linear-gradient(45deg, #167ac6, #1e348d);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(22, 122, 198, 0.4);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: #167ac6;
+      border: 2px solid #167ac6;
+    }
+
+    .btn-secondary:hover {
+      background: #167ac6;
+      color: white;
+    }
+
+    @media (max-width: 768px) {
+      .events-hero h1 {
+        font-size: 2.5rem;
+      }
+
+      .events-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+  <!-- Google Translate API -->
+  <script type="text/javascript"
+    src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+</head>
+
+<body>
+
+  <div class="menu-overlay"></div>
+  <main class="main">
+
+    <section class="s-contact">
+      <div class="sidebar">
+        <div class="menu-wrap">
+          <a href="index.html" class="sidebar-logo">
+            <img src="../images/SCLDALOGOV3.png" alt="Sylvia">
+          </a>
+          <nav class="menu-nav">
+
+
+
+
+            <ul>
+              <li><a href="index.html"><i class="fa-solid fa-house"></i> Home</a></li>
+              <li><a href="about.html"><i class="fa-solid fa-building"></i> About Us</a></li>
+              <li><a href="services-platform/our_services.html"><i class="fa-solid fa-hand-holding-dollar"></i>
+                  Pricing</a></li>
+              <li><a href="applications/products.html"><i class="fa-solid fa-cart-shopping"></i> Store</a></li>
+
+              <li><a href="case_studies.html"><i class="fa-regular fa-folder-open"></i> Customers</a></li>
+              <li><a href="events-platform/eventspage.html"><i class="fa-solid fa-calendar-week"></i> Events</a></li>
+
+              <hr>
+              <li><a href="contactus.html"><i class="fa-solid fa-phone"></i> Contact Us</a></li>
+              <hr>
+              <li><a href="ClientPortal/client-billing-portal.html"><i class="fa-solid fa-right-to-bracket"></i> Client
+                  Portal</a></li>
+
+            </ul>
+
+
+            <div class="menu-contacts">
+              <a href="../payments-system/payments.html" class="menu-contacts__item">
+                <span class="menu-contacts__icon">
+                  <i class="fa-regular fa-credit-card"></i>
+                </span>
+                <p>Payment & Fees</p>
+              </a>
+
+              <a href="../AdminPortal/admin-login.html" class="menu-contacts__item">
+                <span class="menu-contacts__icon">
+                  <i class="fa-solid fa-right-to-bracket"></i>
+                </span>
+                <p>Staff Portal</p>
+              </a>
+
+              <div class="menu-social">
+                <a href="https://www.instagram.com/scl_agency/" target="_blank" class="menu-social__item">
+                  <svg xmlns="http://www.w3.org/2000/svg" height="24" width="26" viewBox="0 0 448 512">
+                    <path fill="#ffffff"
+                      d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7 2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z" />
+                  </svg>
+                </a>
+
+                <a href="https://www.linkedin.com/company/scl-digital-agency/?viewAsMember=true" target="_blank"
+                  class="menu-social__item">
+                  <svg xmlns="http://www.w3.org/2000/svg" height="24" width="26" viewBox="0 0 448 512">
+                    <path fill="#ffffff"
+                      d="M100.3 448H7.4V148.9h92.9zM53.8 108.1C24.1 108.1 0 83.5 0 53.8a53.8 53.8 0 0 1 107.6 0c0 29.7-24.1 54.3-53.8 54.3zM447.9 448h-92.7V302.4c0-34.7-.7-79.2-48.3-79.2-48.3 0-55.7 37.7-55.7 76.7V448h-92.8V148.9h89.1v40.8h1.3c12.4-23.5 42.7-48.3 87.9-48.3 94 0 111.3 61.9 111.3 142.3V448z" />
+                  </svg>
+                </a>
+
+                <a href="https://www.tiktok.com/@scl_digital_agency" target="_blank" class="menu-social__item">
+                  <svg xmlns="http://www.w3.org/2000/svg" height="24" width="26" viewBox="0 0 448 512">
+                    <path fill="#ffffff"
+                      d="M448 209.9a210.1 210.1 0 0 1 -122.8-39.3V349.4A162.6 162.6 0 1 1 185 188.3V278.2a74.6 74.6 0 1 0 52.2 71.2V0l88 0a121.2 121.2 0 0 0 1.9 22.2h0A122.2 122.2 0 0 0 381 102.4a121.4 121.4 0 0 0 67 20.1z" />
+                  </svg>
+                </a>
+              </div>
+            </div>
+
+            <div class="menu-close__wrap">
+              <a href="#" class="menu-close"><img style="transform: rotate(180deg);" src="images/arrow-right.svg"
+                  alt=""></a>
+            </div>
+          </nav>
+        </div>
+
+        <a href="index.html" class="logo">
+          <img src="images/SCL_DA_Icon_logo.png" alt="">
+        </a>
+
+        <a href="#" class="hamburger-button">
+          <span></span>
+          <span></span>
+          <span></span>
+        </a>
+
+        <style>
+          hr {
+            background-color: #f5f5f5;
+            border: none;
+            display: block;
+            height: 2px;
+            margin: 1.5rem 0;
+          }
+
+          .logo img {
+            max-width: 100%;
+            height: auto;
+            width: 200px;
+          }
+
+          .hamburger-button {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 30px;
+            height: 25px;
+            cursor: pointer;
+          }
+
+          .hamburger-button span {
+            display: block;
+            height: 4px;
+            background-color: #333;
+            border-radius: 4px;
+          }
+        </style>
+      </div>
+
+      <!-- Events Hero Section -->
+      <section class="events-hero">
+        <div class="events-hero-content">
+          <h1>Events & Experiences</h1>
+          <p>Join us for exciting workshops, conferences, and networking opportunities. Stay connected with our
+            community and discover the latest in digital innovation.</p>
+
+          <div class="events-nav">
+            <button class="active" onclick="showEvents('upcoming')">
+              <i class="fas fa-calendar-alt"></i> Upcoming Events
+            </button>
+            <button onclick="showEvents('past')">
+              <i class="fas fa-history"></i> Past Events
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Events Section -->
+      <section class="events-section">
+        <div class="events-container">
+          <!-- Upcoming Events -->
+          <div id="upcoming-events" class="events-content">
+            <div class="events-grid" id="eventsList"></div>
+          </div>
+
+          <!-- Past Events -->
+          <div id="past-events" class="events-content" style="display: none;">
+            <div class="events-grid" id="pastEventsList"></div>
+          </div>
+      </section>
+
+      <!-- Call to Action Section -->
+      <section
+        style="background: linear-gradient(135deg, #167ac6, #1e348d); padding: 80px 0; text-align: center; color: white;">
+        <div style="max-width: 800px; margin: 0 auto; padding: 0 20px;">
+          <h2 style="font-size: 2.5rem; margin-bottom: 20px;">Stay Updated</h2>
+          <p style="font-size: 1.2rem; margin-bottom: 30px; opacity: 0.9;">Don't miss out on our upcoming events!
+            Subscribe to our newsletter and be the first to know about new workshops, conferences, and networking
+            opportunities.</p>
+          <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
+            <input type="email" placeholder="Enter your email address"
+              style="padding: 15px 20px; border: none; border-radius: 4px; width: 300px; font-size: 1rem;">
+            <button
+              style="background: white; color: #167ac6; padding: 15px 30px; border: none; border-radius: 4px; font-weight: 600; cursor: pointer; transition: all 0.3s ease;">Subscribe</button>
+          </div>
+        </div>
+      </section>
+
+    </section>
+  </main>
+
+  <!-- Footer START -->
+  <footer
+    style="background: url(images/background-image-sized.webp) no-repeat center center; padding: 32px 0 16px 0; text-align: center; border-top: 1px solid #FFF; margin-top: 1px;">
+    <div style="max-width: 600px; margin: 0 auto;">
+      <!-- Footer Navigation Links -->
+      <nav style="margin-bottom: 18px;">
+        <a href="index.html" style="margin: 0 10px; color: #fff; text-decoration: none; font-weight: 500;">Home</a>
+        <a href="applications/products.html/"
+          style="margin: 0 10px; color: #fff; text-decoration: none; font-weight: 500;">Products</a>
+        <a href="services-platform/our_services.html"
+          style="margin: 0 10px; color: #fff; text-decoration: none; font-weight: 500;">Our Solutions</a>
+        <a href="case_studies.html"
+          style="margin: 0 10px; color: #fff; text-decoration: none; font-weight: 500;">Customers</a>
+        <a href="about.html" style="margin: 0 10px; color: #fff; text-decoration: none; font-weight: 500;">About Us</a>
+        <a href="payments.html" style="margin: 0 10px; color: #fff; text-decoration: none; font-weight: 500;">Payments &
+          Fees</a>
+
+      </nav>
+      <!-- DesignRush Badge Area -->
+      <a href="https://www.designrush.com/agency/it-services/za" target="_blank" rel="noopener"
+        style="display: inline-block; margin-bottom: 12px;">
+        <img src="images/Top IT Services Company.png" alt="it services agencies in south africa designrush"
+          style="max-width: 180px; width: 50%; height: auto;" />
+      </a>
+      <div style="font-size: 13px; color: #fff; margin-top: 8px;">Proudly listed among the Top IT Services Companies in
+        South Africa by DesignRush</div>
+    </div>
+    <div style="font-size: 12px; color: #fff; margin-top: 18px;">&copy; 2025 SCL Digital Agency. All rights reserved.
+    </div>
+  </footer>
+  <!-- Footer END -->
+
+  <!-- JavaScript for Events Page -->
+  <script>
+    async function fetchEvents() {
+      const res = await fetch('../api/admin/events.php');
+      const data = await res.json();
+      if (!data.success) return [];
+      return data.data || [];
+    }
+
+    function formatDateBadge(dt) {
+      if (!dt) return '';
+      const d = new Date(dt.replace(' ', 'T'));
+      const mo = d.toLocaleString('en-US', { month: 'short' });
+      return `${mo} ${d.getDate()}, ${d.getFullYear()}`;
+    }
+
+    function createEventCard(e) {
+      const isPast = e.event_date && new Date(e.event_date.replace(' ', 'T')) < new Date();
+      const cls = isPast ? 'past' : 'upcoming';
+      const img = e.image_url || 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=1500&q=60';
+      const dateBadge = formatDateBadge(e.event_date);
+      const type = (e.event_type || '').toUpperCase() || 'EVENT';
+      const desc = e.description || '';
+      const detailsPdf = e.pdf_url || '#';
+      const registerHref = `events.html?id=${e.id}`;
+      return `
+  <div class="event-card ${cls}">
+    <div class="event-image">
+      <div class="event-date-badge">${dateBadge}</div>
+      <img src="${img}" alt="${e.title || 'Event'}">
+    </div>
+    <div class="event-content">
+      <span class="event-category">${type}</span>
+      <h3 class="event-title">${e.title || ''}</h3>
+      <p class="event-description">${desc}</p>
+      <div class="event-meta">
+        <span><i class="fas fa-clock"></i> ${(e.event_date || '').split(' ')[1] || ''}</span>
+        <span><i class="fas fa-map-marker-alt"></i> ${e.location || ''}</span>
+      </div>
+      <div class="event-actions">
+        <a href="${registerHref}" class="btn-event btn-primary"><i class="fas fa-ticket-alt"></i> Register Now</a>
+        <a href="${detailsPdf}" target="_blank" class="btn-event btn-secondary"><i class="fas fa-info-circle"></i> Details</a>
+      </div>
+    </div>
+  </div>`;
+    }
+
+    document.addEventListener('DOMContentLoaded', async function () {
+      const events = await fetchEvents();
+      const upcomingList = document.getElementById('eventsList');
+      const pastList = document.getElementById('pastEventsList');
+      events.forEach(e => {
+        const isPast = e.event_date && new Date(e.event_date.replace(' ', 'T')) < new Date();
+        const html = createEventCard(e);
+        if (isPast) {
+          if (pastList) pastList.insertAdjacentHTML('beforeend', html);
+        } else {
+          if (upcomingList) upcomingList.insertAdjacentHTML('beforeend', html);
+        }
+      });
+    });
+    function showEvents(type) {
+      document.getElementById('upcoming-events').style.display = 'none';
+      document.getElementById('past-events').style.display = 'none';
+      document.getElementById(type + '-events').style.display = 'block';
+
+      const buttons = document.querySelectorAll('.events-nav button');
+      buttons.forEach(btn => btn.classList.remove('active'));
+
+      if (type === 'upcoming') {
+        buttons[0].classList.add('active');
+      } else {
+        buttons[1].classList.add('active');
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+      const eventCards = document.querySelectorAll('.event-card');
+      eventCards.forEach(card => {
+        card.addEventListener('mouseenter', function () {
+          this.style.transform = 'translateY(-10px) scale(1.02)';
+        });
+        card.addEventListener('mouseleave', function () {
+          this.style.transform = 'translateY(0) scale(1)';
+        });
+      });
+    });
+
+    document.querySelector('button').addEventListener('click', function () {
+      const email = document.querySelector('input[type="email"]').value;
+      if (email) {
+        alert('Thank you for subscribing! You\'ll receive updates about our upcoming events.');
+        document.querySelector('input[type="email"]').value = '';
+      } else {
+        alert('Please enter a valid email address.');
+      }
+    });
+  </script>
+
+  <!-- JavaScript files for menu functionality -->
+  <script src="../js/jquery-3.7.0.min.js"></script>
+  <script src="../js/swiper-bundle.min.js"></script>
+  <script src="../js/wow.min.js"></script>
+  <script src="../js/masonry.pkgd.min.js"></script>
+  <script src="../js/imagesloaded.pkgd.min.js"></script>
+  <script src="../js/magnific-popup.min.js"></script>
+  <script src="../js/blazy.min.js"></script>
+  <script src="../js/parazoom.min.js"></script>
+  <script src="../js/script.js"></script>
+
+  <!-- Language Translator Widget Styles -->
+  <style>
+    .translator-widget {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 1001;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .translator-button {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 12px 20px;
+      border-radius: 25px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+      transition: all 0.3s ease;
+      font-weight: 600;
+      font-size: 14px;
+      border: none;
+      outline: none;
+    }
+
+    .translator-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+    }
+
+    .translator-button i {
+      font-size: 16px;
+    }
+
+    .translator-dropdown {
+      position: absolute;
+      top: 60px;
+      right: 0;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+      min-width: 280px;
+      max-height: 400px;
+      overflow: hidden;
+      transform: scale(0) translateY(-20px);
+      opacity: 0;
+      transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+      border: 1px solid rgba(0, 0, 0, 0.1);
+    }
+
+    .translator-dropdown.active {
+      transform: scale(1) translateY(0);
+      opacity: 1;
+    }
+
+    .translator-header {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .translator-header h4 {
+      margin: 0;
+      font-size: 16px;
+      font-weight: 600;
+    }
+
+    .close-translator {
+      background: none;
+      border: none;
+      color: white;
+      cursor: pointer;
+      padding: 5px;
+      border-radius: 50%;
+      transition: background 0.2s;
+      width: 30px;
+      height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .close-translator:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    /* Google Translate Element Styling */
+    #google_translate_element {
+      padding: 15px 20px;
+    }
+
+    .goog-te-gadget {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+      font-size: 14px !important;
+    }
+
+    .goog-te-gadget-simple {
+      background: transparent !important;
+      border: none !important;
+      padding: 0 !important;
+    }
+
+    .goog-te-gadget-simple .goog-te-menu-value {
+      color: #333 !important;
+      font-size: 14px !important;
+      font-weight: 500 !important;
+    }
+
+    .goog-te-gadget-simple .goog-te-menu-value span:first-child {
+      color: #667eea !important;
+      font-weight: 600 !important;
+    }
+
+    .goog-te-gadget-simple .goog-te-menu-value span:last-child {
+      color: #666 !important;
+    }
+
+    .goog-te-gadget-simple .goog-te-menu-value:before {
+      content: "🌐 " !important;
+      margin-right: 5px !important;
+    }
+
+    /* Hide Google Translate banner */
+    .goog-te-banner-frame {
+      display: none !important;
+    }
+
+    body {
+      top: 0 !important;
+    }
+
+    /* Style the dropdown arrow */
+    .goog-te-gadget-simple .goog-te-menu-value:after {
+      content: " ▼" !important;
+      color: #667eea !important;
+      font-size: 12px !important;
+    }
+
+    .translator-footer {
+      padding: 15px 20px;
+      background: #f8f9fa;
+      display: flex;
+      justify-content: center;
+      border-top: 1px solid rgba(0, 0, 0, 0.1);
+    }
+
+    .reset-btn {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 600;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+      color: white;
+    }
+
+    .reset-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(255, 107, 107, 0.4);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .translator-widget {
+        top: 15px;
+        right: 15px;
+      }
+
+      .translator-button {
+        padding: 10px 16px;
+        font-size: 13px;
+      }
+
+      .translator-dropdown {
+        min-width: 260px;
+        right: -10px;
+      }
+
+      .reset-btn {
+        padding: 8px 16px;
+        font-size: 11px;
+        width: 100%;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .translator-widget {
+        top: 10px;
+        right: 10px;
+      }
+
+      .translator-button {
+        padding: 8px 12px;
+        font-size: 12px;
+      }
+
+      .translator-button span {
+        display: none;
+      }
+
+      .translator-dropdown {
+        min-width: 240px;
+        right: -20px;
+      }
+    }
+  </style>
+
+  <!-- Language Translator Widget -->
+  <div class="translator-widget">
+    <div class="translator-button" id="translatorBtn">
+      <i class="fa-solid fa-language"></i>
+      <span>Translate</span>
+    </div>
+
+    <div class="translator-dropdown" id="translatorDropdown">
+      <div class="translator-header">
+        <h4>Choose Language</h4>
+        <button class="close-translator" id="closeTranslator">
+          <i class="fa-solid fa-times"></i>
+        </button>
+      </div>
+
+      <!-- Google Translate Element -->
+      <div id="google_translate_element"></div>
+
+      <div class="translator-footer">
+        <button class="reset-btn" id="resetBtn">
+          <i class="fa-solid fa-undo"></i>
+          Reset to English
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Google Translate Widget JavaScript -->
+  <script>
+    // Google Translate Element Initialization
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({
+        pageLanguage: 'en',
+        includedLanguages: 'en,es,fr,de,it,pt,ru,zh,ja,ko,ar,hi',
+        layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+        autoDisplay: false
+      }, 'google_translate_element');
+    }
+
+    // Simple Translator Widget Controller
+    class SimpleTranslator {
+      constructor() {
+        this.isOpen = false;
+        this.init();
+      }
+
+      init() {
+        this.translatorBtn = document.getElementById('translatorBtn');
+        this.translatorDropdown = document.getElementById('translatorDropdown');
+        this.closeTranslator = document.getElementById('closeTranslator');
+        this.resetBtn = document.getElementById('resetBtn');
+
+        this.bindEvents();
+      }
+
+      bindEvents() {
+        // Toggle dropdown
+        this.translatorBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          this.toggleDropdown();
+        });
+
+        // Close dropdown
+        this.closeTranslator.addEventListener('click', () => {
+          this.closeDropdown();
+        });
+
+        // Reset button
+        this.resetBtn.addEventListener('click', () => {
+          this.resetTranslation();
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', (e) => {
+          if (!e.target.closest('.translator-widget') && this.isOpen) {
+            this.closeDropdown();
+          }
+        });
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape' && this.isOpen) {
+            this.closeDropdown();
+          }
+        });
+      }
+
+      toggleDropdown() {
+        if (this.isOpen) {
+          this.closeDropdown();
+        } else {
+          this.openDropdown();
+        }
+      }
+
+      openDropdown() {
+        this.translatorDropdown.classList.add('active');
+        this.isOpen = true;
+      }
+
+      closeDropdown() {
+        this.translatorDropdown.classList.remove('active');
+        this.isOpen = false;
+      }
+
+      resetTranslation() {
+        // Reset Google Translate to English
+        if (window.google && window.google.translate) {
+          const translateElement = document.querySelector('.goog-te-combo');
+          if (translateElement) {
+            translateElement.selectedIndex = 0;
+            translateElement.dispatchEvent(new Event('change'));
+          }
+        }
+
+        // Remove Google Translate banner
+        const banner = document.querySelector('.goog-te-banner-frame');
+        if (banner) {
+          banner.remove();
+        }
+
+        // Reset body top position
+        document.body.style.top = '0px';
+
+        this.showNotification('Translation reset to English');
+      }
+
+      showNotification(message) {
+        // Create notification element
+        const notification = document.createElement('div');
+        notification.style.cssText = `
+                    position: fixed;
+                    top: 80px;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                    color: white;
+                    padding: 12px 24px;
+                    border-radius: 25px;
+                    font-size: 14px;
+                    font-weight: 600;
+                    z-index: 10000;
+                    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+                    animation: slideDown 0.3s ease;
+                `;
+        notification.textContent = message;
+        document.body.appendChild(notification);
+
+        // Remove notification after 3 seconds
+        setTimeout(() => {
+          notification.style.animation = 'slideUp 0.3s ease';
+          setTimeout(() => notification.remove(), 300);
+        }, 3000);
+      }
+    }
+
+    // Initialize the translator when DOM is loaded
+    document.addEventListener('DOMContentLoaded', () => {
+      new SimpleTranslator();
+    });
+
+    // Add CSS animations for notifications
+    const style = document.createElement('style');
+    style.textContent = `
+            @keyframes slideDown {
+                from {
+                    opacity: 0;
+                    transform: translateX(-50%) translateY(-20px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateX(-50%) translateY(0);
+                }
+            }
+            
+            @keyframes slideUp {
+                from {
+                    opacity: 1;
+                    transform: translateX(-50%) translateY(0);
+                }
+                to {
+                    opacity: 0;
+                    transform: translateX(-50%) translateY(-20px);
+                }
+            }
+        `;
+    document.head.appendChild(style);
+  </script>
+
+</body>
+
+</html>
