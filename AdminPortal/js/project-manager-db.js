@@ -5,7 +5,7 @@
  */
 
 class ProjectManagerDB {
-  constructor(containerSelector = '#projectManagerContainer', apiBase = '/api/admin') {
+  constructor(containerSelector = '#projectManagerContainer', apiBase = 'api/admin') {
     this.container = document.querySelector(containerSelector);
     this.apiBase = apiBase;
     this.projects = [];
@@ -866,7 +866,12 @@ class ProjectManagerDB {
 // Initialize on page load
 document.addEventListener('DOMContentLoaded', () => {
   const container = document.getElementById('projectManagerContainer');
-  if (container) {
-    window.projectManagerDB = new ProjectManagerDB('#projectManagerContainer', '/api/admin');
-  }
+  if (!container) return;
+
+  // Prefer page-provided API_BASE (billing-admin.html sets API_BASE)
+  // Fall back to a relative path that points to project root `../api/admin`.
+  const pageApiBase = (typeof API_BASE !== 'undefined') ? API_BASE : null;
+  const resolvedApiBase = pageApiBase ? (pageApiBase.replace(/\/$/, '') + '/admin') : '../api/admin';
+
+  window.projectManagerDB = new ProjectManagerDB('#projectManagerContainer', resolvedApiBase);
 });
