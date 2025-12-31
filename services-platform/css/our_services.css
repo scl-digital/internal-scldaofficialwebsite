@@ -1,7 +1,7 @@
 /* Dynamic Services Grid & Card Responsive Styling */
 #dynamic-services {
   padding: 40px 0 60px 0 !important;
-  background: linear-gradient(135deg, #330867 0%, #30CFD0 100%);
+  background: #0755e9;
 }
 
 #dynamic-services h2 {
