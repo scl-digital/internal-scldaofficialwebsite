@@ -50,7 +50,7 @@ html, body {
 
 body {
   font-family: 'OpenSans-Regular';
-  background-color: #0755E9;
+      background: url(../images/background-image-sized.webp) no-repeat center center;
   background-size: cover;
   line-height: 1.5;
   margin: 0;
