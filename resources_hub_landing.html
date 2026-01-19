@@ -473,7 +473,18 @@
     <!-- Header -->
     <header>
         <div class="header-content">
-            <div class="logo">Cape<span>Studio</span></div>
+            <img src="images/SCLDALOGOV3.png" alt="Sylvia">
+
+            <style>
+                /* Target the logo by its alt text or a class */
+img[alt="Sylvia"] {
+  height: auto;        /* Maintains aspect ratio */
+  width: 200px;       /* Set your desired width */
+  display: block;     /* Removes bottom whitespace gap */
+  object-fit: contain; /* Ensures the logo isn't distorted */
+}
+            </style>
+          
             <nav>
                 <a href="#resources">Resources</a>
                 <a href="#about">About</a>
