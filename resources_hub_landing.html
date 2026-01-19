@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resources Hub - Build. Invest. Deliver.</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --ocean-deep: #0A2E4A;
+            --cape-blue: #1E5F8C;
+            --sunset-coral: #E85D75;
+            --gold-accent: #F2A541;
+            --sky-light: #E8F4F8;
+            --charcoal: #2C3E50;
+            --white: #FFFFFF;
+            --gradient-primary: linear-gradient(135deg, #0A2E4A 0%, #1E5F8C 100%);
+            --gradient-accent: linear-gradient(135deg, #E85D75 0%, #F2A541 100%);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            color: var(--charcoal);
+            background: var(--white);
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        header {
+            background: var(--gradient-primary);
+            color: var(--white);
+            padding: 1.5rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        .logo span {
+            color: var(--gold-accent);
+        }
+
+        nav a {
+            color: var(--white);
+            text-decoration: none;
+            margin-left: 2rem;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--gold-accent);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: var(--gradient-primary);
+            color: var(--white);
+            padding: 6rem 2rem 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 50%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><circle cx="800" cy="200" r="300" fill="rgba(242,165,65,0.1)"/><circle cx="900" cy="600" r="200" fill="rgba(232,93,117,0.1)"/></svg>');
+            background-size: cover;
+            opacity: 0.3;
+        }
+
+        .hero-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            max-width: 800px;
+        }
+
+        .hero .subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--gold-accent);
+            font-weight: 600;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            line-height: 1.6;
+            margin-bottom: 2.5rem;
+            max-width: 700px;
+            opacity: 0.95;
+        }
+
+        .dual-power {
+            display: inline-flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .power-badge {
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(10px);
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            border: 1px solid rgba(255,255,255,0.2);
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        /* Filter Section */
+        .filter-section {
+            background: var(--sky-light);
+            padding: 2rem;
+            position: sticky;
+            top: 73px;
+            z-index: 999;
+            border-bottom: 3px solid var(--gold-accent);
+        }
+
+        .filter-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .filter-tabs {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .filter-btn {
+            background: var(--white);
+            border: 2px solid var(--cape-blue);
+            color: var(--cape-blue);
+            padding: 0.75rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 1rem;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: var(--cape-blue);
+            color: var(--white);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(30,95,140,0.3);
+        }
+
+        .search-box {
+            position: relative;
+        }
+
+        .search-box input {
+            padding: 0.75rem 1.5rem;
+            border: 2px solid var(--cape-blue);
+            border-radius: 50px;
+            width: 300px;
+            font-size: 1rem;
+            outline: none;
+            transition: all 0.3s;
+        }
+
+        .search-box input:focus {
+            border-color: var(--sunset-coral);
+            box-shadow: 0 0 0 3px rgba(232,93,117,0.1);
+        }
+
+        /* Resources Grid */
+        .resources-section {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .resource-card {
+            background: var(--white);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+
+        .resource-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.15);
+            border-color: var(--gold-accent);
+        }
+
+        .resource-thumbnail {
+            width: 100%;
+            height: 220px;
+            background: var(--gradient-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .resource-thumbnail::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, transparent 0%, rgba(232,93,117,0.3) 100%);
+        }
+
+        .resource-icon {
+            font-size: 4rem;
+            z-index: 1;
+        }
+
+        .resource-type {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: var(--gradient-accent);
+            color: var(--white);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            z-index: 2;
+        }
+
+        .resource-content {
+            padding: 1.5rem;
+        }
+
+        .resource-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--ocean-deep);
+            margin-bottom: 0.75rem;
+        }
+
+        .resource-description {
+            color: var(--charcoal);
+            line-height: 1.6;
+            margin-bottom: 1.25rem;
+            opacity: 0.85;
+        }
+
+        .resource-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(0,0,0,0.1);
+        }
+
+        .resource-access {
+            font-size: 0.9rem;
+            color: var(--sunset-coral);
+            font-weight: 600;
+        }
+
+        .cta-btn {
+            background: var(--gradient-accent);
+            color: var(--white);
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.95rem;
+        }
+
+        .cta-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 16px rgba(232,93,117,0.4);
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 10000;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(5px);
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: var(--white);
+            padding: 3rem;
+            border-radius: 20px;
+            max-width: 500px;
+            width: 90%;
+            position: relative;
+            animation: modalSlideIn 0.3s ease-out;
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            font-size: 2rem;
+            cursor: pointer;
+            color: var(--charcoal);
+            opacity: 0.6;
+            transition: opacity 0.3s;
+        }
+
+        .modal-close:hover {
+            opacity: 1;
+        }
+
+        .modal h2 {
+            color: var(--ocean-deep);
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .modal p {
+            color: var(--charcoal);
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--ocean-deep);
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 0.875rem;
+            border: 2px solid var(--sky-light);
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--cape-blue);
+        }
+
+        .submit-btn {
+            width: 100%;
+            background: var(--gradient-accent);
+            color: var(--white);
+            border: none;
+            padding: 1rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(232,93,117,0.4);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .resources-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .filter-content {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .filter-tabs {
+                flex-wrap: wrap;
+            }
+
+            .search-box input {
+                width: 100%;
+            }
+
+            nav {
+                display: none;
+            }
+        }
+
+        .hidden {
+            display: none !important;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-content">
+            <div class="logo">Cape<span>Studio</span></div>
+            <nav>
+                <a href="#resources">Resources</a>
+                <a href="#about">About</a>
+                <a href="#contact">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="subtitle">Build. Invest. Deliver.</div>
+            <h1>Your Unfair Advantage in South African Tech</h1>
+            <p>We don't just advise—we build alongside you. Access battle-tested playbooks, founder insights, and tools from Cape Town's only startup studio that also ships world-class agency work.</p>
+            <div class="dual-power">
+                <div class="power-badge">🚀 Studio: We Co-Build & Invest</div>
+                <div class="power-badge">⚡ Agency: We Deliver at Scale</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Filter Section -->
+    <section class="filter-section">
+        <div class="filter-content">
+            <div class="filter-tabs">
+                <button class="filter-btn active" data-filter="all">All Resources</button>
+                <button class="filter-btn" data-filter="watch">📹 Watch</button>
+                <button class="filter-btn" data-filter="read">📚 Read</button>
+                <button class="filter-btn" data-filter="tools">🛠️ Tools</button>
+            </div>
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="Search resources...">
+            </div>
+        </div>
+    </section>
+
+    <!-- Resources Grid -->
+    <section class="resources-section" id="resources">
+        <div class="resources-grid" id="resourcesGrid">
+            <!-- Video Resources -->
+            <div class="resource-card" data-type="watch" data-title="The Founder Sessions Ep1" data-access="preview">
+                <div class="resource-thumbnail">
+                    <div class="resource-icon">🎬</div>
+                    <div class="resource-type">WATCH</div>
+                </div>
+                <div class="resource-content">
+                    <h3 class="resource-title">The Founder Sessions: Episode 1</h3>
+                    <p class="resource-description">From idea to exit: A Cape Town founder's journey building a R50M SaaS company. First 2 minutes free.</p>
+                    <div class="resource-meta">
+                        <span class="resource-access">🔓 Preview Available</span>
+                        <button class="cta-btn">Watch Now</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="resource-card" data-type="watch" data-title="Scaling Your Startup" data-access="gated">
+                <div class="resource-thumbnail">
+                    <div class="resource-icon">🎥</div>
+                    <div class="resource-type">WATCH</div>
+                </div>
+                <div class="resource-content">
+                    <h3 class="resource-title">Scaling Your Startup: 0-100 Employees</h3>
+                    <p class="resource-description">Lessons from scaling three startups. Hiring, culture, and avoiding the death spiral.</p>
+                    <div class="resource-meta">
+                        <span class="resource-access">🔒 Email Required</span>
+                        <button class="cta-btn">Get Access</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PDF Playbooks -->
+            <div class="resource-card" data-type="read" data-title="M&A Exit Guide" data-access="gated">
+                <div class="resource-thumbnail">
+                    <div class="resource-icon">📄</div>
+                    <div class="resource-type">READ</div>
+                </div>
+                <div class="resource-content">
+                    <h3 class="resource-title">The M&A Exit Readiness Guide</h3>
+                    <p class="resource-description">42-page playbook: How we prepared 3 portfolio companies for acquisition. Financial modeling, legal prep, and negotiation tactics.</p>
+                    <div class="resource-meta">
+                        <span class="resource-access">🔒 Email Required</span>
+                        <button class="cta-btn">Download</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="resource-card" data-type="read" data-title="Product-Market Fit" data-access="gated">
+                <div class="resource-thumbnail">
+                    <div class="resource-icon">📊</div>
+                    <div class="resource-type">READ</div>
+                </div>
+                <div class="resource-content">
+                    <h3 class="resource-title">Finding Product-Market Fit in Africa</h3>
+                    <p class="resource-description">The framework we use to validate ideas before writing a single line of code. Includes interview scripts and metrics.</p>
+                    <div class="resource-meta">
+                        <span class="resource-access">🔒 Email Required</span>
+                        <button class="cta-btn">Download</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tools -->
+            <div class="resource-card" data-type="tools" data-title="ROI Calculator" data-access="gated">
+                <div class="resource-thumbnail">
+                    <div class="resource-icon">🧮</div>
+                    <div class="resource-type">TOOL</div>
+                </div>
+                <div class="resource-content">
+                    <h3 class="resource-title">Product ROI Calculator</h3>
+                    <p class="resource-description">Calculate whether your product idea is financially viable. Input costs, pricing, and get a 5-year projection with burn rate analysis.</p>
+                    <div class="resource-meta">
+                        <span class="resource-access">🔒 Email Required</span>
+                        <button class="cta-btn">Access Tool</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="resource-card" data-type="tools" data-title="Startup Valuation" data-access="gated">
+                <div class="resource-thumbnail">
+                    <div class="resource-icon">💰</div>
+                    <div class="resource-type">TOOL</div>
+                </div>
+                <div class="resource-content">
+                    <h3 class="resource-title">Startup Valuation Tool</h3>
+                    <p class="resource-description">Estimate your startup's valuation using our proprietary model based on 50+ South African deals.</p>
+                    <div class="resource-meta">
+                        <span class="resource-access">🔒 Email Required</span>
+                        <button class="cta-btn">Calculate</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="resource-card" data-type="watch" data-title="Pitch Deck Teardown" data-access="preview">
+                <div class="resource-thumbnail">
+                    <div class="resource-icon">🎯</div>
+                    <div class="resource-type">WATCH</div>
+                </div>
+                <div class="resource-content">
+                    <h3 class="resource-title">Pitch Deck Teardown Series</h3>
+                    <p class="resource-description">We analyze real pitch decks (anonymized) that raised R1M+ in funding. What worked, what didn't.</p>
+                    <div class="resource-meta">
+                        <span class="resource-access">🔓 Preview Available</span>
+                        <button class="cta-btn">Watch Now</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="resource-card" data-type="read" data-title="Agency Pricing" data-access="gated">
+                <div class="resource-thumbnail">
+                    <div class="resource-icon">💵</div>
+                    <div class="resource-type">READ</div>
+                </div>
+                <div class="resource-content">
+                    <h3 class="resource-title">How We Price Agency Work</h3>
+                    <p class="resource-description">Transparent breakdown of our pricing model. From discovery to deployment—what you actually pay for.</p>
+                    <div class="resource-meta">
+                        <span class="resource-access">🔒 Email Required</span>
+                        <button class="cta-btn">Download</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Lead Capture Modal -->
+    <div class="modal" id="leadModal">
+        <div class="modal-content">
+            <button class="modal-close" id="modalClose">&times;</button>
+            <h2>Get Instant Access</h2>
+            <p id="modalDescription">Enter your email to unlock this resource. We'll also send you our weekly insights on building in Africa.</p>
+            <form id="leadForm">
+                <div class="form-group">
+                    <label for="userName">Name</label>
+                    <input type="text" id="userName" required>
+                </div>
+                <div class="form-group">
+                    <label for="userEmail">Email</label>
+                    <input type="email" id="userEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="userCompany">Company (Optional)</label>
+                    <input type="text" id="userCompany">
+                </div>
+                <button type="submit" class="submit-btn">Unlock Resource</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const state = {
+            currentFilter: 'all',
+            currentResource: null,
+            resources: []
+        };
+
+        // Filter functionality
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const resourceCards = document.querySelectorAll('.resource-card');
+        const searchInput = document.getElementById('searchInput');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                const filter = btn.getAttribute('data-filter');
+                state.currentFilter = filter;
+                applyFilters();
+            });
+        });
+
+        searchInput.addEventListener('input', (e) => {
+            applyFilters();
+        });
+
+        function applyFilters() {
+            const searchTerm = searchInput.value.toLowerCase();
+            
+            resourceCards.forEach(card => {
+                const type = card.getAttribute('data-type');
+                const title = card.getAttribute('data-title').toLowerCase();
+                const description = card.querySelector('.resource-description').textContent.toLowerCase();
+                
+                const matchesFilter = state.currentFilter === 'all' || type === state.currentFilter;
+                const matchesSearch = searchTerm === '' || title.includes(searchTerm) || description.includes(searchTerm);
+                
+                if (matchesFilter && matchesSearch) {
+                    card.classList.remove('hidden');
+                } else {
+                    card.classList.add('hidden');
+                }
+            });
+        }
+
+        // Modal functionality
+        const modal = document.getElementById('leadModal');
+        const modalClose = document.getElementById('modalClose');
+        const leadForm = document.getElementById('leadForm');
+        const ctaBtns = document.querySelectorAll('.cta-btn');
+
+        ctaBtns.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const card = e.target.closest('.resource-card');
+                const access = card.getAttribute('data-access');
+                const title = card.getAttribute('data-title');
+                
+                state.currentResource = {
+                    title: title,
+                    access: access
+                };
+
+                if (access === 'preview') {
+                    alert(`🎥 Playing preview of "${title}"\n\nFirst 2 minutes are free. Sign up to watch the full video!`);
+                    modal.classList.add('active');
+                } else {
+                    modal.classList.add('active');
+                }
+
+                document.getElementById('modalDescription').textContent = 
+                    `Unlock "${title}" and join 2,500+ founders receiving our weekly insights.`;
+            });
+        });
+
+        modalClose.addEventListener('click', () => {
+            modal.classList.remove('active');
+        });
+
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.classList.remove('active');
+            }
+        });
+
+        leadForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const formData = {
+                name: document.getElementById('userName').value,
+                email: document.getElementById('userEmail').value,
+                company: document.getElementById('userCompany').value,
+                resource: state.currentResource.title,
+                timestamp: new Date().toISOString()
+            };
+
+            console.log('Lead captured:', formData);
+            
+            alert(`✅ Success! Check your email for "${state.currentResource.title}"\n\nWe've also added you to our weekly newsletter.`);
+            
+            modal.classList.remove('active');
+            leadForm.reset();
+        });
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
