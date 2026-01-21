@@ -377,6 +377,111 @@
             }
         }
 
+        .videos-section {
+            margin: 60px 0;
+        }
+
+        .videos-section h3 {
+            font-size: 2rem;
+            margin-bottom: 30px;
+            color: #ff00ff;
+        }
+
+        .videos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            margin-bottom: 20px;
+        }
+
+        .video-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .video-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(0, 245, 255, 0.3);
+            box-shadow: 0 15px 40px rgba(0, 245, 255, 0.2);
+        }
+
+        .video-frame {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%;
+            overflow: hidden;
+            background: #000;
+        }
+
+        .video-frame iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 0;
+        }
+
+        .video-info {
+            padding: 20px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .video-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #00f5ff;
+            margin-bottom: 10px;
+        }
+
+        .video-description {
+            font-size: 0.95rem;
+            color: #a0a0a0;
+            line-height: 1.6;
+            flex: 1;
+        }
+
+        .video-duration {
+            font-size: 0.85rem;
+            color: #666;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .view-all-videos-btn {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .view-all-videos-btn a {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 30px;
+            background: linear-gradient(135deg, #00f5ff, #00a8ff);
+            color: #000;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .view-all-videos-btn a:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 245, 255, 0.3);
+        }
+
         @media (max-width: 768px) {
             h1 {
                 font-size: 2.5rem;
@@ -387,6 +492,10 @@
             }
 
             .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .videos-grid {
                 grid-template-columns: 1fr;
             }
 
@@ -476,6 +585,64 @@
                     <img src="https://images.unsplash.com/photo-1557821552-17105176677c?w=800" alt="Payment Flow">
                     <div class="gallery-overlay">
                         <span style="color: white; font-size: 1.5rem;">+</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="videos-section">
+            <h3>Project Videos & Demos</h3>
+            <div class="videos-grid">
+                <!-- Video 1 -->
+                <div class="video-card">
+                    <div class="video-frame">
+                   
+                        <iframe src="https://www.youtube.com/embed/va7Xblr6irY?si=3_KPkICa5lsjmnq4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                    <div class="video-info">
+                        <div class="video-title">Project Overview</div>
+                        <div class="video-description">Get an in-depth look at the fintech platform architecture and key features that drive our success.</div>
+                        <div class="video-duration">Duration: 5:23</div>
+                    </div>
+                </div>
+
+                <!-- Video 2 -->
+                <div class="video-card">
+                    <div class="video-frame">
+                        <iframe src="https://www.youtube.com/embed/9bZkp7q19f0" title="Features Demo" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+
+                        <iframe src="https://www.youtube.com/embed/sEU5ARqivVE?si=56PuNri6Vu9PYv-p" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"  allowfullscreen></iframe>
+
+                    </div>
+                    <div class="video-info">
+                        <div class="video-title">Features Demo</div>
+                        <div class="video-description">Explore the powerful features including payments, analytics, and user management systems.</div>
+                        <div class="video-duration">Duration: 7:45</div>
+                    </div>
+                </div>
+
+                <!-- Video 3 -->
+                <div class="video-card">
+                    <div class="video-frame">
+                        <iframe src="https://www.youtube.com/embed/jNQXAC9IVRw" title="User Experience" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                    <div class="video-info">
+                        <div class="video-title">User Experience Walkthrough</div>
+                        <div class="video-description">See how our intuitive design makes complex financial tasks simple and accessible.</div>
+                        <div class="video-duration">Duration: 6:12</div>
+                    </div>
+                </div>
+
+                <!-- Video 4 -->
+                <div class="video-card">
+                    <div class="video-frame">
+                        <iframe src="https://www.youtube.com/embed/6ZzX9i4PN-0" title="Technical Architecture" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                    <div class="video-info">
+                        <div class="video-title">Technical Architecture</div>
+                        <div class="video-description">Learn about the scalable backend infrastructure and security measures that protect user data.</div>
+                        <div class="video-duration">Duration: 8:30</div>
                     </div>
                 </div>
             </div>
