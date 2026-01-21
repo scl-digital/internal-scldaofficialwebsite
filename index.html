@@ -461,7 +461,7 @@ results that add real value to your business. Let's turn your vision into impact
 
 
 		<!-- YouTube Video Section START -->
-		<div class="video-section">
+		<div class="video-section" id="techTalentPartnerSection">
 			<div class="container">
 				<div class="video-content reversed">
 					<div class="video-copy">
@@ -3430,6 +3430,28 @@ results that add real value to your business. Let's turn your vision into impact
 					closeAccountModal();
 				}
 			});
+
+			// Intersection Observer for "Your Tech Talent Partner" section
+			const techTalentSection = document.getElementById('techTalentPartnerSection');
+			let hasShownModal = false; // Track if modal has been shown
+
+			if (techTalentSection) {
+				const observer = new IntersectionObserver((entries) => {
+					entries.forEach((entry) => {
+						// Show modal only once when section comes into view
+						if (entry.isIntersecting && !hasShownModal) {
+							hasShownModal = true;
+							setTimeout(() => {
+								openAccountModal();
+							}, 500); // Small delay for better UX
+						}
+					});
+				}, {
+					threshold: 0.3 // Trigger when 30% of the section is visible
+				});
+
+				observer.observe(techTalentSection);
+			}
 		});
 	</script>
 </body>
