@@ -3113,56 +3113,64 @@ results that add real value to your business. Let's turn your vision into impact
 
 	<!-- Create Account Popup Modal -->
 	<div id="createAccountModal" class="modal-overlay">
-		<div class="modal-container">
-			<div class="modal-header">
-				<h2>Create Your Account</h2>
-				<button class="modal-close-btn" onclick="closeAccountModal()">
-					<i class="fas fa-times"></i>
-				</button>
+		<div class="modal-container-with-image">
+			<div class="modal-image-side">
+				<img src="https://via.placeholder.com/500x600/667eea/ffffff?text=Create+Your+Account" alt="Create Account" class="modal-image">
 			</div>
-			<div class="modal-content">
-				<form id="createAccountForm" onsubmit="handleAccountCreation(event)">
-					<div class="form-group">
-						<label for="fullName">Full Name *</label>
-						<input type="text" id="fullName" name="fullName" required placeholder="Enter your full name">
+			<div class="modal-form-side">
+				<div class="modal-header">
+					<h2>Create Your Account</h2>
+					<button class="modal-close-btn" onclick="closeAccountModal()">
+						<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+							<line x1="18" y1="6" x2="6" y2="18"></line>
+							<line x1="6" y1="6" x2="18" y2="18"></line>
+						</svg>
+					</button>
+				</div>
+				<div class="modal-content">
+					<form id="createAccountForm" onsubmit="handleAccountCreation(event)">
+						<div class="form-group">
+							<label for="fullName">Full Name *</label>
+							<input type="text" id="fullName" name="fullName" required placeholder="Enter your full name">
+						</div>
+
+						<div class="form-group">
+							<label for="email">Email Address *</label>
+							<input type="email" id="email" name="email" required placeholder="Enter your email address">
+						</div>
+
+						<div class="form-group">
+							<label for="phone">Phone Number</label>
+							<input type="tel" id="phone" name="phone" placeholder="Enter your phone number">
+						</div>
+
+						<div class="form-group">
+							<label for="company">Company Name</label>
+							<input type="text" id="company" name="company" placeholder="Enter your company name">
+						</div>
+
+						<div class="form-group">
+							<label for="password">Password *</label>
+							<input type="password" id="password" name="password" required placeholder="Create a strong password">
+							<small class="password-hint">Minimum 8 characters</small>
+						</div>
+
+						<div class="form-group">
+							<label for="confirmPassword">Confirm Password *</label>
+							<input type="password" id="confirmPassword" name="confirmPassword" required placeholder="Confirm your password">
+						</div>
+
+						<div class="form-group checkbox">
+							<input type="checkbox" id="agreeTerms" name="agreeTerms" required>
+							<label for="agreeTerms">I agree to the Terms of Service and Privacy Policy</label>
+						</div>
+
+						<button type="submit" class="submit-btn">Create Account</button>
+					</form>
+
+					<div class="modal-footer">
+						<p>Already have an account? <a href="ClientPortal/client-billing-portal.html" class="login-link">Sign In</a></p>
 					</div>
-
-					<div class="form-group">
-						<label for="email">Email Address *</label>
-						<input type="email" id="email" name="email" required placeholder="Enter your email address">
-					</div>
-
-					<div class="form-group">
-						<label for="phone">Phone Number</label>
-						<input type="tel" id="phone" name="phone" placeholder="Enter your phone number">
-					</div>
-
-					<div class="form-group">
-						<label for="company">Company Name</label>
-						<input type="text" id="company" name="company" placeholder="Enter your company name">
-					</div>
-
-					<div class="form-group">
-						<label for="password">Password *</label>
-						<input type="password" id="password" name="password" required placeholder="Create a strong password">
-						<small class="password-hint">Minimum 8 characters</small>
-					</div>
-
-					<div class="form-group">
-						<label for="confirmPassword">Confirm Password *</label>
-						<input type="password" id="confirmPassword" name="confirmPassword" required placeholder="Confirm your password">
-					</div>
-
-					<div class="form-group checkbox">
-						<input type="checkbox" id="agreeTerms" name="agreeTerms" required>
-						<label for="agreeTerms">I agree to the Terms of Service and Privacy Policy</label>
-					</div>
-
-					<button type="submit" class="submit-btn">Create Account</button>
-				</form>
-
-				<div class="modal-footer">
-					<p>Already have an account? <a href="ClientPortal/client-billing-portal.html" class="login-link">Sign In</a></p>
 				</div>
 			</div>
 		</div>
@@ -3177,7 +3185,7 @@ results that add real value to your business. Let's turn your vision into impact
 			left: 0;
 			width: 100%;
 			height: 100%;
-			background-color: rgba(0, 0, 0, 0.6);
+			background-color: rgba(0, 0, 0, 0.7);
 			z-index: 9999;
 			justify-content: center;
 			align-items: center;
@@ -3188,15 +3196,37 @@ results that add real value to your business. Let's turn your vision into impact
 			display: flex;
 		}
 
-		.modal-container {
+		.modal-container-with-image {
 			background: white;
-			border-radius: 12px;
-			box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+			border-radius: 16px;
+			display: flex;
 			width: 90%;
-			max-width: 450px;
+			max-width: 900px;
+			max-height: 90vh;
+			overflow: hidden;
+			animation: slideIn 0.3s ease-out;
+			box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+		}
+
+		.modal-image-side {
+			flex: 1;
+			display: none;
+			overflow: hidden;
+			background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+		}
+
+		.modal-image {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+		}
+
+		.modal-form-side {
+			flex: 1;
+			display: flex;
+			flex-direction: column;
 			max-height: 90vh;
 			overflow-y: auto;
-			animation: slideIn 0.3s ease-out;
 		}
 
 		@keyframes slideIn {
@@ -3214,7 +3244,7 @@ results that add real value to your business. Let's turn your vision into impact
 			display: flex;
 			justify-content: space-between;
 			align-items: center;
-			padding: 25px;
+			padding: 30px;
 			border-bottom: 1px solid #e5e5e5;
 			background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
 			color: white;
@@ -3222,23 +3252,22 @@ results that add real value to your business. Let's turn your vision into impact
 
 		.modal-header h2 {
 			margin: 0;
-			font-size: 24px;
-			font-weight: 600;
+			font-size: 28px;
+			font-weight: 700;
 		}
 
 		.modal-close-btn {
 			background: none;
 			border: none;
-			font-size: 24px;
 			cursor: pointer;
-			color: white;
 			padding: 0;
-			width: 30px;
-			height: 30px;
+			width: 32px;
+			height: 32px;
 			display: flex;
 			align-items: center;
 			justify-content: center;
 			transition: transform 0.2s ease;
+			flex-shrink: 0;
 		}
 
 		.modal-close-btn:hover {
@@ -3246,7 +3275,8 @@ results that add real value to your business. Let's turn your vision into impact
 		}
 
 		.modal-content {
-			padding: 30px;
+			padding: 40px 30px;
+			flex: 1;
 		}
 
 		.form-group {
@@ -3265,7 +3295,7 @@ results that add real value to your business. Let's turn your vision into impact
 		.form-group input {
 			padding: 12px 15px;
 			border: 2px solid #e5e5e5;
-			border-radius: 6px;
+			border-radius: 8px;
 			font-size: 14px;
 			transition: border-color 0.3s ease;
 			font-family: inherit;
@@ -3284,7 +3314,7 @@ results that add real value to your business. Let's turn your vision into impact
 		.form-group.checkbox {
 			flex-direction: row;
 			align-items: center;
-			margin-bottom: 25px;
+			margin-bottom: 30px;
 		}
 
 		.form-group.checkbox input {
@@ -3312,7 +3342,7 @@ results that add real value to your business. Let's turn your vision into impact
 			background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
 			color: white;
 			border: none;
-			border-radius: 6px;
+			border-radius: 8px;
 			font-size: 16px;
 			font-weight: 600;
 			cursor: pointer;
@@ -3323,7 +3353,7 @@ results that add real value to your business. Let's turn your vision into impact
 
 		.submit-btn:hover {
 			transform: translateY(-2px);
-			box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+			box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
 		}
 
 		.submit-btn:active {
@@ -3349,19 +3379,40 @@ results that add real value to your business. Let's turn your vision into impact
 			text-decoration: underline;
 		}
 
+		@media (max-width: 1024px) {
+			.modal-container-with-image {
+				max-width: 600px;
+			}
+
+			.modal-image-side {
+				display: none !important;
+			}
+		}
+
+		@media (min-width: 1024px) {
+			.modal-image-side {
+				display: block;
+			}
+		}
+
 		@media (max-width: 600px) {
-			.modal-container {
+			.modal-container-with-image {
 				width: 95%;
 				max-height: 95vh;
 			}
 
 			.modal-content {
-				padding: 20px;
+				padding: 25px 20px;
 			}
 
 			.modal-header {
 				padding: 20px;
 			}
+
+			.modal-header h2 {
+				font-size: 22px;
+			}
+		}
 
 			.modal-header h2 {
 				font-size: 20px;

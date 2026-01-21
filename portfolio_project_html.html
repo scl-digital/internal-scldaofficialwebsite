@@ -57,6 +57,43 @@
             font-size: 1.2rem;
             color: #a0a0a0;
             font-weight: 300;
+            margin-bottom: 25px;
+        }
+
+        .header-signup-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 30px;
+            background: linear-gradient(135deg, #00f5ff, #00a8ff);
+            color: #000;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            animation: fadeInUp 0.8s ease;
+        }
+
+        .header-signup-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 245, 255, 0.3);
+        }
+
+        .header-signup-btn:active {
+            transform: translateY(0);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .project-grid {
@@ -515,6 +552,14 @@
         <div class="header">
             <h1>Family Peace Association South Africa</h1>
             <p class="subtitle">Transforming Digital Banking for Africa</p>
+            <button class="header-signup-btn" onclick="openAccountModal()">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="12" cy="7" r="4"></circle>
+                    <polyline points="12 12 17 17 12 22 7 17 12 12"></polyline>
+                </svg>
+                Create Account
+            </button>
         </div>
 
         <div class="project-grid">
@@ -768,6 +813,370 @@
                 link.click();
             });
         }
+
+        // Account Modal Functions
+        function openAccountModal() {
+            const modal = document.getElementById('createAccountModal');
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeAccountModal() {
+            const modal = document.getElementById('createAccountModal');
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        function handleAccountCreation(event) {
+            event.preventDefault();
+
+            const fullName = document.getElementById('fullName').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const company = document.getElementById('company').value;
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+
+            if (password !== confirmPassword) {
+                alert('Passwords do not match. Please try again.');
+                return;
+            }
+
+            if (password.length < 8) {
+                alert('Password must be at least 8 characters long.');
+                return;
+            }
+
+            const accountData = {
+                fullName: fullName,
+                email: email,
+                phone: phone,
+                company: company,
+                password: password,
+                createdAt: new Date().toISOString()
+            };
+
+            console.log('Account Creation Data:', accountData);
+            alert(`Account created successfully!\n\nWelcome, ${fullName}!\n\nA confirmation email has been sent to ${email}.`);
+            document.getElementById('createAccountForm').reset();
+            closeAccountModal();
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const modal = document.getElementById('createAccountModal');
+            if (modal) {
+                modal.addEventListener('click', function(event) {
+                    if (event.target === modal) {
+                        closeAccountModal();
+                    }
+                });
+            }
+        });
     </script>
+
+    <!-- Create Account Modal -->
+    <div id="createAccountModal" class="modal-overlay">
+        <div class="modal-container-with-image">
+            <div class="modal-image-side">
+                <img src="https://via.placeholder.com/500x600/667eea/ffffff?text=Create+Your+Account" alt="Create Account" class="modal-image">
+            </div>
+            <div class="modal-form-side">
+                <div class="modal-header">
+                    <h2>Create Your Account</h2>
+                    <button class="modal-close-btn" onclick="closeAccountModal()">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                            <line x1="18" y1="6" x2="6" y2="18"></line>
+                            <line x1="6" y1="6" x2="18" y2="18"></line>
+                        </svg>
+                    </button>
+                </div>
+                <div class="modal-content">
+                    <form id="createAccountForm" onsubmit="handleAccountCreation(event)">
+                        <div class="form-group">
+                            <label for="fullName">Full Name *</label>
+                            <input type="text" id="fullName" name="fullName" required placeholder="Enter your full name">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Email Address *</label>
+                            <input type="email" id="email" name="email" required placeholder="Enter your email address">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" name="phone" placeholder="Enter your phone number">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="company">Company Name</label>
+                            <input type="text" id="company" name="company" placeholder="Enter your company name">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="password">Password *</label>
+                            <input type="password" id="password" name="password" required placeholder="Create a strong password">
+                            <small class="password-hint">Minimum 8 characters</small>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="confirmPassword">Confirm Password *</label>
+                            <input type="password" id="confirmPassword" name="confirmPassword" required placeholder="Confirm your password">
+                        </div>
+
+                        <div class="form-group checkbox">
+                            <input type="checkbox" id="agreeTerms" name="agreeTerms" required>
+                            <label for="agreeTerms">I agree to the Terms of Service and Privacy Policy</label>
+                        </div>
+
+                        <button type="submit" class="submit-btn">Create Account</button>
+                    </form>
+
+                    <div class="modal-footer">
+                        <p>Already have an account? <a href="#" class="login-link">Sign In</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Styles -->
+    <style>
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(4px);
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal-container-with-image {
+            background: white;
+            border-radius: 16px;
+            display: flex;
+            width: 90%;
+            max-width: 900px;
+            max-height: 90vh;
+            overflow: hidden;
+            animation: slideIn 0.3s ease-out;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .modal-image-side {
+            flex: 1;
+            display: none;
+            overflow: hidden;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .modal-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .modal-form-side {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 30px;
+            border-bottom: 1px solid #e5e5e5;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .modal-header h2 {
+            margin: 0;
+            font-size: 28px;
+            font-weight: 700;
+        }
+
+        .modal-close-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.2s ease;
+            flex-shrink: 0;
+        }
+
+        .modal-close-btn:hover {
+            transform: scale(1.2);
+        }
+
+        .modal-content {
+            padding: 40px 30px;
+            flex: 1;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
+            font-size: 14px;
+        }
+
+        .form-group input {
+            padding: 12px 15px;
+            border: 2px solid #e5e5e5;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: border-color 0.3s ease;
+            font-family: inherit;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .form-group input::placeholder {
+            color: #999;
+        }
+
+        .form-group.checkbox {
+            flex-direction: row;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .form-group.checkbox input {
+            margin-right: 10px;
+            width: auto;
+            margin-bottom: 0;
+        }
+
+        .form-group.checkbox label {
+            margin-bottom: 0;
+            font-weight: 400;
+            font-size: 13px;
+            color: #666;
+        }
+
+        .password-hint {
+            font-size: 12px;
+            color: #999;
+            margin-top: 5px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+
+        .modal-footer {
+            padding: 0 30px 30px;
+            text-align: center;
+            color: #666;
+            font-size: 14px;
+        }
+
+        .login-link {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.2s ease;
+        }
+
+        .login-link:hover {
+            color: #764ba2;
+            text-decoration: underline;
+        }
+
+        @media (max-width: 1024px) {
+            .modal-container-with-image {
+                max-width: 600px;
+            }
+
+            .modal-image-side {
+                display: none !important;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .modal-image-side {
+                display: block;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .modal-container-with-image {
+                width: 95%;
+                max-height: 95vh;
+            }
+
+            .modal-content {
+                padding: 25px 20px;
+            }
+
+            .modal-header {
+                padding: 20px;
+            }
+
+            .modal-header h2 {
+                font-size: 22px;
+            }
+        }
+    </style>
 </body>
 </html>
+```
