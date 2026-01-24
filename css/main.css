@@ -789,14 +789,14 @@ a {
 }
 
 .home {
-  height: 100vh;
+  height: 80vh;
 }
 
 .swiper-banner .swiper-slide {
   padding: 70px 70px 70px 0;
 }
 .banner-item {
-  height: calc(100vh - 140px);
+  height: calc(80vh - 140px);
   padding: 150px 70px 70px 70px;
   display: flex;
   flex-direction: column;
