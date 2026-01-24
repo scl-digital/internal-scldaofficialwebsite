@@ -1,0 +1,1270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Showcase - Cape Town Digital Agency</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%);
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 60px;
+            position: relative;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, #00f5ff, #ff00ff);
+            border-radius: 2px;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #00f5ff, #ff00ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+            animation: fadeInDown 0.8s ease;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: #a0a0a0;
+            font-weight: 300;
+            margin-bottom: 25px;
+        }
+
+        .header-signup-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 30px;
+            background: linear-gradient(135deg, #00f5ff, #00a8ff);
+            color: #000;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            animation: fadeInUp 0.8s ease;
+        }
+
+        .header-signup-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 245, 255, 0.3);
+        }
+
+        .header-signup-btn:active {
+            transform: translateY(0);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .project-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+
+        .project-description {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 40px;
+            animation: fadeInLeft 0.8s ease;
+        }
+
+        .project-description h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #00f5ff;
+        }
+
+        .project-description p {
+            line-height: 1.8;
+            color: #cccccc;
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+        }
+
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 30px;
+        }
+
+        .tag {
+            padding: 8px 16px;
+            background: rgba(0, 245, 255, 0.1);
+            border: 1px solid rgba(0, 245, 255, 0.3);
+            border-radius: 20px;
+            font-size: 0.9rem;
+            color: #00f5ff;
+        }
+
+        .video-section {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 20px;
+            animation: fadeInRight 0.8s ease;
+        }
+
+        .video-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%;
+            background: #000;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .video-container video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .video-controls {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .play-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #00f5ff;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.2s;
+        }
+
+        .play-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .gallery-section {
+            margin: 60px 0;
+        }
+
+        .gallery-section h3 {
+            font-size: 2rem;
+            margin-bottom: 30px;
+            color: #ff00ff;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 16px;
+            cursor: pointer;
+            aspect-ratio: 4/3;
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.05);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(0, 245, 255, 0.3), rgba(255, 0, 255, 0.3));
+            opacity: 0;
+            transition: opacity 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 60px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 16px 40px;
+            border-radius: 50px;
+            border: none;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .btn span {
+            position: relative;
+            z-index: 1;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #00f5ff, #00a8ff);
+            color: #000;
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, #ff00ff, #ff0080);
+            color: #fff;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 245, 255, 0.3);
+        }
+
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .lightbox.active {
+            display: flex;
+        }
+
+        .lightbox-content {
+            max-width: 90%;
+            max-height: 90%;
+            position: relative;
+        }
+
+        .lightbox-content img {
+            max-width: 100%;
+            max-height: 90vh;
+            border-radius: 8px;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: -50px;
+            right: 0;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+        }
+
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .lightbox-nav:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .lightbox-prev {
+            left: -80px;
+        }
+
+        .lightbox-next {
+            right: -80px;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .videos-section {
+            margin: 60px 0;
+        }
+
+        .videos-section h3 {
+            font-size: 2rem;
+            margin-bottom: 30px;
+            color: #ff00ff;
+        }
+
+        .videos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            margin-bottom: 20px;
+        }
+
+        .video-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .video-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(0, 245, 255, 0.3);
+            box-shadow: 0 15px 40px rgba(0, 245, 255, 0.2);
+        }
+
+        .video-frame {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%;
+            overflow: hidden;
+            background: #000;
+        }
+
+        .video-frame iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 0;
+        }
+
+        .video-info {
+            padding: 20px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .video-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #00f5ff;
+            margin-bottom: 10px;
+        }
+
+        .video-description {
+            font-size: 0.95rem;
+            color: #a0a0a0;
+            line-height: 1.6;
+            flex: 1;
+        }
+
+        .video-duration {
+            font-size: 0.85rem;
+            color: #666;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .view-all-videos-btn {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .view-all-videos-btn a {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 30px;
+            background: linear-gradient(135deg, #00f5ff, #00a8ff);
+            color: #000;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .view-all-videos-btn a:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 245, 255, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .project-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .videos-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .action-buttons {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Family Peace Association South Africa</h1>
+            <p class="subtitle">Transforming Digital Banking for Africa</p>
+            <button class="header-signup-btn" onclick="openAccountModal()">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="12" cy="7" r="4"></circle>
+                    <polyline points="12 12 17 17 12 22 7 17 12 12"></polyline>
+                </svg>
+                Create Account
+            </button>
+        </div>
+
+        <div class="project-grid">
+            <div class="project-description">
+                <h2>Project Overview</h2>
+                <p>We partnered with a pioneering fintech startup to create a comprehensive digital banking platform that serves the unique needs of the African market. This project showcases our expertise in building scalable, secure, and user-friendly financial solutions.</p>
+                <p>Our team designed and developed a complete ecosystem including mobile applications, web dashboards, and backend infrastructure that processes millions of transactions daily. The platform integrates cutting-edge AI for fraud detection and personalized financial insights.</p>
+                <p>Through iterative design sprints and close collaboration with the founding team, we delivered a product that has onboarded over 500,000 users in its first year and secured Series A funding.</p>
+                
+                <div class="tags">
+                    <span class="tag">Mobile Development</span>
+                    <span class="tag">Web Platform</span>
+                    <span class="tag">AI/ML</span>
+                    <span class="tag">FinTech</span>
+                    <span class="tag">Security</span>
+                </div>
+            </div>
+
+            <div class="video-section">
+                <div class="video-container">
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/va7Xblr6irY?si=3_KPkICa5lsjmnq4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    <div class="video-controls">
+                        <button class="play-btn" id="playBtn">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                            </svg>
+                        </button>
+                        <span style="color: white; font-size: 0.9rem;">Project Demo</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="gallery-section">
+            <h3>Project Gallery</h3>
+            <div class="gallery-grid">
+                <div class="gallery-item" onclick="openLightbox(0)">
+                    <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?w=800" alt="Dashboard Interface">
+                    <div class="gallery-overlay">
+                        <span style="color: white; font-size: 1.5rem;">+</span>
+                    </div>
+                </div>
+                <div class="gallery-item" onclick="openLightbox(1)">
+                    <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800" alt="Analytics View">
+                    <div class="gallery-overlay">
+                        <span style="color: white; font-size: 1.5rem;">+</span>
+                    </div>
+                </div>
+                <div class="gallery-item" onclick="openLightbox(2)">
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800" alt="Mobile App">
+                    <div class="gallery-overlay">
+                        <span style="color: white; font-size: 1.5rem;">+</span>
+                    </div>
+                </div>
+                <div class="gallery-item" onclick="openLightbox(3)">
+                    <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?w=800" alt="User Interface">
+                    <div class="gallery-overlay">
+                        <span style="color: white; font-size: 1.5rem;">+</span>
+                    </div>
+                </div>
+                <div class="gallery-item" onclick="openLightbox(4)">
+                    <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?w=800&q=60" alt="Design System">
+                    <div class="gallery-overlay">
+                        <span style="color: white; font-size: 1.5rem;">+</span>
+                    </div>
+                </div>
+                <div class="gallery-item" onclick="openLightbox(5)">
+                    <img src="https://images.unsplash.com/photo-1557821552-17105176677c?w=800" alt="Payment Flow">
+                    <div class="gallery-overlay">
+                        <span style="color: white; font-size: 1.5rem;">+</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="videos-section">
+            <h3>Project Videos & Demos</h3>
+            <div class="videos-grid">
+                <!-- Video 1 -->
+                <div class="video-card">
+                    <div class="video-frame">
+                   
+                        <iframe src="https://www.youtube.com/embed/va7Xblr6irY?si=3_KPkICa5lsjmnq4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                    <div class="video-info">
+                        <div class="video-title">Project Overview</div>
+                        <div class="video-description">Get an in-depth look at the fintech platform architecture and key features that drive our success.</div>
+                        <div class="video-duration">Duration: 5:23</div>
+                    </div>
+                </div>
+
+                <!-- Video 2 -->
+                <div class="video-card">
+                    <div class="video-frame">
+                        <iframe src="https://www.youtube.com/embed/9bZkp7q19f0" title="Features Demo" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+
+                        <iframe src="https://www.youtube.com/embed/sEU5ARqivVE?si=56PuNri6Vu9PYv-p" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"  allowfullscreen></iframe>
+
+                    </div>
+                    <div class="video-info">
+                        <div class="video-title">Features Demo</div>
+                        <div class="video-description">Explore the powerful features including payments, analytics, and user management systems.</div>
+                        <div class="video-duration">Duration: 7:45</div>
+                    </div>
+                </div>
+
+                <!-- Video 3 -->
+                <div class="video-card">
+                    <div class="video-frame">
+                        <iframe src="https://www.youtube.com/embed/jNQXAC9IVRw" title="User Experience" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                    <div class="video-info">
+                        <div class="video-title">User Experience Walkthrough</div>
+                        <div class="video-description">See how our intuitive design makes complex financial tasks simple and accessible.</div>
+                        <div class="video-duration">Duration: 6:12</div>
+                    </div>
+                </div>
+
+                <!-- Video 4 -->
+                <div class="video-card">
+                    <div class="video-frame">
+                        <iframe src="https://www.youtube.com/embed/6ZzX9i4PN-0" title="Technical Architecture" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                    <div class="video-info">
+                        <div class="video-title">Technical Architecture</div>
+                        <div class="video-description">Learn about the scalable backend infrastructure and security measures that protect user data.</div>
+                        <div class="video-duration">Duration: 8:30</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="action-buttons">
+            <button class="btn btn-primary" onclick="downloadPDF()">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                    <polyline points="7 10 12 15 17 10"></polyline>
+                    <line x1="12" y1="15" x2="12" y2="3"></line>
+                </svg>
+                <span>Download PDF</span>
+            </button>
+            <button class="btn btn-secondary" onclick="downloadPNG()">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                    <polyline points="7 10 12 15 17 10"></polyline>
+                    <line x1="12" y1="15" x2="12" y2="3"></line>
+                </svg>
+                <span>Download PNG</span>
+            </button>
+        </div>
+    </div>
+
+    <div class="lightbox" id="lightbox">
+        <div class="lightbox-content">
+            <button class="lightbox-close" onclick="closeLightbox()">×</button>
+            <button class="lightbox-nav lightbox-prev" onclick="changeLightboxImage(-1)">‹</button>
+            <img id="lightboxImage" src="" alt="">
+            <button class="lightbox-nav lightbox-next" onclick="changeLightboxImage(1)">›</button>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+    <script>
+        const images = [
+            'https://images.unsplash.com/photo-1551650975-87deedd944c3?w=1200',
+            'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200',
+            'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200',
+            'https://images.unsplash.com/photo-1563986768609-322da13575f3?w=1200',
+            'https://images.unsplash.com/photo-1551650975-87deedd944c3?w=1200&q=60',
+            'https://images.unsplash.com/photo-1557821552-17105176677c?w=1200'
+        ];
+
+        let currentImageIndex = 0;
+
+        // Video controls
+        const video = document.getElementById('projectVideo');
+        const playBtn = document.getElementById('playBtn');
+
+        playBtn.addEventListener('click', () => {
+            if (video.paused) {
+                video.play();
+                playBtn.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect></svg>';
+            } else {
+                video.pause();
+                playBtn.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>';
+            }
+        });
+
+        // Lightbox functions
+        function openLightbox(index) {
+            currentImageIndex = index;
+            document.getElementById('lightboxImage').src = images[index];
+            document.getElementById('lightbox').classList.add('active');
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.remove('active');
+        }
+
+        function changeLightboxImage(direction) {
+            currentImageIndex += direction;
+            if (currentImageIndex < 0) currentImageIndex = images.length - 1;
+            if (currentImageIndex >= images.length) currentImageIndex = 0;
+            document.getElementById('lightboxImage').src = images[currentImageIndex];
+        }
+
+        // Close lightbox on escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeLightbox();
+            if (e.key === 'ArrowLeft') changeLightboxImage(-1);
+            if (e.key === 'ArrowRight') changeLightboxImage(1);
+        });
+
+        // Download PDF
+        function downloadPDF() {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF('p', 'mm', 'a4');
+            
+            doc.setFontSize(24);
+            doc.setTextColor(0, 245, 255);
+            doc.text('FinTech Revolution', 20, 30);
+            
+            doc.setFontSize(14);
+            doc.setTextColor(0, 0, 0);
+            doc.text('Transforming Digital Banking for Africa', 20, 40);
+            
+            doc.setFontSize(11);
+            const description = 'We partnered with a pioneering fintech startup to create a comprehensive digital banking platform that serves the unique needs of the African market. This project showcases our expertise in building scalable, secure, and user-friendly financial solutions.';
+            const splitText = doc.splitTextToSize(description, 170);
+            doc.text(splitText, 20, 55);
+            
+            doc.setFontSize(10);
+            doc.setTextColor(100, 100, 100);
+            doc.text('Cape Town Digital Agency - Startup Studio & Digital Solutions', 20, 280);
+            
+            doc.save('project-portfolio.pdf');
+        }
+
+        // Download PNG
+        function downloadPNG() {
+            html2canvas(document.querySelector('.container'), {
+                backgroundColor: '#0a0a0a',
+                scale: 2
+            }).then(canvas => {
+                const link = document.createElement('a');
+                link.download = 'project-portfolio.png';
+                link.href = canvas.toDataURL();
+                link.click();
+            });
+        }
+
+        // Account Modal Functions
+        function openAccountModal() {
+            const modal = document.getElementById('createAccountModal');
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeAccountModal() {
+            const modal = document.getElementById('createAccountModal');
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        function handleGoogleLogin() {
+            console.log('Google login initiated');
+            // In production, integrate with Google OAuth
+            // window.location.href = 'https://accounts.google.com/o/oauth2/v2/auth?...';
+            alert('Google login would redirect to Google OAuth');
+        }
+
+        function handleLinkedInLogin() {
+            console.log('LinkedIn login initiated');
+            // In production, integrate with LinkedIn OAuth
+            // window.location.href = 'https://www.linkedin.com/oauth/v2/authorization?...';
+            alert('LinkedIn login would redirect to LinkedIn OAuth');
+        }
+
+        function handleAccountCreation(event) {
+            event.preventDefault();
+
+            const fullName = document.getElementById('fullName').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const company = document.getElementById('company').value;
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+
+            if (password !== confirmPassword) {
+                alert('Passwords do not match. Please try again.');
+                return;
+            }
+
+            if (password.length < 8) {
+                alert('Password must be at least 8 characters long.');
+                return;
+            }
+
+            const accountData = {
+                fullName: fullName,
+                email: email,
+                phone: phone,
+                company: company,
+                password: password,
+                createdAt: new Date().toISOString()
+            };
+
+            console.log('Account Creation Data:', accountData);
+            alert(`Account created successfully!\n\nWelcome, ${fullName}!\n\nA confirmation email has been sent to ${email}.`);
+            document.getElementById('createAccountForm').reset();
+            closeAccountModal();
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const modal = document.getElementById('createAccountModal');
+            if (modal) {
+                modal.addEventListener('click', function(event) {
+                    if (event.target === modal) {
+                        closeAccountModal();
+                    }
+                });
+            }
+        });
+    </script>
+
+    <!-- Create Account Modal -->
+    <div id="createAccountModal" class="modal-overlay">
+        <div class="modal-container-with-image">
+            <div class="modal-image-side">
+                <img src="https://via.placeholder.com/500x600/667eea/ffffff?text=Create+Your+Account" alt="Create Account" class="modal-image">
+            </div>
+            <div class="modal-form-side">
+                <div class="modal-header">
+                    <h2>Create Your Account</h2>
+                    <button class="modal-close-btn" onclick="closeAccountModal()">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                            <line x1="18" y1="6" x2="6" y2="18"></line>
+                            <line x1="6" y1="6" x2="18" y2="18"></line>
+                        </svg>
+                    </button>
+                </div>
+                <div class="modal-content">
+                    <div class="social-login-section">
+                        <button type="button" class="social-btn google-btn" onclick="handleGoogleLogin()">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+                            <span>Continue with Google</span>
+                        </button>
+                        <button type="button" class="social-btn linkedin-btn" onclick="handleLinkedInLogin()">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z"/></svg>
+                            <span>Continue with LinkedIn</span>
+                        </button>
+                    </div>
+                    <div class="divider-section">
+                        <div class="divider-line"></div>
+                        <span class="divider-text">or</span>
+                        <div class="divider-line"></div>
+                    </div>
+                    <form id="createAccountForm" onsubmit="handleAccountCreation(event)">
+                        <div class="form-group">
+                            <label for="fullName">Full Name *</label>
+                            <input type="text" id="fullName" name="fullName" required placeholder="Enter your full name">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Email Address *</label>
+                            <input type="email" id="email" name="email" required placeholder="Enter your email address">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" name="phone" placeholder="Enter your phone number">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="company">Company Name</label>
+                            <input type="text" id="company" name="company" placeholder="Enter your company name">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="password">Password *</label>
+                            <input type="password" id="password" name="password" required placeholder="Create a strong password">
+                            <small class="password-hint">Minimum 8 characters</small>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="confirmPassword">Confirm Password *</label>
+                            <input type="password" id="confirmPassword" name="confirmPassword" required placeholder="Confirm your password">
+                        </div>
+
+                        <div class="form-group checkbox">
+                            <input type="checkbox" id="agreeTerms" name="agreeTerms" required>
+                            <label for="agreeTerms">I agree to the Terms of Service and Privacy Policy</label>
+                        </div>
+
+                        <button type="submit" class="submit-btn">Create Account</button>
+                    </form>
+
+                    <div class="modal-footer">
+                        <p>Already have an account? <a href="#" class="login-link">Sign In</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Styles -->
+    <style>
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(4px);
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal-container-with-image {
+            background: white;
+            border-radius: 16px;
+            display: flex;
+            width: 90%;
+            max-width: 900px;
+            max-height: 90vh;
+            overflow: hidden;
+            animation: slideIn 0.3s ease-out;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .modal-image-side {
+            flex: 1;
+            display: none;
+            overflow: hidden;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .modal-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .modal-form-side {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .social-login-section {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .social-btn {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 12px;
+            border: 2px solid #e5e5e5;
+            border-radius: 8px;
+            background: white;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            color: #333;
+        }
+
+        .social-btn:hover {
+            border-color: #667eea;
+            background: #f5f7ff;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.15);
+        }
+
+        .google-btn:hover {
+            color: #4285f4;
+        }
+
+        .linkedin-btn:hover {
+            color: #0077b5;
+        }
+
+        .divider-section {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin: 20px 0;
+            color: #999;
+        }
+
+        .divider-line {
+            flex: 1;
+            height: 1px;
+            background: #e5e5e5;
+        }
+
+        .divider-text {
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            color: #999;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 30px;
+            border-bottom: 1px solid #e5e5e5;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .modal-header h2 {
+            margin: 0;
+            font-size: 28px;
+            font-weight: 700;
+        }
+
+        .modal-close-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.2s ease;
+            flex-shrink: 0;
+        }
+
+        .modal-close-btn:hover {
+            transform: scale(1.2);
+        }
+
+        .modal-content {
+            padding: 40px 30px;
+            flex: 1;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
+            font-size: 14px;
+        }
+
+        .form-group input {
+            padding: 12px 15px;
+            border: 2px solid #e5e5e5;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: border-color 0.3s ease;
+            font-family: inherit;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .form-group input::placeholder {
+            color: #999;
+        }
+
+        .form-group.checkbox {
+            flex-direction: row;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .form-group.checkbox input {
+            margin-right: 10px;
+            width: auto;
+            margin-bottom: 0;
+        }
+
+        .form-group.checkbox label {
+            margin-bottom: 0;
+            font-weight: 400;
+            font-size: 13px;
+            color: #666;
+        }
+
+        .password-hint {
+            font-size: 12px;
+            color: #999;
+            margin-top: 5px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+
+        .modal-footer {
+            padding: 0 30px 30px;
+            text-align: center;
+            color: #666;
+            font-size: 14px;
+        }
+
+        .login-link {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.2s ease;
+        }
+
+        .login-link:hover {
+            color: #764ba2;
+            text-decoration: underline;
+        }
+
+        @media (max-width: 1024px) {
+            .modal-container-with-image {
+                max-width: 600px;
+            }
+
+            .modal-image-side {
+                display: none !important;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .modal-image-side {
+                display: block;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .modal-container-with-image {
+                width: 95%;
+                max-height: 95vh;
+            }
+
+            .modal-content {
+                padding: 25px 20px;
+            }
+
+            .modal-header {
+                padding: 20px;
+            }
+
+            .modal-header h2 {
+                font-size: 22px;
+            }
+        }
+    </style>
+</body>
+</html>
+```
