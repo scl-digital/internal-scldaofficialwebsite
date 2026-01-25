@@ -19,10 +19,10 @@ class CEOChatbot {
             <div class="chatbot-container">
                 <div class="chatbot-header">
                     <div class="header-content">
-                        <img src="/images/Shinsa_Lyonga_Lomboto_Website_Chat_Image.png" class="logo" alt="SCL Logo">
+                        <div class="online-indicator"></div>
                         <div class="header-text">
-                            <h3>Shinsa Lomboto</h3>
-                            <p>CEO / Founder & Managing Director</p>
+                            <h3>Support Agent</h3>
+                            <p class="online-status">we are online!</p>
                         </div>
                     </div>
                     <button class="minimize-btn">−</button>
@@ -53,8 +53,11 @@ class CEOChatbot {
                     </div>
                 </div>
             </div>
-            <button class="chat-toggle-btn">
-                <img src="/images/Shinsa_Lyonga_Lomboto_Website_Chat_Image.png" alt="Chat with Shinsa" class="ceo-profile-image">
+            <button class="chat-toggle-btn" title="Click here to chat with our support team">
+                <div class="toggle-content">
+                    <span class="toggle-icon">💬</span>
+                    <span class="toggle-text">Need Help?</span>
+                </div>
             </button>
         `;
         document.body.appendChild(widget);
@@ -118,7 +121,7 @@ class CEOChatbot {
     }
 
     showWelcomeMessage() {
-        const welcomeMessage = `Hello! I'm Shinsa Lomboto, CEO and Founder of Software Creative Labs. I'm here to assist you. How can I help you today?`;
+        const welcomeMessage = `Hi! I'm a Support Agent here to help. 👋 Need assistance? I'm available to chat with you right now!`;
         this.addMessage('ceo', welcomeMessage, true);
         
         // Show quick options
@@ -130,27 +133,24 @@ class CEOChatbot {
     showQuickOptions() {
         const options = [
             {
-                text: 'View Our Work',
+                text: 'Report an Issue',
                 action: () => {
-                    this.addMessage('user', 'I\'d like to see some of your work.');
-                    window.open('/case_studies.html', '_blank');
-                    this.respondToOption('work');
+                    this.addMessage('user', 'I need to report an issue.');
+                    this.respondToOption('issue');
                 }
             },
             {
-                text: 'Contact Our Team',
+                text: 'Get Help',
                 action: () => {
-                    this.addMessage('user', 'I\'d like to get in touch with your team.');
-                    window.open('mailto:contact@softwarecreativelabs.com', '_blank');
-                    this.respondToOption('contact');
+                    this.addMessage('user', 'I need help with something.');
+                    this.respondToOption('help');
                 }
             },
             {
-                text: 'Make a Payment',
+                text: 'Contact Support',
                 action: () => {
-                    this.addMessage('user', 'I\'d like to make a payment.');
-                    window.open('/payments.html', '_blank');
-                    this.respondToOption('payment');
+                    this.addMessage('user', 'I\'d like to contact your support team.');
+                    this.respondToOption('contact_support');
                 }
             }
         ];
@@ -171,16 +171,15 @@ class CEOChatbot {
 
     respondToOption(option) {
         const responses = {
-            'work': 'I\'ve opened our case studies in a new tab. You can see some of our recent projects and success stories there. Is there anything specific you\'d like to know about our work?',
-            'contact': 'I\'ve opened your email client with our contact address. Our team will get back to you as soon as possible. Is there anything else I can help you with?',
-            'payment': 'I\'ve opened our secure payment portal in a new tab. You can complete your payment there. Let me know if you need any assistance with the process.'
+            'issue': 'Thank you for reporting an issue. Please provide details about the problem you\'re experiencing, and I\'ll help you resolve it as quickly as possible. What seems to be the issue?',
+            'help': 'I\'m here to help! Please tell me what you need assistance with, and I\'ll do my best to resolve it or connect you with the right person.',
+            'contact_support': 'You can reach our support team via email at contact@softwarecreativelabs.com or through this chat. How can I assist you today?'
         };
 
         this.showTypingIndicator();
         setTimeout(() => {
             this.hideTypingIndicator();
             this.addMessage('ceo', responses[option] || 'How else can I assist you today?');
-            this.showQuickOptions();
         }, 1000);
     }
 

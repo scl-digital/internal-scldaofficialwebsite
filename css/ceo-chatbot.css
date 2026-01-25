@@ -12,21 +12,41 @@
     position: fixed;
     bottom: 30px;
     right: 30px;
-    width: 70px;
-    height: 70px;
-    border-radius: 5%;
-    background: linear-gradient(135deg, #667eea, #764ba2);
+    padding: 12px 16px;
+    border-radius: 1px;
+    background: linear-gradient(135deg, #10b981, #059669);
     color: white;
     border: 2px solid #fff;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    gap: 8px;
+    box-shadow: 0 4px 20px rgba(16, 185, 129, 0.3);
     transition: all 0.3s ease;
     z-index: 10000;
-    padding: 0;
-    overflow: hidden;
+    font-weight: 600;
+    font-size: 14px;
+    min-width: 120px;
+    flex-direction: column;
+    height: auto;
+    width: auto;
+}
+
+.toggle-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+}
+
+.toggle-icon {
+    font-size: 24px;
+}
+
+.toggle-text {
+    font-size: 12px;
+    font-weight: 600;
 }
 
 .ceo-profile-image {
@@ -37,13 +57,10 @@
     transition: transform 0.3s ease;
 }
 
-.chat-toggle-btn:hover .ceo-profile-image {
-    transform: scale(1.05);
-}
-
 .chat-toggle-btn:hover {
-    transform: scale(1.1);
-    box-shadow: 0 6px 25px rgba(102, 126, 234, 0.4);
+    transform: scale(1.05);
+    box-shadow: 0 6px 25px rgba(16, 185, 129, 0.5);
+    background: linear-gradient(135deg, #059669, #047857);
 }
 
 .chat-toggle-btn svg {
@@ -91,6 +108,25 @@
     gap: 12px;
 }
 
+.online-indicator {
+    width: 12px;
+    height: 12px;
+    background-color: #10b981;
+    border-radius: 50%;
+    display: inline-block;
+    box-shadow: 0 0 6px rgba(16, 185, 129, 0.6);
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        box-shadow: 0 0 6px rgba(16, 185, 129, 0.6);
+    }
+    50% {
+        box-shadow: 0 0 12px rgba(16, 185, 129, 0.9);
+    }
+}
+
 .header-content img.logo {
     width: 40px;
     height: 40px;
@@ -106,10 +142,13 @@
     line-height: 1.2;
 }
 
-.header-text p {
+.header-text p,
+.online-status {
     margin: 2px 0 0;
     font-size: 12px;
     opacity: 0.9;
+    color: #10b981;
+    font-weight: 500;
 }
 
 .minimize-btn {
