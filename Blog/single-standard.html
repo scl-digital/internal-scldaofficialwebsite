@@ -46,80 +46,125 @@
     <div id="page" class="s-pagewrap">
 
 
-        <!-- # site header 
-        ================================================== -->
-        <header id="masthead" class="s-header">
+        <!-- Modern site header (copied from main site) -->
+        <nav class="modern-navbar">
+            <div class="navbar-container">
+                <div class="navbar-logo">
+                    <a href="../index.html" title="Back to Home">
+                        <img src="../images/SCL_Blue.png" alt="SCL Digital Agency">
+                    </a>
+                </div>
 
-            <div class="s-header__branding">
-                <p class="site-title">
-                    <a href="index.html" rel="home">Spurgeon.</a>
-                </p>
+                <div class="navbar-primary">
+                    <ul class="nav-items">
+                        <li><a href="../index.html" class="nav-link active">Home</a></li>
+                        <li class="nav-dropdown">
+                            <a href="../services-platform/our_services.html" class="nav-link">Services
+                                <svg class="chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polyline points="6 9 12 15 18 9"></polyline>
+                                </svg>
+                            </a>
+                            <div class="dropdown-menu">
+                                <a href="../services-platform/our_services.html">Digital Infrastructure</a>
+                                <a href="../applications/products.html">Signature Software Suite</a>
+                                <a href="../case_studies.html">Client Case Studies</a>
+                            </div>
+                        </li>
+                        <li><a href="../about.html" class="nav-link">About</a></li>
+                        <li><a href="../events-platform/eventspage.html" class="nav-link">Events</a></li>
+                        <li><a href="../resources_hub_landing.html" class="nav-link">Resources</a></li>
+                    </ul>
+                </div>
+
+                <div class="navbar-utility">
+                    <button class="navbar-icon-btn" title="Search" onclick="toggleSearchBar()">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <path d="m21 21-4.35-4.35"></path>
+                        </svg>
+                    </button>
+
+                    <button class="navbar-btn-primary" onclick="openAccountModal()">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="12" cy="7" r="4"></circle>
+                        </svg>
+                        <span>Create Account</span>
+                    </button>
+
+                    <a href="../ClientPortal/client-billing-portal.html" class="navbar-icon-btn" title="Client Portal">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="12" cy="7" r="4"></circle>
+                        </svg>
+                    </a>
+
+                    <button class="navbar-hamburger" onclick="toggleSidebar()">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                </div>
             </div>
 
-            <div class="row s-header__navigation">
+            <div class="navbar-search-bar" id="searchBar">
+                <input type="text" placeholder="Search our services, resources, and more..." class="search-input">
+                <button class="search-close" onclick="toggleSearchBar()">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+        </nav>
 
-                <nav class="s-header__nav-wrap">
-    
-                    <h3 class="s-header__nav-heading">Navigate to</h3>
-    
-                    <ul class="s-header__nav">
-                        <li><a href="index.html" title="">Home</a></li>
-                        <li class="has-children">
-                            <a href="#0" title="" class="">Categories</a>
-                            <ul class="sub-menu">
-                                <li><a href="category.html">Design</a></li>
-                                <li><a href="category.html">Lifestyle</a></li>
-                                <li><a href="category.html">Inspiration</a></li>
-                                <li><a href="category.html">Work</a></li>
-                                <li><a href="category.html">Health</a></li>
-                                <li><a href="category.html">Photography</a></li>
-                            </ul>
-                        </li>
-                        <li class="current-menu-item has-children">
-                            <a href="#0" title="" class="">Blog</a>
-                            <ul class="sub-menu">
-                                <li><a href="single-standard.html">Standard Post</a></li>
-                                <li><a href="single-video.html">Video Post</a></li>
-                                <li><a href="single-audio.html">Audio Post</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="styles.html" title="">Styles</a></li>
-                        <li><a href="about.html" title="">About</a></li>
-                        <li><a href="contact.html" title="">Contact</a></li>
-                    </ul> <!-- end s-header__nav -->
+        <style>
+            .modern-navbar { position: fixed; top: 0; left: 0; right: 0; background: linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(250,250,250,0.95) 100%); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(0,0,0,0.08); z-index:1000; box-shadow:0 2px 8px rgba(0,0,0,0.05); transition: all 0.3s ease; }
+            .modern-navbar.scrolled { box-shadow: 0 4px 16px rgba(0,0,0,0.1); }
+            .navbar-container{ max-width:1400px; margin:0 auto; padding:0 20px; display:flex; align-items:center; justify-content:space-between; height:70px; }
+            .navbar-logo a{ display:flex; align-items:center; height:50px; transition:transform 0.2s ease; }
+            .navbar-logo img{ height:70px; width:auto; object-fit:contain; }
+            .navbar-primary{ flex:1; display:flex; justify-content:center; margin:0 30px; }
+            .nav-items{ display:flex; list-style:none; gap:30px; margin:0; padding:0; }
+            .nav-link{ display:flex; align-items:center; gap:6px; color:#333; text-decoration:none; font-weight:500; font-size:14px; position:relative; transition: color 0.2s ease; }
+            .nav-link:hover, .nav-link.active{ color:#667eea; }
+            .nav-link.active::after{ content:''; position:absolute; bottom:-8px; left:0; right:0; height:3px; background: linear-gradient(135deg,#667eea,#764ba2); border-radius:2px; }
+            .nav-dropdown{ position:relative; }
+            .nav-dropdown:hover .dropdown-menu{ opacity:1; visibility:visible; transform:translateY(0); }
+            .dropdown-menu{ position:absolute; top:100%; left:0; background:white; border:1px solid rgba(0,0,0,0.1); border-radius:8px; margin-top:8px; padding:8px 0; min-width:200px; opacity:0; visibility:hidden; transform:translateY(-8px); transition: all 0.3s ease; box-shadow:0 8px 24px rgba(0,0,0,0.12); }
+            .dropdown-menu a{ display:block; padding:12px 16px; color:#333; text-decoration:none; font-size:14px; }
+            .dropdown-menu a:hover{ background:#f5f7ff; color:#667eea; }
+            .chevron{ transition: transform 0.3s ease; }
+            .nav-dropdown:hover .chevron{ transform: rotate(180deg); }
+            .navbar-utility{ display:flex; align-items:center; gap:16px; }
+            .navbar-icon-btn{ background:none; border:none; color:#333; cursor:pointer; padding:8px; display:flex; align-items:center; justify-content:center; transition: all 0.2s ease; border-radius:6px; }
+            .navbar-icon-btn:hover{ color:#667eea; background: rgba(102,126,234,0.1); }
+            .navbar-btn-primary{ display:flex; align-items:center; gap:8px; padding:10px 20px; background: linear-gradient(135deg,#0755E9 0%,#0755E9 100%); color:white; border:none; border-radius:1px; font-weight:600; font-size:14px; cursor:pointer; transition: all 0.3s ease; white-space:nowrap; }
+            .navbar-btn-primary:hover{ transform: translateY(-2px); box-shadow: 0 8px 20px rgba(102,126,234,0.3); }
+            .navbar-btn-primary:active{ transform: translateY(0); }
+            .navbar-search-bar{ display:none; padding:12px 20px; background: rgba(255,255,255,0.98); border-top:1px solid rgba(0,0,0,0.08); }
+            .navbar-search-bar.active{ display:flex; gap:12px; align-items:center; }
+            .search-input{ flex:1; padding:10px 12px; border:1px solid rgba(0,0,0,0.1); border-radius:6px; font-size:14px; outline:none; }
+            .search-input:focus{ border-color:#667eea; box-shadow:0 0 0 3px rgba(102,126,234,0.1); }
+            .search-close{ background:none; border:none; color:#666; cursor:pointer; padding:8px; display:flex; align-items:center; justify-content:center; }
+            .search-close:hover{ color:#333; }
+            .navbar-hamburger{ display:none; flex-direction:column; gap:6px; background:none; border:none; cursor:pointer; padding:8px; }
+            .navbar-hamburger span{ width:24px; height:2px; background:#333; border-radius:2px; transition: all 0.3s ease; }
+            .navbar-hamburger.active span:nth-child(1){ transform: rotate(45deg) translate(10px,10px); }
+            .navbar-hamburger.active span:nth-child(2){ opacity:0; }
+            .navbar-hamburger.active span:nth-child(3){ transform: rotate(-45deg) translate(7px,-7px); }
+            @media (max-width:768px){ .navbar-container{ height:60px; padding:0 15px; } .navbar-logo img{ height:40px; } .navbar-primary{ display:none; margin:0; } .navbar-btn-primary span{ display:none; } .navbar-hamburger{ display:flex; } .nav-items{ gap:15px; } }
+            body{ padding-top:70px; }
+            @media (max-width:768px){ body{ padding-top:60px; } }
+        </style>
 
-                </nav> <!-- end s-header__nav-wrap -->
-    
-            </div> <!-- end s-header__navigation -->
-
-            <div class="s-header__search">
-
-                <div class="s-header__search-inner">
-                    <div class="row">
-    
-                        <form role="search" method="get" class="s-header__search-form" action="#">
-                            <label>
-                                <span class="u-screen-reader-text">Search for:</span>
-                                <input type="search" class="s-header__search-field" placeholder="Search for..." value="" name="s" title="Search for:" autocomplete="off">
-                            </label>
-                            <input type="submit" class="s-header__search-submit" value="Search"> 
-                        </form>
-    
-                        <a href="#0" title="Close Search" class="s-header__search-close">Close</a>
-    
-                    </div> <!-- end row -->
-                </div> <!-- s-header__search-inner -->
-    
-            </div> <!-- end s-header__search -->
-
-            <a class="s-header__menu-toggle" href="#0"><span>Menu</span></a>
-            <a class="s-header__search-trigger" href="#">
-                <svg width="24" height="24" fill="none" viewBox="0 0 24 24">
-                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19.25 19.25L15.5 15.5M4.75 11C4.75 7.54822 7.54822 4.75 11 4.75C14.4518 4.75 17.25 7.54822 17.25 11C17.25 14.4518 14.4518 17.25 11 17.25C7.54822 17.25 4.75 14.4518 4.75 11Z"></path>
-                </svg>
-            </a>
-
-        </header> <!-- end s-header -->
+        <script>
+            function toggleSearchBar(){ const searchBar = document.getElementById('searchBar'); searchBar.classList.toggle('active'); if (searchBar.classList.contains('active')) { searchBar.querySelector('.search-input').focus(); } }
+            function toggleSidebar(){ const hamburger = document.querySelector('.navbar-hamburger'); if (hamburger) hamburger.classList.toggle('active'); }
+            let lastScrollTop = 0; const navbar = document.querySelector('.modern-navbar');
+            window.addEventListener('scroll', function(){ let scrollTop = window.pageYOffset || document.documentElement.scrollTop; if (navbar){ if (scrollTop > 0){ navbar.classList.add('scrolled'); } else { navbar.classList.remove('scrolled'); } } lastScrollTop = scrollTop <= 0 ? 0 : scrollTop; });
+            document.addEventListener('DOMContentLoaded', function(){ const currentPage = window.location.pathname.split('/').pop() || 'index.html'; const navLinks = document.querySelectorAll('.nav-link'); navLinks.forEach(link => { const href = link.getAttribute('href'); if (href === currentPage || (currentPage === '' && href === 'index.html')){ link.classList.add('active'); } }); });
+        </script>
 
 
         <!-- # site-content
