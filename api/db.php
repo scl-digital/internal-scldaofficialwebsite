@@ -24,17 +24,17 @@ function scl_attempt_pdo($host, $db, $user, $pass, $charset, $options) {
 
 $attempts = [];
 
-// Attempt 1: Provided/env credentials
-$attempts[] = [$host, $db, $user, $pass];
+// Attempt 1: XAMPP default root/no password with same DB (local dev first)
+$attempts[] = [$host, $db, 'root', ''];
 
-// Attempt 2: XAMPP default root/no password with same DB
-if (!($user === 'root' && $pass === '')) {
-    $attempts[] = [$host, $db, 'root', ''];
-}
-
-// Attempt 3: XAMPP default root/no password with common local DB name
+// Attempt 2: XAMPP default root/no password with common local DB name
 if ($db !== 'clientportal') {
     $attempts[] = [$host, 'clientportal', 'root', ''];
+}
+
+// Attempt 3: Provided/env credentials (production)
+if (!($user === 'root' && $pass === '')) {
+    $attempts[] = [$host, $db, $user, $pass];
 }
 
 $pdo = null;

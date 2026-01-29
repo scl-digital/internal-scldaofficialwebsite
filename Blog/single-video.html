@@ -343,176 +343,20 @@
 
                         </article> <!-- end entry -->
 
-                        <!-- comments -->
+                        <!-- comments (dynamic) -->
                         <div class="comments-wrap">
 
                             <div id="comments">
                                 <div class="large-12">
-
-                                    <h3>5 Comments</h3>
-
-                                    <!-- START commentlist -->
-                                    <ol class="commentlist">
-
-                                        <li class="depth-1 comment">
-
-                                            <div class="comment__avatar">
-                                                <img class="avatar" src="images/avatars/user-01.jpg" alt="" width="50" height="50">
-                                            </div>
-
-                                            <div class="comment__content">
-
-                                                <div class="comment__info">
-                                                    <div class="comment__author">Itachi Uchiha</div>
-
-                                                    <div class="comment__meta">
-                                                        <div class="comment__time">Aug 15, 2021</div>
-                                                        <div class="comment__reply">
-                                                            <a class="comment-reply-link" href="#0">Reply</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="comment__text">
-                                                <p>Adhuc quaerendum est ne, vis ut harum tantas noluisse, id suas iisque mei. Nec te inani ponderum vulputate,
-                                                facilisi expetenda has et. Iudico dictas scriptorem an vim, ei alia mentitum est, ne has voluptua praesent.</p>
-                                                </div>
-
-                                            </div>
-
-                                        </li> <!-- end comment level 1 -->
-
-                                        <li class="thread-alt depth-1 comment">
-
-                                            <div class="comment__avatar">
-                                                <img class="avatar" src="images/avatars/user-04.jpg" alt="" width="50" height="50">
-                                            </div>
-
-                                            <div class="comment__content">
-
-                                                <div class="comment__info">
-                                                    <div class="comment__author">John Doe</div>
-
-                                                    <div class="comment__meta">
-                                                        <div class="comment__time">Aug 14, 2021</div>
-                                                        <div class="comment__reply">
-                                                            <a class="comment-reply-link" href="#0">Reply</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="comment__text">
-                                                <p>Sumo euismod dissentiunt ne sit, ad eos iudico qualisque adversarium, tota falli et mei. Esse euismod
-                                                urbanitas ut sed, et duo scaevola pericula splendide. Primis veritus contentiones nec ad, nec et
-                                                tantas semper delicatissimi.</p>
-                                                </div>
-
-                                            </div>
-
-                                            <ul class="children">
-
-                                                <li class="depth-2 comment">
-
-                                                    <div class="comment__avatar">
-                                                        <img class="avatar" src="images/avatars/user-03.jpg" alt="" width="50" height="50">
-                                                    </div>
-
-                                                    <div class="comment__content">
-
-                                                        <div class="comment__info">
-                                                            <div class="comment__author">Kakashi Hatake</div>
-
-                                                            <div class="comment__meta">
-                                                                <div class="comment__time">Aug 14, 2021</div>
-                                                                <div class="comment__reply">
-                                                                    <a class="comment-reply-link" href="#0">Reply</a>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="comment__text">
-                                                            <p>Duis sed odio sit amet nibh vulputate
-                                                            cursus a sit amet mauris. Morbi accumsan ipsum velit. Duis sed odio sit amet nibh vulputate
-                                                            cursus a sit amet mauris</p>
-                                                        </div>
-
-                                                    </div>
-
-                                                    <ul class="children">
-
-                                                        <li class="depth-3 comment">
-
-                                                            <div class="comment__avatar">
-                                                                <img class="avatar" src="images/avatars/user-04.jpg" alt="" width="50" height="50">
-                                                            </div>
-
-                                                            <div class="comment__content">
-
-                                                                <div class="comment__info">
-                                                                    <div class="comment__author">John Doe</div>
-
-                                                                    <div class="comment__meta">
-                                                                        <div class="comment__time">Aug 14, 2021</div>
-                                                                        <div class="comment__reply">
-                                                                            <a class="comment-reply-link" href="#0">Reply</a>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-
-                                                                <div class="comment__text">
-                                                                <p>Investigationes demonstraverunt lectores legere me lius quod ii legunt saepius. Claritas est
-                                                                etiam processus dynamicus, qui sequitur mutationem consuetudium lectorum.</p>
-                                                                </div>
-
-                                                            </div>
-
-                                                        </li>
-
-                                                    </ul>
-
-                                                </li>
-
-                                            </ul>
-
-                                        </li> <!-- end comment level 1 -->
-
-                                        <li class="depth-1 comment">
-
-                                            <div class="comment__avatar">
-                                                <img class="avatar" src="images/avatars/user-02.jpg" alt="" width="50" height="50">
-                                            </div>
-
-                                            <div class="comment__content">
-
-                                                <div class="comment__info">
-                                                    <div class="comment__author">Shikamaru Nara</div>
-
-                                                    <div class="comment__meta">
-                                                        <div class="comment__time">Aug 13, 2021</div>
-                                                        <div class="comment__reply">
-                                                            <a class="comment-reply-link" href="#0">Reply</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="comment__text">
-                                                <p>Typi non habent claritatem insitam; est usus legentis in iis qui facit eorum claritatem.</p>
-                                                </div>
-
-                                            </div>
-
-                                        </li>  <!-- end comment level 1 -->
-
+                                    <h3 id="comments-title">Comments</h3>
+                                    <ol class="commentlist" id="commentlist">
+                                        <!-- comments will be loaded here -->
                                     </ol>
-                                    <!-- END commentlist -->
-
                                 </div> <!-- end col-full -->
                             </div> <!-- end comments -->
 
-
                             <div class="comment-respond">
 
-                                <!-- START respond -->
                                 <div id="respond">
 
                                     <h3>
@@ -520,23 +364,24 @@
                                     <span>Your email address will not be published.</span>
                                     </h3>
 
-                                    <form name="contactForm" id="contactForm" method="post" action="" autocomplete="off">
+                                    <form name="commentForm" id="commentForm" method="post" action="" autocomplete="off">
+                                        <input type="hidden" name="post" id="postInput" value="">
                                         <fieldset class="row">
 
                                             <div class="column lg-6 tab-12 form-field">
-                                                <input name="cName" id="cName" class="u-fullwidth h-remove-bottom" placeholder="Your Name" value="" type="text">
+                                                <input name="name" id="name" class="u-fullwidth h-remove-bottom" placeholder="Your Name" value="" type="text" required>
                                             </div>
 
                                             <div class="column lg-6 tab-12 form-field">
-                                                <input name="cEmail" id="cEmail" class="u-fullwidth h-remove-bottom" placeholder="Your Email" value="" type="text">
+                                                <input name="email" id="email" class="u-fullwidth h-remove-bottom" placeholder="Your Email" value="" type="email">
                                             </div>
 
                                             <div class="column lg-12 form-field">
-                                                <input name="cWebsite" id="cWebsite" class="u-fullwidth h-remove-bottom" placeholder="Website" value="" type="text">
+                                                <input name="website" id="website" class="u-fullwidth h-remove-bottom" placeholder="Website" value="" type="text">
                                             </div>
 
                                             <div class="column lg-12 message form-field">
-                                                <textarea name="cMessage" id="cMessage" class="u-fullwidth" placeholder="Your Message"></textarea>
+                                                <textarea name="message" id="message" class="u-fullwidth" placeholder="Your Message" required></textarea>
                                             </div>
 
                                             <div class="column lg-12">
@@ -547,11 +392,72 @@
                                     </form> <!-- end form -->
 
                                 </div>
-                                <!-- END respond-->
 
                             </div> <!-- end comment-respond -->
 
                         </div> <!-- end comments-wrap -->
+
+                        <script>
+                        (function(){
+                            const post = window.location.pathname.split('/').pop();
+                            const apiBase = '../api';
+                            const commentList = document.getElementById('commentlist');
+                            const commentsTitle = document.getElementById('comments-title');
+                            const postInput = document.getElementById('postInput');
+                            postInput.value = post;
+
+                            function escapeHtml(s){ return s ? s.replace(/[&<>"']/g, function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":"&#39;"}[c];}) : ''; }
+
+                            function render(comments){
+                                commentList.innerHTML = '';
+                                commentsTitle.textContent = (comments.length||0) + ' Comment' + (comments.length==1?'':'s');
+                                comments.forEach(c => {
+                                    const li = document.createElement('li');
+                                    li.className = 'depth-1 comment';
+                                    li.innerHTML = `
+                                        <div class="comment__avatar"><img class="avatar" src="../images/avatars/user-01.jpg" alt="" width="50" height="50"></div>
+                                        <div class="comment__content">
+                                          <div class="comment__info"><div class="comment__author">${escapeHtml(c.name)}</div>
+                                            <div class="comment__meta"><div class="comment__time">${escapeHtml(c.created_at)}</div></div></div>
+                                          <div class="comment__text"><p>${escapeHtml(c.message)}</p></div>
+                                        </div>`;
+                                    commentList.appendChild(li);
+                                });
+                            }
+
+                            async function loadComments(){
+                                try{
+                                    const res = await fetch(apiBase + '/get_comments.php?post=' + encodeURIComponent(post));
+                                    const json = await res.json();
+                                    if (json.success) render(json.comments);
+                                }catch(e){ console.error(e); }
+                            }
+
+                            document.getElementById('commentForm').addEventListener('submit', async function(e){
+                                e.preventDefault();
+                                const data = {
+                                    post: post,
+                                    name: document.getElementById('name').value.trim(),
+                                    email: document.getElementById('email').value.trim(),
+                                    website: document.getElementById('website').value.trim(),
+                                    message: document.getElementById('message').value.trim()
+                                };
+                                try{
+                                    const res = await fetch(apiBase + '/save_comment.php', { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify(data)});
+                                    const json = await res.json();
+                                    if (json.success){
+                                        document.getElementById('commentForm').reset();
+                                        loadComments();
+                                    } else {
+                                        alert('Error: ' + (json.error||'Unable to save comment'));
+                                    }
+                                }catch(err){ console.error(err); alert('Error saving comment'); }
+                            });
+
+                            // initial load
+                            loadComments();
+                        })();
+                        </script>
 
                     </div>
                 </div> <!-- end entry-wrap -->
