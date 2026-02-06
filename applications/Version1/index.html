@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimal-ui,shrink-to-fit=no,viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="description"
+        content="A man walking on snow. Enjoying the silence and the relaxing sound of his own foosteps.">
+    <link rel="stylesheet" href="./style.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="root"></div>
+    <div id="start-menu">
+        <div class="menu-content">
+            <h1>Solo7</h1>
+            <p>Experience the peaceful silence of a solitary walk on snow. Immerse yourself in the rhythmic crunch of
+                footsteps and the vast, white stillness.</p>
+            <button class="start-button" id="start-button">START EXPERIENCE</button>
+        </div>
+    </div>
+    <script>
+        document.getElementById('start-button').addEventListener('click', function () {
+            document.getElementById('start-menu').classList.add('hidden');
+        });
+    </script>
+</body>
+<script src="./script.js"></script>
+
+</html>
