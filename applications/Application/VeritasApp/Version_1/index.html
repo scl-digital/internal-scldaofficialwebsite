@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VRE Builder | Veritas Rhythm Engine</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+</head>
+<body class="dark-theme">
+    <div class="background-blobs">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+
+    <div class="builder-container">
+        <header class="builder-header">
+            <div class="logo-wrapper">
+                <svg class="vre-logo" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 2L2 7L12 12L22 7L12 2Z"/>
+                    <path d="M2 17L12 22L22 17"/>
+                    <path d="M2 12L12 17L22 12"/>
+                </svg>
+                <h1>VRE Builder</h1>
+            </div>
+            <p class="subtitle">Turn your web application into a native desktop asset.</p>
+        </header>
+
+        <main class="builder-main">
+            <section class="config-section card glass">
+                <div class="step-indicator">Step 1: Configuration</div>
+                <div class="input-group">
+                    <label for="appUrl">Application URL</label>
+                    <input type="url" id="appUrl" placeholder="https://your-app.com" required>
+                    <small>The URL of the web application you want to wrap.</small>
+                </div>
+                
+                <div class="input-group">
+                    <label for="appName">Application Name</label>
+                    <input type="text" id="appName" placeholder="e.g., My Awesome App">
+                </div>
+            </section>
+
+            <section class="branding-section card glass">
+                <div class="step-indicator">Step 2: Branding</div>
+                <div class="upload-area" id="iconUploadArea">
+                    <input type="file" id="iconInput" accept="image/*" hidden>
+                    <div class="upload-placeholder">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/>
+                        </svg>
+                        <span>Upload Application Icon</span>
+                        <small>PNG, JPG or ICO (max. 1MB)</small>
+                    </div>
+                    <div class="icon-preview hidden" id="iconPreviewContainer">
+                        <img id="iconPreview" src="" alt="Icon Preview">
+                        <button class="remove-icon" id="removeIconBtn">&times;</button>
+                    </div>
+                </div>
+            </section>
+
+            <section class="export-section card glass">
+                <div class="step-indicator">Step 3: Export Target</div>
+                <div class="platform-grid">
+                    <div class="platform-card active" data-platform="exe">
+                        <div class="platform-icon">🪟</div>
+                        <span>Windows (EXE)</span>
+                    </div>
+                    <div class="platform-card" data-platform="iso">
+                        <div class="platform-icon">💿</div>
+                        <span>Disk Image (ISO)</span>
+                    </div>
+                    <div class="platform-card" data-platform="android">
+                        <div class="platform-icon">📱</div>
+                        <span>Android (APK)</span>
+                    </div>
+                </div>
+            </section>
+
+            <div class="action-footer">
+                <button id="buildBtn" class="btn-primary ripple">
+                    <span>Build My Application</span>
+                    <div class="progress-ring hidden" id="buildProgress"></div>
+                </button>
+            </div>
+        </main>
+
+        <section class="preview-section">
+            <div class="preview-label">Live Wrapper Preview</div>
+            <div class="mock-wrapper glass">
+                <div class="mock-topbar">
+                    <div class="mock-left">
+                        <div class="mock-indicator"></div>
+                        <span id="previewName">My App</span>
+                    </div>
+                    <div class="mock-url-bar">
+                        <span id="previewUrl">https://your-app.com</span>
+                    </div>
+                    <div class="mock-controls">
+                        <span></span><span></span><span></span>
+                    </div>
+                </div>
+                <div class="mock-body">
+                    <div class="browser-placeholder">
+                        <div class="browser-icon">🌐</div>
+                        <p>Application View</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div class="modal hidden" id="buildModal">
+        <div class="modal-content glass">
+            <h3>Building Application...</h3>
+            <div class="build-logs" id="buildLogs">
+                <p>> Initializing VRE Build Engine...</p>
+                <p>> Fetching configuration...</p>
+                <p>> Optimizing assets...</p>
+            </div>
+            <div class="progress-bar-container">
+                <div class="progress-bar" id="modalProgressBar"></div>
+            </div>
+            <button id="closeModalBtn" class="btn-secondary hidden">Close</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

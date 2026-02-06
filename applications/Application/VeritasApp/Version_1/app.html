@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VRE Application</title>
+    <link rel="stylesheet" href="app-styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Minimal top bar -->
+    <div class="vre-topbar">
+        <div class="topbar-left">
+            <div class="app-indicator">
+                <svg class="indicator-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 2L2 7L12 12L22 7L12 2Z"/>
+                    <path d="M2 17L12 22L22 17"/>
+                    <path d="M2 12L12 17L22 12"/>
+                </svg>
+                <span class="app-title" id="appTitle">Loading...</span>
+            </div>
+            
+            <div class="url-bar" id="urlBar">
+                <svg class="lock-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                    <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                </svg>
+                <span class="url-text" id="urlText">https://</span>
+            </div>
+        </div>
+        
+        <div class="topbar-right">
+            <div class="connection-status">
+                <span class="status-dot" id="statusDot"></span>
+                <span class="status-text" id="statusText">Connected</span>
+            </div>
+            
+            <div class="topbar-controls">
+                <button class="control-btn" id="refreshBtn" title="Refresh (Ctrl+R)">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.2"/>
+                    </svg>
+                </button>
+                
+                <button class="control-btn" id="homeBtn" title="Home">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                        <polyline points="9 22 9 12 15 12 15 22"/>
+                    </svg>
+                </button>
+                
+                <button class="control-btn" id="settingsBtn" title="Settings">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="3"/>
+                        <path d="M12 1v6m0 6v6m-6-6h6m6 0h6"/>
+                    </svg>
+                </button>
+                
+                <button class="control-btn minimize-btn" id="minimizeBtn" title="Minimize">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="5" y1="12" x2="19" y2="12"/>
+                    </svg>
+                </button>
+                
+                <button class="control-btn maximize-btn" id="maximizeBtn" title="Maximize">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="3" width="18" height="18" rx="2"/>
+                    </svg>
+                </button>
+                
+                <button class="control-btn close-btn" id="closeBtn" title="Close (Ctrl+W)">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18"/>
+                        <line x1="6" y1="6" x2="18" y2="18"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main content area - iframe container -->
+    <div class="vre-content">
+        <iframe 
+            id="appFrame" 
+            src="about:blank" 
+            frameborder="0"
+            sandbox="allow-same-origin allow-scripts allow-forms allow-popups allow-modals"
+            allowfullscreen>
+        </iframe>
+        
+        <!-- Loading overlay -->
+        <div class="loading-overlay" id="loadingOverlay">
+            <div class="loading-spinner">
+                <svg viewBox="0 0 50 50">
+                    <circle cx="25" cy="25" r="20" fill="none" stroke-width="3"></circle>
+                </svg>
+            </div>
+            <div class="loading-text">Initializing Application...</div>
+            <div class="loading-progress">
+                <div class="progress-bar" id="progressBar"></div>
+            </div>
+        </div>
+        
+        <!-- Error state -->
+        <div class="error-overlay hidden" id="errorOverlay">
+            <div class="error-content">
+                <svg class="error-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <line x1="12" y1="8" x2="12" y2="12"/>
+                    <line x1="12" y1="16" x2="12.01" y2="16"/>
+                </svg>
+                <h2 class="error-title">Connection Failed</h2>
+                <p class="error-message" id="errorMessage">Unable to load the application.</p>
+                <button class="error-retry" id="retryBtn">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.2"/>
+                    </svg>
+                    Retry Connection
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Settings panel (slide-in) -->
+    <div class="settings-panel hidden" id="settingsPanel">
+        <div class="settings-header">
+            <h3 class="settings-title">Application Settings</h3>
+            <button class="settings-close" id="settingsClose">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="18" y1="6" x2="6" y2="18"/>
+                    <line x1="6" y1="6" x2="18" y2="18"/>
+                </svg>
+            </button>
+        </div>
+        
+        <div class="settings-content">
+            <div class="settings-section">
+                <h4 class="section-title">Display</h4>
+                <div class="setting-item">
+                    <label class="setting-label">
+                        <input type="checkbox" id="alwaysOnTop">
+                        <span>Always on Top</span>
+                    </label>
+                </div>
+                <div class="setting-item">
+                    <label class="setting-label">
+                        <input type="checkbox" id="hideTopbar">
+                        <span>Hide Top Bar (Ctrl+B)</span>
+                    </label>
+                </div>
+            </div>
+            
+            <div class="settings-section">
+                <h4 class="section-title">Performance</h4>
+                <div class="setting-item">
+                    <label class="setting-label">
+                        <input type="checkbox" id="hardwareAccel" checked>
+                        <span>Hardware Acceleration</span>
+                    </label>
+                </div>
+                <div class="setting-item">
+                    <label class="setting-label">
+                        <input type="checkbox" id="cacheEnabled" checked>
+                        <span>Enable Cache</span>
+                    </label>
+                </div>
+            </div>
+            
+            <div class="settings-section">
+                <h4 class="section-title">Privacy</h4>
+                <div class="setting-item">
+                    <label class="setting-label">
+                        <input type="checkbox" id="blockCookies">
+                        <span>Block Third-Party Cookies</span>
+                    </label>
+                </div>
+                <div class="setting-item">
+                    <label class="setting-label">
+                        <input type="checkbox" id="clearOnClose">
+                        <span>Clear Data on Close</span>
+                    </label>
+                </div>
+            </div>
+            
+            <div class="settings-section">
+                <h4 class="section-title">Application Info</h4>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <span class="info-label">Version</span>
+                        <span class="info-value">1.0.0</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Build</span>
+                        <span class="info-value">2024.02</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Engine</span>
+                        <span class="info-value">Chromium 120</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Memory</span>
+                        <span class="info-value" id="memoryUsage">-- MB</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="settings-footer">
+            <button class="btn-secondary" id="resetSettings">Reset to Defaults</button>
+            <button class="btn-primary" id="saveSettings">Save Settings</button>
+        </div>
+    </div>
+
+    <!-- Quick actions bar (bottom, auto-hide) -->
+    <div class="quick-actions hidden" id="quickActions">
+        <div class="action-item" id="screenshotBtn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
+                <circle cx="12" cy="13" r="4"/>
+            </svg>
+            <span>Screenshot</span>
+        </div>
+        <div class="action-item" id="fullscreenBtn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/>
+            </svg>
+            <span>Fullscreen</span>
+        </div>
+        <div class="action-item" id="zoomBtn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="11" cy="11" r="8"/>
+                <path d="m21 21-4.35-4.35"/>
+                <line x1="11" y1="8" x2="11" y2="14"/>
+                <line x1="8" y1="11" x2="14" y2="11"/>
+            </svg>
+            <span>Zoom: 100%</span>
+        </div>
+    </div>
+
+    <script src="app-script.js"></script>
+</body>
+</html>
