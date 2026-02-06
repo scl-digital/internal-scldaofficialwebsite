@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,8 +8,11 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@500&display=swap"
+        rel="stylesheet">
 </head>
+
 <body class="dark-theme">
     <div class="background-blobs">
         <div class="blob blob-1"></div>
@@ -17,17 +21,7 @@
     </div>
 
     <div class="builder-container">
-        <header class="builder-header">
-            <div class="logo-wrapper">
-                <svg class="vre-logo" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M12 2L2 7L12 12L22 7L12 2Z"/>
-                    <path d="M2 17L12 22L22 17"/>
-                    <path d="M2 12L12 17L22 12"/>
-                </svg>
-                <h1>VRE Builder</h1>
-            </div>
-            <p class="subtitle">Turn your web application into a native desktop asset.</p>
-        </header>
+
 
         <main class="builder-main">
             <section class="config-section card glass">
@@ -37,7 +31,7 @@
                     <input type="url" id="appUrl" placeholder="https://your-app.com" required>
                     <small>The URL of the web application you want to wrap.</small>
                 </div>
-                
+
                 <div class="input-group">
                     <label for="appName">Application Name</label>
                     <input type="text" id="appName" placeholder="e.g., My Awesome App">
@@ -50,7 +44,7 @@
                     <input type="file" id="iconInput" accept="image/*" hidden>
                     <div class="upload-placeholder">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/>
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12" />
                         </svg>
                         <span>Upload Application Icon</span>
                         <small>PNG, JPG or ICO (max. 1MB)</small>
@@ -130,4 +124,5 @@
 
     <script src="script.js"></script>
 </body>
+
 </html>
