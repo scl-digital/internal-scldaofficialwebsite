@@ -20,6 +20,17 @@
         <div class="blob blob-3"></div>
     </div>
 
+    <div class="user-account-wrapper">
+        <button id="accountBtn" class="btn-account glass">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+            <span id="accountLabel">Login / Sign Up</span>
+        </button>
+        <div id="proBadge" class="pro-badge hidden">PRO</div>
+    </div>
+
     <div class="builder-container">
 
 
@@ -122,6 +133,31 @@
         </div>
     </div>
 
+    <!-- Subscription Modal -->
+    <div class="modal hidden" id="subModal">
+        <div class="modal-content glass sub-card">
+            <div class="sub-header">
+                <h2>Upgrade to VRE Pro</h2>
+                <p>Unlock the ability to build and export your applications.</p>
+            </div>
+            <div class="price-tag">
+                <span class="currency">$</span>
+                <span class="amount">9.99</span>
+                <span class="period">/ Year</span>
+            </div>
+            <ul class="features-list">
+                <li>✅ Unlimited Application Builds</li>
+                <li>✅ Windows (EXE) Export</li>
+                <li>✅ Android (APK) Support</li>
+                <li>✅ Custom Branding & Icons</li>
+                <li>✅ Priority Support</li>
+            </ul>
+            <div id="paypal-button-container"></div>
+            <button class="close-modal" id="closeSubBtn">&times;</button>
+        </div>
+    </div>
+
+    <script src="https://www.paypal.com/sdk/js?client-id=test&currency=USD"></script>
     <script src="script.js"></script>
 </body>
 
