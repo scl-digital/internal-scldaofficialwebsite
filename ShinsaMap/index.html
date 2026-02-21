@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Genesis Client Map</title>
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    
+    <style>
+        /* Set the map size to fill the screen or a specific grid area */
+        #map {
+            height: 600px;
+            width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+        body { font-family: sans-serif; padding: 20px; background-color: #f4f4f4; }
+        h2 { color: #2c3e50; }
+    </style>
+</head>
+<body>
+
+    <h2>Genesis Virtual Machine: Global Deployment Map</h2>
+    <div id="map"></div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    
+    <script>
+        // 1. Initialize the map and set its view (Latitude, Longitude, Zoom Level)
+        // Set coordinates to your primary office or a central client location
+        var map = L.map('map').setView([-22.9, 14.5], 4); 
+
+        // 2. Add the OpenStreetMap tile layer (The actual map imagery)
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '© OpenStreetMap contributors'
+        }).addTo(map);
+
+        // 3. Add markers for your Genesis VM Client sites
+        // Example: Client Pilot Site
+        var pilotSite = L.marker([-22.967, 14.505]).addTo(map);
+        pilotSite.bindPopup("<b>Pilot Site: Pharmacy A</b><br>Status: Genesis VM Active").openPopup();
+
+        // Example: Future Cloud Instance
+        var cloudSite = L.marker([-23.500, 18.200]).addTo(map);
+        cloudSite.bindPopup("<b>Cloud Site: Pharmacy B</b><br>Type: High-Speed Fiber Deployment");
+
+        // 4. Automation Logic: You could eventually pull these coordinates 
+        // from a database on your server to update the map automatically.
+    </script>
+
+</body>
+</html>
