@@ -151,11 +151,7 @@
 
 		<div class="content-page about-content content" style="background-image: url('images/image-bg-3.jpg');">
 			<div class="content-inner">
-				<div class="left">
-					<div class="left-avatar">
-						<img src="Images/make a payment.png" class="wow animate__fadeInLeft" alt="">
-					</div>
-				</div>
+			
 
 
 					  <style>
@@ -194,8 +190,8 @@
 
 				<div class="right">
 					<div class="left-text">
-				        <h2 class="title wow animate__slideInLeft" data-wow-delay="0.1s" style="color: #ffffff;">Make a Secure Payment</h2>
-						<div class="subtitle wow animate__slideInLeft" data-wow-delay="0.5s">Please use the Electronic Funds Transfer (EFT) details below to complete your payment.</div>
+				      
+					
 
 
 						<style>
@@ -654,11 +650,6 @@ items.forEach((item) => item.addEventListener('click', toggleAccordion));
 
 
 
-<!-- Calendly badge widget begin -->
-
-<script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
-<script type="text/javascript">window.onload = function() { Calendly.initBadgeWidget({ url: 'https://calendly.com/scldigital', text: 'Schedule a Call', color: '#FFFFFF', textColor: '#1e348d', branding: false }); }</script>
-<!-- Calendly badge widget end -->
  
 <script src="js/jquery-3.7.0.min.js"></script>
 <script src="js/swiper-bundle.min.js"></script>
@@ -670,28 +661,18 @@ items.forEach((item) => item.addEventListener('click', toggleAccordion));
 <script src="js/parazoom.min.js"></script>
 <script src="js/script.js"></script>
 
+
+
+
+
+
+
+
+
 <!-- Footer START -->
 <footer style="background: url(../images/background-image-sized.webp) no-repeat center center; padding: 32px 0 16px 0; text-align: center; border-top: 1px solid #FFF; margin-top: 40px;">
   <div style="max-width: 600px; margin: 0 auto;">
-    <!-- Footer Navigation Links -->
-    <nav style="margin-bottom: 18px;">
-      <a href="index.html" style="margin: 0 10px; color: #fff; text-decoration: none; font-weight: 500;">Home</a>
-      <a href="applications/products.html/" style="margin: 0 10px; color: #fff; text-decoration: none; font-weight: 500;">Products</a>
-      <a href="../services-platform/our_services.html" style="margin: 0 10px; color: #fff; text-decoration: none; font-weight: 500;">Services</a>
-      <a href="../case_studies.html" style="margin: 0 10px; color: #fff; text-decoration: none; font-weight: 500;">Customers</a>
-      <a href="../about.html" style="margin: 0 10px; color: #fff; text-decoration: none; font-weight: 500;">About Us</a>
-      <a href="../payments.html" style="margin: 0 10px; color: #fff; text-decoration: none; font-weight: 500;">Payments & Fees</a>
-      <a href="../quote.html" style="margin: 0 10px; color: #fff; text-decoration: none; font-weight: 500;">Sign In</a>
-    </nav>
-    <!-- DesignRush Badge Area -->
-    <a href="https://www.designrush.com/agency/it-services/za" target="_blank" rel="noopener" style="display: inline-block; margin-bottom: 12px;">
-      <img src="images/Top IT Services Company.png" alt="it services agencies in south africa designrush" style="max-width: 180px; width: 100%; height: auto;" />
-    </a>
-    <div style="font-size: 13px; color: #fff; margin-top: 8px;">Proudly listed among the Top IT Services Companies in South Africa by DesignRush</div>
-  </div>
-  <div style="font-size: 12px; color: #fff; margin-top: 18px;">SCL DIGITAL AGENCY | Registration Number: K2025001641</div>
-</footer>
-<!-- Footer END -->
+    
 
     <!-- Language Translator Widget Styles -->
     <style>
@@ -911,194 +892,7 @@ items.forEach((item) => item.addEventListener('click', toggleAccordion));
         }
     </style>
 
-    <!-- Language Translator Widget -->
-    <div class="translator-widget">
-        <div class="translator-button" id="translatorBtn">
-            <i class="fa-solid fa-language"></i>
-            <span>Translate</span>
-        </div>
-        
-        <div class="translator-dropdown" id="translatorDropdown">
-            <div class="translator-header">
-                <h4>Choose Language</h4>
-                <button class="close-translator" id="closeTranslator">
-                    <i class="fa-solid fa-times"></i>
-                </button>
-            </div>
-            
-            <!-- Google Translate Element -->
-            <div id="google_translate_element"></div>
-            
-            <div class="translator-footer">
-                <button class="reset-btn" id="resetBtn">
-                    <i class="fa-solid fa-undo"></i>
-                    Reset to English
-                </button>
-            </div>
-        </div>
-    </div>
 
-    <!-- Google Translate Widget JavaScript -->
-    <script>
-        // Google Translate Element Initialization
-        function googleTranslateElementInit() {
-            new google.translate.TranslateElement({
-                pageLanguage: 'en',
-                includedLanguages: 'en,es,fr,de,it,pt,ru,zh,ja,ko,ar,hi',
-                layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
-                autoDisplay: false
-            }, 'google_translate_element');
-        }
-
-        // Simple Translator Widget Controller
-        class SimpleTranslator {
-            constructor() {
-                this.isOpen = false;
-                this.init();
-            }
-
-            init() {
-                this.translatorBtn = document.getElementById('translatorBtn');
-                this.translatorDropdown = document.getElementById('translatorDropdown');
-                this.closeTranslator = document.getElementById('closeTranslator');
-                this.resetBtn = document.getElementById('resetBtn');
-
-                this.bindEvents();
-            }
-
-            bindEvents() {
-                // Toggle dropdown
-                this.translatorBtn.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    this.toggleDropdown();
-                });
-
-                // Close dropdown
-                this.closeTranslator.addEventListener('click', () => {
-                    this.closeDropdown();
-                });
-
-                // Reset button
-                this.resetBtn.addEventListener('click', () => {
-                    this.resetTranslation();
-                });
-
-                // Close dropdown when clicking outside
-                document.addEventListener('click', (e) => {
-                    if (!e.target.closest('.translator-widget') && this.isOpen) {
-                        this.closeDropdown();
-                    }
-                });
-
-                // Keyboard navigation
-                document.addEventListener('keydown', (e) => {
-                    if (e.key === 'Escape' && this.isOpen) {
-                        this.closeDropdown();
-                    }
-                });
-            }
-
-            toggleDropdown() {
-                if (this.isOpen) {
-                    this.closeDropdown();
-                } else {
-                    this.openDropdown();
-                }
-            }
-
-            openDropdown() {
-                this.translatorDropdown.classList.add('active');
-                this.isOpen = true;
-            }
-
-            closeDropdown() {
-                this.translatorDropdown.classList.remove('active');
-                this.isOpen = false;
-            }
-
-            resetTranslation() {
-                // Reset Google Translate to English
-                if (window.google && window.google.translate) {
-                    const translateElement = document.querySelector('.goog-te-combo');
-                    if (translateElement) {
-                        translateElement.selectedIndex = 0;
-                        translateElement.dispatchEvent(new Event('change'));
-                    }
-                }
-
-                // Remove Google Translate banner
-                const banner = document.querySelector('.goog-te-banner-frame');
-                if (banner) {
-                    banner.remove();
-                }
-
-                // Reset body top position
-                document.body.style.top = '0px';
-
-                this.showNotification('Translation reset to English');
-            }
-
-            showNotification(message) {
-                // Create notification element
-                const notification = document.createElement('div');
-                notification.style.cssText = `
-                    position: fixed;
-                    top: 80px;
-                    left: 50%;
-                    transform: translateX(-50%);
-                    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-                    color: white;
-                    padding: 12px 24px;
-                    border-radius: 25px;
-                    font-size: 14px;
-                    font-weight: 600;
-                    z-index: 10000;
-                    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
-                    animation: slideDown 0.3s ease;
-                `;
-                notification.textContent = message;
-                document.body.appendChild(notification);
-
-                // Remove notification after 3 seconds
-                setTimeout(() => {
-                    notification.style.animation = 'slideUp 0.3s ease';
-                    setTimeout(() => notification.remove(), 300);
-                }, 3000);
-            }
-        }
-
-        // Initialize the translator when DOM is loaded
-        document.addEventListener('DOMContentLoaded', () => {
-            new SimpleTranslator();
-        });
-
-        // Add CSS animations for notifications
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes slideDown {
-                from {
-                    opacity: 0;
-                    transform: translateX(-50%) translateY(-20px);
-                }
-                to {
-                    opacity: 1;
-                    transform: translateX(-50%) translateY(0);
-                }
-            }
-            
-            @keyframes slideUp {
-                from {
-                    opacity: 1;
-                    transform: translateX(-50%) translateY(0);
-                }
-                to {
-                    opacity: 0;
-                    transform: translateX(-50%) translateY(-20px);
-                }
-            }
-        `;
-        document.head.appendChild(style);
-    </script>
 
 </body>
 </html>
