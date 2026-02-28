@@ -36,110 +36,116 @@
 	<link rel="stylesheet" href="css/animate.min.css">
 	<link rel="stylesheet" href="css/main.css">
 
-	<script 
-  src="https://www.paypal.com/sdk/js?client-id=BAA7vNU5NSCtKvs9z2m7sx5KQXRRUKhu9PKNajIP5Yxc018zzYwgjz8ywGFU0TFJix2tf5M0z4vzm2UA5g&components=hosted-buttons&disable-funding=venmo&currency=USD">
-</script>
-
+	<script src="https://www.paypal.com/sdk/js?client-id=BAA7vNU5NSCtKvs9z2m7sx5KQXRRUKhu9PKNajIP5Yxc018zzYwgjz8ywGFU0TFJix2tf5M0z4vzm2UA5g&components=hosted-buttons&disable-funding=venmo&currency=USD"></script>
     <!-- Google Translate API -->
     <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+    <!-- Modern Navbar Styles -->
+    <style>
+        .modern-navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(250, 250, 250, 0.95) 100%);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+            z-index: 1000;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+        .modern-navbar.scrolled { box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1); }
+        .navbar-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 70px;
+        }
+        .navbar-logo a { display: flex; align-items: center; height: 50px; transition: transform 0.2s ease; }
+        .navbar-logo img { height: 70px; width: auto; object-fit: contain; }
+        .navbar-logo a:hover { transform: scale(1.05); }
+        .navbar-primary { flex: 1; display: flex; justify-content: center; margin: 0 30px; }
+        .nav-items { display: flex; list-style: none; gap: 30px; margin: 0; padding: 0; }
+        .nav-link { display: flex; align-items: center; gap: 6px; color: #333; text-decoration: none; font-weight: 500; font-size: 14px; position: relative; transition: color 0.2s ease; }
+        .nav-link:hover, .nav-link.active { color: #667eea; }
+        .nav-link.active::after { content: ''; position: absolute; bottom: -8px; left: 0; right: 0; height: 3px; background: linear-gradient(135deg, #667eea, #764ba2); border-radius: 2px; }
+        .navbar-utility { display: flex; align-items: center; gap: 16px; }
+        .navbar-icon-btn { background: none; border: none; color: #333; cursor: pointer; padding: 8px; display: flex; align-items: center; justify-content: center; transition: all 0.2s ease; border-radius: 6px; }
+        .navbar-icon-btn:hover { color: #667eea; background: rgba(102, 126, 234, 0.1); }
+        .navbar-btn-primary { display: flex; align-items: center; gap: 8px; padding: 10px 20px; background: linear-gradient(135deg, #0755E9 0%, #0755E9 100%); color: white; border: none; border-radius: 1px; font-weight: 600; font-size: 14px; cursor: pointer; transition: all 0.3s ease; white-space: nowrap; }
+        .navbar-btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3); }
+        .navbar-hamburger { display: none; flex-direction: column; gap: 6px; background: none; border: none; cursor: pointer; padding: 8px; }
+        .navbar-hamburger span { width: 24px; height: 2px; background: #333; border-radius: 2px; transition: all 0.3s ease; }
+        @media (max-width: 768px) {
+            .navbar-container { height: 60px; padding: 0 15px; }
+            .navbar-logo img { height: 40px; }
+            .navbar-primary { display: none; }
+            .navbar-btn-primary span { display: none; }
+            .navbar-hamburger { display: flex; }
+        }
+        body { padding-top: 70px !important; }
+        @media (max-width: 768px) { body { padding-top: 60px !important; } }
+    </style>
 </head>
 <body>
+
+    <!-- Modern Sticky Navbar -->
+    <nav class="modern-navbar">
+        <div class="navbar-container">
+            <div class="navbar-logo">
+                <a href="../index.html" title="Back to Home">
+                    <img src="../images/SCL_Blue.png" alt="SCL Digital Agency">
+                </a>
+            </div>
+            <div class="navbar-primary">
+                <ul class="nav-items">
+                    <li><a href="../index.html" class="nav-link">Home</a></li>
+                    <li><a href="../services-platform/our_services.html" class="nav-link">Products</a></li>
+                    <li><a href="../about.html" class="nav-link">About Us</a></li>
+                </ul>
+            </div>
+            <div class="navbar-utility">
+                <a href="../ClientPortal/client-billing-portal.html" class="navbar-icon-btn" title="Client Portal">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="12" cy="7" r="4"></circle>
+                    </svg>
+                </a>
+                <button class="navbar-hamburger" onclick="toggleSidebar()">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Sidebar (Simplistic) -->
+    <div id="mobileSidebar" style="display:none; position:fixed; top:70px; left:0; right:0; background:white; z-index:999; border-bottom:1px solid #ddd; padding:20px;">
+        <ul style="list-style:none; padding:0;">
+            <li style="margin-bottom:15px;"><a href="../index.html" style="text-decoration:none; color:#333; font-weight:600;">Home</a></li>
+            <li style="margin-bottom:15px;"><a href="../services-platform/our_services.html" style="text-decoration:none; color:#333; font-weight:600;">Products</a></li>
+            <li style="margin-bottom:15px;"><a href="../about.html" style="text-decoration:none; color:#333; font-weight:600;">About Us</a></li>
+        </ul>
+    </div>
+
+    <script>
+        function toggleSidebar() {
+            const sidebar = document.getElementById('mobileSidebar');
+            sidebar.style.display = sidebar.style.display === 'none' ? 'block' : 'none';
+        }
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.modern-navbar');
+            if (window.pageYOffset > 0) { navbar.classList.add('scrolled'); }
+            else { navbar.classList.remove('scrolled'); }
+        });
+    </script>
 
 <div class="menu-overlay"></div>
 
 <main class="main">
 
-	<div class="s-about">
-		
-		<div class="sidebar">
-	<div class="menu-wrap">
-		<a href="index.html" class="sidebar-logo">
-			<img src="images/SCL_DA_Logo.png" alt="Sylvia">
-		</a>
-		<nav class="menu-nav">
-			<ul>
-				<ul>
-					<li><a href="index.html"><i class="fa-solid fa-house"></i> Home</a></li>
-			        <li><a href="applications/products.html/"><i class="fa-solid fa-cart-shopping"></i> Products</a></li>
-					<li><a href="/services-platform/our_services.html"><i class="fa-solid fa-screwdriver-wrench"></i> Our Solutions</a></li>
-					<li><a href="/case_studies.html"><i class="fa-regular fa-folder-open"></i> Customers</a></li>
-					<li><a href="/about.html"><i class="fa-solid fa-building"></i>  About Us</a></li>
-					<hr>
-					<li><a href="quote.html"><i class="fa-solid fa-right-to-bracket"></i> Sign In</a></li>
-				</ul>
-			</ul>
-
-			<div class="menu-contacts">
-				<a href="/payments-system/payments.html" class="menu-contacts__item">
-					<span class="menu-contacts__icon">
-						<i class="fa-regular fa-credit-card"></i>
-					</span>
-					<p>Payment & Fees</p>
-				</a>
-
-				<a href="../AdminPortal/admin-login.html" class="menu-contacts__item">
-					<span class="menu-contacts__icon">
-						<i class="fa-solid fa-right-to-bracket"></i>
-					</span>
-					<p>Staff Portal</p>
-				</a>
-
-				<div class="menu-social">
-					
-
-					<a href="https://www.instagram.com/scl_agency/" target="_blank" class="menu-social__item">
-						
-						<svg xmlns="http://www.w3.org/2000/svg" height="24" width="26" viewBox="0 0 448 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path fill="#ffffff" d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"/></svg>
-
-					</a>
-
-					<a href="https://www.linkedin.com/company/scl-digital-agency/?viewAsMember=true" target="_blank" class="menu-social__item">
-						
-						<svg xmlns="http://www.w3.org/2000/svg" height="24" width="26" viewBox="0 0 448 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path fill="#ffffff" d="M100.3 448H7.4V148.9h92.9zM53.8 108.1C24.1 108.1 0 83.5 0 53.8a53.8 53.8 0 0 1 107.6 0c0 29.7-24.1 54.3-53.8 54.3zM447.9 448h-92.7V302.4c0-34.7-.7-79.2-48.3-79.2-48.3 0-55.7 37.7-55.7 76.7V448h-92.8V148.9h89.1v40.8h1.3c12.4-23.5 42.7-48.3 87.9-48.3 94 0 111.3 61.9 111.3 142.3V448z"/></svg>
-						
-					</a>
-
-
-					<a href="https://www.tiktok.com/@scl_digital_agency" target="_blank" class="menu-social__item">
-
-					
-				
-					<svg xmlns="http://www.w3.org/2000/svg" height="24" width="26" viewBox="0 0 448 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path fill="#ffffff" d="M448 209.9a210.1 210.1 0 0 1 -122.8-39.3V349.4A162.6 162.6 0 1 1 185 188.3V278.2a74.6 74.6 0 1 0 52.2 71.2V0l88 0a121.2 121.2 0 0 0 1.9 22.2h0A122.2 122.2 0 0 0 381 102.4a121.4 121.4 0 0 0 67 20.1z"/></svg>
-				
-				
-				
-				
-				</a>
-
-
-
-				</div>
-			</div>
-
-
-			
-			<div class="menu-close__wrap">
-				<a href="#" class="menu-close"><img style="transform: rotate(180deg);" src="images/arrow-right.svg" alt=""></a>
-			</div>
-		</nav>
-	</div>
-
-	<a href="index.html" class="logo">
-		<img src="images/SCL_DA_Icon_logo.png" alt="">
-	</a>
-
-	<a href="#" class="hamburger-button">
-		<span></span>
-		<span></span>
-		<span></span>
-	</a>
-</div>
-
-<div class="prelodaer-wrap">
-	<div class="preloader-item">
-		<img src="../images/SCLDA_Softwarecreativelabs.com_logo.png" alt="Preloader">
-	</div>
-</div>
 
 
 
@@ -188,16 +194,8 @@
 
 				<div class="right">
 					<div class="left-text">
-				<h2 class="title wow animate__slideInLeft" data-wow-delay="0.1s" style="color: #ffffff;">Make a Secure Payment Now</h2>
-						
-					<div class="subtitle wow animate__slideInLeft" data-wow-delay="0.5s">Secure your service with a quick and trusted payment.</div>
-
-
-						<h2 class="title wow animate__slideInLeft" data-wow-delay="0.1s" style="color: #ffffff; font-size: 1.5rem;">
-							Available Payment Methods:
-						</h2>
-						
-						<div class="subtitle wow animate__slideInLeft" data-wow-delay="0.5s">Choose your preferred payment method from the options below</div>
+				        <h2 class="title wow animate__slideInLeft" data-wow-delay="0.1s" style="color: #ffffff;">Make a Secure Payment</h2>
+						<div class="subtitle wow animate__slideInLeft" data-wow-delay="0.5s">Please use the Electronic Funds Transfer (EFT) details below to complete your payment.</div>
 
 
 						<style>
@@ -402,52 +400,11 @@
 
 
 							
-							<div class="payment-section">
-								<div class="section-header" onclick="toggleSection('card-payment')">
-								  <span><i class="fa-solid fa-credit-card"></i>&nbsp;&nbsp;Secure Card Payment</span>
-								  <span class="chevron" id="card-payment-chevron">▼</span>
-								</div>
-								<div class="section-content" id="card-payment-content">
-								  <div class="payment-info">
-									<div class="security-badge">
-									  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-										<path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/>
-									  </svg>
-									  <span>Secure PayPal Payment Processing</span>
-									</div>
-									<div class="payment-methods">
-									  <div class="payment-method-icon">VISA</div>
-									  <div class="payment-method-icon">MC</div>
-									  <div class="payment-method-icon">AMEX</div>
-									  <div class="payment-method-icon">PP</div>
-									</div>
-								  </div>
-								  
-								  <div class="payment-container">
-									<style>.pp-3R5P8BK5YHCU6{text-align:center;border:none;border-radius:0.25rem;min-width:11.625rem;padding:0 2rem;height:2.625rem;font-weight:bold;background-color:#FFD140;color:#000000;font-family:"Helvetica Neue",Arial,sans-serif;font-size:1rem;line-height:1.25rem;cursor:pointer;}</style>
-									<form action="https://www.paypal.com/ncp/payment/3R5P8BK5YHCU6" method="post" target="_blank" style="display:inline-grid;justify-items:center;align-content:start;gap:0.5rem;">
-									  <input class="pp-3R5P8BK5YHCU6" type="submit" value="Complete Payment" />
-									  <img src=https://www.paypalobjects.com/images/Debit_Credit_APM.svg alt="cards" />
-									  <section> Powered by <img src="https://www.paypalobjects.com/paypal-ui/logos/svg/paypal-wordmark-color.svg" alt="paypal" style="height:0.875rem;vertical-align:middle;"/></section>
-									</form>
-								  </div>
-
-
-
-								  
-								  <div class="help-text">
-									<p>Your payment information is securely processed by PayPal. We never store your credit card details.</p>
-									<p>If you have any issues with your payment, please contact our support team at <strong>support@yourcompany.com</strong></p>
-								  </div>
-								</div>
-							  </div>
-							  
 							  <div class="payment-section">
-								<div class="section-header" onclick="toggleSection('eft-payment')">
+								<div class="section-header" style="cursor:default;">
 								  <span><i class="fa-solid fa-money-check-dollar"></i>&nbsp;&nbsp;Electronic Funds Transfer (EFT)</span>
-								  <span class="chevron" id="eft-payment-chevron">▼</span>
 								</div>
-								<div class="section-content" id="eft-payment-content">
+								<div class="section-content active" id="eft-payment-content" style="max-height: none; padding: 20px;">
 								  <div class="security-badge">
 									<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
 									  <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/>
@@ -457,22 +414,20 @@
 								  
 								  <div class="eft-details">
 									<h3 style="margin-top: 0; color: #0962d0;">Bank Account Details</h3>
-									<p style="font-size: x-large;"><strong>Bank Name:</strong> FNB / RMB</p>
-									<p style="font-size: x-large;"><strong>Account Holder:</strong> SCL Digital Agency (Pty) Ltd</p>
-									<p style="font-size: x-large;"><strong>Account Type:</strong> Gold Business Account</p>
-									<p style="font-size: x-large;"><strong>Account Number:</strong> 63134146992</p>
-									<p style="font-size: x-large;"><strong>Branch Code:</strong> 250655</p>
-									<p style="font-size: x-large;"><strong>Swift Code:</strong> FIRNZAJJ</p>
-									<p style="font-size: x-large;"><strong>Reference:</strong> Your Invoice Number</p>
+									<p style="font-size: 1.1rem; margin-bottom: 12px;"><strong>Bank Name:</strong> FNB / RMB</p>
+									<p style="font-size: 1.1rem; margin-bottom: 12px;"><strong>Account Holder:</strong> SCL Digital Agency (Pty) Ltd</p>
+									<p style="font-size: 1.1rem; margin-bottom: 12px;"><strong>Account Type:</strong> Gold Business Account</p>
+									<p style="font-size: 1.1rem; margin-bottom: 12px;"><strong>Account Number:</strong> 63134146992</p>
+									<p style="font-size: 1.1rem; margin-bottom: 12px;"><strong>Branch Code:</strong> 250655</p>
+									<p style="font-size: 1.1rem; margin-bottom: 12px;"><strong>Swift Code:</strong> FIRNZAJJ</p>
+									<p style="font-size: 1.1rem; margin-bottom: 12px;"><strong>Reference:</strong> Your Invoice Number</p>
 								  </div>
 								  
-								  <h4 class="form-header" style="color: #017c07; font-size: larger;">Email proof of payment to:  payments@scl-agency.net</h4>
-								  
-								  
+								  <h4 class="form-header" style="color: #017c07; font-size: 1.1rem;">Email proof of payment to:<br><strong>payments@scl-agency.net</strong></h4>
 								  
 								  <div class="help-text">
 									<p>Please allow 1-2 business days for EFT payments to be processed and confirmed.</p>
-									<p>For any assistance with EFT payments, contact us at <strong>payments@scl-agency.net</strong></p>
+									<p>For any assistance, contact us at <strong>payments@scl-agency.net</strong></p>
 								  </div>
 								</div>
 							  </div>
