@@ -1,0 +1,1138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SCL Digital Agency | Web Infrastructure Onboarding</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --surface: #111118;
+    --surface2: #1a1a24;
+    --border: #2a2a3a;
+    --accent: #00e5ff;
+    --accent2: #7c3aed;
+    --accent3: #10b981;
+    --text: #e8e8f0;
+    --muted: #6b6b80;
+    --danger: #ef4444;
+    --radius: 10px;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Mono', monospace;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Grid background */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(0,229,255,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,229,255,0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .page-wrapper {
+    position: relative;
+    z-index: 1;
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 60px 24px 100px;
+  }
+
+  /* Header */
+  .header {
+    margin-bottom: 60px;
+    animation: fadeDown 0.6s ease both;
+  }
+
+  .logo-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 28px;
+  }
+
+  .logo-mark {
+    width: 46px;
+    height: 46px;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 18px;
+    color: #000;
+    flex-shrink: 0;
+    box-shadow: 0 0 24px rgba(0,229,255,0.3);
+  }
+
+  .brand-text {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .header h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(28px, 5vw, 42px);
+    font-weight: 800;
+    line-height: 1.1;
+    color: #fff;
+    margin-bottom: 14px;
+  }
+
+  .header h1 span {
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .header p {
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.7;
+    max-width: 520px;
+  }
+
+  /* Progress bar */
+  .progress-track {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 48px;
+    animation: fadeDown 0.6s 0.1s ease both;
+  }
+
+  .progress-step {
+    flex: 1;
+    height: 3px;
+    border-radius: 99px;
+    background: var(--border);
+    transition: background 0.4s ease;
+    cursor: pointer;
+  }
+
+  .progress-step.active { background: var(--accent); box-shadow: 0 0 10px rgba(0,229,255,0.5); }
+  .progress-step.done { background: var(--accent3); }
+
+  .step-label {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 32px;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+
+  .step-label span { transition: color 0.3s; }
+  .step-label span.active { color: var(--accent); }
+
+  /* Section */
+  .section {
+    display: none;
+    animation: fadeUp 0.4s ease both;
+  }
+  .section.active { display: block; }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 32px;
+  }
+
+  .section-num {
+    width: 36px;
+    height: 36px;
+    border: 1.5px solid var(--accent);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    color: var(--accent);
+    flex-shrink: 0;
+  }
+
+  .section-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: #fff;
+  }
+
+  .section-subtitle {
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 2px;
+  }
+
+  /* Fields */
+  .field-group {
+    display: grid;
+    gap: 20px;
+    margin-bottom: 20px;
+  }
+
+  .field-group.two-col {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  @media (max-width: 560px) {
+    .field-group.two-col { grid-template-columns: 1fr; }
+  }
+
+  .field {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  label {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+  }
+
+  label .req { color: var(--accent); margin-left: 3px; }
+
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  textarea,
+  select {
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius);
+    color: var(--text);
+    font-family: 'DM Mono', monospace;
+    font-size: 14px;
+    padding: 13px 16px;
+    width: 100%;
+    transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+    outline: none;
+    -webkit-appearance: none;
+  }
+
+  input::placeholder, textarea::placeholder { color: var(--muted); opacity: 0.7; }
+
+  input:focus, textarea:focus, select:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(0,229,255,0.1);
+    background: var(--surface2);
+  }
+
+  input.error, textarea.error, select.error {
+    border-color: var(--danger);
+    box-shadow: 0 0 0 3px rgba(239,68,68,0.1);
+  }
+
+  .error-msg {
+    font-size: 11px;
+    color: var(--danger);
+    display: none;
+  }
+
+  .field.has-error .error-msg { display: block; }
+  .field.has-error input,
+  .field.has-error textarea,
+  .field.has-error select { border-color: var(--danger); }
+
+  textarea { resize: vertical; min-height: 100px; }
+
+  select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%236b6b80' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    padding-right: 40px;
+    cursor: pointer;
+  }
+
+  /* Radio / Checkbox group */
+  .choices {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .choice-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 14px 16px;
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius);
+    cursor: pointer;
+    transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
+    position: relative;
+    user-select: none;
+  }
+
+  .choice-item:hover {
+    border-color: rgba(0,229,255,0.4);
+    background: var(--surface2);
+  }
+
+  .choice-item.selected {
+    border-color: var(--accent);
+    background: rgba(0,229,255,0.05);
+    box-shadow: 0 0 0 1px rgba(0,229,255,0.2);
+  }
+
+  .choice-item.selected-green {
+    border-color: var(--accent3);
+    background: rgba(16,185,129,0.05);
+  }
+
+  .choice-item.selected-purple {
+    border-color: var(--accent2);
+    background: rgba(124,58,237,0.05);
+  }
+
+  .choice-input {
+    width: 18px;
+    height: 18px;
+    border: 1.5px solid var(--border);
+    border-radius: 50%;
+    flex-shrink: 0;
+    margin-top: 1px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: border-color 0.2s, background 0.2s;
+  }
+
+  .choice-item.selected .choice-input {
+    border-color: var(--accent);
+    background: var(--accent);
+  }
+
+  .choice-input::after {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #000;
+    opacity: 0;
+    transition: opacity 0.15s;
+  }
+
+  .choice-item.selected .choice-input::after { opacity: 1; }
+
+  .choice-checkbox {
+    border-radius: 5px;
+  }
+
+  .choice-checkbox::after {
+    content: '';
+    width: 10px;
+    height: 6px;
+    border-left: 2px solid #000;
+    border-bottom: 2px solid #000;
+    transform: rotate(-45deg) translateY(-2px);
+    border-radius: 0;
+    background: none;
+  }
+
+  .choice-text {
+    flex: 1;
+  }
+
+  .choice-label {
+    font-size: 14px;
+    color: var(--text);
+    line-height: 1.4;
+    font-weight: 400;
+  }
+
+  .choice-desc {
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 3px;
+  }
+
+  .choice-tag {
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: 99px;
+    font-weight: 500;
+    margin-left: auto;
+    align-self: center;
+    white-space: nowrap;
+  }
+
+  .tag-cyan { background: rgba(0,229,255,0.15); color: var(--accent); }
+  .tag-purple { background: rgba(124,58,237,0.2); color: #a78bfa; }
+  .tag-green { background: rgba(16,185,129,0.15); color: var(--accent3); }
+
+  /* Conditional field */
+  .conditional {
+    display: none;
+    margin-top: 16px;
+    padding: 16px;
+    background: var(--surface2);
+    border-left: 2px solid var(--accent);
+    border-radius: 0 var(--radius) var(--radius) 0;
+    animation: fadeUp 0.3s ease;
+  }
+
+  .conditional.visible { display: block; }
+
+  .conditional .field label { color: rgba(0,229,255,0.7); }
+
+  /* Info box */
+  .info-box {
+    background: rgba(0,229,255,0.06);
+    border: 1px solid rgba(0,229,255,0.2);
+    border-radius: var(--radius);
+    padding: 14px 18px;
+    font-size: 13px;
+    color: rgba(0,229,255,0.8);
+    margin-top: 12px;
+    line-height: 1.6;
+  }
+
+  .info-box strong { color: var(--accent); }
+
+  /* TOS */
+  .tos-box {
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+
+  .tos-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 14px;
+  }
+
+  .tos-items {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 18px;
+  }
+
+  .tos-item {
+    display: flex;
+    gap: 12px;
+    font-size: 13px;
+    color: var(--text);
+    line-height: 1.5;
+  }
+
+  .tos-num {
+    width: 22px;
+    height: 22px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    font-size: 11px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--muted);
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .tos-item strong { color: var(--accent); }
+
+  /* Navigation */
+  .nav-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 36px;
+    gap: 12px;
+  }
+
+  .btn {
+    font-family: 'Syne', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    padding: 14px 28px;
+    border-radius: var(--radius);
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s;
+    letter-spacing: 0.05em;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .btn-back {
+    background: transparent;
+    border: 1.5px solid var(--border);
+    color: var(--muted);
+  }
+
+  .btn-back:hover {
+    border-color: var(--text);
+    color: var(--text);
+  }
+
+  .btn-next {
+    background: var(--accent);
+    color: #000;
+    margin-left: auto;
+  }
+
+  .btn-next:hover {
+    background: #33eeff;
+    box-shadow: 0 0 20px rgba(0,229,255,0.4);
+    transform: translateY(-1px);
+  }
+
+  .btn-submit {
+    background: linear-gradient(135deg, var(--accent3), #059669);
+    color: #fff;
+    margin-left: auto;
+  }
+
+  .btn-submit:hover {
+    box-shadow: 0 0 20px rgba(16,185,129,0.4);
+    transform: translateY(-1px);
+  }
+
+  .btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none !important;
+    box-shadow: none !important;
+  }
+
+  /* Success screen */
+  .success-screen {
+    display: none;
+    text-align: center;
+    padding: 60px 20px;
+    animation: fadeUp 0.5s ease both;
+  }
+
+  .success-screen.active { display: block; }
+
+  .success-icon {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: rgba(16,185,129,0.15);
+    border: 2px solid var(--accent3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 28px;
+    font-size: 32px;
+  }
+
+  .success-screen h2 {
+    font-family: 'Syne', sans-serif;
+    font-size: 32px;
+    font-weight: 800;
+    color: #fff;
+    margin-bottom: 12px;
+  }
+
+  .success-screen p {
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.7;
+    max-width: 440px;
+    margin: 0 auto 32px;
+  }
+
+  .payment-card {
+    background: var(--surface);
+    border: 1.5px solid var(--accent3);
+    border-radius: 14px;
+    padding: 28px;
+    max-width: 440px;
+    margin: 0 auto 24px;
+    text-align: left;
+  }
+
+  .payment-card-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--accent3);
+    margin-bottom: 16px;
+  }
+
+  .payment-detail {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 13px;
+  }
+
+  .payment-detail:last-child { border-bottom: none; }
+  .payment-detail .key { color: var(--muted); }
+  .payment-detail .val { color: var(--text); font-weight: 500; }
+  .payment-detail .val.amount { color: var(--accent3); font-family: 'Syne', sans-serif; font-weight: 800; font-size: 18px; }
+
+  .checklist-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 12px;
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: left;
+  }
+
+  .checklist-item {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 14px 16px;
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  .checklist-item .icon { font-size: 16px; flex-shrink: 0; }
+
+  /* Summary panel */
+  .summary-section { margin-bottom: 40px; }
+
+  .summary-row {
+    display: flex;
+    gap: 12px;
+    padding: 11px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 13px;
+    align-items: flex-start;
+  }
+
+  .summary-row:last-child { border-bottom: none; }
+  .summary-key { color: var(--muted); min-width: 160px; flex-shrink: 0; }
+  .summary-val { color: var(--text); word-break: break-word; }
+  .summary-val.highlight { color: var(--accent); }
+
+  /* Animations */
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Divider */
+  .divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 28px 0;
+  }
+
+  /* Helper text */
+  .helper { font-size: 12px; color: var(--muted); margin-top: 4px; }
+
+  /* Step counter badge */
+  .step-badge {
+    font-size: 12px;
+    color: var(--muted);
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    padding: 4px 10px;
+    border-radius: 99px;
+  }
+</style>
+</head>
+<body>
+
+<div class="page-wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo-row">
+      <div class="logo-mark">SCL</div>
+      <div class="brand-text">SCL Digital Agency</div>
+    </div>
+    <h1>Web Infrastructure<br><span>Onboarding</span></h1>
+    <p>Complete this form so we can provision your managed VM environment. It takes about 3 minutes.</p>
+  </div>
+
+  <!-- Progress -->
+  <div class="progress-track" id="progressTrack">
+    <div class="progress-step active" data-step="0"></div>
+    <div class="progress-step" data-step="1"></div>
+    <div class="progress-step" data-step="2"></div>
+    <div class="progress-step" data-step="3"></div>
+  </div>
+  <div class="step-label">
+    <span class="active" id="label0">01 Profile</span>
+    <span id="label1">02 Technical</span>
+    <span id="label2">03 Goals</span>
+    <span id="label3">04 Agreement</span>
+  </div>
+
+  <!-- ── SECTION 1: Client Profile ── -->
+  <div class="section active" id="section0">
+    <div class="section-header">
+      <div class="section-num">01</div>
+      <div>
+        <div class="section-title">Client Profile</div>
+        <div class="section-subtitle">Basic contact information for your account</div>
+      </div>
+    </div>
+
+    <div class="field-group two-col">
+      <div class="field" id="field-businessName">
+        <label>Business Name <span class="req">*</span></label>
+        <input type="text" id="businessName" placeholder="e.g. Acme Pty Ltd">
+        <span class="error-msg">Please enter your business name</span>
+      </div>
+      <div class="field" id="field-contactPerson">
+        <label>Contact Person <span class="req">*</span></label>
+        <input type="text" id="contactPerson" placeholder="Full name">
+        <span class="error-msg">Please enter a contact name</span>
+      </div>
+    </div>
+
+    <div class="field-group two-col">
+      <div class="field" id="field-whatsapp">
+        <label>WhatsApp / Phone <span class="req">*</span></label>
+        <input type="tel" id="whatsapp" placeholder="+27 60 000 0000">
+        <span class="error-msg">Please enter a phone number</span>
+      </div>
+      <div class="field" id="field-email">
+        <label>Email for Invoicing <span class="req">*</span></label>
+        <input type="email" id="email" placeholder="billing@yourdomain.co.za">
+        <span class="error-msg">Please enter a valid email</span>
+      </div>
+    </div>
+
+    <div class="nav-row">
+      <span class="step-badge">Step 1 of 4</span>
+      <button class="btn btn-next" onclick="nextSection(0)">Continue →</button>
+    </div>
+  </div>
+
+  <!-- ── SECTION 2: Technical & Domain ── -->
+  <div class="section" id="section1">
+    <div class="section-header">
+      <div class="section-num">02</div>
+      <div>
+        <div class="section-title">Technical & Domain Access</div>
+        <div class="section-subtitle">We need this to configure your server environment</div>
+      </div>
+    </div>
+
+    <div class="field" style="margin-bottom:20px">
+      <label>Do you currently own a domain? <span class="req">*</span></label>
+      <div class="choices" id="domainOwned">
+        <div class="choice-item" data-value="yes" onclick="selectChoice('domainOwned', 'yes', this); showConditional('domainDetails', true)">
+          <div class="choice-input"></div>
+          <div class="choice-text">
+            <div class="choice-label">Yes, I own one</div>
+            <div class="choice-desc">e.g. mybusiness.co.za or mybusiness.com</div>
+          </div>
+          <span class="choice-tag tag-cyan">Have domain</span>
+        </div>
+        <div class="choice-item" data-value="no" onclick="selectChoice('domainOwned', 'no', this); showConditional('domainDetails', false)">
+          <div class="choice-input"></div>
+          <div class="choice-text">
+            <div class="choice-label">No, I need SCL to register one for me</div>
+            <div class="choice-desc">We'll sort this out during onboarding</div>
+          </div>
+          <span class="choice-tag tag-purple">New domain</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Conditional: domain details -->
+    <div class="conditional" id="domainDetails">
+      <div class="field-group" style="margin-bottom:16px">
+        <div class="field" id="field-registrar">
+          <label>Domain Registrar</label>
+          <input type="text" id="registrar" placeholder="e.g. GoDaddy, Hexonet, Xneelo, AFRINIC">
+          <span class="error-msg">Please enter your registrar</span>
+        </div>
+      </div>
+      <div class="field">
+        <label>Login Details or DNS Nameserver Instruction</label>
+        <textarea id="dnsDetails" placeholder="Paste your login credentials here, OR list the nameservers you'd like us to point DNS to.&#10;&#10;Tip: You can change your registrar password after we've completed the transfer."></textarea>
+        <div class="helper">🔒 Your credentials are encrypted in transit. You can reset your password immediately after setup.</div>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <div class="field">
+      <label>Current Website Platform <span class="req">*</span></label>
+      <div class="choices" id="platform">
+        <div class="choice-item" data-value="wordpress" onclick="selectChoice('platform', 'wordpress', this)">
+          <div class="choice-input"></div>
+          <div class="choice-text"><div class="choice-label">WordPress</div></div>
+          <span class="choice-tag tag-cyan">Most common</span>
+        </div>
+        <div class="choice-item" data-value="custom" onclick="selectChoice('platform', 'custom', this)">
+          <div class="choice-input"></div>
+          <div class="choice-text">
+            <div class="choice-label">Custom Code</div>
+            <div class="choice-desc">HTML / PHP / React / Vue</div>
+          </div>
+        </div>
+        <div class="choice-item" data-value="none" onclick="selectChoice('platform', 'none', this)">
+          <div class="choice-input"></div>
+          <div class="choice-text"><div class="choice-label">Not sure / No website yet</div></div>
+          <span class="choice-tag tag-purple">Starting fresh</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="nav-row">
+      <button class="btn btn-back" onclick="prevSection(1)">← Back</button>
+      <span class="step-badge">Step 2 of 4</span>
+      <button class="btn btn-next" onclick="nextSection(1)">Continue →</button>
+    </div>
+  </div>
+
+  <!-- ── SECTION 3: Project Goals ── -->
+  <div class="section" id="section2">
+    <div class="section-header">
+      <div class="section-num">03</div>
+      <div>
+        <div class="section-title">Project Goals</div>
+        <div class="section-subtitle">Help us understand what you want to achieve</div>
+      </div>
+    </div>
+
+    <div class="field" style="margin-bottom:24px">
+      <label>Primary Goal of Your Website <span class="req">*</span></label>
+      <div class="choices" id="primaryGoal">
+        <div class="choice-item" data-value="info" onclick="selectChoice('primaryGoal', 'info', this)">
+          <div class="choice-input"></div>
+          <div class="choice-text">
+            <div class="choice-label">Information only</div>
+            <div class="choice-desc">Business card style — showcase who you are</div>
+          </div>
+          <span class="choice-tag tag-cyan">Basic</span>
+        </div>
+        <div class="choice-item" data-value="leads" onclick="selectChoice('primaryGoal', 'leads', this)">
+          <div class="choice-input"></div>
+          <div class="choice-text">
+            <div class="choice-label">Generating leads & inquiries</div>
+            <div class="choice-desc">Contact forms, calls-to-action, quote requests</div>
+          </div>
+          <span class="choice-tag tag-purple">Growth</span>
+        </div>
+        <div class="choice-item" data-value="ecommerce" onclick="selectChoice('primaryGoal', 'ecommerce', this)">
+          <div class="choice-input"></div>
+          <div class="choice-text">
+            <div class="choice-label">Selling products online</div>
+            <div class="choice-desc">E-commerce, cart, checkout, payments</div>
+          </div>
+          <span class="choice-tag tag-green">Revenue</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Are you interested in a professional redesign? <span class="req">*</span></label>
+      <div class="choices" id="redesignInterest">
+        <div class="choice-item" data-value="yes" onclick="selectChoice('redesignInterest', 'yes', this)">
+          <div class="choice-input"></div>
+          <div class="choice-text">
+            <div class="choice-label">Yes, send me a quote</div>
+            <div class="choice-desc">Improve speed, UX, and conversions</div>
+          </div>
+          <span class="choice-tag tag-green">R2,000 – R10,000</span>
+        </div>
+        <div class="choice-item" data-value="no" onclick="selectChoice('redesignInterest', 'no', this)">
+          <div class="choice-input"></div>
+          <div class="choice-text">
+            <div class="choice-label">Not right now — just the hosting</div>
+            <div class="choice-desc">R100/mo managed VM environment</div>
+          </div>
+          <span class="choice-tag tag-cyan">R100/mo</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="info-box" style="margin-top:20px">
+      💡 <strong>Good to know:</strong> All clients start on R100/mo. A redesign can be added at any time and typically pays for itself within 3–6 months through improved conversions.
+    </div>
+
+    <div class="nav-row">
+      <button class="btn btn-back" onclick="prevSection(2)">← Back</button>
+      <span class="step-badge">Step 3 of 4</span>
+      <button class="btn btn-next" onclick="nextSection(2)">Continue →</button>
+    </div>
+  </div>
+
+  <!-- ── SECTION 4: Agreement ── -->
+  <div class="section" id="section3">
+    <div class="section-header">
+      <div class="section-num">04</div>
+      <div>
+        <div class="section-title">Terms of Service</div>
+        <div class="section-subtitle">Required to activate your account</div>
+      </div>
+    </div>
+
+    <!-- Summary -->
+    <div class="summary-section">
+      <div style="font-size:12px; text-transform:uppercase; letter-spacing:0.08em; color: var(--muted); margin-bottom:14px;">Your Submission Summary</div>
+      <div id="summaryContent"></div>
+    </div>
+
+    <hr class="divider">
+
+    <div class="tos-box">
+      <div class="tos-title">Service Agreement</div>
+      <div class="tos-items">
+        <div class="tos-item">
+          <div class="tos-num">1</div>
+          <div><strong>Infrastructure:</strong> You are paying for a managed Virtual Machine environment at <strong style="color:var(--accent)">R100/month</strong>.</div>
+        </div>
+        <div class="tos-item">
+          <div class="tos-num">2</div>
+          <div><strong>Payments:</strong> Invoices are due by the <strong style="color:var(--accent)">1st of each month</strong>. Late payments attract no penalty if settled within 7 days.</div>
+        </div>
+        <div class="tos-item">
+          <div class="tos-num">3</div>
+          <div><strong>Suspension:</strong> If payment is more than <strong style="color:var(--danger)">7 days late</strong>, service is automatically suspended until settled.</div>
+        </div>
+        <div class="tos-item">
+          <div class="tos-num">4</div>
+          <div><strong>Liability:</strong> SCL provides daily backups. You remain responsible for your site content, assets, and any third-party integrations.</div>
+        </div>
+      </div>
+
+      <div class="choice-item" id="tosAcceptItem" onclick="toggleTOS()">
+        <div class="choice-input choice-checkbox" id="tosCheckbox"></div>
+        <div class="choice-text">
+          <div class="choice-label">I agree to the terms and conditions above</div>
+          <div class="choice-desc">By checking this, you confirm you've read and accept the SCL service agreement.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="nav-row">
+      <button class="btn btn-back" onclick="prevSection(3)">← Back</button>
+      <span class="step-badge">Step 4 of 4</span>
+      <button class="btn btn-submit" id="submitBtn" onclick="submitForm()" disabled>Submit Application ✓</button>
+    </div>
+  </div>
+
+  <!-- ── SUCCESS ── -->
+  <div class="success-screen" id="successScreen">
+    <div class="success-icon">✓</div>
+    <h2>You're all set!</h2>
+    <p>Your onboarding form has been received. Your managed VM will be provisioned within <strong style="color:#fff">24 hours</strong>. Please make your first payment to activate your account.</p>
+
+    <div class="payment-card">
+      <div class="payment-card-title">First Payment — Activate Your Account</div>
+      <div class="payment-detail">
+        <span class="key">Bank</span>
+        <span class="val">FNB / First National Bank</span>
+      </div>
+      <div class="payment-detail">
+        <span class="key">Account Name</span>
+        <span class="val">SCL Digital Agency</span>
+      </div>
+      <div class="payment-detail">
+        <span class="key">Account No.</span>
+        <span class="val">62 000 000 000</span>
+      </div>
+      <div class="payment-detail">
+        <span class="key">Branch Code</span>
+        <span class="val">250 655</span>
+      </div>
+      <div class="payment-detail">
+        <span class="key">Reference</span>
+        <span class="val" id="paymentRef">—</span>
+      </div>
+      <div class="payment-detail">
+        <span class="key">Amount Due</span>
+        <span class="val amount">R100.00</span>
+      </div>
+    </div>
+
+    <div class="checklist-grid">
+      <div class="checklist-item"><span class="icon">🖥️</span> VM provisioned within 24h</div>
+      <div class="checklist-item"><span class="icon">📧</span> Invoice emailed to you</div>
+      <div class="checklist-item"><span class="icon">🔐</span> cPanel credentials sent</div>
+      <div class="checklist-item"><span class="icon">🌐</span> DNS configured & verified</div>
+      <div class="checklist-item"><span class="icon">💾</span> Daily backups activated</div>
+      <div class="checklist-item"><span class="icon">🔒</span> SSL certificate issued</div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  // ── State ──
+  const state = {
+    domainOwned: null,
+    platform: null,
+    primaryGoal: null,
+    redesignInterest: null,
+    tosAccepted: false
+  };
+
+  // ── Section navigation ──
+  function showSection(index) {
+    document.querySelectorAll('.section').forEach((s, i) => {
+      s.classList.toggle('active', i === index);
+    });
+    document.querySelectorAll('.progress-step').forEach((s, i) => {
+      s.classList.toggle('active', i === index);
+      s.classList.toggle('done', i < index);
+    });
+    document.querySelectorAll('.step-label span').forEach((s, i) => {
+      s.classList.toggle('active', i === index);
+    });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function nextSection(from) {
+    if (!validateSection(from)) return;
+    if (from === 2) buildSummary();
+    showSection(from + 1);
+  }
+
+  function prevSection(from) {
+    showSection(from - 1);
+  }
+
+  // ── Validation ──
+  function validateSection(idx) {
+    let valid = true;
+    if (idx === 0) {
+      valid = validateField('businessName', v => v.trim().length > 0) && valid;
+      valid = validateField('contactPerson', v => v.trim().length > 0) && valid;
+      valid = validateField('whatsapp', v => v.trim().length > 6) && valid;
+      valid = validateField('email', v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)) && valid;
+    }
+    if (idx === 1) {
+      if (!state.domainOwned) { alert('Please select whether you own a domain.'); return false; }
+      if (!state.platform) { alert('Please select your current website platform.'); return false; }
+    }
+    if (idx === 2) {
+      if (!state.primaryGoal) { alert('Please select your primary website goal.'); return false; }
+      if (!state.redesignInterest) { alert('Please indicate your interest in a redesign.'); return false; }
+    }
+    return valid;
+  }
+
+  function validateField(id, check) {
+    const el = document.getElementById(id);
+    const wrapper = document.getElementById('field-' + id);
+    const ok = check(el.value);
+    wrapper?.classList.toggle('has-error', !ok);
+    el.addEventListener('input', () => wrapper?.classList.remove('has-error'), { once: true });
+    return ok;
+  }
+
+  // ── Choices ──
+  function selectChoice(groupId, value, el) {
+    state[groupId] = value;
+    document.querySelectorAll(`#${groupId} .choice-item`).forEach(c => {
+      c.classList.remove('selected', 'selected-green', 'selected-purple');
+    });
+    el.classList.add('selected');
+  }
+
+  // ── Conditional ──
+  function showConditional(id, show) {
+    document.getElementById(id).classList.toggle('visible', show);
+  }
+
+  // ── TOS ──
+  let tosState = false;
+  function toggleTOS() {
+    tosState = !tosState;
+    const item = document.getElementById('tosAcceptItem');
+    const cb = document.getElementById('tosCheckbox');
+    const btn = document.getElementById('submitBtn');
+    item.classList.toggle('selected', tosState);
+    cb.style.background = tosState ? 'var(--accent3)' : '';
+    cb.style.borderColor = tosState ? 'var(--accent3)' : '';
+    btn.disabled = !tosState;
+  }
+
+  // ── Summary ──
+  function buildSummary() {
+    const goalMap = { info: 'Information / Business Card', leads: 'Lead Generation', ecommerce: 'E-Commerce' };
+    const platformMap = { wordpress: 'WordPress', custom: 'Custom Code (HTML/PHP/React)', none: 'No website yet' };
+    const domainMap = { yes: 'Yes — Existing domain', no: 'No — SCL to register' };
+    const redesignMap = { yes: 'Yes — Send me a quote', no: 'Not now — Hosting only' };
+
+    const rows = [
+      ['Business', document.getElementById('businessName').value],
+      ['Contact', document.getElementById('contactPerson').value],
+      ['Phone / WhatsApp', document.getElementById('whatsapp').value],
+      ['Invoice Email', document.getElementById('email').value],
+      ['Domain', domainMap[state.domainOwned] || '—'],
+      ['Registrar', document.getElementById('registrar').value || '—'],
+      ['Platform', platformMap[state.platform] || '—'],
+      ['Primary Goal', goalMap[state.primaryGoal] || '—'],
+      ['Redesign Interest', redesignMap[state.redesignInterest] || '—'],
+    ];
+
+    document.getElementById('summaryContent').innerHTML = rows.map(([k, v]) => `
+      <div class="summary-row">
+        <span class="summary-key">${k}</span>
+        <span class="summary-val">${v}</span>
+      </div>
+    `).join('');
+  }
+
+  // ── Submit ──
+  function submitForm() {
+    if (!tosState) return;
+    const name = document.getElementById('businessName').value.trim();
+    const ref = 'SCL-' + name.replace(/\s+/g, '').toUpperCase().slice(0, 6) + '-' + Date.now().toString().slice(-4);
+    document.getElementById('paymentRef').textContent = ref;
+
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.progress-step').forEach(s => { s.classList.remove('active'); s.classList.add('done'); });
+    document.getElementById('successScreen').classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+</script>
+</body>
+</html>
