@@ -1,0 +1,46 @@
+/* Mega Menu Styles */
+.mega-menu {
+  position: absolute;
+  left: 0;
+  top: 100%;
+  width: 100vw;
+  background: #fff;
+  color: #333;
+  display: none;
+  z-index: 1000;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+  padding: 40px 60px;
+}
+.nav-dropdown:hover .mega-menu,
+.nav-dropdown:focus-within .mega-menu {
+  display: block;
+}
+.mega-menu-content {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+}
+.mega-menu-section {
+  flex: 1 1 220px;
+}
+.mega-menu-section h3 {
+  margin-bottom: 16px;
+  font-size: 20px;
+  color: #330867;
+}
+.mega-menu-section ul {
+  list-style: none;
+  padding: 0;
+}
+.mega-menu-section ul li {
+  margin-bottom: 12px;
+}
+.mega-menu-section ul li a {
+  color: #333;
+  text-decoration: none;
+  font-size: 16px;
+  transition: color 0.2s;
+}
+.mega-menu-section ul li a:hover {
+  color: #330867;
+}
