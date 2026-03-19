@@ -1,9 +1,8 @@
-/* Mega Menu - Swift.com Inspired Hierarchical Layout */
 .mega-menu {
   position: fixed;
   left: 0;
   top: 70px;
-  /* Header height */
+  /* Synchronized with header height */
   width: 100%;
   background: #ffffff;
   color: #333;
@@ -14,23 +13,30 @@
   /* Use visibility and opacity for smoother transition and hover persistence */
   visibility: hidden;
   opacity: 0;
-  transition: opacity 0.3s ease, visibility 0s linear 0.3s;
+  transition: opacity 0.3s ease, visibility 0s linear 0.1s;
+  /* Reduced delay */
   pointer-events: none;
-  /* Prevent interaction when hidden */
 }
 
 /* Invisible bridge to prevent losing hover when moving mouse from link to menu */
 .mega-menu::before {
   content: '';
   position: absolute;
-  top: -20px;
+  top: -40px;
+  /* Even more overlap to be safe */
   left: 0;
   width: 100%;
-  height: 20px;
-  background: transparent;
+  height: 40px;
+  background: rgba(255, 255, 255, 0.01);
+  /* Not fully transparent to ensure hit testing in some browsers */
+  display: block;
+  z-index: -1;
 }
 
-.nav-dropdown:hover .mega-menu {
+/* Trigger menus based on specific parent hover */
+#nav-solutions:hover #mega-menu-solutions,
+#nav-innovation:hover #mega-menu-innovation,
+#nav-news:hover #mega-menu-news {
   visibility: visible;
   opacity: 1;
   pointer-events: auto;

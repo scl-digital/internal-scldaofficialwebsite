@@ -111,14 +111,14 @@ results that add real value to your business. Let's turn your vision into impact
 			<div class="navbar-primary">
 				<ul class="nav-items">
 
-					<li class="nav-dropdown">
+					<li class="nav-dropdown" id="nav-solutions">
 						<a href="services-platform/our_services.html" class="nav-link">Solutions
 							<svg class="chevron" width="16" height="16" viewBox="0 0 24 24" fill="none"
 								stroke="currentColor" stroke-width="2">
 								<polyline points="6 9 12 15 18 9"></polyline>
 							</svg>
 						</a>
-						<div class="mega-menu">
+						<div class="mega-menu" id="mega-menu-solutions">
 							<div class="mega-menu-content">
 								<!-- Sidebar: Categories (Column 1) -->
 								<div class="mega-menu-sidebar">
@@ -247,14 +247,14 @@ results that add real value to your business. Let's turn your vision into impact
 					</li>
 
 
-					<li class="nav-dropdown">
+					<li class="nav-dropdown" id="nav-innovation">
 						<a href="services-platform/our_services.html" class="nav-link">Innovation
 							<svg class="chevron" width="16" height="16" viewBox="0 0 24 24" fill="none"
 								stroke="currentColor" stroke-width="2">
 								<polyline points="6 9 12 15 18 9"></polyline>
 							</svg>
 						</a>
-						<div class="mega-menu">
+						<div class="mega-menu" id="mega-menu-innovation">
 							<div class="mega-menu-content">
 								<!-- Sidebar: Categories (Column 1) -->
 								<div class="mega-menu-sidebar">
@@ -383,13 +383,136 @@ results that add real value to your business. Let's turn your vision into impact
 
 
 
-					<li class="nav-dropdown">
+					<li class="nav-dropdown" id="nav-news">
 						<a href="services-platform/our_services.html" class="nav-link">News & Events
 							<svg class="chevron" width="16" height="16" viewBox="0 0 24 24" fill="none"
 								stroke="currentColor" stroke-width="2">
 								<polyline points="6 9 12 15 18 9"></polyline>
 							</svg>
 						</a>
+						<div class="mega-menu" id="mega-menu-news">
+							<div class="mega-menu-content">
+								<!-- Sidebar: Categories (Column 1) -->
+								<div class="mega-menu-sidebar">
+									<div class="sidebar-item active" onmouseover="showCategory(this, 'latest-news')">
+										<span>Latest News</span>
+										<i class="fas fa-chevron-right"></i>
+									</div>
+									<div class="sidebar-item" onmouseover="showCategory(this, 'upcoming-events')">
+										<span>Upcoming Events</span>
+										<i class="fas fa-chevron-right"></i>
+									</div>
+									<div class="sidebar-item" onmouseover="showCategory(this, 'community')">
+										<span>Community Stories</span>
+										<i class="fas fa-chevron-right"></i>
+									</div>
+									<div class="sidebar-item" onmouseover="showCategory(this, 'press')">
+										<span>Press Releases</span>
+										<i class="fas fa-chevron-right"></i>
+									</div>
+								</div>
+
+								<!-- Main Content Area (Columns 2 & 3) -->
+								<div class="mega-menu-main">
+									<!-- Latest News -->
+									<div id="category-latest-news" class="category-content active">
+										<div class="mega-menu-column middle">
+											<h3>Latest Updates</h3>
+											<p>Stay informed about SCL Digital Agency's latest achievements,
+												major milestones, and company announcements from our global offices.</p>
+											<a href="Blog/blog.html" class="mega-menu-cta">Read All
+												News <i class="fas fa-arrow-right"></i></a>
+										</div>
+										<div class="mega-menu-column right">
+											<h4>Recent Headlines</h4>
+											<ul>
+												<li><a href="#">Expansion Into New Markets <i
+															class="fas fa-chevron-right"></i></a></li>
+												<li><a href="#">Annual Innovation Award 2025 <i
+															class="fas fa-chevron-right"></i></a></li>
+												<li><a href="#">New Strategic Partnerships <i
+															class="fas fa-chevron-right"></i></a></li>
+												<li><a href="#">CEO's Monthly Vision Update <i
+															class="fas fa-chevron-right"></i></a></li>
+											</ul>
+										</div>
+									</div>
+
+									<!-- Upcoming Events -->
+									<div id="category-upcoming-events" class="category-content">
+										<div class="mega-menu-column middle">
+											<h3>Events & Workshops</h3>
+											<p>Join us for our upcoming webinars, technology workshops,
+												and networking events designed to foster innovation and collaboration.
+											</p>
+											<a href="events-platform/eventspage.html" class="mega-menu-cta">View
+												Calendar <i class="fas fa-arrow-right"></i></a>
+										</div>
+										<div class="mega-menu-column right">
+											<h4>Join Us</h4>
+											<ul>
+												<li><a href="#">Future of AI Webinar <i
+															class="fas fa-chevron-right"></i></a></li>
+												<li><a href="#">UI/UX Masterclass <i
+															class="fas fa-chevron-right"></i></a></li>
+												<li><a href="#">SaaS Networking Night <i
+															class="fas fa-chevron-right"></i></a></li>
+												<li><a href="#">Tech Talent Career Fair <i
+															class="fas fa-chevron-right"></i></a></li>
+											</ul>
+										</div>
+									</div>
+
+									<!-- Community -->
+									<div id="category-community" class="category-content">
+										<div class="mega-menu-column middle">
+											<h3>Community & Impact</h3>
+											<p>Discover the success stories of our clients and the positive
+												social impact projects SCL Digital Agency supports around the world.</p>
+											<a href="case_studies.html" class="mega-menu-cta">Impact
+												Reports <i class="fas fa-arrow-right"></i></a>
+										</div>
+										<div class="mega-menu-column right">
+											<h4>Our Circle</h4>
+											<ul>
+												<li><a href="#">Client Success Overviews <i
+															class="fas fa-chevron-right"></i></a></li>
+												<li><a href="#">Social Responsibility Programs <i
+															class="fas fa-chevron-right"></i></a></li>
+												<li><a href="#">Global Community Forum <i
+															class="fas fa-chevron-right"></i></a></li>
+												<li><a href="#">Partner Spotlights <i
+															class="fas fa-chevron-right"></i></a></li>
+											</ul>
+										</div>
+									</div>
+
+									<!-- Press Releases -->
+									<div id="category-press" class="category-content">
+										<div class="mega-menu-column middle">
+											<h3>Newsroom & Media</h3>
+											<p>Access our official press releases, high-resolution media
+												assets, and contact information for media inquiries.</p>
+											<a href="contactus.html" class="mega-menu-cta">Media
+												Inquiries <i class="fas fa-arrow-right"></i></a>
+										</div>
+										<div class="mega-menu-column right">
+											<h4>Resources</h4>
+											<ul>
+												<li><a href="#">Official Press Releases <i
+															class="fas fa-chevron-right"></i></a></li>
+												<li><a href="#">Digital Media Kit <i
+															class="fas fa-chevron-right"></i></a></li>
+												<li><a href="#">Executive Biographies <i
+															class="fas fa-chevron-right"></i></a></li>
+												<li><a href="#">Brand Asset Library <i
+															class="fas fa-chevron-right"></i></a></li>
+											</ul>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
 
 					</li>
 
@@ -515,6 +638,8 @@ results that add real value to your business. Let's turn your vision into impact
 			gap: 30px;
 			margin: 0;
 			padding: 0;
+			height: 100%;
+			align-items: center;
 		}
 
 		.nav-link {
@@ -525,6 +650,7 @@ results that add real value to your business. Let's turn your vision into impact
 			text-decoration: none;
 			font-weight: 500;
 			font-size: 14px;
+			height: 100%;
 			position: relative;
 			transition: color 0.2s ease;
 		}
@@ -538,7 +664,7 @@ results that add real value to your business. Let's turn your vision into impact
 		.nav-link.active::after {
 			content: '';
 			position: absolute;
-			bottom: -8px;
+			bottom: 0;
 			left: 0;
 			right: 0;
 			height: 3px;
@@ -549,6 +675,9 @@ results that add real value to your business. Let's turn your vision into impact
 		/* Dropdown */
 		.nav-dropdown {
 			position: relative;
+			height: 100%;
+			display: flex;
+			align-items: center;
 		}
 
 		.nav-dropdown:hover .dropdown-menu {
@@ -4272,7 +4401,6 @@ results that add real value to your business. Let's turn your vision into impact
 		.modal-header h2 {
 			font-size: 20px;
 		}
-		}
 	</style>
 
 	<!-- Create Account Modal Scripts -->
@@ -4385,7 +4513,5 @@ results that add real value to your business. Let's turn your vision into impact
 		});
 	</script>
 </body>
-
-</html>
 
 </html>
