@@ -1,7 +1,8 @@
 .mega-menu {
-  position: fixed;
+  position: absolute;
   left: 0;
-  top: 70px;
+  top: 100%;
+  /* Perfectly flush with parent bottom */
   /* Synchronized with header height */
   width: 100%;
   background: #ffffff;
@@ -33,14 +34,16 @@
   z-index: -1;
 }
 
-/* Trigger menus based on specific parent hover */
+/* Specific Triggers */
 #nav-solutions:hover #mega-menu-solutions,
 #nav-innovation:hover #mega-menu-innovation,
-#nav-news:hover #mega-menu-news {
-  visibility: visible;
-  opacity: 1;
-  pointer-events: auto;
-  transition-delay: 0s;
+#nav-news:hover #mega-menu-news,
+#nav-about:hover #mega-menu-about,
+.nav-dropdown:hover>.mega-menu {
+  visibility: visible !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+  transition-delay: 0s !important;
   animation: slideDownFade 0.3s ease-out forwards;
 }
 

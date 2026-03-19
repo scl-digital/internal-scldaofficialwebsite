@@ -9,6 +9,7 @@
   <title>Events - SCL Digital Agency</title>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
   <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/mega-menu.css">
   <style>
     .events-hero {
       background: linear-gradient(135deg, rgba(22, 122, 198, 0.9), rgba(30, 52, 141, 0.287)), url('../images/Tech Event.jpg');
@@ -266,481 +267,589 @@
 
 <body>
 
-	<!-- Modern Sticky Navbar -->
-	<nav class="modern-navbar">
-		<div class="navbar-container">
-			<!-- Logo / Home -->
-			<div class="navbar-logo">
-				<a href="../index.html" title="Back to Home">
-					<img src="../images/SCL_Blue.png" alt="SCL Digital Agency">
-				</a>
-			</div>
+  <!-- Modern Sticky Navbar -->
+  <nav class="modern-navbar">
+    <div class="navbar-container">
+      <!-- Logo / Home -->
+      <div class="navbar-logo">
+        <a href="../index.html" title="Back to Home">
+          <img src="../images/SCL_Blue.png" alt="SCL Digital Agency">
+        </a>
+      </div>
 
-			<!-- Primary Navigation Links -->
-			<div class="navbar-primary">
-				<ul class="nav-items">
-					<li><a href="../index.html" class="nav-link">Home</a></li>
-					<li class="nav-dropdown">
-						<a href="eventspage.html" class="nav-link active">Events
-							<svg class="chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-								<polyline points="6 9 12 15 18 9"></polyline>
-							</svg>
-						</a>
-						<div class="dropdown-menu">
-							<a href="../services-platform/our_services.html">Digital Infrastructure</a>
-							<a href="../applications/products.html">Signature Software Suite</a>
-							<a href="../about.html">About Us</a>
-						</div>
-					</li>
-					<li><a href="../services-platform/our_services.html" class="nav-link">Services</a></li>
-					<li><a href="../case_studies.html" class="nav-link">Customers</a></li>
-					<li><a href="../resources_hub_landing.html" class="nav-link">Resources</a></li>
-				</ul>
-			</div>
+      <!-- Primary Navigation Links -->
+      <div class="navbar-primary">
+        <ul class="nav-items">
+          <li><a href="../index.html" class="nav-link">Home</a></li>
+          <li class="nav-dropdown" id="nav-about">
+            <a href="../about.html" class="nav-link">About us
+              <svg class="chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </a>
+            <div class="mega-menu" id="mega-menu-about">
+              <div class="mega-menu-content">
+                <!-- Sidebar: Categories (Column 1) -->
+                <div class="mega-menu-sidebar">
+                  <div class="sidebar-item active" onmouseover="showCategory(this, 'company')">
+                    <span>Company Profile</span>
+                    <i class="fas fa-chevron-right"></i>
+                  </div>
+                  <div class="sidebar-item" onmouseover="showCategory(this, 'leadership')">
+                    <span>Leadership</span>
+                    <i class="fas fa-chevron-right"></i>
+                  </div>
+                  <div class="sidebar-item" onmouseover="showCategory(this, 'growth')">
+                    <span>Growth & Careers</span>
+                    <i class="fas fa-chevron-right"></i>
+                  </div>
+                  <div class="sidebar-item" onmouseover="showCategory(this, 'impact')">
+                    <span>Impact & Network</span>
+                    <i class="fas fa-chevron-right"></i>
+                  </div>
+                </div>
 
-			<!-- Utility/Action Zone (Right) -->
-			<div class="navbar-utility">
-				<!-- Search Icon -->
-				<button class="navbar-icon-btn" title="Search" onclick="toggleSearchBar()">
-					<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-						<circle cx="11" cy="11" r="8"></circle>
-						<path d="m21 21-4.35-4.35"></path>
-					</svg>
-				</button>
+                <!-- Main Content Area: Content Sections (Column 2-3) -->
+                <div class="mega-menu-main">
+                  <!-- Company Profile Content -->
+                  <div class="category-content active" id="category-company">
+                    <div class="content-col">
+                      <h3>Our Story</h3>
+                      <p>Founded with a vision to empower African businesses through cutting-edge technology and
+                        creative innovation.</p>
+                      <a href="../about.html" class="mega-menu-cta">Learn More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                    <div class="links-col">
+                      <h4>Company Links</h4>
+                      <ul>
+                        <li><a href="../about.html#vision-mission-section">Vision & Mission <i
+                              class="fas fa-external-link-alt"></i></a></li>
+                        <li><a href="../about.html#core-values-section">Core Values <i
+                              class="fas fa-external-link-alt"></i></a></li>
+                        <li><a href="../about.html#approach-card">Our Approach <i
+                              class="fas fa-external-link-alt"></i></a></li>
+                      </ul>
+                    </div>
+                  </div>
 
-				<!-- Create Account Button -->
-				<button class="navbar-btn-primary" onclick="openAccountModal()">
-					<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-						<path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-						<circle cx="12" cy="7" r="4"></circle>
-					</svg>
-					<span>Create Account</span>
-				</button>
+                  <!-- Leadership Content -->
+                  <div class="category-content" id="category-leadership">
+                    <div class="content-col">
+                      <h3>Leadership Team</h3>
+                      <p>Meet the visionaries behind SCL Digital Agency, led by our founder Shinsa Lyonga Lomboto.</p>
+                      <a href="../about.html#founder-section" class="mega-menu-cta">Meet the Team <i
+                          class="fas fa-arrow-right"></i></a>
+                    </div>
+                    <div class="links-col">
+                      <h4>Leadership Links</h4>
+                      <ul>
+                        <li><a href="../about.html#founder-section">Meet our Founder <i
+                              class="fas fa-external-link-alt"></i></a></li>
+                        <li><a href="../about.html#founder-bio">CEO's Message <i
+                              class="fas fa-external-link-alt"></i></a></li>
+                        <li><a href="../ClientPortal/client-billing-portal.html">Client Relations <i
+                              class="fas fa-external-link-alt"></i></a></li>
+                      </ul>
+                    </div>
+                  </div>
 
-				<!-- Profile/Login -->
-				<a href="../ClientPortal/client-billing-portal.html" class="navbar-icon-btn" title="Client Portal">
-					<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-						<path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-						<circle cx="12" cy="7" r="4"></circle>
-					</svg>
-				</a>
+                  <!-- Growth & Careers Content -->
+                  <div class="category-content" id="category-growth">
+                    <div class="content-col">
+                      <h3>Working at SCL</h3>
+                      <p>We are always looking for passionate creators and problem-solvers to join our fast-growing
+                        agency.</p>
+                      <a href="../about.html#approach-card" class="mega-menu-cta">Join Our Team <i
+                          class="fas fa-arrow-right"></i></a>
+                    </div>
+                    <div class="links-col">
+                      <h4>Growth Links</h4>
+                      <ul>
+                        <li><a href="../about.html#approach-card">Why Join Us? <i
+                              class="fas fa-external-link-alt"></i></a></li>
+                        <li><a href="../about.html#community">Culture & Impact <i
+                              class="fas fa-external-link-alt"></i></a></li>
+                        <li><a href="../events-platform/eventspage.html">Career Events <i
+                              class="fas fa-external-link-alt"></i></a></li>
+                      </ul>
+                    </div>
+                  </div>
 
-				<!-- Shopping Cart Icon -->
-				<button class="navbar-icon-btn navbar-cart-btn" title="Shopping Cart" onclick="toggleCart()">
-					<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-						<circle cx="9" cy="21" r="1"></circle>
-						<circle cx="20" cy="21" r="1"></circle>
-						<path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
-					</svg>
-					<span class="navbar-cart-badge" id="navbar-cart-count">0</span>
-				</button>
+                  <!-- Impact & Network Content -->
+                  <div class="category-content" id="category-impact">
+                    <div class="content-col">
+                      <h3>Social Impact</h3>
+                      <p>We believe in technology as a force for good, supporting educational initiatives and digital
+                        empowerment across Africa.</p>
+                      <a href="../about.html#community" class="mega-menu-cta">Explore Impact <i
+                          class="fas fa-arrow-right"></i></a>
+                    </div>
+                    <div class="links-col">
+                      <h4>Impact Links</h4>
+                      <ul>
+                        <li><a href="../about.html#partners">Our Partners <i class="fas fa-external-link-alt"></i></a>
+                        </li>
+                        <li><a href="../about.html#community">CSR Initiatives <i
+                              class="fas fa-external-link-alt"></i></a></li>
+                        <li><a href="../about.html#stats">Global Network <i class="fas fa-external-link-alt"></i></a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li><a href="../services-platform/our_services.html" class="nav-link">Services</a></li>
+          <li><a href="../case_studies.html" class="nav-link">Customers</a></li>
+          <li><a href="../resources_hub_landing.html" class="nav-link">Resources</a></li>
+        </ul>
+      </div>
 
-				<!-- Hamburger Menu (Mobile) -->
-				<button class="navbar-hamburger" onclick="toggleSidebar()">
-					<span></span>
-					<span></span>
-					<span></span>
-				</button>
-			</div>
-		</div>
+      <!-- Utility/Action Zone (Right) -->
+      <div class="navbar-utility">
+        <!-- Search Icon -->
+        <button class="navbar-icon-btn" title="Search" onclick="toggleSearchBar()">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"></circle>
+            <path d="m21 21-4.35-4.35"></path>
+          </svg>
+        </button>
 
-		<!-- Search Bar (Hidden by default) -->
-		<div class="navbar-search-bar" id="searchBar">
-			<input type="text" placeholder="Search our services, resources, and more..." class="search-input">
-			<button class="search-close" onclick="toggleSearchBar()">
-				<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-					<line x1="18" y1="6" x2="6" y2="18"></line>
-					<line x1="6" y1="6" x2="18" y2="18"></line>
-				</svg>
-			</button>
-		</div>
-	</nav>
+        <!-- Create Account Button -->
+        <button class="navbar-btn-primary" onclick="openAccountModal()">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+            <circle cx="12" cy="7" r="4"></circle>
+          </svg>
+          <span>Create Account</span>
+        </button>
 
-	<!-- Modern Navbar Styles -->
-	<style>
-		.modern-navbar {
-			position: fixed;
-			top: 0;
-			left: 0;
-			right: 0;
-			background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(250, 250, 250, 0.95) 100%);
-			backdrop-filter: blur(10px);
-			border-bottom: 1px solid rgba(0, 0, 0, 0.08);
-			z-index: 1000;
-			box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-			transition: all 0.3s ease;
-		}
+        <!-- Profile/Login -->
+        <a href="../ClientPortal/client-billing-portal.html" class="navbar-icon-btn" title="Client Portal">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+            <circle cx="12" cy="7" r="4"></circle>
+          </svg>
+        </a>
 
-		.modern-navbar.scrolled {
-			box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
-		}
+        <!-- Shopping Cart Icon -->
+        <button class="navbar-icon-btn navbar-cart-btn" title="Shopping Cart" onclick="toggleCart()">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="9" cy="21" r="1"></circle>
+            <circle cx="20" cy="21" r="1"></circle>
+            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+          </svg>
+          <span class="navbar-cart-badge" id="navbar-cart-count">0</span>
+        </button>
 
-		.navbar-container {
-			max-width: 1400px;
-			margin: 0 auto;
-			padding: 0 20px;
-			display: flex;
-			align-items: center;
-			justify-content: space-between;
-			height: 70px;
-		}
+        <!-- Hamburger Menu (Mobile) -->
+        <button class="navbar-hamburger" onclick="toggleSidebar()">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
 
-		/* Logo */
-		.navbar-logo a {
-			display: flex;
-			align-items: center;
-			height: 50px;
-			transition: transform 0.2s ease;
-		}
+    <!-- Search Bar (Hidden by default) -->
+    <div class="navbar-search-bar" id="searchBar">
+      <input type="text" placeholder="Search our services, resources, and more..." class="search-input">
+      <button class="search-close" onclick="toggleSearchBar()">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+  </nav>
 
-		.navbar-logo img {
-			height: 50px;
-			width: auto;
-			object-fit: contain;
-		}
+  <!-- Modern Navbar Styles -->
+  <style>
+    .modern-navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(250, 250, 250, 0.95) 100%);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+      z-index: 1000;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      transition: all 0.3s ease;
+    }
 
-		.navbar-logo a:hover {
-			transform: scale(1.05);
-		}
+    .modern-navbar.scrolled {
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    }
 
-		/* Primary Navigation */
-		.navbar-primary {
-			flex: 1;
-			display: flex;
-			justify-content: center;
-			margin: 0 30px;
-		}
+    .navbar-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 70px;
+    }
 
-		.nav-items {
-			display: flex;
-			list-style: none;
-			gap: 30px;
-			margin: 0;
-			padding: 0;
-		}
+    /* Logo */
+    .navbar-logo a {
+      display: flex;
+      align-items: center;
+      height: 50px;
+      transition: transform 0.2s ease;
+    }
 
-		.nav-link {
-			display: flex;
-			align-items: center;
-			gap: 6px;
-			color: #333;
-			text-decoration: none;
-			font-weight: 500;
-			font-size: 14px;
-			position: relative;
-			transition: color 0.2s ease;
-		}
+    .navbar-logo img {
+      height: 50px;
+      width: auto;
+      object-fit: contain;
+    }
 
-		.nav-link:hover,
-		.nav-link.active {
-			color: #667eea;
-		}
+    .navbar-logo a:hover {
+      transform: scale(1.05);
+    }
 
-		/* Active state underline */
-		.nav-link.active::after {
-			content: '';
-			position: absolute;
-			bottom: -8px;
-			left: 0;
-			right: 0;
-			height: 3px;
-			background: linear-gradient(135deg, #667eea, #764ba2);
-			border-radius: 2px;
-		}
+    /* Primary Navigation */
+    .navbar-primary {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      margin: 0 30px;
+    }
 
-		/* Dropdown */
-		.nav-dropdown {
-			position: relative;
-		}
+    .nav-items {
+      display: flex;
+      list-style: none;
+      gap: 30px;
+      margin: 0;
+      padding: 0;
+    }
 
-		.nav-dropdown:hover .dropdown-menu {
-			opacity: 1;
-			visibility: visible;
-			transform: translateY(0);
-		}
+    .nav-link {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: #333;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 14px;
+      position: relative;
+      transition: color 0.2s ease;
+    }
 
-		.dropdown-menu {
-			position: absolute;
-			top: 100%;
-			left: 0;
-			background: white;
-			border: 1px solid rgba(0, 0, 0, 0.1);
-			border-radius: 8px;
-			margin-top: 8px;
-			padding: 8px 0;
-			min-width: 200px;
-			opacity: 0;
-			visibility: hidden;
-			transform: translateY(-8px);
-			transition: all 0.3s ease;
-			box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
-		}
+    .nav-link:hover,
+    .nav-link.active {
+      color: #667eea;
+    }
 
-		.dropdown-menu a {
-			display: block;
-			padding: 12px 16px;
-			color: #333;
-			text-decoration: none;
-			font-size: 14px;
-			transition: background 0.2s ease;
-		}
+    /* Active state underline */
+    .nav-link.active::after {
+      content: '';
+      position: absolute;
+      bottom: -8px;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      border-radius: 2px;
+    }
 
-		.dropdown-menu a:hover {
-			background: #f5f7ff;
-			color: #667eea;
-		}
+    /* Dropdown */
+    .nav-dropdown {
+      position: relative;
+    }
 
-		.chevron {
-			transition: transform 0.3s ease;
-		}
+    .nav-dropdown:hover .dropdown-menu {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
 
-		.nav-dropdown:hover .chevron {
-			transform: rotate(180deg);
-		}
+    .dropdown-menu {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background: white;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+      margin-top: 8px;
+      padding: 8px 0;
+      min-width: 200px;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-8px);
+      transition: all 0.3s ease;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    }
 
-		/* Utility Zone */
-		.navbar-utility {
-			display: flex;
-			align-items: center;
-			gap: 16px;
-		}
+    .dropdown-menu a {
+      display: block;
+      padding: 12px 16px;
+      color: #333;
+      text-decoration: none;
+      font-size: 14px;
+      transition: background 0.2s ease;
+    }
 
-		.navbar-icon-btn {
-			background: none;
-			border: none;
-			color: #333;
-			cursor: pointer;
-			padding: 8px;
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			transition: all 0.2s ease;
-			border-radius: 6px;
-		}
+    .dropdown-menu a:hover {
+      background: #f5f7ff;
+      color: #667eea;
+    }
 
-		.navbar-icon-btn:hover {
-			color: #667eea;
-			background: rgba(102, 126, 234, 0.1);
-		}
+    .chevron {
+      transition: transform 0.3s ease;
+    }
 
-		/* Primary Button */
-		.navbar-btn-primary {
-			display: flex;
-			align-items: center;
-			gap: 8px;
-			padding: 10px 20px;
-			background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-			color: white;
-			border: none;
-			border-radius: 6px;
-			font-weight: 600;
-			font-size: 14px;
-			cursor: pointer;
-			transition: all 0.3s ease;
-			white-space: nowrap;
-		}
+    .nav-dropdown:hover .chevron {
+      transform: rotate(180deg);
+    }
 
-		.navbar-btn-primary:hover {
-			transform: translateY(-2px);
-			box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
-		}
+    /* Utility Zone */
+    .navbar-utility {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
 
-		.navbar-btn-primary:active {
-			transform: translateY(0);
-		}
+    .navbar-icon-btn {
+      background: none;
+      border: none;
+      color: #333;
+      cursor: pointer;
+      padding: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s ease;
+      border-radius: 6px;
+    }
 
-		/* Search Bar */
-		.navbar-search-bar {
-			display: none;
-			padding: 12px 20px;
-			background: rgba(255, 255, 255, 0.98);
-			border-top: 1px solid rgba(0, 0, 0, 0.08);
-		}
+    .navbar-icon-btn:hover {
+      color: #667eea;
+      background: rgba(102, 126, 234, 0.1);
+    }
 
-		.navbar-search-bar.active {
-			display: flex;
-			gap: 12px;
-			align-items: center;
-		}
+    /* Primary Button */
+    .navbar-btn-primary {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 20px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 14px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      white-space: nowrap;
+    }
 
-		.search-input {
-			flex: 1;
-			padding: 10px 12px;
-			border: 1px solid rgba(0, 0, 0, 0.1);
-			border-radius: 6px;
-			font-size: 14px;
-			outline: none;
-			transition: border-color 0.2s ease;
-		}
+    .navbar-btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+    }
 
-		.search-input:focus {
-			border-color: #667eea;
-			box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
-		}
+    .navbar-btn-primary:active {
+      transform: translateY(0);
+    }
 
-		.search-close {
-			background: none;
-			border: none;
-			color: #666;
-			cursor: pointer;
-			padding: 8px;
-			display: flex;
-			align-items: center;
-			justify-content: center;
-		}
+    /* Search Bar */
+    .navbar-search-bar {
+      display: none;
+      padding: 12px 20px;
+      background: rgba(255, 255, 255, 0.98);
+      border-top: 1px solid rgba(0, 0, 0, 0.08);
+    }
 
-		.search-close:hover {
-			color: #333;
-		}
+    .navbar-search-bar.active {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
 
-		/* Hamburger Menu */
-		.navbar-hamburger {
-			display: none;
-			flex-direction: column;
-			gap: 6px;
-			background: none;
-			border: none;
-			cursor: pointer;
-			padding: 8px;
-		}
+    .search-input {
+      flex: 1;
+      padding: 10px 12px;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      border-radius: 6px;
+      font-size: 14px;
+      outline: none;
+      transition: border-color 0.2s ease;
+    }
 
-		.navbar-hamburger span {
-			width: 24px;
-			height: 2px;
-			background: #333;
-			border-radius: 2px;
-			transition: all 0.3s ease;
-		}
+    .search-input:focus {
+      border-color: #667eea;
+      box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    }
 
-		.navbar-hamburger.active span:nth-child(1) {
-			transform: rotate(45deg) translate(10px, 10px);
-		}
+    .search-close {
+      background: none;
+      border: none;
+      color: #666;
+      cursor: pointer;
+      padding: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
 
-		.navbar-hamburger.active span:nth-child(2) {
-			opacity: 0;
-		}
+    .search-close:hover {
+      color: #333;
+    }
 
-		.navbar-hamburger.active span:nth-child(3) {
-			transform: rotate(-45deg) translate(7px, -7px);
-		}
+    /* Hamburger Menu */
+    .navbar-hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 6px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 8px;
+    }
 
-		/* Responsive */
-		@media (max-width: 768px) {
-			.navbar-container {
-				height: 60px;
-				padding: 0 15px;
-			}
+    .navbar-hamburger span {
+      width: 24px;
+      height: 2px;
+      background: #333;
+      border-radius: 2px;
+      transition: all 0.3s ease;
+    }
 
-			.navbar-logo img {
-				height: 40px;
-			}
+    .navbar-hamburger.active span:nth-child(1) {
+      transform: rotate(45deg) translate(10px, 10px);
+    }
 
-			.navbar-primary {
-				display: none;
-				margin: 0;
-			}
+    .navbar-hamburger.active span:nth-child(2) {
+      opacity: 0;
+    }
 
-			.navbar-btn-primary span {
-				display: none;
-			}
+    .navbar-hamburger.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(7px, -7px);
+    }
 
-			.navbar-hamburger {
-				display: flex;
-			}
+    /* Responsive */
+    @media (max-width: 768px) {
+      .navbar-container {
+        height: 60px;
+        padding: 0 15px;
+      }
 
-			.nav-items {
-				gap: 15px;
-			}
-		}
+      .navbar-logo img {
+        height: 40px;
+      }
 
-		/* Ensure body has top padding for fixed navbar */
-		body {
-			padding-top: 70px;
-		}
+      .navbar-primary {
+        display: none;
+        margin: 0;
+      }
 
-		@media (max-width: 768px) {
-			body {
-				padding-top: 60px;
-			}
-		}
+      .navbar-btn-primary span {
+        display: none;
+      }
 
-		/* Navbar Cart Button Styling */
-		.navbar-cart-btn {
-			position: relative;
-		}
+      .navbar-hamburger {
+        display: flex;
+      }
 
-		.navbar-cart-badge {
-			position: absolute;
-			top: -8px;
-			right: -8px;
-			background: linear-gradient(135deg, #667eea, #764ba2);
-			color: white;
-			border-radius: 50%;
-			width: 20px;
-			height: 20px;
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			font-size: 12px;
-			font-weight: 700;
-			min-width: 20px;
-			padding: 0;
-			border: 2px solid white;
-			box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
-		}
+      .nav-items {
+        gap: 15px;
+      }
+    }
 
-		.navbar-cart-badge:empty,
-		.navbar-cart-badge[data-count="0"] {
-			display: none;
-		}
-	</style>
+    /* Ensure body has top padding for fixed navbar */
+    body {
+      padding-top: 70px;
+    }
 
-	<!-- Navbar Scripts -->
-	<script>
-		function toggleSearchBar() {
-			const searchBar = document.getElementById('searchBar');
-			searchBar.classList.toggle('active');
-			if (searchBar.classList.contains('active')) {
-				searchBar.querySelector('.search-input').focus();
-			}
-		}
+    @media (max-width: 768px) {
+      body {
+        padding-top: 60px;
+      }
+    }
 
-		function toggleSidebar() {
-			const hamburger = document.querySelector('.navbar-hamburger');
-			hamburger.classList.toggle('active');
-			// Additional sidebar toggle logic here if needed
-		}
+    /* Navbar Cart Button Styling */
+    .navbar-cart-btn {
+      position: relative;
+    }
 
-		// Update navbar on scroll
-		let lastScrollTop = 0;
-		const navbar = document.querySelector('.modern-navbar');
+    .navbar-cart-badge {
+      position: absolute;
+      top: -8px;
+      right: -8px;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: white;
+      border-radius: 50%;
+      width: 20px;
+      height: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 700;
+      min-width: 20px;
+      padding: 0;
+      border: 2px solid white;
+      box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+    }
 
-		window.addEventListener('scroll', function() {
-			let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-			
-			// Add shadow on scroll
-			if (scrollTop > 0) {
-				navbar.classList.add('scrolled');
-			} else {
-				navbar.classList.remove('scrolled');
-			}
+    .navbar-cart-badge:empty,
+    .navbar-cart-badge[data-count="0"] {
+      display: none;
+    }
+  </style>
 
-			lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
-		});
+  <!-- Navbar Scripts -->
+  <script>
+    function toggleSearchBar() {
+      const searchBar = document.getElementById('searchBar');
+      searchBar.classList.toggle('active');
+      if (searchBar.classList.contains('active')) {
+        searchBar.querySelector('.search-input').focus();
+      }
+    }
 
-		// Set active nav link based on current page
-		document.addEventListener('DOMContentLoaded', function() {
-			const currentPage = window.location.pathname.split('/').pop() || 'index.html';
-			const navLinks = document.querySelectorAll('.nav-link');
-			
-			navLinks.forEach(link => {
-				const href = link.getAttribute('href');
-				if (href === currentPage || (currentPage === '' && href === 'index.html')) {
-					link.classList.add('active');
-				}
-			});
-		});
-	</script>
+    function toggleSidebar() {
+      const hamburger = document.querySelector('.navbar-hamburger');
+      hamburger.classList.toggle('active');
+      // Additional sidebar toggle logic here if needed
+    }
+
+    // Update navbar on scroll
+    let lastScrollTop = 0;
+    const navbar = document.querySelector('.modern-navbar');
+
+    window.addEventListener('scroll', function () {
+      let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+      // Add shadow on scroll
+      if (scrollTop > 0) {
+        navbar.classList.add('scrolled');
+      } else {
+        navbar.classList.remove('scrolled');
+      }
+
+      lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+    });
+
+    // Set active nav link based on current page
+    document.addEventListener('DOMContentLoaded', function () {
+      const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+      const navLinks = document.querySelectorAll('.nav-link');
+
+      navLinks.forEach(link => {
+        const href = link.getAttribute('href');
+        if (href === currentPage || (currentPage === '' && href === 'index.html')) {
+          link.classList.add('active');
+        }
+      });
+    });
+  </script>
 
   <div class="menu-overlay"></div>
   <main class="main">
@@ -826,7 +935,8 @@
       <div style="font-size: 13px; color: #fff; margin-top: 8px;">Proudly listed among the Top IT Services Companies in
         South Africa by DesignRush</div>
     </div>
-    <div style="font-size: 12px; color: #fff; margin-top: 18px;">SCL DIGITAL AGENCY | Registration Number: K2025001641</div>
+    <div style="font-size: 12px; color: #fff; margin-top: 18px;">SCL DIGITAL AGENCY | Registration Number: K2025001641
+    </div>
   </footer>
   <!-- Footer END -->
 
@@ -1347,6 +1457,7 @@
     document.head.appendChild(style);
   </script>
 
+  <script src="../js/mega-menu.js"></script>
 </body>
 
 </html>
