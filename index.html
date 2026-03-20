@@ -1362,8 +1362,10 @@ results that add real value to your business. Let's turn your vision into impact
 		<!-- Insights / Thought Leadership START -->
 		<section class="insights-section">
 			<div class="container">
-				<h2 class="section-title">Lastest News
-				</h2>
+				<div class="insights-header">
+					<h2 class="section-title">Latest News</h2>
+					<a href="Blog/blog.html" class="see-more-link">See more news and events <i class="fas fa-arrow-right"></i></a>
+				</div>
 				<div class="metrics-grid">
 					<!-- Companies logos removed as requested -->
 				</div>
@@ -1378,6 +1380,10 @@ results that add real value to your business. Let's turn your vision into impact
 									<img src="https://i.postimg.cc/x8NqGWyY/11.png" alt="Software Development">
 								</div>
 								<div class="insight-content">
+									<div class="news-meta">
+										<span class="news-date">March 15, 2025</span>
+										<span class="news-read-time">23 min read</span>
+									</div>
 									<h3>01. VERITAS RHYTHM ENGINE (VRE)</h3>
 									<p>
 										Zero-Friction
@@ -1399,6 +1405,10 @@ results that add real value to your business. Let's turn your vision into impact
 										alt="Digital Infrastructure">
 								</div>
 								<div class="insight-content">
+									<div class="news-meta">
+										<span class="news-date">March 12, 2025</span>
+										<span class="news-read-time">15 min read</span>
+									</div>
 									<h3>02. THINKBRIDGE AI</h3>
 									<p>
 										Custom web and mobile applications engineered for performance and scale.
@@ -1410,12 +1420,16 @@ results that add real value to your business. Let's turn your vision into impact
 								</div>
 							</article>
 
-							<!-- Insight Card 1 -->
+							<!-- Insight Card 3 -->
 							<article class="insight-card insights-slide">
 								<div class="insight-image">
 									<img src="https://i.postimg.cc/x8NqGWyY/11.png" alt="Software Development">
 								</div>
 								<div class="insight-content">
+									<div class="news-meta">
+										<span class="news-date">March 10, 2025</span>
+										<span class="news-read-time">18 min read</span>
+									</div>
 									<h3>03. Managed Infrastructure</h3>
 									<p>
 										One dashboard for your Hosting, Domains, and Professional Emails.
@@ -1560,6 +1574,98 @@ results that add real value to your business. Let's turn your vision into impact
 		</script>
 
 		<style>
+			/* News Header Layout */
+			.insights-header {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				margin-bottom: 50px;
+			}
+
+			.see-more-link {
+				color: #667eea;
+				text-decoration: none;
+				font-weight: 500;
+				font-size: 16px;
+				display: flex;
+				align-items: center;
+				gap: 8px;
+				transition: all 0.3s ease;
+			}
+
+			.see-more-link:hover {
+				color: #764ba2;
+				transform: translateX(5px);
+			}
+
+			/* News Meta Information */
+			.news-meta {
+				display: flex;
+				gap: 15px;
+				margin-bottom: 12px;
+				font-size: 14px;
+				color: #666;
+			}
+
+			.news-date {
+				font-weight: 500;
+			}
+
+			.news-read-time {
+				color: #888;
+				font-size: 13px;
+			}
+
+			/* Enhanced News Card Styles */
+			.insight-card {
+				background: #ffffff;
+				border-radius: 12px;
+				overflow: hidden;
+				box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+				border: 1px solid rgba(0, 0, 0, 0.05);
+				transition: all 0.3s ease;
+			}
+
+			.insight-card:hover {
+				transform: translateY(-8px);
+				box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+			}
+
+			.insight-content {
+				padding: 25px;
+			}
+
+			.insight-content h3 {
+				font-size: 18px;
+				font-weight: 600;
+				color: #1a1a1a;
+				margin-bottom: 12px;
+				line-height: 1.3;
+			}
+
+			.insight-content p {
+				color: #555;
+				line-height: 1.6;
+				margin-bottom: 20px;
+			}
+
+			.btn-learn-more {
+				background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+				color: white;
+				padding: 10px 20px;
+				border-radius: 6px;
+				text-decoration: none;
+				font-weight: 500;
+				font-size: 14px;
+				transition: all 0.3s ease;
+				display: inline-block;
+			}
+
+			.btn-learn-more:hover {
+				transform: translateY(-2px);
+				box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+			}
+
 			.insights-carousel-wrapper {
 				position: relative;
 				margin-bottom: 40px;
