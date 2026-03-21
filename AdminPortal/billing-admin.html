@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,68 +15,69 @@
             font-style: normal;
             font-display: swap;
         }
-        
-        body { 
+
+        body {
             font-family: scldafont;
-            background: #f8fafc; 
+            background: #f8fafc;
         }
-        
-        .sidebar { 
-            min-height: 100vh; 
+
+        .sidebar {
+            min-height: 100vh;
             background: linear-gradient(135deg, #1e348d, #2563eb);
-            color: #fff; 
-            padding: 2rem 1rem; 
+            color: #fff;
+            padding: 2rem 1rem;
         }
-        
-        .sidebar .nav-link { 
-            color: #cbd5e1; 
-            margin-bottom: 0.5rem; 
-            border-radius: 8px; 
+
+        .sidebar .nav-link {
+            color: #cbd5e1;
+            margin-bottom: 0.5rem;
+            border-radius: 8px;
             padding: 12px 16px;
             transition: all 0.3s ease;
             display: flex;
             align-items: center;
             gap: 10px;
         }
-        
-        .sidebar .nav-link.active, .sidebar .nav-link:hover { 
-            background: rgba(255,255,255,0.15); 
-            color: #fff; 
+
+        .sidebar .nav-link.active,
+        .sidebar .nav-link:hover {
+            background: rgba(255, 255, 255, 0.15);
+            color: #fff;
         }
-        
+
         .stat-card {
             background: white;
             border-radius: 12px;
             padding: 1.5rem;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
             border-left: 4px solid var(--accent-color);
             transition: all 0.3s ease;
         }
-        
+
         .stat-card:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
         }
-        
+
         .stat-value {
             font-size: 2.5rem;
             font-weight: 700;
             color: #1e293b;
         }
-        
+
         .stat-label {
             color: #64748b;
             font-size: 0.875rem;
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
-        
+
         .btn-primary {
             background: linear-gradient(135deg, #1e348d, #2563eb);
             border: none;
             border-radius: 8px;
         }
-        
+
         .status-badge {
             padding: 4px 12px;
             border-radius: 20px;
@@ -83,13 +85,25 @@
             font-weight: 600;
             text-transform: uppercase;
         }
-        
-        .status-paid { background: #d1fae5; color: #059669; }
-        .status-pending { background: #fef3c7; color: #d97706; }
-        .status-overdue { background: #fee2e2; color: #dc2626; }
+
+        .status-paid {
+            background: #d1fae5;
+            color: #059669;
+        }
+
+        .status-pending {
+            background: #fef3c7;
+            color: #d97706;
+        }
+
+        .status-overdue {
+            background: #fee2e2;
+            color: #dc2626;
+        }
     </style>
     <!-- Google Translate API -->
-    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    <script type="text/javascript"
+        src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
     <!-- Project Manager CSS -->
     <link rel="stylesheet" href="css/project-manager.css">
     <style>
@@ -101,12 +115,12 @@
             z-index: 9999;
             max-width: 400px;
         }
-        
+
         /* Project Manager */
         .project-manager {
             padding: 20px 0;
         }
-        
+
         .project-header {
             display: flex;
             justify-content: space-between;
@@ -115,17 +129,17 @@
             padding-bottom: 15px;
             border-bottom: 2px solid #e5e7eb;
         }
-        
+
         .project-controls {
             display: flex;
             gap: 10px;
             align-items: center;
         }
-        
+
         .project-table tbody tr:hover {
             background-color: #f9fafb;
         }
-        
+
         .activity-item {
             padding: 8px;
             border-left: 3px solid #3B82F6;
@@ -135,21 +149,22 @@
         }
     </style>
 </head>
+
 <body>
     <script>
-        (function(){
+        (function () {
             try {
                 const raw = localStorage.getItem('scl_admin');
                 const data = raw ? JSON.parse(raw) : null;
-                if (!data || (data.role||'') !== 'admin') {
+                if (!data || (data.role || '') !== 'admin') {
                     window.location.replace('admin-login.html');
                 }
             } catch (e) {
                 window.location.replace('admin-login.html');
             }
         })();
-        function sclLogout(){
-            try { localStorage.removeItem('scl_admin'); } catch(e){}
+        function sclLogout() {
+            try { localStorage.removeItem('scl_admin'); } catch (e) { }
             window.location.href = 'admin-login.html';
         }
     </script>
@@ -208,16 +223,21 @@
 
             <!-- Main Content -->
             <main class="col-md-10 ms-sm-auto">
-                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                <div
+                    class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                     <h1 class="h2" id="pageTitle">Billing & Payment Dashboard</h1>
                     <div class="btn-toolbar mb-2 mb-md-0">
                         <div class="btn-group me-2">
-                            <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown">
+                            <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle"
+                                data-bs-toggle="dropdown">
                                 <i class="bi bi-bell"></i> Notifications
                             </button>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#"><i class="bi bi-exclamation-triangle text-warning"></i> 3 Overdue invoices</a></li>
-                                <li><a class="dropdown-item" href="#"><i class="bi bi-credit-card text-success"></i> New payment received</a></li>
+                                <li><a class="dropdown-item" href="#"><i
+                                            class="bi bi-exclamation-triangle text-warning"></i> 3 Overdue invoices</a>
+                                </li>
+                                <li><a class="dropdown-item" href="#"><i class="bi bi-credit-card text-success"></i> New
+                                        payment received</a></li>
                             </ul>
                         </div>
                         <button type="button" class="btn btn-sm btn-primary" onclick="showQuickActions()">
@@ -234,28 +254,30 @@
                     <div class="row mb-4">
                         <div class="col-md-3 mb-3">
                             <div class="stat-card" style="--accent-color: #059669;">
-                                <div class="stat-value">R 922,847,329</div>
+                                <div class="stat-value">R 999,999</div>
                                 <div class="stat-label">Total Revenue</div>
-                                <small class="text-success"><i class="bi bi-arrow-up"></i> +12.5% from last month</small>
+                                <small class="text-success"><i class="bi bi-arrow-up"></i> +12.5% from last
+                                    month</small>
                             </div>
                         </div>
                         <div class="col-md-3 mb-3">
                             <div class="stat-card" style="--accent-color: #d97706;">
-                                <div class="stat-value">R 456,890</div>
+                                <div class="stat-value">R 9,999</div>
                                 <div class="stat-label">Pending Invoices</div>
                                 <small class="text-warning"><i class="bi bi-clock"></i> 23 pending payments</small>
                             </div>
                         </div>
                         <div class="col-md-3 mb-3">
                             <div class="stat-card" style="--accent-color: #dc2626;">
-                                <div class="stat-value">R 89,450</div>
+                                <div class="stat-value">R 99,999</div>
                                 <div class="stat-label">Overdue Amount</div>
-                                <small class="text-danger"><i class="bi bi-exclamation-triangle"></i> 5 overdue invoices</small>
+                                <small class="text-danger"><i class="bi bi-exclamation-triangle"></i> 5 overdue
+                                    invoices</small>
                             </div>
                         </div>
                         <div class="col-md-3 mb-3">
                             <div class="stat-card" style="--accent-color: #1e348d;">
-                                <div class="stat-value">127</div>
+                                <div class="stat-value">99</div>
                                 <div class="stat-label">Active Clients</div>
                                 <small class="text-primary"><i class="bi bi-people"></i> +8 new this month</small>
                             </div>
@@ -302,7 +324,8 @@
                                             </button>
                                         </div>
                                         <div class="col-md-2 mb-2">
-                                            <button class="btn btn-outline-primary w-100" onclick="loadTab('bulkemail')">
+                                            <button class="btn btn-outline-primary w-100"
+                                                onclick="loadTab('bulkemail')">
                                                 <i class="bi bi-envelope-paper"></i><br>Bulk Email
                                             </button>
                                         </div>
@@ -318,7 +341,8 @@
                             <div class="card">
                                 <div class="card-header d-flex justify-content-between align-items-center">
                                     <h5><i class="bi bi-clock-history"></i> Recent Invoices</h5>
-                                    <button class="btn btn-sm btn-primary" onclick="loadTab('invoices')">View All</button>
+                                    <button class="btn btn-sm btn-primary" onclick="loadTab('invoices')">View
+                                        All</button>
                                 </div>
                                 <div class="card-body">
                                     <div class="table-responsive">
@@ -439,7 +463,8 @@
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Amount</label>
-                        <input type="number" step="0.01" class="form-control" id="ci_amount" placeholder="Auto-calculated from services">
+                        <input type="number" step="0.01" class="form-control" id="ci_amount"
+                            placeholder="Auto-calculated from services">
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Due Date</label>
@@ -447,7 +472,8 @@
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Description</label>
-                        <textarea class="form-control" id="ci_desc" rows="3" placeholder="Additional notes or description"></textarea>
+                        <textarea class="form-control" id="ci_desc" rows="3"
+                            placeholder="Additional notes or description"></textarea>
                     </div>
                     <div id="ci_error" class="text-danger"></div>
                 </div>
@@ -510,15 +536,15 @@
                   </table>
                 </div>`;
             const resp = await apiRequest(`${API_BASE}/admin/clients.php`);
-            if (!resp.success) { target.innerHTML += `<div class="text-danger">${resp.error||'Failed to load'}</div>`; return; }
+            if (!resp.success) { target.innerHTML += `<div class="text-danger">${resp.error || 'Failed to load'}</div>`; return; }
             const tbody = target.querySelector('#clientsTable tbody');
-            (resp.data||[]).forEach(c => {
+            (resp.data || []).forEach(c => {
                 const tr = document.createElement('tr');
                 tr.innerHTML = `
-                  <td><input class="form-control form-control-sm" value="${c.name||''}" data-field="name" data-id="${c.id}"></td>
-                  <td><input class="form-control form-control-sm" value="${c.email||''}" data-field="email" data-id="${c.id}"></td>
-                  <td><input class="form-control form-control-sm" value="${c.company||''}" data-field="company" data-id="${c.id}"></td>
-                  <td>${(c.created_at||'').slice(0,10)}</td>
+                  <td><input class="form-control form-control-sm" value="${c.name || ''}" data-field="name" data-id="${c.id}"></td>
+                  <td><input class="form-control form-control-sm" value="${c.email || ''}" data-field="email" data-id="${c.id}"></td>
+                  <td><input class="form-control form-control-sm" value="${c.company || ''}" data-field="company" data-id="${c.id}"></td>
+                  <td>${(c.created_at || '').slice(0, 10)}</td>
                   <td>
                     <button class="btn btn-sm btn-outline-primary" onclick="saveClientRow(${c.id}, this)">Save</button>
                     <button class="btn btn-sm btn-outline-warning ms-1" onclick="resetClientPassword(${c.id})">Reset Password</button>
@@ -542,9 +568,9 @@
                   </table>
                 </div>`;
             const resp = await apiRequest(`${API_BASE}/admin/invoices.php`);
-            if (!resp.success) { target.innerHTML += `<div class="text-danger">${resp.error||'Failed to load'}</div>`; return; }
+            if (!resp.success) { target.innerHTML += `<div class="text-danger">${resp.error || 'Failed to load'}</div>`; return; }
             const tbody = target.querySelector('#invoicesTable tbody');
-            (resp.data||[]).forEach(i => {
+            (resp.data || []).forEach(i => {
                 const tr = document.createElement('tr');
                 tr.innerHTML = `
                   <td>${i.invoice_number}</td>
@@ -552,7 +578,7 @@
                   <td>R ${Number(i.total_amount).toFixed(2)}</td>
                   <td>
                     <select class="form-select form-select-sm" data-field="status" data-id="${i.id}">
-                      ${['draft','sent','paid','overdue','cancelled'].map(s=>`<option ${s===i.status?'selected':''}>${s}</option>`).join('')}
+                      ${['draft', 'sent', 'paid', 'overdue', 'cancelled'].map(s => `<option ${s === i.status ? 'selected' : ''}>${s}</option>`).join('')}
                     </select>
                   </td>
                   <td><input class="form-control form-control-sm" value="${i.issue_date}" data-field="issue_date" data-id="${i.id}"></td>
@@ -580,24 +606,24 @@
                   </table>
                 </div>`;
             const resp = await apiRequest(`${API_BASE}/admin/events.php`);
-            if (!resp.success) { target.innerHTML += `<div class="text-danger">${resp.error||'Failed to load'}</div>`; return; }
+            if (!resp.success) { target.innerHTML += `<div class="text-danger">${resp.error || 'Failed to load'}</div>`; return; }
             const tbody = target.querySelector('#eventsTable tbody');
-            (resp.data||[]).forEach(e => {
+            (resp.data || []).forEach(e => {
                 const tr = document.createElement('tr');
                 tr.innerHTML = `
-                  <td style="min-width:220px;"><input class="form-control form-control-sm" value="${e.title||''}" data-field="title" data-id="${e.id}"></td>
-                  <td style="min-width:130px;"><input class="form-control form-control-sm" value="${e.event_type||''}" data-field="event_type" data-id="${e.id}" placeholder="workshop, conference"></td>
-                  <td><input type="datetime-local" class="form-control form-control-sm" value="${(e.event_date||'').replace(' ','T').slice(0,16)}" data-field="event_date" data-id="${e.id}"></td>
-                  <td><input class="form-control form-control-sm" value="${e.location||''}" data-field="location" data-id="${e.id}"></td>
+                  <td style="min-width:220px;"><input class="form-control form-control-sm" value="${e.title || ''}" data-field="title" data-id="${e.id}"></td>
+                  <td style="min-width:130px;"><input class="form-control form-control-sm" value="${e.event_type || ''}" data-field="event_type" data-id="${e.id}" placeholder="workshop, conference"></td>
+                  <td><input type="datetime-local" class="form-control form-control-sm" value="${(e.event_date || '').replace(' ', 'T').slice(0, 16)}" data-field="event_date" data-id="${e.id}"></td>
+                  <td><input class="form-control form-control-sm" value="${e.location || ''}" data-field="location" data-id="${e.id}"></td>
                   <td>
                     <select class="form-select form-select-sm" data-field="status" data-id="${e.id}">
-                      ${['draft','published','archived'].map(s=>`<option ${s===(e.status||'')?'selected':''}>${s}</option>`).join('')}
+                      ${['draft', 'published', 'archived'].map(s => `<option ${s === (e.status || '') ? 'selected' : ''}>${s}</option>`).join('')}
                     </select>
                   </td>
                   <td style="min-width:220px;">
                     <div class="d-flex gap-1 flex-wrap">
-                      <a class="btn btn-sm btn-outline-secondary" target="_blank" href="${e.image_url||'#'}">Image</a>
-                      <a class="btn btn-sm btn-outline-secondary" target="_blank" href="${e.pdf_url||'#'}">PDF</a>
+                      <a class="btn btn-sm btn-outline-secondary" target="_blank" href="${e.image_url || '#'}">Image</a>
+                      <a class="btn btn-sm btn-outline-secondary" target="_blank" href="${e.pdf_url || '#'}">PDF</a>
                       <a class="btn btn-sm btn-outline-secondary" target="_blank" href="../events-platform/events.html?id=${e.id}">Preview</a>
                     </div>
                   </td>
@@ -664,9 +690,9 @@
             const sel = document.getElementById('ev_client');
             sel.innerHTML = '<option value="">No client</option>';
             const resp = await apiRequest(`${API_BASE}/admin/clients.php`);
-            (resp.data||[]).forEach(c=>{
-                const opt=document.createElement('option');
-                opt.value=c.id; opt.textContent=`${c.name} (${c.email})`;
+            (resp.data || []).forEach(c => {
+                const opt = document.createElement('option');
+                opt.value = c.id; opt.textContent = `${c.name} (${c.email})`;
                 sel.appendChild(opt);
             });
             new bootstrap.Modal(document.getElementById('createEventModal')).show();
@@ -680,12 +706,12 @@
             const status = document.getElementById('ev_status').value;
             const description = document.getElementById('ev_desc').value || null;
             const out = document.getElementById('ev_error');
-            out.textContent='';
-            if (!title) { out.textContent='Title is required'; return; }
+            out.textContent = '';
+            if (!title) { out.textContent = 'Title is required'; return; }
             const payload = { title, event_date, location, status, description };
             if (client_id) payload.client_id = client_id;
             const resp = await apiRequest(`${API_BASE}/admin/events.php`, 'POST', payload);
-            if (!resp.success) { out.textContent = resp.error||'Failed to create event'; return; }
+            if (!resp.success) { out.textContent = resp.error || 'Failed to create event'; return; }
             bootstrap.Modal.getInstance(document.getElementById('createEventModal')).hide();
             renderEvents();
         }
@@ -701,11 +727,11 @@
                 status: row.querySelector('select[data-field="status"]').value
             };
             const resp = await apiRequest(`${API_BASE}/admin/events.php`, 'PUT', payload);
-            if (!resp.success) { alert(resp.error||'Save failed'); return; }
+            if (!resp.success) { alert(resp.error || 'Save failed'); return; }
             alert('Saved');
         }
 
-        function openEditEvent(id){
+        function openEditEvent(id) {
             const html = `
               <div class="modal fade" id="editEventModal" tabindex="-1">
                 <div class="modal-dialog modal-lg">
@@ -770,42 +796,42 @@
             if (!container) { container = document.createElement('div'); container.id = 'editEventContainer'; document.body.appendChild(container); }
             container.innerHTML = html;
             // Prefill from API
-            apiRequest(`${API_BASE}/admin/events.php?id=${id}`).then(resp=>{
-                if(resp.success){
+            apiRequest(`${API_BASE}/admin/events.php?id=${id}`).then(resp => {
+                if (resp.success) {
                     const d = resp.data;
-                    document.getElementById('ev_image_url').value = d.image_url||'';
-                    document.getElementById('ev_pdf_url').value = d.pdf_url||'';
-                    document.getElementById('ev_video_url').value = d.video_url||'';
-                    document.getElementById('ev_agenda').value = d.agenda||'';
-                    document.getElementById('ev_overview').value = d.overview||'';
-                    document.getElementById('ev_map_embed').value = d.map_embed||'';
-                    document.getElementById('ev_ad_left_url').value = d.ad_left_url||'';
-                    document.getElementById('ev_ad_left_link').value = d.ad_left_link||'';
-                    document.getElementById('ev_ad_right_url').value = d.ad_right_url||'';
-                    document.getElementById('ev_ad_right_link').value = d.ad_right_link||'';
+                    document.getElementById('ev_image_url').value = d.image_url || '';
+                    document.getElementById('ev_pdf_url').value = d.pdf_url || '';
+                    document.getElementById('ev_video_url').value = d.video_url || '';
+                    document.getElementById('ev_agenda').value = d.agenda || '';
+                    document.getElementById('ev_overview').value = d.overview || '';
+                    document.getElementById('ev_map_embed').value = d.map_embed || '';
+                    document.getElementById('ev_ad_left_url').value = d.ad_left_url || '';
+                    document.getElementById('ev_ad_left_link').value = d.ad_left_link || '';
+                    document.getElementById('ev_ad_right_url').value = d.ad_right_url || '';
+                    document.getElementById('ev_ad_right_link').value = d.ad_right_link || '';
                 }
                 new bootstrap.Modal(document.getElementById('editEventModal')).show();
             });
         }
 
-        async function submitEditEvent(id){
+        async function submitEditEvent(id) {
             const out = document.getElementById('evd_error');
             out.textContent = '';
             const payload = {
                 id,
-                image_url: document.getElementById('ev_image_url').value.trim()||null,
-                pdf_url: document.getElementById('ev_pdf_url').value.trim()||null,
-                video_url: document.getElementById('ev_video_url').value.trim()||null,
+                image_url: document.getElementById('ev_image_url').value.trim() || null,
+                pdf_url: document.getElementById('ev_pdf_url').value.trim() || null,
+                video_url: document.getElementById('ev_video_url').value.trim() || null,
                 agenda: document.getElementById('ev_agenda').value,
                 overview: document.getElementById('ev_overview').value,
                 map_embed: document.getElementById('ev_map_embed').value,
-                ad_left_url: document.getElementById('ev_ad_left_url').value.trim()||null,
-                ad_left_link: document.getElementById('ev_ad_left_link').value.trim()||null,
-                ad_right_url: document.getElementById('ev_ad_right_url').value.trim()||null,
-                ad_right_link: document.getElementById('ev_ad_right_link').value.trim()||null
+                ad_left_url: document.getElementById('ev_ad_left_url').value.trim() || null,
+                ad_left_link: document.getElementById('ev_ad_left_link').value.trim() || null,
+                ad_right_url: document.getElementById('ev_ad_right_url').value.trim() || null,
+                ad_right_link: document.getElementById('ev_ad_right_link').value.trim() || null
             };
             const resp = await apiRequest(`${API_BASE}/admin/events.php`, 'PUT', payload);
-            if (!resp.success) { out.textContent = resp.error||'Save failed'; return; }
+            if (!resp.success) { out.textContent = resp.error || 'Save failed'; return; }
             bootstrap.Modal.getInstance(document.getElementById('editEventModal')).hide();
             renderEvents();
         }
@@ -814,34 +840,34 @@
             // Initialize Database-Integrated ProjectManager
             const target = document.getElementById('mainContent');
             target.innerHTML = '<div id="projectManagerContainer"></div>';
-            
+
             // Create new ProjectManagerDB instance (database-integrated)
             if (window.projectManagerDB) {
                 // Reload data
                 window.projectManagerDB.loadProjects().then(() => {
                     window.projectManagerDB.render();
                 });
-                } else {
-                        setTimeout(() => {
-                            if (!window.projectManagerDB) {
-                                const pageApi = (typeof API_BASE !== 'undefined') ? API_BASE.replace(/\/$/, '') + '/admin' : '../api/admin';
-                                window.projectManagerDB = new ProjectManagerDB('#projectManagerContainer', pageApi);
-                            } else {
-                                window.projectManagerDB.loadProjects().then(() => {
-                                    window.projectManagerDB.render();
-                                });
-                            }
-                        }, 100);
+            } else {
+                setTimeout(() => {
+                    if (!window.projectManagerDB) {
+                        const pageApi = (typeof API_BASE !== 'undefined') ? API_BASE.replace(/\/$/, '') + '/admin' : '../api/admin';
+                        window.projectManagerDB = new ProjectManagerDB('#projectManagerContainer', pageApi);
+                    } else {
+                        window.projectManagerDB.loadProjects().then(() => {
+                            window.projectManagerDB.render();
+                        });
                     }
+                }, 100);
+            }
         }
 
         function openAddClient() {
             const modal = new bootstrap.Modal(document.getElementById('addClientModal'));
-            document.getElementById('ac_name').value='';
-            document.getElementById('ac_email').value='';
-            document.getElementById('ac_password').value='';
-            document.getElementById('ac_company').value='';
-            document.getElementById('ac_error').textContent='';
+            document.getElementById('ac_name').value = '';
+            document.getElementById('ac_email').value = '';
+            document.getElementById('ac_password').value = '';
+            document.getElementById('ac_company').value = '';
+            document.getElementById('ac_error').textContent = '';
             modal.show();
         }
 
@@ -851,10 +877,10 @@
             const password = document.getElementById('ac_password').value.trim();
             const company = document.getElementById('ac_company').value.trim();
             const out = document.getElementById('ac_error');
-            out.textContent='';
-            if (!name || !email || !password) { out.textContent='Name, Email and Password are required'; return; }
-            const resp = await apiRequest(`${API_BASE}/admin/clients.php`,'POST',{name,email,password,company});
-            if (!resp.success) { out.textContent = resp.error||'Failed to add client'; return; }
+            out.textContent = '';
+            if (!name || !email || !password) { out.textContent = 'Name, Email and Password are required'; return; }
+            const resp = await apiRequest(`${API_BASE}/admin/clients.php`, 'POST', { name, email, password, company });
+            if (!resp.success) { out.textContent = resp.error || 'Failed to add client'; return; }
             bootstrap.Modal.getInstance(document.getElementById('addClientModal')).hide();
             renderClients();
         }
@@ -864,16 +890,16 @@
             const name = row.querySelector('input[data-field="name"]').value;
             const email = row.querySelector('input[data-field="email"]').value;
             const company = row.querySelector('input[data-field="company"]').value;
-            const resp = await apiRequest(`${API_BASE}/admin/clients.php`,'PUT',{id,name,email,company});
-            if (!resp.success) { alert(resp.error||'Save failed'); return; }
+            const resp = await apiRequest(`${API_BASE}/admin/clients.php`, 'PUT', { id, name, email, company });
+            if (!resp.success) { alert(resp.error || 'Save failed'); return; }
             alert('Saved');
         }
 
         async function resetClientPassword(id) {
             const newPassword = prompt('Enter new password for this client:');
             if (!newPassword || newPassword.trim() === '') return;
-            
-            const resp = await apiRequest(`${API_BASE}/admin/clients.php`, 'PATCH', {id, password: newPassword});
+
+            const resp = await apiRequest(`${API_BASE}/admin/clients.php`, 'PATCH', { id, password: newPassword });
             if (!resp.success) { alert(resp.error || 'Password reset failed'); return; }
             alert('Password reset successfully. Client can now login with: ' + newPassword);
         }
@@ -882,13 +908,13 @@
             if (!confirm(`Are you sure you want to delete client "${name}"?\n\nThis will permanently remove:\n- Client account\n- All associated projects\n- All invoices and payment records\n- All messages and files\n\nThis action cannot be undone!`)) {
                 return;
             }
-            
-            const resp = await apiRequest(`${API_BASE}/admin/clients.php`, 'DELETE', {id});
-            if (!resp.success) { 
-                alert(resp.error || 'Delete failed'); 
-                return; 
+
+            const resp = await apiRequest(`${API_BASE}/admin/clients.php`, 'DELETE', { id });
+            if (!resp.success) {
+                alert(resp.error || 'Delete failed');
+                return;
             }
-            
+
             alert('Client deleted successfully');
             renderClients();
         }
@@ -897,13 +923,13 @@
             if (!confirm(`Are you sure you want to delete project "${title}"?\n\nThis will permanently remove the project and all associated data.\n\nThis action cannot be undone!`)) {
                 return;
             }
-            
-            const resp = await apiRequest(`${API_BASE}/admin/projects.php`, 'DELETE', {id});
-            if (!resp.success) { 
-                alert(resp.error || 'Delete failed'); 
-                return; 
+
+            const resp = await apiRequest(`${API_BASE}/admin/projects.php`, 'DELETE', { id });
+            if (!resp.success) {
+                alert(resp.error || 'Delete failed');
+                return;
             }
-            
+
             alert('Project deleted successfully');
             renderProjects();
         }
@@ -912,13 +938,13 @@
             if (!confirm(`Are you sure you want to delete event "${title}"?\n\nThis will permanently remove the event.\n\nThis action cannot be undone!`)) {
                 return;
             }
-            
-            const resp = await apiRequest(`${API_BASE}/admin/events.php`, 'DELETE', {id});
-            if (!resp.success) { 
-                alert(resp.error || 'Delete failed'); 
-                return; 
+
+            const resp = await apiRequest(`${API_BASE}/admin/events.php`, 'DELETE', { id });
+            if (!resp.success) {
+                alert(resp.error || 'Delete failed');
+                return;
             }
-            
+
             alert('Event deleted successfully');
             renderEvents();
         }
@@ -927,19 +953,19 @@
             const sel = document.getElementById('ci_client');
             sel.innerHTML = '';
             const resp = await apiRequest(`${API_BASE}/admin/clients.php`);
-            (resp.data||[]).forEach(c=>{
-                const opt=document.createElement('option');
-                opt.value=c.id; opt.textContent=`${c.name} (${c.email})`;
+            (resp.data || []).forEach(c => {
+                const opt = document.createElement('option');
+                opt.value = c.id; opt.textContent = `${c.name} (${c.email})`;
                 sel.appendChild(opt);
             });
-            
+
             // Load services
             await loadServicesForInvoice();
-            
-            document.getElementById('ci_amount').value='';
-            document.getElementById('ci_due').value=new Date().toISOString().slice(0,10);
-            document.getElementById('ci_desc').value='';
-            document.getElementById('ci_error').textContent='';
+
+            document.getElementById('ci_amount').value = '';
+            document.getElementById('ci_due').value = new Date().toISOString().slice(0, 10);
+            document.getElementById('ci_desc').value = '';
+            document.getElementById('ci_error').textContent = '';
             new bootstrap.Modal(document.getElementById('createInvoiceModal')).show();
         }
 
@@ -985,17 +1011,17 @@
 
         async function submitCreateInvoice() {
             const client_id = document.getElementById('ci_client').value;
-            const amount = parseFloat(document.getElementById('ci_amount').value||'0');
+            const amount = parseFloat(document.getElementById('ci_amount').value || '0');
             const due_date = document.getElementById('ci_due').value;
             const description = document.getElementById('ci_desc').value;
             const out = document.getElementById('ci_error');
-            out.textContent='';
-            
-            if (!client_id || !amount || !due_date) { 
-                out.textContent='Client, Amount, and Due Date are required'; 
-                return; 
+            out.textContent = '';
+
+            if (!client_id || !amount || !due_date) {
+                out.textContent = 'Client, Amount, and Due Date are required';
+                return;
             }
-            
+
             // Get selected services
             const selectedServices = [];
             const checkboxes = document.querySelectorAll('.service-checkbox:checked');
@@ -1006,24 +1032,24 @@
                     price: parseFloat(checkbox.dataset.price || 0)
                 });
             });
-            
-            const resp = await apiRequest(`${API_BASE}/create_invoice.php`,'POST',{
+
+            const resp = await apiRequest(`${API_BASE}/create_invoice.php`, 'POST', {
                 client_id,
                 amount,
                 due_date,
                 description,
-                status:'sent',
+                status: 'sent',
                 services: selectedServices
             });
-            
-            if (!resp.success) { 
-                out.textContent = resp.error||'Failed to create invoice'; 
-                return; 
+
+            if (!resp.success) {
+                out.textContent = resp.error || 'Failed to create invoice';
+                return;
             }
-            
+
             bootstrap.Modal.getInstance(document.getElementById('createInvoiceModal')).hide();
             renderInvoices();
-            window.open(`${API_BASE}/download_invoice.php?invoice_id=${resp.invoice_id}`,'_blank');
+            window.open(`${API_BASE}/download_invoice.php?invoice_id=${resp.invoice_id}`, '_blank');
         }
 
         async function saveInvoiceRow(id, btn) {
@@ -1031,8 +1057,8 @@
             const status = row.querySelector('select[data-field="status"]').value;
             const issue_date = row.querySelector('input[data-field="issue_date"]').value;
             const due_date = row.querySelector('input[data-field="due_date"]').value;
-            const resp = await apiRequest(`${API_BASE}/admin/invoices.php`,'PUT',{id,status,issue_date,due_date});
-            if (!resp.success) { alert(resp.error||'Save failed'); return; }
+            const resp = await apiRequest(`${API_BASE}/admin/invoices.php`, 'PUT', { id, status, issue_date, due_date });
+            if (!resp.success) { alert(resp.error || 'Save failed'); return; }
             alert('Saved');
         }
 
@@ -1040,9 +1066,9 @@
             if (!confirm(`Are you sure you want to delete invoice ${invoiceNumber}?\n\nThis action cannot be undone and will also delete all associated invoice items.`)) {
                 return;
             }
-            
+
             try {
-                const resp = await apiRequest(`${API_BASE}/admin/invoices.php`, 'DELETE', {id});
+                const resp = await apiRequest(`${API_BASE}/admin/invoices.php`, 'DELETE', { id });
                 if (resp.success) {
                     showNotification(`Invoice ${invoiceNumber} deleted successfully!`, 'success');
                     renderInvoices();
@@ -1053,20 +1079,20 @@
                 showNotification('Error deleting invoice: ' + error.message, 'error');
             }
         }
- 
+
         function loadTab(tabName) {
             // Update active nav
             document.querySelectorAll('.sidebar .nav-link').forEach(link => {
                 link.classList.remove('active');
             });
             document.querySelector(`[onclick="loadTab('${tabName}')"]`).classList.add('active');
-            
+
             // Update page title
             const titles = {
                 'dashboard': 'Billing & Payment Dashboard',
                 'clients': 'Client Management',
-                'projects': 'Project Management', 
-                'invoices': 'Invoice Management', 
+                'projects': 'Project Management',
+                'invoices': 'Invoice Management',
                 'payments': 'Payment Tracking',
                 'automation': 'Billing Automation',
                 'reports': 'Financial Reports',
@@ -1079,7 +1105,7 @@
                 'settings': 'Company Settings'
             };
             document.getElementById('pageTitle').textContent = titles[tabName];
-            
+
             // Load content (placeholder for now)
             if (tabName === 'clients') { renderClients(); return; }
             if (tabName === 'projects') { renderProjects(); return; }
@@ -1104,7 +1130,7 @@
             }
         }
 
-        async function renderServices(){
+        async function renderServices() {
             const target = document.getElementById('mainContent');
             target.innerHTML = `
               <div class="d-flex justify-content-between align-items-center mb-3">
@@ -1122,25 +1148,25 @@
                 </table>
               </div>`;
             const res = await apiRequest(`${API_BASE}/admin/services.php`);
-            if(!res.success){ target.innerHTML += `<div class="text-danger">${res.error||'Failed to load services'}</div>`; return; }
+            if (!res.success) { target.innerHTML += `<div class="text-danger">${res.error || 'Failed to load services'}</div>`; return; }
             const tbody = target.querySelector('#servicesTable tbody');
-            (res.data||[]).forEach(s=>{
+            (res.data || []).forEach(s => {
                 const tr = document.createElement('tr');
                 tr.innerHTML = `
-                  <td style="min-width:200px;"><input class="form-control form-control-sm" value="${s.name||''}" data-field="name" data-id="${s.id}"></td>
-                  <td><input class="form-control form-control-sm" value="${s.slug||''}" data-field="slug" data-id="${s.id}"></td>
-                  <td><input class="form-control form-control-sm" value="${s.category||''}" data-field="category" data-id="${s.id}"></td>
-                  <td style="max-width:120px"><input type="number" step="0.01" class="form-control form-control-sm" value="${s.price_amount||0}" data-field="price_amount" data-id="${s.id}"></td>
-                  <td style="max-width:120px"><input class="form-control form-control-sm" value="${s.price_period||''}" data-field="price_period" data-id="${s.id}" placeholder="month/Year"></td>
+                  <td style="min-width:200px;"><input class="form-control form-control-sm" value="${s.name || ''}" data-field="name" data-id="${s.id}"></td>
+                  <td><input class="form-control form-control-sm" value="${s.slug || ''}" data-field="slug" data-id="${s.id}"></td>
+                  <td><input class="form-control form-control-sm" value="${s.category || ''}" data-field="category" data-id="${s.id}"></td>
+                  <td style="max-width:120px"><input type="number" step="0.01" class="form-control form-control-sm" value="${s.price_amount || 0}" data-field="price_amount" data-id="${s.id}"></td>
+                  <td style="max-width:120px"><input class="form-control form-control-sm" value="${s.price_period || ''}" data-field="price_period" data-id="${s.id}" placeholder="month/Year"></td>
                   <td>
                     <select class="form-select form-select-sm" data-field="is_active" data-id="${s.id}">
-                      <option value="1" ${String(s.is_active)==='1'?'selected':''}>Yes</option>
-                      <option value="0" ${String(s.is_active)==='0'?'selected':''}>No</option>
+                      <option value="1" ${String(s.is_active) === '1' ? 'selected' : ''}>Yes</option>
+                      <option value="0" ${String(s.is_active) === '0' ? 'selected' : ''}>No</option>
                     </select>
                   </td>
-                  <td style="min-width:220px;"><input class="form-control form-control-sm" value="${s.image_url||''}" data-field="image_url" data-id="${s.id}" placeholder="/images/...">
+                  <td style="min-width:220px;"><input class="form-control form-control-sm" value="${s.image_url || ''}" data-field="image_url" data-id="${s.id}" placeholder="/images/...">
                   </td>
-                  <td style="min-width:220px;"><input class="form-control form-control-sm" value="${s.details_url||''}" data-field="details_url" data-id="${s.id}" placeholder="/services-platform/our_services.html#...">
+                  <td style="min-width:220px;"><input class="form-control form-control-sm" value="${s.details_url || ''}" data-field="details_url" data-id="${s.id}" placeholder="/services-platform/our_services.html#...">
                   </td>
                   <td>
                     <button class="btn btn-sm btn-outline-primary" onclick="saveServiceRow(${s.id}, this)">Save</button>
@@ -1151,7 +1177,7 @@
             });
         }
 
-        function openCreateService(){
+        function openCreateService() {
             const html = `
             <div class="modal fade" id="createServiceModal" tabindex="-1">
               <div class="modal-dialog">
@@ -1172,81 +1198,81 @@
                 </div>
               </div>
             </div>`;
-            let c = document.getElementById('createServiceContainer'); if(!c){ c=document.createElement('div'); c.id='createServiceContainer'; document.body.appendChild(c);} c.innerHTML = html;
+            let c = document.getElementById('createServiceContainer'); if (!c) { c = document.createElement('div'); c.id = 'createServiceContainer'; document.body.appendChild(c); } c.innerHTML = html;
             new bootstrap.Modal(document.getElementById('createServiceModal')).show();
         }
 
-        async function submitCreateService(){
+        async function submitCreateService() {
             const name = document.getElementById('sv_name').value.trim();
-            const slug = document.getElementById('sv_slug').value.trim()||null;
-            const category = document.getElementById('sv_category').value.trim()||null;
-            const price_amount = parseFloat(document.getElementById('sv_price_amount').value||'0');
-            const price_period = document.getElementById('sv_price_period').value.trim()||null;
-            const image_url = document.getElementById('sv_image_url').value.trim()||null;
-            const details_url = document.getElementById('sv_details_url').value.trim()||null;
+            const slug = document.getElementById('sv_slug').value.trim() || null;
+            const category = document.getElementById('sv_category').value.trim() || null;
+            const price_amount = parseFloat(document.getElementById('sv_price_amount').value || '0');
+            const price_period = document.getElementById('sv_price_period').value.trim() || null;
+            const image_url = document.getElementById('sv_image_url').value.trim() || null;
+            const details_url = document.getElementById('sv_details_url').value.trim() || null;
             const is_active = document.getElementById('sv_active').checked ? 1 : 0;
-            const out = document.getElementById('sv_err'); out.textContent='';
-            if(!name){ out.textContent='Name is required'; return; }
-            const resp = await apiRequest(`${API_BASE}/admin/services.php`,'POST',{name,slug,category,price_amount,price_period,image_url,details_url,is_active});
-            if(!resp.success){ out.textContent = resp.error||'Create failed'; return; }
+            const out = document.getElementById('sv_err'); out.textContent = '';
+            if (!name) { out.textContent = 'Name is required'; return; }
+            const resp = await apiRequest(`${API_BASE}/admin/services.php`, 'POST', { name, slug, category, price_amount, price_period, image_url, details_url, is_active });
+            if (!resp.success) { out.textContent = resp.error || 'Create failed'; return; }
             bootstrap.Modal.getInstance(document.getElementById('createServiceModal')).hide();
             renderServices();
         }
 
-        async function saveServiceRow(id, btn){
+        async function saveServiceRow(id, btn) {
             const row = btn.closest('tr');
             const payload = {
-              id,
-              name: row.querySelector('input[data-field="name"]').value,
-              slug: row.querySelector('input[data-field="slug"]').value,
-              category: row.querySelector('input[data-field="category"]').value,
-              price_amount: parseFloat(row.querySelector('input[data-field="price_amount"]').value||'0'),
-              price_period: row.querySelector('input[data-field="price_period"]').value,
-              image_url: row.querySelector('input[data-field="image_url"]').value,
-              details_url: row.querySelector('input[data-field="details_url"]').value,
-              is_active: parseInt(row.querySelector('select[data-field="is_active"]').value||'1',10)
+                id,
+                name: row.querySelector('input[data-field="name"]').value,
+                slug: row.querySelector('input[data-field="slug"]').value,
+                category: row.querySelector('input[data-field="category"]').value,
+                price_amount: parseFloat(row.querySelector('input[data-field="price_amount"]').value || '0'),
+                price_period: row.querySelector('input[data-field="price_period"]').value,
+                image_url: row.querySelector('input[data-field="image_url"]').value,
+                details_url: row.querySelector('input[data-field="details_url"]').value,
+                is_active: parseInt(row.querySelector('select[data-field="is_active"]').value || '1', 10)
             };
             const resp = await apiRequest(`${API_BASE}/admin/services.php`, 'PUT', payload);
-            if(!resp.success){ alert(resp.error||'Save failed'); return; }
+            if (!resp.success) { alert(resp.error || 'Save failed'); return; }
             alert('Saved');
         }
 
-        async function openEditService(id){
+        async function openEditService(id) {
             const r = await apiRequest(`${API_BASE}/admin/services.php?id=${id}`);
-            if(!r.success || !r.data){ alert('Failed to load'); return; }
+            if (!r.success || !r.data) { alert('Failed to load'); return; }
             const s = r.data;
             let features = [];
             let notes = [];
             try {
-              if(s.features) features = typeof s.features === 'string' ? JSON.parse(s.features) : s.features;
-              if(s.notes) notes = typeof s.notes === 'string' ? JSON.parse(s.notes) : s.notes;
-            } catch(e) {}
-            
+                if (s.features) features = typeof s.features === 'string' ? JSON.parse(s.features) : s.features;
+                if (s.notes) notes = typeof s.notes === 'string' ? JSON.parse(s.notes) : s.notes;
+            } catch (e) { }
+
             const html = `
             <div class="modal fade" id="editServiceModal" tabindex="-1">
               <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                   <div class="modal-header"><h5 class="modal-title">Edit Service</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
                   <div class="modal-body" style="max-height: 70vh; overflow-y: auto;">
-                    <div class="mb-2"><label class="form-label">Name</label><input id="es_name" class="form-control" value="${s.name||''}"></div>
-                    <div class="mb-2"><label class="form-label">Slug</label><input id="es_slug" class="form-control" value="${s.slug||''}"></div>
-                    <div class="mb-2"><label class="form-label">Category</label><input id="es_category" class="form-control" value="${s.category||''}"></div>
-                    <div class="mb-2"><label class="form-label">Price Amount</label><input id="es_price_amount" type="number" step="0.01" class="form-control" value="${s.price_amount||0}"></div>
-                    <div class="mb-2"><label class="form-label">Price Period</label><input id="es_price_period" class="form-control" value="${s.price_period||''}"></div>
-                    <div class="mb-2"><label class="form-label">Image URL</label><input id="es_image_url" class="form-control" value="${s.image_url||''}"></div>
-                    <div class="mb-2"><label class="form-label">Details URL</label><input id="es_details_url" class="form-control" value="${s.details_url||''}"></div>
-                    <div class="form-check mb-3"><input id="es_active" type="checkbox" class="form-check-input" ${String(s.is_active)==='1'?'checked':''}><label for="es_active" class="form-check-label">Active</label></div>
+                    <div class="mb-2"><label class="form-label">Name</label><input id="es_name" class="form-control" value="${s.name || ''}"></div>
+                    <div class="mb-2"><label class="form-label">Slug</label><input id="es_slug" class="form-control" value="${s.slug || ''}"></div>
+                    <div class="mb-2"><label class="form-label">Category</label><input id="es_category" class="form-control" value="${s.category || ''}"></div>
+                    <div class="mb-2"><label class="form-label">Price Amount</label><input id="es_price_amount" type="number" step="0.01" class="form-control" value="${s.price_amount || 0}"></div>
+                    <div class="mb-2"><label class="form-label">Price Period</label><input id="es_price_period" class="form-control" value="${s.price_period || ''}"></div>
+                    <div class="mb-2"><label class="form-label">Image URL</label><input id="es_image_url" class="form-control" value="${s.image_url || ''}"></div>
+                    <div class="mb-2"><label class="form-label">Details URL</label><input id="es_details_url" class="form-control" value="${s.details_url || ''}"></div>
+                    <div class="form-check mb-3"><input id="es_active" type="checkbox" class="form-check-input" ${String(s.is_active) === '1' ? 'checked' : ''}><label for="es_active" class="form-check-label">Active</label></div>
                     
                     <hr>
                     <h6 class="mb-2">What You Get (Features)</h6>
                     <div id="es_features_container" style="display:flex;flex-direction:column;gap:8px;margin-bottom:12px;">
-                      ${features.map((f, i) => `<input type="text" class="form-control form-control-sm es_feature" value="${f||''}" data-index="${i}">`).join('')}
+                      ${features.map((f, i) => `<input type="text" class="form-control form-control-sm es_feature" value="${f || ''}" data-index="${i}">`).join('')}
                     </div>
                     <button type="button" class="btn btn-sm btn-outline-secondary mb-3" onclick="addFeatureField('es_features_container')">+ Add Feature</button>
                     
                     <h6 class="mb-2">What Else You Should Know (Notes)</h6>
                     <div id="es_notes_container" style="display:flex;flex-direction:column;gap:8px;margin-bottom:12px;">
-                      ${notes.map((n, i) => `<input type="text" class="form-control form-control-sm es_note" value="${n||''}" data-index="${i}">`).join('')}
+                      ${notes.map((n, i) => `<input type="text" class="form-control form-control-sm es_note" value="${n || ''}" data-index="${i}">`).join('')}
                     </div>
                     <button type="button" class="btn btn-sm btn-outline-secondary mb-3" onclick="addNoteField('es_notes_container')">+ Add Note</button>
                     
@@ -1256,11 +1282,11 @@
                 </div>
               </div>
             </div>`;
-            let c = document.getElementById('editServiceContainer'); if(!c){ c=document.createElement('div'); c.id='editServiceContainer'; document.body.appendChild(c);} c.innerHTML = html;
+            let c = document.getElementById('editServiceContainer'); if (!c) { c = document.createElement('div'); c.id = 'editServiceContainer'; document.body.appendChild(c); } c.innerHTML = html;
             new bootstrap.Modal(document.getElementById('editServiceModal')).show();
         }
-        
-        function addFeatureField(containerId){
+
+        function addFeatureField(containerId) {
             const container = document.getElementById(containerId);
             const input = document.createElement('input');
             input.type = 'text';
@@ -1268,8 +1294,8 @@
             input.placeholder = 'Enter feature';
             container.appendChild(input);
         }
-        
-        function addNoteField(containerId){
+
+        function addNoteField(containerId) {
             const container = document.getElementById(containerId);
             const input = document.createElement('input');
             input.type = 'text';
@@ -1278,33 +1304,33 @@
             container.appendChild(input);
         }
 
-        async function submitEditService(id){
+        async function submitEditService(id) {
             const features = Array.from(document.querySelectorAll('.es_feature')).map(inp => inp.value.trim()).filter(v => v);
             const notes = Array.from(document.querySelectorAll('.es_note')).map(inp => inp.value.trim()).filter(v => v);
-            
+
             const payload = {
-              id,
-              name: document.getElementById('es_name').value.trim(),
-              slug: document.getElementById('es_slug').value.trim(),
-              category: document.getElementById('es_category').value.trim(),
-              price_amount: parseFloat(document.getElementById('es_price_amount').value||'0'),
-              price_period: document.getElementById('es_price_period').value.trim(),
-              image_url: document.getElementById('es_image_url').value.trim(),
-              details_url: document.getElementById('es_details_url').value.trim(),
-              is_active: document.getElementById('es_active').checked ? 1 : 0,
-              features: JSON.stringify(features),
-              notes: JSON.stringify(notes)
+                id,
+                name: document.getElementById('es_name').value.trim(),
+                slug: document.getElementById('es_slug').value.trim(),
+                category: document.getElementById('es_category').value.trim(),
+                price_amount: parseFloat(document.getElementById('es_price_amount').value || '0'),
+                price_period: document.getElementById('es_price_period').value.trim(),
+                image_url: document.getElementById('es_image_url').value.trim(),
+                details_url: document.getElementById('es_details_url').value.trim(),
+                is_active: document.getElementById('es_active').checked ? 1 : 0,
+                features: JSON.stringify(features),
+                notes: JSON.stringify(notes)
             };
             const resp = await apiRequest(`${API_BASE}/admin/services.php`, 'PUT', payload);
-            if(!resp.success){ document.getElementById('es_err').textContent = resp.error||'Save failed'; return; }
+            if (!resp.success) { document.getElementById('es_err').textContent = resp.error || 'Save failed'; return; }
             bootstrap.Modal.getInstance(document.getElementById('editServiceModal')).hide();
             renderServices();
         }
 
-        async function deleteService(id){
-            if(!confirm('Delete this service?')) return;
-            const resp = await apiRequest(`${API_BASE}/admin/services.php`, 'DELETE', {id});
-            if(!resp.success){ alert(resp.error||'Delete failed'); return; }
+        async function deleteService(id) {
+            if (!confirm('Delete this service?')) return;
+            const resp = await apiRequest(`${API_BASE}/admin/services.php`, 'DELETE', { id });
+            if (!resp.success) { alert(resp.error || 'Delete failed'); return; }
             renderServices();
         }
 
@@ -1323,33 +1349,33 @@
                 </div>
             `;
         }
-        
+
         // Quick action functions
         async function createInvoice() { openCreateInvoice(); }
-        
+
         async function addClient() { openAddClient(); }
- 
+
         function sendReminders() {
             alert('Sending payment reminders to overdue clients...');
         }
-        
+
         function runAutomation() {
             alert('Running billing automation tasks...');
         }
-        
+
         function exportReports() {
             alert('Exporting financial reports...');
         }
-        
+
         function viewSettings() {
             loadTab('settings');
         }
-        
+
         function showQuickActions() {
             alert('Quick Actions Menu');
         }
 
-        async function renderProducts(){
+        async function renderProducts() {
             const target = document.getElementById('mainContent');
             target.innerHTML = `
               <div class="d-flex justify-content-between align-items-center mb-3">
@@ -1367,24 +1393,24 @@
                 </table>
               </div>`;
             const res = await apiRequest(`${API_BASE}/admin/products.php`);
-            if(!res.success){ target.innerHTML += `<div class="text-danger">${res.error||'Failed to load products'}</div>`; return; }
+            if (!res.success) { target.innerHTML += `<div class="text-danger">${res.error || 'Failed to load products'}</div>`; return; }
             const tbody = target.querySelector('#productsTable tbody');
-            (res.data||[]).forEach(p=>{
+            (res.data || []).forEach(p => {
                 const tr = document.createElement('tr');
                 tr.innerHTML = `
-                  <td style="min-width:220px;"><input class="form-control form-control-sm" value="${p.title||''}" data-field="title" data-id="${p.id}"></td>
-                  <td><input class="form-control form-control-sm" value="${p.category||''}" data-field="category" data-id="${p.id}"></td>
-                  <td style="max-width:120px"><input type="number" step="0.01" class="form-control form-control-sm" value="${p.price_amount||0}" data-field="price_amount" data-id="${p.id}"></td>
-                  <td style="max-width:120px"><input class="form-control form-control-sm" value="${p.price_period||''}" data-field="price_period" data-id="${p.id}" placeholder="month/Year"></td>
-                  <td><input class="form-control form-control-sm" value="${p.badge||''}" data-field="badge" data-id="${p.id}" placeholder="Featured/Coming Soon"></td>
+                  <td style="min-width:220px;"><input class="form-control form-control-sm" value="${p.title || ''}" data-field="title" data-id="${p.id}"></td>
+                  <td><input class="form-control form-control-sm" value="${p.category || ''}" data-field="category" data-id="${p.id}"></td>
+                  <td style="max-width:120px"><input type="number" step="0.01" class="form-control form-control-sm" value="${p.price_amount || 0}" data-field="price_amount" data-id="${p.id}"></td>
+                  <td style="max-width:120px"><input class="form-control form-control-sm" value="${p.price_period || ''}" data-field="price_period" data-id="${p.id}" placeholder="month/Year"></td>
+                  <td><input class="form-control form-control-sm" value="${p.badge || ''}" data-field="badge" data-id="${p.id}" placeholder="Featured/Coming Soon"></td>
                   <td>
                     <select class="form-select form-select-sm" data-field="is_featured" data-id="${p.id}">
-                      <option value="0" ${String(p.is_featured)==='0'?'selected':''}>No</option>
-                      <option value="1" ${String(p.is_featured)==='1'?'selected':''}>Yes</option>
+                      <option value="0" ${String(p.is_featured) === '0' ? 'selected' : ''}>No</option>
+                      <option value="1" ${String(p.is_featured) === '1' ? 'selected' : ''}>Yes</option>
                     </select>
                   </td>
                   <td style="min-width:220px;">
-                    <input class="form-control form-control-sm" value="${p.image_url||''}" data-field="image_url" data-id="${p.id}" placeholder="/images/...">
+                    <input class="form-control form-control-sm" value="${p.image_url || ''}" data-field="image_url" data-id="${p.id}" placeholder="/images/...">
                   </td>
                   <td>
                     <button class="btn btn-sm btn-outline-primary" onclick="saveProductRow(${p.id}, this)">Save</button>
@@ -1395,24 +1421,24 @@
             });
         }
 
-        async function saveProductRow(id, btn){
+        async function saveProductRow(id, btn) {
             const row = btn.closest('tr');
             const payload = {
-              id,
-              title: row.querySelector('input[data-field="title"]').value,
-              category: row.querySelector('input[data-field="category"]').value,
-              price_amount: parseFloat(row.querySelector('input[data-field="price_amount"]').value||'0'),
-              price_period: row.querySelector('input[data-field="price_period"]').value,
-              badge: row.querySelector('input[data-field="badge"]').value,
-              is_featured: parseInt(row.querySelector('select[data-field="is_featured"]').value||'0',10),
-              image_url: row.querySelector('input[data-field="image_url"]').value
+                id,
+                title: row.querySelector('input[data-field="title"]').value,
+                category: row.querySelector('input[data-field="category"]').value,
+                price_amount: parseFloat(row.querySelector('input[data-field="price_amount"]').value || '0'),
+                price_period: row.querySelector('input[data-field="price_period"]').value,
+                badge: row.querySelector('input[data-field="badge"]').value,
+                is_featured: parseInt(row.querySelector('select[data-field="is_featured"]').value || '0', 10),
+                image_url: row.querySelector('input[data-field="image_url"]').value
             };
             const resp = await apiRequest(`${API_BASE}/admin/products.php`, 'PUT', payload);
-            if(!resp.success){ alert(resp.error||'Save failed'); return; }
+            if (!resp.success) { alert(resp.error || 'Save failed'); return; }
             alert('Saved');
         }
 
-        function openCreateProduct(){
+        function openCreateProduct() {
             const html = `
             <div class="modal fade" id="createProductModal" tabindex="-1">
               <div class="modal-dialog">
@@ -1431,28 +1457,28 @@
               </div>
             </div>`;
             let c = document.getElementById('createProductContainer');
-            if(!c){ c=document.createElement('div'); c.id='createProductContainer'; document.body.appendChild(c); }
+            if (!c) { c = document.createElement('div'); c.id = 'createProductContainer'; document.body.appendChild(c); }
             c.innerHTML = html;
             new bootstrap.Modal(document.getElementById('createProductModal')).show();
         }
 
-        async function submitCreateProduct(){
+        async function submitCreateProduct() {
             const title = document.getElementById('pr_title').value.trim();
             const category = document.getElementById('pr_category').value.trim();
-            const price_amount = parseFloat(document.getElementById('pr_price_amount').value||'0');
+            const price_amount = parseFloat(document.getElementById('pr_price_amount').value || '0');
             const price_period = document.getElementById('pr_price_period').value.trim();
             const image_url = document.getElementById('pr_image_url').value.trim();
-            const out = document.getElementById('pr_err'); out.textContent='';
-            if(!title){ out.textContent='Title is required'; return; }
-            const resp = await apiRequest(`${API_BASE}/admin/products.php`,'POST',{title,category,price_amount,price_period,image_url,is_featured:0});
-            if(!resp.success){ out.textContent = resp.error||'Create failed'; return; }
+            const out = document.getElementById('pr_err'); out.textContent = '';
+            if (!title) { out.textContent = 'Title is required'; return; }
+            const resp = await apiRequest(`${API_BASE}/admin/products.php`, 'POST', { title, category, price_amount, price_period, image_url, is_featured: 0 });
+            if (!resp.success) { out.textContent = resp.error || 'Create failed'; return; }
             bootstrap.Modal.getInstance(document.getElementById('createProductModal')).hide();
             renderProducts();
         }
 
-        async function openEditProduct(id){
+        async function openEditProduct(id) {
             const r = await apiRequest(`${API_BASE}/admin/products.php?id=${id}`);
-            if(!r.success || !r.data){ alert('Failed to load'); return; }
+            if (!r.success || !r.data) { alert('Failed to load'); return; }
             const p = r.data;
             const html = `
             <div class="modal fade" id="editProductModal" tabindex="-1">
@@ -1461,20 +1487,20 @@
                   <div class="modal-header"><h5 class="modal-title">Edit Product Details</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
                   <div class="modal-body">
                     <div class="row g-2">
-                      <div class="col-md-6"><label class="form-label">Title</label><input id="ep_title" class="form-control" value="${p.title||''}"></div>
-                      <div class="col-md-6"><label class="form-label">Category</label><input id="ep_category" class="form-control" value="${p.category||''}"></div>
-                      <div class="col-md-6"><label class="form-label">Price Amount</label><input id="ep_price_amount" type="number" step="0.01" class="form-control" value="${p.price_amount||0}"></div>
-                      <div class="col-md-6"><label class="form-label">Price Period</label><input id="ep_price_period" class="form-control" value="${p.price_period||''}"></div>
-                      <div class="col-md-12"><label class="form-label">Description</label><textarea id="ep_description" class="form-control" rows="4">${p.description||''}</textarea></div>
-                      <div class="col-md-6"><label class="form-label">Hero / Image URL</label><input id="ep_image_url" class="form-control" value="${p.image_url||''}"></div>
-                      <div class="col-md-6"><label class="form-label">Background URL</label><input id="ep_background_url" class="form-control" value="${p.background_url||''}"></div>
-                      <div class="col-md-6"><label class="form-label">Primary CTA Text</label><input id="ep_cta_primary_text" class="form-control" value="${p.cta_primary_text||''}"></div>
-                      <div class="col-md-6"><label class="form-label">Primary CTA Link</label><input id="ep_cta_primary_link" class="form-control" value="${p.cta_primary_link||''}"></div>
-                      <div class="col-md-6"><label class="form-label">Secondary CTA Text</label><input id="ep_cta_secondary_text" class="form-control" value="${p.cta_secondary_text||''}"></div>
-                      <div class="col-md-6"><label class="form-label">Secondary CTA Link</label><input id="ep_cta_secondary_link" class="form-control" value="${p.cta_secondary_link||''}"></div>
-                      <div class="col-md-4"><label class="form-label">Badge</label><input id="ep_badge" class="form-control" value="${p.badge||''}"></div>
-                      <div class="col-md-4"><label class="form-label">Icon (FA class)</label><input id="ep_icon_class" class="form-control" value="${p.icon_class||''}" placeholder="fa-solid fa-wallet"></div>
-                      <div class="col-md-4"><label class="form-label">Featured</label><select id="ep_is_featured" class="form-select"><option value="0" ${String(p.is_featured)==='0'?'selected':''}>No</option><option value="1" ${String(p.is_featured)==='1'?'selected':''}>Yes</option></select></div>
+                      <div class="col-md-6"><label class="form-label">Title</label><input id="ep_title" class="form-control" value="${p.title || ''}"></div>
+                      <div class="col-md-6"><label class="form-label">Category</label><input id="ep_category" class="form-control" value="${p.category || ''}"></div>
+                      <div class="col-md-6"><label class="form-label">Price Amount</label><input id="ep_price_amount" type="number" step="0.01" class="form-control" value="${p.price_amount || 0}"></div>
+                      <div class="col-md-6"><label class="form-label">Price Period</label><input id="ep_price_period" class="form-control" value="${p.price_period || ''}"></div>
+                      <div class="col-md-12"><label class="form-label">Description</label><textarea id="ep_description" class="form-control" rows="4">${p.description || ''}</textarea></div>
+                      <div class="col-md-6"><label class="form-label">Hero / Image URL</label><input id="ep_image_url" class="form-control" value="${p.image_url || ''}"></div>
+                      <div class="col-md-6"><label class="form-label">Background URL</label><input id="ep_background_url" class="form-control" value="${p.background_url || ''}"></div>
+                      <div class="col-md-6"><label class="form-label">Primary CTA Text</label><input id="ep_cta_primary_text" class="form-control" value="${p.cta_primary_text || ''}"></div>
+                      <div class="col-md-6"><label class="form-label">Primary CTA Link</label><input id="ep_cta_primary_link" class="form-control" value="${p.cta_primary_link || ''}"></div>
+                      <div class="col-md-6"><label class="form-label">Secondary CTA Text</label><input id="ep_cta_secondary_text" class="form-control" value="${p.cta_secondary_text || ''}"></div>
+                      <div class="col-md-6"><label class="form-label">Secondary CTA Link</label><input id="ep_cta_secondary_link" class="form-control" value="${p.cta_secondary_link || ''}"></div>
+                      <div class="col-md-4"><label class="form-label">Badge</label><input id="ep_badge" class="form-control" value="${p.badge || ''}"></div>
+                      <div class="col-md-4"><label class="form-label">Icon (FA class)</label><input id="ep_icon_class" class="form-control" value="${p.icon_class || ''}" placeholder="fa-solid fa-wallet"></div>
+                      <div class="col-md-4"><label class="form-label">Featured</label><select id="ep_is_featured" class="form-select"><option value="0" ${String(p.is_featured) === '0' ? 'selected' : ''}>No</option><option value="1" ${String(p.is_featured) === '1' ? 'selected' : ''}>Yes</option></select></div>
                     </div>
                     <div id="ep_err" class="text-danger mt-2"></div>
                   </div>
@@ -1482,38 +1508,38 @@
                 </div>
               </div>
             </div>`;
-            let c = document.getElementById('editProductContainer'); if(!c){ c=document.createElement('div'); c.id='editProductContainer'; document.body.appendChild(c);} c.innerHTML = html;
+            let c = document.getElementById('editProductContainer'); if (!c) { c = document.createElement('div'); c.id = 'editProductContainer'; document.body.appendChild(c); } c.innerHTML = html;
             new bootstrap.Modal(document.getElementById('editProductModal')).show();
         }
 
-        async function submitEditProduct(id){
+        async function submitEditProduct(id) {
             const payload = {
-              id,
-              title: document.getElementById('ep_title').value.trim(),
-              category: document.getElementById('ep_category').value.trim(),
-              price_amount: parseFloat(document.getElementById('ep_price_amount').value||'0'),
-              price_period: document.getElementById('ep_price_period').value.trim(),
-              description: document.getElementById('ep_description').value,
-              image_url: document.getElementById('ep_image_url').value.trim(),
-              background_url: document.getElementById('ep_background_url').value.trim(),
-              cta_primary_text: document.getElementById('ep_cta_primary_text').value.trim(),
-              cta_primary_link: document.getElementById('ep_cta_primary_link').value.trim(),
-              cta_secondary_text: document.getElementById('ep_cta_secondary_text').value.trim(),
-              cta_secondary_link: document.getElementById('ep_cta_secondary_link').value.trim(),
-              badge: document.getElementById('ep_badge').value.trim(),
-              icon_class: document.getElementById('ep_icon_class').value.trim(),
-              is_featured: parseInt(document.getElementById('ep_is_featured').value||'0',10)
+                id,
+                title: document.getElementById('ep_title').value.trim(),
+                category: document.getElementById('ep_category').value.trim(),
+                price_amount: parseFloat(document.getElementById('ep_price_amount').value || '0'),
+                price_period: document.getElementById('ep_price_period').value.trim(),
+                description: document.getElementById('ep_description').value,
+                image_url: document.getElementById('ep_image_url').value.trim(),
+                background_url: document.getElementById('ep_background_url').value.trim(),
+                cta_primary_text: document.getElementById('ep_cta_primary_text').value.trim(),
+                cta_primary_link: document.getElementById('ep_cta_primary_link').value.trim(),
+                cta_secondary_text: document.getElementById('ep_cta_secondary_text').value.trim(),
+                cta_secondary_link: document.getElementById('ep_cta_secondary_link').value.trim(),
+                badge: document.getElementById('ep_badge').value.trim(),
+                icon_class: document.getElementById('ep_icon_class').value.trim(),
+                is_featured: parseInt(document.getElementById('ep_is_featured').value || '0', 10)
             };
             const resp = await apiRequest(`${API_BASE}/admin/products.php`, 'PUT', payload);
-            if(!resp.success){ document.getElementById('ep_err').textContent = resp.error||'Save failed'; return; }
+            if (!resp.success) { document.getElementById('ep_err').textContent = resp.error || 'Save failed'; return; }
             bootstrap.Modal.getInstance(document.getElementById('editProductModal')).hide();
             renderProducts();
         }
 
-        async function deleteProduct(id){
-            if(!confirm('Delete this product?')) return;
-            const resp = await apiRequest(`${API_BASE}/admin/products.php`, 'DELETE', {id});
-            if(!resp.success){ alert(resp.error||'Delete failed'); return; }
+        async function deleteProduct(id) {
+            if (!confirm('Delete this product?')) return;
+            const resp = await apiRequest(`${API_BASE}/admin/products.php`, 'DELETE', { id });
+            if (!resp.success) { alert(resp.error || 'Delete failed'); return; }
             renderProducts();
         }
     </script>
@@ -1735,34 +1761,9 @@
         }
     </style>
 
-    <!-- Language Translator Widget -->
-    <div class="translator-widget">
-        <div class="translator-button" id="translatorBtn">
-            <i class="fa-solid fa-language"></i>
-            <span>Translate</span>
-        </div>
-        
-        <div class="translator-dropdown" id="translatorDropdown">
-            <div class="translator-header">
-                <h4>Choose Language</h4>
-                <button class="close-translator" id="closeTranslator">
-                    <i class="fa-solid fa-times"></i>
-                </button>
-            </div>
-            
-            <!-- Google Translate Element -->
-            <div id="google_translate_element"></div>
-            
-            <div class="translator-footer">
-                <button class="reset-btn" id="resetBtn">
-                    <i class="fa-solid fa-undo"></i>
-                    Reset to English
-                </button>
-            </div>
-        </div>
-    </div>
 
-    <!-- Google Translate Widget JavaScript -->
+
+
     <script>
         // Google Translate Element Initialization
         function googleTranslateElementInit() {
@@ -1896,9 +1897,9 @@
             new SimpleTranslator();
             // Auto-open specific tab if hash provided
             try {
-                const hash = (location.hash||'').replace('#','');
+                const hash = (location.hash || '').replace('#', '');
                 if (hash === 'services') { loadTab('services'); }
-            } catch(e){}
+            } catch (e) { }
         });
 
         // Add CSS animations for notifications
@@ -2067,7 +2068,7 @@
                     </div>
                 </div>
             `;
-            
+
             // Load current settings
             await loadCompanySettings();
         }
@@ -2091,7 +2092,7 @@
                     document.getElementById('cs_paypal_enabled').checked = (data.paypal_enabled == '1' || data.paypal_enabled === 1 || data.paypal_enabled === 'true');
                     document.getElementById('cs_currency').value = data.currency || 'ZAR';
                     document.getElementById('cs_paypal_mode').value = data.paypal_mode || 'sandbox';
-                    
+
                     // Update preview
                     updateCompanyPreview();
                 }
@@ -2105,13 +2106,13 @@
             const companyName = document.getElementById('cs_company_name').value;
             const companyEmail = document.getElementById('cs_company_email').value;
             const companyPhone = document.getElementById('cs_company_phone').value;
-            
+
             // Update preview elements
             document.getElementById('preview_logo').src = logoUrl;
             document.getElementById('preview_company_name').textContent = companyName || 'Company Name';
             document.getElementById('preview_company_email').textContent = companyEmail || 'email@company.com';
             document.getElementById('preview_company_phone').textContent = companyPhone || '+27 21 123 4567';
-            
+
             // Update logo preview
             const logoPreview = document.getElementById('logo_preview_img');
             const logoPlaceholder = document.getElementById('logo_preview_placeholder');
@@ -2141,9 +2142,9 @@
             data.paypal_client_id = document.getElementById('cs_paypal_client_id').value;
             data.paypal_client_secret = document.getElementById('cs_paypal_client_secret').value;
             data.paypal_mode = document.getElementById('cs_paypal_mode').value;
-                data.paypal_enabled = document.getElementById('cs_paypal_enabled').checked ? 1 : 0;
-                data.currency = document.getElementById('cs_currency').value || 'ZAR';
-            
+            data.paypal_enabled = document.getElementById('cs_paypal_enabled').checked ? 1 : 0;
+            data.currency = document.getElementById('cs_currency').value || 'ZAR';
+
             try {
                 const resp = await apiRequest(`${API_BASE}/company_settings.php`, 'PUT', data);
                 if (resp.success) {
@@ -2176,7 +2177,7 @@
                     </div>
                 </div>
             `;
-            
+
             await loadBanners();
         }
 
@@ -2195,7 +2196,7 @@
 
         function displayBanners(banners) {
             const container = document.getElementById('bannersList');
-            
+
             if (banners.length === 0) {
                 container.innerHTML = `
                     <div class="col-12 text-center py-5">
@@ -2214,10 +2215,10 @@
                 <div class="col-md-6 col-lg-4 mb-4">
                     <div class="card h-100">
                         <div class="card-img-top" style="height: 200px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); display: flex; align-items: center; justify-content: center; color: white; position: relative;">
-                            ${banner.image_url ? 
-                                `<img src="${banner.image_url}" alt="${banner.title}" style="width: 100%; height: 100%; object-fit: cover;">` :
-                                `<i class="bi bi-image" style="font-size: 3rem;"></i>`
-                            }
+                            ${banner.image_url ?
+                    `<img src="${banner.image_url}" alt="${banner.title}" style="width: 100%; height: 100%; object-fit: cover;">` :
+                    `<i class="bi bi-image" style="font-size: 3rem;"></i>`
+                }
                             <div class="position-absolute top-0 end-0 m-2">
                                 <span class="badge ${banner.is_active ? 'bg-success' : 'bg-secondary'}">
                                     ${banner.is_active ? 'Active' : 'Inactive'}
@@ -2312,16 +2313,16 @@
                     </div>
                 </div>
             `;
-            
+
             // Remove existing modal if any
             const existingModal = document.getElementById('bannerModal');
             if (existingModal) {
                 existingModal.remove();
             }
-            
+
             // Add modal to body
             document.body.insertAdjacentHTML('beforeend', modalHtml);
-            
+
             // Show modal
             const modal = new bootstrap.Modal(document.getElementById('bannerModal'));
             modal.show();
@@ -2347,13 +2348,13 @@
             try {
                 const url = bannerId ? `${API_BASE}/banners.php` : `${API_BASE}/banners.php`;
                 const method = bannerId ? 'PUT' : 'POST';
-                
+
                 if (bannerId) {
                     data.id = bannerId;
                 }
 
                 const response = await apiRequest(url, method, data);
-                
+
                 if (response.success) {
                     showNotification(bannerId ? 'Banner updated successfully!' : 'Banner created successfully!', 'success');
                     bootstrap.Modal.getInstance(document.getElementById('bannerModal')).hide();
@@ -2477,7 +2478,7 @@
                     </div>
                 </div>
             `;
-            
+
             await loadClientsForFilter();
             await loadDomains();
         }
@@ -2487,7 +2488,7 @@
                 const response = await apiRequest(`${API_BASE}/admin/clients.php`, 'GET');
                 if (response.success) {
                     const clientFilter = document.getElementById('clientFilter');
-                    clientFilter.innerHTML = '<option value="">All Clients</option>' + 
+                    clientFilter.innerHTML = '<option value="">All Clients</option>' +
                         response.data.map(client => `<option value="${client.id}">${client.name}</option>`).join('');
                 }
             } catch (error) {
@@ -2499,7 +2500,7 @@
             try {
                 const url = clientId ? `${API_BASE}/domains.php?client_id=${clientId}` : `${API_BASE}/domains.php`;
                 const response = await apiRequest(url, 'GET');
-                
+
                 if (response.success) {
                     displayDomains(response.data);
                     updateDomainStats(response.stats);
@@ -2513,7 +2514,7 @@
 
         function displayDomains(domains) {
             const tbody = document.getElementById('domainsTableBody');
-            
+
             if (domains.length === 0) {
                 tbody.innerHTML = `
                     <tr>
@@ -2654,19 +2655,19 @@
                     </div>
                 </div>
             `;
-            
+
             // Remove existing modal if any
             const existingModal = document.getElementById('domainModal');
             if (existingModal) {
                 existingModal.remove();
             }
-            
+
             // Add modal to body
             document.body.insertAdjacentHTML('beforeend', modalHtml);
-            
+
             // Load clients for dropdown
             loadClientsForDomainModal(domain?.client_id);
-            
+
             // Show modal
             const modal = new bootstrap.Modal(document.getElementById('domainModal'));
             modal.show();
@@ -2677,8 +2678,8 @@
                 const response = await apiRequest(`${API_BASE}/admin/clients.php`, 'GET');
                 if (response.success) {
                     const clientSelect = document.getElementById('domain_client_id');
-                    clientSelect.innerHTML = '<option value="">Select Client</option>' + 
-                        response.data.map(client => 
+                    clientSelect.innerHTML = '<option value="">Select Client</option>' +
+                        response.data.map(client =>
                             `<option value="${client.id}" ${client.id == selectedClientId ? 'selected' : ''}>${client.name}</option>`
                         ).join('');
                 }
@@ -2708,13 +2709,13 @@
             try {
                 const url = domainId ? `${API_BASE}/domains.php` : `${API_BASE}/domains.php`;
                 const method = domainId ? 'PUT' : 'POST';
-                
+
                 if (domainId) {
                     data.id = domainId;
                 }
 
                 const response = await apiRequest(url, method, data);
-                
+
                 if (response.success) {
                     showNotification(domainId ? 'Domain updated successfully!' : 'Domain created successfully!', 'success');
                     bootstrap.Modal.getInstance(document.getElementById('domainModal')).hide();
@@ -2781,4 +2782,5 @@
     <script src="js/project-manager.js"></script>
 
 </body>
+
 </html>
