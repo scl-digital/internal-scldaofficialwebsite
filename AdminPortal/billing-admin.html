@@ -280,9 +280,10 @@
                         </div>
                         <div class="col-md-3 mb-3">
                             <div class="stat-card" style="--accent-color: #1e348d;">
-                                <div class="stat-value">99</div>
+                                <div class="stat-value" id="stat-active-clients">0</div>
                                 <div class="stat-label">Active Clients</div>
-                                <small class="text-primary"><i class="bi bi-people"></i> +8 new this month</small>
+                                <small class="text-primary"><i class="bi bi-people"></i> <span
+                                        id="stat-new-clients">+0</span> new this month</small>
                             </div>
                         </div>
                     </div>
@@ -512,6 +513,30 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
+        async function updateDashboardStats() {
+            try {
+                const resp = await apiRequest(`${API_BASE}/admin/clients.php`);
+                if (resp.success) {
+                    const clients = resp.data || [];
+                    const activeClientsElem = document.getElementById('stat-active-clients');
+                    if (activeClientsElem) activeClientsElem.textContent = clients.length;
+
+                    const now = new Date();
+                    const thisMonth = now.getMonth();
+                    const thisYear = now.getFullYear();
+                    const newThisMonth = clients.filter(c => {
+                        const d = new Date(c.created_at);
+                        return d.getMonth() === thisMonth && d.getFullYear() === thisYear;
+                    }).length;
+
+                    const newClientsElem = document.getElementById('stat-new-clients');
+                    if (newClientsElem) newClientsElem.textContent = `+${newThisMonth}`;
+                }
+            } catch (err) {
+                console.error('Failed to update dashboard stats:', err);
+            }
+        }
+
         async function apiRequest(url, method = 'GET', body) {
             const opts = { method, headers: { 'Content-Type': 'application/json', 'X-ADMIN-API': '1' } };
             if (body) opts.body = JSON.stringify(body);
@@ -529,21 +554,27 @@
             const target = document.getElementById('mainContent');
             target.innerHTML = `
                 <div class="d-flex justify-content-between align-items-center mb-3">
-                  <h4>Client Management</h4>
+                  <h4>Client Management <span class="badge bg-secondary ms-2" id="clientCountBadge">0</span></h4>
                   <button class="btn btn-primary" onclick="openAddClient()"><i class="bi bi-person-plus"></i> Add Client</button>
                 </div>
                 <div class="table-responsive">
                   <table class="table table-hover" id="clientsTable">
-                    <thead><tr><th>Name</th><th>Email</th><th>Company</th><th>Created</th><th>Actions</th></tr></thead>
+                    <thead><tr><th>ID</th><th>Name</th><th>Email</th><th>Company</th><th>Created</th><th>Actions</th></tr></thead>
                     <tbody></tbody>
                   </table>
                 </div>`;
             const resp = await apiRequest(`${API_BASE}/admin/clients.php`);
             if (!resp.success) { target.innerHTML += `<div class="text-danger">${resp.error || 'Failed to load'}</div>`; return; }
+
+            const clients = resp.data || [];
+            const badge = document.getElementById('clientCountBadge');
+            if (badge) badge.textContent = clients.length;
+
             const tbody = target.querySelector('#clientsTable tbody');
-            (resp.data || []).forEach(c => {
+            clients.forEach(c => {
                 const tr = document.createElement('tr');
                 tr.innerHTML = `
+                  <td><code class="text-muted">#${c.id}</code></td>
                   <td><input class="form-control form-control-sm" value="${c.name || ''}" data-field="name" data-id="${c.id}"></td>
                   <td><input class="form-control form-control-sm" value="${c.email || ''}" data-field="email" data-id="${c.id}"></td>
                   <td><input class="form-control form-control-sm" value="${c.company || ''}" data-field="company" data-id="${c.id}"></td>
@@ -886,6 +917,7 @@
             if (!resp.success) { out.textContent = resp.error || 'Failed to add client'; return; }
             bootstrap.Modal.getInstance(document.getElementById('addClientModal')).hide();
             renderClients();
+            updateDashboardStats();
         }
 
         async function saveClientRow(id, btn) {
@@ -913,13 +945,13 @@
             }
 
             const resp = await apiRequest(`${API_BASE}/admin/clients.php`, 'DELETE', { id });
-            if (!resp.success) {
+            if (resp.success) {
+                alert('Client deleted successfully');
+                renderClients();
+                updateDashboardStats();
+            } else {
                 alert(resp.error || 'Delete failed');
-                return;
             }
-
-            alert('Client deleted successfully');
-            renderClients();
         }
 
         async function deleteProject(id, title) {
@@ -2769,6 +2801,9 @@
 
         // Add event listeners for real-time preview updates
         document.addEventListener('DOMContentLoaded', () => {
+            // Update dashboard stats on load
+            updateDashboardStats();
+
             // Add event listeners for company settings preview updates
             const previewFields = ['cs_company_name', 'cs_company_email', 'cs_company_phone', 'cs_logo_url'];
             previewFields.forEach(fieldId => {
