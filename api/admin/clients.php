@@ -68,7 +68,7 @@ switch ($method) {
         break;
     case 'DELETE':
         // Delete client
-        parse_str(file_get_contents('php://input'), $data);
+        $data = json_decode(file_get_contents('php://input'), true);
         if (!$data['id']) {
             echo json_encode(['success' => false, 'error' => 'Client ID required.']);
             exit;
