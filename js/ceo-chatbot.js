@@ -56,12 +56,12 @@ class CEOChatbot {
             <button class="chat-toggle-btn" title="Click here to chat with our support team">
                 <div class="toggle-content">
                     <span class="toggle-icon">💬</span>
-                    <span class="toggle-text">Need Help?</span>
+                
                 </div>
             </button>
         `;
         document.body.appendChild(widget);
-        
+
         // Store references to elements
         this.elements = {
             widget: widget,
@@ -80,10 +80,10 @@ class CEOChatbot {
         // Toggle chat
         this.elements.toggleBtn.addEventListener('click', () => this.toggleChat());
         this.elements.minimizeBtn.addEventListener('click', () => this.toggleChat());
-        
+
         // Send message on button click
         this.elements.sendBtn.addEventListener('click', () => this.sendMessage());
-        
+
         // Send message on Enter (but allow Shift+Enter for new line)
         this.elements.input.addEventListener('keypress', (e) => {
             if (e.key === 'Enter' && !e.shiftKey) {
@@ -91,15 +91,15 @@ class CEOChatbot {
                 this.sendMessage();
             }
         });
-        
+
         // Auto-resize textarea
         this.elements.input.addEventListener('input', () => {
             this.adjustTextareaHeight();
         });
-        
+
         // File upload
         this.elements.fileInput.addEventListener('change', (e) => this.handleFileUpload(e));
-        
+
         // Close when clicking outside
         document.addEventListener('click', (e) => {
             if (this.isOpen && !this.elements.widget.contains(e.target) && !e.target.closest('.ceo-chatbot-widget')) {
@@ -123,7 +123,7 @@ class CEOChatbot {
     showWelcomeMessage() {
         const welcomeMessage = `Hi! I'm a Support Agent here to help. 👋 Need assistance? I'm available to chat with you right now!`;
         this.addMessage('ceo', welcomeMessage, true);
-        
+
         // Show quick options
         setTimeout(() => {
             this.showQuickOptions();
@@ -157,7 +157,7 @@ class CEOChatbot {
 
         const optionsContainer = document.createElement('div');
         optionsContainer.className = 'quick-options';
-        
+
         options.forEach(option => {
             const button = document.createElement('button');
             button.className = 'quick-option';
@@ -220,10 +220,10 @@ class CEOChatbot {
     addMessage(sender, message, isTyping = false, customContent = null) {
         const messageDiv = document.createElement('div');
         messageDiv.className = `message ${sender}-message`;
-        
+
         const messageContent = document.createElement('div');
         messageContent.className = 'message-content';
-        
+
         if (customContent) {
             messageContent.appendChild(customContent);
         } else if (isTyping) {
@@ -232,11 +232,11 @@ class CEOChatbot {
         } else {
             messageContent.textContent = message;
         }
-        
+
         messageDiv.appendChild(messageContent);
         this.elements.messages.appendChild(messageDiv);
         this.scrollToBottom();
-        
+
         // Add to chat history
         this.chatHistory.push({ sender, message, timestamp: new Date() });
     }
