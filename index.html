@@ -671,6 +671,12 @@ results that add real value to your business. Let's turn your vision into impact
 					</svg>
 				</button>
 
+				<!-- Quick Login Fields -->
+				<div class="navbar-login-fields">
+					<input type="text" placeholder="Username" class="nav-login-input">
+					<input type="password" placeholder="Password" class="nav-login-input">
+				</div>
+
 				<!-- Login Button -->
 				<a href="login-products.html" class="navbar-btn-primary" title="Login">
 					<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -900,6 +906,30 @@ results that add real value to your business. Let's turn your vision into impact
 			box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
 		}
 
+		/* Quick Login Fields Styling */
+		.navbar-login-fields {
+			display: flex;
+			gap: 8px;
+			align-items: center;
+		}
+
+		.nav-login-input {
+			width: 120px;
+			padding: 8px 12px;
+			border: 1px solid rgba(0, 0, 0, 0.1);
+			border-radius: 1px;
+			font-size: 13px;
+			background: rgba(255, 255, 255, 0.8);
+			outline: none;
+			transition: all 0.3s ease;
+		}
+
+		.nav-login-input:focus {
+			border-color: #0755E9;
+			background: #fff;
+			box-shadow: 0 0 0 3px rgba(7, 85, 233, 0.1);
+		}
+
 		.navbar-btn-primary:active {
 			transform: translateY(0);
 		}
@@ -995,7 +1025,8 @@ results that add real value to your business. Let's turn your vision into impact
 				margin: 0;
 			}
 
-			.navbar-btn-primary span {
+			.navbar-btn-primary span,
+			.navbar-login-fields {
 				display: none;
 			}
 
@@ -1364,7 +1395,8 @@ results that add real value to your business. Let's turn your vision into impact
 			<div class="container">
 				<div class="insights-header">
 					<h2 class="section-title">Latest News</h2>
-					<a href="Blog/blog.html" class="see-more-link">See more news and events <i class="fas fa-arrow-right"></i></a>
+					<a href="Blog/blog.html" class="see-more-link">See more news and events <i
+							class="fas fa-arrow-right"></i></a>
 				</div>
 				<div class="metrics-grid">
 					<!-- Companies logos removed as requested -->
@@ -1386,7 +1418,9 @@ results that add real value to your business. Let's turn your vision into impact
 									</div>
 									<h3>SCL Digital Agency Launches Revolutionary AI-Powered Development Platform</h3>
 									<p>
-										Our cutting-edge AI platform transforms how businesses build and deploy digital solutions, reducing development time by 60% while maintaining enterprise-grade quality and security standards.
+										Our cutting-edge AI platform transforms how businesses build and deploy digital
+										solutions, reducing development time by 60% while maintaining enterprise-grade
+										quality and security standards.
 									</p>
 									<div class="insight-buttons">
 										<a href="#" class="btn-learn-more">read more</a>
@@ -1405,9 +1439,12 @@ results that add real value to your business. Let's turn your vision into impact
 										<span class="news-date">March 12, 2025</span>
 										<span class="news-read-time">15 min read</span>
 									</div>
-									<h3>Strategic Partnership Announcement: SCL Digital Agency Teams Up with Global Tech Leader</h3>
+									<h3>Strategic Partnership Announcement: SCL Digital Agency Teams Up with Global Tech
+										Leader</h3>
 									<p>
-										We're excited to announce our groundbreaking partnership with a leading global technology company, bringing advanced cloud solutions and AI integration to African businesses.
+										We're excited to announce our groundbreaking partnership with a leading global
+										technology company, bringing advanced cloud solutions and AI integration to
+										African businesses.
 									</p>
 									<div class="insight-buttons">
 										<a href="#" class="btn-learn-more">read more</a>
@@ -1425,9 +1462,12 @@ results that add real value to your business. Let's turn your vision into impact
 										<span class="news-date">March 10, 2025</span>
 										<span class="news-read-time">18 min read</span>
 									</div>
-									<h3>Industry Recognition: SCL Digital Agency Wins Innovation Excellence Award 2025</h3>
+									<h3>Industry Recognition: SCL Digital Agency Wins Innovation Excellence Award 2025
+									</h3>
 									<p>
-										We're honored to receive the prestigious Innovation Excellence Award for our transformative digital solutions that are reshaping how African businesses leverage technology for growth.
+										We're honored to receive the prestigious Innovation Excellence Award for our
+										transformative digital solutions that are reshaping how African businesses
+										leverage technology for growth.
 									</p>
 									<div class="insight-buttons">
 										<a href="#" class="btn-learn-more">read more</a>
@@ -1442,10 +1482,10 @@ results that add real value to your business. Let's turn your vision into impact
 
 
 
-				<div class="insights-cta">
+							<div class="insights-cta">
 
-				</div>
-			</div>
+							</div>
+						</div>
 		</section>
 
 		<!-- Insights Carousel Scripts and Styles -->

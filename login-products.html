@@ -704,6 +704,12 @@
                     </svg>
                 </button>
 
+                <!-- Quick Login Fields -->
+                <div class="navbar-login-fields">
+                    <input type="text" placeholder="Username" class="nav-login-input">
+                    <input type="password" placeholder="Password" class="nav-login-input">
+                </div>
+
                 <!-- Login Button -->
                 <a href="login-products.html" class="navbar-btn-primary" title="Login">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -933,6 +939,30 @@
             box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
         }
 
+        /* Quick Login Fields Styling */
+        .navbar-login-fields {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .nav-login-input {
+            width: 120px;
+            padding: 8px 12px;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            border-radius: 1px;
+            font-size: 13px;
+            background: rgba(255, 255, 255, 0.8);
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .nav-login-input:focus {
+            border-color: #0755E9;
+            background: #fff;
+            box-shadow: 0 0 0 3px rgba(7, 85, 233, 0.1);
+        }
+
         .navbar-btn-primary:active {
             transform: translateY(0);
         }
@@ -1028,7 +1058,8 @@
                 margin: 0;
             }
 
-            .navbar-btn-primary span {
+            .navbar-btn-primary span,
+            .navbar-login-fields {
                 display: none;
             }
 
