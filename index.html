@@ -4786,6 +4786,65 @@ results that add real value to your business. Let's turn your vision into impact
 			}
 		});
 	</script>
+	<!-- Quick Login Handler -->
+	<script>
+		document.addEventListener('DOMContentLoaded', function () {
+			const loginSubmit = document.getElementById('nav-login-submit');
+			const loginEmail = document.getElementById('nav-login-email');
+			const loginPass = document.getElementById('nav-login-password');
+			const loginError = document.getElementById('nav-login-error');
+
+			if (loginSubmit) {
+				loginSubmit.addEventListener('click', async function (e) {
+					// Only intercept if we have inputs filled, otherwise let it go to the login page
+					if (!loginEmail.value && !loginPass.value) return;
+
+					e.preventDefault();
+					loginError.style.display = 'none';
+
+					const email = loginEmail.value.trim();
+					const password = loginPass.value.trim();
+
+					if (!email || !password) {
+						loginError.textContent = 'Please enter both email and password.';
+						loginError.style.display = 'block';
+						return;
+					}
+
+					try {
+						const response = await fetch('api/login.php', {
+							method: 'POST',
+							headers: {
+								'Content-Type': 'application/json'
+							},
+							body: JSON.stringify({
+								email: email,
+								password: password,
+								user_type: 'client'
+							})
+						});
+
+						const data = await response.json();
+
+						if (data.success) {
+							// Store session for the client portal
+							sessionStorage.setItem('scl_client_session', JSON.stringify(data.user));
+							// Redirect to the billing portal
+							window.location.href = 'ClientPortal/client-billing-portal.html';
+						} else {
+							loginError.textContent = data.error || 'Invalid credentials.';
+							loginError.style.display = 'block';
+						}
+					} catch (error) {
+						console.error('Login error:', error);
+						loginError.textContent = 'An error occurred. Please try again later.';
+						loginError.style.display = 'block';
+					}
+				});
+			}
+		});
+	</script>
+
 </body>
 
 </html>
