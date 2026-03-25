@@ -706,12 +706,14 @@
 
                 <!-- Quick Login Fields -->
                 <div class="navbar-login-fields">
-                    <input type="text" placeholder="Username" class="nav-login-input">
-                    <input type="password" placeholder="Password" class="nav-login-input">
+                    <input type="email" id="nav-login-email" placeholder="Email" class="nav-login-input">
+                    <input type="password" id="nav-login-password" placeholder="Password" class="nav-login-input">
+                    <span id="nav-login-error"
+                        style="color: #ff4d4d; font-size: 11px; display: none; position: absolute; top: 100%; right: 130px; white-space: nowrap;"></span>
                 </div>
 
                 <!-- Login Button -->
-                <a href="login-products.html" class="navbar-btn-primary" title="Login">
+                <a href="login-products.html" id="nav-login-submit" class="navbar-btn-primary" title="Login">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <rect x="3" y="11" width="18" height="10" rx="2" ry="2"></rect>
                         <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
@@ -926,7 +928,7 @@
             background: linear-gradient(135deg, #0755E9 0%, #0755E9 100%);
             color: white;
             border: none;
-            border-radius: 1px;
+            border-radius: 100px;
             font-weight: 600;
             font-size: 14px;
             cursor: pointer;
@@ -950,7 +952,7 @@
             width: 120px;
             padding: 8px 12px;
             border: 1px solid rgba(0, 0, 0, 0.1);
-            border-radius: 1px;
+            border-radius: 100px;
             font-size: 13px;
             background: rgba(255, 255, 255, 0.8);
             outline: none;
@@ -1122,6 +1124,73 @@
                     link.classList.add('active');
                 }
             });
+
+            // Navbar Login Logic
+            const loginSubmit = document.getElementById('nav-login-submit');
+            const emailInput = document.getElementById('nav-login-email');
+            const passwordInput = document.getElementById('nav-login-password');
+            const errorSpan = document.getElementById('nav-login-error');
+
+            if (loginSubmit) {
+                loginSubmit.addEventListener('click', async function (e) {
+                    const email = emailInput.value.trim();
+                    const password = passwordInput.value.trim();
+
+                    // If fields are empty, let the default link behavior happen
+                    if (!email && !password) return;
+
+                    // Otherwise, prevent default and attempt login
+                    e.preventDefault();
+
+                    if (!email || !password) {
+                        showLoginError('Email and password required');
+                        return;
+                    }
+
+                    try {
+                        loginSubmit.style.opacity = '0.7';
+                        loginSubmit.style.pointerEvents = 'none';
+                        errorSpan.style.display = 'none';
+
+                        const response = await fetch('api/login.php', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ email, password, user_type: 'client' })
+                        });
+
+                        const data = await response.json();
+
+                        if (data.success) {
+                            // Success: Redirect to Client Portal
+                            window.location.href = 'ClientPortal/client-billing-portal.html';
+                        } else {
+                            // Failure: Show error
+                            showLoginError(data.error || 'Invalid credentials');
+                        }
+                    } catch (err) {
+                        showLoginError('Connection error');
+                        console.error('Login error:', err);
+                    } finally {
+                        loginSubmit.style.opacity = '1';
+                        loginSubmit.style.pointerEvents = 'auto';
+                    }
+                });
+
+                // Allow pressing Enter to submit
+                [emailInput, passwordInput].forEach(input => {
+                    input.addEventListener('keypress', (e) => {
+                        if (e.key === 'Enter') loginSubmit.click();
+                    });
+                });
+            }
+
+            function showLoginError(msg) {
+                errorSpan.textContent = msg;
+                errorSpan.style.display = 'block';
+                setTimeout(() => {
+                    errorSpan.style.display = 'none';
+                }, 5000);
+            }
         });
     </script>
 
