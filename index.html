@@ -1126,7 +1126,9 @@ results that add real value to your business. Let's turn your vision into impact
 						const data = await response.json();
 
 						if (data.success) {
-							// Success: Redirect to Client Portal
+							// Success: Store user data for seamless handoff to the portal
+							sessionStorage.setItem('scl_client_session', JSON.stringify(data.user));
+							// Redirect to Client Portal
 							window.location.href = 'ClientPortal/client-billing-portal.html';
 						} else {
 							// Failure: Show error

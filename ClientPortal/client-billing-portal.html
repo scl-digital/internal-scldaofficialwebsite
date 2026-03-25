@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,14 +15,14 @@
             font-style: normal;
             font-display: swap;
         }
-        
+
         body {
             font-family: scldafont;
             background: url('background-image.png') no-repeat center center fixed;
             background-size: cover;
             min-height: 100vh;
         }
-        
+
         .login-container {
             min-height: 100vh;
             display: flex;
@@ -29,7 +30,7 @@
             justify-content: center;
             padding: 20px;
         }
-        
+
         .login-card {
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
@@ -39,25 +40,25 @@
             width: 100%;
             max-width: 400px;
         }
-        
+
         .dashboard {
-            display: none;
+            display: block;
             background: rgba(248, 250, 252, 0.95);
             min-height: 100vh;
         }
-        
+
         .navbar {
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
-        
+
         .sidebar {
             background: linear-gradient(135deg, #1e348d, #2563eb);
             min-height: calc(100vh - 76px);
             padding: 1.5rem 1rem;
         }
-        
+
         .nav-link {
             color: #cbd5e1;
             border-radius: 8px;
@@ -68,12 +69,13 @@
             align-items: center;
             gap: 10px;
         }
-        
-        .nav-link.active, .nav-link:hover {
+
+        .nav-link.active,
+        .nav-link:hover {
             background: rgba(255, 255, 255, 0.15);
             color: #fff;
         }
-        
+
         .billing-card {
             background: white;
             border-radius: 12px;
@@ -82,7 +84,7 @@
             border: 1px solid #e2e8f0;
             margin-bottom: 1.5rem;
         }
-        
+
         .balance-card {
             background: linear-gradient(135deg, #1e348d, #2563eb);
             color: white;
@@ -91,20 +93,20 @@
             text-align: center;
             margin-bottom: 2rem;
         }
-        
+
         .balance-amount {
             font-size: 3rem;
             font-weight: 700;
             margin-bottom: 0.5rem;
         }
-        
+
         .next-payment {
             background: rgba(255, 255, 255, 0.1);
             border-radius: 8px;
             padding: 1rem;
             margin-top: 1rem;
         }
-        
+
         .status-badge {
             padding: 4px 12px;
             border-radius: 20px;
@@ -112,11 +114,22 @@
             font-weight: 600;
             text-transform: uppercase;
         }
-        
-        .status-paid { background: #d1fae5; color: #059669; }
-        .status-pending { background: #fef3c7; color: #d97706; }
-        .status-overdue { background: #fee2e2; color: #dc2626; }
-        
+
+        .status-paid {
+            background: #d1fae5;
+            color: #059669;
+        }
+
+        .status-pending {
+            background: #fef3c7;
+            color: #d97706;
+        }
+
+        .status-overdue {
+            background: #fee2e2;
+            color: #dc2626;
+        }
+
         .payment-method-card {
             border: 2px solid #e2e8f0;
             border-radius: 12px;
@@ -126,17 +139,17 @@
             transition: all 0.3s ease;
             margin-bottom: 1rem;
         }
-        
+
         .payment-method-card:hover {
             border-color: #1e348d;
             background: #f8fafc;
         }
-        
+
         .payment-method-card.selected {
             border-color: #1e348d;
             background: #f0f4ff;
         }
-        
+
         .btn-primary {
             background: linear-gradient(135deg, #1e348d, #2563eb);
             border: none;
@@ -144,18 +157,20 @@
             padding: 12px 24px;
             font-weight: 500;
         }
-        
+
         .btn-primary:hover {
             transform: translateY(-1px);
             box-shadow: 0 4px 12px rgba(30, 52, 141, 0.3);
         }
     </style>
     <!-- Google Translate API -->
-    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    <script type="text/javascript"
+        src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </head>
+
 <body>
     <!-- Login Screen -->
-    <div id="loginScreen" class="login-container">
+    <div id="loginScreen" class="login-container" style="display: none;">
         <div class="login-card">
             <div class="text-center mb-4">
                 <img src="SCL_Blue.png" style="width: 60%;" alt="SCL Digital">
@@ -252,7 +267,8 @@
                             <div class="row mb-4">
                                 <div class="col-md-4 mb-3">
                                     <div class="billing-card text-center">
-                                        <i class="bi bi-credit-card-2-front" style="font-size: 2rem; color: #1e348d;"></i>
+                                        <i class="bi bi-credit-card-2-front"
+                                            style="font-size: 2rem; color: #1e348d;"></i>
                                         <h5 class="mt-3">Make Payment</h5>
                                         <p class="text-muted">Pay your outstanding balance</p>
                                         <button class="btn btn-primary" onclick="loadTab('payments')">Pay Now</button>
@@ -263,7 +279,8 @@
                                         <i class="bi bi-file-earmark-text" style="font-size: 2rem; color: #059669;"></i>
                                         <h5 class="mt-3">View Invoices</h5>
                                         <p class="text-muted">Download and view invoices</p>
-                                        <button class="btn btn-outline-primary" onclick="loadTab('invoices')">View All</button>
+                                        <button class="btn btn-outline-primary" onclick="loadTab('invoices')">View
+                                            All</button>
                                     </div>
                                 </div>
                                 <div class="col-md-4 mb-3">
@@ -280,7 +297,8 @@
                             <div class="billing-card">
                                 <div class="d-flex justify-content-between align-items-center mb-3">
                                     <h5><i class="bi bi-clock-history"></i> Recent Invoices</h5>
-                                    <button class="btn btn-sm btn-outline-primary" onclick="loadTab('invoices')">View All</button>
+                                    <button class="btn btn-sm btn-outline-primary" onclick="loadTab('invoices')">View
+                                        All</button>
                                 </div>
                                 <div class="table-responsive">
                                     <table class="table table-hover">
@@ -309,8 +327,10 @@
                                                 <td>R 5,250.00</td>
                                                 <td><span class="status-badge status-pending">Pending</span></td>
                                                 <td>
-                                                    <button class="btn btn-sm btn-primary" onclick="payInvoice('INV-2024-002')">Pay Now</button>
-                                                    <button class="btn btn-sm btn-outline-secondary">Download PDF</button>
+                                                    <button class="btn btn-sm btn-primary"
+                                                        onclick="payInvoice('INV-2024-002')">Pay Now</button>
+                                                    <button class="btn btn-sm btn-outline-secondary">Download
+                                                        PDF</button>
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -358,7 +378,7 @@
                                     <i class="bi bi-plus-circle"></i> Add Website
                                 </button>
                             </div>
-                            
+
                             <div class="row" id="websitesGrid">
                                 <div class="col-md-6 mb-3">
                                     <div class="billing-card">
@@ -379,16 +399,18 @@
                                             <span>September 15, 2024</span>
                                         </div>
                                         <div class="d-flex gap-2">
-                                            <button class="btn btn-sm btn-outline-primary" onclick="visitWebsite('https://example.com')">
+                                            <button class="btn btn-sm btn-outline-primary"
+                                                onclick="visitWebsite('https://example.com')">
                                                 <i class="bi bi-box-arrow-up-right"></i> Visit
                                             </button>
-                                            <button class="btn btn-sm btn-outline-secondary" onclick="manageWebsite('example.com')">
+                                            <button class="btn btn-sm btn-outline-secondary"
+                                                onclick="manageWebsite('example.com')">
                                                 <i class="bi bi-gear"></i> Manage
                                             </button>
                                         </div>
                                     </div>
                                 </div>
-                                
+
                                 <div class="col-md-6 mb-3">
                                     <div class="billing-card">
                                         <div class="d-flex justify-content-between align-items-start mb-3">
@@ -408,10 +430,12 @@
                                             <span>September 20, 2024</span>
                                         </div>
                                         <div class="d-flex gap-2">
-                                            <button class="btn btn-sm btn-outline-primary" onclick="visitWebsite('https://staging.example.com')">
+                                            <button class="btn btn-sm btn-outline-primary"
+                                                onclick="visitWebsite('https://staging.example.com')">
                                                 <i class="bi bi-box-arrow-up-right"></i> Visit
                                             </button>
-                                            <button class="btn btn-sm btn-outline-secondary" onclick="manageWebsite('staging.example.com')">
+                                            <button class="btn btn-sm btn-outline-secondary"
+                                                onclick="manageWebsite('staging.example.com')">
                                                 <i class="bi bi-gear"></i> Manage
                                             </button>
                                         </div>
@@ -428,7 +452,7 @@
                                     <i class="bi bi-plus-circle"></i> Register Domain
                                 </button>
                             </div>
-                            
+
                             <div class="billing-card mb-4">
                                 <h5><i class="bi bi-info-circle"></i> Domain Overview</h5>
                                 <div class="row" id="domainStats">
@@ -492,7 +516,7 @@
                                     <i class="bi bi-plus-circle"></i> Add Email Account
                                 </button>
                             </div>
-                            
+
                             <div class="billing-card mb-4">
                                 <h5><i class="bi bi-info-circle"></i> Email Overview</h5>
                                 <div class="row">
@@ -542,16 +566,18 @@
                                             <span>September 20, 2024</span>
                                         </div>
                                         <div class="d-flex gap-2">
-                                            <button class="btn btn-sm btn-outline-primary" onclick="accessEmail('admin@example.com')">
+                                            <button class="btn btn-sm btn-outline-primary"
+                                                onclick="accessEmail('admin@example.com')">
                                                 <i class="bi bi-box-arrow-in-right"></i> Access
                                             </button>
-                                            <button class="btn btn-sm btn-outline-secondary" onclick="manageEmail('admin@example.com')">
+                                            <button class="btn btn-sm btn-outline-secondary"
+                                                onclick="manageEmail('admin@example.com')">
                                                 <i class="bi bi-gear"></i> Manage
                                             </button>
                                         </div>
                                     </div>
                                 </div>
-                                
+
                                 <div class="col-md-6 mb-3">
                                     <div class="billing-card">
                                         <div class="d-flex justify-content-between align-items-start mb-3">
@@ -570,16 +596,18 @@
                                             <span>September 19, 2024</span>
                                         </div>
                                         <div class="d-flex gap-2">
-                                            <button class="btn btn-sm btn-outline-primary" onclick="accessEmail('support@example.com')">
+                                            <button class="btn btn-sm btn-outline-primary"
+                                                onclick="accessEmail('support@example.com')">
                                                 <i class="bi bi-box-arrow-in-right"></i> Access
                                             </button>
-                                            <button class="btn btn-sm btn-outline-secondary" onclick="manageEmail('support@example.com')">
+                                            <button class="btn btn-sm btn-outline-secondary"
+                                                onclick="manageEmail('support@example.com')">
                                                 <i class="bi bi-gear"></i> Manage
                                             </button>
                                         </div>
                                     </div>
                                 </div>
-                                
+
                                 <div class="col-md-6 mb-3">
                                     <div class="billing-card">
                                         <div class="d-flex justify-content-between align-items-start mb-3">
@@ -598,10 +626,12 @@
                                             <span>August 15, 2024</span>
                                         </div>
                                         <div class="d-flex gap-2">
-                                            <button class="btn btn-sm btn-outline-warning" onclick="reactivateEmail('info@example.com')">
+                                            <button class="btn btn-sm btn-outline-warning"
+                                                onclick="reactivateEmail('info@example.com')">
                                                 <i class="bi bi-arrow-clockwise"></i> Reactivate
                                             </button>
-                                            <button class="btn btn-sm btn-outline-secondary" onclick="manageEmail('info@example.com')">
+                                            <button class="btn btn-sm btn-outline-secondary"
+                                                onclick="manageEmail('info@example.com')">
                                                 <i class="bi bi-gear"></i> Manage
                                             </button>
                                         </div>
@@ -627,7 +657,7 @@
                     <div class="text-center mb-4">
                         <h4>Amount Due: <span class="text-primary">R 5,250.00</span></h4>
                     </div>
-                    
+
                     <h6>Select Payment Method:</h6>
                     <div class="row">
                         <div class="col-md-6 mb-3">
@@ -645,7 +675,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="d-grid">
                         <button class="btn btn-primary btn-lg" onclick="processPayment()">
                             <i class="bi bi-shield-check"></i> Proceed to Secure Payment
@@ -679,19 +709,19 @@
         const API_BASE = '../api';
 
         let currentUser = null;
-        
+
         // Login functionality
-        document.getElementById('loginForm').addEventListener('submit', async function(e) {
+        document.getElementById('loginForm').addEventListener('submit', async function (e) {
             e.preventDefault();
             const email = document.getElementById('email').value.trim();
             const password = document.getElementById('password').value.trim();
             try {
                 const resp = await apiRequest(`${API_BASE}/login.php`, 'POST', { email, password, user_type: 'client' });
-                if (!resp.success) { 
+                if (!resp.success) {
                     const errorMsg = resp.error || 'Invalid credentials';
                     const debugInfo = resp.debug ? '\nDebug: ' + JSON.stringify(resp.debug, null, 2) : '';
-                    document.getElementById('loginError').textContent = errorMsg + debugInfo; 
-                    return; 
+                    document.getElementById('loginError').textContent = errorMsg + debugInfo;
+                    return;
                 }
                 currentUser = resp.user;
                 document.getElementById('clientName').textContent = currentUser.name || currentUser.email;
@@ -703,19 +733,38 @@
             }
         });
 
+        // Automatic Login Check (for seamless handoff from navbar)
+        document.addEventListener('DOMContentLoaded', async function () {
+            const sessionData = sessionStorage.getItem('scl_client_session');
+            if (sessionData) {
+                try {
+                    currentUser = JSON.parse(sessionData);
+                    if (currentUser && currentUser.id) {
+                        document.getElementById('clientName').textContent = currentUser.name || currentUser.email;
+                        document.getElementById('loginScreen').style.display = 'none';
+                        document.getElementById('dashboard').style.display = 'block';
+                        await loadClientSummary();
+                    }
+                } catch (e) {
+                    console.error('Session handoff error:', e);
+                    sessionStorage.removeItem('scl_client_session');
+                }
+            }
+        });
+
         // Show DB health badge
-        (async function(){
+        (async function () {
             try {
                 const res = await fetch(`${API_BASE}/health.php`, { headers: { 'Content-Type': 'application/json' } });
                 const text = await res.text();
                 let ok = false; let msg = '';
                 try { const j = JSON.parse(text); ok = !!(j && j.success && j.db_connected); msg = ok ? 'Connected' : 'Not connected'; }
-                catch(e){ msg = 'Non-JSON'; }
+                catch (e) { msg = 'Non-JSON'; }
                 const badge = document.createElement('div');
                 badge.className = 'text-center mt-2';
                 badge.innerHTML = ok ? '<span class="badge bg-success">DB Connected</span>' : '<span class="badge bg-danger">DB Not Connected</span>';
                 document.getElementById('loginForm').appendChild(badge);
-            } catch(e){}
+            } catch (e) { }
         })();
 
         async function loadClientSummary() {
@@ -744,7 +793,7 @@
                 });
             }
         }
-        
+
         function logout() {
             if (confirm('Are you sure you want to logout?')) {
                 currentUser = null;
@@ -752,23 +801,23 @@
                 document.getElementById('dashboard').style.display = 'none';
             }
         }
-        
+
         function loadTab(tabName) {
             // Update active nav
             document.querySelectorAll('.nav-link').forEach(link => {
                 link.classList.remove('active');
             });
             document.querySelector(`[onclick="loadTab('${tabName}')"]`).classList.add('active');
-            
+
             // Hide all content panels
             document.getElementById('billingContent').style.display = 'none';
             document.getElementById('websitesContent').style.display = 'none';
             document.getElementById('domainsContent').style.display = 'none';
             document.getElementById('emailsContent').style.display = 'none';
-            
+
             // Load content based on tab
             const content = document.getElementById('mainContent');
-            
+
             if (tabName === 'billing') {
                 document.getElementById('billingContent').style.display = 'block';
                 loadClientSummary();
@@ -797,49 +846,49 @@
                 `;
             }
         }
-        
+
         function showPaymentModal() {
             const modal = new bootstrap.Modal(document.getElementById('paymentModal'));
             modal.show();
         }
-        
+
         function payInvoice(invoiceId) {
             showPaymentModal();
         }
-        
+
         function selectPaymentMethod(method) {
             document.querySelectorAll('.payment-method-card').forEach(card => {
                 card.classList.remove('selected');
             });
             event.currentTarget.classList.add('selected');
         }
-        
+
         function processPayment() {
             alert('Redirecting to secure payment gateway...\n\nThis would integrate with PayFast, Stripe, or PayPal APIs for actual payment processing.');
         }
-        
+
         function setupAutoPay() {
             alert('Auto-Pay Setup - This would configure automatic monthly payments for the client.');
         }
-        
+
         // Websites Panel Functions
         function loadWebsites() {
             // This would load websites from API
             console.log('Loading websites...');
         }
-        
+
         function addWebsite() {
             alert('Add Website - This would open a form to add a new website.');
         }
-        
+
         function visitWebsite(url) {
             window.open(url, '_blank');
         }
-        
+
         function manageWebsite(domain) {
             alert(`Manage Website: ${domain} - This would open website management tools.`);
         }
-        
+
         // Domains Panel Functions
         async function loadDomains() {
             console.log('🔄 Loading domains...');
@@ -847,20 +896,20 @@
                 // Get client ID from session or use a default for demo
                 const clientId = getCurrentClientId() || 1; // Default to client ID 1 for demo
                 console.log('👤 Client ID:', clientId);
-                
+
                 const apiUrl = `../api/domains_public.php?client_id=${clientId}`;
                 console.log('🌐 API URL:', apiUrl);
-                
+
                 const response = await fetch(apiUrl);
                 console.log('📡 Response status:', response.status);
-                
+
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
-                
+
                 const data = await response.json();
                 console.log('📊 API Response:', data);
-                
+
                 if (data.success) {
                     console.log('✅ Domains loaded successfully:', data.data.length, 'domains');
                     displayClientDomains(data.data);
@@ -884,12 +933,12 @@
         function displayClientDomains(domains) {
             console.log('🎨 Displaying domains:', domains);
             const tbody = document.getElementById('domainsTableBody');
-            
+
             if (!tbody) {
                 console.error('❌ domainsTableBody element not found!');
                 return;
             }
-            
+
             if (domains.length === 0) {
                 tbody.innerHTML = `
                     <tr>
@@ -914,10 +963,10 @@
                     </td>
                     <td>${domain.expiry_date ? new Date(domain.expiry_date).toLocaleDateString() : 'N/A'}</td>
                     <td>
-                        ${domain.auto_renewal ? 
-                            '<i class="bi bi-check-circle text-success"></i> Enabled' : 
-                            '<i class="bi bi-x-circle text-danger"></i> Disabled'
-                        }
+                        ${domain.auto_renewal ?
+                    '<i class="bi bi-check-circle text-success"></i> Enabled' :
+                    '<i class="bi bi-x-circle text-danger"></i> Disabled'
+                }
                     </td>
                     <td>
                         <button class="btn btn-sm btn-outline-primary" onclick="manageDomain('${domain.domain_name}')">
@@ -972,44 +1021,44 @@
                     </td>
                 </tr>
             `;
-            
+
             // Update stats with fallback data
             document.getElementById('activeDomainsCount').textContent = '1';
             document.getElementById('autoRenewalCount').textContent = '1';
             document.getElementById('expiringSoonCount').textContent = '1';
             document.getElementById('pendingCount').textContent = '0';
         }
-        
+
         function registerDomain() {
             alert('Register Domain - This would open a domain registration form.');
         }
-        
+
         function manageDomain(domain) {
             alert(`Manage Domain: ${domain} - This would open domain management tools.`);
         }
-        
+
         function renewDomain(domain) {
             alert(`Renew Domain: ${domain} - This would process domain renewal.`);
         }
-        
+
         // Email Panel Functions
         function loadEmails() {
             // This would load email accounts from API
             console.log('Loading email accounts...');
         }
-        
+
         function addEmailAccount() {
             alert('Add Email Account - This would open a form to create a new email account.');
         }
-        
+
         function accessEmail(email) {
             alert(`Access Email: ${email} - This would open webmail interface.`);
         }
-        
+
         function manageEmail(email) {
             alert(`Manage Email: ${email} - This would open email management tools.`);
         }
-        
+
         function reactivateEmail(email) {
             alert(`Reactivate Email: ${email} - This would reactivate the suspended email account.`);
         }
@@ -1238,7 +1287,7 @@
             <i class="fa-solid fa-language"></i>
             <span>Translate</span>
         </div>
-        
+
         <div class="translator-dropdown" id="translatorDropdown">
             <div class="translator-header">
                 <h4>Choose Language</h4>
@@ -1246,10 +1295,10 @@
                     <i class="fa-solid fa-times"></i>
                 </button>
             </div>
-            
+
             <!-- Google Translate Element -->
             <div id="google_translate_element"></div>
-            
+
             <div class="translator-footer">
                 <button class="reset-btn" id="resetBtn">
                     <i class="fa-solid fa-undo"></i>
@@ -1422,4 +1471,5 @@
     </script>
 
 </body>
+
 </html>
