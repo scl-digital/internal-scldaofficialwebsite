@@ -169,30 +169,6 @@
 </head>
 
 <body>
-    <!-- Login Screen -->
-    <div id="loginScreen" class="login-container" style="display: none;">
-        <div class="login-card">
-            <div class="text-center mb-4">
-                <img src="SCL_Blue.png" style="width: 60%;" alt="SCL Digital">
-            </div>
-            <h2 class="text-center mb-4" style="color: #1e348d;">Client Billing Portal</h2>
-            <form id="loginForm">
-                <div class="mb-3">
-                    <label for="email" class="form-label">Email Address</label>
-                    <input type="email" class="form-control" id="email" required>
-                </div>
-                <div class="mb-3">
-                    <label for="password" class="form-label">Password</label>
-                    <input type="password" class="form-control" id="password" required>
-                </div>
-                <button type="submit" class="btn btn-primary w-100">
-                    <i class="bi bi-box-arrow-in-right"></i> Login to Portal
-                </button>
-                <div id="loginError" class="text-danger text-center mt-2"></div>
-            </form>
-        </div>
-    </div>
-
     <!-- Dashboard -->
     <div id="dashboard" class="dashboard">
         <!-- Top Navigation -->
@@ -216,22 +192,22 @@
                 <nav class="col-md-2 d-none d-md-block sidebar">
                     <div class="nav flex-column">
                         <a class="nav-link active" href="#" onclick="loadTab('billing')">
-                            <i class="bi bi-credit-card"></i> Overview
+                            <i class="bi bi-grid-1x2-fill"></i> Overview
                         </a>
                         <a class="nav-link" href="#" onclick="loadTab('invoices')">
-                            <i class="bi bi-receipt"></i> Products
+                            <i class="bi bi-box-seam-fill"></i> Products
                         </a>
                         <a class="nav-link" href="#" onclick="loadTab('payments')">
-                            <i class="bi bi-wallet2"></i> Projects
+                            <i class="bi bi-kanban"></i> Projects
                         </a>
                         <a class="nav-link" href="#" onclick="loadTab('websites')">
-                            <i class="bi bi-globe"></i> Billing
+                            <i class="bi bi-credit-card-2-front-fill"></i> Billing
                         </a>
                         <a class="nav-link" href="#" onclick="loadTab('domains')">
-                            <i class="bi bi-link-45deg"></i> Account
+                            <i class="bi bi-person-gear"></i> Account
                         </a>
                         <a class="nav-link" href="#" onclick="loadTab('emails')">
-                            <i class="bi bi-envelope"></i> Support
+                            <i class="bi bi-headset"></i> Support
                         </a>
 
                     </div>
@@ -702,29 +678,6 @@
 
         let currentUser = null;
 
-        // Login functionality
-        document.getElementById('loginForm').addEventListener('submit', async function (e) {
-            e.preventDefault();
-            const email = document.getElementById('email').value.trim();
-            const password = document.getElementById('password').value.trim();
-            try {
-                const resp = await apiRequest(`${API_BASE}/login.php`, 'POST', { email, password, user_type: 'client' });
-                if (!resp.success) {
-                    const errorMsg = resp.error || 'Invalid credentials';
-                    const debugInfo = resp.debug ? '\nDebug: ' + JSON.stringify(resp.debug, null, 2) : '';
-                    document.getElementById('loginError').textContent = errorMsg + debugInfo;
-                    return;
-                }
-                currentUser = resp.user;
-                document.getElementById('clientName').textContent = currentUser.name || currentUser.email;
-                document.getElementById('loginScreen').style.display = 'none';
-                document.getElementById('dashboard').style.display = 'block';
-                await loadClientSummary();
-            } catch (err) {
-                document.getElementById('loginError').textContent = 'Login failed: ' + err.message;
-            }
-        });
-
         // Automatic Login Check (for seamless handoff from navbar)
         document.addEventListener('DOMContentLoaded', async function () {
             const sessionData = sessionStorage.getItem('scl_client_session');
@@ -743,21 +696,6 @@
                 }
             }
         });
-
-        // Show DB health badge
-        (async function () {
-            try {
-                const res = await fetch(`${API_BASE}/health.php`, { headers: { 'Content-Type': 'application/json' } });
-                const text = await res.text();
-                let ok = false; let msg = '';
-                try { const j = JSON.parse(text); ok = !!(j && j.success && j.db_connected); msg = ok ? 'Connected' : 'Not connected'; }
-                catch (e) { msg = 'Non-JSON'; }
-                const badge = document.createElement('div');
-                badge.className = 'text-center mt-2';
-                badge.innerHTML = ok ? '<span class="badge bg-success">DB Connected</span>' : '<span class="badge bg-danger">DB Not Connected</span>';
-                document.getElementById('loginForm').appendChild(badge);
-            } catch (e) { }
-        })();
 
         async function loadClientSummary() {
             if (!currentUser || !currentUser.id) return;
@@ -789,8 +727,8 @@
         function logout() {
             if (confirm('Are you sure you want to logout?')) {
                 currentUser = null;
-                document.getElementById('loginScreen').style.display = 'flex';
-                document.getElementById('dashboard').style.display = 'none';
+                // Redirect back to homepage or show a logged out state
+                window.location.href = '../index.html';
             }
         }
 
