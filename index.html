@@ -1455,84 +1455,1356 @@ results that add real value to your business. Let's turn your vision into impact
 
 
 
+<!-- insert here the new code -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+
+<style>
+  :root {
+    --bg: #0755E9;
+    --surface: #0c0c14;
+    --border: rgba(255,255,255,0.07);
+    --accent: #c8f03c;
+    --accent-dim: rgba(200,240,60,0.12);
+    --text: #f0eee8;
+    --muted: rgba(240,238,232,0.45);
+    --faint: rgba(240,238,232,0.1);
+    --red: #ff4d3a;
+    --blue: #3a8fff;
+  }
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Syne', sans-serif;
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  /* Custom cursor */
+  .cursor {
+    width: 10px; height: 10px;
+    background: var(--accent);
+    border-radius: 50%;
+    position: fixed;
+    top: 0; left: 0;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: transform 0.1s ease, width 0.2s, height 0.2s, background 0.2s;
+    mix-blend-mode: difference;
+  }
+  .cursor-ring {
+    width: 36px; height: 36px;
+    border: 1px solid rgba(200,240,60,0.5);
+    border-radius: 50%;
+    position: fixed;
+    top: 0; left: 0;
+    pointer-events: none;
+    z-index: 9998;
+    transform: translate(-50%, -50%);
+    transition: transform 0.12s ease, opacity 0.2s;
+  }
+  body:hover .cursor { opacity: 1; }
+
+  /* Noise overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    opacity: 0.5;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 24px 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.4s, background 0.4s, backdrop-filter 0.4s;
+  }
+  nav.scrolled {
+    background: rgba(5,5,8,0.85);
+    backdrop-filter: blur(20px);
+    border-color: var(--border);
+  }
+  .nav-logo {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px;
+    letter-spacing: 0.15em;
+    color: var(--text);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .nav-logo-mark {
+    width: 28px; height: 28px;
+    background: var(--accent);
+    display: grid;
+    place-items: center;
+    font-size: 11px;
+    font-weight: 700;
+    color: #000;
+    letter-spacing: 0;
+  }
+  .nav-links {
+    display: flex;
+    gap: 36px;
+    list-style: none;
+  }
+  .nav-links a {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: color 0.2s;
+    position: relative;
+  }
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -3px; left: 0;
+    width: 0; height: 1px;
+    background: var(--accent);
+    transition: width 0.25s;
+  }
+  .nav-links a:hover { color: var(--text); }
+  .nav-links a:hover::after { width: 100%; }
+
+  .nav-cta {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #000;
+    background: var(--accent);
+    padding: 10px 22px;
+    text-decoration: none;
+    transition: opacity 0.2s, transform 0.2s;
+  }
+  .nav-cta:hover { opacity: 0.85; transform: translateY(-1px); }
+
+  /* ─── HERO ─── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 0 48px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Animated grid background */
+  .hero-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(var(--border) 1px, transparent 1px),
+      linear-gradient(90deg, var(--border) 1px, transparent 1px);
+    background-size: 80px 80px;
+    animation: gridDrift 30s linear infinite;
+    opacity: 0.6;
+  }
+  @keyframes gridDrift {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(80px); }
+  }
+
+  /* Glowing orbs */
+  .hero-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(120px);
+    opacity: 0.35;
+    animation: orbFloat 8s ease-in-out infinite;
+  }
+  .hero-orb-1 {
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, #c8f03c 0%, transparent 70%);
+    top: -200px; right: -100px;
+    animation-delay: 0s;
+  }
+  .hero-orb-2 {
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, #3a8fff 0%, transparent 70%);
+    bottom: 100px; left: -100px;
+    animation-delay: 3s;
+    opacity: 0.2;
+  }
+  @keyframes orbFloat {
+    0%, 100% { transform: translateY(0px) scale(1); }
+    50% { transform: translateY(-30px) scale(1.05); }
+  }
+
+  .hero-eyebrow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 28px;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeUp 0.8s ease 0.2s forwards;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .hero-eyebrow::before {
+    content: '';
+    display: block;
+    width: 40px; height: 1px;
+    background: var(--accent);
+  }
+
+  .hero-headline {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(64px, 9vw, 130px);
+    font-weight: 800;
+    line-height: 0.92;
+    letter-spacing: -0.03em;
+    text-transform: uppercase;
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-headline .line {
+    display: block;
+    opacity: 0;
+    transform: translateY(60px);
+    animation: fadeUp 0.9s cubic-bezier(0.16,1,0.3,1) forwards;
+  }
+  .hero-headline .line:nth-child(1) { animation-delay: 0.35s; }
+  .hero-headline .line:nth-child(2) { animation-delay: 0.5s; color: var(--accent); }
+  .hero-headline .line:nth-child(3) { animation-delay: 0.65s; }
+
+  .hero-headline em {
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    font-size: 0.9em;
+    font-weight: 400;
+  }
+
+  .hero-bottom {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-top: 60px;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeUp 0.8s ease 0.9s forwards;
+    position: relative; z-index: 1;
+  }
+
+  .hero-desc {
+    max-width: 380px;
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--muted);
+    font-weight: 400;
+  }
+
+  .hero-actions {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--accent);
+    color: #000;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 16px 32px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: transform 0.2s, box-shadow 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+  .btn-primary::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(255,255,255,0.15);
+    transform: translateX(-100%);
+    transition: transform 0.3s;
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(200,240,60,0.25); }
+  .btn-primary:hover::after { transform: translateX(0); }
+
+  .btn-ghost {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+  .btn-ghost:hover { color: var(--text); }
+
+  .hero-stat-strip {
+    position: absolute;
+    bottom: 80px;
+    right: 48px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    z-index: 1;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 1.1s forwards;
+  }
+  .stat-item {
+    text-align: right;
+    font-family: 'IBM Plex Mono', monospace;
+  }
+  .stat-item .num {
+    font-size: 28px;
+    font-weight: 300;
+    color: var(--text);
+    letter-spacing: -0.02em;
+    line-height: 1;
+  }
+  .stat-item .label {
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-top: 3px;
+  }
+
+  @keyframes fadeUp {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Scroll indicator */
+  .scroll-indicator {
+    position: absolute;
+    bottom: 32px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    color: var(--muted);
+    text-transform: uppercase;
+    animation: fadeIn 1s ease 1.5s both;
+  }
+  .scroll-line {
+    width: 1px; height: 50px;
+    background: linear-gradient(to bottom, var(--accent), transparent);
+    animation: scrollLine 1.5s ease-in-out infinite;
+  }
+  @keyframes scrollLine {
+    0%, 100% { transform: scaleY(1); opacity: 1; }
+    50% { transform: scaleY(0.5); opacity: 0.4; }
+  }
+  @keyframes fadeIn { to { opacity: 1; } }
+
+  /* ─── MARQUEE ─── */
+  .marquee-section {
+    padding: 28px 0;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    overflow: hidden;
+    background: var(--surface);
+    position: relative; z-index: 1;
+  }
+  .marquee-track {
+    display: flex;
+    gap: 0;
+    animation: marquee 22s linear infinite;
+    white-space: nowrap;
+    width: max-content;
+  }
+  .marquee-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 28px;
+    padding: 0 40px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .marquee-item span {
+    color: var(--accent);
+    font-size: 18px;
+    line-height: 1;
+  }
+  @keyframes marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  /* ─── DUAL ENGINE ─── */
+  .section {
+    padding: 120px 48px;
+    position: relative; z-index: 1;
+  }
+
+  .section-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 60px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .section-label::before {
+    content: '';
+    display: block;
+    width: 30px; height: 1px;
+    background: var(--accent);
+  }
+
+  /* Dual engine cards */
+  .dual-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    background: var(--border);
+  }
+
+  .engine-card {
+    background: var(--bg);
+    padding: 64px 56px;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.4s;
+  }
+  .engine-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--accent-color, var(--accent)), transparent);
+    opacity: 0;
+    transition: opacity 0.4s;
+  }
+  .engine-card:hover::before { opacity: 1; }
+  .engine-card:hover { background: var(--surface); }
+
+  .engine-card.blue { --accent-color: var(--blue); }
+
+  .engine-number {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    color: var(--muted);
+    margin-bottom: 36px;
+  }
+  .engine-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 42px;
+    font-weight: 700;
+    line-height: 1.05;
+    margin-bottom: 20px;
+    letter-spacing: -0.02em;
+  }
+  .engine-subtitle {
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    font-size: 18px;
+    color: var(--accent);
+    margin-bottom: 32px;
+  }
+  .engine-card.blue .engine-subtitle { color: var(--blue); }
+  .engine-desc {
+    font-size: 14px;
+    line-height: 1.8;
+    color: var(--muted);
+    max-width: 380px;
+    margin-bottom: 48px;
+  }
+  .engine-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .engine-list li {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    color: var(--muted);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--faint);
+    transition: color 0.2s;
+  }
+  .engine-list li:last-child { border-bottom: none; padding-bottom: 0; }
+  .engine-card:hover .engine-list li { color: rgba(240,238,232,0.65); }
+  .engine-list li::before {
+    content: '→';
+    color: var(--accent);
+    font-size: 14px;
+    flex-shrink: 0;
+  }
+  .engine-card.blue .engine-list li::before { color: var(--blue); }
+
+  /* ─── SERVICES ─── */
+  .services-section {
+    padding: 120px 48px;
+    position: relative; z-index: 1;
+    border-top: 1px solid var(--border);
+  }
+
+  .services-header {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: end;
+    margin-bottom: 80px;
+  }
+  .services-headline {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(42px, 5vw, 72px);
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -0.03em;
+    text-transform: uppercase;
+  }
+  .services-headline em {
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    font-weight: 400;
+    font-size: 0.9em;
+    color: var(--accent);
+  }
+  .services-intro {
+    font-size: 15px;
+    line-height: 1.75;
+    color: var(--muted);
+    max-width: 340px;
+    align-self: end;
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    border: 1px solid var(--border);
+  }
+
+  .service-card {
+    padding: 40px 32px;
+    border-right: 1px solid var(--border);
+    position: relative;
+    overflow: hidden;
+    transition: background 0.3s;
+    cursor: pointer;
+  }
+  .service-card:last-child { border-right: none; }
+  .service-card:hover { background: var(--surface); }
+
+  .service-num {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    color: var(--faint);
+    margin-bottom: 36px;
+  }
+  .service-icon {
+    font-size: 28px;
+    margin-bottom: 24px;
+    display: block;
+    transition: transform 0.3s;
+  }
+  .service-card:hover .service-icon { transform: scale(1.1); }
+
+  .service-name {
+    font-family: 'Syne', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 12px;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+  }
+  .service-desc {
+    font-size: 13px;
+    line-height: 1.65;
+    color: var(--muted);
+  }
+
+  .service-card .hover-bar {
+    position: absolute;
+    bottom: 0; left: 0;
+    width: 0; height: 2px;
+    background: var(--accent);
+    transition: width 0.3s ease;
+  }
+  .service-card:hover .hover-bar { width: 100%; }
+
+  /* ─── PHILOSOPHY ─── */
+  .philosophy-section {
+    padding: 140px 48px;
+    border-top: 1px solid var(--border);
+    position: relative; z-index: 1;
+    overflow: hidden;
+  }
+
+  .philosophy-bg-text {
+    position: absolute;
+    font-family: 'Syne', sans-serif;
+    font-size: 280px;
+    font-weight: 800;
+    color: rgba(255,255,255,0.018);
+    text-transform: uppercase;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    white-space: nowrap;
+    letter-spacing: -0.05em;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  .philosophy-content {
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+    position: relative; z-index: 1;
+  }
+
+  .philosophy-quote {
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    font-size: clamp(36px, 5vw, 64px);
+    line-height: 1.2;
+    margin-bottom: 40px;
+    color: var(--text);
+  }
+  .philosophy-quote strong {
+    font-style: normal;
+    color: var(--accent);
+  }
+
+  .philosophy-source {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+
+  /* Advantage strip */
+  .advantage-strip {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    margin-top: 80px;
+  }
+  .adv-item {
+    padding: 40px 48px;
+    border-right: 1px solid var(--border);
+    position: relative;
+    overflow: hidden;
+  }
+  .adv-item:last-child { border-right: none; }
+  .adv-num {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--accent);
+    margin-bottom: 12px;
+  }
+  .adv-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    letter-spacing: -0.01em;
+  }
+  .adv-desc {
+    font-size: 13px;
+    line-height: 1.65;
+    color: var(--muted);
+  }
+
+  /* ─── CTA SECTION ─── */
+  .cta-section {
+    padding: 140px 48px;
+    border-top: 1px solid var(--border);
+    position: relative; z-index: 1;
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+
+  .cta-visual {
+    position: relative;
+    height: 420px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .cta-rings {
+    position: relative;
+    width: 320px; height: 320px;
+  }
+  .ring {
+    position: absolute;
+    border-radius: 50%;
+    border: 1px solid;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    animation: ringPulse 4s ease-in-out infinite;
+  }
+  .ring-1 { width: 100%; height: 100%; border-color: rgba(200,240,60,0.3); animation-delay: 0s; }
+  .ring-2 { width: 76%; height: 76%; border-color: rgba(200,240,60,0.2); animation-delay: 0.5s; }
+  .ring-3 { width: 52%; height: 52%; border-color: rgba(200,240,60,0.15); animation-delay: 1s; }
+  .ring-center {
+    position: absolute;
+    width: 80px; height: 80px;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    background: var(--accent);
+    display: grid;
+    place-items: center;
+    font-family: 'Syne', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    color: #000;
+    letter-spacing: 0.05em;
+    text-align: center;
+    line-height: 1.3;
+    text-transform: uppercase;
+  }
+  @keyframes ringPulse {
+    0%, 100% { opacity: 0.6; transform: translate(-50%,-50%) scale(1); }
+    50% { opacity: 1; transform: translate(-50%,-50%) scale(1.04); }
+  }
+
+  .cta-text {}
+  .cta-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 32px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .cta-label::before { content: ''; display: block; width: 30px; height: 1px; background: var(--accent); }
+  .cta-headline {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(42px, 4vw, 64px);
+    font-weight: 800;
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+  .cta-headline em {
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    font-weight: 400;
+    display: block;
+    font-size: 0.9em;
+    color: var(--accent);
+  }
+  .cta-para {
+    font-size: 15px;
+    line-height: 1.75;
+    color: var(--muted);
+    margin-bottom: 48px;
+    max-width: 360px;
+  }
+  .cta-actions {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .btn-outline {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 15px 28px;
+    text-decoration: none;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .btn-outline:hover { border-color: var(--text); color: var(--text); }
+
+  /* ─── FOOTER ─── */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 60px 48px 40px;
+    position: relative; z-index: 1;
+  }
+  .footer-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 60px;
+  }
+  .footer-brand {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    text-decoration: none;
+  }
+  .footer-logo-mark {
+    width: 40px; height: 40px;
+    background: var(--accent);
+    display: grid;
+    place-items: center;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px;
+    font-weight: 700;
+    color: #000;
+  }
+  .footer-brand-text {
+    font-family: 'Syne', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--text);
+  }
+  .footer-brand-sub {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    margin-top: 2px;
+  }
+  .footer-cols {
+    display: grid;
+    grid-template-columns: repeat(3, 140px);
+    gap: 60px;
+  }
+  .footer-col-title {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 20px;
+  }
+  .footer-links {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .footer-links a {
+    font-size: 13px;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.2s;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+  }
+  .footer-links a:hover { color: var(--text); }
+
+  .footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 32px;
+    border-top: 1px solid var(--border);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+  }
+
+  /* Live indicator */
+  .live-dot {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+  .live-dot::before {
+    content: '';
+    display: block;
+    width: 6px; height: 6px;
+    background: var(--accent);
+    border-radius: 50%;
+    animation: blink 1.5s ease-in-out infinite;
+  }
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+
+  /* Scroll reveal */
+  .reveal {
+    opacity: 0;
+    transform: translateY(32px);
+    transition: opacity 0.75s ease, transform 0.75s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Mobile menu button (hidden on desktop) */
+  .mobile-menu-btn { display: none; }
+
+  @media (max-width: 900px) {
+    nav { padding: 20px 24px; }
+    .nav-links, .nav-cta { display: none; }
+    .mobile-menu-btn {
+      display: block;
+      background: none;
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 8px 14px;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      cursor: none;
+    }
+    .hero { padding: 0 24px 60px; }
+    .hero-stat-strip { display: none; }
+    .hero-bottom { flex-direction: column; align-items: flex-start; gap: 32px; }
+    .section { padding: 80px 24px; }
+    .dual-grid { grid-template-columns: 1fr; }
+    .services-section { padding: 80px 24px; }
+    .services-header { grid-template-columns: 1fr; gap: 24px; }
+    .services-grid { grid-template-columns: 1fr 1fr; }
+    .service-card:nth-child(even) { border-right: none; }
+    .service-card:nth-child(odd) { border-right: 1px solid var(--border); }
+    .philosophy-section { padding: 80px 24px; }
+    .advantage-strip { grid-template-columns: 1fr; }
+    .adv-item { border-right: none; border-bottom: 1px solid var(--border); }
+    .cta-section { grid-template-columns: 1fr; gap: 60px; padding: 80px 24px; }
+    .cta-visual { height: 280px; }
+    .cta-rings { width: 240px; height: 240px; }
+    footer { padding: 48px 24px 32px; }
+    .footer-top { flex-direction: column; gap: 40px; }
+    .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
+    body { cursor: auto; }
+    .cursor, .cursor-ring { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Custom Cursor -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- ─── NAV ─── -->
+<nav id="nav">
+  <a href="#" class="nav-logo">
+    <div class="nav-logo-mark">SCL</div>
+    SCL Digital Agency
+  </a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#model">Model</a></li>
+    <li><a href="#work">Work</a></li>
+    <li><a href="#vision">Vision</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Start a Project</a>
+  <button class="mobile-menu-btn">Menu</button>
+</nav>
+
+<!-- ─── HERO ─── -->
+<section class="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-orb hero-orb-1"></div>
+  <div class="hero-orb hero-orb-2"></div>
+
+  <p class="hero-eyebrow">Software Creative Lab · Since 2024</p>
+
+  <h1 class="hero-headline">
+    <span class="line">We Build</span>
+    <span class="line"><em>Digital</em></span>
+    <span class="line">Futures.</span>
+  </h1>
+
+  <div class="hero-bottom">
+    <p class="hero-desc">
+      SCL DA is a software creative lab and digital agency — we design, build, and launch scalable digital products internally, and partner with founders to bring their visions to life.
+    </p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn-primary">
+        Start Building
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+      <a href="#model" class="btn-ghost">
+        Our Model
+        <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+  </div>
+
+  <div class="hero-stat-strip">
+    <div class="stat-item">
+      <div class="num">2×</div>
+      <div class="label">Revenue Engines</div>
+    </div>
+    <div class="stat-item">
+      <div class="num">5</div>
+      <div class="label">Core Services</div>
+    </div>
+    <div class="stat-item">
+      <div class="num">∞</div>
+      <div class="label">Scale Potential</div>
+    </div>
+  </div>
+
+  <div class="scroll-indicator">
+    <div class="scroll-line"></div>
+    Scroll
+  </div>
+</section>
+
+<!-- ─── MARQUEE ─── -->
+<div class="marquee-section">
+  <div class="marquee-track" id="marqueeTrack">
+    <div class="marquee-item"><span>◆</span> Idea Protection</div>
+    <div class="marquee-item"><span>◆</span> Pitch Development</div>
+    <div class="marquee-item"><span>◆</span> MVP Development</div>
+    <div class="marquee-item"><span>◆</span> Product Launch</div>
+    <div class="marquee-item"><span>◆</span> Monetization Strategy</div>
+    <div class="marquee-item"><span>◆</span> Scalable Architecture</div>
+    <div class="marquee-item"><span>◆</span> Brand Identity</div>
+    <div class="marquee-item"><span>◆</span> Go-To-Market</div>
+    <div class="marquee-item"><span>◆</span> Investor Decks</div>
+    <div class="marquee-item"><span>◆</span> Digital Products</div>
+    <!-- duplicate for seamless loop -->
+    <div class="marquee-item"><span>◆</span> Idea Protection</div>
+    <div class="marquee-item"><span>◆</span> Pitch Development</div>
+    <div class="marquee-item"><span>◆</span> MVP Development</div>
+    <div class="marquee-item"><span>◆</span> Product Launch</div>
+    <div class="marquee-item"><span>◆</span> Monetization Strategy</div>
+    <div class="marquee-item"><span>◆</span> Scalable Architecture</div>
+    <div class="marquee-item"><span>◆</span> Brand Identity</div>
+    <div class="marquee-item"><span>◆</span> Go-To-Market</div>
+    <div class="marquee-item"><span>◆</span> Investor Decks</div>
+    <div class="marquee-item"><span>◆</span> Digital Products</div>
+  </div>
+</div>
+
+<!-- ─── DUAL ENGINE MODEL ─── -->
+<section class="section" id="model">
+  <p class="section-label">Our Model</p>
+  <div class="dual-grid">
+
+    <div class="engine-card reveal">
+      <p class="engine-number">Engine 01 / 02</p>
+      <h2 class="engine-title">Internal<br>Product Lab</h2>
+      <p class="engine-subtitle">We build first.</p>
+      <p class="engine-desc">
+        We generate ideas, validate them, build MVPs, and launch into real markets. Successful products become revenue assets — positioned for scale or acquisition.
+      </p>
+      <ul class="engine-list">
+        <li>Idea generation & validation</li>
+        <li>MVP design & development</li>
+        <li>Real-market testing & iteration</li>
+        <li>Scaling successful products</li>
+        <li>Acquisition-ready positioning</li>
+      </ul>
+    </div>
+
+    <div class="engine-card blue reveal" style="transition-delay: 0.15s;">
+      <p class="engine-number">Engine 02 / 02</p>
+      <h2 class="engine-title">Agency<br>Services</h2>
+      <p class="engine-subtitle">Then we empower others.</p>
+      <p class="engine-desc">
+        We bring our proven systems to founders, startups, and visionaries — giving them the infrastructure and strategy to transform bold ideas into scalable businesses.
+      </p>
+      <ul class="engine-list">
+        <li>Idea protection & IP structuring</li>
+        <li>Investor-ready pitch decks</li>
+        <li>UI/UX & product development</li>
+        <li>Go-to-market strategy</li>
+        <li>Revenue & monetization design</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<!-- ─── SERVICES ─── -->
+<section class="services-section" id="services">
+  <p class="section-label">Core Services</p>
+  <div class="services-header">
+    <h2 class="services-headline reveal">Full-Cycle<br><em>Product</em><br>Execution</h2>
+    <p class="services-intro reveal" style="transition-delay:0.1s;">
+      From protecting your first idea to scaling your first million users — we cover every phase of building a digital product.
+    </p>
+  </div>
+
+  <div class="services-grid">
+    <div class="service-card reveal">
+      <p class="service-num">01</p>
+      <span class="service-icon">🛡️</span>
+      <h3 class="service-name">Idea Protection</h3>
+      <p class="service-desc">IP awareness, brand structuring, and strategic positioning of your concept before it hits the market.</p>
+      <div class="hover-bar"></div>
+    </div>
+    <div class="service-card reveal" style="transition-delay:0.07s;">
+      <p class="service-num">02</p>
+      <span class="service-icon">🎯</span>
+      <h3 class="service-name">Pitch Development</h3>
+      <p class="service-desc">Investor-ready decks, narrative architecture, and brand-aligned visual storytelling that converts.</p>
+      <div class="hover-bar"></div>
+    </div>
+    <div class="service-card reveal" style="transition-delay:0.14s;">
+      <p class="service-num">03</p>
+      <span class="service-icon">⚡</span>
+      <h3 class="service-name">MVP Development</h3>
+      <p class="service-desc">Rapid prototyping, UI/UX design, web & mobile builds with scalable architecture from day one.</p>
+      <div class="hover-bar"></div>
+    </div>
+    <div class="service-card reveal" style="transition-delay:0.21s;">
+      <p class="service-num">04</p>
+      <span class="service-icon">🚀</span>
+      <h3 class="service-name">Product Launch</h3>
+      <p class="service-desc">Go-to-market strategy, content rollout, and digital presence setup that creates real traction.</p>
+      <div class="hover-bar"></div>
+    </div>
+    <div class="service-card reveal" style="transition-delay:0.28s;">
+      <p class="service-num">05</p>
+      <span class="service-icon">💰</span>
+      <h3 class="service-name">Monetization</h3>
+      <p class="service-desc">Business model design, revenue stream mapping, pricing strategy, and long-term growth pathways.</p>
+      <div class="hover-bar"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── PHILOSOPHY ─── -->
+<section class="philosophy-section">
+  <div class="philosophy-bg-text">SOLVE</div>
+  <div class="philosophy-content reveal">
+    <p class="philosophy-quote">
+      "Every product is <strong>a solution.</strong><br>Every solution solves <strong>a real problem.</strong>"
+    </p>
+    <p class="philosophy-source">— SCL DA Core Philosophy</p>
+  </div>
+
+  <div class="advantage-strip reveal" style="transition-delay:0.2s;">
+    <div class="adv-item">
+      <p class="adv-num">01</p>
+      <h3 class="adv-title">We Build First</h3>
+      <p class="adv-desc">We don't just advise — we ship our own products, prove concepts in real markets, then bring those capabilities to clients.</p>
+    </div>
+    <div class="adv-item">
+      <p class="adv-num">02</p>
+      <h3 class="adv-title">Real Credibility</h3>
+      <p class="adv-desc">Our portfolio is proof. Every internal product is a case study. Every service comes from hands-on experience, not theory.</p>
+    </div>
+    <div class="adv-item">
+      <p class="adv-num">03</p>
+      <h3 class="adv-title">Built to Exit</h3>
+      <p class="adv-desc">Scalable IP, brand equity, and proprietary systems — every product we build is structured for long-term value and acquisition readiness.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ─── CTA ─── -->
+<section class="cta-section" id="contact">
+  <div class="cta-visual">
+    <div class="cta-rings">
+      <div class="ring ring-1"></div>
+      <div class="ring ring-2"></div>
+      <div class="ring ring-3"></div>
+      <div class="ring-center">SCL<br>DA</div>
+    </div>
+  </div>
+  <div class="cta-text reveal">
+    <p class="cta-label">Get Started</p>
+    <h2 class="cta-headline">
+      Have an Idea?
+      <em>Let's Build It.</em>
+    </h2>
+    <p class="cta-para">
+      Whether you're a founder with a vision or a business ready to scale — we have the infrastructure, strategy, and execution capability to make it happen.
+    </p>
+    <div class="cta-actions">
+      <a href="mailto:hello@sclda.com" class="btn-primary">
+        Start a Conversation
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+      <a href="#services" class="btn-outline">View Services</a>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <div class="footer-top">
+    <div>
+      <a href="#" class="footer-brand" style="text-decoration:none;">
+        <div class="footer-logo-mark">SCL</div>
+        <div>
+          <div class="footer-brand-text">SCL Digital Agency</div>
+          <div class="footer-brand-sub">Software Creative Lab</div>
+        </div>
+      </a>
+    </div>
+    <div class="footer-cols">
+      <div>
+        <p class="footer-col-title">Services</p>
+        <ul class="footer-links">
+          <li><a href="#">Idea Protection</a></li>
+          <li><a href="#">Pitch Development</a></li>
+          <li><a href="#">MVP Development</a></li>
+          <li><a href="#">Product Launch</a></li>
+          <li><a href="#">Monetization</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer-col-title">Company</p>
+        <ul class="footer-links">
+          <li><a href="#">About SCL DA</a></li>
+          <li><a href="#">Our Model</a></li>
+          <li><a href="#">Portfolio</a></li>
+          <li><a href="#">Vision</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer-col-title">Connect</p>
+        <ul class="footer-links">
+          <li><a href="#">Start a Project</a></li>
+          <li><a href="#">LinkedIn</a></li>
+          <li><a href="#">Twitter / X</a></li>
+          <li><a href="#">hello@sclda.com</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="live-dot">Open for New Projects</span>
+    <span>© 2024 SCL Digital Agency. All rights reserved.</span>
+    <span>ZA · Built by SCL DA</span>
+  </div>
+</footer>
+
+<script>
+  // ─── Cursor ───
+  const cursor = document.getElementById('cursor');
+  const cursorRing = document.getElementById('cursorRing');
+  let mx = 0, my = 0, rx = 0, ry = 0;
+
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    cursor.style.left = mx + 'px';
+    cursor.style.top = my + 'px';
+  });
+
+  function animateRing() {
+    rx += (mx - rx) * 0.1;
+    ry += (my - ry) * 0.1;
+    cursorRing.style.left = rx + 'px';
+    cursorRing.style.top = ry + 'px';
+    requestAnimationFrame(animateRing);
+  }
+  animateRing();
+
+  document.querySelectorAll('a, button').forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      cursor.style.transform = 'translate(-50%,-50%) scale(2.5)';
+      cursorRing.style.opacity = '0';
+    });
+    el.addEventListener('mouseleave', () => {
+      cursor.style.transform = 'translate(-50%,-50%) scale(1)';
+      cursorRing.style.opacity = '1';
+    });
+  });
+
+  // ─── Nav scroll ───
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+  });
+
+  // ─── Scroll Reveal ───
+  const reveals = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  reveals.forEach(el => io.observe(el));
+
+  // ─── Counter animation for hero stat ───
+  function animateCounter(el, target, isSymbol) {
+    if (isSymbol) return;
+    let start = 0;
+    const dur = 1200;
+    const startTime = performance.now();
+    function update(t) {
+      const progress = Math.min((t - startTime) / dur, 1);
+      const ease = 1 - Math.pow(1 - progress, 3);
+      el.textContent = Math.round(start + (target - start) * ease) + (el.dataset.suffix || '');
+      if (progress < 1) requestAnimationFrame(update);
+    }
+    requestAnimationFrame(update);
+  }
+</script>
+</body>
+</html>
 
 
 
 
-		<!-- Insights / Thought Leadership START -->
-		<section class="insights-section">
-			<div class="container">
 
-				<div class="metrics-grid">
-					<!-- Companies logos removed as requested -->
-				</div>
-
-				<!-- Insights Carousel Container -->
-				<div class="insights-carousel-wrapper">
-					<div class="insights-carousel-container">
-						<div class="insights-carousel" id="insightsCarousel">
-							<!-- Insight Card 1 -->
-							<article class="insight-card insights-slide">
-								<div class="insight-image">
-									<img src="https://i.postimg.cc/x8NqGWyY/11.png" alt="Digital Innovation">
-								</div>
-								<div class="insight-content">
-									<div class="news-meta">
-
-									</div>
-									<h3>SCL Digital Agency Launches Revolutionary AI-Powered Development Platform</h3>
-									<p>
-										Our cutting-edge AI platform transforms how businesses build and deploy digital
-										solutions, reducing development time by 60% while maintaining enterprise-grade
-										quality and security standards.
-									</p>
-									<div class="insight-buttons">
-										<a href="#" class="btn-learn-more">read more</a>
-									</div>
-								</div>
-							</article>
-
-						<!-- Insight Card 1 -->
-						<article class="insight-card insights-slide">
-							<div class="insight-image">
-								<img src="https://i.postimg.cc/x8NqGWyY/11.png" alt="Digital Innovation">
-							</div>
-							<div class="insight-content">
-								<div class="news-meta">
-
-								</div>
-								<h3>SCL Digital Agency Launches Revolutionary AI-Powered Development Platform</h3>
-								<p>
-									Our cutting-edge AI platform transforms how businesses build and deploy digital
-									solutions, reducing development time by 60% while maintaining enterprise-grade
-									quality and security standards.
-								</p>
-								<div class="insight-buttons">
-									<a href="#" class="btn-learn-more">read more</a>
-								</div>
-							</div>
-						</article>
-
-							<!-- Insight Card 1 -->
-							<article class="insight-card insights-slide">
-								<div class="insight-image">
-									<img src="https://i.postimg.cc/x8NqGWyY/11.png" alt="Digital Innovation">
-								</div>
-								<div class="insight-content">
-									<div class="news-meta">
-
-									</div>
-									<h3>SCL Digital Agency Launches Revolutionary AI-Powered Development Platform</h3>
-									<p>
-										Our cutting-edge AI platform transforms how businesses build and deploy digital
-										solutions, reducing development time by 60% while maintaining enterprise-grade
-										quality and security standards.
-									</p>
-									<div class="insight-buttons">
-										<a href="#" class="btn-learn-more">read more</a>
-									</div>
-								</div>
-							</article>
+<!-- insert here the new code -->
 
 
 
@@ -1540,12 +2812,10 @@ results that add real value to your business. Let's turn your vision into impact
 
 
 
+		
 
-							<div class="insights-cta">
+					
 
-							</div>
-						</div>
-		</section>
 
 		<!-- Insights Carousel Scripts and Styles -->
 		<script>
@@ -3652,39 +4922,6 @@ results that add real value to your business. Let's turn your vision into impact
 
 	</main>
 
-	<!-- Footer START -->
-	<footer
-		style="background: url(images/background-image-sized.webp) no-repeat center center; padding: 32px 0 16px 0; text-align: center; border-top: 1px solid #FFF; margin-top: 1px;">
-		<div style="max-width: 600px; margin: 0 auto;">
-			<!-- Footer Navigation Links -->
-			<nav style="margin-bottom: 18px;">
-				<a href="index.html"
-					style="margin: 0 10px; color: #fff; text-decoration: none; font-weight: 500;">Home</a>
-				<a href="applications/products.html/"
-					style="margin: 0 10px; color: #fff; text-decoration: none; font-weight: 500;">Products</a>
-				<a href="services-platform/our_services.html"
-					style="margin: 0 10px; color: #fff; text-decoration: none; font-weight: 500;">Our Solutions</a>
-				<a href="case_studies.html"
-					style="margin: 0 10px; color: #fff; text-decoration: none; font-weight: 500;">Customers</a>
-				<a href="about.html" style="margin: 0 10px; color: #fff; text-decoration: none; font-weight: 500;">About
-					Us</a>
-				<a href="payments-system/payments.html"
-					style="margin: 0 10px; color: #fff; text-decoration: none; font-weight: 500;">Payments & Fees</a>
-
-			</nav>
-			<!-- DesignRush Badge Area -->
-			<a href="https://www.designrush.com/agency/it-services/za" target="_blank" rel="noopener"
-				style="display: inline-block; margin-bottom: 12px;">
-				<img src="images/Top IT Services Company.png" alt="it services agencies in south africa designrush"
-					style="max-width: 180px; width: 50%; height: auto;" />
-			</a>
-			<div style="font-size: 13px; color: #fff; margin-top: 8px;">Proudly listed among the Top IT Services
-				Companies in South Africa by DesignRush</div>
-		</div>
-		<div style="font-size: 12px; color: #fff; margin-top: 18px;">SCL DIGITAL AGENCY | Registration Number:
-			K2025001641</div>
-	</footer>
-	<!-- Footer END -->
 
 
 	<script>
