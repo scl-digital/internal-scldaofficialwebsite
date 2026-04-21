@@ -1486,7 +1486,7 @@ results that add real value to your business. Let's turn your vision into impact
   body {
     background: var(--bg);
     color: var(--text);
-    font-family: 'Syne', sans-serif;
+    
     overflow-x: hidden;
     cursor: none;
   }
@@ -1528,82 +1528,7 @@ results that add real value to your business. Let's turn your vision into impact
     z-index: 0;
   }
 
-  /* ─── NAV ─── */
-  nav {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 100;
-    padding: 24px 48px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border-bottom: 1px solid transparent;
-    transition: border-color 0.4s, background 0.4s, backdrop-filter 0.4s;
-  }
-  nav.scrolled {
-    background: rgba(5,5,8,0.85);
-    backdrop-filter: blur(20px);
-    border-color: var(--border);
-  }
-  .nav-logo {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 13px;
-    letter-spacing: 0.15em;
-    color: var(--text);
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-  .nav-logo-mark {
-    width: 28px; height: 28px;
-    background: var(--accent);
-    display: grid;
-    place-items: center;
-    font-size: 11px;
-    font-weight: 700;
-    color: #000;
-    letter-spacing: 0;
-  }
-  .nav-links {
-    display: flex;
-    gap: 36px;
-    list-style: none;
-  }
-  .nav-links a {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 0.12em;
-    color: var(--muted);
-    text-decoration: none;
-    text-transform: uppercase;
-    transition: color 0.2s;
-    position: relative;
-  }
-  .nav-links a::after {
-    content: '';
-    position: absolute;
-    bottom: -3px; left: 0;
-    width: 0; height: 1px;
-    background: var(--accent);
-    transition: width 0.25s;
-  }
-  .nav-links a:hover { color: var(--text); }
-  .nav-links a:hover::after { width: 100%; }
-
-  .nav-cta {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: #000;
-    background: var(--accent);
-    padding: 10px 22px;
-    text-decoration: none;
-    transition: opacity 0.2s, transform 0.2s;
-  }
-  .nav-cta:hover { opacity: 0.85; transform: translateY(-1px); }
-
+  
   /* ─── HERO ─── */
   .hero {
     min-height: 100vh;
@@ -2441,21 +2366,7 @@ results that add real value to your business. Let's turn your vision into impact
 <div class="cursor" id="cursor"></div>
 <div class="cursor-ring" id="cursorRing"></div>
 
-<!-- ─── NAV ─── -->
-<nav id="nav">
-  <a href="#" class="nav-logo">
-    <div class="nav-logo-mark">SCL</div>
-    SCL Digital Agency
-  </a>
-  <ul class="nav-links">
-    <li><a href="#services">Services</a></li>
-    <li><a href="#model">Model</a></li>
-    <li><a href="#work">Work</a></li>
-    <li><a href="#vision">Vision</a></li>
-  </ul>
-  <a href="#contact" class="nav-cta">Start a Project</a>
-  <button class="mobile-menu-btn">Menu</button>
-</nav>
+
 
 <!-- ─── HERO ─── -->
 <section class="hero">
