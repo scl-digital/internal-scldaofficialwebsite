@@ -669,22 +669,32 @@ results that add real value to your business. Let's turn your vision into impact
 					</svg>
 				</button>
 
-				<!-- Quick Login Fields -->
-				<div class="navbar-login-fields">
-					<input type="email" id="nav-login-email" placeholder="Email" class="nav-login-input">
-					<input type="password" id="nav-login-password" placeholder="Password" class="nav-login-input">
-					<span id="nav-login-error"
-						style="color: #ff4d4d; font-size: 11px; display: none; position: absolute; top: 100%; right: 130px; white-space: nowrap;"></span>
-				</div>
-
-				<!-- Login Button -->
-				<a href="login-products.html" id="nav-login-submit" class="navbar-btn-primary" title="Login">
+				<!-- Create Account Button -->
+				<button class="navbar-btn-primary" onclick="openAccountModal()">
 					<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-						<rect x="3" y="11" width="18" height="10" rx="2" ry="2"></rect>
-						<path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+						<path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+						<circle cx="12" cy="7" r="4"></circle>
 					</svg>
-					<span>Login</span>
+					<span>Create Account</span>
+				</button>
+
+				<!-- Profile/Login -->
+				<a href="ClientPortal/client-billing-portal.html" class="navbar-icon-btn" title="Client Portal">
+					<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+						<path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+						<circle cx="12" cy="7" r="4"></circle>
+					</svg>
 				</a>
+
+				<!-- Shopping Cart Icon -->
+				<button class="navbar-icon-btn navbar-cart-btn" title="Shopping Cart" onclick="toggleCart()">
+					<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+						<circle cx="9" cy="21" r="1"></circle>
+						<circle cx="20" cy="21" r="1"></circle>
+						<path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+					</svg>
+					<span class="navbar-cart-badge" id="navbar-cart-count">0</span>
+				</button>
 
 				<!-- Hamburger Menu (Mobile) -->
 				<button class="navbar-hamburger" onclick="toggleSidebar()">
@@ -906,32 +916,117 @@ results that add real value to your business. Let's turn your vision into impact
 			box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
 		}
 
-		/* Quick Login Fields Styling */
-		.navbar-login-fields {
+		/* Navbar Cart Button Styling */
+		.navbar-cart-btn {
+			position: relative;
+		}
+
+		.navbar-cart-badge {
+			position: absolute;
+			top: -8px;
+			right: -8px;
+			background: #ff4d4d;
+			color: white;
+			border-radius: 50%;
+			width: 18px;
+			height: 18px;
 			display: flex;
-			gap: 8px;
+			align-items: center;
+			justify-content: center;
+			font-size: 11px;
+			font-weight: bold;
+			border: 2px solid white;
+		}
+
+		.navbar-cart-badge:empty,
+		.navbar-cart-badge[data-count="0"] {
+			display: none;
+		}
+
+		/* Cart Modal Styling */
+		.cart-modal {
+			display: none;
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background: rgba(0, 0, 0, 0.5);
+			z-index: 2000;
+			justify-content: center;
 			align-items: center;
 		}
 
-		.nav-login-input {
-			width: 120px;
-			padding: 8px 12px;
-			border: 1px solid rgba(0, 0, 0, 0.1);
-			border-radius: 100px;
-			font-size: 13px;
-			background: rgba(255, 255, 255, 0.8);
-			outline: none;
-			transition: all 0.3s ease;
+		.cart-modal.active {
+			display: flex;
 		}
 
-		.nav-login-input:focus {
-			border-color: #0755E9;
-			background: #fff;
-			box-shadow: 0 0 0 3px rgba(7, 85, 233, 0.1);
+		.cart-modal-content {
+			background: white;
+			border-radius: 12px;
+			width: 90%;
+			max-width: 500px;
+			max-height: 80vh;
+			overflow: hidden;
+			box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
 		}
 
-		.navbar-btn-primary:active {
-			transform: translateY(0);
+		.cart-modal-header {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			padding: 20px;
+			border-bottom: 1px solid #eee;
+		}
+
+		.cart-modal-header h3 {
+			margin: 0;
+			font-size: 20px;
+			font-weight: 600;
+		}
+
+		.cart-close {
+			background: none;
+			border: none;
+			font-size: 24px;
+			cursor: pointer;
+			color: #666;
+		}
+
+		.cart-modal-body {
+			padding: 20px;
+			max-height: 60vh;
+			overflow-y: auto;
+		}
+
+		.cart-total {
+			margin: 20px 0;
+			font-size: 18px;
+			text-align: right;
+		}
+
+		.cart-actions {
+			display: flex;
+			gap: 10px;
+			justify-content: flex-end;
+		}
+
+		.btn-secondary {
+			background: #f8f9fa;
+			color: #333;
+			border: 1px solid #ddd;
+			padding: 10px 20px;
+			border-radius: 6px;
+			cursor: pointer;
+		}
+
+		.btn-primary {
+			background: #0755E9;
+			color: white;
+			border: none;
+			padding: 10px 20px;
+			border-radius: 6px;
+			cursor: pointer;
 		}
 
 		/* Search Bar */
@@ -2707,7 +2802,58 @@ results that add real value to your business. Let's turn your vision into impact
     }
     requestAnimationFrame(update);
   }
+
+  // Simple cart toggle function
+  function toggleCart() {
+    const cartModal = document.getElementById('cart-modal');
+    if (cartModal) {
+      cartModal.classList.toggle('active');
+    }
+  }
+
+  // Placeholder for account modal
+  function openAccountModal() {
+    alert('Account creation modal not implemented yet.');
+  }
+
+  // Placeholder cart functions
+  function clearCart() {
+    alert('Clear cart not implemented yet.');
+  }
+
+  function checkout() {
+    alert('Checkout not implemented yet.');
+  }
 </script>
+
+<!-- Shopping Cart Modal -->
+<div class="cart-modal" id="cart-modal">
+  <div class="cart-modal-content">
+    <div class="cart-modal-header">
+      <h3>Shopping Cart</h3>
+      <button class="cart-close" onclick="toggleCart()">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+    <div class="cart-modal-body">
+      <div id="cart-items">
+        <!-- Cart items will be populated here -->
+        <p>Your cart is empty.</p>
+      </div>
+      <div class="cart-total">
+        <strong>Total: <span id="cart-total">ZAR 0</span></strong>
+      </div>
+      <div class="cart-actions">
+        <button class="btn-secondary" onclick="clearCart()">Clear Cart</button>
+        <button class="btn-primary" onclick="checkout()">Checkout</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 </body>
 </html>
 
