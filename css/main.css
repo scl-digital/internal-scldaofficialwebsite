@@ -1865,7 +1865,6 @@ a {
 .service-icon {
   width: 80px;
   height: 80px;
-  background: linear-gradient(135deg, #1e348d, #2563eb);
   border-radius: 5%;
   display: flex;
   align-items: center;
