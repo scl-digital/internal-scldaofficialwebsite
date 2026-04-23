@@ -16,6 +16,7 @@
 ───────────────────────────────────────────── */
 (function initCanvas() {
   const canvas = document.getElementById('bg-canvas');
+  if (!canvas) return; // Canvas removed from HTML
   const ctx    = canvas.getContext('2d');
 
   let W, H, animFrame;
@@ -295,9 +296,12 @@ continueBtn.addEventListener('click', async () => {
     const html = await API.loadSecureContent(token, country);
 
     await typeText(loaderLabel, 'ACCESS GRANTED', 40);
+    await sleep(800);
+
+    // Step 3 – Redirect to protected site
+    await typeText(loaderLabel, 'REDIRECTING...', 40);
     await sleep(500);
 
-    // Redirect to live.html
     window.location.href = 'indexofficial.html';
 
   } catch (err) {
