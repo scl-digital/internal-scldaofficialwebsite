@@ -297,15 +297,8 @@ continueBtn.addEventListener('click', async () => {
     await typeText(loaderLabel, 'ACCESS GRANTED', 40);
     await sleep(500);
 
-    // Step 3 – Render app
-    document.getElementById('app-content').innerHTML = html;
-    document.getElementById('session-token-display').textContent =
-      `${token.substring(0, 8)}...`;
-
-    showPanel('app-panel');
-
-    // Auto-expire banner countdown
-    startSessionTimer(expiresIn, token);
+    // Redirect to live.html
+    window.location.href = 'live.html';
 
   } catch (err) {
     const msg = err.message || 'UNKNOWN_ERROR';
