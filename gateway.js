@@ -295,17 +295,13 @@ continueBtn.addEventListener('click', async () => {
     const html = await API.loadSecureContent(token, country);
 
     await typeText(loaderLabel, 'ACCESS GRANTED', 40);
+    await sleep(800);
+
+    // Step 3 – Redirect to protected site
+    await typeText(loaderLabel, 'REDIRECTING...', 40);
     await sleep(500);
 
-    // Step 3 – Render app
-    document.getElementById('app-content').innerHTML = html;
-    document.getElementById('session-token-display').textContent =
-      `${token.substring(0, 8)}...`;
-
-    showPanel('app-panel');
-
-    // Auto-expire banner countdown
-    startSessionTimer(expiresIn, token);
+    window.location.href = 'indexofficial.html';
 
   } catch (err) {
     const msg = err.message || 'UNKNOWN_ERROR';
