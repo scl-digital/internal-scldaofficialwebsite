@@ -32,7 +32,10 @@
 
 html, body {
   height: 100%;
-  background: var(--bg);
+  background: url("SCL_DA_Background.png");
+background-size: cover;
+background-position: center;
+background-repeat: no-repeat;
   color: var(--text);
   font-family: var(--font-mono);
   overflow: hidden;
