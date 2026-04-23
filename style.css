@@ -13,7 +13,7 @@
   --bg:          #050A0E;
   --surface:     #0B1117;
   --border:      #1A2730;
-  --accent:      #00FFB2;
+  --accent:      #ffffff;
   --accent-dim:  #00FFB230;
   --accent-glow: #00FFB215;
   --text:        #E8F0F5;
@@ -68,7 +68,7 @@ html, body {
 
 .panel-inner {
   width: var(--panel-w);
-  background: var(--surface);
+  background: #1C1550;
   border: 1px solid var(--border);
   padding: 44px 40px;
   position: relative;
