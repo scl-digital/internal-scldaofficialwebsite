@@ -70,18 +70,420 @@
       <!-- Logo / Home -->
       <div class="navbar-logo">
         <a href="index.html" title="Back to Home">
-          <img src="images/SCL_Blue.png" alt="SCL Digital Agency">
+          <img src="images/NEW_SCLDA_Purple_Logo_01.png" alt="SCL Digital Agency">
         </a>
       </div>
 
       <!-- Primary Navigation Links -->
       <div class="navbar-primary">
         <ul class="nav-items">
-          <li><a href="index.html" class="nav-link">Home</a></li>
+
+          <li class="nav-dropdown" id="nav-solutions">
+            <a href="services-platform/our_services.html" class="nav-link">Solutions
+              <svg class="chevron" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </a>
+            <div class="mega-menu" id="mega-menu-solutions">
+              <div class="mega-menu-content">
+                <!-- Sidebar: Categories (Column 1) -->
+                <div class="mega-menu-sidebar">
+                  <div class="sidebar-item active" onmouseover="showCategory(this, 'digital')">
+                    <span>Digital Solutions</span>
+                    <i class="fas fa-chevron-right"></i>
+                  </div>
+                  <div class="sidebar-item" onmouseover="showCategory(this, 'business')">
+                    <span>Business Services</span>
+                    <i class="fas fa-chevron-right"></i>
+                  </div>
+                  <div class="sidebar-item" onmouseover="showCategory(this, 'products')">
+                    <span>Featured Products</span>
+                    <i class="fas fa-chevron-right"></i>
+                  </div>
+                  <div class="sidebar-item" onmouseover="showCategory(this, 'resources')">
+                    <span>Resources</span>
+                    <i class="fas fa-chevron-right"></i>
+                  </div>
+                </div>
+
+                <!-- Main Content Area (Columns 2 & 3) -->
+                <div class="mega-menu-main">
+                  <!-- Digital Solutions -->
+                  <div id="category-digital" class="category-content active">
+                    <div class="mega-menu-column middle">
+                      <h3>Digital Solutions</h3>
+                      <p>We build high-performance digital platforms tailored to your business
+                        needs, from responsive websites to complex SaaS applications that
+                        drive growth and innovation.</p>
+                      <a href="applications/products.html" class="mega-menu-cta">Explore
+                        Services <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                    <div class="mega-menu-column right">
+                      <h4>Core Services</h4>
+                      <ul>
+                        <li><a href="#">Web Development <i class="fas fa-chevron-right"></i></a>
+                        </li>
+                        <li><a href="#">Mobile App Development <i
+                                    class="fas fa-chevron-right"></i></a></li>
+                        <li><a href="#">UI/UX Strategy & Design <i
+                                    class="fas fa-chevron-right"></i></a></li>
+                        <li><a href="#">E-commerce Solutions <i
+                                    class="fas fa-chevron-right"></i></a></li>
+                      </ul>
+                    </div>
+                  </div>
+                  <!-- Featured Products -->
+                  <div id="category-products" class="category-content">
+                    <div class="mega-menu-column middle">
+                      <h3>Featured Products</h3>
+                      <p>Discover our signature software suite designed to solve specific business
+                        problems and streamline your operations through automation and
+                        advanced technology.</p>
+                      <a href="services-platform/our_services.html" class="mega-menu-cta">View All
+                        Products <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                    <div class="mega-menu-column right">
+                      <h4>Signature Suite</h4>
+                      <ul>
+                        <li><a href="#">SCL SaaS Platform <i
+                                    class="fas fa-chevron-right"></i></a></li>
+                        <li><a href="#">SecurePay Gateway <i
+                                    class="fas fa-chevron-right"></i></a></li>
+                        <li><a href="#">Event Booking System <i
+                                    class="fas fa-chevron-right"></i></a></li>
+                        <li><a href="#">Client Portal Pro <i
+                                    class="fas fa-chevron-right"></i></a></li>
+                      </ul>
+                    </div>
+                  </div>
+                  <!-- Business Services -->
+                  <div id="category-business" class="category-content">
+                    <div class="mega-menu-column middle">
+                      <h3>Business Services</h3>
+                      <p>Scale your business with our strategic consulting and digital marketing
+                        expertise designed for measurable impact and sustainable success in
+                        a digital world.</p>
+                      <a href="services-platform/our_services.html" class="mega-menu-cta">See
+                        Business Support <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                    <div class="mega-menu-column right">
+                      <h4>Scaling Success</h4>
+                      <ul>
+                        <li><a href="#">IT Consulting & Strategy <i
+                                    class="fas fa-chevron-right"></i></a></li>
+                        <li><a href="#">Digital Marketing <i
+                                    class="fas fa-chevron-right"></i></a></li>
+                        <li><a href="#">SEO & Search Excellence <i
+                                    class="fas fa-chevron-right"></i></a></li>
+                        <li><a href="#">Branding & Identity <i
+                                    class="fas fa-chevron-right"></i></a></li>
+                      </ul>
+                    </div>
+                  </div>
+
+                  <!-- Resources -->
+                  <div id="category-resources" class="category-content">
+                    <div class="mega-menu-column middle">
+                      <h3>Resources Hub</h3>
+                      <p>Access our wealth of knowledge, from in-depth case studies and expert
+                        blog posts to comprehensive documentation and reliable support
+                        services.</p>
+                      <a href="resources_hub_landing.html" class="mega-menu-cta">Visit Resource
+                        Hub <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                    <div class="mega-menu-column right">
+                      <h4>Knowledge Center</h4>
+                      <ul>
+                        <li><a href="case_studies.html">Case Studies <i
+                                    class="fas fa-chevron-right"></i></a></li>
+                        <li><a href="Blog/blog.html">Expert Blog <i
+                                    class="fas fa-chevron-right"></i></a></li>
+                        <li><a href="#">Documentation <i class="fas fa-chevron-right"></i></a>
+                        </li>
+                        <li><a href="#">Help & Support <i class="fas fa-chevron-right"></i></a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+
+
+          <li class="nav-dropdown" id="nav-innovation">
+            <a href="services-platform/our_services.html" class="nav-link">Innovation
+              <svg class="chevron" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </a>
+            <div class="mega-menu" id="mega-menu-innovation">
+              <div class="mega-menu-content">
+                <!-- Sidebar: Categories (Column 1) -->
+                <div class="mega-menu-sidebar">
+                  <div class="sidebar-item active" onmouseover="showCategory(this, 'ai')">
+                    <span>AI & Automation</span>
+                    <i class="fas fa-chevron-right"></i>
+                  </div>
+                  <div class="sidebar-item" onmouseover="showCategory(this, 'frameworks')">
+                    <span>Modern Frameworks</span>
+                    <i class="fas fa-chevron-right"></i>
+                  </div>
+                  <div class="sidebar-item" onmouseover="showCategory(this, 'research')">
+                    <span>Research & Development</span>
+                    <i class="fas fa-chevron-right"></i>
+                  </div>
+                  <div class="sidebar-item" onmouseover="showCategory(this, 'future')">
+                    <span>Future Vision</span>
+                    <i class="fas fa-chevron-right"></i>
+                  </div>
+                </div>
+
+                <!-- Main Content Area (Columns 2 & 3) -->
+                <div class="mega-menu-main">
+                  <!-- AI & Automation -->
+                  <div id="category-ai" class="category-content active">
+                    <div class="mega-menu-column middle">
+                      <h3>AI & Automation</h3>
+                      <p>Harness the power of Artificial Intelligence and intelligent automation
+                        to transform
+                        your business processes and drive unprecedented efficiency.</p>
+                      <a href="services-platform/our_services.html" class="mega-menu-cta">Explore
+                        AI
+                        Solutions <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                    <div class="mega-menu-column right">
+                      <h4>Core Innovations</h4>
+                      <ul>
+                        <li><a href="#">Machine Learning <i
+                                    class="fas fa-chevron-right"></i></a></li>
+                        <li><a href="#">Natural Language Processing <i
+                                    class="fas fa-chevron-right"></i></a></li>
+                        <li><a href="#">Process Automation <i
+                                    class="fas fa-chevron-right"></i></a></li>
+                        <li><a href="#">Predictive Analytics <i
+                                    class="fas fa-chevron-right"></i></a></li>
+                      </ul>
+                    </div>
+                  </div>
+
+                  <!-- Modern Frameworks -->
+                  <div id="category-frameworks" class="category-content">
+                    <div class="mega-menu-column middle">
+                      <h3>Modern Frameworks</h3>
+                      <p>Building the future on solid foundations. We utilize cutting-edge
+                        tech stacks to ensure your products are scalable, secure, and fast.</p>
+                      <a href="services-platform/our_services.html" class="mega-menu-cta">View
+                        Tech
+                        Stack <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                    <div class="mega-menu-column right">
+                      <h4>Technologies</h4>
+                      <ul>
+                        <li><a href="#">Next.js & React <i class="fas fa-chevron-right"></i></a>
+                        </li>
+                        <li><a href="#">Node.js Ecosystem <i
+                                    class="fas fa-chevron-right"></i></a></li>
+                        <li><a href="#">Cloud Native Architecture <i
+                                    class="fas fa-chevron-right"></i></a></li>
+                        <li><a href="#">Microservices <i class="fas fa-chevron-right"></i></a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+
+                  <!-- Research -->
+                  <div id="category-research" class="category-content">
+                    <div class="mega-menu-column middle">
+                      <h3>Research & Development</h3>
+                      <p>Constantly pushing boundaries. Our R&D team explores emerging
+                        technologies to keep your business ahead of the curve.</p>
+                      <a href="services-platform/our_services.html" class="mega-menu-cta">Our Labs
+                        <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                    <div class="mega-menu-column right">
+                      <h4>Innovation Hub</h4>
+                      <ul>
+                        <li><a href="#">Prototype Development <i
+                                    class="fas fa-chevron-right"></i></a></li>
+                        <li><a href="#">Tech Feasibility Studies <i
+                                    class="fas fa-chevron-right"></i></a></li>
+                        <li><a href="#">User Experience Labs <i
+                                    class="fas fa-chevron-right"></i></a></li>
+                        <li><a href="#">Security Innovation <i
+                                    class="fas fa-chevron-right"></i></a></li>
+                      </ul>
+                    </div>
+                  </div>
+
+                  <!-- Future Vision -->
+                  <div id="category-future" class="category-content">
+                    <div class="mega-menu-column middle">
+                      <h3>Future Vision</h3>
+                      <p>Strategic foresight for a rapidly evolving digital landscape.
+                        We help you navigate what's next in technology and business.</p>
+                      <a href="about.html" class="mega-menu-cta">Our Roadmap
+                        <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                    <div class="mega-menu-column right">
+                      <h4>Tomorrow's Tech</h4>
+                      <ul>
+                        <li><a href="#">Web3 & Decentralization <i
+                                    class="fas fa-chevron-right"></i></a></li>
+                        <li><a href="#">Edge Computing <i class="fas fa-chevron-right"></i>
+                        </li>
+                        <li><a href="#">Quantum Readiness <i
+                                    class="fas fa-chevron-right"></i></a></li>
+                        <li><a href="#">Sustainability Tech <i
+                                    class="fas fa-chevron-right"></i></a></li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+
+
+
+          <li class="nav-dropdown" id="nav-news">
+            <a href="services-platform/our_services.html" class="nav-link">News & Events
+              <svg class="chevron" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </a>
+            <div class="mega-menu" id="mega-menu-news">
+              <div class="mega-menu-content">
+                <!-- Sidebar: Categories (Column 1) -->
+                <div class="mega-menu-sidebar">
+                  <div class="sidebar-item active" onmouseover="showCategory(this, 'latest-news')">
+                    <span>Latest News</span>
+                    <i class="fas fa-chevron-right"></i>
+                  </div>
+                  <div class="sidebar-item" onmouseover="showCategory(this, 'upcoming-events')">
+                    <span>Upcoming Events</span>
+                    <i class="fas fa-chevron-right"></i>
+                  </div>
+                  <div class="sidebar-item" onmouseover="showCategory(this, 'community')">
+                    <span>Community Stories</span>
+                    <i class="fas fa-chevron-right"></i>
+                  </div>
+                  <div class="sidebar-item" onmouseover="showCategory(this, 'press')">
+                    <span>Press Releases</span>
+                    <i class="fas fa-chevron-right"></i>
+                  </div>
+                </div>
+
+                <!-- Main Content Area (Columns 2 & 3) -->
+                <div class="mega-menu-main">
+                  <!-- Latest News -->
+                  <div id="category-latest-news" class="category-content active">
+                    <div class="mega-menu-column middle">
+                      <h3>Latest Updates</h3>
+                      <p>Stay informed about SCL Digital Agency's latest achievements,
+                        major milestones, and company announcements from our global offices.</p>
+                      <a href="Blog/blog.html" class="mega-menu-cta">Read All
+                        News <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                    <div class="mega-menu-column right">
+                      <h4>Recent Headlines</h4>
+                      <ul>
+                        <li><a href="#">Expansion Into New Markets <i
+                                    class="fas fa-chevron-right"></i></a></li>
+                        <li><a href="#">Annual Innovation Award 2025 <i
+                                    class="fas fa-chevron-right"></i></a></li>
+                        <li><a href="#">New Strategic Partnerships <i
+                                    class="fas fa-chevron-right"></i></a></li>
+                        <li><a href="#">CEO's Monthly Vision Update <i
+                                    class="fas fa-chevron-right"></i></a></li>
+                      </ul>
+                    </div>
+                  </div>
+
+                  <!-- Upcoming Events -->
+                  <div id="category-upcoming-events" class="category-content">
+                    <div class="mega-menu-column middle">
+                      <h3>Events & Workshops</h3>
+                      <p>Join us for our upcoming webinars, technology workshops,
+                        and networking events designed to foster innovation and collaboration.
+                      </p>
+                      <a href="events-platform/eventspage.html" class="mega-menu-cta">View
+                        Calendar <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                    <div class="mega-menu-column right">
+                      <h4>Join Us</h4>
+                      <ul>
+                        <li><a href="#">Future of AI Webinar <i
+                                    class="fas fa-chevron-right"></i></a></li>
+                        <li><a href="#">UI/UX Masterclass <i
+                                    class="fas fa-chevron-right"></i></a></li>
+                        <li><a href="#">SaaS Networking Night <i
+                                    class="fas fa-chevron-right"></i></a></li>
+                        <li><a href="#">Tech Talent Career Fair <i
+                                    class="fas fa-chevron-right"></i></a></li>
+                      </ul>
+                    </div>
+                  </div>
+
+                  <!-- Community -->
+                  <div id="category-community" class="category-content">
+                    <div class="mega-menu-column middle">
+                      <h3>Community & Impact</h3>
+                      <p>Discover the success stories of our clients and the positive
+                        social impact projects SCL Digital Agency supports around the world.</p>
+                      <a href="case_studies.html" class="mega-menu-cta">Impact
+                        Reports <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                    <div class="mega-menu-column right">
+                      <h4>Our Circle</h4>
+                      <ul>
+                        <li><a href="#">Client Success Overviews <i
+                                    class="fas fa-chevron-right"></i></a></li>
+                        <li><a href="#">Social Responsibility Programs <i
+                                    class="fas fa-chevron-right"></i></a></li>
+                        <li><a href="#">Global Community Forum <i
+                                    class="fas fa-chevron-right"></i></a></li>
+                        <li><a href="#">Partner Spotlights <i
+                                    class="fas fa-chevron-right"></i></a></li>
+                      </ul>
+                    </div>
+                  </div>
+
+                  <!-- Press Releases -->
+                  <div id="category-press" class="category-content">
+                    <div class="mega-menu-column middle">
+                      <h3>Newsroom & Media</h3>
+                      <p>Access our official press releases, high-resolution media
+                        assets, and contact information for media inquiries.</p>
+                      <a href="contactus.html" class="mega-menu-cta">Media
+                        Inquiries <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                    <div class="mega-menu-column right">
+                      <h4>Resources</h4>
+                      <ul>
+                        <li><a href="#">Official Press Releases <i
+                                    class="fas fa-chevron-right"></i></a></li>
+                        <li><a href="#">Digital Media Kit <i
+                                    class="fas fa-chevron-right"></i></a></li>
+                        <li><a href="#">Executive Biographies <i
+                                    class="fas fa-chevron-right"></i></a></li>
+                        <li><a href="#">Brand Asset Library <i
+                                    class="fas fa-chevron-right"></i></a></li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+
           <li class="nav-dropdown" id="nav-about">
             <a href="about.html" class="nav-link active">About us
-              <svg class="chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                stroke-width="2">
+              <svg class="chevron" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2">
                 <polyline points="6 9 12 15 18 9"></polyline>
               </svg>
             </a>
@@ -203,9 +605,7 @@
               </div>
             </div>
           </li>
-          <li><a href="services-platform/our_services.html" class="nav-link">Services</a></li>
-          <li><a href="events-platform/eventspage.html" class="nav-link">Events</a></li>
-          <li><a href="resources_hub_landing.html" class="nav-link">Resources</a></li>
+        
         </ul>
       </div>
 
@@ -708,7 +1108,7 @@
                     <img src="images/Shinsa.jpg" alt="Shinsa Lyonga Lomboto - Founder & CEO" />
                   </figure>
                   <div class="founder-badge">
-                    <span class="badge-text">Visionary Leader</span>
+                    <span class="badge-text">Watch Video</span>
                   </div>
                 </div>
               </div>
@@ -2700,37 +3100,56 @@
 
   </main>
 
-  <!-- Footer START -->
-  <footer
-    style="background: url(images/background-image-sized.webp) no-repeat center center; padding: 32px 0 16px 0; text-align: center; border-top: 1px solid #FFF; margin-top: 1px;">
-    <div style="max-width: 600px; margin: 0 auto;">
-      <!-- Footer Navigation Links -->
-      <nav style="margin-bottom: 18px;">
-        <a href="index.html" style="margin: 0 10px; color: #fff; text-decoration: none; font-weight: 500;">Home</a>
-        <a href="applications/products.html/"
-          style="margin: 0 10px; color: #fff; text-decoration: none; font-weight: 500;">Products</a>
-        <a href="services-platform/our_services.html"
-          style="margin: 0 10px; color: #fff; text-decoration: none; font-weight: 500;">Our Solutions</a>
-        <a href="case_studies.html"
-          style="margin: 0 10px; color: #fff; text-decoration: none; font-weight: 500;">Customers</a>
-        <a href="about.html" style="margin: 0 10px; color: #fff; text-decoration: none; font-weight: 500;">About Us</a>
-        <a href="payments.html" style="margin: 0 10px; color: #fff; text-decoration: none; font-weight: 500;">Payments &
-          Fees</a>
+  <!-- ─── FOOTER ─── -->
+<footer>
+  <div class="footer-top">
+    <div>
+       <img src="images/SCL DA_White_Logo.png">
+    </div>
 
-      </nav>
-      <!-- DesignRush Badge Area -->
-      <a href="https://www.designrush.com/agency/it-services/za" target="_blank" rel="noopener"
-        style="display: inline-block; margin-bottom: 12px;">
-        <img src="images/Top IT Services Company.png" alt="it services agencies in south africa designrush"
-          style="max-width: 180px; width: 50%; height: auto;" />
-      </a>
-      <div style="font-size: 13px; color: #fff; margin-top: 8px;">Proudly listed among the Top IT Services Companies in
-        South Africa by DesignRush</div>
+	<script language="JavaScript" src="http://dunsregistered.dnb.com"
+type="text/javascript"></script>
+
+<script language="JavaScript" src="https://dunsregistered.dnb.com/mini.js"
+type="text/javascript"></script>
+
+    <div class="footer-cols">
+      <div>
+        <p class="footer-col-title">Services</p>
+        <ul class="footer-links">
+          <li><a href="#">Idea Protection</a></li>
+          <li><a href="#">Pitch Development</a></li>
+          <li><a href="#">MVP Development</a></li>
+          <li><a href="#">Product Launch</a></li>
+          <li><a href="#">Monetization</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer-col-title">Company</p>
+        <ul class="footer-links">
+          <li><a href="#">About SCL DA</a></li>
+          <li><a href="#">Our Model</a></li>
+          <li><a href="#">Portfolio</a></li>
+          <li><a href="#">Vision</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer-col-title">Connect</p>
+        <ul class="footer-links">
+          <li><a href="#">Start a Project</a></li>
+          <li><a href="#">LinkedIn</a></li>
+          <li><a href="#">Twitter / X</a></li>
+          <li><a href="#">hello@sclda.com</a></li>
+        </ul>
+      </div>
     </div>
-    <div style="font-size: 12px; color: #fff; margin-top: 18px;">SCL DIGITAL AGENCY | Registration Number: K2025001641
-    </div>
-  </footer>
-  <!-- Footer END -->
+  </div>
+  <div class="footer-bottom">
+    <span class="live-dot">Open for New Projects</span>
+    <span> 2024 SCL Digital Agency. All rights reserved.</span>
+    <span>ZA · Built by SCL DA</span>
+  </div>
+</footer>
 
   <script>
     class WhatsAppWidget {
@@ -3161,6 +3580,121 @@
       background: linear-gradient(90deg, rgba(102, 126, 234, 0.2), rgba(118, 75, 162, 0.2));
       border-left: 4px solid #667eea;
     }
+
+    /* Footer Styles */
+    footer {
+      background: #0a0a0a;
+      color: #ffffff;
+      padding: 64px 40px 32px;
+    }
+
+    .footer-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 48px;
+    }
+
+    .footer-top img {
+      height: 40px;
+      width: auto;
+    }
+
+    .footer-cols {
+      display: flex;
+      gap: 64px;
+    }
+
+    .footer-col-title {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #ffffff;
+      margin-bottom: 16px;
+      font-weight: 600;
+    }
+
+    .footer-links {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .footer-links li {
+      margin-bottom: 12px;
+    }
+
+    .footer-links a {
+      color: #a0a0a0;
+      text-decoration: none;
+      transition: color 0.2s;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 12px;
+    }
+
+    .footer-links a:hover {
+      color: #ffffff;
+    }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 32px;
+      border-top: 1px solid #333333;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      color: #a0a0a0;
+      letter-spacing: 0.08em;
+    }
+
+    /* Live indicator */
+    .live-dot {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.15em;
+      color: #a0a0a0;
+      text-transform: uppercase;
+    }
+
+    .live-dot::before {
+      content: '';
+      display: block;
+      width: 6px;
+      height: 6px;
+      background: #00ff88;
+      border-radius: 50%;
+      animation: blink 1.5s ease-in-out infinite;
+    }
+
+    @keyframes blink {
+      0%, 100% {
+        opacity: 1;
+      }
+      50% {
+        opacity: 0.3;
+      }
+    }
+
+    /* Footer responsive */
+    @media (max-width: 900px) {
+      footer {
+        padding: 48px 24px 32px;
+      }
+      .footer-top {
+        flex-direction: column;
+        gap: 40px;
+      }
+      .footer-bottom {
+        flex-direction: column;
+        gap: 12px;
+        text-align: center;
+      }
+    }
   </style>
 
 
@@ -3319,12 +3853,117 @@
               transform: translateX(-50%) translateY(0);
           }
           to {
-              opacity: 0;
-              transform: translateX(-50%) translateY(-20px);
-          }
-      }
   `;
     document.head.appendChild(style);
+  </script>
+
+  <!-- Mega Menu JavaScript -->
+  <script>
+    // Mega Menu Category Switching
+    function showCategory(element, categoryId) {
+      // Remove active class from all sidebar items in this menu
+      const sidebarItems = element.parentElement.querySelectorAll('.sidebar-item');
+      sidebarItems.forEach(item => item.classList.remove('active'));
+      
+      // Add active class to clicked item
+      element.classList.add('active');
+      
+      // Hide all category contents
+      const categoryContents = element.closest('.mega-menu-main').querySelectorAll('.category-content');
+      categoryContents.forEach(content => content.classList.remove('active'));
+      
+      // Show selected category
+      const targetCategory = document.getElementById('category-' + categoryId);
+      if (targetCategory) {
+        targetCategory.classList.add('active');
+      }
+    }
+
+    // Search Bar Toggle
+    function toggleSearchBar() {
+      const searchBar = document.getElementById('searchBar');
+      if (searchBar) {
+        searchBar.classList.toggle('active');
+        if (searchBar.classList.contains('active')) {
+          searchBar.querySelector('.search-input').focus();
+        }
+      }
+    }
+
+    // Account Modal (placeholder function)
+    function openAccountModal() {
+      // Placeholder for account modal functionality
+      console.log('Account modal would open here');
+    }
+
+    // Cart Toggle (placeholder function)
+    function toggleCart() {
+      // Placeholder for cart functionality
+      console.log('Cart would toggle here');
+    }
+
+    // Sidebar Toggle (placeholder function)
+    function toggleSidebar() {
+      // Placeholder for mobile sidebar functionality
+      console.log('Mobile sidebar would toggle here');
+    }
+
+    // Navbar scroll effect
+    window.addEventListener('scroll', function() {
+      const navbar = document.querySelector('.modern-navbar');
+      if (navbar) {
+        if (window.scrollY > 50) {
+          navbar.classList.add('scrolled');
+        } else {
+          navbar.classList.remove('scrolled');
+        }
+      }
+    });
+
+    // Close search bar when clicking outside
+    document.addEventListener('click', function(event) {
+      const searchBar = document.getElementById('searchBar');
+      const searchButton = event.target.closest('.navbar-icon-btn[title="Search"]');
+      
+      if (searchBar && searchBar.classList.contains('active') && 
+          !searchBar.contains(event.target) && 
+          !searchButton) {
+        searchBar.classList.remove('active');
+      }
+    });
+
+    // Close mega menus when clicking outside
+    document.addEventListener('click', function(event) {
+      if (!event.target.closest('.nav-dropdown')) {
+        const megaMenus = document.querySelectorAll('.mega-menu');
+        megaMenus.forEach(menu => {
+          menu.style.visibility = 'hidden';
+          menu.style.opacity = '0';
+          menu.style.pointerEvents = 'none';
+        });
+      }
+    });
+
+    // Re-enable mega menu hover functionality
+    document.querySelectorAll('.nav-dropdown').forEach(dropdown => {
+      dropdown.addEventListener('mouseenter', function() {
+        const megaMenu = this.querySelector('.mega-menu');
+        if (megaMenu) {
+          megaMenu.style.visibility = 'visible';
+          megaMenu.style.opacity = '1';
+          megaMenu.style.pointerEvents = 'auto';
+        }
+      });
+      
+      dropdown.addEventListener('mouseleave', function() {
+        const megaMenu = this.querySelector('.mega-menu');
+        if (megaMenu) {
+          megaMenu.style.visibility = 'hidden';
+          megaMenu.style.opacity = '0';
+          megaMenu.style.pointerEvents = 'none';
+        }
+      });
+    });
   </script>
 
   <!-- Testimonials Slider Initialization -->
@@ -3379,7 +4018,6 @@
       });
     });
   </script>
-
 
   <script src="js/jquery-3.7.0.min.js"></script>
   <script src="js/swiper-bundle.min.js"></script>
