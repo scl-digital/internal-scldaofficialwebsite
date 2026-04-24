@@ -1948,13 +1948,23 @@ results that add real value to your business. Let's turn your vision into impact
     background: var(--border);
   }
 
+
+
   .engine-card {
-    background: #000000;
-    padding: 64px 56px;
-    position: relative;
-    overflow: hidden;
-    transition: background 0.4s;
-  }
+  position: relative;
+  overflow: hidden;
+  padding: 64px 56px;
+
+  background: 
+    linear-gradient(rgba(0, 0, 0, 0.637), rgb(0, 0, 0)),
+    url("images/Agencyservices.png");
+
+  background-size: cover;
+  background-position: center;
+
+  transition: all 0.4s ease;
+}
+
   .engine-card::before {
     content: '';
     position: absolute;
@@ -1988,10 +1998,10 @@ results that add real value to your business. Let's turn your vision into impact
     font-family: 'Instrument Serif', serif;
     font-style: italic;
     font-size: 18px;
-    color: var(--accent);
+    color: #66318F;
     margin-bottom: 32px;
   }
-  .engine-card.blue .engine-subtitle { color: var(--blue); }
+  .engine-card.blue .engine-subtitle { color: #66318F; }
   .engine-desc {
     font-size: 14px;
     line-height: 1.8;
@@ -2024,7 +2034,7 @@ results that add real value to your business. Let's turn your vision into impact
     font-size: 14px;
     flex-shrink: 0;
   }
-  .engine-card.blue .engine-list li::before { color: var(--blue); }
+  .engine-card.blue .engine-list li::before { color: #66318F; }
 
   /* ─── SERVICES ─── */
   .services-section {
