@@ -1092,9 +1092,170 @@
         }
       </style>
 
+      <!-- Founder Gallery Styles -->
+      <style>
+        .founder-gallery-wrap {
+          position: relative;
+        }
 
+        .founder-gallery-container {
+          background: #ffffff;
+          border-radius: 20px;
+          overflow: hidden;
+          box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+          transition: transform 0.3s ease;
+        }
 
+        .founder-gallery-container:hover {
+          transform: translateY(-5px);
+        }
 
+        .gallery-main-image {
+          position: relative;
+          width: 100%;
+          height: 400px;
+          overflow: hidden;
+        }
+
+        .gallery-image {
+          position: relative;
+          width: 100%;
+          height: 100%;
+          margin: 0;
+        }
+
+        .gallery-image img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          transition: transform 0.5s ease;
+        }
+
+        .gallery-image:hover img {
+          transform: scale(1.05);
+        }
+
+        .gallery-badge {
+          position: absolute;
+          top: 20px;
+          right: 20px;
+          background: linear-gradient(135deg, #667eea, #764ba2);
+          color: white;
+          padding: 8px 16px;
+          border-radius: 25px;
+          font-size: 12px;
+          font-weight: 600;
+          cursor: pointer;
+          transition: all 0.3s ease;
+          z-index: 10;
+        }
+
+        .gallery-badge:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .gallery-thumbnails {
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          gap: 0;
+          background: #f8f9fa;
+        }
+
+        .thumbnail-item {
+          position: relative;
+          width: 100%;
+          height: 80px;
+          cursor: pointer;
+          overflow: hidden;
+          transition: all 0.3s ease;
+        }
+
+        .thumbnail-item img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          transition: transform 0.3s ease;
+        }
+
+        .thumbnail-item:hover img {
+          transform: scale(1.1);
+        }
+
+        .thumbnail-item.active {
+          border: 3px solid #667eea;
+        }
+
+        .thumbnail-item.active::after {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background: rgba(102, 126, 234, 0.2);
+          pointer-events: none;
+        }
+
+        .thumbnail-overlay {
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background: rgba(0, 0, 0, 0.5);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          opacity: 0;
+          transition: opacity 0.3s ease;
+        }
+
+        .thumbnail-item:hover .thumbnail-overlay {
+          opacity: 1;
+        }
+
+        .thumbnail-overlay i {
+          color: white;
+          font-size: 18px;
+        }
+
+        /* Responsive Gallery */
+        @media (max-width: 768px) {
+          .gallery-main-image {
+            height: 300px;
+          }
+
+          .gallery-thumbnails {
+            grid-template-columns: repeat(4, 1fr);
+          }
+
+          .thumbnail-item {
+            height: 60px;
+          }
+
+          .gallery-badge {
+            top: 15px;
+            right: 15px;
+            padding: 6px 12px;
+            font-size: 11px;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .gallery-main-image {
+            height: 250px;
+          }
+
+          .thumbnail-item {
+            height: 50px;
+          }
+
+          .gallery-thumbnails {
+            grid-template-columns: repeat(4, 1fr);
+          }
+        }
+      </style>
 
       <!-- Founder Section START -->
       <section class="founder-section">
@@ -1102,13 +1263,44 @@
           <div class="row align-items-center">
             <!-- Founder Image Column -->
             <div class="col-lg-6 col-md-12 col-sm-12 mb-md-40">
-              <div class="founder-image-wrap wow fadeInLeft">
-                <div class="founder-image-container">
-                  <figure class="founder-image">
-                    <img src="images/Shinsa.jpg" alt="Shinsa Lyonga Lomboto - Founder & CEO" />
-                  </figure>
-                  <div class="founder-badge">
-                    <span class="badge-text">Watch Video</span>
+              <div class="founder-gallery-wrap wow fadeInLeft">
+                <div class="founder-gallery-container">
+                  <!-- Main Featured Image -->
+                  <div class="gallery-main-image">
+                    <figure class="gallery-image">
+                      <img src="images/Shinsa.jpg" alt="Shinsa Lyonga Lomboto - Founder & CEO" />
+                      <div class="gallery-badge">
+                        <span class="badge-text">Watch Video</span>
+                      </div>
+                    </figure>
+                  </div>
+                  
+                  <!-- Thumbnail Gallery -->
+                  <div class="gallery-thumbnails">
+                    <div class="thumbnail-item active" onclick="changeGalleryImage('images/Shinsa.jpg', this)">
+                      <img src="images/Shinsa.jpg" alt="Professional Portrait" />
+                      <div class="thumbnail-overlay">
+                        <i class="fas fa-search-plus"></i>
+                      </div>
+                    </div>
+                    <div class="thumbnail-item" onclick="changeGalleryImage('images/Shinsa-office.jpg', this)">
+                      <img src="images/Shinsa-office.jpg" alt="In Office" />
+                      <div class="thumbnail-overlay">
+                        <i class="fas fa-search-plus"></i>
+                      </div>
+                    </div>
+                    <div class="thumbnail-item" onclick="changeGalleryImage('images/Shinsa-speaking.jpg', this)">
+                      <img src="images/Shinsa-speaking.jpg" alt="Speaking Event" />
+                      <div class="thumbnail-overlay">
+                        <i class="fas fa-search-plus"></i>
+                      </div>
+                    </div>
+                    <div class="thumbnail-item" onclick="changeGalleryImage('images/Shinsa-team.jpg', this)">
+                      <img src="images/Shinsa-team.jpg" alt="With Team" />
+                      <div class="thumbnail-overlay">
+                        <i class="fas fa-search-plus"></i>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -1136,28 +1328,10 @@
                     building world-class African brands. His leadership philosophy centers on innovation with integrity,
                     blending spiritual values with cutting-edge digital strategies.
                   </p>
-                  <p>
-                    Under his vision, SCL Digital Agency has evolved into a trusted partner for startups, SMEs, and
-                    enterprise
-                    brands, delivering transformative digital solutions that drive sustainable growth and market
-                    leadership.
-                  </p>
+              
                 </div>
 
-                <div class="founder-stats">
-                  <div class="stat-item">
-                    <div class="stat-number">100+</div>
-                    <div class="stat-label">Projects Delivered</div>
-                  </div>
-                  <div class="stat-item">
-                    <div class="stat-number">6+</div>
-                    <div class="stat-label">Industries Served</div>
-                  </div>
-                  <div class="stat-item">
-                    <div class="stat-number">5+</div>
-                    <div class="stat-label">Years Building Excellence</div>
-                  </div>
-                </div>
+            
 
                 <div class="founder-cta">
                   <a href="contactus.html" class="theme-btn btn-style-one">
@@ -3832,6 +4006,26 @@ type="text/javascript"></script>
     document.addEventListener('DOMContentLoaded', () => {
       new SimpleTranslator();
     });
+
+    // Gallery Image Switching Function
+    function changeGalleryImage(imageSrc, thumbnailElement) {
+      // Update main image
+      const mainImage = document.querySelector('.gallery-image img');
+      if (mainImage) {
+        mainImage.src = imageSrc;
+        
+        // Add fade effect
+        mainImage.style.opacity = '0';
+        setTimeout(() => {
+          mainImage.style.opacity = '1';
+        }, 100);
+      }
+      
+      // Update active thumbnail
+      const thumbnails = document.querySelectorAll('.thumbnail-item');
+      thumbnails.forEach(thumb => thumb.classList.remove('active'));
+      thumbnailElement.classList.add('active');
+    }
 
     // Add CSS animations for notifications
     const style = document.createElement('style');
