@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Access Restricted — SCL Shield</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .blocked-container {
+      text-align: center;
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+    .blocked-icon {
+      font-size: 4rem;
+      color: #ff4444;
+      margin-bottom: 1rem;
+    }
+    .blocked-title {
+      color: #ff4444;
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+    .blocked-message {
+      color: #e0e0e0;
+      margin-bottom: 2rem;
+      line-height: 1.6;
+    }
+    .back-btn {
+      background: var(--accent);
+      color: var(--bg);
+      padding: 0.75rem 1.5rem;
+      border: none;
+      font-family: 'Space Mono', monospace;
+      font-weight: 700;
+      cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      text-decoration: none;
+      display: inline-block;
+    }
+    .back-btn:hover {
+      background: var(--accent-dim);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="panel active">
+    <div class="panel-inner">
+      <div class="blocked-container">
+        
+        <div class="brand">
+          <div class="brand-text">
+            <span class="brand-name"> <img src="/images/SCL DA_White_Logo.png" width="50%" alt="SCL Shield" /></span>
+          </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="blocked-icon">🚫</div>
+        
+        <h1 class="blocked-title">ACCESS RESTRICTED</h1>
+        
+        <div class="blocked-message">
+          <p>Access from your region is currently restricted due to compliance requirements.</p>
+          <p>This restriction is in place to ensure regulatory compliance and data protection.</p>
+          <p>If you believe this is an error, please contact our support team.</p>
+        </div>
+        
+        <a href="index.html" class="back-btn">Return to Access Portal</a>
+        
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

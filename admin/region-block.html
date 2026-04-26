@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Region Block Manager — SCL Admin</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    :root {
+      --bg: #0a0a0a;
+      --bg-secondary: #111;
+      --accent: #00ffb2;
+      --accent-dim: #00cc8e;
+      --text: #e0e0e0;
+      --text-dim: #666;
+      --danger: #ff4444;
+      --border: #222;
+    }
+    
+    body {
+      font-family: 'Space Mono', monospace;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      padding: 2rem;
+    }
+    
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    
+    h1 {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 1.5rem;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+    }
+    
+    .subtitle {
+      color: var(--text-dim);
+      font-size: 0.85rem;
+      margin-bottom: 2rem;
+    }
+    
+    .admin-key-section {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+    }
+    
+    .form-group {
+      margin-bottom: 1rem;
+    }
+    
+    label {
+      display: block;
+      font-size: 0.75rem;
+      color: var(--text-dim);
+      margin-bottom: 0.5rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    
+    input, select {
+      width: 100%;
+      padding: 0.75rem;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      color: var(--text);
+      font-family: 'Space Mono', monospace;
+      font-size: 0.9rem;
+    }
+    
+    input:focus, select:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+    
+    button {
+      padding: 0.75rem 1.5rem;
+      background: var(--accent);
+      color: var(--bg);
+      border: none;
+      font-family: 'Space Mono', monospace;
+      font-weight: 700;
+      cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    
+    button:hover {
+      background: var(--accent-dim);
+    }
+    
+    button.danger {
+      background: var(--danger);
+      color: white;
+    }
+    
+    button.danger:hover {
+      background: #cc3333;
+    }
+    
+    .blocked-list {
+      margin-top: 2rem;
+    }
+    
+    .blocked-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      padding: 1rem;
+      margin-bottom: 0.5rem;
+    }
+    
+    .blocked-item .country-info {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    
+    .blocked-item .country-code {
+      font-weight: 700;
+      color: var(--accent);
+    }
+    
+    .blocked-item .blocked-date {
+      font-size: 0.75rem;
+      color: var(--text-dim);
+    }
+    
+    .blocked-item .reason {
+      font-size: 0.8rem;
+      color: var(--text-dim);
+      margin-top: 0.25rem;
+    }
+    
+    .message {
+      padding: 1rem;
+      margin-bottom: 1rem;
+      font-size: 0.85rem;
+    }
+    
+    .message.success {
+      background: rgba(0, 255, 178, 0.1);
+      border: 1px solid var(--accent);
+      color: var(--accent);
+    }
+    
+    .message.error {
+      background: rgba(255, 68, 68, 0.1);
+      border: 1px solid var(--danger);
+      color: var(--danger);
+    }
+    
+    .hidden { display: none; }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>⬡ REGION BLOCK MANAGER</h1>
+    <p class="subtitle">Manage access restrictions by geographic region</p>
+    
+    <!-- Admin Key Input -->
+    <div class="admin-key-section" id="auth-section">
+      <div class="form-group">
+        <label for="admin-key">// ADMIN SECRET KEY</label>
+        <input type="password" id="admin-key" placeholder="Enter admin key..." />
+      </div>
+      <button id="auth-btn">Authenticate</button>
+    </div>
+    
+    <!-- Main Management Section (hidden until authenticated) -->
+    <div id="management-section" class="hidden">
+      
+      <!-- Block New Region -->
+      <div class="admin-key-section">
+        <h2 style="font-size: 1rem; margin-bottom: 1rem;">// BLOCK NEW REGION</h2>
+        <div class="form-group">
+          <label for="country-select">Select Country</label>
+          <select id="country-select">
+            <option value="">-- Select Region --</option>
+            <option value="ZA">🇿🇦 South Africa</option>
+            <option value="US">🇺🇸 United States</option>
+            <option value="GB">🇬🇧 United Kingdom</option>
+            <option value="NG">🇳🇬 Nigeria</option>
+            <option value="KE">🇰🇪 Kenya</option>
+            <option value="FR">🇫🇷 France</option>
+            <option value="DE">🇩🇪 Germany</option>
+            <option value="CN">🇨🇳 China</option>
+            <option value="RU">🇷🇺 Russia</option>
+            <option value="KR">🇰🇷 South Korea</option>
+            <option value="JP">🇯🇵 Japan</option>
+            <option value="IN">🇮🇳 India</option>
+            <option value="BR">🇧🇷 Brazil</option>
+            <option value="MX">🇲🇽 Mexico</option>
+            <option value="AU">🇦🇺 Australia</option>
+            <option value="CA">🇨🇦 Canada</option>
+            <option value="ES">🇪🇸 Spain</option>
+            <option value="IT">🇮🇹 Italy</option>
+            <option value="NL">🇳🇱 Netherlands</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="block-reason">Reason (optional)</label>
+          <input type="text" id="block-reason" placeholder="e.g., License restrictions, Compliance..." />
+        </div>
+        <button id="block-btn" class="danger">Block Region</button>
+      </div>
+      
+      <!-- Currently Blocked Regions -->
+      <div class="blocked-list">
+        <h2 style="font-size: 1rem; margin-bottom: 1rem;">// CURRENTLY BLOCKED</h2>
+        <div id="blocked-regions">
+          <p style="color: var(--text-dim);">Loading...</p>
+        </div>
+      </div>
+      
+      <!-- Compliance Report -->
+      <div class="admin-key-section">
+        <h2 style="font-size: 1rem; margin-bottom: 1rem;">// COMPLIANCE REPORT</h2>
+        <button id="report-btn">Generate Report</button>
+        <div id="report-content" style="margin-top: 1rem;"></div>
+      </div>
+      
+    </div>
+    
+    <div id="message-area"></div>
+  </div>
+
+  <script>
+    const ADMIN_KEY = 'scl_admin_secret_key_2024'; // Must match region_block.php
+    
+    // DOM Elements
+    const authSection = document.getElementById('auth-section');
+    const managementSection = document.getElementById('management-section');
+    const authBtn = document.getElementById('auth-btn');
+    const adminKeyInput = document.getElementById('admin-key');
+    const countrySelect = document.getElementById('country-select');
+    const blockReasonInput = document.getElementById('block-reason');
+    const blockBtn = document.getElementById('block-btn');
+    const blockedRegionsDiv = document.getElementById('blocked-regions');
+    const messageArea = document.getElementById('message-area');
+    const reportBtn = document.getElementById('report-btn');
+    const reportContent = document.getElementById('report-content');
+    
+    let authenticated = false;
+    
+    // Show message
+    function showMessage(text, type = 'success') {
+      messageArea.innerHTML = `<div class="message ${type}">${text}</div>`;
+      setTimeout(() => messageArea.innerHTML = '', 5000);
+    }
+    
+    // Authenticate
+    authBtn.addEventListener('click', async () => {
+      const key = adminKeyInput.value;
+      if (key === ADMIN_KEY) {
+        authenticated = true;
+        authSection.classList.add('hidden');
+        managementSection.classList.remove('hidden');
+        loadBlockedRegions();
+      } else {
+        showMessage('Invalid admin key', 'error');
+      }
+    });
+    
+    // Load blocked regions
+    async function loadBlockedRegions() {
+      try {
+        const res = await fetch('../api/region_block.php?action=list');
+        const data = await res.json();
+        
+        if (data.success && data.data && data.data.blocked_regions) {
+          const regions = data.data.blocked_regions;
+          
+          if (regions.length === 0) {
+            blockedRegionsDiv.innerHTML = '<p style="color: var(--text-dim);">No regions currently blocked</p>';
+            return;
+          }
+          
+          blockedRegionsDiv.innerHTML = regions.map(r => `
+            <div class="blocked-item">
+              <div class="country-info">
+                <span class="country-code">${r.country_code}</span>
+                <span>${r.country_name}</span>
+              </div>
+              <div>
+                <div class="blocked-date">Blocked: ${new Date(r.blocked_at).toLocaleDateString()}</div>
+                <div class="reason">${r.reason || 'No reason specified'}</div>
+              </div>
+              <button class="unblock-btn" data-country="${r.country_code}" style="background: transparent; border: 1px solid var(--danger); color: var(--danger); padding: 0.5rem 1rem; font-size: 0.75rem;">UNBLOCK</button>
+            </div>
+          `).join('');
+          
+          // Add unblock handlers
+          document.querySelectorAll('.unblock-btn').forEach(btn => {
+            btn.addEventListener('click', () => unblockRegion(btn.dataset.country));
+          });
+        }
+      } catch (e) {
+        blockedRegionsDiv.innerHTML = '<p style="color: var(--danger);">Failed to load blocked regions</p>';
+      }
+    }
+    
+    // Block region
+    blockBtn.addEventListener('click', async () => {
+      const country = countrySelect.value;
+      if (!country) {
+        showMessage('Please select a country', 'error');
+        return;
+      }
+      
+      const reason = blockReasonInput.value || 'Manually blocked by admin';
+      
+      try {
+        const res = await fetch('../api/region_block.php', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: `action=block&country=${country}&reason=${encodeURIComponent(reason)}&admin_key=${ADMIN_KEY}`
+        });
+        const data = await res.json();
+        
+        if (data.success) {
+          showMessage(data.message);
+          countrySelect.value = '';
+          blockReasonInput.value = '';
+          loadBlockedRegions();
+        } else {
+          showMessage(data.message, 'error');
+        }
+      } catch (e) {
+        showMessage('Failed to block region', 'error');
+      }
+    });
+    
+    // Unblock region
+    async function unblockRegion(country) {
+      if (!confirm(`Are you sure you want to unblock ${country}?`)) return;
+      
+      try {
+        const res = await fetch('../api/region_block.php', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: `action=unblock&country=${country}&admin_key=${ADMIN_KEY}`
+        });
+        const data = await res.json();
+        
+        if (data.success) {
+          showMessage(data.message);
+          loadBlockedRegions();
+        } else {
+          showMessage(data.message, 'error');
+        }
+      } catch (e) {
+        showMessage('Failed to unblock region', 'error');
+      }
+    }
+    
+    // Generate compliance report
+    reportBtn.addEventListener('click', async () => {
+      try {
+        const res = await fetch('../api/region_block.php?action=list');
+        const data = await res.json();
+        
+        if (data.success && data.data && data.data.blocked_regions) {
+          const regions = data.data.blocked_regions;
+          const reportDate = new Date().toLocaleString();
+          
+          let reportHTML = `
+            <div style="background: var(--bg-secondary); border: 1px solid var(--border); padding: 1rem; font-size: 0.8rem;">
+              <h3 style="color: var(--accent); margin-bottom: 1rem;">Compliance Report - ${reportDate}</h3>
+              <p><strong>Total Blocked Regions:</strong> ${regions.length}</p>
+              <p><strong>Compliance Status:</strong> ${regions.length > 0 ? 'Active restrictions in place' : 'No active restrictions'}</p>
+          `;
+          
+          if (regions.length > 0) {
+            reportHTML += `
+              <h4 style="margin-top: 1rem; margin-bottom: 0.5rem;">Blocked Regions Summary:</h4>
+              <table style="width: 100%; border-collapse: collapse;">
+                <thead>
+                  <tr style="border-bottom: 1px solid var(--border);">
+                    <th style="text-align: left; padding: 0.5rem;">Country</th>
+                    <th style="text-align: left; padding: 0.5rem;">Blocked Date</th>
+                    <th style="text-align: left; padding: 0.5rem;">Reason</th>
+                  </tr>
+                </thead>
+                <tbody>
+            `;
+            
+            regions.forEach(region => {
+              reportHTML += `
+                <tr style="border-bottom: 1px solid var(--border);">
+                  <td style="padding: 0.5rem;">${region.country_code} - ${region.country_name}</td>
+                  <td style="padding: 0.5rem;">${new Date(region.blocked_at).toLocaleDateString()}</td>
+                  <td style="padding: 0.5rem;">${region.reason || 'Not specified'}</td>
+                </tr>
+              `;
+            });
+            
+            reportHTML += `
+                </tbody>
+              </table>
+            `;
+          }
+          
+          reportHTML += `
+            <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--border);">
+              <p style="color: var(--text-dim); font-size: 0.75rem;">
+                This report is for compliance documentation purposes.<br>
+                Generated by SCL Region Block Manager.
+              </p>
+            </div>
+          </div>
+          `;
+          
+          reportContent.innerHTML = reportHTML;
+        } else {
+          reportContent.innerHTML = '<p style="color: var(--danger);">Failed to generate report</p>';
+        }
+      } catch (e) {
+        reportContent.innerHTML = '<p style="color: var(--danger);">Error generating report</p>';
+      }
+    });
+  </script>
+</body>
+</html>

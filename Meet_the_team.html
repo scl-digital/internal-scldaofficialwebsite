@@ -1100,7 +1100,7 @@
 
         .founder-gallery-container {
           background: #ffffff;
-          border-radius: 20px;
+          border-radius: 1px;
           overflow: hidden;
           box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
           transition: transform 0.3s ease;
@@ -1268,35 +1268,43 @@
                   <!-- Main Featured Image -->
                   <div class="gallery-main-image">
                     <figure class="gallery-image">
-                      <img src="images/Shinsa.jpg" alt="Shinsa Lyonga Lomboto - Founder & CEO" />
-                      <div class="gallery-badge">
-                        <span class="badge-text">Watch Video</span>
-                      </div>
+                      <img id="galleryMainImage" src="images/Shinsa_Lomboto_Lyonga/Shinsa_1.png" alt="Shinsa Lyonga Lomboto - Founder & CEO" />
+                      <video id="galleryMainVideo" style="display: none; width: 100%; height: 100%; object-fit: cover;" controls muted>
+                        <source src="" type="video/mp4">
+                        Your browser does not support the video tag.
+                      </video>
                     </figure>
                   </div>
                   
                   <!-- Thumbnail Gallery -->
                   <div class="gallery-thumbnails">
-                    <div class="thumbnail-item active" onclick="changeGalleryImage('images/Shinsa.jpg', this)">
-                      <img src="images/Shinsa.jpg" alt="Professional Portrait" />
+
+               <div class="thumbnail-item active" onclick="changeGalleryImage('images/Shinsa_Lomboto_Lyonga/Shinsa_2.MOV', this)">
+                      <img src="images/Shinsa_Lomboto_Lyonga/video.png" alt="In Office" />
+                      <div class="thumbnail-overlay">
+                        <i class="fas fa-play"></i>
+                      </div>
+                    </div>
+
+                    <div class="thumbnail-item active" onclick="changeGalleryImage('images/Shinsa_Lomboto_Lyonga/Shinsa_1.png', this)">
+                      <img src="images/Shinsa_Lomboto_Lyonga/Shinsa_1.png" alt="Professional Portrait" />
                       <div class="thumbnail-overlay">
                         <i class="fas fa-search-plus"></i>
                       </div>
                     </div>
-                    <div class="thumbnail-item" onclick="changeGalleryImage('images/Shinsa-office.jpg', this)">
-                      <img src="images/Shinsa-office.jpg" alt="In Office" />
+
+
+
+
+                    <div class="thumbnail-item" onclick="changeGalleryImage('images/Shinsa_Lomboto_Lyonga/Shinsa_3.jpg', this)">
+                      <img src="images/Shinsa_Lomboto_Lyonga/Shinsa_3.jpg" alt="Speaking Event" />
                       <div class="thumbnail-overlay">
                         <i class="fas fa-search-plus"></i>
                       </div>
                     </div>
-                    <div class="thumbnail-item" onclick="changeGalleryImage('images/Shinsa-speaking.jpg', this)">
-                      <img src="images/Shinsa-speaking.jpg" alt="Speaking Event" />
-                      <div class="thumbnail-overlay">
-                        <i class="fas fa-search-plus"></i>
-                      </div>
-                    </div>
-                    <div class="thumbnail-item" onclick="changeGalleryImage('images/Shinsa-team.jpg', this)">
-                      <img src="images/Shinsa-team.jpg" alt="With Team" />
+
+                    <div class="thumbnail-item" onclick="changeGalleryImage('images/Shinsa_Lomboto_Lyonga/Shinsa_4.jpg', this)">
+                      <img src="images/Shinsa_Lomboto_Lyonga/Shinsa_4.jpg" alt="With Team" />
                       <div class="thumbnail-overlay">
                         <i class="fas fa-search-plus"></i>
                       </div>
@@ -1322,12 +1330,7 @@
                     Shinsa Lyonga Lomboto founded SCL Digital Agency to empower visionaries and dreamers across the
                     continent.
                   </p>
-                  <p>
-                    Driven by a purpose-led approach, Shinsa believes that technology and creativity are the catalysts
-                    for
-                    building world-class African brands. His leadership philosophy centers on innovation with integrity,
-                    blending spiritual values with cutting-edge digital strategies.
-                  </p>
+                
               
                 </div>
 
@@ -1335,7 +1338,7 @@
 
                 <div class="founder-cta">
                   <a href="contactus.html" class="theme-btn btn-style-one">
-                    <i class="fa-solid fa-envelope"></i> Connect With Us
+                    <i class="fa-brands fa-instagram"></i> Instagram Profile
                   </a>
                   <a href="https://www.linkedin.com/in/shinsa-lyonga-lomboto/" target="_blank"
                     class="theme-btn btn-style-social">
@@ -1822,7 +1825,7 @@
           padding: 15px 40px;
           font-size: 16px;
           font-weight: 600;
-          border-radius: 2px;
+          border-radius: 50px;
           transition: all 0.3s ease;
           display: inline-flex;
           align-items: center;
@@ -1831,11 +1834,11 @@
 
         .founder-cta .btn-style-one {
           background-color: #ffffff;
-          color: #1e348d;
+          color: #1C1550;
         }
 
         .founder-cta .btn-style-one:hover {
-          background-color: #44bce2;
+          background-color: #1C1550;
           color: #ffffff;
           transform: translateY(-3px);
           box-shadow: 0 20px 40px rgba(68, 188, 226, 0.3);
@@ -1843,14 +1846,14 @@
 
         .founder-cta .btn-style-social {
           background-color: rgba(255, 255, 255, 0.15);
-          color: #ffffff;
+          color: #1C1550;
           border: 2px solid rgba(255, 255, 255, 0.3);
         }
 
         .founder-cta .btn-style-social:hover {
-          background-color: #44bce2;
+          background-color: #1C1550;
           color: #ffffff;
-          border-color: #44bce2;
+          border-color: #1C1550;
           transform: translateY(-3px);
           box-shadow: 0 20px 40px rgba(68, 188, 226, 0.3);
         }
@@ -4007,12 +4010,44 @@ type="text/javascript"></script>
       new SimpleTranslator();
     });
 
-    // Gallery Image Switching Function
-    function changeGalleryImage(imageSrc, thumbnailElement) {
-      // Update main image
-      const mainImage = document.querySelector('.gallery-image img');
-      if (mainImage) {
-        mainImage.src = imageSrc;
+    // Gallery Image/Video Switching Function
+    function changeGalleryImage(mediaSrc, thumbnailElement) {
+      const mainImage = document.getElementById('galleryMainImage');
+      const mainVideo = document.getElementById('galleryMainVideo');
+      
+      // Check if the media is a video file
+      const isVideo = mediaSrc.toLowerCase().endsWith('.mov') || 
+                     mediaSrc.toLowerCase().endsWith('.mp4') || 
+                     mediaSrc.toLowerCase().endsWith('.webm') || 
+                     mediaSrc.toLowerCase().endsWith('.avi');
+      
+      if (isVideo) {
+        // Hide image and show video
+        mainImage.style.display = 'none';
+        mainVideo.style.display = 'block';
+        
+        // Update video source
+        mainVideo.src = mediaSrc;
+        mainVideo.load(); // Reload the video with new source
+        
+        // Add fade effect
+        mainVideo.style.opacity = '0';
+        setTimeout(() => {
+          mainVideo.style.opacity = '1';
+        }, 100);
+        
+        // Auto-play video (optional)
+        mainVideo.play().catch(e => {
+          console.log('Auto-play was prevented:', e);
+        });
+        
+      } else {
+        // Hide video and show image
+        mainVideo.style.display = 'none';
+        mainImage.style.display = 'block';
+        
+        // Update image source
+        mainImage.src = mediaSrc;
         
         // Add fade effect
         mainImage.style.opacity = '0';

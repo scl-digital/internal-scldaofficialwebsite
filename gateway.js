@@ -157,7 +157,38 @@ const TokenStore = (() => {
 
 
 /* ─────────────────────────────────────────────
-   4. SIMULATED API
+   4. REGION BLOCK CHECK
+───────────────────────────────────────────── */
+const RegionBlock = {
+  /**
+   * Check if a region is blocked
+   * Returns { blocked: boolean, message?: string }
+   */
+  async checkRegion(country) {
+    try {
+      const res = await fetch(`api/region_block.php?action=status&country=${country}`);
+      const data = await res.json();
+      
+      if (data.success && data.data && data.data.blocked) {
+        return {
+          blocked: true,
+          message: `ACCESS DENIED — This service is currently unavailable in ${data.data.country_name}.`,
+          country: data.data.country_name,
+          blockedAt: data.data.blocked_at
+        };
+      }
+      return { blocked: false };
+    } catch (e) {
+      // If API fails, allow access (fail-open)
+      console.warn('Region check failed:', e);
+      return { blocked: false };
+    }
+  }
+};
+
+
+/* ─────────────────────────────────────────────
+   5. SIMULATED API
    Replace these with real fetch() calls to your
    actual backend endpoints.
 ───────────────────────────────────────────── */
@@ -269,6 +300,38 @@ continueBtn.addEventListener('click', async () => {
   const country = countryEl.value;
 
   continueBtn.disabled = true;
+  setStatus('CHECKING REGION ACCESS...');
+
+  // Step 0 – Check if region is blocked
+  const regionCheck = await RegionBlock.checkRegion(country);
+  
+  if (regionCheck.blocked) {
+    // Show blocked message
+    showPanel('loading-panel');
+    const loaderLabel = document.getElementById('loader-label');
+    const tokenPreview = document.getElementById('token-preview');
+    
+    loaderLabel.style.color = '#ff4444';
+    await typeText(loaderLabel, 'ACCESS DENIED', 40);
+    await sleep(500);
+    
+    tokenPreview.style.color = '#ff4444';
+    tokenPreview.classList.add('visible');
+    await typeText(tokenPreview, regionCheck.message, 25);
+    
+    await sleep(2000);
+    
+    // Reset and allow retry
+    continueBtn.disabled = false;
+    setStatus('AWAITING INPUT');
+    showPanel('gateway');
+    tokenPreview.classList.remove('visible');
+    tokenPreview.textContent = '';
+    loaderLabel.style.color = '';
+    tokenPreview.style.color = '';
+    return;
+  }
+
   setStatus('INITIALISING SESSION...');
 
   // Transition to loading panel
