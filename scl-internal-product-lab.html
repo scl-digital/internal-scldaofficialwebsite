@@ -1,0 +1,971 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Internal Product Lab — SCL Digital Agency</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --purple: #7C3AED;
+    --purple-light: #A855F7;
+    --purple-dim: #1E0A3C;
+    --purple-glow: rgba(124, 58, 237, 0.3);
+    --black: #04020C;
+    --surface: #0A0618;
+    --surface-2: #110D24;
+    --surface-3: #1A1333;
+    --border: rgba(124, 58, 237, 0.18);
+    --border-bright: rgba(168, 85, 247, 0.4);
+    --text: #EDE9FA;
+    --text-muted: #7B6E9A;
+    --text-dim: #4A4060;
+    --accent: #C084FC;
+    --green: #34D399;
+    --orange: #F97316;
+    --cyan: #22D3EE;
+    --red: #F87171;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--text);
+    font-family: 'DM Mono', monospace;
+    overflow-x: hidden;
+    min-height: 100vh;
+  }
+
+  /* GRAIN OVERLAY */
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.035'/%3E%3C/svg%3E");
+    pointer-events: none; z-index: 9999; opacity: 0.4;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 500;
+    padding: 0 48px;
+    height: 64px;
+    display: flex; align-items: center; justify-content: space-between;
+    background: rgba(4, 2, 12, 0.9);
+    backdrop-filter: blur(24px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .logo {
+    font-family: 'Syne', sans-serif;
+    font-size: 18px; font-weight: 800;
+    letter-spacing: 4px; color: var(--text);
+    text-decoration: none;
+  }
+  .logo em { color: var(--purple-light); font-style: normal; }
+
+  .nav-links {
+    display: flex; gap: 0; list-style: none;
+  }
+  .nav-links li a {
+    display: block; padding: 0 20px; height: 64px; line-height: 64px;
+    color: var(--text-muted); text-decoration: none;
+    font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+    transition: color 0.2s, background 0.2s;
+    position: relative;
+  }
+  .nav-links li a:hover { color: var(--text); background: rgba(124,58,237,0.06); }
+  .nav-links li a.active {
+    color: var(--accent);
+    background: rgba(124,58,237,0.1);
+  }
+  .nav-links li a.active::after {
+    content: '';
+    position: absolute; bottom: 0; left: 0; right: 0;
+    height: 2px; background: var(--purple-light);
+  }
+
+  .nav-cta {
+    background: transparent;
+    border: 1px solid var(--border-bright);
+    color: var(--accent);
+    padding: 9px 22px;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+    cursor: pointer; transition: all 0.2s;
+  }
+  .nav-cta:hover {
+    background: var(--purple);
+    border-color: var(--purple);
+    color: #fff;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    padding-top: 64px;
+    min-height: 100vh;
+    display: grid;
+    grid-template-rows: 1fr auto;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* animated grid background */
+  .hero-grid {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(124,58,237,0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(124,58,237,0.06) 1px, transparent 1px);
+    background-size: 60px 60px;
+    animation: gridShift 20s linear infinite;
+  }
+  @keyframes gridShift {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(60px); }
+  }
+
+  /* radial glow */
+  .hero-glow {
+    position: absolute;
+    top: -10%; left: -5%;
+    width: 60vw; height: 80vh;
+    background: radial-gradient(ellipse at 30% 40%, rgba(124,58,237,0.18) 0%, transparent 65%);
+    pointer-events: none;
+  }
+  .hero-glow-2 {
+    position: absolute;
+    bottom: 10%; right: -10%;
+    width: 40vw; height: 50vh;
+    background: radial-gradient(ellipse at 70% 60%, rgba(168,85,247,0.1) 0%, transparent 65%);
+    pointer-events: none;
+  }
+
+  .hero-content {
+    display: flex; flex-direction: column;
+    justify-content: center;
+    padding: 80px 48px 0;
+    position: relative; z-index: 2;
+  }
+
+  .engine-tag {
+    display: inline-flex; align-items: center; gap: 12px;
+    margin-bottom: 40px;
+  }
+  .engine-label {
+    font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--text-dim);
+  }
+  .engine-badge {
+    display: flex; align-items: center; gap: 8px;
+    padding: 6px 14px;
+    border: 1px solid var(--border-bright);
+    background: rgba(124,58,237,0.08);
+  }
+  .engine-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--green);
+    animation: pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(52,211,153,0.4); }
+    50% { opacity: 0.7; box-shadow: 0 0 0 5px rgba(52,211,153,0); }
+  }
+  .engine-text {
+    font-size: 10px; letter-spacing: 2px; color: var(--green); text-transform: uppercase;
+  }
+
+  .hero-eyebrow {
+    font-size: 11px; letter-spacing: 4px; text-transform: uppercase;
+    color: var(--purple-light); margin-bottom: 20px;
+  }
+
+  .hero-title {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(52px, 8vw, 110px);
+    font-weight: 800;
+    line-height: 0.9;
+    letter-spacing: -3px;
+    color: var(--text);
+    margin-bottom: 32px;
+    max-width: 900px;
+  }
+  .hero-title .italic {
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    color: var(--purple-light);
+    font-weight: 400;
+    letter-spacing: -2px;
+  }
+
+  .hero-desc {
+    font-size: 14px; line-height: 1.8;
+    color: var(--text-muted);
+    max-width: 560px;
+    font-family: 'DM Mono', monospace;
+    font-weight: 300;
+    margin-bottom: 48px;
+  }
+
+  .hero-actions {
+    display: flex; gap: 16px; align-items: center;
+  }
+  .btn-primary {
+    background: var(--purple);
+    color: #fff; border: none;
+    padding: 14px 32px;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
+    cursor: pointer; transition: all 0.25s;
+    position: relative; overflow: hidden;
+  }
+  .btn-primary::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+    transform: translateX(-100%);
+    transition: transform 0.5s;
+  }
+  .btn-primary:hover { background: var(--purple-light); transform: translateY(-2px); }
+  .btn-primary:hover::after { transform: translateX(100%); }
+
+  .btn-ghost {
+    background: transparent;
+    color: var(--text-muted); border: none;
+    padding: 14px 0;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
+    cursor: pointer; transition: color 0.2s;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .btn-ghost:hover { color: var(--text); }
+  .btn-ghost .arrow { transition: transform 0.2s; }
+  .btn-ghost:hover .arrow { transform: translateX(4px); }
+
+  /* stats strip */
+  .hero-stats {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    border-top: 1px solid var(--border);
+    position: relative; z-index: 2;
+    margin-top: 80px;
+  }
+  .stat-item {
+    padding: 32px 48px;
+    border-right: 1px solid var(--border);
+  }
+  .stat-item:last-child { border-right: none; }
+  .stat-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 36px; font-weight: 800;
+    color: var(--text); margin-bottom: 4px;
+    letter-spacing: -1px;
+  }
+  .stat-num span { color: var(--purple-light); }
+  .stat-label {
+    font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--text-dim);
+  }
+
+  /* ── PIPELINE SECTION ── */
+  .section {
+    padding: 120px 48px;
+    position: relative;
+  }
+
+  .section-header {
+    display: flex; align-items: flex-start; justify-content: space-between;
+    margin-bottom: 72px;
+  }
+  .section-tag {
+    font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--text-dim); margin-bottom: 16px;
+  }
+  .section-title {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(32px, 4vw, 52px);
+    font-weight: 800; letter-spacing: -1.5px;
+    line-height: 1;
+  }
+  .section-title .dim { color: var(--text-dim); }
+
+  /* PIPELINE */
+  .pipeline {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0;
+    border: 1px solid var(--border);
+    margin-bottom: 80px;
+    position: relative;
+  }
+
+  /* connector line */
+  .pipeline::after {
+    content: '';
+    position: absolute;
+    top: 50%; left: 10%;
+    width: 80%; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--purple), var(--purple-light), var(--purple), transparent);
+    opacity: 0.3;
+    pointer-events: none;
+  }
+
+  .pipeline-step {
+    padding: 40px 28px;
+    border-right: 1px solid var(--border);
+    position: relative;
+    transition: background 0.3s;
+    cursor: default;
+  }
+  .pipeline-step:last-child { border-right: none; }
+  .pipeline-step:hover { background: rgba(124,58,237,0.06); }
+  .pipeline-step:hover .step-icon { border-color: var(--purple-light); color: var(--purple-light); }
+
+  .step-num {
+    font-size: 9px; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--text-dim); margin-bottom: 20px;
+  }
+  .step-icon {
+    width: 44px; height: 44px;
+    border: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 20px;
+    color: var(--text-muted);
+    transition: all 0.3s;
+    font-size: 18px;
+  }
+  .step-name {
+    font-family: 'Syne', sans-serif;
+    font-size: 14px; font-weight: 700;
+    margin-bottom: 10px; letter-spacing: -0.3px;
+  }
+  .step-desc {
+    font-size: 11px; line-height: 1.7;
+    color: var(--text-muted); font-weight: 300;
+  }
+
+  .step-active .step-icon {
+    border-color: var(--purple);
+    background: rgba(124,58,237,0.15);
+    color: var(--accent);
+  }
+  .step-active .step-name { color: var(--accent); }
+
+  /* ── CAPABILITIES GRID ── */
+  .capabilities {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    margin-top: 2px;
+  }
+
+  .cap-card {
+    background: var(--black);
+    padding: 52px 48px;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.3s;
+  }
+  .cap-card:hover { background: var(--surface); }
+  .cap-card::before {
+    content: attr(data-num);
+    position: absolute;
+    top: -20px; right: 24px;
+    font-family: 'Syne', sans-serif;
+    font-size: 90px; font-weight: 800;
+    color: rgba(124,58,237,0.06);
+    letter-spacing: -4px;
+    pointer-events: none;
+    transition: color 0.3s;
+  }
+  .cap-card:hover::before { color: rgba(124,58,237,0.1); }
+
+  .cap-status {
+    display: inline-flex; align-items: center; gap: 7px;
+    margin-bottom: 28px;
+    padding: 4px 10px;
+    border: 1px solid var(--border);
+    font-size: 9px; letter-spacing: 2px; text-transform: uppercase;
+  }
+  .status-dot { width: 5px; height: 5px; border-radius: 50%; }
+  .status-active { background: var(--green); }
+  .status-pipeline { background: var(--orange); }
+  .status-research { background: var(--cyan); }
+
+  .cap-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 24px; font-weight: 700;
+    letter-spacing: -0.5px;
+    margin-bottom: 14px; line-height: 1.1;
+  }
+  .cap-desc {
+    font-size: 12px; line-height: 1.9;
+    color: var(--text-muted); font-weight: 300;
+    margin-bottom: 28px;
+  }
+  .cap-tags {
+    display: flex; flex-wrap: wrap; gap: 8px;
+  }
+  .cap-tag {
+    font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase;
+    padding: 4px 10px; border: 1px solid var(--border);
+    color: var(--text-dim); transition: all 0.2s;
+  }
+  .cap-card:hover .cap-tag { border-color: var(--border-bright); color: var(--text-muted); }
+
+  /* ── ACQUISITION SECTION ── */
+  .acquisition-section {
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .acq-inner {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 0;
+  }
+
+  .acq-left {
+    padding: 100px 48px;
+    border-right: 1px solid var(--border);
+  }
+  .acq-right {
+    padding: 100px 48px;
+    display: flex; flex-direction: column; justify-content: center;
+  }
+
+  .acq-title {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(36px, 4vw, 56px);
+    font-weight: 800; letter-spacing: -2px;
+    line-height: 1; margin-bottom: 24px;
+  }
+  .acq-title em {
+    font-family: 'Instrument Serif', serif;
+    font-style: italic; font-weight: 400;
+    color: var(--purple-light);
+  }
+
+  .acq-desc {
+    font-size: 13px; line-height: 1.9;
+    color: var(--text-muted); font-weight: 300;
+    margin-bottom: 40px;
+  }
+
+  .acq-list {
+    list-style: none; display: flex; flex-direction: column; gap: 0;
+    border: 1px solid var(--border);
+  }
+  .acq-list li {
+    display: flex; align-items: center; gap: 16px;
+    padding: 18px 24px;
+    border-bottom: 1px solid var(--border);
+    font-size: 12px; color: var(--text-muted);
+    transition: background 0.2s, color 0.2s;
+    cursor: default;
+  }
+  .acq-list li:last-child { border-bottom: none; }
+  .acq-list li:hover { background: rgba(124,58,237,0.05); color: var(--text); }
+  .acq-list li::before {
+    content: '→';
+    color: var(--purple-light); font-size: 14px;
+    flex-shrink: 0;
+  }
+
+  /* readout metrics */
+  .readout {
+    display: flex; flex-direction: column; gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    margin-bottom: 32px;
+  }
+  .readout-row {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 16px 24px;
+    background: var(--surface-2);
+    font-size: 11px;
+  }
+  .readout-label { color: var(--text-dim); letter-spacing: 1.5px; text-transform: uppercase; font-size: 10px; }
+  .readout-val { color: var(--text); font-weight: 500; }
+  .readout-val.green { color: var(--green); }
+  .readout-val.orange { color: var(--orange); }
+
+  /* ── HOW WE BUILD ── */
+  .how-section { padding: 120px 48px; }
+
+  .how-grid {
+    display: grid; grid-template-columns: 340px 1fr;
+    gap: 80px; align-items: start;
+  }
+
+  .how-sticky {
+    position: sticky; top: 100px;
+  }
+  .how-subtitle {
+    font-size: 12px; line-height: 1.9;
+    color: var(--text-muted); font-weight: 300;
+    margin-top: 20px; margin-bottom: 40px;
+  }
+
+  .how-steps { display: flex; flex-direction: column; gap: 0; }
+  .how-step {
+    padding: 32px 0;
+    border-bottom: 1px solid var(--border);
+    display: grid; grid-template-columns: 60px 1fr;
+    gap: 24px; align-items: start;
+    transition: padding-left 0.3s;
+  }
+  .how-step:first-child { border-top: 1px solid var(--border); }
+  .how-step:hover { padding-left: 8px; }
+  .how-step-num {
+    font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--purple-light); padding-top: 4px;
+  }
+  .how-step-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 18px; font-weight: 700;
+    margin-bottom: 10px;
+  }
+  .how-step-desc {
+    font-size: 12px; line-height: 1.8;
+    color: var(--text-muted); font-weight: 300;
+  }
+
+  /* ── CTA ── */
+  .cta-section {
+    padding: 120px 48px;
+    display: flex; flex-direction: column; align-items: center;
+    text-align: center;
+    border-top: 1px solid var(--border);
+    position: relative; overflow: hidden;
+  }
+  .cta-bg {
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 50% 100%, rgba(124,58,237,0.12) 0%, transparent 60%);
+  }
+  .cta-tag {
+    font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--text-dim); margin-bottom: 24px;
+    position: relative;
+  }
+  .cta-title {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(42px, 7vw, 88px);
+    font-weight: 800; letter-spacing: -3px;
+    line-height: 0.9; margin-bottom: 32px;
+    position: relative;
+  }
+  .cta-title em {
+    font-family: 'Instrument Serif', serif;
+    font-style: italic; font-weight: 400;
+    color: var(--purple-light);
+  }
+  .cta-desc {
+    font-size: 13px; color: var(--text-muted);
+    max-width: 480px; line-height: 1.8;
+    margin-bottom: 48px; position: relative;
+  }
+  .cta-actions {
+    display: flex; gap: 16px; position: relative;
+  }
+
+  /* FOOTER */
+  footer {
+    padding: 40px 48px;
+    border-top: 1px solid var(--border);
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .footer-logo {
+    font-family: 'Syne', sans-serif;
+    font-size: 14px; font-weight: 800; letter-spacing: 3px;
+  }
+  .footer-logo em { color: var(--purple-light); font-style: normal; }
+  .footer-copy {
+    font-size: 10px; letter-spacing: 1.5px; color: var(--text-dim); text-transform: uppercase;
+  }
+  .footer-nav {
+    display: flex; gap: 24px;
+  }
+  .footer-nav a {
+    font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--text-dim); text-decoration: none; transition: color 0.2s;
+  }
+  .footer-nav a:hover { color: var(--accent); }
+
+  /* ── SCROLL ANIMATIONS ── */
+  .reveal {
+    opacity: 0; transform: translateY(24px);
+    transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1);
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+  .reveal-delay-4 { transition-delay: 0.4s; }
+
+  /* GLITCH on hero title */
+  @keyframes glitch {
+    0%,100% { clip-path: none; transform: none; }
+    92% { clip-path: none; transform: none; }
+    93% { clip-path: polygon(0 20%, 100% 20%, 100% 25%, 0 25%); transform: translateX(-3px); }
+    94% { clip-path: polygon(0 50%, 100% 50%, 100% 55%, 0 55%); transform: translateX(3px); }
+    95% { clip-path: none; transform: none; }
+  }
+  .glitch { animation: glitch 6s infinite; }
+
+  /* scrollbar */
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: var(--black); }
+  ::-webkit-scrollbar-thumb { background: var(--purple-dim); }
+
+  @media (max-width: 900px) {
+    nav { padding: 0 24px; }
+    .nav-links { display: none; }
+    .hero-content { padding: 40px 24px 0; }
+    .hero-stats { grid-template-columns: 1fr; }
+    .stat-item { border-right: none; border-bottom: 1px solid var(--border); }
+    .section { padding: 80px 24px; }
+    .pipeline { grid-template-columns: 1fr 1fr; }
+    .capabilities { grid-template-columns: 1fr; }
+    .acq-inner { grid-template-columns: 1fr; }
+    .acq-left { border-right: none; border-bottom: 1px solid var(--border); }
+    .how-grid { grid-template-columns: 1fr; }
+    .how-sticky { position: static; }
+    .cta-section { padding: 80px 24px; }
+    footer { padding: 32px 24px; flex-direction: column; gap: 20px; text-align: center; }
+    .hero-title { letter-spacing: -2px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="logo">SCL <em>DA</em></a>
+  <ul class="nav-links">
+    <li><a href="#" class="active">Internal Product Lab</a></li>
+    <li><a href="#">Agency Services</a></li>
+    <li><a href="#">Featured Products</a></li>
+    <li><a href="#">Resources</a></li>
+  </ul>
+  <button class="nav-cta">Start a Project</button>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-glow-2"></div>
+
+  <div class="hero-content">
+    <div class="engine-tag reveal">
+      <span class="engine-label">Engine</span>
+      <div class="engine-badge">
+        <span class="engine-dot"></span>
+        <span class="engine-text">01 / 02 — Active</span>
+      </div>
+    </div>
+
+    <p class="hero-eyebrow reveal reveal-delay-1">Internal Product Lab</p>
+
+    <h1 class="hero-title glitch reveal reveal-delay-2">
+      We build<br><span class="italic">first.</span>
+    </h1>
+
+    <p class="hero-desc reveal reveal-delay-3">
+      We generate ideas, validate them, build MVPs, and launch into real markets. Successful products become revenue assets — positioned for scale or acquisition.
+    </p>
+
+    <div class="hero-actions reveal reveal-delay-4">
+      <button class="btn-primary">View Our Products →</button>
+      <button class="btn-ghost">See the pipeline <span class="arrow">→</span></button>
+    </div>
+  </div>
+
+  <div class="hero-stats">
+    <div class="stat-item reveal">
+      <div class="stat-num">12<span>+</span></div>
+      <div class="stat-label">MVPs Launched</div>
+    </div>
+    <div class="stat-item reveal reveal-delay-1">
+      <div class="stat-num">3<span>×</span></div>
+      <div class="stat-label">Avg. Revenue Multiplier</div>
+    </div>
+    <div class="stat-item reveal reveal-delay-2">
+      <div class="stat-num">100<span>%</span></div>
+      <div class="stat-label">Acquisition-Ready</div>
+    </div>
+  </div>
+</section>
+
+<!-- PIPELINE -->
+<section class="section">
+  <div class="section-header reveal">
+    <div>
+      <p class="section-tag">// how we operate</p>
+      <h2 class="section-title">The build<br><span class="dim">pipeline</span></h2>
+    </div>
+    <p style="max-width:300px; font-size:12px; color:var(--text-muted); line-height:1.9; align-self:flex-end; font-weight:300;">
+      Every product follows the same rigorous path — from raw idea to market-ready asset.
+    </p>
+  </div>
+
+  <div class="pipeline reveal">
+    <div class="pipeline-step step-active">
+      <div class="step-num">// 01</div>
+      <div class="step-icon">◈</div>
+      <div class="step-name">Idea Generation & Validation</div>
+      <div class="step-desc">Market research, demand signals, competitive gaps. We only build what the market wants.</div>
+    </div>
+    <div class="pipeline-step">
+      <div class="step-num">// 02</div>
+      <div class="step-icon">⬡</div>
+      <div class="step-name">MVP Design & Development</div>
+      <div class="step-desc">UI/UX, architecture, and full-stack build. Shipped fast. Built to scale.</div>
+    </div>
+    <div class="pipeline-step">
+      <div class="step-num">// 03</div>
+      <div class="step-icon">◎</div>
+      <div class="step-name">Real-Market Testing</div>
+      <div class="step-desc">Live users. Real feedback. Rapid iteration until product-market fit is confirmed.</div>
+    </div>
+    <div class="pipeline-step">
+      <div class="step-num">// 04</div>
+      <div class="step-icon">⬆</div>
+      <div class="step-name">Scaling Successful Products</div>
+      <div class="step-desc">Infrastructure, growth channels, revenue models. We scale what works.</div>
+    </div>
+    <div class="pipeline-step">
+      <div class="step-num">// 05</div>
+      <div class="step-icon">◉</div>
+      <div class="step-name">Acquisition-Ready Positioning</div>
+      <div class="step-desc">IP protection, financials, documentation. Every product built to attract buyers.</div>
+    </div>
+  </div>
+</section>
+
+<!-- CAPABILITIES -->
+<section style="padding: 0 48px 120px;">
+  <div class="section-header reveal" style="margin-bottom:40px;">
+    <div>
+      <p class="section-tag">// what we build</p>
+      <h2 class="section-title">Core<br><span class="dim">capabilities</span></h2>
+    </div>
+  </div>
+
+  <div class="capabilities">
+    <div class="cap-card reveal" data-num="01">
+      <div class="cap-status">
+        <span class="status-dot status-active"></span>
+        Active
+      </div>
+      <h3 class="cap-title">SaaS Products</h3>
+      <p class="cap-desc">Subscription-based software that solves vertical-specific problems. We own the IP, manage the stack, and grow the user base before seeking strategic acquirers.</p>
+      <div class="cap-tags">
+        <span class="cap-tag">B2B</span>
+        <span class="cap-tag">B2C</span>
+        <span class="cap-tag">Recurring Revenue</span>
+        <span class="cap-tag">Scalable</span>
+      </div>
+    </div>
+    <div class="cap-card reveal reveal-delay-1" data-num="02">
+      <div class="cap-status">
+        <span class="status-dot status-active"></span>
+        Active
+      </div>
+      <h3 class="cap-title">Mobile Applications</h3>
+      <p class="cap-desc">Native and cross-platform apps built for real user behaviour. From concept to App Store launch, we own the full development cycle and IP.</p>
+      <div class="cap-tags">
+        <span class="cap-tag">iOS</span>
+        <span class="cap-tag">Android</span>
+        <span class="cap-tag">Cross-Platform</span>
+        <span class="cap-tag">Consumer</span>
+      </div>
+    </div>
+    <div class="cap-card reveal reveal-delay-2" data-num="03">
+      <div class="cap-status">
+        <span class="status-dot status-pipeline"></span>
+        In Pipeline
+      </div>
+      <h3 class="cap-title">Digital Platforms</h3>
+      <p class="cap-desc">Marketplace, community, and data-driven platforms with defensible network effects. Built for acquisition at scale, not just revenue.</p>
+      <div class="cap-tags">
+        <span class="cap-tag">Marketplace</span>
+        <span class="cap-tag">Network Effects</span>
+        <span class="cap-tag">Platform</span>
+      </div>
+    </div>
+    <div class="cap-card reveal reveal-delay-3" data-num="04">
+      <div class="cap-status">
+        <span class="status-dot status-research"></span>
+        Research Phase
+      </div>
+      <h3 class="cap-title">AI-Integrated Tools</h3>
+      <p class="cap-desc">Next-generation tooling that embeds AI into core workflows. We are actively developing proprietary AI-enhanced products for key verticals.</p>
+      <div class="cap-tags">
+        <span class="cap-tag">AI / ML</span>
+        <span class="cap-tag">Automation</span>
+        <span class="cap-tag">Workflow</span>
+        <span class="cap-tag">API-First</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ACQUISITION SECTION -->
+<section class="acquisition-section">
+  <div class="acq-inner">
+    <div class="acq-left">
+      <p class="section-tag" style="margin-bottom:16px;">// the end game</p>
+      <h2 class="acq-title reveal">Built to be<br><em>acquired.</em></h2>
+      <p class="acq-desc reveal">Every product we create internally is designed from day one with an exit in mind. That means clean IP, defensible tech, documented architecture, and proven revenue — exactly what acquirers want to see.</p>
+      <ul class="acq-list reveal">
+        <li>IP protection & trademark registration from launch</li>
+        <li>Clean financial records and revenue documentation</li>
+        <li>Documented codebase and technical architecture</li>
+        <li>Proven product-market fit with real user data</li>
+        <li>Investor-grade pitch materials ready to deploy</li>
+      </ul>
+    </div>
+    <div class="acq-right">
+      <p class="section-tag" style="margin-bottom:24px;">// current portfolio status</p>
+      <div class="readout reveal">
+        <div class="readout-row">
+          <span class="readout-label">Products in Development</span>
+          <span class="readout-val green">4 Active</span>
+        </div>
+        <div class="readout-row">
+          <span class="readout-label">Live & Generating Revenue</span>
+          <span class="readout-val green">2 Live</span>
+        </div>
+        <div class="readout-row">
+          <span class="readout-label">In Market Testing</span>
+          <span class="readout-val orange">3 Testing</span>
+        </div>
+        <div class="readout-row">
+          <span class="readout-label">IP Registered</span>
+          <span class="readout-val green">All Products</span>
+        </div>
+        <div class="readout-row">
+          <span class="readout-label">Acquisition Conversations</span>
+          <span class="readout-val" style="color:var(--cyan);">Open</span>
+        </div>
+      </div>
+      <button class="btn-primary" style="align-self:flex-start;">Discuss an Acquisition →</button>
+    </div>
+  </div>
+</section>
+
+<!-- HOW WE BUILD -->
+<section class="how-section">
+  <div class="how-grid">
+    <div class="how-sticky">
+      <p class="section-tag">// our process</p>
+      <h2 class="section-title reveal" style="font-size: clamp(32px,3vw,44px);">How we<br><span class="dim">build it</span></h2>
+      <p class="how-subtitle reveal">We don't freelance. We build as founders. Every SCL internal product is treated like a standalone company — resourced, focused, and built to last.</p>
+      <button class="btn-primary reveal">Partner With Our Lab →</button>
+    </div>
+
+    <div class="how-steps">
+      <div class="how-step reveal">
+        <div class="how-step-num">01</div>
+        <div>
+          <div class="how-step-title">Idea Generation & Validation</div>
+          <div class="how-step-desc">We run structured market research, analyse competitor gaps, and validate with real potential users before a single line of code is written. No guesswork — only signal.</div>
+        </div>
+      </div>
+      <div class="how-step reveal">
+        <div class="how-step-num">02</div>
+        <div>
+          <div class="how-step-title">MVP Design & Development</div>
+          <div class="how-step-desc">Our in-house designers and developers build lean, functional MVPs — prioritising the features that matter, built on scalable architecture from day one.</div>
+        </div>
+      </div>
+      <div class="how-step reveal">
+        <div class="how-step-num">03</div>
+        <div>
+          <div class="how-step-title">Real-Market Testing & Iteration</div>
+          <div class="how-step-desc">Live users, real data, rapid feedback loops. We test in market — not in theory — and iterate until we have undeniable product-market fit.</div>
+        </div>
+      </div>
+      <div class="how-step reveal">
+        <div class="how-step-num">04</div>
+        <div>
+          <div class="how-step-title">Scaling Successful Products</div>
+          <div class="how-step-desc">When a product proves itself, we scale: growth infrastructure, marketing channels, revenue model optimisation, and team expansion as needed.</div>
+        </div>
+      </div>
+      <div class="how-step reveal">
+        <div class="how-step-num">05</div>
+        <div>
+          <div class="how-step-title">Acquisition-Ready Positioning</div>
+          <div class="how-step-desc">Every product in our lab is structured for a clean exit — legally protected, financially documented, and packaged for strategic acquirers or investors seeking proven digital assets.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-bg"></div>
+  <p class="cta-tag reveal">// what's next</p>
+  <h2 class="cta-title reveal">
+    Invest in<br>what we're<br><em>building.</em>
+  </h2>
+  <p class="cta-desc reveal">
+    We partner with investors who want early access to acquisition-ready digital assets. Enquire about our current product portfolio.
+  </p>
+  <div class="cta-actions reveal">
+    <button class="btn-primary">View Portfolio →</button>
+    <button class="btn-ghost">Contact the Lab <span class="arrow">→</span></button>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">SCL <em>DA</em></div>
+  <p class="footer-copy">© 2026 SCL Digital Agency · Shinsa Lyonga Lomboto</p>
+  <nav class="footer-nav">
+    <a href="#">Product Lab</a>
+    <a href="#">Agency</a>
+    <a href="#">Products</a>
+    <a href="#">Resources</a>
+  </nav>
+</footer>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  reveals.forEach(el => observer.observe(el));
+
+  // Pipeline step hover label
+  document.querySelectorAll('.pipeline-step').forEach(step => {
+    step.addEventListener('mouseenter', () => {
+      step.style.borderBottom = '2px solid var(--purple)';
+    });
+    step.addEventListener('mouseleave', () => {
+      step.style.borderBottom = '';
+    });
+  });
+
+  // Readout live ticker (cosmetic)
+  const devCount = document.querySelector('.readout-val.green');
+  let tick = 0;
+  setInterval(() => {
+    tick++;
+    if (tick % 7 === 0 && devCount) {
+      devCount.style.opacity = '0.5';
+      setTimeout(() => devCount.style.opacity = '1', 200);
+    }
+  }, 1000);
+</script>
+</body>
+</html>

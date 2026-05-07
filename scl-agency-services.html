@@ -1,0 +1,1338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agency Services — SCL Digital Agency</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --purple: #7C3AED;
+    --purple-light: #A855F7;
+    --purple-dim: #1E0A3C;
+    --purple-glow: rgba(124, 58, 237, 0.3);
+    --black: #04020C;
+    --surface: #0A0618;
+    --surface-2: #110D24;
+    --surface-3: #1A1333;
+    --border: rgba(124, 58, 237, 0.18);
+    --border-bright: rgba(168, 85, 247, 0.4);
+    --text: #EDE9FA;
+    --text-muted: #7B6E9A;
+    --text-dim: #4A4060;
+    --accent: #C084FC;
+    --green: #34D399;
+    --orange: #F97316;
+    --cyan: #22D3EE;
+    --red: #F87171;
+    --amber: #FBBF24;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--text);
+    font-family: 'DM Mono', monospace;
+    overflow-x: hidden;
+    min-height: 100vh;
+  }
+
+  /* GRAIN */
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.035'/%3E%3C/svg%3E");
+    pointer-events: none; z-index: 9999; opacity: 0.4;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 500;
+    padding: 0 48px;
+    height: 64px;
+    display: flex; align-items: center; justify-content: space-between;
+    background: rgba(4, 2, 12, 0.92);
+    backdrop-filter: blur(24px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .logo {
+    font-family: 'Syne', sans-serif;
+    font-size: 18px; font-weight: 800;
+    letter-spacing: 4px; color: var(--text);
+    text-decoration: none;
+  }
+  .logo em { color: var(--purple-light); font-style: normal; }
+
+  .nav-links {
+    display: flex; gap: 0; list-style: none;
+  }
+  .nav-links li a {
+    display: block; padding: 0 20px; height: 64px; line-height: 64px;
+    color: var(--text-muted); text-decoration: none;
+    font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+    transition: color 0.2s, background 0.2s;
+    position: relative;
+  }
+  .nav-links li a:hover { color: var(--text); background: rgba(124,58,237,0.06); }
+  .nav-links li a.active {
+    color: var(--accent);
+    background: rgba(124,58,237,0.1);
+  }
+  .nav-links li a.active::after {
+    content: '';
+    position: absolute; bottom: 0; left: 0; right: 0;
+    height: 2px; background: var(--purple-light);
+  }
+
+  .nav-cta {
+    background: transparent;
+    border: 1px solid var(--border-bright);
+    color: var(--accent);
+    padding: 9px 22px;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+    cursor: pointer; transition: all 0.2s;
+  }
+  .nav-cta:hover {
+    background: var(--purple);
+    border-color: var(--purple);
+    color: #fff;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    padding-top: 64px;
+    min-height: 100vh;
+    display: grid;
+    grid-template-rows: 1fr auto;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-grid {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(124,58,237,0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(124,58,237,0.06) 1px, transparent 1px);
+    background-size: 60px 60px;
+    animation: gridShift 20s linear infinite;
+  }
+  @keyframes gridShift {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(60px); }
+  }
+
+  /* Diagonal stripe accent unique to Agency page */
+  .hero-stripes {
+    position: absolute; inset: 0; pointer-events: none;
+    background: repeating-linear-gradient(
+      -45deg,
+      transparent,
+      transparent 80px,
+      rgba(124,58,237,0.02) 80px,
+      rgba(124,58,237,0.02) 81px
+    );
+  }
+
+  .hero-glow {
+    position: absolute;
+    top: -10%; right: -5%;
+    width: 60vw; height: 80vh;
+    background: radial-gradient(ellipse at 70% 30%, rgba(124,58,237,0.16) 0%, transparent 65%);
+    pointer-events: none;
+  }
+  .hero-glow-2 {
+    position: absolute;
+    bottom: 5%; left: -5%;
+    width: 40vw; height: 50vh;
+    background: radial-gradient(ellipse at 30% 70%, rgba(34,211,238,0.07) 0%, transparent 65%);
+    pointer-events: none;
+  }
+
+  .hero-content {
+    display: flex; flex-direction: column;
+    justify-content: center;
+    padding: 80px 48px 0;
+    position: relative; z-index: 2;
+  }
+
+  .engine-tag {
+    display: inline-flex; align-items: center; gap: 12px;
+    margin-bottom: 40px;
+  }
+  .engine-label {
+    font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--text-dim);
+  }
+  .engine-badge {
+    display: flex; align-items: center; gap: 8px;
+    padding: 6px 14px;
+    border: 1px solid var(--border-bright);
+    background: rgba(124,58,237,0.08);
+  }
+  .engine-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--cyan);
+    animation: pulse-cyan 2s ease-in-out infinite;
+  }
+  @keyframes pulse-cyan {
+    0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(34,211,238,0.4); }
+    50% { opacity: 0.7; box-shadow: 0 0 0 5px rgba(34,211,238,0); }
+  }
+  .engine-text {
+    font-size: 10px; letter-spacing: 2px; color: var(--cyan); text-transform: uppercase;
+  }
+
+  .hero-eyebrow {
+    font-size: 11px; letter-spacing: 4px; text-transform: uppercase;
+    color: var(--cyan); margin-bottom: 20px;
+  }
+
+  .hero-title {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(52px, 8vw, 110px);
+    font-weight: 800;
+    line-height: 0.9;
+    letter-spacing: -3px;
+    color: var(--text);
+    margin-bottom: 32px;
+    max-width: 900px;
+  }
+  .hero-title .italic {
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    color: var(--purple-light);
+    font-weight: 400;
+    letter-spacing: -2px;
+  }
+
+  .hero-desc {
+    font-size: 14px; line-height: 1.8;
+    color: var(--text-muted);
+    max-width: 580px;
+    font-family: 'DM Mono', monospace;
+    font-weight: 300;
+    margin-bottom: 48px;
+  }
+
+  .hero-actions {
+    display: flex; gap: 16px; align-items: center;
+  }
+  .btn-primary {
+    background: var(--purple);
+    color: #fff; border: none;
+    padding: 14px 32px;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
+    cursor: pointer; transition: all 0.25s;
+    position: relative; overflow: hidden;
+  }
+  .btn-primary::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+    transform: translateX(-100%);
+    transition: transform 0.5s;
+  }
+  .btn-primary:hover { background: var(--purple-light); transform: translateY(-2px); }
+  .btn-primary:hover::after { transform: translateX(100%); }
+
+  .btn-ghost {
+    background: transparent;
+    color: var(--text-muted); border: none;
+    padding: 14px 0;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
+    cursor: pointer; transition: color 0.2s;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .btn-ghost:hover { color: var(--text); }
+  .btn-ghost .arrow { transition: transform 0.2s; }
+  .btn-ghost:hover .arrow { transform: translateX(4px); }
+
+  /* hero stats */
+  .hero-stats {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    border-top: 1px solid var(--border);
+    position: relative; z-index: 2;
+    margin-top: 80px;
+  }
+  .stat-item {
+    padding: 32px 48px;
+    border-right: 1px solid var(--border);
+  }
+  .stat-item:last-child { border-right: none; }
+  .stat-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 36px; font-weight: 800;
+    color: var(--text); margin-bottom: 4px;
+    letter-spacing: -1px;
+  }
+  .stat-num span { color: var(--purple-light); }
+  .stat-label {
+    font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--text-dim);
+  }
+
+  /* ── SECTIONS ── */
+  .section {
+    padding: 120px 48px;
+    position: relative;
+  }
+
+  .section-header {
+    display: flex; align-items: flex-start; justify-content: space-between;
+    margin-bottom: 72px;
+  }
+  .section-tag {
+    font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--text-dim); margin-bottom: 16px;
+  }
+  .section-title {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(32px, 4vw, 52px);
+    font-weight: 800; letter-spacing: -1.5px;
+    line-height: 1;
+  }
+  .section-title .dim { color: var(--text-dim); }
+  .section-title .accent-cyan { color: var(--cyan); }
+
+  /* ── SERVICE TIERS ── */
+  .tiers-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    border: 1px solid var(--border);
+  }
+
+  .tier-card {
+    padding: 48px 40px;
+    border-right: 1px solid var(--border);
+    position: relative;
+    transition: background 0.3s;
+    cursor: default;
+  }
+  .tier-card:last-child { border-right: none; }
+  .tier-card:hover { background: rgba(124,58,237,0.04); }
+  .tier-card.featured {
+    background: rgba(124,58,237,0.06);
+    border-top: 2px solid var(--purple-light);
+    margin-top: -1px;
+  }
+
+  .tier-tag {
+    font-size: 9px; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--text-dim); margin-bottom: 24px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .tier-tag::after {
+    content: '';
+    flex: 1; height: 1px;
+    background: var(--border);
+  }
+
+  .tier-name {
+    font-family: 'Syne', sans-serif;
+    font-size: 28px; font-weight: 800;
+    letter-spacing: -0.5px;
+    margin-bottom: 8px;
+  }
+
+  .tier-tagline {
+    font-size: 12px; color: var(--text-muted);
+    line-height: 1.7; margin-bottom: 32px;
+    font-weight: 300;
+  }
+
+  .tier-price {
+    margin-bottom: 32px;
+    padding-bottom: 32px;
+    border-bottom: 1px solid var(--border);
+  }
+  .tier-price-label {
+    font-size: 9px; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--text-dim); margin-bottom: 6px;
+  }
+  .tier-price-value {
+    font-family: 'Syne', sans-serif;
+    font-size: 22px; font-weight: 700;
+    color: var(--text);
+  }
+  .tier-price-value .currency { color: var(--text-muted); font-size: 14px; }
+
+  .tier-features {
+    list-style: none; display: flex; flex-direction: column; gap: 14px;
+    margin-bottom: 40px;
+  }
+  .tier-features li {
+    display: flex; align-items: flex-start; gap: 12px;
+    font-size: 12px; color: var(--text-muted); line-height: 1.5;
+    font-weight: 300;
+  }
+  .tier-features li .check {
+    color: var(--green); flex-shrink: 0; margin-top: 1px;
+    font-size: 11px;
+  }
+  .tier-features li .check.dim { color: var(--text-dim); }
+
+  .tier-cta {
+    width: 100%;
+    padding: 12px;
+    background: transparent;
+    border: 1px solid var(--border-bright);
+    color: var(--accent);
+    font-family: 'DM Mono', monospace;
+    font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+    cursor: pointer; transition: all 0.2s;
+  }
+  .tier-cta:hover, .tier-cta.primary {
+    background: var(--purple);
+    border-color: var(--purple);
+    color: #fff;
+  }
+
+  /* ── SERVICES GRID ── */
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0;
+    border: 1px solid var(--border);
+  }
+
+  .service-card {
+    padding: 56px 48px;
+    border-right: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    position: relative;
+    transition: background 0.3s;
+  }
+  .service-card:hover { background: rgba(124,58,237,0.04); }
+  .service-card:nth-child(2n) { border-right: none; }
+  .service-card:nth-last-child(-n+2) { border-bottom: none; }
+
+  .service-num {
+    font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--text-dim); margin-bottom: 28px;
+  }
+
+  .service-icon {
+    width: 48px; height: 48px;
+    border: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 28px;
+    position: relative;
+  }
+  .service-icon::after {
+    content: '';
+    position: absolute; inset: 4px;
+    border: 1px solid rgba(124,58,237,0.2);
+  }
+  .service-icon svg { width: 20px; height: 20px; }
+
+  .service-name {
+    font-family: 'Syne', sans-serif;
+    font-size: 22px; font-weight: 800;
+    letter-spacing: -0.5px;
+    margin-bottom: 16px;
+  }
+
+  .service-desc {
+    font-size: 12px; color: var(--text-muted);
+    line-height: 1.8; margin-bottom: 28px;
+    font-weight: 300;
+  }
+
+  .service-tags {
+    display: flex; flex-wrap: wrap; gap: 8px;
+  }
+  .tag {
+    font-size: 9px; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--text-dim);
+    border: 1px solid var(--border);
+    padding: 4px 10px;
+  }
+  .tag.active { color: var(--cyan); border-color: rgba(34,211,238,0.3); }
+
+  /* ── PROCESS ── */
+  .process-layout {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 0;
+    border: 1px solid var(--border);
+  }
+
+  .process-sidebar {
+    padding: 56px 40px;
+    border-right: 1px solid var(--border);
+    display: flex; flex-direction: column; gap: 0;
+  }
+
+  .process-nav-item {
+    padding: 20px 0;
+    border-bottom: 1px solid var(--border);
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .process-nav-item:last-child { border-bottom: none; }
+  .process-nav-item.active .pni-num { color: var(--purple-light); }
+  .process-nav-item.active .pni-label { color: var(--text); }
+
+  .pni-num { font-size: 9px; letter-spacing: 3px; color: var(--text-dim); margin-bottom: 6px; }
+  .pni-label {
+    font-family: 'Syne', sans-serif;
+    font-size: 15px; font-weight: 700;
+    color: var(--text-muted); letter-spacing: -0.3px;
+    transition: color 0.2s;
+  }
+  .process-nav-item:hover .pni-label { color: var(--text); }
+
+  .process-content {
+    padding: 56px 56px;
+  }
+
+  .process-step {
+    display: none;
+    animation: fadeInUp 0.4s ease;
+  }
+  .process-step.active { display: block; }
+
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .ps-eyebrow {
+    font-size: 9px; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--text-dim); margin-bottom: 20px;
+  }
+  .ps-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 36px; font-weight: 800;
+    letter-spacing: -1px; margin-bottom: 20px;
+  }
+  .ps-desc {
+    font-size: 13px; line-height: 1.9;
+    color: var(--text-muted); font-weight: 300;
+    margin-bottom: 40px;
+  }
+  .ps-deliverables {
+    border: 1px solid var(--border);
+    padding: 24px 28px;
+    background: rgba(124,58,237,0.03);
+  }
+  .ps-del-label {
+    font-size: 9px; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--text-dim); margin-bottom: 16px;
+  }
+  .ps-del-list {
+    list-style: none; display: flex; flex-direction: column; gap: 10px;
+  }
+  .ps-del-list li {
+    font-size: 12px; color: var(--text-muted);
+    display: flex; align-items: center; gap: 10px;
+    font-weight: 300;
+  }
+  .ps-del-list li::before {
+    content: '→';
+    color: var(--purple-light);
+    font-size: 11px;
+  }
+
+  /* ── CASE STUDIES STRIP ── */
+  .cases-scroll {
+    display: flex; gap: 0;
+    border: 1px solid var(--border);
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .cases-scroll::-webkit-scrollbar { display: none; }
+
+  .case-card {
+    min-width: 320px;
+    border-right: 1px solid var(--border);
+    padding: 48px 40px;
+    flex-shrink: 0;
+    position: relative;
+    transition: background 0.3s;
+  }
+  .case-card:last-child { border-right: none; }
+  .case-card:hover { background: rgba(124,58,237,0.04); }
+
+  .case-client {
+    font-size: 9px; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--text-dim); margin-bottom: 16px;
+  }
+  .case-name {
+    font-family: 'Syne', sans-serif;
+    font-size: 20px; font-weight: 800;
+    letter-spacing: -0.5px; margin-bottom: 12px;
+  }
+  .case-desc {
+    font-size: 11px; color: var(--text-muted);
+    line-height: 1.7; margin-bottom: 28px;
+    font-weight: 300;
+  }
+  .case-metrics {
+    display: flex; gap: 24px;
+  }
+  .case-metric-val {
+    font-family: 'Syne', sans-serif;
+    font-size: 24px; font-weight: 800;
+    letter-spacing: -1px;
+  }
+  .case-metric-val span { color: var(--green); }
+  .case-metric-label {
+    font-size: 9px; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--text-dim);
+  }
+
+  /* ── ENGAGEMENT MODELS ── */
+  .models-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  .model-card {
+    border: 1px solid var(--border);
+    padding: 40px 36px;
+    position: relative;
+    transition: border-color 0.3s, background 0.3s;
+  }
+  .model-card:hover {
+    border-color: var(--border-bright);
+    background: rgba(124,58,237,0.04);
+  }
+
+  .model-icon {
+    font-size: 28px; margin-bottom: 24px;
+    display: block;
+  }
+  .model-name {
+    font-family: 'Syne', sans-serif;
+    font-size: 18px; font-weight: 800;
+    margin-bottom: 12px;
+  }
+  .model-desc {
+    font-size: 12px; color: var(--text-muted);
+    line-height: 1.7; font-weight: 300;
+    margin-bottom: 24px;
+  }
+  .model-detail {
+    font-size: 10px; letter-spacing: 1px;
+    color: var(--text-dim);
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+    line-height: 1.8;
+  }
+
+  /* ── TECH STACK ── */
+  .stack-bar {
+    border: 1px solid var(--border);
+    display: flex; flex-wrap: wrap;
+  }
+  .stack-item {
+    flex: 1 0 auto;
+    padding: 28px 32px;
+    border-right: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    display: flex; flex-direction: column; align-items: flex-start; gap: 10px;
+    transition: background 0.2s;
+    min-width: 140px;
+  }
+  .stack-item:hover { background: rgba(124,58,237,0.05); }
+  .stack-name {
+    font-family: 'Syne', sans-serif;
+    font-size: 14px; font-weight: 700;
+  }
+  .stack-category {
+    font-size: 9px; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--text-dim);
+  }
+  .stack-dot {
+    width: 5px; height: 5px; border-radius: 50%;
+    background: var(--green);
+  }
+  .stack-dot.blue { background: var(--cyan); }
+  .stack-dot.amber { background: var(--amber); }
+  .stack-dot.purple { background: var(--purple-light); }
+
+  /* ── CTA ── */
+  .cta-section {
+    padding: 120px 48px;
+    position: relative;
+    overflow: hidden;
+  }
+  .cta-inner {
+    border: 1px solid var(--border);
+    padding: 80px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+    position: relative;
+    background: rgba(124,58,237,0.04);
+  }
+  .cta-inner::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 80% 50%, rgba(124,58,237,0.12) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .cta-tag { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--text-dim); margin-bottom: 20px; }
+  .cta-title {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(36px, 4vw, 56px);
+    font-weight: 800; letter-spacing: -2px; line-height: 1;
+    margin-bottom: 20px;
+  }
+  .cta-desc { font-size: 13px; color: var(--text-muted); line-height: 1.8; font-weight: 300; }
+  .cta-actions { display: flex; flex-direction: column; gap: 16px; align-items: flex-start; }
+  .cta-actions .btn-primary { font-size: 12px; padding: 16px 40px; }
+
+  .cta-readout {
+    border: 1px solid var(--border);
+    background: rgba(4,2,12,0.6);
+    padding: 32px;
+    font-family: 'DM Mono', monospace;
+    position: relative; z-index: 1;
+  }
+  .readout-header {
+    font-size: 9px; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--text-dim); margin-bottom: 24px;
+    padding-bottom: 16px; border-bottom: 1px solid var(--border);
+    display: flex; justify-content: space-between;
+  }
+  .readout-row {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 12px 0; border-bottom: 1px solid rgba(124,58,237,0.08);
+    font-size: 11px;
+  }
+  .readout-key { color: var(--text-dim); }
+  .readout-val { color: var(--text); }
+  .readout-val.green { color: var(--green); }
+  .readout-val.amber { color: var(--amber); }
+  .readout-val.cyan { color: var(--cyan); }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 32px 48px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .footer-copy { font-size: 10px; color: var(--text-dim); letter-spacing: 1px; }
+  .footer-links { display: flex; gap: 32px; }
+  .footer-links a { font-size: 10px; color: var(--text-dim); text-decoration: none; letter-spacing: 1px; transition: color 0.2s; }
+  .footer-links a:hover { color: var(--text-muted); }
+
+  /* ── DIVIDER ── */
+  .section-divider {
+    height: 1px; background: var(--border);
+    margin: 0 48px;
+  }
+
+  /* ── SCROLL REVEAL ── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+  .reveal-delay-4 { transition-delay: 0.4s; }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: var(--black); }
+  ::-webkit-scrollbar-thumb { background: var(--border-bright); }
+
+  /* Horizontal scroll hint */
+  .scroll-hint {
+    font-size: 9px; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--text-dim); display: flex; align-items: center; gap: 8px;
+    margin-bottom: 16px;
+  }
+  .scroll-hint-line { width: 32px; height: 1px; background: var(--border); }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="logo">SCL<em>.</em></a>
+  <ul class="nav-links">
+    <li><a href="#">Overview</a></li>
+    <li><a href="#" class="active">Agency Services</a></li>
+    <li><a href="#">Product Lab</a></li>
+    <li><a href="#">Portfolio</a></li>
+    <li><a href="#">Insights</a></li>
+  </ul>
+  <button class="nav-cta">Start a Project</button>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-stripes"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-glow-2"></div>
+
+  <div class="hero-content">
+    <div class="engine-tag">
+      <span class="engine-label">SCL Digital Agency</span>
+      <div class="engine-badge">
+        <div class="engine-dot"></div>
+        <span class="engine-text">Engine 02 — Client Services</span>
+      </div>
+    </div>
+
+    <p class="hero-eyebrow">// Agency Services</p>
+
+    <h1 class="hero-title">
+      We build<br>
+      <span class="italic">products</span><br>
+      that scale.
+    </h1>
+
+    <p class="hero-desc">
+      From early-stage MVPs to enterprise-grade platforms — SCL delivers full-stack digital execution. Strategy, design, engineering, and growth under one roof. We don't just build; we ship outcomes.
+    </p>
+
+    <div class="hero-actions">
+      <button class="btn-primary">Scope a Project →</button>
+      <button class="btn-ghost">View our portfolio <span class="arrow">→</span></button>
+    </div>
+  </div>
+
+  <div class="hero-stats">
+    <div class="stat-item">
+      <div class="stat-num">60<span>+</span></div>
+      <div class="stat-label">Products Shipped</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">4<span>yr</span></div>
+      <div class="stat-label">Average Retention</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">3<span>×</span></div>
+      <div class="stat-label">Avg Client Growth</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">14<span>d</span></div>
+      <div class="stat-label">Avg Onboarding Time</div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES GRID -->
+<section class="section">
+  <div class="section-header reveal">
+    <div>
+      <div class="section-tag">// 02.01 — What we build</div>
+      <h2 class="section-title">Core <span class="dim">service</span><br><span class="accent-cyan">disciplines</span></h2>
+    </div>
+    <div style="max-width:320px; font-size:12px; color:var(--text-muted); line-height:1.8; font-weight:300; padding-top:40px;">
+      Each discipline is a full practice — not a line item. We go deep, not wide, delivering complete execution within each domain.
+    </div>
+  </div>
+
+  <div class="services-grid">
+    <div class="service-card reveal">
+      <div class="service-num">01 — Design Systems</div>
+      <div class="service-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#A855F7" stroke-width="1.5">
+          <rect x="3" y="3" width="8" height="8" rx="1"/><rect x="13" y="3" width="8" height="8" rx="1"/>
+          <rect x="3" y="13" width="8" height="8" rx="1"/><rect x="13" y="13" width="8" height="8" rx="1"/>
+        </svg>
+      </div>
+      <h3 class="service-name">Product Design</h3>
+      <p class="service-desc">UI/UX systems built to convert and retain. We design for real human behaviour — zero fluff, maximum signal. From wireframes to interactive prototypes to production-ready design systems.</p>
+      <div class="service-tags">
+        <span class="tag active">UI/UX</span>
+        <span class="tag active">Design Systems</span>
+        <span class="tag">Brand Identity</span>
+        <span class="tag">Prototyping</span>
+        <span class="tag">User Research</span>
+      </div>
+    </div>
+
+    <div class="service-card reveal reveal-delay-1">
+      <div class="service-num">02 — Engineering</div>
+      <div class="service-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#22D3EE" stroke-width="1.5">
+          <polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>
+        </svg>
+      </div>
+      <h3 class="service-name">Full-Stack Development</h3>
+      <p class="service-desc">End-to-end engineering for web and mobile platforms. We build fast, secure, and scalable — from API architecture to pixel-perfect frontends. Production-grade from day one.</p>
+      <div class="service-tags">
+        <span class="tag active">Web Apps</span>
+        <span class="tag active">Mobile</span>
+        <span class="tag">API Dev</span>
+        <span class="tag">Integrations</span>
+        <span class="tag">DevOps</span>
+      </div>
+    </div>
+
+    <div class="service-card reveal reveal-delay-2">
+      <div class="service-num">03 — AI Integration</div>
+      <div class="service-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#C084FC" stroke-width="1.5">
+          <circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/>
+        </svg>
+      </div>
+      <h3 class="service-name">AI & Automation</h3>
+      <p class="service-desc">LLM integrations, intelligent workflows, and AI-native product features. We don't bolt AI on — we architect around it. From RAG pipelines to custom model fine-tuning.</p>
+      <div class="service-tags">
+        <span class="tag active">LLM Integration</span>
+        <span class="tag active">Automation</span>
+        <span class="tag">RAG Pipelines</span>
+        <span class="tag">AI Agents</span>
+      </div>
+    </div>
+
+    <div class="service-card reveal reveal-delay-3">
+      <div class="service-num">04 — Growth</div>
+      <div class="service-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#34D399" stroke-width="1.5">
+          <polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/>
+        </svg>
+      </div>
+      <h3 class="service-name">Digital Growth</h3>
+      <p class="service-desc">Acquisition, retention, and revenue optimisation. We run data-driven growth experiments, conversion architecture, and performance marketing — tied directly to your revenue model.</p>
+      <div class="service-tags">
+        <span class="tag active">Growth Strategy</span>
+        <span class="tag active">CRO</span>
+        <span class="tag">Paid Media</span>
+        <span class="tag">Analytics</span>
+      </div>
+    </div>
+
+    <div class="service-card reveal">
+      <div class="service-num">05 — Infrastructure</div>
+      <div class="service-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#F97316" stroke-width="1.5">
+          <rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/>
+          <line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/>
+        </svg>
+      </div>
+      <h3 class="service-name">Cloud & DevOps</h3>
+      <p class="service-desc">Scalable cloud infrastructure, CI/CD pipelines, and platform reliability. We architect for growth from the start — so your stack doesn't become your bottleneck.</p>
+      <div class="service-tags">
+        <span class="tag active">AWS / GCP</span>
+        <span class="tag">Kubernetes</span>
+        <span class="tag">CI/CD</span>
+        <span class="tag">Monitoring</span>
+      </div>
+    </div>
+
+    <div class="service-card reveal reveal-delay-1">
+      <div class="service-num">06 — Strategy</div>
+      <div class="service-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#FBBF24" stroke-width="1.5">
+          <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+          <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+        </svg>
+      </div>
+      <h3 class="service-name">Digital Strategy</h3>
+      <p class="service-desc">Product roadmaps, go-to-market planning, and technology architecture advisory. We help founders and operators make better product decisions — before they become expensive problems.</p>
+      <div class="service-tags">
+        <span class="tag active">Product Strategy</span>
+        <span class="tag">GTM Planning</span>
+        <span class="tag">Tech Advisory</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- HOW WE WORK / PROCESS -->
+<section class="section">
+  <div class="section-header reveal">
+    <div>
+      <div class="section-tag">// 02.02 — Our method</div>
+      <h2 class="section-title">How we <span class="dim">work</span><br><span class="accent-cyan">with you</span></h2>
+    </div>
+  </div>
+
+  <div class="process-layout reveal">
+    <div class="process-sidebar">
+      <div class="process-nav-item active" onclick="showStep(0, this)">
+        <div class="pni-num">Step 01</div>
+        <div class="pni-label">Discovery & Scoping</div>
+      </div>
+      <div class="process-nav-item" onclick="showStep(1, this)">
+        <div class="pni-num">Step 02</div>
+        <div class="pni-label">Strategy & Architecture</div>
+      </div>
+      <div class="process-nav-item" onclick="showStep(2, this)">
+        <div class="pni-num">Step 03</div>
+        <div class="pni-label">Design & Prototyping</div>
+      </div>
+      <div class="process-nav-item" onclick="showStep(3, this)">
+        <div class="pni-num">Step 04</div>
+        <div class="pni-label">Build & Integrate</div>
+      </div>
+      <div class="process-nav-item" onclick="showStep(4, this)">
+        <div class="pni-num">Step 05</div>
+        <div class="pni-label">Launch & Optimise</div>
+      </div>
+    </div>
+
+    <div class="process-content">
+      <div class="process-step active">
+        <p class="ps-eyebrow">// Step 01 — Discovery & Scoping</p>
+        <h3 class="ps-title">We start by understanding the real problem.</h3>
+        <p class="ps-desc">Before a single wireframe or line of code, we run a structured discovery process. We map your business model, user flows, existing tech, and competitive landscape. This surfaces the actual problem — not just the stated one. Most project failures trace back to misaligned scope. We fix that first.</p>
+        <div class="ps-deliverables">
+          <div class="ps-del-label">// Deliverables</div>
+          <ul class="ps-del-list">
+            <li>Problem statement & success metrics</li>
+            <li>Technical feasibility assessment</li>
+            <li>Project scope document & timeline</li>
+            <li>Risk identification & mitigation plan</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="process-step">
+        <p class="ps-eyebrow">// Step 02 — Strategy & Architecture</p>
+        <h3 class="ps-title">Architecture decisions made early save months later.</h3>
+        <p class="ps-desc">We design your technical and product strategy before touching a tool. Stack selection, system architecture, data models, integration map. The decisions made here determine how easily you can scale, pivot, and ship in the future. We treat architecture as a strategic asset, not just engineering scaffolding.</p>
+        <div class="ps-deliverables">
+          <div class="ps-del-label">// Deliverables</div>
+          <ul class="ps-del-list">
+            <li>Technology stack recommendation</li>
+            <li>System architecture diagram</li>
+            <li>Data model & integration plan</li>
+            <li>Go-to-market alignment document</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="process-step">
+        <p class="ps-eyebrow">// Step 03 — Design & Prototyping</p>
+        <h3 class="ps-title">We design in systems, not screens.</h3>
+        <p class="ps-desc">UI/UX design that prioritises clarity, conversion, and retention. We build interactive prototypes for validation before engineering begins — saving significant rework cost. Design is a thinking tool, not a decoration layer. We use it to stress-test assumptions and validate flows with real users before they're built.</p>
+        <div class="ps-deliverables">
+          <div class="ps-del-label">// Deliverables</div>
+          <ul class="ps-del-list">
+            <li>Full UI/UX design system</li>
+            <li>Interactive Figma prototype</li>
+            <li>User flow maps & journey analysis</li>
+            <li>Design QA & handoff documentation</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="process-step">
+        <p class="ps-eyebrow">// Step 04 — Build & Integrate</p>
+        <h3 class="ps-title">Production-grade engineering, shipped in iterations.</h3>
+        <p class="ps-desc">We build in 2-week sprint cycles with continuous deployment to staging. You see real progress — not PowerPoint updates. Every sprint ends with working, reviewable software. We maintain full test coverage, write documentation as we go, and keep your team in the loop at every stage.</p>
+        <div class="ps-deliverables">
+          <div class="ps-del-label">// Deliverables</div>
+          <ul class="ps-del-list">
+            <li>Sprint-based delivery with demo sessions</li>
+            <li>Staging environment & QA pipeline</li>
+            <li>Code review & documentation</li>
+            <li>Integration testing & sign-off</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="process-step">
+        <p class="ps-eyebrow">// Step 05 — Launch & Optimise</p>
+        <h3 class="ps-title">Launching is the start, not the finish.</h3>
+        <p class="ps-desc">We manage production deployment, post-launch monitoring, and the critical first 30 days. Bugs get fixed fast, metrics get tracked from day one, and growth experiments begin immediately. For retained clients, we operate as an ongoing engineering and growth partner — shipping continuously rather than in large, risky releases.</p>
+        <div class="ps-deliverables">
+          <div class="ps-del-label">// Deliverables</div>
+          <ul class="ps-del-list">
+            <li>Production deployment & monitoring setup</li>
+            <li>Analytics & dashboard configuration</li>
+            <li>30-day post-launch support</li>
+            <li>Growth experiment roadmap</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ENGAGEMENT MODELS -->
+<section class="section">
+  <div class="section-header reveal">
+    <div>
+      <div class="section-tag">// 02.03 — How to engage</div>
+      <h2 class="section-title">Engagement <span class="dim">models</span></h2>
+    </div>
+  </div>
+
+  <div class="models-grid reveal">
+    <div class="model-card">
+      <span class="model-icon">⚡</span>
+      <h3 class="model-name">Sprint Project</h3>
+      <p class="model-desc">Fixed-scope delivery across 4–12 weeks. Ideal for MVPs, new features, or defined digital products with a clear outcome in mind.</p>
+      <div class="model-detail">
+        Best for: Startups, new product launches, defined scope work<br>
+        Timeline: 4 – 12 weeks<br>
+        Pricing: Fixed project fee
+      </div>
+    </div>
+    <div class="model-card">
+      <span class="model-icon">🔁</span>
+      <h3 class="model-name">Retained Partner</h3>
+      <p class="model-desc">An embedded team operating on monthly retainer. You get continuous delivery, strategic input, and a team that knows your product inside out.</p>
+      <div class="model-detail">
+        Best for: Scaling companies, ongoing product evolution<br>
+        Timeline: 3+ month minimum<br>
+        Pricing: Monthly retainer
+      </div>
+    </div>
+    <div class="model-card">
+      <span class="model-icon">🏗</span>
+      <h3 class="model-name">Team Augmentation</h3>
+      <p class="model-desc">Senior engineers, designers, and strategists embedded into your existing team. Fill capability gaps without the overhead of permanent hiring.</p>
+      <div class="model-detail">
+        Best for: Teams with gaps, scale-ups hiring slowly<br>
+        Timeline: Flexible<br>
+        Pricing: Daily / monthly rate
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- SERVICE TIERS -->
+<section class="section">
+  <div class="section-header reveal">
+    <div>
+      <div class="section-tag">// 02.04 — Investment levels</div>
+      <h2 class="section-title">Service <span class="dim">tiers</span></h2>
+    </div>
+    <div style="max-width:300px; font-size:12px; color:var(--text-muted); line-height:1.8; font-weight:300; padding-top:40px;">
+      Every tier includes dedicated project management, weekly reporting, and direct access to your lead engineer and designer.
+    </div>
+  </div>
+
+  <div class="tiers-grid reveal">
+    <div class="tier-card">
+      <div class="tier-tag">Entry</div>
+      <h3 class="tier-name">Launch</h3>
+      <p class="tier-tagline">For early-stage startups validating ideas and shipping first versions into market.</p>
+      <div class="tier-price">
+        <div class="tier-price-label">Starting from</div>
+        <div class="tier-price-value"><span class="currency">R </span>45,000<span class="currency"> / project</span></div>
+      </div>
+      <ul class="tier-features">
+        <li><span class="check">✓</span> MVP scoping & architecture</li>
+        <li><span class="check">✓</span> UI/UX design (up to 15 screens)</li>
+        <li><span class="check">✓</span> Full-stack development (4–6 weeks)</li>
+        <li><span class="check">✓</span> Basic analytics integration</li>
+        <li><span class="check">✓</span> 30-day post-launch support</li>
+        <li><span class="check dim">—</span> Growth strategy & CRO</li>
+        <li><span class="check dim">—</span> Dedicated success manager</li>
+      </ul>
+      <button class="tier-cta">Enquire →</button>
+    </div>
+
+    <div class="tier-card featured">
+      <div class="tier-tag">Most Popular</div>
+      <h3 class="tier-name">Scale</h3>
+      <p class="tier-tagline">For growing businesses that need a full digital engine — design, engineering, and growth.</p>
+      <div class="tier-price">
+        <div class="tier-price-label">Starting from</div>
+        <div class="tier-price-value"><span class="currency">R </span>120,000<span class="currency"> / project</span></div>
+      </div>
+      <ul class="tier-features">
+        <li><span class="check">✓</span> Full product strategy & architecture</li>
+        <li><span class="check">✓</span> Complete design system (unlimited screens)</li>
+        <li><span class="check">✓</span> Full-stack development (8–12 weeks)</li>
+        <li><span class="check">✓</span> AI / automation integrations</li>
+        <li><span class="check">✓</span> Growth strategy & CRO setup</li>
+        <li><span class="check">✓</span> 60-day post-launch support</li>
+        <li><span class="check dim">—</span> Dedicated success manager</li>
+      </ul>
+      <button class="tier-cta primary">Start Here →</button>
+    </div>
+
+    <div class="tier-card">
+      <div class="tier-tag">Enterprise</div>
+      <h3 class="tier-name">Partner</h3>
+      <p class="tier-tagline">Full retained partnership — your outsourced digital leadership team, embedded and always on.</p>
+      <div class="tier-price">
+        <div class="tier-price-label">Starting from</div>
+        <div class="tier-price-value"><span class="currency">R </span>60,000<span class="currency"> / month</span></div>
+      </div>
+      <ul class="tier-features">
+        <li><span class="check">✓</span> Everything in Scale, ongoing</li>
+        <li><span class="check">✓</span> Dedicated senior team (eng + design)</li>
+        <li><span class="check">✓</span> Monthly strategy & roadmap sessions</li>
+        <li><span class="check">✓</span> Continuous delivery & deployment</li>
+        <li><span class="check">✓</span> Growth experiments & reporting</li>
+        <li><span class="check">✓</span> Dedicated success manager</li>
+        <li><span class="check">✓</span> SLA-backed response times</li>
+      </ul>
+      <button class="tier-cta">Let's Talk →</button>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- TECH STACK -->
+<section class="section">
+  <div class="section-header reveal">
+    <div>
+      <div class="section-tag">// 02.05 — Our toolkit</div>
+      <h2 class="section-title">Technology <span class="dim">stack</span></h2>
+    </div>
+  </div>
+
+  <div class="stack-bar reveal">
+    <div class="stack-item">
+      <div class="stack-dot"></div>
+      <div class="stack-name">React / Next.js</div>
+      <div class="stack-category">Frontend</div>
+    </div>
+    <div class="stack-item">
+      <div class="stack-dot"></div>
+      <div class="stack-name">React Native</div>
+      <div class="stack-category">Mobile</div>
+    </div>
+    <div class="stack-item">
+      <div class="stack-dot blue"></div>
+      <div class="stack-name">Node.js</div>
+      <div class="stack-category">Backend</div>
+    </div>
+    <div class="stack-item">
+      <div class="stack-dot blue"></div>
+      <div class="stack-name">Python / FastAPI</div>
+      <div class="stack-category">AI / Backend</div>
+    </div>
+    <div class="stack-item">
+      <div class="stack-dot purple"></div>
+      <div class="stack-name">PostgreSQL</div>
+      <div class="stack-category">Database</div>
+    </div>
+    <div class="stack-item">
+      <div class="stack-dot purple"></div>
+      <div class="stack-name">Supabase</div>
+      <div class="stack-category">BaaS</div>
+    </div>
+    <div class="stack-item">
+      <div class="stack-dot amber"></div>
+      <div class="stack-name">AWS / GCP</div>
+      <div class="stack-category">Cloud</div>
+    </div>
+    <div class="stack-item">
+      <div class="stack-dot amber"></div>
+      <div class="stack-name">OpenAI / Anthropic</div>
+      <div class="stack-category">AI Layer</div>
+    </div>
+    <div class="stack-item">
+      <div class="stack-dot blue"></div>
+      <div class="stack-name">Figma</div>
+      <div class="stack-category">Design</div>
+    </div>
+    <div class="stack-item">
+      <div class="stack-dot"></div>
+      <div class="stack-name">Stripe / PayFast</div>
+      <div class="stack-category">Payments</div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-inner reveal">
+    <div>
+      <div class="cta-tag">// Ready to build?</div>
+      <h2 class="cta-title">Let's scope your project.</h2>
+      <p class="cta-desc" style="margin-bottom:40px;">
+        Tell us what you're building. We'll assess scope, recommend an approach, and give you a clear picture of what it takes — timeline, team, and cost — within 48 hours.
+      </p>
+      <div class="cta-actions">
+        <button class="btn-primary">Book a Scoping Call →</button>
+        <button class="btn-ghost">Explore the Product Lab <span class="arrow">→</span></button>
+      </div>
+    </div>
+    <div class="cta-readout">
+      <div class="readout-header">
+        <span>// Project intake status</span>
+        <span style="color:var(--green)">● Accepting briefs</span>
+      </div>
+      <div class="readout-row">
+        <span class="readout-key">Response time</span>
+        <span class="readout-val green">< 24 hours</span>
+      </div>
+      <div class="readout-row">
+        <span class="readout-key">Team availability</span>
+        <span class="readout-val amber">Q3 2025 — Limited slots</span>
+      </div>
+      <div class="readout-row">
+        <span class="readout-key">Active projects</span>
+        <span class="readout-val">7 / 10 capacity</span>
+      </div>
+      <div class="readout-row">
+        <span class="readout-key">Avg scoping turnaround</span>
+        <span class="readout-val cyan">48 hours</span>
+      </div>
+      <div class="readout-row">
+        <span class="readout-key">Min project size</span>
+        <span class="readout-val">R 45,000</span>
+      </div>
+      <div class="readout-row" style="border:none">
+        <span class="readout-key">NDA available</span>
+        <span class="readout-val green">On request</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-copy">© 2025 SCL Digital Agency — Engine 02</span>
+  <div class="footer-links">
+    <a href="#">Privacy</a>
+    <a href="#">Terms</a>
+    <a href="#">Contact</a>
+    <a href="#">Product Lab →</a>
+  </div>
+</footer>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(r => io.observe(r));
+
+  // Process steps
+  function showStep(index, el) {
+    document.querySelectorAll('.process-nav-item').forEach(i => i.classList.remove('active'));
+    document.querySelectorAll('.process-step').forEach(s => s.classList.remove('active'));
+    el.classList.add('active');
+    document.querySelectorAll('.process-step')[index].classList.add('active');
+  }
+</script>
+</body>
+</html>
