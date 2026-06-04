@@ -1166,13 +1166,22 @@ canvas#sigPad { display: block; width: 100%; height: 160px; cursor: crosshair; t
         <div class="settings-panel" id="sp-email-config">
           <div class="settings-section">
             <div class="settings-section-title">Email Infrastructure</div>
-            <div class="form-group"><label class="form-label">Provider</label><select class="form-input"><option>Resend</option><option>SendGrid</option><option>SMTP</option></select></div>
-            <div class="form-group"><label class="form-label">From Name</label><input class="form-input" value="SCL Agency" /></div>
-            <div class="form-group"><label class="form-label">From Email</label><input class="form-input" value="proposals@sclagency.com" /></div>
+            <div class="form-group"><label class="form-label">Provider</label><select class="form-input" id="settings_provider"><option value="smtp">SMTP</option><option value="sendgrid">SendGrid</option><option value="resend">Resend</option></select></div>
+            <div class="form-row cols-2">
+              <div class="form-group form-group-inline"><label class="form-label">SMTP Host</label><input id="settings_smtp_host" class="form-input" placeholder="smtp.example.com" /></div>
+              <div class="form-group form-group-inline"><label class="form-label">Port</label><input id="settings_smtp_port" class="form-input" placeholder="587" /></div>
+            </div>
+            <div class="form-row cols-2">
+              <div class="form-group form-group-inline"><label class="form-label">Username</label><input id="settings_smtp_username" class="form-input" placeholder="username@example.com" /></div>
+              <div class="form-group form-group-inline"><label class="form-label">Password</label><input id="settings_smtp_password" class="form-input" type="password" placeholder="Leave blank to keep existing" /></div>
+            </div>
+            <div class="form-group"><label class="form-label">Encryption</label><select class="form-input" id="settings_smtp_encryption"><option value="tls">TLS</option><option value="ssl">SSL</option><option value="none">None</option></select></div>
+            <div class="form-group"><label class="form-label">From Name</label><input id="settings_from_name" class="form-input" placeholder="SCL Agency" /></div>
+            <div class="form-group"><label class="form-label">From Email</label><input id="settings_from_email" class="form-input" placeholder="proposals@sclagency.com" /></div>
             <div class="toggle-row"><div class="toggle-info">Open Tracking<span>Track when clients open emails</span></div><label class="toggle"><input type="checkbox" checked><span class="toggle-slider"></span></label></div>
             <div class="toggle-row"><div class="toggle-info">Click Tracking<span>Track link clicks in emails</span></div><label class="toggle"><input type="checkbox" checked><span class="toggle-slider"></span></label></div>
             <div class="toggle-row"><div class="toggle-info">Expiry Reminders<span>Auto-send before proposal expires</span></div><label class="toggle"><input type="checkbox" checked><span class="toggle-slider"></span></label></div>
-            <button class="btn btn-primary btn-sm" onclick="showToast('Email settings saved','success')">Save</button>
+            <button class="btn btn-primary btn-sm" onclick="saveEmailSettings()">Save</button>
           </div>
         </div>
         <!-- Security -->
@@ -1323,8 +1332,8 @@ By signing below, both parties agree to the terms set forth in this Agreement.</
             <div><span style="color:var(--white-70)">Number:</span> <span id="rev_number">—</span></div>
           </div>
         </div>
-        <div class="toggle-row"><div class="toggle-info">Send email immediately<span>Proposal email will be sent to client</span></div><label class="toggle"><input type="checkbox" checked><span class="toggle-slider"></span></label></div>
-        <div class="toggle-row"><div class="toggle-info">Save as draft<span>Don't send yet, save for later</span></div><label class="toggle"><input type="checkbox"><span class="toggle-slider"></span></label></div>
+        <div class="toggle-row"><div class="toggle-info">Send email immediately<span>Proposal email will be sent to client</span></div><label class="toggle"><input id="pb_sendEmail" type="checkbox" checked><span class="toggle-slider"></span></label></div>
+        <div class="toggle-row"><div class="toggle-info">Save as draft<span>Don't send yet, save for later</span></div><label class="toggle"><input id="pb_saveDraft" type="checkbox"><span class="toggle-slider"></span></label></div>
       </div>
     </div>
     <div class="modal-footer" id="builderFooter">
@@ -1766,18 +1775,59 @@ document.querySelectorAll('.modal-overlay').forEach(m=>{
 
 // ==================== PROPOSAL BUILDER ====================
 let builderStep=1;
-function builderNav(dir){
+async function builderNav(dir){
   const total=4;
   if(dir===1&&builderStep===4){
     const cn=document.getElementById('pb_clientName').value||'Unknown';
     const em=document.getElementById('pb_email').value||'—';
     const ti=document.getElementById('pb_title').value||'New Proposal';
     const nu=document.getElementById('pb_number').value||'SCL-2025-XXX';
-    // Add to proposals
-    proposals.unshift({id:proposals.length+1,client:cn,company:document.getElementById('pb_company').value||'',email:em,title:ti,number:nu,value:'TBD',status:'draft',date:new Date().toLocaleDateString('en-ZA',{day:'numeric',month:'short',year:'numeric'}),color:'#'+Math.floor(Math.random()*16777215).toString(16)});
+    const sendEmail = document.getElementById('pb_sendEmail').checked;
+    const saveDraft = document.getElementById('pb_saveDraft').checked;
+    const proposalData = {
+      client_name: cn,
+      company_name: document.getElementById('pb_company').value||'',
+      client_email: em,
+      phone: document.getElementById('pb_phone').value||'',
+      proposal_title: ti,
+      proposal_number: nu,
+      expiry_date: document.querySelector('#builderStep1 input[type="date"]').value || '',
+      currency: document.querySelector('#builderStep1 select').value || 'ZAR (R)',
+      vat_rate: document.querySelectorAll('#builderStep1 select')[1].value || '15% VAT',
+      agreement_text: document.querySelector('#builderStep3 textarea').value || '',
+      send_email: sendEmail,
+      save_draft: saveDraft,
+    };
+
+    let status = sendEmail ? 'sent' : 'draft';
+    proposals.unshift({
+      id: proposals.length + 1,
+      client: cn,
+      company: proposalData.company_name,
+      email: em,
+      title: ti,
+      number: nu,
+      value: 'TBD',
+      status,
+      date: new Date().toLocaleDateString('en-ZA',{day:'numeric',month:'short',year:'numeric'}),
+      color: '#'+Math.floor(Math.random()*16777215).toString(16)
+    });
+
     renderProposals(); renderDashboard();
     closeModal('proposalBuilderModal');
-    showToast('Proposal created & sent!','success');
+
+    if(sendEmail){
+      showToast('Sending proposal email…','info');
+      const result = await sendProposalEmail(proposalData);
+      if(result.success){
+        showToast('Proposal created and email sent successfully!','success');
+      } else {
+        showToast('Proposal created, but email failed: ' + result.error,'error');
+      }
+    } else {
+      showToast('Proposal created successfully.','success');
+    }
+
     builderStep=1; updateBuilderUI();
     return;
   }
@@ -1789,6 +1839,23 @@ function builderNav(dir){
   }
   builderStep=Math.max(1,Math.min(total,builderStep+dir));
   updateBuilderUI();
+}
+async function sendProposalEmail(data){
+  try {
+    const response = await fetch('../api/send_proposal_email.php', {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify(data)
+    });
+    const text = await response.text();
+    try {
+      return JSON.parse(text);
+    } catch (parseError) {
+      return {success:false,error:'Invalid JSON from server: ' + text.trim()};
+    }
+  } catch (error) {
+    return {success:false,error:error.message};
+  }
 }
 function updateBuilderUI(){
   for(let i=1;i<=4;i++){
@@ -1866,10 +1933,57 @@ function showToast(msg,type='info'){
   setTimeout(()=>t.remove(),4000);
 }
 
+async function loadEmailSettings(){
+  try {
+    const response = await fetch('../api/get_email_settings.php');
+    const result = await response.json();
+    if(!result.success || !result.data) return;
+    const settings = result.data;
+    document.getElementById('settings_provider').value = 'smtp';
+    document.getElementById('settings_smtp_host').value = settings.smtp_host || '';
+    document.getElementById('settings_smtp_port').value = settings.smtp_port || '';
+    document.getElementById('settings_smtp_username').value = settings.smtp_username || '';
+    document.getElementById('settings_smtp_encryption').value = settings.smtp_encryption || 'tls';
+    document.getElementById('settings_from_name').value = settings.from_name || '';
+    document.getElementById('settings_from_email').value = settings.from_email || '';
+  } catch (error) {
+    console.error('Email settings load failed', error);
+  }
+}
+
+async function saveEmailSettings(){
+  const payload = {
+    smtp_host: document.getElementById('settings_smtp_host').value.trim(),
+    smtp_port: document.getElementById('settings_smtp_port').value.trim(),
+    smtp_username: document.getElementById('settings_smtp_username').value.trim(),
+    smtp_password: document.getElementById('settings_smtp_password').value,
+    smtp_encryption: document.getElementById('settings_smtp_encryption').value,
+    from_email: document.getElementById('settings_from_email').value.trim(),
+    from_name: document.getElementById('settings_from_name').value.trim(),
+  };
+  try {
+    const response = await fetch('../api/save_email_settings.php', {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify(payload)
+    });
+    const result = await response.json();
+    if(result.success){
+      showToast('Email settings saved successfully','success');
+      document.getElementById('settings_smtp_password').value = '';
+    } else {
+      showToast(result.error || 'Unable to save email settings','error');
+    }
+  } catch (error) {
+    showToast('Unable to save email settings: ' + error.message,'error');
+  }
+}
+
 // Run on load
 window.addEventListener('DOMContentLoaded',()=>{
   // Pre-render for fast load
   renderProposals(); renderCRM(); renderTemplates(); renderNotifications();
+  loadEmailSettings();
 });
 </script>
 </body>
