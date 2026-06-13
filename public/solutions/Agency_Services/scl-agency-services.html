@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Agency Services — SCL Digital Agency</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+<link rel="stylesheet" href="../../home/css/mega-menu.css">
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -45,67 +47,14 @@
     content: '';
     position: fixed; inset: 0;
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.035'/%3E%3C/svg%3E");
-    pointer-events: none; z-index: 9999; opacity: 0.4;
+    pointer-events: none; z-index: 1; opacity: 0.4;
   }
 
-  /* ── NAV ── */
-  nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 500;
-    padding: 0 48px;
-    height: 64px;
-    display: flex; align-items: center; justify-content: space-between;
-    background: rgba(4, 2, 12, 0.92);
-    backdrop-filter: blur(24px);
-    border-bottom: 1px solid var(--border);
-  }
+  /* Mega menu navbar styles injected in body */
 
-  .logo {
-    font-family: 'Syne', sans-serif;
-    font-size: 18px; font-weight: 800;
-    letter-spacing: 4px; color: var(--text);
-    text-decoration: none;
-  }
-  .logo em { color: var(--purple-light); font-style: normal; }
-
-  .nav-links {
-    display: flex; gap: 0; list-style: none;
-  }
-  .nav-links li a {
-    display: block; padding: 0 20px; height: 64px; line-height: 64px;
-    color: var(--text-muted); text-decoration: none;
-    font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
-    transition: color 0.2s, background 0.2s;
-    position: relative;
-  }
-  .nav-links li a:hover { color: var(--text); background: rgba(124,58,237,0.06); }
-  .nav-links li a.active {
-    color: var(--accent);
-    background: rgba(124,58,237,0.1);
-  }
-  .nav-links li a.active::after {
-    content: '';
-    position: absolute; bottom: 0; left: 0; right: 0;
-    height: 2px; background: var(--purple-light);
-  }
-
-  .nav-cta {
-    background: transparent;
-    border: 1px solid var(--border-bright);
-    color: var(--accent);
-    padding: 9px 22px;
-    font-family: 'DM Mono', monospace;
-    font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
-    cursor: pointer; transition: all 0.2s;
-  }
-  .nav-cta:hover {
-    background: var(--purple);
-    border-color: var(--purple);
-    color: #fff;
-  }
-
-  /* ── HERO ── */
+  /* â”€â”€ HERO â”€â”€ */
   .hero {
-    padding-top: 64px;
+    padding-top: 0;
     min-height: 100vh;
     display: grid;
     grid-template-rows: 1fr auto;
@@ -278,7 +227,7 @@
     color: var(--text-dim);
   }
 
-  /* ── SECTIONS ── */
+  /* â”€â”€ SECTIONS â”€â”€ */
   .section {
     padding: 120px 48px;
     position: relative;
@@ -301,7 +250,7 @@
   .section-title .dim { color: var(--text-dim); }
   .section-title .accent-cyan { color: var(--cyan); }
 
-  /* ── SERVICE TIERS ── */
+  /* â”€â”€ SERVICE TIERS â”€â”€ */
   .tiers-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -395,7 +344,7 @@
     color: #fff;
   }
 
-  /* ── SERVICES GRID ── */
+  /* â”€â”€ SERVICES GRID â”€â”€ */
   .services-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -457,7 +406,7 @@
   }
   .tag.active { color: var(--cyan); border-color: rgba(34,211,238,0.3); }
 
-  /* ── PROCESS ── */
+  /* â”€â”€ PROCESS â”€â”€ */
   .process-layout {
     display: grid;
     grid-template-columns: 1fr 2fr;
@@ -537,12 +486,12 @@
     font-weight: 300;
   }
   .ps-del-list li::before {
-    content: '→';
+    content: 'â†’';
     color: var(--purple-light);
     font-size: 11px;
   }
 
-  /* ── CASE STUDIES STRIP ── */
+  /* â”€â”€ CASE STUDIES STRIP â”€â”€ */
   .cases-scroll {
     display: flex; gap: 0;
     border: 1px solid var(--border);
@@ -590,7 +539,7 @@
     color: var(--text-dim);
   }
 
-  /* ── ENGAGEMENT MODELS ── */
+  /* â”€â”€ ENGAGEMENT MODELS â”€â”€ */
   .models-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -630,7 +579,7 @@
     line-height: 1.8;
   }
 
-  /* ── TECH STACK ── */
+  /* â”€â”€ TECH STACK â”€â”€ */
   .stack-bar {
     border: 1px solid var(--border);
     display: flex; flex-wrap: wrap;
@@ -661,7 +610,7 @@
   .stack-dot.amber { background: var(--amber); }
   .stack-dot.purple { background: var(--purple-light); }
 
-  /* ── CTA ── */
+  /* â”€â”€ CTA â”€â”€ */
   .cta-section {
     padding: 120px 48px;
     position: relative;
@@ -718,7 +667,7 @@
   .readout-val.amber { color: var(--amber); }
   .readout-val.cyan { color: var(--cyan); }
 
-  /* ── FOOTER ── */
+  /* â”€â”€ FOOTER â”€â”€ */
   footer {
     border-top: 1px solid var(--border);
     padding: 32px 48px;
@@ -729,13 +678,13 @@
   .footer-links a { font-size: 10px; color: var(--text-dim); text-decoration: none; letter-spacing: 1px; transition: color 0.2s; }
   .footer-links a:hover { color: var(--text-muted); }
 
-  /* ── DIVIDER ── */
+  /* â”€â”€ DIVIDER â”€â”€ */
   .section-divider {
     height: 1px; background: var(--border);
     margin: 0 48px;
   }
 
-  /* ── SCROLL REVEAL ── */
+  /* â”€â”€ SCROLL REVEAL â”€â”€ */
   .reveal {
     opacity: 0;
     transform: translateY(20px);
@@ -762,22 +711,1119 @@
     margin-bottom: 16px;
   }
   .scroll-hint-line { width: 32px; height: 1px; background: var(--border); }
+
+  nav.modern-navbar {
+    position: fixed !important;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: auto !important;
+    padding: 0 !important;
+    display: block !important;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(250, 250, 250, 0.95) 100%) !important;
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif !important;
+    z-index: 10001 !important;
+  }
+  .modern-navbar .mega-menu {
+    z-index: 10002;
+  }
 </style>
 </head>
 <body>
 
-<!-- NAV -->
-<nav>
-  <a href="#" class="logo">SCL<em>.</em></a>
-  <ul class="nav-links">
-    <li><a href="#">Overview</a></li>
-    <li><a href="#" class="active">Agency Services</a></li>
-    <li><a href="#">Product Lab</a></li>
-    <li><a href="#">Portfolio</a></li>
-    <li><a href="#">Insights</a></li>
-  </ul>
-  <button class="nav-cta">Start a Project</button>
-</nav>
+	<!-- Modern Sticky Navbar -->
+	<nav class="modern-navbar">
+		<div class="navbar-container">
+			<!-- Logo / Home -->
+			<div class="navbar-logo">
+				<a href="../../home/home.html" title="Back to Home">
+					<img src="../../home/images/NEW_SCLDA_Purple_Logo_01.png" alt="SCL Digital Agency">
+				</a>
+			</div>
+
+			<!-- Primary Navigation Links -->
+			<div class="navbar-primary">
+				<ul class="nav-items">
+
+					<li class="nav-dropdown" id="nav-solutions">
+						<a href="../../services-platform/our_services.html" class="nav-link active">Solutions
+							<svg class="chevron" width="16" height="16" viewBox="0 0 24 24" fill="none"
+								stroke="currentColor" stroke-width="2">
+								<polyline points="6 9 12 15 18 9"></polyline>
+							</svg>
+						</a>
+						<div class="mega-menu" id="mega-menu-solutions">
+							<div class="mega-menu-content">
+								<!-- Sidebar: Categories (Column 1) -->
+								<div class="mega-menu-sidebar">
+									<div class="sidebar-item active" onmouseover="showCategory(this, 'digital')">
+										<span>Internal Product Lab</span>
+										<i class="fas fa-chevron-right"></i>
+									</div>
+									<div class="sidebar-item" onmouseover="showCategory(this, 'business')">
+										<span>Agency Services</span>
+										<i class="fas fa-chevron-right"></i>
+									</div>
+									<div class="sidebar-item" onmouseover="showCategory(this, 'products')">
+										<span>Featured Products</span>
+										<i class="fas fa-chevron-right"></i>
+									</div>
+									<div class="sidebar-item" onmouseover="showCategory(this, 'resources')">
+										<span>Resources</span>
+										<i class="fas fa-chevron-right"></i>
+									</div>
+								</div>
+
+								<!-- Main Content Area (Columns 2 & 3) -->
+								<div class="mega-menu-main">
+									<!-- Digital Solutions -->
+									<div id="category-digital" class="category-content active">
+										<div class="mega-menu-column middle">
+											<h3>Internal Product Lab</h3>
+											<p>We generate ideas, validate them, build MVPs, and launch into real markets. Successful products become revenue assets — positioned for scale or acquisition.</p>
+											<a href="../Internal_Product_Lab/scl-internal-product-lab.html" class="mega-menu-cta">Learn More <i class="fas fa-arrow-right"></i></a>
+										</div>
+										<div class="mega-menu-column right">
+											<h4>Core Services</h4>
+											<ul>
+												<li><a href="#">Idea generation & Validation <i class="fas fa-chevron-right"></i></a>
+												</li>
+												<li><a href="#">MVP Design & Development <i
+															class="fas fa-chevron-right"></i></a></li>
+												<li><a href="#">Real-market testing & Iteration <i
+															class="fas fa-chevron-right"></i></a></li>
+												<li><a href="#">Scaling successful products <i
+															class="fas fa-chevron-right"></i></a></li>
+												<li><a href="#">Acquisition-ready positioning <i
+															class="fas fa-chevron-right"></i></a></li>
+											</ul>
+										</div>
+									</div>
+									<!-- Featured Products -->
+									<div id="category-products" class="category-content">
+										<div class="mega-menu-column middle">
+											<h3>Featured Products</h3>
+											<p>Discover our signature software suite designed to solve specific business
+												problems and streamline your operations through automation and
+												advanced technology.</p>
+											<a href="../../services-platform/our_services.html" class="mega-menu-cta">View All
+												Products <i class="fas fa-arrow-right"></i></a>
+										</div>
+										<div class="mega-menu-column right">
+											<h4>Signature Suite</h4>
+											<ul>
+												<li><a href="#">SCL SaaS Platform <i
+															class="fas fa-chevron-right"></i></a></li>
+												<li><a href="#">SecurePay Gateway <i
+															class="fas fa-chevron-right"></i></a></li>
+												<li><a href="#">Event Booking System <i
+															class="fas fa-chevron-right"></i></a></li>
+												<li><a href="#">Client Portal Pro <i
+															class="fas fa-chevron-right"></i></a></li>
+											</ul>
+										</div>
+									</div>
+									<!-- Business Services -->
+									<div id="category-business" class="category-content">
+										<div class="mega-menu-column middle">
+											<h3>Agency Services</h3>
+											<p>We bring our proven systems to founders, startups, and visionaries — giving them the infrastructure and strategy to transform bold ideas into scalable businesses.</p>
+											<a href="scl-agency-services.html" class="mega-menu-cta">Learn More <i class="fas fa-arrow-right"></i></a>
+										</div>
+										<div class="mega-menu-column right">
+											<h4>Scaling Success</h4>
+											<ul>
+												<li><a href="#">Idea protection & IP structuring<i
+															class="fas fa-chevron-right"></i></a></li>
+												<li><a href="#">Investor-ready pitch decks <i
+															class="fas fa-chevron-right"></i></a></li>
+												<li><a href="#">UI/UX & product development <i
+															class="fas fa-chevron-right"></i></a></li>
+												<li><a href="#">Go-to-market strategy <i
+															class="fas fa-chevron-right"></i></a></li>
+												<li><a href="#">Revenue & monetization design <i
+															class="fas fa-chevron-right"></i></a></li>
+											</ul>
+										</div>
+									</div>
+
+									<!-- Featured Products -->
+									<div id="category-products" class="category-content">
+										<div class="mega-menu-column middle">
+											<h3>Featured Products</h3>
+											<p>Discover our signature software suite designed to solve specific business
+												problems and streamline your operations through automation and
+												advanced technology.</p>
+											<a href="../../services-platform/our_services.html" class="mega-menu-cta">View All
+												Products <i class="fas fa-arrow-right"></i></a>
+										</div>
+										<div class="mega-menu-column right">
+											<h4>Signature Suite</h4>
+											<ul>
+												<li><a href="#">SCL SaaS Platform <i
+															class="fas fa-chevron-right"></i></a></li>
+												<li><a href="#">SecurePay Gateway <i
+															class="fas fa-chevron-right"></i></a></li>
+												<li><a href="#">Event Booking System <i
+															class="fas fa-chevron-right"></i></a></li>
+												<li><a href="#">Client Portal Pro <i
+															class="fas fa-chevron-right"></i></a></li>
+											</ul>
+										</div>
+									</div>
+
+									<!-- Resources -->
+									<div id="category-resources" class="category-content">
+										<div class="mega-menu-column middle">
+											<h3>Resources Hub</h3>
+											<p>Access our wealth of knowledge, from in-depth case studies and expert
+												blog posts to comprehensive documentation and reliable support
+												services.</p>
+											<a href="../Resources/Resources/resources_hub_landing.html" class="mega-menu-cta">Visit Resource
+												Hub <i class="fas fa-arrow-right"></i></a>
+										</div>
+										<div class="mega-menu-column right">
+											<h4>Knowledge Center</h4>
+											<ul>
+												<li><a href="../Resources/Portfolio/case_studies.html">Case Studies <i
+															class="fas fa-chevron-right"></i></a></li>
+												<li><a href="#">Expert Blog <i
+															class="fas fa-chevron-right"></i></a></li>
+												<li><a href="#">Documentation <i class="fas fa-chevron-right"></i></a>
+												</li>
+												<li><a href="#">Help & Support <i class="fas fa-chevron-right"></i></a>
+												</li>
+											</ul>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</li>
+
+
+					<li class="nav-dropdown" id="nav-innovation">
+						<a href="../../services-platform/our_services.html" class="nav-link">Innovation
+							<svg class="chevron" width="16" height="16" viewBox="0 0 24 24" fill="none"
+								stroke="currentColor" stroke-width="2">
+								<polyline points="6 9 12 15 18 9"></polyline>
+							</svg>
+						</a>
+						<div class="mega-menu" id="mega-menu-innovation">
+							<div class="mega-menu-content">
+								<!-- Sidebar: Categories (Column 1) -->
+								<div class="mega-menu-sidebar">
+									<div class="sidebar-item active" onmouseover="showCategory(this, 'ai')">
+										<span>AI & Automation</span>
+										<i class="fas fa-chevron-right"></i>
+									</div>
+									<div class="sidebar-item" onmouseover="showCategory(this, 'frameworks')">
+										<span>Modern Frameworks</span>
+										<i class="fas fa-chevron-right"></i>
+									</div>
+									<div class="sidebar-item" onmouseover="showCategory(this, 'research')">
+										<span>Research & Development</span>
+										<i class="fas fa-chevron-right"></i>
+									</div>
+									<div class="sidebar-item" onmouseover="showCategory(this, 'future')">
+										<span>Future Vision</span>
+										<i class="fas fa-chevron-right"></i>
+									</div>
+								</div>
+
+								<!-- Main Content Area (Columns 2 & 3) -->
+								<div class="mega-menu-main">
+									<!-- AI & Automation -->
+									<div id="category-ai" class="category-content active">
+										<div class="mega-menu-column middle">
+											<h3>AI & Automation</h3>
+											<p>Harness the power of Artificial Intelligence and intelligent automation
+												to transform
+												your business processes and drive unprecedented efficiency.</p>
+											<a href="../../services-platform/our_services.html" class="mega-menu-cta">Explore
+												AI
+												Solutions <i class="fas fa-arrow-right"></i></a>
+										</div>
+										<div class="mega-menu-column right">
+											<h4>Core Innovations</h4>
+											<ul>
+												<li><a href="#">Machine Learning <i
+															class="fas fa-chevron-right"></i></a></li>
+												<li><a href="#">Natural Language Processing <i
+															class="fas fa-chevron-right"></i></a></li>
+												<li><a href="#">Process Automation <i
+															class="fas fa-chevron-right"></i></a></li>
+												<li><a href="#">Predictive Analytics <i
+															class="fas fa-chevron-right"></i></a></li>
+											</ul>
+										</div>
+									</div>
+
+									<!-- Modern Frameworks -->
+									<div id="category-frameworks" class="category-content">
+										<div class="mega-menu-column middle">
+											<h3>Modern Frameworks</h3>
+											<p>Building the future on solid foundations. We utilize cutting-edge
+												tech stacks to ensure your products are scalable, secure, and fast.</p>
+											<a href="../../services-platform/our_services.html" class="mega-menu-cta">View
+												Tech
+												Stack <i class="fas fa-arrow-right"></i></a>
+										</div>
+										<div class="mega-menu-column right">
+											<h4>Technologies</h4>
+											<ul>
+												<li><a href="#">Next.js & React <i class="fas fa-chevron-right"></i></a>
+												</li>
+												<li><a href="#">Node.js Ecosystem <i
+															class="fas fa-chevron-right"></i></a></li>
+												<li><a href="#">Cloud Native Architecture <i
+															class="fas fa-chevron-right"></i></a></li>
+												<li><a href="#">Microservices <i class="fas fa-chevron-right"></i></a>
+												</li>
+											</ul>
+										</div>
+									</div>
+
+									<!-- Research -->
+									<div id="category-research" class="category-content">
+										<div class="mega-menu-column middle">
+											<h3>Research & Development</h3>
+											<p>Constantly pushing boundaries. Our R&D team explores emerging
+												technologies to keep your business ahead of the curve.</p>
+											<a href="../../services-platform/our_services.html" class="mega-menu-cta">Our Labs
+												<i class="fas fa-arrow-right"></i></a>
+										</div>
+										<div class="mega-menu-column right">
+											<h4>Innovation Hub</h4>
+											<ul>
+												<li><a href="#">Prototype Development <i
+															class="fas fa-chevron-right"></i></a></li>
+												<li><a href="#">Tech Feasibility Studies <i
+															class="fas fa-chevron-right"></i></a></li>
+												<li><a href="#">User Experience Labs <i
+															class="fas fa-chevron-right"></i></a></li>
+												<li><a href="#">Security Innovation <i
+															class="fas fa-chevron-right"></i></a></li>
+											</ul>
+										</div>
+									</div>
+
+									<!-- Future Vision -->
+									<div id="category-future" class="category-content">
+										<div class="mega-menu-column middle">
+											<h3>Future Vision</h3>
+											<p>Strategic foresight for a rapidly evolving digital landscape.
+												We help you navigate what's next in technology and business.</p>
+											<a href="../../about/about.html" class="mega-menu-cta">Our Roadmap
+												<i class="fas fa-arrow-right"></i></a>
+										</div>
+										<div class="mega-menu-column right">
+											<h4>Tomorrow's Tech</h4>
+											<ul>
+												<li><a href="#">Web3 & Decentralization <i
+															class="fas fa-chevron-right"></i></a></li>
+												<li><a href="#">Edge Computing <i class="fas fa-chevron-right"></i></a>
+												</li>
+												<li><a href="#">Quantum Readiness <i
+															class="fas fa-chevron-right"></i></a></li>
+												<li><a href="#">Sustainability Tech <i
+															class="fas fa-chevron-right"></i></a></li>
+											</ul>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</li>
+
+
+
+					<li class="nav-dropdown" id="nav-news">
+						<a href="../../services-platform/our_services.html" class="nav-link">News & Events
+							<svg class="chevron" width="16" height="16" viewBox="0 0 24 24" fill="none"
+								stroke="currentColor" stroke-width="2">
+								<polyline points="6 9 12 15 18 9"></polyline>
+							</svg>
+						</a>
+						<div class="mega-menu" id="mega-menu-news">
+							<div class="mega-menu-content">
+								<!-- Sidebar: Categories (Column 1) -->
+								<div class="mega-menu-sidebar">
+									<div class="sidebar-item active" onmouseover="showCategory(this, 'latest-news')">
+										<span>Latest News</span>
+										<i class="fas fa-chevron-right"></i>
+									</div>
+									<div class="sidebar-item" onmouseover="showCategory(this, 'upcoming-events')">
+										<span>Upcoming Events</span>
+										<i class="fas fa-chevron-right"></i>
+									</div>
+									<div class="sidebar-item" onmouseover="showCategory(this, 'community')">
+										<span>Community Stories</span>
+										<i class="fas fa-chevron-right"></i>
+									</div>
+									<div class="sidebar-item" onmouseover="showCategory(this, 'press')">
+										<span>Press Releases</span>
+										<i class="fas fa-chevron-right"></i>
+									</div>
+								</div>
+
+								<!-- Main Content Area (Columns 2 & 3) -->
+								<div class="mega-menu-main">
+									<!-- Latest News -->
+									<div id="category-latest-news" class="category-content active">
+										<div class="mega-menu-column middle">
+											<h3>Latest Updates</h3>
+											<p>Stay informed about SCL Digital Agency's latest achievements,
+												major milestones, and company announcements from our global offices.</p>
+											<a href="#" class="mega-menu-cta">Read All
+												News <i class="fas fa-arrow-right"></i></a>
+										</div>
+										<div class="mega-menu-column right">
+											<h4>Recent Headlines</h4>
+											<ul>
+												<li><a href="#">Expansion Into New Markets <i
+															class="fas fa-chevron-right"></i></a></li>
+												<li><a href="#">Annual Innovation Award 2025 <i
+															class="fas fa-chevron-right"></i></a></li>
+												<li><a href="#">New Strategic Partnerships <i
+															class="fas fa-chevron-right"></i></a></li>
+												<li><a href="#">CEO's Monthly Vision Update <i
+															class="fas fa-chevron-right"></i></a></li>
+											</ul>
+										</div>
+									</div>
+
+									<!-- Upcoming Events -->
+									<div id="category-upcoming-events" class="category-content">
+										<div class="mega-menu-column middle">
+											<h3>Events & Workshops</h3>
+											<p>Join us for our upcoming webinars, technology workshops,
+												and networking events designed to foster innovation and collaboration.
+											</p>
+											<a href="../../events-platform/eventspage.html" class="mega-menu-cta">View
+												Calendar <i class="fas fa-arrow-right"></i></a>
+										</div>
+										<div class="mega-menu-column right">
+											<h4>Join Us</h4>
+											<ul>
+												<li><a href="#">Future of AI Webinar <i
+															class="fas fa-chevron-right"></i></a></li>
+												<li><a href="#">UI/UX Masterclass <i
+															class="fas fa-chevron-right"></i></a></li>
+												<li><a href="#">SaaS Networking Night <i
+															class="fas fa-chevron-right"></i></a></li>
+												<li><a href="#">Tech Talent Career Fair <i
+															class="fas fa-chevron-right"></i></a></li>
+											</ul>
+										</div>
+									</div>
+
+									<!-- Community -->
+									<div id="category-community" class="category-content">
+										<div class="mega-menu-column middle">
+											<h3>Community & Impact</h3>
+											<p>Discover the success stories of our clients and the positive
+												social impact projects SCL Digital Agency supports around the world.</p>
+											<a href="../Resources/Portfolio/case_studies.html" class="mega-menu-cta">Impact
+												Reports <i class="fas fa-arrow-right"></i></a>
+										</div>
+										<div class="mega-menu-column right">
+											<h4>Our Circle</h4>
+											<ul>
+												<li><a href="#">Client Success Overviews <i
+															class="fas fa-chevron-right"></i></a></li>
+												<li><a href="#">Social Responsibility Programs <i
+															class="fas fa-chevron-right"></i></a></li>
+												<li><a href="#">Global Community Forum <i
+															class="fas fa-chevron-right"></i></a></li>
+												<li><a href="#">Partner Spotlights <i
+															class="fas fa-chevron-right"></i></a></li>
+											</ul>
+										</div>
+									</div>
+
+									<!-- Press Releases -->
+									<div id="category-press" class="category-content">
+										<div class="mega-menu-column middle">
+											<h3>Newsroom & Media</h3>
+											<p>Access our official press releases, high-resolution media
+												assets, and contact information for media inquiries.</p>
+											<a href="../../about/contactus.html" class="mega-menu-cta">Media
+												Inquiries <i class="fas fa-arrow-right"></i></a>
+										</div>
+										<div class="mega-menu-column right">
+											<h4>Resources</h4>
+											<ul>
+												<li><a href="#">Official Press Releases <i
+															class="fas fa-chevron-right"></i></a></li>
+												<li><a href="#">Digital Media Kit <i
+															class="fas fa-chevron-right"></i></a></li>
+												<li><a href="#">Executive Biographies <i
+															class="fas fa-chevron-right"></i></a></li>
+												<li><a href="#">Brand Asset Library <i
+															class="fas fa-chevron-right"></i></a></li>
+											</ul>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+					</li>
+
+					<li class="nav-dropdown" id="nav-about">
+						<a href="../../about/about.html" class="nav-link">About us
+							<svg class="chevron" width="16" height="16" viewBox="0 0 24 24" fill="none"
+								stroke="currentColor" stroke-width="2">
+								<polyline points="6 9 12 15 18 9"></polyline>
+							</svg>
+						</a>
+						<div class="mega-menu" id="mega-menu-about">
+							<div class="mega-menu-content">
+								<!-- Sidebar: Categories (Column 1) -->
+								<div class="mega-menu-sidebar">
+									<div class="sidebar-item active" onmouseover="showCategory(this, 'company')">
+										<span>Company Profile</span>
+										<i class="fas fa-chevron-right"></i>
+									</div>
+									<div class="sidebar-item" onmouseover="showCategory(this, 'leadership')">
+										<span>Leadership</span>
+										<i class="fas fa-chevron-right"></i>
+									</div>
+									<div class="sidebar-item" onmouseover="showCategory(this, 'growth')">
+										<span>Growth & Careers</span>
+										<i class="fas fa-chevron-right"></i>
+									</div>
+									<div class="sidebar-item" onmouseover="showCategory(this, 'impact')">
+										<span>Impact & Network</span>
+										<i class="fas fa-chevron-right"></i>
+									</div>
+								</div>
+
+								<!-- Main Content Area (Columns 2 & 3) -->
+								<div class="mega-menu-main">
+									<!-- Company Profile -->
+									<div id="category-company" class="category-content active">
+										<div class="mega-menu-column middle">
+											<h3>Company Profile</h3>
+											<p>Discover the essence of SCL Digital Agency, where we empower visionaries
+												and
+												deliver transformative digital excellence across Africa.</p>
+											<a href="../../about/about.html" class="mega-menu-cta">Learn More <i
+													class="fas fa-arrow-right"></i></a>
+										</div>
+										<div class="mega-menu-column right">
+											<h4>Our Essence</h4>
+											<ul>
+												<li><a href="../../about/OurStory/ourstory.html">Our Story <i
+															class="fas fa-chevron-right"></i></a></li>
+												<li><a href="../../about/about.html#vision-mission-section">Vision & Mission <i
+															class="fas fa-chevron-right"></i></a></li>
+												<li><a href="../../about/about.html#core-values-section">Core Values <i
+															class="fas fa-chevron-right"></i></a></li>
+												<li><a href="../../about/SCL%20Digital%20Agency%20(Pty)%20Ltd%20Company%20Profile%202025%20-%202026.pdf"
+														target="_blank">Company Profile (PDF) <i
+															class="fas fa-chevron-right"></i></a></li>
+											</ul>
+										</div>
+									</div>
+
+									<!-- Leadership -->
+									<div id="category-leadership" class="category-content">
+										<div class="mega-menu-column middle">
+											<h3>Leadership</h3>
+											<p>Guided by purpose-led visionaries who blend innovation with integrity to
+												build world-class African brands.</p>
+											<a href="../../about/Meet_the_team.html" class="mega-menu-cta">Meet the Team <i
+													class="fas fa-arrow-right"></i></a>
+										</div>
+										<div class="mega-menu-column right">
+											<h4>Visionary Guides</h4>
+											<ul>
+												<li><a href="../../about/Meet_the_team.html">Meet our Founder <i
+															class="fas fa-chevron-right"></i></a></li>
+												<li><a href="../../about/about.html#founder-bio">CEO's Message <i
+															class="fas fa-chevron-right"></i></a></li>
+												<li><a href="#">CEO Chatbot <i
+															class="fas fa-chevron-right"></i></a></li>
+												<li><a href="https://www.linkedin.com/in/shinsa-lyonga-lomboto/"
+														target="_blank">LinkedIn Profile <i
+															class="fas fa-chevron-right"></i></a></li>
+											</ul>
+										</div>
+									</div>
+
+									<!-- Growth & Careers -->
+									<div id="category-growth" class="category-content">
+										<div class="mega-menu-column middle">
+											<h3>Growth & Careers</h3>
+											<p>Join a team of passionate innovators and creators. We're building the
+												future of digital excellence, one project at a time.</p>
+											<a href="../../about/Groth_Career/careers/jobpost.html" class="mega-menu-cta">Join Us <i
+													class="fas fa-arrow-right"></i></a>
+										</div>
+										<div class="mega-menu-column right">
+											<h4>Join the Team</h4>
+											<ul>
+												<li><a href="../../about/Groth_Career/careers/jobpost.html">Current Openings <i
+															class="fas fa-chevron-right"></i></a></li>
+												<li><a href="../../about/about.html#approach-card">Why Join Us? <i
+															class="fas fa-chevron-right"></i></a></li>
+												<li><a href="../../about/about.html#community">Culture & Impact <i
+															class="fas fa-chevron-right"></i></a></li>
+												<li><a href="#">Internship Programs <i
+															class="fas fa-chevron-right"></i></a></li>
+											</ul>
+										</div>
+									</div>
+
+									<!-- Impact & Network -->
+									<div id="category-impact" class="category-content">
+										<div class="mega-menu-column middle">
+											<h3>Impact & Network</h3>
+											<p>Our success is measured by the growth of our partners and the positive
+												impact we create in the global digital landscape.</p>
+											<a href="../Resources/Portfolio/case_studies.html" class="mega-menu-cta">Our Impact <i
+													class="fas fa-arrow-right"></i></a>
+										</div>
+										<div class="mega-menu-column right">
+											<h4>Global Presence</h4>
+											<ul>
+												<li><a href="../Resources/Portfolio/case_studies.html">Client Case Studies <i
+															class="fas fa-chevron-right"></i></a></li>
+												<li><a href="../../about/about.html#partners">Our Partners <i
+															class="fas fa-chevron-right"></i></a></li>
+												<li><a href="../../about/about.html#community">CSR Initiatives <i
+															class="fas fa-chevron-right"></i></a></li>
+												<li><a href="../../about/about.html#stats">Global Network <i
+															class="fas fa-chevron-right"></i></a></li>
+											</ul>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</li>
+
+
+
+				</ul>
+			</div>
+
+			<!-- Utility/Action Zone (Right) -->
+			<div class="navbar-utility">
+
+
+
+
+				<!-- Search Icon -->
+				<button class="navbar-icon-btn" title="Search" onclick="toggleSearchBar()">
+					<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+						<circle cx="11" cy="11" r="8"></circle>
+						<path d="m21 21-4.35-4.35"></path>
+					</svg>
+				</button>
+
+				<!-- Create Account Button -->
+				<button class="navbar-btn-primary" onclick="openAccountModal()">
+					<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+						<path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+						<circle cx="12" cy="7" r="4"></circle>
+					</svg>
+					<span>Create Account</span>
+				</button>
+
+				<!-- Profile/Login -->
+				<a href="../../home/login-products.html" class="navbar-icon-btn" title="Client Portal">
+					<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+						<path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+						<circle cx="12" cy="7" r="4"></circle>
+					</svg>
+				</a>
+
+				<!-- Shopping Cart Icon -->
+				<button class="navbar-icon-btn navbar-cart-btn" title="Shopping Cart" onclick="toggleCart()">
+					<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+						<circle cx="9" cy="21" r="1"></circle>
+						<circle cx="20" cy="21" r="1"></circle>
+						<path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+					</svg>
+					<span class="navbar-cart-badge" id="navbar-cart-count">0</span>
+				</button>
+
+				<!-- Hamburger Menu (Mobile) -->
+				<button class="navbar-hamburger" onclick="toggleSidebar()">
+					<span></span>
+					<span></span>
+					<span></span>
+				</button>
+			</div>
+		</div>
+
+		<!-- Search Bar (Hidden by default) -->
+		<div class="navbar-search-bar" id="searchBar">
+			<input type="text" placeholder="Search our services, resources, and more..." class="search-input">
+			<button class="search-close" onclick="toggleSearchBar()">
+				<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+					<line x1="18" y1="6" x2="6" y2="18"></line>
+					<line x1="6" y1="6" x2="18" y2="18"></line>
+				</svg>
+			</button>
+		</div>
+	</nav>
+
+	<!-- Modern Navbar Styles -->
+	<style>
+		.modern-navbar {
+			position: fixed;
+			top: 0;
+			left: 0;
+			right: 0;
+			background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(250, 250, 250, 0.95) 100%);
+			backdrop-filter: blur(10px);
+			border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+			z-index: 10001;
+			box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+			transition: all 0.3s ease;
+		}
+
+		.modern-navbar.scrolled {
+			box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+		}
+
+		.navbar-container {
+			max-width: 1400px;
+			margin: 0 auto;
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			height: 70px;
+			padding: 0 40px;
+			position: relative;
+		}
+
+		/* Logo */
+		.navbar-logo a {
+			display: flex;
+			align-items: center;
+			height: 50px;
+			transition: transform 0.2s ease;
+		}
+
+		.navbar-logo img {
+			height: 40px;
+			width: auto;
+			object-fit: contain;
+		}
+
+		.navbar-logo a:hover {
+			transform: scale(1.05);
+		}
+
+		/* Primary Navigation */
+		.navbar-primary {
+			flex: 1;
+			display: flex;
+			justify-content: center;
+			margin: 0 30px;
+		}
+
+		.nav-items {
+			display: flex;
+			list-style: none;
+			gap: 30px;
+			margin: 0;
+			padding: 0;
+			height: 100%;
+			align-items: center;
+		}
+
+		.nav-link {
+			display: flex;
+			align-items: center;
+			gap: 6px;
+			color: #333;
+			text-decoration: none;
+			font-weight: 500;
+			font-size: 14px;
+			height: 100%;
+			position: relative;
+			transition: color 0.2s ease;
+		}
+
+		.nav-link:hover,
+		.nav-link.active {
+			color: #667eea;
+		}
+
+		/* Active state underline */
+		.nav-link.active::after {
+			content: '';
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			right: 0;
+			height: 3px;
+			background: linear-gradient(135deg, #667eea, #764ba2);
+			border-radius: 2px;
+		}
+
+		/* Dropdown */
+		.nav-dropdown {
+			position: static;
+			/* Let mega-menu be relative to navbar-container */
+			height: 100%;
+			display: flex;
+			align-items: center;
+		}
+
+		/* Dropdown Trigger */
+		.nav-dropdown:hover>.mega-menu {
+			visibility: visible !important;
+			opacity: 1 !important;
+			pointer-events: auto !important;
+			transform: translateY(0) !important;
+		}
+
+		.dropdown-menu {
+			position: absolute;
+			top: 100%;
+			left: 0;
+			background: white;
+			border: 1px solid rgba(0, 0, 0, 0.1);
+			border-radius: 8px;
+			margin-top: 8px;
+			padding: 8px 0;
+			min-width: 200px;
+			opacity: 0;
+			visibility: hidden;
+			transform: translateY(-8px);
+			transition: all 0.3s ease;
+			box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+		}
+
+		.dropdown-menu a {
+			display: block;
+			padding: 12px 16px;
+			color: #333;
+			text-decoration: none;
+			font-size: 14px;
+			transition: background 0.2s ease;
+		}
+
+		.dropdown-menu a:hover {
+			background: #f5f7ff;
+			color: #667eea;
+		}
+
+		.chevron {
+			transition: transform 0.3s ease;
+		}
+
+		.nav-dropdown:hover .chevron {
+			transform: rotate(180deg);
+		}
+
+		/* Utility Zone */
+		.navbar-utility {
+			display: flex;
+			align-items: center;
+			gap: 16px;
+		}
+
+		.navbar-icon-btn {
+			background: none;
+			border: none;
+			color: #333;
+			cursor: pointer;
+			padding: 8px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			transition: all 0.2s ease;
+			border-radius: 6px;
+		}
+
+		.navbar-icon-btn:hover {
+			color: #667eea;
+			background: rgba(102, 126, 234, 0.1);
+		}
+
+		/* Primary Button */
+		.navbar-btn-primary {
+			display: flex;
+			align-items: center;
+			gap: 8px;
+			padding: 10px 20px;
+			background: linear-gradient(135deg, #1C1550 0%, #1C1550 100%);
+			color: white;
+			border: none;
+			border-radius: 100px;
+			font-weight: 600;
+			font-size: 14px;
+			cursor: pointer;
+			transition: all 0.3s ease;
+			white-space: nowrap;
+		}
+
+		.navbar-btn-primary:hover {
+			transform: translateY(-2px);
+			box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+		}
+
+		/* Navbar Cart Button Styling */
+		.navbar-cart-btn {
+			position: relative;
+		}
+
+		.navbar-cart-badge {
+			position: absolute;
+			top: -8px;
+			right: -8px;
+			background: #ff4d4d;
+			color: white;
+			border-radius: 50%;
+			width: 18px;
+			height: 18px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			font-size: 11px;
+			font-weight: bold;
+			border: 2px solid white;
+		}
+
+		.navbar-cart-badge:empty,
+		.navbar-cart-badge[data-count="0"] {
+			display: none;
+		}
+
+		/* Cart Modal Styling */
+		.cart-modal {
+			display: none;
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background: rgba(0, 0, 0, 0.5);
+			z-index: 2000;
+			justify-content: center;
+			align-items: center;
+		}
+
+		.cart-modal.active {
+			display: flex;
+		}
+
+		.cart-modal-content {
+			background: white;
+			border-radius: 12px;
+			width: 90%;
+			max-width: 500px;
+			max-height: 80vh;
+			overflow: hidden;
+			box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+		}
+
+		.cart-modal-header {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			padding: 20px;
+			border-bottom: 1px solid #eee;
+		}
+
+		.cart-modal-header h3 {
+			margin: 0;
+			font-size: 20px;
+			font-weight: 600;
+		}
+
+		.cart-close {
+			background: none;
+			border: none;
+			font-size: 24px;
+			cursor: pointer;
+			color: #666;
+		}
+
+		.cart-modal-body {
+			padding: 20px;
+			max-height: 60vh;
+			overflow-y: auto;
+		}
+
+		.cart-total {
+			margin: 20px 0;
+			font-size: 18px;
+			text-align: right;
+		}
+
+		.cart-actions {
+			display: flex;
+			gap: 10px;
+			justify-content: flex-end;
+		}
+
+		.cart-modal .btn-secondary {
+			background: #f8f9fa;
+			color: #333;
+			border: 1px solid #ddd;
+			padding: 10px 20px;
+			border-radius: 6px;
+			cursor: pointer;
+		}
+
+		.cart-modal .btn-primary {
+			background: #1C1550;
+			color: white;
+			border: none;
+			padding: 10px 20px;
+			border-radius: 6px;
+			cursor: pointer;
+		}
+
+		/* Search Bar */
+		.navbar-search-bar {
+			display: none;
+			padding: 12px 20px;
+			background: rgba(255, 255, 255, 0.98);
+			border-top: 1px solid rgba(0, 0, 0, 0.08);
+		}
+
+		.navbar-search-bar.active {
+			display: flex;
+			gap: 12px;
+			align-items: center;
+		}
+
+		.search-input {
+			flex: 1;
+			padding: 10px 12px;
+			border: 1px solid rgba(0, 0, 0, 0.1);
+			border-radius: 6px;
+			font-size: 14px;
+			outline: none;
+			transition: border-color 0.2s ease;
+		}
+
+		.search-input:focus {
+			border-color: #667eea;
+			box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+		}
+
+		.search-close {
+			background: none;
+			border: none;
+			color: #666;
+			cursor: pointer;
+			padding: 8px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+
+		.search-close:hover {
+			color: #333;
+		}
+
+		/* Hamburger Menu */
+		.navbar-hamburger {
+			display: none;
+			flex-direction: column;
+			gap: 6px;
+			background: none;
+			border: none;
+			cursor: pointer;
+			padding: 8px;
+		}
+
+		.navbar-hamburger span {
+			width: 24px;
+			height: 2px;
+			background: #333;
+			border-radius: 2px;
+			transition: all 0.3s ease;
+		}
+
+		.navbar-hamburger.active span:nth-child(1) {
+			transform: rotate(45deg) translate(10px, 10px);
+		}
+
+		.navbar-hamburger.active span:nth-child(2) {
+			opacity: 0;
+		}
+
+		.navbar-hamburger.active span:nth-child(3) {
+			transform: rotate(-45deg) translate(7px, -7px);
+		}
+
+		/* Responsive */
+		@media (max-width: 768px) {
+			.navbar-container {
+				height: 60px;
+				padding: 0 15px;
+			}
+
+			.navbar-logo img {
+				height: 40px;
+			}
+
+			.navbar-primary {
+				display: none;
+				margin: 0;
+			}
+
+			.navbar-btn-primary span,
+			.navbar-login-fields {
+				display: none;
+			}
+
+			.navbar-hamburger {
+				display: flex;
+			}
+
+			.nav-items {
+				gap: 15px;
+			}
+		}
+
+		/* Ensure body has top padding for fixed navbar */
+		body {
+			padding-top: 70px;
+		}
+
+		@media (max-width: 768px) {
+			body {
+				padding-top: 60px;
+			}
+		}
+	</style>
+	<!-- Navbar Scripts -->
+	<script src="../../home/js/mega-menu.js"></script>
+	<script>
+		function toggleSidebar() {
+			const hamburger = document.querySelector('.navbar-hamburger');
+			if (hamburger) hamburger.classList.toggle('active');
+		}
+		function toggleCart() {
+			const cartModal = document.getElementById('cart-modal');
+			if (cartModal) cartModal.classList.toggle('active');
+		}
+		function openAccountModal() {
+			window.location.href = '../../home/login-products.html';
+		}
+		window.addEventListener('scroll', function () {
+			const navbar = document.querySelector('.modern-navbar');
+			if (!navbar) return;
+			const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+			if (scrollTop > 0) navbar.classList.add('scrolled');
+			else navbar.classList.remove('scrolled');
+		});
+	</script>
 
 <!-- HERO -->
 <section class="hero">
@@ -791,7 +1837,7 @@
       <span class="engine-label">SCL Digital Agency</span>
       <div class="engine-badge">
         <div class="engine-dot"></div>
-        <span class="engine-text">Engine 02 — Client Services</span>
+        <span class="engine-text">Engine 02 â€” Client Services</span>
       </div>
     </div>
 
@@ -804,12 +1850,12 @@
     </h1>
 
     <p class="hero-desc">
-      From early-stage MVPs to enterprise-grade platforms — SCL delivers full-stack digital execution. Strategy, design, engineering, and growth under one roof. We don't just build; we ship outcomes.
+      From early-stage MVPs to enterprise-grade platforms â€” SCL delivers full-stack digital execution. Strategy, design, engineering, and growth under one roof. We don't just build; we ship outcomes.
     </p>
 
     <div class="hero-actions">
-      <button class="btn-primary">Scope a Project →</button>
-      <button class="btn-ghost">View our portfolio <span class="arrow">→</span></button>
+      <button class="btn-primary">Scope a Project â†’</button>
+      <button class="btn-ghost">View our portfolio <span class="arrow">â†’</span></button>
     </div>
   </div>
 
@@ -823,7 +1869,7 @@
       <div class="stat-label">Average Retention</div>
     </div>
     <div class="stat-item">
-      <div class="stat-num">3<span>×</span></div>
+      <div class="stat-num">3<span>Ã—</span></div>
       <div class="stat-label">Avg Client Growth</div>
     </div>
     <div class="stat-item">
@@ -837,17 +1883,17 @@
 <section class="section">
   <div class="section-header reveal">
     <div>
-      <div class="section-tag">// 02.01 — What we build</div>
+      <div class="section-tag">// 02.01 â€” What we build</div>
       <h2 class="section-title">Core <span class="dim">service</span><br><span class="accent-cyan">disciplines</span></h2>
     </div>
     <div style="max-width:320px; font-size:12px; color:var(--text-muted); line-height:1.8; font-weight:300; padding-top:40px;">
-      Each discipline is a full practice — not a line item. We go deep, not wide, delivering complete execution within each domain.
+      Each discipline is a full practice â€” not a line item. We go deep, not wide, delivering complete execution within each domain.
     </div>
   </div>
 
   <div class="services-grid">
     <div class="service-card reveal">
-      <div class="service-num">01 — Design Systems</div>
+      <div class="service-num">01 â€” Design Systems</div>
       <div class="service-icon">
         <svg viewBox="0 0 24 24" fill="none" stroke="#A855F7" stroke-width="1.5">
           <rect x="3" y="3" width="8" height="8" rx="1"/><rect x="13" y="3" width="8" height="8" rx="1"/>
@@ -855,7 +1901,7 @@
         </svg>
       </div>
       <h3 class="service-name">Product Design</h3>
-      <p class="service-desc">UI/UX systems built to convert and retain. We design for real human behaviour — zero fluff, maximum signal. From wireframes to interactive prototypes to production-ready design systems.</p>
+      <p class="service-desc">UI/UX systems built to convert and retain. We design for real human behaviour â€” zero fluff, maximum signal. From wireframes to interactive prototypes to production-ready design systems.</p>
       <div class="service-tags">
         <span class="tag active">UI/UX</span>
         <span class="tag active">Design Systems</span>
@@ -866,14 +1912,14 @@
     </div>
 
     <div class="service-card reveal reveal-delay-1">
-      <div class="service-num">02 — Engineering</div>
+      <div class="service-num">02 â€” Engineering</div>
       <div class="service-icon">
         <svg viewBox="0 0 24 24" fill="none" stroke="#22D3EE" stroke-width="1.5">
           <polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>
         </svg>
       </div>
       <h3 class="service-name">Full-Stack Development</h3>
-      <p class="service-desc">End-to-end engineering for web and mobile platforms. We build fast, secure, and scalable — from API architecture to pixel-perfect frontends. Production-grade from day one.</p>
+      <p class="service-desc">End-to-end engineering for web and mobile platforms. We build fast, secure, and scalable â€” from API architecture to pixel-perfect frontends. Production-grade from day one.</p>
       <div class="service-tags">
         <span class="tag active">Web Apps</span>
         <span class="tag active">Mobile</span>
@@ -884,14 +1930,14 @@
     </div>
 
     <div class="service-card reveal reveal-delay-2">
-      <div class="service-num">03 — AI Integration</div>
+      <div class="service-num">03 â€” AI Integration</div>
       <div class="service-icon">
         <svg viewBox="0 0 24 24" fill="none" stroke="#C084FC" stroke-width="1.5">
           <circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/>
         </svg>
       </div>
       <h3 class="service-name">AI & Automation</h3>
-      <p class="service-desc">LLM integrations, intelligent workflows, and AI-native product features. We don't bolt AI on — we architect around it. From RAG pipelines to custom model fine-tuning.</p>
+      <p class="service-desc">LLM integrations, intelligent workflows, and AI-native product features. We don't bolt AI on â€” we architect around it. From RAG pipelines to custom model fine-tuning.</p>
       <div class="service-tags">
         <span class="tag active">LLM Integration</span>
         <span class="tag active">Automation</span>
@@ -901,14 +1947,14 @@
     </div>
 
     <div class="service-card reveal reveal-delay-3">
-      <div class="service-num">04 — Growth</div>
+      <div class="service-num">04 â€” Growth</div>
       <div class="service-icon">
         <svg viewBox="0 0 24 24" fill="none" stroke="#34D399" stroke-width="1.5">
           <polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/>
         </svg>
       </div>
       <h3 class="service-name">Digital Growth</h3>
-      <p class="service-desc">Acquisition, retention, and revenue optimisation. We run data-driven growth experiments, conversion architecture, and performance marketing — tied directly to your revenue model.</p>
+      <p class="service-desc">Acquisition, retention, and revenue optimisation. We run data-driven growth experiments, conversion architecture, and performance marketing â€” tied directly to your revenue model.</p>
       <div class="service-tags">
         <span class="tag active">Growth Strategy</span>
         <span class="tag active">CRO</span>
@@ -918,7 +1964,7 @@
     </div>
 
     <div class="service-card reveal">
-      <div class="service-num">05 — Infrastructure</div>
+      <div class="service-num">05 â€” Infrastructure</div>
       <div class="service-icon">
         <svg viewBox="0 0 24 24" fill="none" stroke="#F97316" stroke-width="1.5">
           <rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/>
@@ -926,7 +1972,7 @@
         </svg>
       </div>
       <h3 class="service-name">Cloud & DevOps</h3>
-      <p class="service-desc">Scalable cloud infrastructure, CI/CD pipelines, and platform reliability. We architect for growth from the start — so your stack doesn't become your bottleneck.</p>
+      <p class="service-desc">Scalable cloud infrastructure, CI/CD pipelines, and platform reliability. We architect for growth from the start â€” so your stack doesn't become your bottleneck.</p>
       <div class="service-tags">
         <span class="tag active">AWS / GCP</span>
         <span class="tag">Kubernetes</span>
@@ -936,7 +1982,7 @@
     </div>
 
     <div class="service-card reveal reveal-delay-1">
-      <div class="service-num">06 — Strategy</div>
+      <div class="service-num">06 â€” Strategy</div>
       <div class="service-icon">
         <svg viewBox="0 0 24 24" fill="none" stroke="#FBBF24" stroke-width="1.5">
           <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
@@ -944,7 +1990,7 @@
         </svg>
       </div>
       <h3 class="service-name">Digital Strategy</h3>
-      <p class="service-desc">Product roadmaps, go-to-market planning, and technology architecture advisory. We help founders and operators make better product decisions — before they become expensive problems.</p>
+      <p class="service-desc">Product roadmaps, go-to-market planning, and technology architecture advisory. We help founders and operators make better product decisions â€” before they become expensive problems.</p>
       <div class="service-tags">
         <span class="tag active">Product Strategy</span>
         <span class="tag">GTM Planning</span>
@@ -960,7 +2006,7 @@
 <section class="section">
   <div class="section-header reveal">
     <div>
-      <div class="section-tag">// 02.02 — Our method</div>
+      <div class="section-tag">// 02.02 â€” Our method</div>
       <h2 class="section-title">How we <span class="dim">work</span><br><span class="accent-cyan">with you</span></h2>
     </div>
   </div>
@@ -991,9 +2037,9 @@
 
     <div class="process-content">
       <div class="process-step active">
-        <p class="ps-eyebrow">// Step 01 — Discovery & Scoping</p>
+        <p class="ps-eyebrow">// Step 01 â€” Discovery & Scoping</p>
         <h3 class="ps-title">We start by understanding the real problem.</h3>
-        <p class="ps-desc">Before a single wireframe or line of code, we run a structured discovery process. We map your business model, user flows, existing tech, and competitive landscape. This surfaces the actual problem — not just the stated one. Most project failures trace back to misaligned scope. We fix that first.</p>
+        <p class="ps-desc">Before a single wireframe or line of code, we run a structured discovery process. We map your business model, user flows, existing tech, and competitive landscape. This surfaces the actual problem â€” not just the stated one. Most project failures trace back to misaligned scope. We fix that first.</p>
         <div class="ps-deliverables">
           <div class="ps-del-label">// Deliverables</div>
           <ul class="ps-del-list">
@@ -1006,7 +2052,7 @@
       </div>
 
       <div class="process-step">
-        <p class="ps-eyebrow">// Step 02 — Strategy & Architecture</p>
+        <p class="ps-eyebrow">// Step 02 â€” Strategy & Architecture</p>
         <h3 class="ps-title">Architecture decisions made early save months later.</h3>
         <p class="ps-desc">We design your technical and product strategy before touching a tool. Stack selection, system architecture, data models, integration map. The decisions made here determine how easily you can scale, pivot, and ship in the future. We treat architecture as a strategic asset, not just engineering scaffolding.</p>
         <div class="ps-deliverables">
@@ -1021,9 +2067,9 @@
       </div>
 
       <div class="process-step">
-        <p class="ps-eyebrow">// Step 03 — Design & Prototyping</p>
+        <p class="ps-eyebrow">// Step 03 â€” Design & Prototyping</p>
         <h3 class="ps-title">We design in systems, not screens.</h3>
-        <p class="ps-desc">UI/UX design that prioritises clarity, conversion, and retention. We build interactive prototypes for validation before engineering begins — saving significant rework cost. Design is a thinking tool, not a decoration layer. We use it to stress-test assumptions and validate flows with real users before they're built.</p>
+        <p class="ps-desc">UI/UX design that prioritises clarity, conversion, and retention. We build interactive prototypes for validation before engineering begins â€” saving significant rework cost. Design is a thinking tool, not a decoration layer. We use it to stress-test assumptions and validate flows with real users before they're built.</p>
         <div class="ps-deliverables">
           <div class="ps-del-label">// Deliverables</div>
           <ul class="ps-del-list">
@@ -1036,9 +2082,9 @@
       </div>
 
       <div class="process-step">
-        <p class="ps-eyebrow">// Step 04 — Build & Integrate</p>
+        <p class="ps-eyebrow">// Step 04 â€” Build & Integrate</p>
         <h3 class="ps-title">Production-grade engineering, shipped in iterations.</h3>
-        <p class="ps-desc">We build in 2-week sprint cycles with continuous deployment to staging. You see real progress — not PowerPoint updates. Every sprint ends with working, reviewable software. We maintain full test coverage, write documentation as we go, and keep your team in the loop at every stage.</p>
+        <p class="ps-desc">We build in 2-week sprint cycles with continuous deployment to staging. You see real progress â€” not PowerPoint updates. Every sprint ends with working, reviewable software. We maintain full test coverage, write documentation as we go, and keep your team in the loop at every stage.</p>
         <div class="ps-deliverables">
           <div class="ps-del-label">// Deliverables</div>
           <ul class="ps-del-list">
@@ -1051,9 +2097,9 @@
       </div>
 
       <div class="process-step">
-        <p class="ps-eyebrow">// Step 05 — Launch & Optimise</p>
+        <p class="ps-eyebrow">// Step 05 â€” Launch & Optimise</p>
         <h3 class="ps-title">Launching is the start, not the finish.</h3>
-        <p class="ps-desc">We manage production deployment, post-launch monitoring, and the critical first 30 days. Bugs get fixed fast, metrics get tracked from day one, and growth experiments begin immediately. For retained clients, we operate as an ongoing engineering and growth partner — shipping continuously rather than in large, risky releases.</p>
+        <p class="ps-desc">We manage production deployment, post-launch monitoring, and the critical first 30 days. Bugs get fixed fast, metrics get tracked from day one, and growth experiments begin immediately. For retained clients, we operate as an ongoing engineering and growth partner â€” shipping continuously rather than in large, risky releases.</p>
         <div class="ps-deliverables">
           <div class="ps-del-label">// Deliverables</div>
           <ul class="ps-del-list">
@@ -1074,24 +2120,24 @@
 <section class="section">
   <div class="section-header reveal">
     <div>
-      <div class="section-tag">// 02.03 — How to engage</div>
+      <div class="section-tag">// 02.03 â€” How to engage</div>
       <h2 class="section-title">Engagement <span class="dim">models</span></h2>
     </div>
   </div>
 
   <div class="models-grid reveal">
     <div class="model-card">
-      <span class="model-icon">⚡</span>
+      <span class="model-icon">âš¡</span>
       <h3 class="model-name">Sprint Project</h3>
-      <p class="model-desc">Fixed-scope delivery across 4–12 weeks. Ideal for MVPs, new features, or defined digital products with a clear outcome in mind.</p>
+      <p class="model-desc">Fixed-scope delivery across 4â€“12 weeks. Ideal for MVPs, new features, or defined digital products with a clear outcome in mind.</p>
       <div class="model-detail">
         Best for: Startups, new product launches, defined scope work<br>
-        Timeline: 4 – 12 weeks<br>
+        Timeline: 4 â€“ 12 weeks<br>
         Pricing: Fixed project fee
       </div>
     </div>
     <div class="model-card">
-      <span class="model-icon">🔁</span>
+      <span class="model-icon">ðŸ”</span>
       <h3 class="model-name">Retained Partner</h3>
       <p class="model-desc">An embedded team operating on monthly retainer. You get continuous delivery, strategic input, and a team that knows your product inside out.</p>
       <div class="model-detail">
@@ -1101,7 +2147,7 @@
       </div>
     </div>
     <div class="model-card">
-      <span class="model-icon">🏗</span>
+      <span class="model-icon">ðŸ—</span>
       <h3 class="model-name">Team Augmentation</h3>
       <p class="model-desc">Senior engineers, designers, and strategists embedded into your existing team. Fill capability gaps without the overhead of permanent hiring.</p>
       <div class="model-detail">
@@ -1119,7 +2165,7 @@
 <section class="section">
   <div class="section-header reveal">
     <div>
-      <div class="section-tag">// 02.04 — Investment levels</div>
+      <div class="section-tag">// 02.04 â€” Investment levels</div>
       <h2 class="section-title">Service <span class="dim">tiers</span></h2>
     </div>
     <div style="max-width:300px; font-size:12px; color:var(--text-muted); line-height:1.8; font-weight:300; padding-top:40px;">
@@ -1137,55 +2183,55 @@
         <div class="tier-price-value"><span class="currency">R </span>45,000<span class="currency"> / project</span></div>
       </div>
       <ul class="tier-features">
-        <li><span class="check">✓</span> MVP scoping & architecture</li>
-        <li><span class="check">✓</span> UI/UX design (up to 15 screens)</li>
-        <li><span class="check">✓</span> Full-stack development (4–6 weeks)</li>
-        <li><span class="check">✓</span> Basic analytics integration</li>
-        <li><span class="check">✓</span> 30-day post-launch support</li>
-        <li><span class="check dim">—</span> Growth strategy & CRO</li>
-        <li><span class="check dim">—</span> Dedicated success manager</li>
+        <li><span class="check">âœ“</span> MVP scoping & architecture</li>
+        <li><span class="check">âœ“</span> UI/UX design (up to 15 screens)</li>
+        <li><span class="check">âœ“</span> Full-stack development (4â€“6 weeks)</li>
+        <li><span class="check">âœ“</span> Basic analytics integration</li>
+        <li><span class="check">âœ“</span> 30-day post-launch support</li>
+        <li><span class="check dim">â€”</span> Growth strategy & CRO</li>
+        <li><span class="check dim">â€”</span> Dedicated success manager</li>
       </ul>
-      <button class="tier-cta">Enquire →</button>
+      <button class="tier-cta">Enquire â†’</button>
     </div>
 
     <div class="tier-card featured">
       <div class="tier-tag">Most Popular</div>
       <h3 class="tier-name">Scale</h3>
-      <p class="tier-tagline">For growing businesses that need a full digital engine — design, engineering, and growth.</p>
+      <p class="tier-tagline">For growing businesses that need a full digital engine â€” design, engineering, and growth.</p>
       <div class="tier-price">
         <div class="tier-price-label">Starting from</div>
         <div class="tier-price-value"><span class="currency">R </span>120,000<span class="currency"> / project</span></div>
       </div>
       <ul class="tier-features">
-        <li><span class="check">✓</span> Full product strategy & architecture</li>
-        <li><span class="check">✓</span> Complete design system (unlimited screens)</li>
-        <li><span class="check">✓</span> Full-stack development (8–12 weeks)</li>
-        <li><span class="check">✓</span> AI / automation integrations</li>
-        <li><span class="check">✓</span> Growth strategy & CRO setup</li>
-        <li><span class="check">✓</span> 60-day post-launch support</li>
-        <li><span class="check dim">—</span> Dedicated success manager</li>
+        <li><span class="check">âœ“</span> Full product strategy & architecture</li>
+        <li><span class="check">âœ“</span> Complete design system (unlimited screens)</li>
+        <li><span class="check">âœ“</span> Full-stack development (8â€“12 weeks)</li>
+        <li><span class="check">âœ“</span> AI / automation integrations</li>
+        <li><span class="check">âœ“</span> Growth strategy & CRO setup</li>
+        <li><span class="check">âœ“</span> 60-day post-launch support</li>
+        <li><span class="check dim">â€”</span> Dedicated success manager</li>
       </ul>
-      <button class="tier-cta primary">Start Here →</button>
+      <button class="tier-cta primary">Start Here â†’</button>
     </div>
 
     <div class="tier-card">
       <div class="tier-tag">Enterprise</div>
       <h3 class="tier-name">Partner</h3>
-      <p class="tier-tagline">Full retained partnership — your outsourced digital leadership team, embedded and always on.</p>
+      <p class="tier-tagline">Full retained partnership â€” your outsourced digital leadership team, embedded and always on.</p>
       <div class="tier-price">
         <div class="tier-price-label">Starting from</div>
         <div class="tier-price-value"><span class="currency">R </span>60,000<span class="currency"> / month</span></div>
       </div>
       <ul class="tier-features">
-        <li><span class="check">✓</span> Everything in Scale, ongoing</li>
-        <li><span class="check">✓</span> Dedicated senior team (eng + design)</li>
-        <li><span class="check">✓</span> Monthly strategy & roadmap sessions</li>
-        <li><span class="check">✓</span> Continuous delivery & deployment</li>
-        <li><span class="check">✓</span> Growth experiments & reporting</li>
-        <li><span class="check">✓</span> Dedicated success manager</li>
-        <li><span class="check">✓</span> SLA-backed response times</li>
+        <li><span class="check">âœ“</span> Everything in Scale, ongoing</li>
+        <li><span class="check">âœ“</span> Dedicated senior team (eng + design)</li>
+        <li><span class="check">âœ“</span> Monthly strategy & roadmap sessions</li>
+        <li><span class="check">âœ“</span> Continuous delivery & deployment</li>
+        <li><span class="check">âœ“</span> Growth experiments & reporting</li>
+        <li><span class="check">âœ“</span> Dedicated success manager</li>
+        <li><span class="check">âœ“</span> SLA-backed response times</li>
       </ul>
-      <button class="tier-cta">Let's Talk →</button>
+      <button class="tier-cta">Let's Talk â†’</button>
     </div>
   </div>
 </section>
@@ -1196,7 +2242,7 @@
 <section class="section">
   <div class="section-header reveal">
     <div>
-      <div class="section-tag">// 02.05 — Our toolkit</div>
+      <div class="section-tag">// 02.05 â€” Our toolkit</div>
       <h2 class="section-title">Technology <span class="dim">stack</span></h2>
     </div>
   </div>
@@ -1262,17 +2308,17 @@
       <div class="cta-tag">// Ready to build?</div>
       <h2 class="cta-title">Let's scope your project.</h2>
       <p class="cta-desc" style="margin-bottom:40px;">
-        Tell us what you're building. We'll assess scope, recommend an approach, and give you a clear picture of what it takes — timeline, team, and cost — within 48 hours.
+        Tell us what you're building. We'll assess scope, recommend an approach, and give you a clear picture of what it takes â€” timeline, team, and cost â€” within 48 hours.
       </p>
       <div class="cta-actions">
-        <button class="btn-primary">Book a Scoping Call →</button>
-        <button class="btn-ghost">Explore the Product Lab <span class="arrow">→</span></button>
+        <button class="btn-primary">Book a Scoping Call â†’</button>
+        <button class="btn-ghost">Explore the Product Lab <span class="arrow">â†’</span></button>
       </div>
     </div>
     <div class="cta-readout">
       <div class="readout-header">
         <span>// Project intake status</span>
-        <span style="color:var(--green)">● Accepting briefs</span>
+        <span style="color:var(--green)">â— Accepting briefs</span>
       </div>
       <div class="readout-row">
         <span class="readout-key">Response time</span>
@@ -1280,7 +2326,7 @@
       </div>
       <div class="readout-row">
         <span class="readout-key">Team availability</span>
-        <span class="readout-val amber">Q3 2025 — Limited slots</span>
+        <span class="readout-val amber">Q3 2025 â€” Limited slots</span>
       </div>
       <div class="readout-row">
         <span class="readout-key">Active projects</span>
@@ -1304,12 +2350,12 @@
 
 <!-- FOOTER -->
 <footer>
-  <span class="footer-copy">© 2025 SCL Digital Agency — Engine 02</span>
+  <span class="footer-copy">Â© 2025 SCL Digital Agency â€” Engine 02</span>
   <div class="footer-links">
     <a href="#">Privacy</a>
     <a href="#">Terms</a>
     <a href="#">Contact</a>
-    <a href="#">Product Lab →</a>
+    <a href="#">Product Lab â†’</a>
   </div>
 </footer>
 
