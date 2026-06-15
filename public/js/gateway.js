@@ -296,95 +296,9 @@ countryEl.addEventListener('change', () => {
 });
 
 // Main entry flow
-continueBtn.addEventListener('click', async () => {
-  const country = countryEl.value;
-
-  continueBtn.disabled = true;
-  setStatus('CHECKING REGION ACCESS...');
-
-  // Step 0 – Check if region is blocked
-  const regionCheck = await RegionBlock.checkRegion(country);
-  
-  if (regionCheck.blocked) {
-    // Show blocked message
-    showPanel('loading-panel');
-    const loaderLabel = document.getElementById('loader-label');
-    const tokenPreview = document.getElementById('token-preview');
-    
-    loaderLabel.style.color = '#ff4444';
-    await typeText(loaderLabel, 'ACCESS DENIED', 40);
-    await sleep(500);
-    
-    tokenPreview.style.color = '#ff4444';
-    tokenPreview.classList.add('visible');
-    await typeText(tokenPreview, regionCheck.message, 25);
-    
-    await sleep(2000);
-    
-    // Reset and allow retry
-    continueBtn.disabled = false;
-    setStatus('AWAITING INPUT');
-    showPanel('gateway');
-    tokenPreview.classList.remove('visible');
-    tokenPreview.textContent = '';
-    loaderLabel.style.color = '';
-    tokenPreview.style.color = '';
-    return;
-  }
-
-  setStatus('INITIALISING SESSION...');
-
-  // Transition to loading panel
-  await sleep(300);
-  showPanel('loading-panel');
-
-  const loaderLabel  = document.getElementById('loader-label');
-  const tokenPreview = document.getElementById('token-preview');
-
-  try {
-    // Step 1 – Request token
-    await typeText(loaderLabel, 'REQUESTING TOKEN...', 40);
-    const { token, expiresIn } = await API.requestToken(country);
-
-    // Show partial token
-    loaderLabel.textContent = 'TOKEN ISSUED';
-    tokenPreview.classList.add('visible');
-    await typeText(tokenPreview, `TKN:${token}`, 18);
-
-    await sleep(600);
-
-    // Step 2 – Load secure content
-    await typeText(loaderLabel, 'LOADING SECURE CONTENT...', 35);
-    tokenPreview.textContent = '';
-    const html = await API.loadSecureContent(token, country);
-
-    await typeText(loaderLabel, 'ACCESS GRANTED', 40);
-    await sleep(800);
-
-    // Step 3 – Redirect to protected site
-    await typeText(loaderLabel, 'REDIRECTING...', 40);
-    await sleep(500);
-
-    window.location.href = 'indexofficial.html';
-
-  } catch (err) {
-    const msg = err.message || 'UNKNOWN_ERROR';
-    loaderLabel.textContent = `ERROR: ${msg}`;
-    loaderLabel.style.color = 'var(--danger)';
-    tokenPreview.textContent = 'ACCESS DENIED — RETURNING TO GATEWAY';
-    tokenPreview.classList.add('visible');
-    tokenPreview.style.color = 'var(--danger)';
-
-    await sleep(2800);
-
-    // Reset and go back
-    loaderLabel.style.color   = '';
-    tokenPreview.style.color  = '';
-    tokenPreview.classList.remove('visible');
-    continueBtn.disabled = false;
-    setStatus('SESSION FAILED — RETRY', 'error');
-    showPanel('gateway');
-  }
+continueBtn.addEventListener('click', () => {
+  // Direct development access: skip authentication flow and load the site.
+  window.location.href = 'public/home/home.html';
 });
 
 
