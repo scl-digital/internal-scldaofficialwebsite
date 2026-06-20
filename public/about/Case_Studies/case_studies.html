@@ -44,6 +44,7 @@
 	<link rel="stylesheet" href="css/magnific-popup.min.css">
 	<link rel="stylesheet" href="css/animate.min.css">
 	<link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/mega-menu.css">
 
 
 
@@ -67,16 +68,66 @@
 			<div class="navbar-primary">
 				<ul class="nav-items">
 					<li><a href="index.html" class="nav-link">Home</a></li>
-					<li class="nav-dropdown">
+                    <li class="nav-dropdown" id="nav-customers">
 						<a href="case_studies.html" class="nav-link active">Customers
 							<svg class="chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
 								<polyline points="6 9 12 15 18 9"></polyline>
 							</svg>
 						</a>
-						<div class="dropdown-menu">
-							<a href="services-platform/our_services.html">Digital Infrastructure</a>
-							<a href="applications/products.html">Signature Software Suite</a>
-							<a href="about.html">About Us</a>
+                        <div class="mega-menu" id="mega-menu-customers">
+                            <div class="mega-menu-content">
+                                <div class="mega-menu-sidebar">
+                                    <div class="sidebar-item active" onmouseover="showCategory(this, 'digital')">
+                                        <span>Internal Product Lab</span>
+                                        <i class="fas fa-chevron-right"></i>
+                                    </div>
+                                    <div class="sidebar-item" onmouseover="showCategory(this, 'business')">
+                                        <span>Agency Services</span>
+                                        <i class="fas fa-chevron-right"></i>
+                                    </div>
+                                    <div class="sidebar-item" onmouseover="showCategory(this, 'products')">
+                                        <span>Featured Products</span>
+                                        <i class="fas fa-chevron-right"></i>
+                                    </div>
+                                    <div class="sidebar-item" onmouseover="showCategory(this, 'resources')">
+                                        <span>Resources Hub</span>
+                                        <i class="fas fa-chevron-right"></i>
+                                    </div>
+                                </div>
+
+                                <div class="mega-menu-main">
+                                    <div id="category-digital" class="category-content active">
+                                        <div class="mega-menu-column middle">
+                                            <h3>Internal Product Lab</h3>
+                                            <p>We generate ideas, validate them, build MVPs, and launch into real markets. Successful products become revenue assets positioned for scale or acquisition.</p>
+                                            <a href="../../solutions/Internal_Product_Lab/scl-internal-product-lab.html" class="mega-menu-cta">Learn More <i class="fas fa-arrow-right"></i></a>
+                                        </div>
+                                    </div>
+
+                                    <div id="category-business" class="category-content">
+                                        <div class="mega-menu-column middle">
+                                            <h3>Agency Services</h3>
+                                            <p>We bring our proven systems to founders, startups, and visionaries, giving them the infrastructure and strategy to transform bold ideas into scalable businesses.</p>
+                                            <a href="../../solutions/Agency_Services/scl-agency-services.html" class="mega-menu-cta">Learn More <i class="fas fa-arrow-right"></i></a>
+                                        </div>
+                                    </div>
+
+                                    <div id="category-products" class="category-content">
+                                        <div class="mega-menu-column middle">
+                                            <h3>Featured Products</h3>
+                                            <p>Discover our signature software suite designed to solve specific business problems and streamline your operations through automation and advanced technology.</p>
+                                            <a href="../../Products/products.html" class="mega-menu-cta">View All Products <i class="fas fa-arrow-right"></i></a>
+                                        </div>
+                                    </div>
+
+                                    <div id="category-resources" class="category-content">
+                                        <div class="mega-menu-column middle">
+                                            <h3>Resources Hub</h3>
+                                            <p>Access our wealth of knowledge, from in-depth case studies and expert blog posts to comprehensive documentation and reliable support services.</p>
+                                            <a href="../../solutions/Resources/resources_hub_landing.html" class="mega-menu-cta">Visit Resource Hub <i class="fas fa-arrow-right"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
 						</div>
 					</li>
 					<li><a href="services-platform/our_services.html" class="nav-link">Services</a></li>
@@ -482,8 +533,27 @@
 		}
 	</style>
 
+
 	<!-- Navbar Scripts -->
 	<script>
+        function showCategory(element, categoryId) {
+            const megaMenu = element.closest('.mega-menu');
+            if (!megaMenu) return;
+
+            const sidebarItems = megaMenu.querySelectorAll('.sidebar-item');
+            sidebarItems.forEach(item => item.classList.remove('active'));
+
+            const categoryContents = megaMenu.querySelectorAll('.category-content');
+            categoryContents.forEach(content => content.classList.remove('active'));
+
+            element.classList.add('active');
+
+            const targetContent = megaMenu.querySelector('#category-' + categoryId);
+            if (targetContent) {
+                targetContent.classList.add('active');
+            }
+        }
+
 		function toggleSearchBar() {
 			const searchBar = document.getElementById('searchBar');
 			searchBar.classList.toggle('active');
