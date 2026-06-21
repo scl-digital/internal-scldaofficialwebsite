@@ -1290,53 +1290,113 @@ results that add real value to your business. Let's turn your vision into impact
 					}
 				</style>
 
-				<!-- Dynamic Banner Styles -->
+				<!-- Hero Video Banner Styles -->
 				<style>
-					.banner-content {
-						position: absolute;
-						top: 50%;
-						left: 0;
-						transform: translateY(-50%);
-						color: white;
-						z-index: 2;
-						padding-left: 5vw;
-						opacity: 1;
-						width: 90%;
-						max-width: 800px;
-					}
-
-					.banner-item {
+					.hero-video-banner {
 						position: relative;
+						width: min(100%, 1180px);
+						min-height: clamp(240px, 42vw, 520px);
+						margin: 28px auto 0;
 						overflow: hidden;
+						border-radius: 22px;
+						background: #090909;
+						box-shadow: 0 28px 70px rgba(0, 0, 0, 0.34);
 					}
 
-					.banner-item img.video {
-						width: 100%;
-						height: 100%;
-						object-fit: cover;
+					.hero-video-banner::before {
+						content: '';
 						position: absolute;
-						top: 0;
-						left: 0;
-						z-index: 0;
-					}
-
-					.image-overlay {
-						position: absolute;
-						bottom: 0;
-						left: 0;
-						width: 100%;
-						height: 100%;
+						inset: 0;
+						background: linear-gradient(180deg, rgba(0, 0, 0, 0.08) 0%, rgba(0, 0, 0, 0.35) 100%);
 						z-index: 1;
-						background: linear-gradient(to top,
-								rgba(0, 0, 0, 0.85) 0%,
-								rgba(0, 0, 0, 0.6) 40%,
-								rgba(0, 0, 0, 0.3) 50%,
-								rgba(0, 0, 0, 0) 100%);
+						pointer-events: none;
 					}
 
-					.banner-content {
-						position: relative;
+					.hero-video {
+						display: block;
+						width: 100%;
+						height: 100%;
+						min-height: inherit;
+						object-fit: cover;
+						background: #000;
+					}
+
+					.hero-video-controls {
+						position: absolute;
+						left: 0;
+						right: 0;
+						bottom: 0;
 						z-index: 2;
+						display: flex;
+						justify-content: space-between;
+						align-items: flex-end;
+						gap: 16px;
+						padding: 20px;
+						pointer-events: none;
+					}
+
+					.hero-video-control {
+						pointer-events: auto;
+						display: inline-flex;
+						align-items: center;
+						gap: 10px;
+						padding: 14px 18px;
+						border: 0;
+						border-radius: 999px;
+						background: rgba(15, 15, 15, 0.68);
+						color: #fff;
+						backdrop-filter: blur(10px);
+						-webkit-backdrop-filter: blur(10px);
+						font: inherit;
+						font-weight: 700;
+						letter-spacing: 0.02em;
+						cursor: pointer;
+						transition: transform 0.18s ease, background 0.18s ease, opacity 0.18s ease;
+					}
+
+					.hero-video-control:hover {
+						transform: translateY(-1px);
+						background: rgba(15, 15, 15, 0.82);
+					}
+
+					.hero-video-control svg {
+						width: 18px;
+						height: 18px;
+						flex: 0 0 auto;
+					}
+
+					.hero-video-control span {
+						white-space: nowrap;
+					}
+
+					.hero-video-control.is-playing .hero-video-control-icon--play,
+					.hero-video-control:not(.is-playing) .hero-video-control-icon--pause,
+					.hero-video-control.is-muted .hero-video-control-icon--sound,
+					.hero-video-control:not(.is-muted) .hero-video-control-icon--muted,
+					.hero-video-control.is-muted .hero-video-control-label--on,
+					.hero-video-control:not(.is-muted) .hero-video-control-label--off,
+					.hero-video-control.is-playing .hero-video-control-label--play,
+					.hero-video-control:not(.is-playing) .hero-video-control-label--pause {
+						display: none;
+					}
+
+					@media (max-width: 767px) {
+						.hero-video-banner {
+							width: 100%;
+							min-height: 220px;
+							margin-top: 20px;
+							border-radius: 16px;
+						}
+
+						.hero-video-controls {
+							padding: 14px;
+							gap: 10px;
+						}
+
+						.hero-video-control {
+							padding: 12px 14px;
+							font-size: 0.92rem;
+						}
 					}
 				</style>
 			</div>
@@ -1350,23 +1410,36 @@ results that add real value to your business. Let's turn your vision into impact
 
 			<div class="content home-content">
 
-				<div class="swiper swiper-banner">
-					<div class="swiper-wrapper" id="bannerSlides">
-						<!-- Dynamic banner content will be loaded here -->
-						<div class="text-center py-5">
-							<div class="spinner-border text-primary" role="status">
-								<span class="visually-hidden">Loading banners...</span>
-							</div>
-							<p class="mt-3 text-muted">Loading banners...</p>
-						</div>
+				<div class="hero-video-banner">
+					<video id="homeHeroVideo" class="hero-video" autoplay muted loop playsinline preload="metadata" poster="images/Office2.webp">
+						<source src="YOUR_VIDEO_URL.mp4" type="video/mp4">
+						Your browser does not support the video tag.
+					</video>
+					<div class="hero-video-controls" aria-label="Video controls">
+						<button id="homeHeroPlayPause" class="hero-video-control is-playing" type="button" aria-label="Pause video">
+							<svg class="hero-video-control-icon--play" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+								<path d="M8 5v14l11-7z" fill="currentColor"></path>
+							</svg>
+							<svg class="hero-video-control-icon--pause" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+								<path d="M7 5h4v14H7zM13 5h4v14h-4z" fill="currentColor"></path>
+							</svg>
+							<span class="hero-video-control-label--play">Play</span>
+							<span class="hero-video-control-label--pause">Pause</span>
+						</button>
+						<button id="homeHeroMute" class="hero-video-control" type="button" aria-label="Unmute video">
+							<svg class="hero-video-control-icon--muted" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+								<path d="M11 5L6 9H2v6h4l5 4V5z" fill="currentColor"></path>
+								<path d="M16 9l4 4m0-4l-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
+							</svg>
+							<svg class="hero-video-control-icon--sound" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+								<path d="M11 5L6 9H2v6h4l5 4V5z" fill="currentColor"></path>
+								<path d="M15 8a4 4 0 0 1 0 8M17.5 5.5a8 8 0 0 1 0 13" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
+							</svg>
+							<span class="hero-video-control-label--on">Sound on</span>
+							<span class="hero-video-control-label--off">Sound off</span>
+						</button>
 					</div>
-
-					<div class="banner-nav-wrap">
-						<div class="swiper-button-prev"></div>
-						<div class="swiper-scrollbar"></div>
-						<div class="swiper-button-next"></div>
-					</div>
-				</div><!-- end swiper-banner -->
+				</div><!-- end hero-video-banner -->
 
 			</div><!-- end home-content -->
 
@@ -5202,117 +5275,54 @@ type="text/javascript"></script>
 		document.head.appendChild(style);
 	</script>
 
-	<!-- Dynamic Banner Loading Script -->
+	<!-- Hero Video Controls Script -->
 	<script>
-		// Load dynamic banners
-		async function loadDynamicBanners() {
-			try {
-				const response = await fetch('api/banners_public.php');
-				const data = await response.json();
+		document.addEventListener('DOMContentLoaded', () => {
+			const video = document.getElementById('homeHeroVideo');
+			const playPauseButton = document.getElementById('homeHeroPlayPause');
+			const muteButton = document.getElementById('homeHeroMute');
 
-				if (data.success && data.data.length > 0) {
-					const bannerSlides = document.getElementById('bannerSlides');
-					bannerSlides.innerHTML = data.data.map(banner => `
-                <div class="swiper-slide animeslide-slide">
-                    <div class="banner-item">
-                        <img class="video" src="${banner.image_url || 'images/Office2.webp'}" alt="${banner.title}">
-                        <div class="image-overlay"></div>
-                        <div class="banner-content">
-                            ${banner.subtitle ? `<div class="banner-title-mini" data-animate="bottom">${banner.subtitle}</div>` : ''}
-                            <h1 class="h1 banner-title" data-animate="bottom">${banner.title}</h1>
-                            ${banner.description ? `
-                                <div class="banner-desc" data-animate="bottom">
-                                    <p>${banner.description}</p>
-                                </div>
-                            ` : ''}
-                            ${banner.button_text && banner.button_link ? `
-                                <div class="banner-btn" data-animate="bottom">
-                                    <a class="link-portfolio" href="${banner.button_link}">
-                                        ${banner.button_text}
-                                        <img src="images/arrow-right.svg" alt="">
-                                        <span class="right-border"></span>
-                                    </a>
-                                </div>
-                            ` : ''}
-                        </div>
-                    </div>
-                </div>
-            `).join('');
+			if (!video || !playPauseButton || !muteButton) {
+				return;
+			}
 
-					// Reinitialize Swiper after loading dynamic content
-					if (typeof Swiper !== 'undefined') {
-						new Swiper('.swiper-banner', {
-							loop: true,
-							autoplay: {
-								delay: 5000,
-								disableOnInteraction: false,
-							},
-							navigation: {
-								nextEl: '.swiper-button-next',
-								prevEl: '.swiper-button-prev',
-							},
-							scrollbar: {
-								el: '.swiper-scrollbar',
-							},
-						});
+			const updatePlayPauseState = () => {
+				const isPlaying = !video.paused && !video.ended;
+				playPauseButton.classList.toggle('is-playing', isPlaying);
+				playPauseButton.setAttribute('aria-label', isPlaying ? 'Pause video' : 'Play video');
+			};
+
+			const updateMuteState = () => {
+				muteButton.classList.toggle('is-muted', video.muted);
+				muteButton.setAttribute('aria-label', video.muted ? 'Unmute video' : 'Mute video');
+			};
+
+			playPauseButton.addEventListener('click', async () => {
+				if (video.paused || video.ended) {
+					try {
+						await video.play();
+					} catch (error) {
+						console.error('Unable to play hero video:', error);
 					}
 				} else {
-					// Fallback to default banner if no banners found
-					const bannerSlides = document.getElementById('bannerSlides');
-					bannerSlides.innerHTML = `
-                <div class="swiper-slide animeslide-slide">
-                    <div class="banner-item">
-                        <img class="video" src="images/Office2.webp" alt="Office Image">
-                        <div class="image-overlay"></div>
-                        <div class="banner-content">
-                            <div class="banner-title-mini" data-animate="bottom">Web Development</div>
-                            <h1 class="h1 banner-title" data-animate="bottom">Build Beyond Limits.</h1>
-                            <div class="banner-desc" data-animate="bottom">
-                                <p>From sleek websites to powerful platforms, SCL DA delivers world-class web development tailored to your vision.</p>
-                            </div>
-                            <div class="banner-btn" data-animate="bottom">
-                                <a class="link-portfolio" href="about.html">
-                                    Start Your Project
-                                    <img src="images/arrow-right.svg" alt="">
-                                    <span class="right-border"></span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            `;
+					video.pause();
 				}
-			} catch (error) {
-				console.error('Error loading banners:', error);
-				// Fallback to default banner on error
-				const bannerSlides = document.getElementById('bannerSlides');
-				bannerSlides.innerHTML = `
-            <div class="swiper-slide animeslide-slide">
-                <div class="banner-item">
-                    <img class="video" src="images/Office2.webp" alt="Office Image">
-                    <div class="image-overlay"></div>
-                    <div class="banner-content">
-                        <div class="banner-title-mini" data-animate="bottom">Web Development</div>
-                        <h1 class="h1 banner-title" data-animate="bottom">Build Beyond Limits.</h1>
-                        <div class="banner-desc" data-animate="bottom">
-                            <p>From sleek websites to powerful platforms, SCL DA delivers world-class web development tailored to your vision.</p>
-                        </div>
-                        <div class="banner-btn" data-animate="bottom">
-                            <a class="link-portfolio" href="about.html">
-                                Start Your Project
-                                <img src="images/arrow-right.svg" alt="">
-                                <span class="right-border"></span>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        `;
-			}
-		}
+				updatePlayPauseState();
+			});
 
-		// Load banners when page loads
-		document.addEventListener('DOMContentLoaded', loadDynamicBanners);
+			muteButton.addEventListener('click', () => {
+				video.muted = !video.muted;
+				updateMuteState();
+			});
+
+			video.addEventListener('play', updatePlayPauseState);
+			video.addEventListener('pause', updatePlayPauseState);
+			video.addEventListener('ended', updatePlayPauseState);
+			video.addEventListener('volumechange', updateMuteState);
+
+			updatePlayPauseState();
+			updateMuteState();
+		});
 	</script>
 
 	<!-- Create Account Popup Modal -->
