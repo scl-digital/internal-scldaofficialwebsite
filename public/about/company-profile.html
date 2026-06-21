@@ -1,0 +1,1177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Company Profile — SCL Digital Agency</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg:        #080B17;
+    --bg2:       #0E1225;
+    --bg3:       #141830;
+    --purple:    #7B2FBE;
+    --violet:    #A855F7;
+    --light-v:   #C084FC;
+    --text:      #F0EDF8;
+    --muted:     #8B92B4;
+    --dim:       #4A5070;
+    --border:    rgba(168,85,247,0.15);
+    --glow:      rgba(168,85,247,0.08);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 20px 60px;
+    background: rgba(8,11,23,0.85);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700; font-size: 1.1rem; letter-spacing: 0.08em;
+    color: var(--text);
+    display: flex; align-items: center; gap: 8px;
+  }
+  .nav-logo span { color: var(--violet); }
+  .nav-links {
+    display: flex; gap: 36px; list-style: none;
+  }
+  .nav-links a {
+    color: var(--muted); text-decoration: none;
+    font-size: 0.85rem; font-weight: 500; letter-spacing: 0.04em;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--text); }
+  .nav-cta {
+    background: transparent;
+    border: 1px solid var(--violet);
+    color: var(--violet);
+    padding: 9px 22px; border-radius: 6px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.85rem; font-weight: 600;
+    cursor: pointer; transition: all 0.2s;
+    text-decoration: none;
+  }
+  .nav-cta:hover { background: var(--violet); color: #fff; }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    padding: 120px 60px 80px;
+    position: relative; overflow: hidden;
+    text-align: center;
+  }
+
+  /* Dual-engine orbit — signature element */
+  .orbit-wrap {
+    position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 700px; height: 700px;
+    pointer-events: none;
+    opacity: 0.18;
+  }
+  .orbit-ring {
+    position: absolute; top: 50%; left: 50%;
+    border: 1px solid var(--violet);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+  }
+  .orbit-ring-1 { width: 340px; height: 340px; }
+  .orbit-ring-2 { width: 560px; height: 560px; border-style: dashed; opacity: 0.5; }
+
+  .orbit-node {
+    position: absolute; border-radius: 50%;
+    background: var(--violet);
+    box-shadow: 0 0 24px var(--violet);
+  }
+  .orbit-node-a {
+    width: 12px; height: 12px;
+    top: calc(50% - 170px); left: 50%;
+    transform: translateX(-50%);
+    animation: orbit-a 8s linear infinite;
+    transform-origin: 0 170px;
+  }
+  .orbit-node-b {
+    width: 8px; height: 8px;
+    top: calc(50% - 280px); left: 50%;
+    transform: translateX(-50%);
+    animation: orbit-b 14s linear infinite reverse;
+    transform-origin: 0 280px;
+    background: var(--light-v);
+    box-shadow: 0 0 16px var(--light-v);
+  }
+  @keyframes orbit-a { to { transform: translateX(-50%) rotate(360deg); } }
+  @keyframes orbit-b { to { transform: translateX(-50%) rotate(360deg); } }
+
+  .orbit-center {
+    position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 48px; height: 48px; border-radius: 50%;
+    background: radial-gradient(circle, var(--violet), var(--purple));
+    box-shadow: 0 0 40px var(--violet);
+  }
+
+  /* ── HERO CONTENT ── */
+  .hero-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--violet); margin-bottom: 24px;
+    display: flex; align-items: center; justify-content: center; gap: 12px;
+  }
+  .hero-eyebrow::before, .hero-eyebrow::after {
+    content: ''; width: 32px; height: 1px; background: var(--violet); opacity: 0.5;
+  }
+  .hero-headline {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(2.8rem, 6vw, 5.2rem);
+    font-weight: 700; line-height: 1.08;
+    letter-spacing: -0.02em; margin-bottom: 28px;
+    position: relative;
+  }
+  .hero-headline .accent { color: var(--violet); }
+  .hero-headline .thin { font-weight: 300; }
+
+  .hero-sub {
+    max-width: 620px; margin: 0 auto 48px;
+    color: var(--muted); font-size: 1.05rem; line-height: 1.7;
+    font-weight: 400;
+  }
+
+  .hero-pills {
+    display: flex; flex-wrap: wrap; gap: 10px; justify-content: center;
+    margin-bottom: 56px;
+  }
+  .pill {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem; letter-spacing: 0.08em;
+    padding: 7px 14px; border-radius: 4px;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    background: var(--glow);
+  }
+
+  .hero-stats {
+    display: flex; gap: 60px; justify-content: center;
+    border-top: 1px solid var(--border);
+    padding-top: 48px; margin-top: 8px;
+  }
+  .stat-item { text-align: center; }
+  .stat-num {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 2.2rem; font-weight: 700;
+    color: var(--text); line-height: 1;
+    margin-bottom: 6px;
+  }
+  .stat-num em { color: var(--violet); font-style: normal; }
+  .stat-label {
+    font-size: 0.75rem; color: var(--muted);
+    letter-spacing: 0.06em; text-transform: uppercase;
+  }
+
+  /* ── SECTION WRAPPER ── */
+  section { padding: 100px 60px; max-width: 1200px; margin: 0 auto; }
+  .section-full { max-width: 100%; padding: 100px 0; }
+
+  .eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--violet); margin-bottom: 16px;
+  }
+  h2 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+    font-weight: 700; line-height: 1.15;
+    letter-spacing: -0.015em; margin-bottom: 20px;
+  }
+  h2 .accent { color: var(--violet); }
+  .section-lead {
+    color: var(--muted); font-size: 1.05rem;
+    max-width: 560px; line-height: 1.75; margin-bottom: 64px;
+  }
+
+  /* ── OVERVIEW ── */
+  .overview-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 2px;
+    border: 1px solid var(--border); border-radius: 12px; overflow: hidden;
+    margin-bottom: 64px;
+  }
+  .ov-card {
+    background: var(--bg2); padding: 40px;
+    border-right: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    position: relative; overflow: hidden;
+  }
+  .ov-card:nth-child(even) { border-right: none; }
+  .ov-card:nth-child(3), .ov-card:nth-child(4) { border-bottom: none; }
+  .ov-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, var(--purple), transparent);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .ov-card:hover::before { opacity: 1; }
+  .ov-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--dim); margin-bottom: 12px;
+  }
+  .ov-value {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1rem; font-weight: 600; color: var(--text); line-height: 1.4;
+  }
+  .ov-value small { display: block; font-size: 0.8rem; color: var(--muted); font-weight: 400; margin-top: 4px; }
+
+  /* ── DUAL ENGINE ── */
+  .dual-bg {
+    background: var(--bg2);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+  .dual-inner { max-width: 1200px; margin: 0 auto; padding: 100px 60px; }
+  .dual-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .engine-card {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 12px; padding: 48px 40px;
+    position: relative; overflow: hidden;
+    transition: border-color 0.3s, transform 0.3s;
+  }
+  .engine-card:hover { border-color: rgba(168,85,247,0.4); transform: translateY(-3px); }
+  .engine-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(168,85,247,0.1);
+    border: 1px solid rgba(168,85,247,0.25);
+    border-radius: 20px; padding: 5px 14px 5px 10px;
+    margin-bottom: 28px;
+  }
+  .engine-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--violet); }
+  .engine-badge span {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--violet);
+  }
+  .engine-card h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.5rem; font-weight: 700; margin-bottom: 16px;
+  }
+  .engine-card p { color: var(--muted); font-size: 0.95rem; line-height: 1.7; margin-bottom: 28px; }
+  .engine-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .engine-list li {
+    display: flex; align-items: flex-start; gap: 12px;
+    font-size: 0.88rem; color: var(--muted);
+  }
+  .engine-list li::before {
+    content: '→'; color: var(--violet); flex-shrink: 0; margin-top: 1px;
+  }
+  .engine-glow {
+    position: absolute; bottom: -60px; right: -60px;
+    width: 200px; height: 200px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(168,85,247,0.12), transparent 70%);
+    pointer-events: none;
+  }
+
+  /* ── SERVICES ── */
+  .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .svc-card {
+    background: var(--bg2); border: 1px solid var(--border);
+    border-radius: 10px; padding: 32px 28px;
+    transition: border-color 0.3s, background 0.3s;
+    cursor: default;
+  }
+  .svc-card:hover {
+    border-color: rgba(168,85,247,0.35);
+    background: var(--bg3);
+  }
+  .svc-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem; letter-spacing: 0.14em;
+    color: var(--violet); margin-bottom: 16px;
+  }
+  .svc-card h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1rem; font-weight: 600; margin-bottom: 10px;
+  }
+  .svc-card p { font-size: 0.85rem; color: var(--muted); line-height: 1.65; margin-bottom: 20px; }
+  .svc-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.62rem; letter-spacing: 0.06em;
+    color: var(--dim); background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.06);
+    padding: 3px 8px; border-radius: 3px;
+  }
+
+  /* ── MILESTONES ── */
+  .milestone-track { position: relative; padding-left: 32px; }
+  .milestone-track::before {
+    content: ''; position: absolute; left: 0; top: 8px; bottom: 8px;
+    width: 1px; background: linear-gradient(180deg, var(--violet), var(--purple), var(--dim));
+  }
+  .milestone {
+    position: relative; margin-bottom: 56px;
+    padding-left: 28px;
+  }
+  .milestone:last-child { margin-bottom: 0; }
+  .milestone::before {
+    content: ''; position: absolute; left: -32px; top: 8px;
+    width: 10px; height: 10px; border-radius: 50%;
+    background: var(--violet);
+    box-shadow: 0 0 12px var(--violet);
+    border: 2px solid var(--bg);
+  }
+  .milestone-phase {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--violet); margin-bottom: 8px;
+  }
+  .milestone h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.15rem; font-weight: 600; margin-bottom: 12px;
+  }
+  .milestone p { color: var(--muted); font-size: 0.9rem; line-height: 1.7; }
+
+  /* ── TEAM ── */
+  .team-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+  .team-card {
+    background: var(--bg2); border: 1px solid var(--border);
+    border-radius: 10px; padding: 32px 28px;
+    display: flex; gap: 20px; align-items: flex-start;
+  }
+  .team-info h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.95rem; font-weight: 600; margin-bottom: 4px;
+  }
+  .team-role {
+    font-size: 0.78rem; color: var(--violet); margin-bottom: 10px;
+    font-weight: 500;
+  }
+  .team-info p { font-size: 0.83rem; color: var(--muted); line-height: 1.6; }
+
+  /* ── LOCATIONS ── */
+  .locations-bg {
+    background: var(--bg2);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+  .locations-inner { max-width: 1200px; margin: 0 auto; padding: 100px 60px; }
+  .loc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .loc-card {
+    border: 1px solid var(--border); border-radius: 12px;
+    padding: 40px 36px; background: var(--bg3);
+    position: relative; overflow: hidden;
+  }
+  .loc-marker {
+    display: inline-block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--violet);
+    background: rgba(168,85,247,0.08);
+    border: 1px solid var(--border);
+    border-radius: 4px; padding: 4px 10px; margin-bottom: 20px;
+  }
+  .loc-card h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.3rem; font-weight: 700; margin-bottom: 8px;
+  }
+  .loc-card .loc-sub { font-size: 0.85rem; color: var(--muted); margin-bottom: 20px; }
+  .loc-detail {
+    font-size: 0.82rem; color: var(--dim); line-height: 1.8;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  /* ── CTA ── */
+  .cta-wrap {
+    text-align: center; padding: 100px 60px;
+    max-width: 800px; margin: 0 auto;
+  }
+  .cta-wrap h2 { margin-bottom: 20px; }
+  .cta-wrap p { color: var(--muted); margin-bottom: 44px; font-size: 1.05rem; }
+  .cta-group { display: flex; gap: 16px; justify-content: center; }
+  .btn-primary {
+    background: var(--violet);
+    color: #fff; border: none;
+    padding: 14px 32px; border-radius: 7px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.9rem; font-weight: 600;
+    cursor: pointer; transition: all 0.2s;
+    text-decoration: none; display: inline-block;
+  }
+  .btn-primary:hover { background: var(--light-v); transform: translateY(-2px); }
+  .btn-outline {
+    background: transparent;
+    color: var(--muted); border: 1px solid var(--dim);
+    padding: 14px 32px; border-radius: 7px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.9rem; font-weight: 500;
+    cursor: pointer; transition: all 0.2s;
+    text-decoration: none; display: inline-block;
+  }
+  .btn-outline:hover { color: var(--text); border-color: var(--muted); }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 40px 60px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .footer-logo {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.9rem; font-weight: 700; color: var(--muted);
+    letter-spacing: 0.06em;
+  }
+  .footer-logo span { color: var(--violet); }
+  .footer-copy {
+    font-size: 0.78rem; color: var(--dim);
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .footer-links { display: flex; gap: 24px; }
+  .footer-links a {
+    font-size: 0.8rem; color: var(--dim); text-decoration: none;
+    transition: color 0.2s;
+  }
+  .footer-links a:hover { color: var(--muted); }
+
+  /* ── MEDIA PLACEHOLDER ── */
+  .media-placeholder {
+    position: relative;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 8px;
+    background:
+      repeating-linear-gradient(135deg, rgba(168,85,247,0.05) 0px, rgba(168,85,247,0.05) 10px, transparent 10px, transparent 20px),
+      var(--bg3);
+    border: 1px dashed var(--border);
+    border-radius: 12px;
+    color: var(--dim);
+    text-align: center;
+    overflow: hidden;
+    transition: border-color 0.3s, color 0.3s;
+  }
+  .media-placeholder:hover { border-color: rgba(168,85,247,0.4); color: var(--muted); }
+  .media-placeholder svg { width: 30px; height: 30px; opacity: 0.6; flex-shrink: 0; }
+  .media-placeholder .mp-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.66rem; letter-spacing: 0.1em; text-transform: uppercase;
+  }
+  .media-placeholder .mp-dims {
+    font-size: 0.66rem; color: var(--dim); font-family: 'JetBrains Mono', monospace;
+  }
+  .media-placeholder--banner { width: 100%; aspect-ratio: 21 / 7; margin-top: 12px; }
+  .media-placeholder--wide   { aspect-ratio: 16 / 9; }
+  .media-placeholder--square { aspect-ratio: 1 / 1; }
+  .media-placeholder--card   { aspect-ratio: 4 / 3; border-radius: 10px 10px 0 0; border-width: 1px 1px 0 1px; }
+
+  /* ── SHOWCASE / VISUAL GALLERY ── */
+  .showcase-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .showcase-card {
+    background: var(--bg2); border: 1px solid var(--border);
+    border-radius: 10px; overflow: hidden;
+    transition: border-color 0.3s, transform 0.3s;
+  }
+  .showcase-card:hover { border-color: rgba(168,85,247,0.35); transform: translateY(-3px); }
+  .showcase-info { padding: 18px 20px 22px; }
+  .showcase-info .sc-tag {
+    font-family: 'JetBrains Mono', monospace; font-size: 0.64rem; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--violet); margin-bottom: 6px; display: block;
+  }
+  .showcase-info h4 { font-family: 'Space Grotesk', sans-serif; font-size: 0.92rem; font-weight: 600; margin-bottom: 4px; }
+  .showcase-info p { font-size: 0.8rem; color: var(--muted); line-height: 1.55; }
+
+  /* ── DOWNLOADS ── */
+  .downloads-bg {
+    background: var(--bg2);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+  .downloads-inner { max-width: 1200px; margin: 0 auto; padding: 100px 60px; }
+  .download-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .download-card {
+    background: var(--bg3); border: 1px solid var(--border); border-radius: 10px;
+    padding: 28px 26px; display: flex; flex-direction: column; gap: 16px;
+    transition: border-color 0.3s, transform 0.3s;
+  }
+  .download-card:hover { border-color: rgba(168,85,247,0.4); transform: translateY(-3px); }
+  .dl-icon {
+    width: 42px; height: 42px; border-radius: 8px; flex-shrink: 0;
+    background: rgba(168,85,247,0.1); border: 1px solid rgba(168,85,247,0.25);
+    display: flex; align-items: center; justify-content: center; color: var(--violet);
+  }
+  .dl-icon svg { width: 20px; height: 20px; }
+  .download-card h4 { font-family: 'Space Grotesk', sans-serif; font-size: 1rem; font-weight: 600; }
+  .download-card p { font-size: 0.83rem; color: var(--muted); line-height: 1.6; flex-grow: 1; }
+  .dl-meta {
+    font-family: 'JetBrains Mono', monospace; font-size: 0.66rem; color: var(--dim); letter-spacing: 0.05em;
+  }
+  .dl-btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    background: transparent; border: 1px solid var(--violet); color: var(--violet);
+    padding: 10px 16px; border-radius: 6px;
+    font-family: 'Space Grotesk', sans-serif; font-size: 0.82rem; font-weight: 600;
+    text-decoration: none; transition: all 0.2s; cursor: pointer;
+  }
+  .dl-btn:hover { background: var(--violet); color: #fff; }
+  .dl-btn svg { width: 14px; height: 14px; }
+  .downloads-note {
+    margin-top: 28px; font-family: 'JetBrains Mono', monospace; font-size: 0.72rem;
+    color: var(--dim); letter-spacing: 0.02em;
+  }
+
+  /* ── NAV DOWNLOAD ── */
+  .nav-actions { display: flex; align-items: center; gap: 12px; }
+  .nav-download {
+    display: flex; align-items: center; gap: 7px;
+    background: rgba(168,85,247,0.08); border: 1px solid var(--border);
+    color: var(--muted); padding: 8px 16px; border-radius: 6px;
+    font-family: 'Space Grotesk', sans-serif; font-size: 0.8rem; font-weight: 500;
+    text-decoration: none; transition: all 0.2s;
+  }
+  .nav-download:hover { border-color: rgba(168,85,247,0.4); color: var(--text); }
+  .nav-download svg { width: 14px; height: 14px; flex-shrink: 0; }
+
+  /* ── HERO ACTIONS ── */
+  .hero-actions { display: flex; gap: 14px; justify-content: center; margin-bottom: 44px; flex-wrap: wrap; }
+  .hero-actions .btn-primary svg, .hero-actions .btn-outline svg {
+    width: 14px; height: 14px; vertical-align: -2px; margin-right: 7px;
+  }
+
+  /* ── TEAM PHOTO PLACEHOLDER ── */
+  .team-avatar {
+    width: 60px; height: 60px; flex-shrink: 0; border-radius: 50%;
+    background: var(--bg3);
+    border: 1px dashed var(--border);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 2px; color: var(--dim);
+    transition: border-color 0.3s, color 0.3s;
+  }
+  .team-card:hover .team-avatar { border-color: rgba(168,85,247,0.4); color: var(--muted); }
+  .team-avatar svg { width: 17px; height: 17px; opacity: 0.75; }
+  .team-avatar span {
+    font-family: 'JetBrains Mono', monospace; font-size: 0.58rem; letter-spacing: 0.04em;
+  }
+
+  /* ── LOCATION MEDIA ── */
+  .loc-media { margin-bottom: 22px; height: 170px; }
+
+  /* ── FADE-IN ── */
+  .fade-in {
+    opacity: 0; transform: translateY(24px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .fade-in.visible { opacity: 1; transform: none; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    nav { padding: 18px 24px; }
+    .nav-links { display: none; }
+    .hero { padding: 100px 24px 60px; }
+    section { padding: 70px 24px; }
+    .dual-inner, .locations-inner { padding: 70px 24px; }
+    .overview-grid, .dual-grid, .loc-grid, .team-grid { grid-template-columns: 1fr; }
+    .services-grid, .showcase-grid, .download-grid { grid-template-columns: 1fr 1fr; }
+    .downloads-inner { padding: 70px 24px; }
+    .nav-download span { display: none; }
+    .nav-download { padding: 9px 11px; }
+    .hero-actions { gap: 10px; }
+    .loc-media { height: 130px; }
+    .hero-stats { gap: 32px; flex-wrap: wrap; }
+    .orbit-wrap { width: 320px; height: 320px; opacity: 0.12; }
+    .orbit-ring-1 { width: 160px; height: 160px; }
+    .orbit-ring-2 { width: 260px; height: 260px; }
+    .orbit-node-a { top: calc(50% - 80px); animation: none; }
+    .orbit-node-b { top: calc(50% - 130px); animation: none; }
+    footer { flex-direction: column; gap: 20px; text-align: center; padding: 40px 24px; }
+    .cta-wrap { padding: 80px 24px; }
+    .cta-group { flex-direction: column; align-items: center; }
+    .ov-card:nth-child(even) { border-right: 1px solid var(--border); }
+    .ov-card { border-bottom: 1px solid var(--border) !important; }
+  }
+
+  @media (max-width: 600px) {
+    .services-grid, .showcase-grid, .download-grid { grid-template-columns: 1fr; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .orbit-node-a, .orbit-node-b { animation: none; }
+    .fade-in { opacity: 1; transform: none; transition: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">SCL <span>DA</span></div>
+  <ul class="nav-links">
+    <li><a href="#overview">Overview</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#showcase">Showcase</a></li>
+    <li><a href="#roadmap">Roadmap</a></li>
+    <li><a href="#team">Team</a></li>
+    <li><a href="#locations">Locations</a></li>
+  </ul>
+  <div class="nav-actions">
+    <a href="documents/SCL-Digital-Agency-Company-Profile.pdf" download class="nav-download">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="M7 10l5 5 5-5"/><path d="M5 21h14"/></svg>
+      <span>Download PDF</span>
+    </a>
+    <a href="#contact" class="nav-cta">Get in Touch</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <!-- Signature orbit graphic -->
+  <div class="orbit-wrap" aria-hidden="true">
+    <div class="orbit-ring orbit-ring-1"></div>
+    <div class="orbit-ring orbit-ring-2"></div>
+    <div class="orbit-node orbit-node-a"></div>
+    <div class="orbit-node orbit-node-b"></div>
+    <div class="orbit-center"></div>
+  </div>
+
+  <div class="hero-eyebrow">Company Profile · 2026</div>
+  <h1 class="hero-headline">
+    We build digital systems<br/>
+    <span class="accent">Africa is proud of.</span>
+  </h1>
+  <p class="hero-sub">
+    SCL Digital Agency is a multi-border digital solutions provider — engineering clean, hyper-focused platforms for global clients while incubating proprietary software assets from our Cape Town and Kigali hubs.
+  </p>
+  <div class="hero-actions">
+    <a href="documents/SCL-Digital-Agency-Company-Profile.pdf" download class="btn-primary">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="M7 10l5 5 5-5"/><path d="M5 21h14"/></svg>Download Company Profile (PDF)
+    </a>
+    <a href="#contact" class="btn-outline">Get in Touch</a>
+  </div>
+  <div class="hero-pills">
+    <span class="pill">Web Development</span>
+    <span class="pill">Brand Identity</span>
+    <span class="pill">AI Integration</span>
+    <span class="pill">Cloud Infrastructure</span>
+    <span class="pill">SaaS Products</span>
+    <span class="pill">Digital Strategy</span>
+  </div>
+  <div class="hero-stats">
+    <div class="stat-item">
+      <div class="stat-num">2<em>+</em></div>
+      <div class="stat-label">Countries</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">6</div>
+      <div class="stat-label">Core Disciplines</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num"><em>&#8734;</em></div>
+      <div class="stat-label">Zero Templates</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">3</div>
+      <div class="stat-label">Year Roadmap</div>
+    </div>
+  </div>
+</div>
+
+<!-- OVERVIEW -->
+<section id="overview">
+  <div class="eyebrow fade-in">// Company Overview</div>
+  <h2 class="fade-in">Built from the <span class="accent">ground up.</span></h2>
+  <p class="section-lead fade-in">
+    Registered in South Africa in January 2025, SCL Digital Agency was founded by Shinsa Lyonga Lomboto after assuming full operational control and executing a structural pivot toward global digital services.
+  </p>
+  <div class="overview-grid fade-in">
+    <div class="ov-card">
+      <div class="ov-label">Legal Entity</div>
+      <div class="ov-value">SCL Digital Agency (Pty) Ltd
+        <small>South Africa · CIPC No: 2025/001641/07</small>
+      </div>
+    </div>
+    <div class="ov-card">
+      <div class="ov-label">International Entity</div>
+      <div class="ov-value">SCL Digital Agency Ltd
+        <small>Rwanda · Registered under RDB framework</small>
+      </div>
+    </div>
+    <div class="ov-card">
+      <div class="ov-label">Headquarters</div>
+      <div class="ov-value">Cape Town, South Africa
+        <small>Core engineering operations</small>
+      </div>
+    </div>
+    <div class="ov-card">
+      <div class="ov-label">International Hub</div>
+      <div class="ov-value">Kigali, Rwanda
+        <small>Global transaction routing &amp; expansion</small>
+      </div>
+    </div>
+  </div>
+  <div class="media-placeholder media-placeholder--banner fade-in">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-5-5L5 21"/></svg>
+    <span class="mp-label">Image Placeholder — Office / Team Photo</span>
+    <span class="mp-dims">Recommended 1600 × 540</span>
+  </div>
+</section>
+
+<!-- DUAL ENGINE -->
+<div class="dual-bg">
+  <div class="dual-inner">
+    <div class="eyebrow fade-in">// The Dual-Engine Model</div>
+    <h2 class="fade-in">Two engines.<br /><span class="accent">One direction.</span></h2>
+    <p class="section-lead fade-in">
+      SCL operates a unique commercial model: premium client services fund and run in parallel with an internal pipeline of proprietary software assets built for acquisition or scaling.
+    </p>
+    <div class="dual-grid">
+      <div class="engine-card fade-in">
+        <div class="media-placeholder media-placeholder--wide" style="margin-bottom:24px;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-5-5L5 21"/></svg>
+          <span class="mp-label">Image Placeholder — Client Work</span>
+        </div>
+        <div class="engine-badge">
+          <span class="engine-dot"></span>
+          <span>Engine 01 · Services</span>
+        </div>
+        <h3>Client-Facing Excellence</h3>
+        <p>Clean, hyper-focused digital platforms, customized web applications, and database-managed infrastructures that align directly with commercial objectives — no bloat, no templates.</p>
+        <ul class="engine-list">
+          <li>End-to-end product design and engineering</li>
+          <li>AI-native integrations and automation workflows</li>
+          <li>Data-driven growth and performance marketing</li>
+          <li>Cloud infrastructure and DevOps</li>
+          <li>Long-term retainer partnerships</li>
+        </ul>
+        <div class="engine-glow"></div>
+      </div>
+      <div class="engine-card fade-in">
+        <div class="media-placeholder media-placeholder--wide" style="margin-bottom:24px;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-5-5L5 21"/></svg>
+          <span class="mp-label">Image Placeholder — Product Screens</span>
+        </div>
+        <div class="engine-badge">
+          <span class="engine-dot"></span>
+          <span>Engine 02 · Products</span>
+        </div>
+        <h3>Proprietary Asset Pipeline</h3>
+        <p>Systematically developed internal software applications and SaaS products, validated against real market demand and built to an acquisition-ready standard for investors and partners.</p>
+        <ul class="engine-list">
+          <li>MVP engineering for venture-ready products</li>
+          <li>Internal SaaS platforms and digital tools</li>
+          <li>IP generation and licensing frameworks</li>
+          <li>Revenue-sharing and co-development models</li>
+          <li>Strategic acquisition pipeline management</li>
+        </ul>
+        <div class="engine-glow"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="eyebrow fade-in">// Core Service Disciplines</div>
+  <h2 class="fade-in">Six disciplines.<br /><span class="accent">One roof.</span></h2>
+  <p class="section-lead fade-in">Every service is built from the ground up using optimized code and deep business insight — no generic plugins, no bloated third-party dependencies.</p>
+  <div class="services-grid">
+    <div class="svc-card fade-in">
+      <div class="svc-num">01 — Design</div>
+      <h3>Design Systems</h3>
+      <p>UI/UX systems built to convert and retain. From wireframes to production-ready design systems — zero fluff, maximum signal.</p>
+      <div class="svc-tags">
+        <span class="tag">UI/UX</span>
+        <span class="tag">Brand Identity</span>
+        <span class="tag">Prototyping</span>
+        <span class="tag">User Research</span>
+      </div>
+    </div>
+    <div class="svc-card fade-in">
+      <div class="svc-num">02 — Engineering</div>
+      <h3>Full-Stack Development</h3>
+      <p>End-to-end engineering for web and mobile. Fast, secure, and scalable — from API architecture to pixel-perfect frontends.</p>
+      <div class="svc-tags">
+        <span class="tag">Web Apps</span>
+        <span class="tag">Mobile</span>
+        <span class="tag">API Dev</span>
+        <span class="tag">DevOps</span>
+      </div>
+    </div>
+    <div class="svc-card fade-in">
+      <div class="svc-num">03 — AI</div>
+      <h3>AI Integration</h3>
+      <p>LLM integrations, intelligent workflows, and AI-native product features. We architect around AI, not bolt it on.</p>
+      <div class="svc-tags">
+        <span class="tag">LLM Integration</span>
+        <span class="tag">RAG Pipelines</span>
+        <span class="tag">AI Agents</span>
+        <span class="tag">Automation</span>
+      </div>
+    </div>
+    <div class="svc-card fade-in">
+      <div class="svc-num">04 — Growth</div>
+      <h3>Digital Growth</h3>
+      <p>Acquisition, retention, and revenue optimization. Data-driven growth experiments tied directly to your revenue model.</p>
+      <div class="svc-tags">
+        <span class="tag">CRO</span>
+        <span class="tag">Paid Media</span>
+        <span class="tag">Analytics</span>
+        <span class="tag">Growth Strategy</span>
+      </div>
+    </div>
+    <div class="svc-card fade-in">
+      <div class="svc-num">05 — Infrastructure</div>
+      <h3>Cloud &amp; DevOps</h3>
+      <p>Scalable cloud infrastructure, CI/CD pipelines, and platform reliability — architected for growth from day one.</p>
+      <div class="svc-tags">
+        <span class="tag">AWS / GCP</span>
+        <span class="tag">Kubernetes</span>
+        <span class="tag">CI/CD</span>
+        <span class="tag">Monitoring</span>
+      </div>
+    </div>
+    <div class="svc-card fade-in">
+      <div class="svc-num">06 — Strategy</div>
+      <h3>Digital Strategy</h3>
+      <p>Product roadmaps, go-to-market planning, and technology architecture advisory — better decisions before they become expensive problems.</p>
+      <div class="svc-tags">
+        <span class="tag">Product Strategy</span>
+        <span class="tag">GTM Planning</span>
+        <span class="tag">Tech Advisory</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SHOWCASE -->
+<section id="showcase">
+  <div class="eyebrow fade-in">// Selected Work</div>
+  <h2 class="fade-in">Visual <span class="accent">showcase.</span></h2>
+  <p class="section-lead fade-in">A growing library of case studies, product screens, and brand work from across our client and internal product portfolio.</p>
+  <div class="showcase-grid">
+    <div class="showcase-card fade-in">
+      <div class="media-placeholder media-placeholder--card">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-5-5L5 21"/></svg>
+        <span class="mp-label">Project Thumbnail</span>
+      </div>
+      <div class="showcase-info">
+        <span class="sc-tag">Web Platform</span>
+        <h4>Case Study Title</h4>
+        <p>One-line summary of the project and the outcome delivered.</p>
+      </div>
+    </div>
+    <div class="showcase-card fade-in">
+      <div class="media-placeholder media-placeholder--card">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-5-5L5 21"/></svg>
+        <span class="mp-label">Project Thumbnail</span>
+      </div>
+      <div class="showcase-info">
+        <span class="sc-tag">Brand Identity</span>
+        <h4>Case Study Title</h4>
+        <p>One-line summary of the project and the outcome delivered.</p>
+      </div>
+    </div>
+    <div class="showcase-card fade-in">
+      <div class="media-placeholder media-placeholder--card">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-5-5L5 21"/></svg>
+        <span class="mp-label">Project Thumbnail</span>
+      </div>
+      <div class="showcase-info">
+        <span class="sc-tag">AI Integration</span>
+        <h4>Case Study Title</h4>
+        <p>One-line summary of the project and the outcome delivered.</p>
+      </div>
+    </div>
+    <div class="showcase-card fade-in">
+      <div class="media-placeholder media-placeholder--card">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-5-5L5 21"/></svg>
+        <span class="mp-label">Project Thumbnail</span>
+      </div>
+      <div class="showcase-info">
+        <span class="sc-tag">SaaS Product</span>
+        <h4>Case Study Title</h4>
+        <p>One-line summary of the project and the outcome delivered.</p>
+      </div>
+    </div>
+    <div class="showcase-card fade-in">
+      <div class="media-placeholder media-placeholder--card">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-5-5L5 21"/></svg>
+        <span class="mp-label">Project Thumbnail</span>
+      </div>
+      <div class="showcase-info">
+        <span class="sc-tag">Mobile App</span>
+        <h4>Case Study Title</h4>
+        <p>One-line summary of the project and the outcome delivered.</p>
+      </div>
+    </div>
+    <div class="showcase-card fade-in">
+      <div class="media-placeholder media-placeholder--card">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-5-5L5 21"/></svg>
+        <span class="mp-label">Project Thumbnail</span>
+      </div>
+      <div class="showcase-info">
+        <span class="sc-tag">Cloud &amp; DevOps</span>
+        <h4>Case Study Title</h4>
+        <p>One-line summary of the project and the outcome delivered.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ROADMAP -->
+<section id="roadmap">
+  <div class="eyebrow fade-in">// 5-Year Strategic Roadmap</div>
+  <h2 class="fade-in">Where we're<br /><span class="accent">headed.</span></h2>
+  <p class="section-lead fade-in">A three-phase growth plan from market validation through ecosystem expansion — methodically scaling from a founder-led studio to a diversified digital enterprise.</p>
+  <div class="milestone-track">
+    <div class="milestone fade-in">
+      <div class="milestone-phase">Phase 01 · 2025–2026</div>
+      <h3>Foundation &amp; Market Validation</h3>
+      <p>Establish the agency brand and operations stack, secure the first 5–15 paying clients, build 3–8 high-impact case studies, and achieve early financial stability. Build repeatable client acquisition pipelines and document core delivery systems into SOPs that outlast any individual.</p>
+    </div>
+    <div class="milestone fade-in">
+      <div class="milestone-phase">Phase 02 · 2026–2028</div>
+      <h3>Scale &amp; Structural Systematization</h3>
+      <p>Transition from founder-led to a fully structured operation. Grow to 30–100+ active accounts, shift revenue from project-based to Monthly Recurring Revenue retainers, build a dedicated core team, and penetrate high-growth verticals including Fintech and funded startups. Establish B2B alliances for white-label and referral pipelines.</p>
+    </div>
+    <div class="milestone fade-in">
+      <div class="milestone-phase">Phase 03 · 2028–2030</div>
+      <h3>Ecosystem Expansion &amp; Productization</h3>
+      <p>Evolve from a service agency to an asset-backed digital solutions enterprise. Launch proprietary SaaS products, secure multi-year institutional contracts, establish regional and international market presence, and explore strategic acquisitions of micro-agencies and proprietary tooling. Become a recognized thought leader in the African tech ecosystem.</p>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section id="team">
+  <div class="eyebrow fade-in">// Core Team</div>
+  <h2 class="fade-in">Small team.<br /><span class="accent">Agency-scale output.</span></h2>
+  <p class="section-lead fade-in">A lean, multidisciplinary founding team supported by a trusted network of specialist contractors — designed for agility and built to scale capacity on demand.</p>
+  <div class="team-grid">
+    <div class="team-card fade-in">
+      <div class="team-avatar">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+        <span>SL</span>
+      </div>
+      <div class="team-info">
+        <h3>Shinsa Lyonga Lomboto</h3>
+        <div class="team-role">Founder &amp; Creative Director</div>
+        <p>Strategy, brand identity, UI/UX, business development, client acquisition and end-to-end project oversight. The originating force behind SCL's vision and creative direction.</p>
+      </div>
+    </div>
+    <div class="team-card fade-in">
+      <div class="team-avatar">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+        <span>LD</span>
+      </div>
+      <div class="team-info">
+        <h3>Lead Developer</h3>
+        <div class="team-role">Web · Systems · Technical Architecture</div>
+        <p>Full-stack and SaaS architecture, CRM/ERP integration, API development, performance optimization, and long-term scalability planning across all client and internal projects.</p>
+      </div>
+    </div>
+    <div class="team-card fade-in">
+      <div class="team-avatar">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+        <span>CM</span>
+      </div>
+      <div class="team-info">
+        <h3>Content &amp; Media Specialist</h3>
+        <div class="team-role">Design · Video · Social Content</div>
+        <p>Visual storytelling, motion design, campaign assets, social media production, and brand consistency across all platforms and touchpoints.</p>
+      </div>
+    </div>
+    <div class="team-card fade-in">
+      <div class="team-avatar">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+        <span>CO</span>
+      </div>
+      <div class="team-info">
+        <h3>Client &amp; Operations Coordinator</h3>
+        <div class="team-role">Project Management · Delivery</div>
+        <p>Project coordination, client communication, quality assurance, resource allocation, and the operational backbone that keeps delivery on time and on brief.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LOCATIONS -->
+<div class="locations-bg" id="locations">
+  <div class="locations-inner">
+    <div class="eyebrow fade-in">// Where We Operate</div>
+    <h2 class="fade-in">Rooted in Africa.<br /><span class="accent">Built for the world.</span></h2>
+    <p class="section-lead fade-in">A deliberate dual-country structure minimizes cross-border overhead while positioning SCL at the intersection of Sub-Saharan Africa's two fastest-growing tech economies.</p>
+    <div class="loc-grid">
+      <div class="loc-card fade-in">
+        <div class="loc-marker">Headquarters · ZA</div>
+        <div class="media-placeholder media-placeholder--wide loc-media">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-5-5L5 21"/></svg>
+          <span class="mp-label">Office Photo — Cape Town</span>
+        </div>
+        <h3>Cape Town</h3>
+        <p class="loc-sub">South Africa · Core engineering operations</p>
+        <div class="loc-detail">
+          Entity: SCL Digital Agency (Pty) Ltd<br />
+          Reg: 2025/001641/07 · CIPC<br />
+          Registered: January 3, 2025<br />
+          Role: Engineering, design, client delivery
+        </div>
+      </div>
+      <div class="loc-card fade-in">
+        <div class="loc-marker">International Hub · RW</div>
+        <div class="media-placeholder media-placeholder--wide loc-media">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-5-5L5 21"/></svg>
+          <span class="mp-label">Office Photo — Kigali</span>
+        </div>
+        <h3>Kigali</h3>
+        <p class="loc-sub">Rwanda · Global transaction &amp; expansion hub</p>
+        <div class="loc-detail">
+          Entity: SCL Digital Agency Ltd<br />
+          Authority: Rwanda Development Board (RDB)<br />
+          Role: Multi-currency banking, international clients<br />
+          Purpose: Cross-border overhead optimization
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DOWNLOADS -->
+<div class="downloads-bg" id="downloads">
+  <div class="downloads-inner">
+    <div class="eyebrow fade-in">// Documents</div>
+    <h2 class="fade-in">Downloadable <span class="accent">resources.</span></h2>
+    <p class="section-lead fade-in">Take this profile with you — or share the specific documents your team needs for evaluation, onboarding, or due diligence.</p>
+    <div class="download-grid">
+      <div class="download-card fade-in">
+        <div class="dl-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>
+        </div>
+        <h4>Company Profile</h4>
+        <p>Full overview of SCL Digital Agency — entities, dual-engine model, services, roadmap, and team.</p>
+        <div class="dl-meta">PDF · ~12 pages</div>
+        <a href="documents/SCL-Digital-Agency-Company-Profile.pdf" download class="dl-btn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="M7 10l5 5 5-5"/><path d="M5 21h14"/></svg>
+          Download PDF
+        </a>
+      </div>
+      <div class="download-card fade-in">
+        <div class="dl-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>
+        </div>
+        <h4>Service Catalogue</h4>
+        <p>Detailed breakdown of all six core disciplines, engagement models, and deliverables.</p>
+        <div class="dl-meta">PDF · ~6 pages</div>
+        <a href="documents/SCL-Digital-Agency-Service-Catalogue.pdf" download class="dl-btn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="M7 10l5 5 5-5"/><path d="M5 21h14"/></svg>
+          Download PDF
+        </a>
+      </div>
+      <div class="download-card fade-in">
+        <div class="dl-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>
+        </div>
+        <h4>Case Studies Portfolio</h4>
+        <p>Selected project breakdowns with outcomes, screens, and client results.</p>
+        <div class="dl-meta">PDF · ~10 pages</div>
+        <a href="documents/SCL-Digital-Agency-Case-Studies.pdf" download class="dl-btn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="M7 10l5 5 5-5"/><path d="M5 21h14"/></svg>
+          Download PDF
+        </a>
+      </div>
+      <div class="download-card fade-in">
+        <div class="dl-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>
+        </div>
+        <h4>5-Year Strategic Roadmap</h4>
+        <p>The three-phase growth plan, from market validation to ecosystem expansion.</p>
+        <div class="dl-meta">PDF · ~4 pages</div>
+        <a href="documents/SCL-Digital-Agency-Strategic-Roadmap.pdf" download class="dl-btn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="M7 10l5 5 5-5"/><path d="M5 21h14"/></svg>
+          Download PDF
+        </a>
+      </div>
+      <div class="download-card fade-in">
+        <div class="dl-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>
+        </div>
+        <h4>Investor Pitch Deck</h4>
+        <p>The dual-engine model and proprietary asset pipeline, framed for investors and partners.</p>
+        <div class="dl-meta">PDF · ~15 pages</div>
+        <a href="documents/SCL-Digital-Agency-Pitch-Deck.pdf" download class="dl-btn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="M7 10l5 5 5-5"/><path d="M5 21h14"/></svg>
+          Download PDF
+        </a>
+      </div>
+      <div class="download-card fade-in">
+        <div class="dl-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>
+        </div>
+        <h4>Entity &amp; Compliance Pack</h4>
+        <p>Registration certificates and entity details for SCL South Africa and Rwanda.</p>
+        <div class="dl-meta">PDF · ~5 pages</div>
+        <a href="documents/SCL-Digital-Agency-Entity-Pack.pdf" download class="dl-btn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="M7 10l5 5 5-5"/><path d="M5 21h14"/></svg>
+          Download PDF
+        </a>
+      </div>
+    </div>
+    <div class="downloads-note fade-in">// Replace the href paths above with your hosted PDF files once they're ready.</div>
+  </div>
+</div>
+
+<!-- CTA -->
+<div class="cta-wrap" id="contact">
+  <div class="eyebrow fade-in" style="text-align:center">// Work With Us</div>
+  <h2 class="fade-in">Ready to build something<br /><span class="accent">that actually works?</span></h2>
+  <p class="fade-in">Whether you're a founder with a product idea, an SME in need of a digital overhaul, or an investor looking for acquisition-ready assets — let's talk.</p>
+  <div class="cta-group fade-in">
+    <a href="mailto:hello@scldigitalagency.com" class="btn-primary">Start a Conversation</a>
+    <a href="#services" class="btn-outline">Explore Services</a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">SCL <span>Digital Agency</span></div>
+  <div class="footer-copy">© 2026 SCL Digital Agency (Pty) Ltd · CIPC 2025/001641/07</div>
+  <div class="footer-links">
+    <a href="#downloads">Documents</a>
+    <a href="#">Cape Town</a>
+    <a href="#">Kigali</a>
+    <a href="#">LinkedIn</a>
+  </div>
+</footer>
+
+<script>
+  // Intersection Observer for fade-ins
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        // stagger children if parent
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.fade-in').forEach((el, i) => {
+    // slight stagger for grid items
+    el.style.transitionDelay = `${(i % 6) * 60}ms`;
+    observer.observe(el);
+  });
+</script>
+</body>
+</html>

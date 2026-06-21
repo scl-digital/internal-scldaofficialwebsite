@@ -1,0 +1,966 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Newsroom — SCL Digital Agency</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink:      #0A0A0F;
+      --surface:  #111118;
+      --card:     #16161F;
+      --border:   #222230;
+      --purple:   #7B35E8;
+      --purple-lo:#7B35E820;
+      --purple-mid:#7B35E840;
+      --silver:   #A0A0B8;
+      --white:    #F0F0FA;
+      --mono:     'Space Mono', monospace;
+      --sans:     'Space Grotesk', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--ink);
+      color: var(--white);
+      font-family: var(--sans);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 20px 48px;
+      background: rgba(10,10,15,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-family: var(--mono);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      color: var(--white);
+      text-decoration: none;
+    }
+    .nav-logo span { color: var(--purple); }
+    .nav-links { display: flex; gap: 32px; list-style: none; }
+    .nav-links a {
+      font-size: 13px;
+      font-family: var(--mono);
+      letter-spacing: 0.08em;
+      color: var(--silver);
+      text-decoration: none;
+      transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--white); }
+    .nav-cta {
+      background: var(--purple);
+      color: #fff;
+      font-family: var(--mono);
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      padding: 10px 20px;
+      border: none;
+      cursor: pointer;
+      transition: opacity .2s;
+      text-decoration: none;
+    }
+    .nav-cta:hover { opacity: .85; }
+
+    /* ── TICKER ── */
+    .ticker-wrap {
+      margin-top: 81px;
+      background: var(--purple);
+      overflow: hidden;
+      padding: 10px 0;
+    }
+    .ticker-track {
+      display: flex;
+      gap: 0;
+      animation: ticker 28s linear infinite;
+      white-space: nowrap;
+    }
+    .ticker-item {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      padding: 0 40px;
+      color: #fff;
+      flex-shrink: 0;
+    }
+    .ticker-sep { color: rgba(255,255,255,0.4); margin: 0 4px; }
+    @keyframes ticker {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+    /* ── HERO ── */
+    .hero {
+      padding: 96px 48px 80px;
+      border-bottom: 1px solid var(--border);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: end;
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+    .hero-eyebrow {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      color: var(--purple);
+      margin-bottom: 20px;
+    }
+    .hero-title {
+      font-size: clamp(52px, 7vw, 96px);
+      font-weight: 700;
+      line-height: 0.92;
+      letter-spacing: -0.03em;
+      color: var(--white);
+    }
+    .hero-title em {
+      font-style: normal;
+      color: var(--purple);
+    }
+    .hero-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      justify-content: flex-end;
+    }
+    .hero-desc {
+      font-size: 16px;
+      line-height: 1.7;
+      color: var(--silver);
+      max-width: 420px;
+    }
+    .hero-stats {
+      display: flex;
+      gap: 40px;
+    }
+    .stat-num {
+      font-family: var(--mono);
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--white);
+    }
+    .stat-label {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.15em;
+      color: var(--silver);
+      margin-top: 4px;
+    }
+
+    /* ── DIVIDER ── */
+    .divider {
+      height: 1px;
+      background: var(--border);
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+
+    /* ── SECTION LABEL ── */
+    .section-label {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.22em;
+      color: var(--silver);
+      text-transform: uppercase;
+    }
+
+    /* ── FEATURED RELEASE ── */
+    .featured-wrap {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 72px 48px;
+    }
+    .featured-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 40px;
+    }
+    .featured-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      overflow: hidden;
+      transition: border-color .3s;
+    }
+    .featured-card:hover { border-color: var(--purple); }
+    .featured-visual {
+      background: var(--surface);
+      position: relative;
+      min-height: 380px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .featured-visual-inner {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+    }
+    .featured-tag-badge {
+      display: inline-block;
+      background: var(--purple);
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      color: #fff;
+      padding: 6px 14px;
+      margin-bottom: 20px;
+    }
+    .featured-visual-logo {
+      font-family: var(--mono);
+      font-size: 42px;
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: -0.02em;
+    }
+    .featured-visual-logo span { color: var(--purple); }
+    /* decorative grid */
+    .visual-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(var(--border) 1px, transparent 1px),
+        linear-gradient(90deg, var(--border) 1px, transparent 1px);
+      background-size: 48px 48px;
+      opacity: 0.4;
+    }
+    .visual-glow {
+      position: absolute;
+      width: 300px; height: 300px;
+      background: var(--purple);
+      border-radius: 50%;
+      filter: blur(100px);
+      opacity: 0.15;
+      top: 50%; left: 50%;
+      transform: translate(-50%,-50%);
+    }
+    .featured-body {
+      padding: 56px 48px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .featured-date {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      color: var(--silver);
+      margin-bottom: 16px;
+    }
+    .featured-title {
+      font-size: 28px;
+      font-weight: 600;
+      line-height: 1.3;
+      color: var(--white);
+      margin-bottom: 20px;
+      letter-spacing: -0.02em;
+    }
+    .featured-excerpt {
+      font-size: 15px;
+      line-height: 1.75;
+      color: var(--silver);
+      flex: 1;
+    }
+    .featured-footer {
+      margin-top: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .tag-pill {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      border: 1px solid var(--border);
+      padding: 6px 12px;
+      color: var(--silver);
+    }
+    .read-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--purple);
+      color: #fff;
+      font-family: var(--mono);
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      padding: 12px 24px;
+      text-decoration: none;
+      border: none; cursor: pointer;
+      transition: opacity .2s;
+    }
+    .read-btn:hover { opacity: .85; }
+    .read-btn svg { transition: transform .2s; }
+    .read-btn:hover svg { transform: translateX(4px); }
+
+    /* ── PRESS GRID ── */
+    .grid-wrap {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 48px 80px;
+    }
+    .grid-header {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 32px;
+    }
+    .filter-row {
+      display: flex; gap: 8px;
+    }
+    .filter-btn {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      padding: 8px 16px;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--silver);
+      cursor: pointer;
+      transition: all .2s;
+    }
+    .filter-btn:hover, .filter-btn.active {
+      background: var(--purple);
+      border-color: var(--purple);
+      color: #fff;
+    }
+    .press-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+    }
+    .press-card {
+      background: var(--card);
+      padding: 36px 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      cursor: pointer;
+      transition: background .2s;
+      position: relative;
+      overflow: hidden;
+    }
+    .press-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 0; height: 2px;
+      background: var(--purple);
+      transition: width .3s;
+    }
+    .press-card:hover { background: var(--surface); }
+    .press-card:hover::after { width: 100%; }
+    .card-tag {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.16em;
+      color: var(--purple);
+    }
+    .card-title {
+      font-size: 17px;
+      font-weight: 600;
+      line-height: 1.45;
+      color: var(--white);
+      letter-spacing: -0.01em;
+    }
+    .card-excerpt {
+      font-size: 13px;
+      line-height: 1.7;
+      color: var(--silver);
+      flex: 1;
+    }
+    .card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 8px;
+      padding-top: 16px;
+      border-top: 1px solid var(--border);
+    }
+    .card-date {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      color: var(--silver);
+    }
+    .card-arrow {
+      color: var(--silver);
+      transition: color .2s, transform .2s;
+    }
+    .press-card:hover .card-arrow {
+      color: var(--purple);
+      transform: translateX(4px);
+    }
+
+    /* ── MEDIA KIT ── */
+    .kit-wrap {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 48px 80px;
+    }
+    .kit-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-top: 32px;
+    }
+    .kit-card {
+      border: 1px solid var(--border);
+      padding: 32px 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      cursor: pointer;
+      transition: border-color .25s, transform .25s;
+      background: var(--card);
+      text-decoration: none;
+    }
+    .kit-card:hover {
+      border-color: var(--purple);
+      transform: translateY(-4px);
+    }
+    .kit-icon {
+      width: 44px; height: 44px;
+      background: var(--purple-lo);
+      border: 1px solid var(--purple-mid);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--purple);
+    }
+    .kit-name {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--white);
+      letter-spacing: -0.01em;
+    }
+    .kit-desc {
+      font-size: 13px;
+      line-height: 1.6;
+      color: var(--silver);
+      flex: 1;
+    }
+    .kit-link {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      color: var(--purple);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* ── CONTACT BANNER ── */
+    .contact-wrap {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 48px 96px;
+    }
+    .contact-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      padding: 64px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 40px;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .contact-card::before {
+      content: '';
+      position: absolute;
+      top: -80px; right: -80px;
+      width: 300px; height: 300px;
+      background: var(--purple);
+      border-radius: 50%;
+      filter: blur(120px);
+      opacity: 0.12;
+      pointer-events: none;
+    }
+    .contact-eyebrow {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.22em;
+      color: var(--purple);
+      margin-bottom: 12px;
+    }
+    .contact-title {
+      font-size: 32px;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      color: var(--white);
+      margin-bottom: 12px;
+    }
+    .contact-desc {
+      font-size: 15px;
+      color: var(--silver);
+      line-height: 1.65;
+      max-width: 520px;
+    }
+    .contact-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .contact-email {
+      font-family: var(--mono);
+      font-size: 13px;
+      color: var(--silver);
+      letter-spacing: 0.04em;
+    }
+    .contact-email a { color: var(--purple); text-decoration: none; }
+    .contact-email a:hover { text-decoration: underline; }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 32px 48px;
+      max-width: 1280px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .footer-brand {
+      font-family: var(--mono);
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      color: var(--silver);
+    }
+    .footer-brand span { color: var(--purple); }
+    .footer-copy {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      color: #404055;
+    }
+
+    /* ── MODAL ── */
+    .modal-overlay {
+      position: fixed; inset: 0; z-index: 200;
+      background: rgba(10,10,15,0.92);
+      backdrop-filter: blur(8px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+    .modal-overlay.open { display: flex; }
+    .modal {
+      background: var(--card);
+      border: 1px solid var(--border);
+      max-width: 640px;
+      width: 100%;
+      padding: 56px;
+      position: relative;
+      animation: modalIn .3s cubic-bezier(.16,1,.3,1);
+    }
+    @keyframes modalIn {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .modal-close {
+      position: absolute; top: 20px; right: 20px;
+      background: none; border: none; cursor: pointer;
+      color: var(--silver); font-size: 20px; transition: color .2s;
+    }
+    .modal-close:hover { color: var(--white); }
+    .modal-tag {
+      font-family: var(--mono); font-size: 10px;
+      letter-spacing: 0.18em; color: var(--purple);
+      margin-bottom: 16px;
+    }
+    .modal-title {
+      font-size: 22px; font-weight: 600;
+      letter-spacing: -0.02em; color: var(--white);
+      margin-bottom: 12px; line-height: 1.35;
+    }
+    .modal-date {
+      font-family: var(--mono); font-size: 11px;
+      letter-spacing: 0.1em; color: var(--silver);
+      margin-bottom: 24px;
+    }
+    .modal-body {
+      font-size: 14px; line-height: 1.8;
+      color: var(--silver);
+      border-top: 1px solid var(--border);
+      padding-top: 24px;
+    }
+
+    /* ── UTIL ── */
+    .view-all {
+      font-family: var(--mono);
+      font-size: 12px; letter-spacing: 0.1em;
+      color: var(--silver); text-decoration: none;
+      display: flex; align-items: center; gap: 8px;
+      transition: color .2s;
+    }
+    .view-all:hover { color: var(--purple); }
+
+    @media (max-width: 900px) {
+      nav { padding: 16px 24px; }
+      .nav-links, .nav-cta { display: none; }
+      .hero { grid-template-columns: 1fr; padding: 60px 24px 48px; gap: 32px; }
+      .featured-card { grid-template-columns: 1fr; }
+      .featured-visual { min-height: 220px; }
+      .featured-body { padding: 36px 28px; }
+      .featured-wrap, .grid-wrap, .kit-wrap, .contact-wrap { padding-left: 24px; padding-right: 24px; }
+      .press-grid { grid-template-columns: 1fr; }
+      .kit-grid { grid-template-columns: 1fr 1fr; }
+      .contact-card { grid-template-columns: 1fr; padding: 36px; }
+      footer { flex-direction: column; gap: 12px; text-align: center; padding: 24px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">SCL <span>DA</span></a>
+  <ul class="nav-links">
+    <li><a href="#">Services</a></li>
+    <li><a href="#">Work</a></li>
+    <li><a href="#">About</a></li>
+    <li><a href="#">Newsroom</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">MEDIA INQUIRIES</a>
+</nav>
+
+<!-- TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker-track" id="ticker">
+    <span class="ticker-item">PRESS RELEASES <span class="ticker-sep">·</span></span>
+    <span class="ticker-item">MEDIA ASSETS <span class="ticker-sep">·</span></span>
+    <span class="ticker-item">EXECUTIVE BIOGRAPHIES <span class="ticker-sep">·</span></span>
+    <span class="ticker-item">BRAND ASSETS <span class="ticker-sep">·</span></span>
+    <span class="ticker-item">COMPANY ANNOUNCEMENTS <span class="ticker-sep">·</span></span>
+    <span class="ticker-item">PARTNERSHIPS <span class="ticker-sep">·</span></span>
+    <span class="ticker-item">PRODUCT LAUNCHES <span class="ticker-sep">·</span></span>
+    <span class="ticker-item">CAPE TOWN · RWANDA · GLOBAL <span class="ticker-sep">·</span></span>
+    <!-- duplicate for seamless loop -->
+    <span class="ticker-item">PRESS RELEASES <span class="ticker-sep">·</span></span>
+    <span class="ticker-item">MEDIA ASSETS <span class="ticker-sep">·</span></span>
+    <span class="ticker-item">EXECUTIVE BIOGRAPHIES <span class="ticker-sep">·</span></span>
+    <span class="ticker-item">BRAND ASSETS <span class="ticker-sep">·</span></span>
+    <span class="ticker-item">COMPANY ANNOUNCEMENTS <span class="ticker-sep">·</span></span>
+    <span class="ticker-item">PARTNERSHIPS <span class="ticker-sep">·</span></span>
+    <span class="ticker-item">PRODUCT LAUNCHES <span class="ticker-sep">·</span></span>
+    <span class="ticker-item">CAPE TOWN · RWANDA · GLOBAL <span class="ticker-sep">·</span></span>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div>
+    <p class="hero-eyebrow">// NEWSROOM & MEDIA</p>
+    <h1 class="hero-title">NEWS<br/><em>ROOM</em></h1>
+  </div>
+  <div class="hero-meta">
+    <p class="hero-desc">
+      Official press releases, high-resolution media assets, executive biographies, and contact information for media inquiries. Everything the press needs — in one place.
+    </p>
+    <div class="hero-stats">
+      <div>
+        <div class="stat-num">2026</div>
+        <div class="stat-label">FOUNDED</div>
+      </div>
+      <div>
+        <div class="stat-num">2</div>
+        <div class="stat-label">OFFICES</div>
+      </div>
+      <div>
+        <div class="stat-num">6+</div>
+        <div class="stat-label">SERVICES</div>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="divider"></div>
+
+<!-- FEATURED RELEASE -->
+<section class="featured-wrap">
+  <div class="featured-header">
+    <span class="section-label">// LATEST RELEASE</span>
+    <a href="#releases" class="view-all">ALL RELEASES <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M7 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+  </div>
+  <div class="featured-card">
+    <div class="featured-visual">
+      <div class="visual-grid"></div>
+      <div class="visual-glow"></div>
+      <div class="featured-visual-inner">
+        <div class="featured-tag-badge">COMPANY ANNOUNCEMENT</div>
+        <div class="featured-visual-logo">SCL <span>DA</span></div>
+      </div>
+    </div>
+    <div class="featured-body">
+      <div>
+        <div class="featured-date">JUNE 2026 · CAPE TOWN, SOUTH AFRICA</div>
+        <h2 class="featured-title">SCL Digital Agency Launches Dual-Engine Model, Expanding Operations Across Africa and Global Markets</h2>
+        <p class="featured-excerpt">
+          SCL Digital Agency officially announces the full operational launch of its Dual-Engine commercial model — delivering premium digital transformation services to enterprise clients worldwide while concurrently developing acquisition-ready proprietary SaaS products. With headquarters in Cape Town, South Africa and a regional hub registered under the Rwanda Development Board, SCL DA is positioned to serve international clients with clean, hyper-focused digital infrastructure.
+        </p>
+      </div>
+      <div class="featured-footer">
+        <div style="display:flex;gap:8px;">
+          <span class="tag-pill">LAUNCH</span>
+          <span class="tag-pill">AFRICA TECH</span>
+        </div>
+        <button class="read-btn" onclick="openModal('featured')">
+          READ RELEASE
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M7 2l5 5-5 5" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRESS RELEASES -->
+<section class="grid-wrap" id="releases">
+  <div class="grid-header">
+    <span class="section-label">// PRESS RELEASES</span>
+    <div class="filter-row">
+      <button class="filter-btn active" onclick="filterCards(this,'all')">ALL</button>
+      <button class="filter-btn" onclick="filterCards(this,'announcement')">ANNOUNCEMENTS</button>
+      <button class="filter-btn" onclick="filterCards(this,'product')">PRODUCTS</button>
+      <button class="filter-btn" onclick="filterCards(this,'partnership')">PARTNERSHIPS</button>
+    </div>
+  </div>
+  <div class="press-grid" id="pressGrid">
+
+    <div class="press-card" data-cat="announcement" onclick="openModal('r1')">
+      <span class="card-tag">ANNOUNCEMENT</span>
+      <h3 class="card-title">Shinsa Lyonga Lomboto Assumes Full Operational Control and Rebrands Legacy Entity</h3>
+      <p class="card-excerpt">Following the structural pivot from Sound Click Labs, the agency rebrands as SCL Digital Agency to serve an international digital market.</p>
+      <div class="card-footer">
+        <span class="card-date">JAN 2025</span>
+        <svg class="card-arrow" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M8 3l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+    </div>
+
+    <div class="press-card" data-cat="partnership" onclick="openModal('r2')">
+      <span class="card-tag">PARTNERSHIP</span>
+      <h3 class="card-title">SCL Digital Agency Registers Rwanda Hub Under RDB Framework</h3>
+      <p class="card-excerpt">Strategic expansion into East Africa positions the agency to route global transactions through an optimized, multi-currency banking setup.</p>
+      <div class="card-footer">
+        <span class="card-date">MAR 2025</span>
+        <svg class="card-arrow" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M8 3l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+    </div>
+
+    <div class="press-card" data-cat="product" onclick="openModal('r3')">
+      <span class="card-tag">PRODUCT</span>
+      <h3 class="card-title">SCL DA Unveils AI Integration Service Line for LLM and RAG Pipeline Deployments</h3>
+      <p class="card-excerpt">The agency introduces a dedicated AI & Automation practice, architecting intelligent workflows and AI-native product features for enterprise clients.</p>
+      <div class="card-footer">
+        <span class="card-date">APR 2025</span>
+        <svg class="card-arrow" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M8 3l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+    </div>
+
+    <div class="press-card" data-cat="product" onclick="openModal('r4')">
+      <span class="card-tag">PRODUCT</span>
+      <h3 class="card-title">SCL Digital Agency Begins Incubation of Proprietary SaaS Assets in Q2 2025</h3>
+      <p class="card-excerpt">First wave of internally developed software products enters validation phase, targeting venture capital acquisition readiness within 18 months.</p>
+      <div class="card-footer">
+        <span class="card-date">MAY 2025</span>
+        <svg class="card-arrow" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M8 3l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+    </div>
+
+    <div class="press-card" data-cat="announcement" onclick="openModal('r5')">
+      <span class="card-tag">ANNOUNCEMENT</span>
+      <h3 class="card-title">SCL DA Targets 30–100 Active Clients by End of Phase 02 in 2028 Growth Plan</h3>
+      <p class="card-excerpt">The agency publishes its 5-year milestone roadmap, outlining the structured path from market validation through ecosystem expansion and productization.</p>
+      <div class="card-footer">
+        <span class="card-date">JAN 2026</span>
+        <svg class="card-arrow" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M8 3l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+    </div>
+
+    <div class="press-card" data-cat="partnership" onclick="openModal('r6')">
+      <span class="card-tag">PARTNERSHIP</span>
+      <h3 class="card-title">Agency Introduces Co-Development and Revenue-Sharing Models for Startup Founders</h3>
+      <p class="card-excerpt">SCL DA expands its value proposition with revenue-sharing agreements, enabling early-stage founders to access production-grade engineering without upfront capital constraints.</p>
+      <div class="card-footer">
+        <span class="card-date">MAR 2026</span>
+        <svg class="card-arrow" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M8 3l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- MEDIA KIT -->
+<section class="kit-wrap">
+  <div class="grid-header">
+    <span class="section-label">// MEDIA RESOURCES</span>
+  </div>
+  <div class="kit-grid">
+
+    <a href="#" class="kit-card">
+      <div class="kit-icon">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="3" y="2" width="14" height="16" rx="1" stroke="currentColor" stroke-width="1.5"/><path d="M6 6h8M6 9h8M6 12h5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </div>
+      <div class="kit-name">Official Press Releases</div>
+      <div class="kit-desc">Full archive of official announcements, company news, and product releases in PDF and text format.</div>
+      <div class="kit-link">ACCESS ARCHIVE <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    </a>
+
+    <a href="#" class="kit-card">
+      <div class="kit-icon">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="2" y="2" width="16" height="16" rx="1" stroke="currentColor" stroke-width="1.5"/><circle cx="7" cy="7" r="2" stroke="currentColor" stroke-width="1.5"/><path d="M2 14l5-4 4 3 3-2 4 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <div class="kit-name">Digital Media Kit</div>
+      <div class="kit-desc">High-resolution logos, brand photography, typography guidelines, and approved visual assets for media use.</div>
+      <div class="kit-link">DOWNLOAD KIT <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 2v7M3 6l3 3 3-3M2 10h8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    </a>
+
+    <a href="#" class="kit-card">
+      <div class="kit-icon">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="7" r="3.5" stroke="currentColor" stroke-width="1.5"/><path d="M3 18c0-3.866 3.134-7 7-7s7 3.134 7 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </div>
+      <div class="kit-name">Executive Biographies</div>
+      <div class="kit-desc">Official bios and professional headshots for SCL DA's founding and leadership team, cleared for editorial publication.</div>
+      <div class="kit-link">VIEW BIOS <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    </a>
+
+    <a href="#" class="kit-card">
+      <div class="kit-icon">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="8" stroke="currentColor" stroke-width="1.5"/><path d="M10 2v8l5 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <div class="kit-name">Brand Asset Library</div>
+      <div class="kit-desc">Complete brand system: primary marks, color codes, usage guidelines, and restricted asset policies for press and partners.</div>
+      <div class="kit-link">OPEN LIBRARY <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    </a>
+
+  </div>
+</section>
+
+<!-- CONTACT BANNER -->
+<section class="contact-wrap" id="contact">
+  <div class="contact-card">
+    <div>
+      <div class="contact-eyebrow">// MEDIA INQUIRIES</div>
+      <h2 class="contact-title">Talk to our press team.</h2>
+      <p class="contact-desc">
+        For interview requests, editorial fact-checking, event coverage, or any media-related questions, reach the SCL Digital Agency communications team directly.
+      </p>
+    </div>
+    <div class="contact-actions">
+      <a href="mailto:press@scldigitalagency.com" class="read-btn">
+        EMAIL PRESS TEAM
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M7 2l5 5-5 5" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <div class="contact-email">
+        Direct: <a href="mailto:press@scldigitalagency.com">press@scldigitalagency.com</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">SCL <span>DA</span> · CAPE TOWN, SOUTH AFRICA</div>
+  <div class="footer-copy">© 2026 SCL DIGITAL AGENCY (PTY) LTD · 2025/001641/07</div>
+</footer>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
+  <div class="modal" id="modal">
+    <button class="modal-close" onclick="closeModalBtn()">✕</button>
+    <div class="modal-tag" id="modalTag"></div>
+    <h2 class="modal-title" id="modalTitle"></h2>
+    <div class="modal-date" id="modalDate"></div>
+    <div class="modal-body" id="modalBody"></div>
+  </div>
+</div>
+
+<script>
+  const releases = {
+    featured: {
+      tag: 'COMPANY ANNOUNCEMENT',
+      title: 'SCL Digital Agency Launches Dual-Engine Model, Expanding Operations Across Africa and Global Markets',
+      date: 'JUNE 2026 · CAPE TOWN, SOUTH AFRICA',
+      body: `SCL Digital Agency (Pty) Ltd (CIPC Reg: 2025/001641/07), headquartered in Cape Town, South Africa, today announces the full operational launch of its Dual-Engine commercial model.\n\nThe agency delivers premium, tailored digital transformation services — including UI/UX design, full-stack engineering, AI integration, cloud infrastructure, and digital growth strategy — to enterprise and startup clients globally, while simultaneously developing proprietary SaaS products and software assets targeted at venture acquisition.\n\nWith a regional hub registered under the Rwanda Development Board, SCL DA channels cross-border transactions through an optimized multi-currency banking framework, reducing overhead and improving margin efficiency for international engagements.\n\n"We don't build bloated, templated systems. Every engagement starts at the architecture level," said Shinsa Lyonga Lomboto, Founder and Creative Director. "The Dual-Engine model lets us do great client work while building the software assets that will define the next decade."\n\nThe agency is actively onboarding clients across South Africa, sub-Saharan Africa, and international markets. Media inquiries can be directed to press@scldigitalagency.com.`
+    },
+    r1: {
+      tag: 'ANNOUNCEMENT',
+      title: 'Shinsa Lyonga Lomboto Assumes Full Operational Control and Rebrands Legacy Entity',
+      date: 'JANUARY 2025 · CAPE TOWN, SOUTH AFRICA',
+      body: `Shinsa Lyonga Lomboto has assumed complete operational control of the entity originally registered as Sound Click Labs (Pty) Ltd by her father, Jean Pierre Lyonga. Following a full structural pivot, the business has been rebranded as SCL Digital Agency to serve the international digital services market.\n\nThe company retains its CIPC registration number (2025/001641/07) registered January 3, 2025, and has expanded its mandate to cover web development, software engineering, branding, marketing, and AI-powered digital services.`
+    },
+    r2: {
+      tag: 'PARTNERSHIP',
+      title: 'SCL Digital Agency Registers Rwanda Hub Under RDB Framework',
+      date: 'MARCH 2025 · KIGALI, RWANDA',
+      body: `SCL Digital Agency Ltd has been formally registered under the Rwanda Development Board (RDB), establishing the company's East Africa hub. The Rwanda office serves as a regional commercial gateway, enabling the agency to process multi-currency transactions efficiently and extend its service footprint across East and Central Africa.\n\nThe dual-jurisdiction structure — South Africa for engineering operations and Rwanda for commercial banking optimization — allows the agency to minimize cross-border overhead and serve global clients competitively.`
+    },
+    r3: {
+      tag: 'PRODUCT',
+      title: 'SCL DA Unveils AI Integration Service Line for LLM and RAG Pipeline Deployments',
+      date: 'APRIL 2025 · CAPE TOWN, SOUTH AFRICA',
+      body: `SCL Digital Agency today unveils its AI & Automation service line, offering enterprise-grade LLM integrations, Retrieval-Augmented Generation (RAG) pipelines, AI agent development, and intelligent workflow automation.\n\nUnlike agencies that retrofit AI onto existing products, SCL DA architects AI natively into the product from day one. The practice supports fine-tuned model deployments, custom agent frameworks, and end-to-end automation strategies tied directly to client business objectives.`
+    },
+    r4: {
+      tag: 'PRODUCT',
+      title: 'SCL Digital Agency Begins Incubation of Proprietary SaaS Assets in Q2 2025',
+      date: 'MAY 2025 · CAPE TOWN, SOUTH AFRICA',
+      body: `SCL Digital Agency has entered the validation phase for its first cohort of internally developed proprietary SaaS products. These products are engineered from inside the agency's core team, drawing on client project insights to identify recurring market problems with scalable software solutions.\n\nThe incubation pipeline is designed to produce acquisition-ready digital assets within 12–18 months, creating an investable software portfolio alongside the agency's primary service revenue.`
+    },
+    r5: {
+      tag: 'ANNOUNCEMENT',
+      title: 'SCL DA Targets 30–100 Active Clients by End of Phase 02 in 2028 Growth Plan',
+      date: 'JANUARY 2026 · CAPE TOWN, SOUTH AFRICA',
+      body: `SCL Digital Agency has published its five-year strategic milestone roadmap, outlining a three-phase growth trajectory from 2025 through 2030.\n\nPhase 01 (2025–2026) focuses on market validation and building a repeatable client acquisition engine. Phase 02 (2026–2028) targets structural systematization, a transition to MRR retainer models, and growing the active client base to 30–100+ accounts. Phase 03 (2028–2030) focuses on ecosystem expansion, proprietary software productization, and enterprise market penetration.\n\nThe roadmap is available in the Digital Media Kit.`
+    },
+    r6: {
+      tag: 'PARTNERSHIP',
+      title: 'Agency Introduces Co-Development and Revenue-Sharing Models for Startup Founders',
+      date: 'MARCH 2026 · CAPE TOWN, SOUTH AFRICA',
+      body: `SCL Digital Agency today formalizes its revenue-sharing and co-development engagement models, designed specifically for early-stage founders who require production-grade engineering but cannot fund full project fees upfront.\n\nUnder these arrangements, SCL DA takes an equity or revenue stake in exchange for engineering and design services, aligning agency incentives directly with founder success. The model positions SCL DA as a long-term innovation partner rather than a transactional service vendor.`
+    }
+  };
+
+  function openModal(id) {
+    const r = releases[id];
+    if (!r) return;
+    document.getElementById('modalTag').textContent = r.tag;
+    document.getElementById('modalTitle').textContent = r.title;
+    document.getElementById('modalDate').textContent = r.date;
+    document.getElementById('modalBody').innerHTML = r.body.split('\n\n').map(p => `<p style="margin-bottom:16px">${p}</p>`).join('');
+    document.getElementById('modalOverlay').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeModal(e) {
+    if (e.target === document.getElementById('modalOverlay')) closeModalBtn();
+  }
+  function closeModalBtn() {
+    document.getElementById('modalOverlay').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModalBtn(); });
+
+  function filterCards(btn, cat) {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.press-card').forEach(card => {
+      card.style.display = (cat === 'all' || card.dataset.cat === cat) ? 'flex' : 'none';
+    });
+  }
+</script>
+</body>
+</html>

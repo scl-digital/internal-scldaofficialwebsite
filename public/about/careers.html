@@ -1,0 +1,1042 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Careers — SCL Digital Agency</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink:       #0A0A0F;
+      --surface:   #111118;
+      --card:      #16161F;
+      --border:    #222230;
+      --purple:    #7B35E8;
+      --purple-lo: rgba(123,53,232,0.12);
+      --purple-mid:rgba(123,53,232,0.28);
+      --silver:    #A0A0B8;
+      --white:     #F0F0FA;
+      --green:     #22C55E;
+      --mono:      'Space Mono', monospace;
+      --sans:      'Space Grotesk', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--ink);
+      color: var(--white);
+      font-family: var(--sans);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 20px 48px;
+      background: rgba(10,10,15,0.88);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-family: var(--mono); font-size: 13px; font-weight: 700;
+      letter-spacing: 0.12em; color: var(--white); text-decoration: none;
+    }
+    .nav-logo span { color: var(--purple); }
+    .nav-links { display: flex; gap: 32px; list-style: none; }
+    .nav-links a {
+      font-size: 13px; font-family: var(--mono); letter-spacing: 0.08em;
+      color: var(--silver); text-decoration: none; transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--white); }
+    .nav-cta {
+      background: var(--purple); color: #fff; font-family: var(--mono);
+      font-size: 12px; letter-spacing: 0.1em; padding: 10px 20px;
+      text-decoration: none; transition: opacity .2s;
+    }
+    .nav-cta:hover { opacity: .85; }
+
+    /* ─── HERO ─── */
+    .hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column; justify-content: flex-end;
+      padding: 0 48px 80px;
+      position: relative; overflow: hidden;
+    }
+    .hero-bg-grid {
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(var(--border) 1px, transparent 1px),
+        linear-gradient(90deg, var(--border) 1px, transparent 1px);
+      background-size: 60px 60px;
+      opacity: 0.35;
+    }
+    .hero-glow {
+      position: absolute; top: 20%; left: 55%;
+      width: 600px; height: 600px;
+      background: var(--purple);
+      border-radius: 50%; filter: blur(160px); opacity: 0.1;
+      pointer-events: none;
+    }
+    .hero-glow-2 {
+      position: absolute; bottom: -100px; left: 10%;
+      width: 400px; height: 400px;
+      background: #3B0FA0;
+      border-radius: 50%; filter: blur(140px); opacity: 0.12;
+      pointer-events: none;
+    }
+    .hero-content { position: relative; z-index: 2; max-width: 1280px; width: 100%; margin: 0 auto; }
+    .hero-eyebrow {
+      font-family: var(--mono); font-size: 11px; letter-spacing: 0.22em;
+      color: var(--purple); margin-bottom: 28px;
+    }
+    .hero-headline {
+      font-size: clamp(52px, 8vw, 110px);
+      font-weight: 700; line-height: 0.9;
+      letter-spacing: -0.04em; color: var(--white);
+      margin-bottom: 0;
+    }
+    .hero-headline .line-2 {
+      display: flex; align-items: baseline; gap: 24px; flex-wrap: wrap;
+    }
+    .hero-headline .role-wrap {
+      position: relative;
+      display: inline-block;
+      min-width: 520px;
+    }
+    .role-word {
+      display: block;
+      color: var(--purple);
+      position: absolute; top: 0; left: 0;
+      opacity: 0;
+      clip-path: inset(0 100% 0 0);
+      transition: none;
+    }
+    .role-word.active {
+      opacity: 1;
+      animation: revealWord 0.55s cubic-bezier(.16,1,.3,1) forwards;
+    }
+    .role-word.exit {
+      animation: exitWord 0.35s cubic-bezier(.55,0,1,.45) forwards;
+    }
+    @keyframes revealWord {
+      from { clip-path: inset(0 100% 0 0); opacity: 1; }
+      to   { clip-path: inset(0 0% 0 0);   opacity: 1; }
+    }
+    @keyframes exitWord {
+      from { clip-path: inset(0 0% 0 0);   opacity: 1; }
+      to   { clip-path: inset(0 0% 0 100%); opacity: 0; }
+    }
+    .hero-sub {
+      margin-top: 48px;
+      display: flex; align-items: flex-start; gap: 80px;
+    }
+    .hero-desc {
+      font-size: 17px; line-height: 1.75; color: var(--silver);
+      max-width: 440px;
+    }
+    .hero-actions { display: flex; flex-direction: column; gap: 14px; }
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 12px;
+      background: var(--purple); color: #fff; font-family: var(--mono);
+      font-size: 13px; letter-spacing: 0.1em; padding: 16px 32px;
+      text-decoration: none; transition: opacity .2s; white-space: nowrap;
+    }
+    .btn-primary:hover { opacity: .85; }
+    .btn-ghost {
+      display: inline-flex; align-items: center; gap: 12px;
+      border: 1px solid var(--border); color: var(--silver);
+      font-family: var(--mono); font-size: 13px; letter-spacing: 0.1em;
+      padding: 16px 32px; text-decoration: none; transition: all .2s; white-space: nowrap;
+    }
+    .btn-ghost:hover { border-color: var(--purple); color: var(--white); }
+    .hero-scroll {
+      position: absolute; bottom: 32px; right: 48px; z-index: 2;
+      display: flex; align-items: center; gap: 10px;
+      font-family: var(--mono); font-size: 10px; letter-spacing: 0.18em;
+      color: var(--silver); writing-mode: vertical-rl;
+      animation: bounce 2s ease-in-out infinite;
+    }
+    @keyframes bounce {
+      0%,100% { transform: translateY(0); }
+      50%      { transform: translateY(6px); }
+    }
+
+    /* ─── NAV JUMP LINKS ─── */
+    .jump-bar {
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      background: var(--surface);
+      position: sticky; top: 81px; z-index: 90;
+    }
+    .jump-inner {
+      max-width: 1280px; margin: 0 auto; padding: 0 48px;
+      display: flex; gap: 0; overflow-x: auto;
+    }
+    .jump-link {
+      font-family: var(--mono); font-size: 11px; letter-spacing: 0.14em;
+      color: var(--silver); text-decoration: none; padding: 16px 28px;
+      border-right: 1px solid var(--border); white-space: nowrap;
+      transition: all .2s; display: flex; align-items: center; gap: 8px;
+    }
+    .jump-link:first-child { border-left: 1px solid var(--border); }
+    .jump-link:hover { color: var(--white); background: var(--card); }
+    .jump-link.active { color: var(--purple); }
+    .jump-dot { width: 6px; height: 6px; background: var(--green); border-radius: 50%; animation: pulse 2s ease-in-out infinite; }
+    @keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:.3;} }
+
+    /* ─── SECTION SHARED ─── */
+    .section-wrap { max-width: 1280px; margin: 0 auto; padding: 88px 48px; }
+    .section-label {
+      font-family: var(--mono); font-size: 10px; letter-spacing: 0.22em;
+      color: var(--silver); text-transform: uppercase; margin-bottom: 40px;
+      display: flex; align-items: center; gap: 12px;
+    }
+    .section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+    .section-title {
+      font-size: clamp(32px, 4vw, 52px); font-weight: 700;
+      letter-spacing: -0.03em; line-height: 1.05; color: var(--white);
+    }
+    .section-title em { font-style: normal; color: var(--purple); }
+    .section-body {
+      font-size: 16px; line-height: 1.8; color: var(--silver); max-width: 580px;
+    }
+    .divider { height: 1px; background: var(--border); max-width: 1280px; margin: 0 auto; }
+
+    /* ─── WHY JOIN ─── */
+    .why-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 1px;
+      background: var(--border); margin-top: 56px;
+    }
+    .why-card {
+      background: var(--card); padding: 48px 40px;
+      display: flex; flex-direction: column; gap: 20px;
+      transition: background .25s;
+    }
+    .why-card:hover { background: var(--surface); }
+    .why-icon {
+      width: 48px; height: 48px; background: var(--purple-lo);
+      border: 1px solid var(--purple-mid);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--purple); flex-shrink: 0;
+    }
+    .why-card-title { font-size: 19px; font-weight: 600; color: var(--white); letter-spacing: -0.01em; }
+    .why-card-body { font-size: 14px; line-height: 1.8; color: var(--silver); }
+
+    /* ─── CULTURE ─── */
+    .culture-layout {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 64px;
+      align-items: start; margin-top: 56px;
+    }
+    .culture-visual {
+      background: var(--card); border: 1px solid var(--border);
+      aspect-ratio: 4/3; position: relative; overflow: hidden;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .culture-grid-bg {
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(var(--border) 1px, transparent 1px),
+        linear-gradient(90deg, var(--border) 1px, transparent 1px);
+      background-size: 36px 36px; opacity: 0.5;
+    }
+    .culture-glow-inner {
+      position: absolute; width: 260px; height: 260px;
+      background: var(--purple); border-radius: 50%; filter: blur(90px); opacity: 0.18;
+    }
+    .culture-values {
+      position: relative; z-index: 1; display: flex; flex-wrap: wrap;
+      gap: 10px; padding: 32px; justify-content: center;
+    }
+    .culture-chip {
+      font-family: var(--mono); font-size: 11px; letter-spacing: 0.12em;
+      border: 1px solid var(--border); padding: 10px 18px; color: var(--white);
+      background: rgba(10,10,15,0.7);
+      transition: border-color .25s, color .25s;
+    }
+    .culture-chip:hover { border-color: var(--purple); color: var(--purple); }
+    .culture-chip.highlight { border-color: var(--purple); color: var(--purple); }
+    .culture-points { display: flex; flex-direction: column; gap: 0; }
+    .culture-point {
+      padding: 28px 0; border-bottom: 1px solid var(--border);
+      display: flex; gap: 24px; align-items: flex-start;
+    }
+    .culture-point:last-child { border-bottom: none; }
+    .c-num {
+      font-family: var(--mono); font-size: 11px; color: var(--purple);
+      letter-spacing: 0.1em; padding-top: 4px; flex-shrink: 0; width: 32px;
+    }
+    .c-label { font-size: 16px; font-weight: 600; color: var(--white); margin-bottom: 6px; }
+    .c-desc { font-size: 14px; line-height: 1.7; color: var(--silver); }
+
+    /* ─── OPENINGS ─── */
+    .openings-header {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 32px; flex-wrap: gap;
+    }
+    .dept-filters { display: flex; gap: 8px; flex-wrap: wrap; }
+    .dept-btn {
+      font-family: var(--mono); font-size: 11px; letter-spacing: 0.1em;
+      padding: 9px 18px; border: 1px solid var(--border);
+      background: transparent; color: var(--silver); cursor: pointer; transition: all .2s;
+    }
+    .dept-btn:hover, .dept-btn.active {
+      background: var(--purple); border-color: var(--purple); color: #fff;
+    }
+    .job-list { display: flex; flex-direction: column; gap: 1px; background: var(--border); }
+    .job-card {
+      background: var(--card); padding: 32px 36px;
+      display: grid; grid-template-columns: 1fr auto;
+      align-items: center; gap: 24px; cursor: pointer;
+      transition: background .2s; border-left: 2px solid transparent;
+    }
+    .job-card:hover { background: var(--surface); border-left-color: var(--purple); }
+    .job-dept { font-family: var(--mono); font-size: 10px; letter-spacing: 0.16em; color: var(--purple); margin-bottom: 8px; }
+    .job-title { font-size: 18px; font-weight: 600; color: var(--white); letter-spacing: -0.01em; margin-bottom: 8px; }
+    .job-meta { display: flex; gap: 16px; flex-wrap: wrap; }
+    .job-tag {
+      font-family: var(--mono); font-size: 10px; letter-spacing: 0.1em;
+      border: 1px solid var(--border); padding: 5px 12px; color: var(--silver);
+    }
+    .job-tag.remote { border-color: var(--green); color: var(--green); }
+    .job-arrow {
+      display: flex; align-items: center; gap: 8px;
+      font-family: var(--mono); font-size: 12px; letter-spacing: 0.1em;
+      color: var(--silver); white-space: nowrap; transition: color .2s;
+    }
+    .job-card:hover .job-arrow { color: var(--purple); }
+    .job-arrow svg { transition: transform .2s; }
+    .job-card:hover .job-arrow svg { transform: translateX(4px); }
+    .no-jobs {
+      display: none; padding: 64px; text-align: center;
+      font-family: var(--mono); font-size: 13px; letter-spacing: 0.1em; color: var(--silver);
+      background: var(--card);
+    }
+
+    /* ─── INTERNSHIPS ─── */
+    .intern-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; margin-top: 56px; }
+    .intern-card {
+      background: var(--card); border: 1px solid var(--border);
+      padding: 36px 32px; display: flex; flex-direction: column; gap: 18px;
+      transition: border-color .25s, transform .3s; position: relative; overflow: hidden;
+    }
+    .intern-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: var(--purple); transform: scaleX(0); transform-origin: left;
+      transition: transform .35s cubic-bezier(.16,1,.3,1);
+    }
+    .intern-card:hover { border-color: var(--purple); transform: translateY(-4px); }
+    .intern-card:hover::before { transform: scaleX(1); }
+    .intern-badge {
+      font-family: var(--mono); font-size: 10px; letter-spacing: 0.14em;
+      background: var(--purple-lo); border: 1px solid var(--purple-mid);
+      color: var(--purple); padding: 6px 14px; display: inline-block; align-self: flex-start;
+    }
+    .intern-title { font-size: 18px; font-weight: 600; color: var(--white); letter-spacing: -0.01em; }
+    .intern-desc { font-size: 14px; line-height: 1.75; color: var(--silver); flex: 1; }
+    .intern-detail {
+      display: flex; gap: 16px; flex-wrap: wrap;
+      padding-top: 16px; border-top: 1px solid var(--border);
+    }
+    .intern-detail-item { font-family: var(--mono); font-size: 10px; letter-spacing: 0.1em; color: var(--silver); }
+    .intern-detail-item span { color: var(--white); }
+    .intern-apply {
+      font-family: var(--mono); font-size: 11px; letter-spacing: 0.1em;
+      color: var(--purple); display: flex; align-items: center; gap: 8px;
+      background: none; border: none; cursor: pointer; transition: gap .2s;
+    }
+    .intern-card:hover .intern-apply { gap: 14px; }
+
+    /* ─── PROCESS ─── */
+    .process-track {
+      display: grid; grid-template-columns: repeat(4,1fr);
+      gap: 0; background: var(--border); margin-top: 56px;
+      position: relative;
+    }
+    .process-step {
+      background: var(--card); padding: 48px 32px;
+      display: flex; flex-direction: column; gap: 16px;
+      transition: background .2s;
+    }
+    .process-step:hover { background: var(--surface); }
+    .step-num {
+      font-family: var(--mono); font-size: 11px; letter-spacing: 0.14em;
+      color: var(--purple); margin-bottom: 4px;
+    }
+    .step-title { font-size: 16px; font-weight: 600; color: var(--white); }
+    .step-body { font-size: 13px; line-height: 1.7; color: var(--silver); }
+
+    /* ─── CTA BANNER ─── */
+    .cta-wrap { max-width: 1280px; margin: 0 auto; padding: 0 48px 96px; }
+    .cta-card {
+      background: var(--purple); padding: 72px 64px;
+      display: grid; grid-template-columns: 1fr auto;
+      gap: 48px; align-items: center; position: relative; overflow: hidden;
+    }
+    .cta-card::before {
+      content: ''; position: absolute; top: -80px; right: -80px;
+      width: 320px; height: 320px; background: #fff;
+      border-radius: 50%; filter: blur(120px); opacity: 0.06;
+    }
+    .cta-eyebrow {
+      font-family: var(--mono); font-size: 10px; letter-spacing: 0.22em;
+      color: rgba(255,255,255,0.6); margin-bottom: 14px;
+    }
+    .cta-title {
+      font-size: clamp(28px, 3.5vw, 44px); font-weight: 700;
+      letter-spacing: -0.03em; color: #fff; margin-bottom: 14px;
+    }
+    .cta-desc { font-size: 15px; line-height: 1.7; color: rgba(255,255,255,0.7); max-width: 480px; }
+    .cta-actions { display: flex; flex-direction: column; gap: 12px; align-items: flex-start; }
+    .btn-white {
+      display: inline-flex; align-items: center; gap: 12px;
+      background: #fff; color: var(--purple); font-family: var(--mono);
+      font-size: 13px; letter-spacing: 0.1em; padding: 16px 32px;
+      text-decoration: none; transition: opacity .2s; white-space: nowrap; font-weight: 700;
+    }
+    .btn-white:hover { opacity: .9; }
+    .btn-outline-white {
+      display: inline-flex; align-items: center; gap: 12px;
+      border: 1px solid rgba(255,255,255,0.4); color: rgba(255,255,255,0.8);
+      font-family: var(--mono); font-size: 13px; letter-spacing: 0.1em;
+      padding: 16px 32px; text-decoration: none; transition: all .2s; white-space: nowrap;
+    }
+    .btn-outline-white:hover { border-color: #fff; color: #fff; }
+
+    /* ─── FOOTER ─── */
+    footer {
+      border-top: 1px solid var(--border); padding: 32px 48px;
+      max-width: 1280px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .footer-brand { font-family: var(--mono); font-size: 12px; letter-spacing: 0.1em; color: var(--silver); }
+    .footer-brand span { color: var(--purple); }
+    .footer-copy { font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; color: #404055; }
+
+    /* ─── MODAL ─── */
+    .modal-overlay {
+      position: fixed; inset: 0; z-index: 200;
+      background: rgba(10,10,15,0.93); backdrop-filter: blur(8px);
+      display: none; align-items: center; justify-content: center; padding: 24px;
+    }
+    .modal-overlay.open { display: flex; }
+    .modal {
+      background: var(--card); border: 1px solid var(--border);
+      max-width: 640px; width: 100%; padding: 56px; position: relative;
+      animation: modalIn .35s cubic-bezier(.16,1,.3,1);
+      max-height: 90vh; overflow-y: auto;
+    }
+    @keyframes modalIn {
+      from { opacity: 0; transform: translateY(28px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .modal-close {
+      position: absolute; top: 20px; right: 20px;
+      background: none; border: none; cursor: pointer;
+      color: var(--silver); font-size: 20px; transition: color .2s;
+    }
+    .modal-close:hover { color: var(--white); }
+    .modal-dept { font-family: var(--mono); font-size: 10px; letter-spacing: 0.18em; color: var(--purple); margin-bottom: 12px; }
+    .modal-title { font-size: 24px; font-weight: 700; letter-spacing: -0.02em; color: var(--white); margin-bottom: 20px; }
+    .modal-tags { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 28px; }
+    .modal-section-label { font-family: var(--mono); font-size: 10px; letter-spacing: 0.16em; color: var(--silver); margin-bottom: 12px; }
+    .modal-text { font-size: 14px; line-height: 1.8; color: var(--silver); margin-bottom: 28px; }
+    .modal-list { list-style: none; display: flex; flex-direction: column; gap: 10px; margin-bottom: 28px; }
+    .modal-list li {
+      font-size: 14px; color: var(--silver); line-height: 1.6;
+      padding-left: 20px; position: relative;
+    }
+    .modal-list li::before { content: '—'; position: absolute; left: 0; color: var(--purple); }
+    .modal-apply {
+      display: inline-flex; align-items: center; gap: 12px;
+      background: var(--purple); color: #fff; font-family: var(--mono);
+      font-size: 13px; letter-spacing: 0.1em; padding: 16px 32px;
+      text-decoration: none; transition: opacity .2s; border: none; cursor: pointer; margin-top: 8px;
+    }
+    .modal-apply:hover { opacity: .85; }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 960px) {
+      nav { padding: 16px 24px; }
+      .nav-links, .nav-cta { display: none; }
+      .hero { padding: 0 24px 64px; }
+      .hero-headline { font-size: clamp(40px, 10vw, 72px); }
+      .hero-headline .role-wrap { min-width: 240px; }
+      .hero-sub { flex-direction: column; gap: 32px; }
+      .hero-scroll { display: none; }
+      .jump-inner { padding: 0 24px; }
+      .section-wrap { padding: 64px 24px; }
+      .why-grid { grid-template-columns: 1fr; }
+      .culture-layout { grid-template-columns: 1fr; }
+      .intern-grid { grid-template-columns: 1fr; }
+      .process-track { grid-template-columns: 1fr 1fr; }
+      .cta-card { grid-template-columns: 1fr; padding: 40px 32px; }
+      .cta-wrap { padding-left: 24px; padding-right: 24px; padding-bottom: 64px; }
+      footer { flex-direction: column; gap: 12px; text-align: center; padding: 24px; }
+      .modal { padding: 36px 28px; }
+      .job-card { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav>
+  <a href="#" class="nav-logo">SCL <span>DA</span></a>
+  <ul class="nav-links">
+    <li><a href="#">Services</a></li>
+    <li><a href="#">Work</a></li>
+    <li><a href="#">About</a></li>
+    <li><a href="#">Careers</a></li>
+  </ul>
+  <a href="#openings" class="nav-cta">VIEW OPENINGS</a>
+</nav>
+
+<!-- ── HERO ── -->
+<section class="hero" id="top">
+  <div class="hero-bg-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-glow-2"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">// GROWTH & CAREERS</p>
+    <h1 class="hero-headline">
+      <div>WE HIRE</div>
+      <div class="line-2">
+        <div class="role-wrap" id="roleWrap" aria-live="polite">
+          <span class="role-word" data-role="BUILDERS">BUILDERS.</span>
+          <span class="role-word" data-role="DESIGNERS">DESIGNERS.</span>
+          <span class="role-word" data-role="STRATEGISTS">STRATEGISTS.</span>
+          <span class="role-word" data-role="DREAMERS">DREAMERS.</span>
+        </div>
+      </div>
+    </h1>
+    <div class="hero-sub">
+      <p class="hero-desc">
+        Join a lean, multidisciplinary team building the future of digital excellence — from Cape Town to Kigali and everywhere in between. We work fast, think sharp, and ship things that matter.
+      </p>
+      <div class="hero-actions">
+        <a href="#openings" class="btn-primary">
+          SEE OPEN ROLES
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M7 2l5 5-5 5" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <a href="#why" class="btn-ghost">
+          WHY SCL DA?
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 2v10M2 7l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="hero-scroll">SCROLL DOWN</div>
+</section>
+
+<!-- ── JUMP BAR ── -->
+<div class="jump-bar">
+  <div class="jump-inner">
+    <a href="#openings" class="jump-link">
+      <span class="jump-dot"></span> CURRENT OPENINGS
+    </a>
+    <a href="#why" class="jump-link">WHY JOIN US?</a>
+    <a href="#culture" class="jump-link">CULTURE & IMPACT</a>
+    <a href="#internships" class="jump-link">INTERNSHIP PROGRAMS</a>
+  </div>
+</div>
+
+<!-- ── WHY JOIN ── -->
+<section id="why">
+  <div class="section-wrap" style="padding-bottom:0">
+    <div class="section-label">// WHY JOIN US</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:end">
+      <h2 class="section-title">More than a<br/><em>job.</em></h2>
+      <p class="section-body">At SCL Digital Agency, you're not filling a seat — you're co-building something real. We give our people ownership, creative latitude, and direct exposure to how a modern digital business is built from the ground up.</p>
+    </div>
+    <div class="why-grid">
+      <div class="why-card">
+        <div class="why-icon">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M11 2L3 7v8l8 5 8-5V7L11 2z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M11 7v4l3 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="why-card-title">Ownership from Day One</div>
+        <div class="why-card-body">You won't be waiting six months before you touch real work. From your first week you'll be shipping, designing, or advising on live projects that matter to real clients.</div>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><circle cx="11" cy="11" r="9" stroke="currentColor" stroke-width="1.5"/><path d="M8 11h6M11 8v6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </div>
+        <div class="why-card-title">Accelerated Learning</div>
+        <div class="why-card-body">Our lean structure means broad exposure. You'll work across engineering, design, strategy, and AI — building skills that would take years to develop in a siloed corporate setting.</div>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M3 11h4l3-7 4 14 3-7h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="why-card-title">Built for Growth</div>
+        <div class="why-card-body">We are mid-scale by design. Phase 02 of our 5-year roadmap targets 30–100 active clients. The people who join now grow with the business — into leadership roles, equity conversations, and beyond.</div>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><rect x="2" y="2" width="18" height="18" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M7 11l3 3 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="why-card-title">Remote-Friendly, Africa-Rooted</div>
+        <div class="why-card-body">Headquartered in Cape Town with a hub in Kigali, we operate across time zones and borders. Collaboration is async-first, output-focused, and internationally minded.</div>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="divider" style="margin-top:88px"></div>
+
+<!-- ── CULTURE ── -->
+<section id="culture">
+  <div class="section-wrap">
+    <div class="section-label">// CULTURE & IMPACT</div>
+    <div class="culture-layout">
+      <div>
+        <h2 class="section-title" style="margin-bottom:40px">How we<br/><em>actually</em> work.</h2>
+        <div class="culture-points">
+          <div class="culture-point">
+            <div class="c-num">A</div>
+            <div>
+              <div class="c-label">No-bloat philosophy</div>
+              <div class="c-desc">Every line of code, every design decision, every strategy recommendation must earn its place. We obsess over simplicity because our clients' businesses depend on it.</div>
+            </div>
+          </div>
+          <div class="culture-point">
+            <div class="c-num">B</div>
+            <div>
+              <div class="c-label">Direct feedback, always</div>
+              <div class="c-desc">We don't do performative positivity. Feedback is clear, specific, and given with respect. We critique the work, never the person — and we mean it.</div>
+            </div>
+          </div>
+          <div class="culture-point">
+            <div class="c-num">C</div>
+            <div>
+              <div class="c-label">Ship, then improve</div>
+              <div class="c-desc">Production-grade from day one doesn't mean perfect from day one. We ship, we learn, we iterate. Speed and quality are not enemies — poor planning is.</div>
+            </div>
+          </div>
+          <div class="culture-point">
+            <div class="c-num">D</div>
+            <div>
+              <div class="c-label">Africa-forward ambition</div>
+              <div class="c-desc">We're building a category-defining digital agency from the African continent. That context shapes how we think about markets, talent, and the problems worth solving.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="culture-visual">
+          <div class="culture-grid-bg"></div>
+          <div class="culture-glow-inner"></div>
+          <div class="culture-values">
+            <span class="culture-chip highlight">Clean Code</span>
+            <span class="culture-chip">Remote First</span>
+            <span class="culture-chip highlight">Ownership</span>
+            <span class="culture-chip">No Fluff</span>
+            <span class="culture-chip">Africa Tech</span>
+            <span class="culture-chip highlight">Fast Shipping</span>
+            <span class="culture-chip">AI-Native</span>
+            <span class="culture-chip">Open Feedback</span>
+            <span class="culture-chip highlight">Lean Team</span>
+            <span class="culture-chip">Global Reach</span>
+            <span class="culture-chip">SaaS Builder</span>
+            <span class="culture-chip highlight">Real Impact</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="divider"></div>
+
+<!-- ── OPENINGS ── -->
+<section id="openings">
+  <div class="section-wrap">
+    <div class="section-label">// CURRENT OPENINGS</div>
+    <div class="openings-header">
+      <h2 class="section-title" style="margin-bottom:0">Open<br/><em>roles.</em></h2>
+      <div class="dept-filters">
+        <button class="dept-btn active" onclick="filterJobs(this,'all')">ALL</button>
+        <button class="dept-btn" onclick="filterJobs(this,'engineering')">ENGINEERING</button>
+        <button class="dept-btn" onclick="filterJobs(this,'design')">DESIGN</button>
+        <button class="dept-btn" onclick="filterJobs(this,'growth')">GROWTH</button>
+        <button class="dept-btn" onclick="filterJobs(this,'strategy')">STRATEGY</button>
+      </div>
+    </div>
+    <div class="job-list" id="jobList">
+
+      <div class="job-card" data-dept="engineering" onclick="openJob('j1')">
+        <div>
+          <div class="job-dept">ENGINEERING</div>
+          <div class="job-title">Full-Stack Engineer (Web & SaaS)</div>
+          <div class="job-meta">
+            <span class="job-tag remote">REMOTE</span>
+            <span class="job-tag">FULL-TIME</span>
+            <span class="job-tag">CAPE TOWN / GLOBAL</span>
+          </div>
+        </div>
+        <div class="job-arrow">
+          APPLY NOW
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M8 3l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+      </div>
+
+      <div class="job-card" data-dept="engineering" onclick="openJob('j2')">
+        <div>
+          <div class="job-dept">ENGINEERING</div>
+          <div class="job-title">AI & Automation Engineer (LLM / RAG Pipelines)</div>
+          <div class="job-meta">
+            <span class="job-tag remote">REMOTE</span>
+            <span class="job-tag">FULL-TIME</span>
+            <span class="job-tag">AFRICA / GLOBAL</span>
+          </div>
+        </div>
+        <div class="job-arrow">
+          APPLY NOW
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M8 3l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+      </div>
+
+      <div class="job-card" data-dept="design" onclick="openJob('j3')">
+        <div>
+          <div class="job-dept">DESIGN</div>
+          <div class="job-title">UI/UX Designer (Product & Brand Systems)</div>
+          <div class="job-meta">
+            <span class="job-tag remote">REMOTE</span>
+            <span class="job-tag">FULL-TIME</span>
+            <span class="job-tag">CAPE TOWN / KIGALI</span>
+          </div>
+        </div>
+        <div class="job-arrow">
+          APPLY NOW
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M8 3l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+      </div>
+
+      <div class="job-card" data-dept="growth" onclick="openJob('j4')">
+        <div>
+          <div class="job-dept">GROWTH</div>
+          <div class="job-title">Digital Growth Strategist (CRO & Paid Media)</div>
+          <div class="job-meta">
+            <span class="job-tag remote">REMOTE</span>
+            <span class="job-tag">CONTRACT / RETAINER</span>
+            <span class="job-tag">GLOBAL</span>
+          </div>
+        </div>
+        <div class="job-arrow">
+          APPLY NOW
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M8 3l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+      </div>
+
+      <div class="job-card" data-dept="strategy" onclick="openJob('j5')">
+        <div>
+          <div class="job-dept">STRATEGY</div>
+          <div class="job-title">Client & Operations Coordinator</div>
+          <div class="job-meta">
+            <span class="job-tag">HYBRID</span>
+            <span class="job-tag">FULL-TIME</span>
+            <span class="job-tag">CAPE TOWN</span>
+          </div>
+        </div>
+        <div class="job-arrow">
+          APPLY NOW
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M8 3l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+      </div>
+
+      <div class="job-card" data-dept="design" onclick="openJob('j6')">
+        <div>
+          <div class="job-dept">DESIGN</div>
+          <div class="job-title">Motion & Content Designer (Video / Social)</div>
+          <div class="job-meta">
+            <span class="job-tag remote">REMOTE</span>
+            <span class="job-tag">FREELANCE / CONTRACT</span>
+            <span class="job-tag">GLOBAL</span>
+          </div>
+        </div>
+        <div class="job-arrow">
+          APPLY NOW
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M8 3l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+      </div>
+
+    </div>
+    <div class="no-jobs" id="noJobs">No openings in this category right now. <a href="#internships" style="color:var(--purple);text-decoration:none">Check internships ↓</a></div>
+  </div>
+</section>
+<div class="divider"></div>
+
+<!-- ── INTERNSHIPS ── -->
+<section id="internships">
+  <div class="section-wrap">
+    <div class="section-label">// INTERNSHIP PROGRAMS</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:end;margin-bottom:0">
+      <h2 class="section-title">Start your<br/><em>career</em> here.</h2>
+      <p class="section-body">Our internship programs are structured, hands-on, and designed to produce professionals — not coffee runners. You'll work directly with senior team members on real client projects and internal product builds.</p>
+    </div>
+    <div class="intern-grid">
+
+      <div class="intern-card">
+        <span class="intern-badge">ENGINEERING</span>
+        <div class="intern-title">Junior Developer Internship</div>
+        <div class="intern-desc">Work alongside senior engineers on live web and SaaS projects. You'll write real code, get code reviews, and build deployable features from week two onwards.</div>
+        <div class="intern-detail">
+          <div class="intern-detail-item">DURATION <span>3–6 months</span></div>
+          <div class="intern-detail-item">STIPEND <span>Paid</span></div>
+          <div class="intern-detail-item">FORMAT <span>Remote</span></div>
+        </div>
+        <button class="intern-apply" onclick="openJob('i1')">
+          APPLY FOR THIS PROGRAM
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+
+      <div class="intern-card">
+        <span class="intern-badge">DESIGN</span>
+        <div class="intern-title">UI/UX & Brand Design Internship</div>
+        <div class="intern-desc">Join the creative team to design real client interfaces, brand identities, and marketing assets. Build a professional portfolio that speaks for itself when you leave.</div>
+        <div class="intern-detail">
+          <div class="intern-detail-item">DURATION <span>3–6 months</span></div>
+          <div class="intern-detail-item">STIPEND <span>Paid</span></div>
+          <div class="intern-detail-item">FORMAT <span>Remote</span></div>
+        </div>
+        <button class="intern-apply" onclick="openJob('i2')">
+          APPLY FOR THIS PROGRAM
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+
+      <div class="intern-card">
+        <span class="intern-badge">GROWTH & STRATEGY</span>
+        <div class="intern-title">Digital Marketing & Strategy Internship</div>
+        <div class="intern-desc">Learn growth strategy, content marketing, and digital campaign management by doing — not watching. Contribute directly to client acquisition and agency growth targets.</div>
+        <div class="intern-detail">
+          <div class="intern-detail-item">DURATION <span>3 months</span></div>
+          <div class="intern-detail-item">STIPEND <span>Performance-based</span></div>
+          <div class="intern-detail-item">FORMAT <span>Remote / Hybrid</span></div>
+        </div>
+        <button class="intern-apply" onclick="openJob('i3')">
+          APPLY FOR THIS PROGRAM
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+
+    </div>
+  </div>
+</section>
+<div class="divider"></div>
+
+<!-- ── PROCESS ── -->
+<section>
+  <div class="section-wrap">
+    <div class="section-label">// HOW WE HIRE</div>
+    <h2 class="section-title" style="margin-bottom:0">Simple.<br/><em>Fast. Fair.</em></h2>
+    <div class="process-track">
+      <div class="process-step">
+        <div class="step-num">STEP 01</div>
+        <div class="step-title">Apply</div>
+        <div class="step-body">Submit your CV, portfolio, or a note about why you want in. No cover letter essays required — just show us who you are and what you've built.</div>
+      </div>
+      <div class="process-step">
+        <div class="step-num">STEP 02</div>
+        <div class="step-title">Quick Screen</div>
+        <div class="step-body">A 20-minute async or live call with the team lead. We check for alignment on values and ways of working — not just technical keywords.</div>
+      </div>
+      <div class="process-step">
+        <div class="step-num">STEP 03</div>
+        <div class="step-title">Practical Task</div>
+        <div class="step-body">A short, real-world task relevant to the role. We time-box it deliberately — it should not take more than 2–3 hours. We pay for lengthy assessments.</div>
+      </div>
+      <div class="process-step">
+        <div class="step-num">STEP 04</div>
+        <div class="step-title">Decision</div>
+        <div class="step-body">We move fast. Within 5 business days of your final interview, you'll have a clear answer — and honest feedback either way.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CTA ── -->
+<div class="cta-wrap">
+  <div class="cta-card">
+    <div>
+      <div class="cta-eyebrow">// READY TO BUILD WITH US?</div>
+      <h2 class="cta-title">Don't see the right role?<br/>Send us your work anyway.</h2>
+      <p class="cta-desc">We review every speculative application. If your skills fit what we're building, we'll reach out — even if there's no open role right now. Great talent makes room for itself.</p>
+    </div>
+    <div class="cta-actions">
+      <a href="careers/jobpost.html" class="btn-white">
+        BROWSE ALL OPENINGS
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M7 2l5 5-5 5" stroke="var(--purple)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <a href="mailto:careers@scldigitalagency.com" class="btn-outline-white">
+        SEND OPEN APPLICATION
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-brand">SCL <span>DA</span> · CAPE TOWN, SOUTH AFRICA</div>
+  <div class="footer-copy">© 2026 SCL DIGITAL AGENCY (PTY) LTD · 2025/001641/07</div>
+</footer>
+
+<!-- ── JOB MODAL ── -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
+  <div class="modal" id="modal">
+    <button class="modal-close" onclick="closeModalBtn()">✕</button>
+    <div class="modal-dept" id="mDept"></div>
+    <h2 class="modal-title" id="mTitle"></h2>
+    <div class="modal-tags" id="mTags"></div>
+    <div class="modal-section-label">ABOUT THE ROLE</div>
+    <div class="modal-text" id="mAbout"></div>
+    <div class="modal-section-label">WHAT YOU'LL DO</div>
+    <ul class="modal-list" id="mDo"></ul>
+    <div class="modal-section-label">WHAT WE'RE LOOKING FOR</div>
+    <ul class="modal-list" id="mLooking"></ul>
+    <a href="careers/jobpost.html" class="modal-apply">
+      APPLY FOR THIS ROLE
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M7 2l5 5-5 5" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+  </div>
+</div>
+
+<script>
+  /* ── ROLE WORD CYCLER ── */
+  const roles = document.querySelectorAll('.role-word');
+  let current = 0;
+
+  function cycleRole() {
+    const prev = roles[current];
+    prev.classList.remove('active');
+    prev.classList.add('exit');
+    setTimeout(() => { prev.classList.remove('exit'); }, 400);
+
+    current = (current + 1) % roles.length;
+    const next = roles[current];
+    next.classList.add('active');
+  }
+
+  roles[0].classList.add('active');
+  setInterval(cycleRole, 2200);
+
+  /* ── JOB FILTER ── */
+  function filterJobs(btn, dept) {
+    document.querySelectorAll('.dept-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    let visible = 0;
+    document.querySelectorAll('.job-card').forEach(c => {
+      const show = dept === 'all' || c.dataset.dept === dept;
+      c.style.display = show ? 'grid' : 'none';
+      if (show) visible++;
+    });
+    document.getElementById('noJobs').style.display = visible === 0 ? 'block' : 'none';
+  }
+
+  /* ── JOB DATA ── */
+  const jobs = {
+    j1: {
+      dept: 'ENGINEERING', title: 'Full-Stack Engineer (Web & SaaS)',
+      tags: ['REMOTE','FULL-TIME','CAPE TOWN / GLOBAL'],
+      about: 'We are looking for a full-stack engineer to build and maintain production-grade web applications and internal SaaS products. You'll work end-to-end — from API architecture and database design to pixel-precise frontend delivery.',
+      does: ['Build and ship full-stack web applications and SaaS MVPs','Architect scalable APIs and database schemas','Collaborate closely with design on frontend implementation','Maintain CI/CD pipelines and cloud infrastructure on AWS/GCP','Contribute to internal proprietary product development'],
+      looking: ['3+ years experience in full-stack development','Proficiency in React or Next.js, Node.js, and PostgreSQL/MongoDB','Experience with cloud deployment (AWS, GCP, or similar)','Clean code discipline — you care about what you write and why','Ability to work autonomously and communicate clearly in async environments']
+    },
+    j2: {
+      dept: 'ENGINEERING', title: 'AI & Automation Engineer (LLM / RAG Pipelines)',
+      tags: ['REMOTE','FULL-TIME','AFRICA / GLOBAL'],
+      about: 'We need an AI engineer who builds, not demos. You will architect and deploy LLM-powered features, RAG pipelines, and intelligent workflow automations as core parts of client and internal products — not as bolt-ons.',
+      does: ['Design and deploy RAG pipelines and LLM-integrated product features','Build AI agents and intelligent automation workflows','Fine-tune and evaluate language models for specific business contexts','Integrate AI capabilities into existing web and SaaS products','Document architecture decisions and model performance benchmarks'],
+      looking: ['Hands-on experience with LLM APIs (OpenAI, Anthropic, or open-source models)','Working knowledge of vector databases (Pinecone, Weaviate, Chroma)','Experience building production-grade AI features, not just prototypes','Strong Python skills; familiarity with LangChain or LlamaIndex is a plus','Ability to communicate AI tradeoffs in plain business terms']
+    },
+    j3: {
+      dept: 'DESIGN', title: 'UI/UX Designer (Product & Brand Systems)',
+      tags: ['REMOTE','FULL-TIME','CAPE TOWN / KIGALI'],
+      about: 'We are looking for a designer who thinks in systems — someone who can go from wireframe to production-ready design language across product interfaces and brand identities. Zero fluff. Maximum signal.',
+      does: ['Design UI systems, wireframes, and interactive prototypes in Figma','Develop and maintain brand identity systems for clients','Conduct lightweight user research to validate design decisions','Collaborate with engineers on implementation fidelity','Contribute to SCL DA's own brand and product design language'],
+      looking: ['3+ years UI/UX design experience, ideally in a product or agency context','Strong portfolio showing systems thinking, not just individual screens','Proficiency in Figma (component libraries, auto layout, prototyping)','Understanding of frontend constraints (what can and cannot be built)','Opinionated design perspective — you can argue for your choices']
+    },
+    j4: {
+      dept: 'GROWTH', title: 'Digital Growth Strategist (CRO & Paid Media)',
+      tags: ['REMOTE','CONTRACT / RETAINER','GLOBAL'],
+      about: 'We need a growth strategist who runs data-driven experiments and ties every decision to revenue outcomes. You will own acquisition and retention strategies for SCL DA clients across multiple verticals.',
+      does: ['Design and run conversion rate optimization (CRO) experiments','Manage paid media campaigns on Google and Meta','Build and analyse performance analytics dashboards','Develop go-to-market strategies for new client product launches','Report on growth metrics with clear business context'],
+      looking: ['3+ years in digital growth, performance marketing, or CRO','Comfortable with Google Analytics 4, Meta Ads Manager, and A/B testing tools','Ability to move from strategy to execution without hand-holding','Strong data literacy — you can find signal in noise','Experience working with startup or SME clients is a strong advantage']
+    },
+    j5: {
+      dept: 'STRATEGY', title: 'Client & Operations Coordinator',
+      tags: ['HYBRID','FULL-TIME','CAPE TOWN'],
+      about: 'As the operational glue between clients and the delivery team, you will own project timelines, client communication, and quality assurance across all active engagements. This role is the difference between good work and work that lands well.',
+      does: ['Own project timelines, task tracking, and resource allocation','Manage client communication throughout the project lifecycle','Coordinate between designers, developers, and strategists','Conduct quality checks before delivery milestones','Support the founder on proposals, scoping, and documentation'],
+      looking: ['2+ years experience in project coordination or agency operations','Exceptional written and verbal communication skills','Calm under pressure — you organize chaos without becoming part of it','Familiarity with project management tools (Notion, Linear, Asana, or similar)','Genuine interest in digital products and how they're built']
+    },
+    j6: {
+      dept: 'DESIGN', title: 'Motion & Content Designer (Video / Social)',
+      tags: ['REMOTE','FREELANCE / CONTRACT','GLOBAL'],
+      about: 'We need a motion designer and content creator to produce scroll-stopping assets for social media, brand campaigns, and product launches. You think in frames and sequences, not static moments.',
+      does: ['Create motion design assets for social media and brand campaigns','Edit and produce short-form video content for client marketing','Design social media visual content that aligns with brand systems','Collaborate on visual direction for product launch materials','Maintain brand consistency across all multimedia touchpoints'],
+      looking: ['Strong portfolio of motion design and short-form video work','Proficiency in After Effects and Premiere Pro (or equivalent)','Understanding of social media platform requirements and formats','Ability to work within established brand systems','Fast turnaround discipline — content moves quickly and so must you']
+    },
+    i1: {
+      dept: 'INTERNSHIP — ENGINEERING', title: 'Junior Developer Internship',
+      tags: ['REMOTE','3–6 MONTHS','PAID STIPEND'],
+      about: 'A structured internship for developers at the start of their careers. You will be paired with a senior engineer and contribute directly to live client projects and internal SaaS builds from week two.',
+      does: ['Write and ship real code on live projects (no toy exercises)','Participate in code reviews and daily async standups','Build at least one deployable feature by end of month one','Document your learning and contribute to team knowledge bases','Learn production deployment workflows hands-on'],
+      looking: ['Currently studying or recently graduated in Computer Science, Software Engineering, or self-taught equivalent','Working knowledge of HTML, CSS, JavaScript (React is a bonus)','Eagerness to receive direct feedback and implement it fast','Basic version control understanding (Git)','Strong written communication in English']
+    },
+    i2: {
+      dept: 'INTERNSHIP — DESIGN', title: 'UI/UX & Brand Design Internship',
+      tags: ['REMOTE','3–6 MONTHS','PAID STIPEND'],
+      about: 'A hands-on design internship where you will work alongside SCL DA's creative director on real client briefs — brand identities, UI screens, and campaign assets that ship into the world, not a drawer.',
+      does: ['Contribute to real client brand and UI design projects','Build and maintain design components in Figma','Assist with user research, wireframing, and prototype iterations','Create social media and marketing visual content','Receive structured weekly feedback from the creative director'],
+      looking: ['Currently studying or recently graduated in Design, Visual Communication, or equivalent','A portfolio showing real design thinking (even personal projects count)','Proficiency or strong working knowledge of Figma','Curiosity about both aesthetics and usability','Ability to take direction, ask questions, and iterate quickly']
+    },
+    i3: {
+      dept: 'INTERNSHIP — GROWTH & STRATEGY', title: 'Digital Marketing & Strategy Internship',
+      tags: ['REMOTE / HYBRID','3 MONTHS','PERFORMANCE-BASED'],
+      about: 'A growth-focused internship for someone who wants to understand how digital agencies win clients and grow brands. You will contribute to real marketing campaigns and client acquisition efforts.',
+      does: ['Assist with social media content planning and scheduling','Research and qualify outbound leads for the sales pipeline','Support campaign reporting and analytics work','Draft client-facing communications and proposals under guidance','Contribute ideas to SCL DA\'s own brand and content strategy'],
+      looking: ['Studying or recently graduated in Marketing, Business, Communications, or equivalent','Strong written communication skills in English','Genuine curiosity about digital marketing and brand strategy','Self-starter who can work independently with clear direction','Familiarity with social media platforms and basic analytics (Google Analytics, Meta Insights)']
+    }
+  };
+
+  function openJob(id) {
+    const j = jobs[id];
+    if (!j) return;
+    document.getElementById('mDept').textContent = j.dept;
+    document.getElementById('mTitle').textContent = j.title;
+    document.getElementById('mTags').innerHTML = j.tags.map(t =>
+      `<span class="job-tag ${t==='REMOTE'?'remote':''}">${t}</span>`).join('');
+    document.getElementById('mAbout').textContent = j.about;
+    document.getElementById('mDo').innerHTML = j.does.map(d => `<li>${d}</li>`).join('');
+    document.getElementById('mLooking').innerHTML = j.looking.map(l => `<li>${l}</li>`).join('');
+    document.getElementById('modalOverlay').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeModal(e) {
+    if (e.target === document.getElementById('modalOverlay')) closeModalBtn();
+  }
+  function closeModalBtn() {
+    document.getElementById('modalOverlay').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModalBtn(); });
+
+  /* ── ACTIVE JUMP LINK on scroll ── */
+  const sections = ['openings','why','culture','internships'];
+  const jumpLinks = document.querySelectorAll('.jump-link');
+  window.addEventListener('scroll', () => {
+    let active = '';
+    sections.forEach(id => {
+      const el = document.getElementById(id);
+      if (el && el.getBoundingClientRect().top <= 160) active = id;
+    });
+    jumpLinks.forEach(l => {
+      l.classList.toggle('active', l.getAttribute('href') === '#' + active);
+    });
+  });
+</script>
+</body>
+</html>
