@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Latest Updates — SCL Digital Agency</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #0b0b0e;
+      --surface:   #111116;
+      --border:    #1e1e28;
+      --purple:    #7c3aed;
+      --purple-hi: #9d5cf6;
+      --purple-lo: #7c3aed18;
+      --text:      #e8e8f0;
+      --muted:     #6b6b80;
+      --white:     #ffffff;
+      --tag-bg:    #1a1a24;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 48px;
+      height: 64px;
+      background: rgba(11,11,14,0.85);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      letter-spacing: 0.12em;
+      color: var(--white);
+    }
+    .nav-logo span { color: var(--purple-hi); }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.875rem;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--white); }
+
+    .nav-cta {
+      background: var(--purple);
+      color: var(--white);
+      border: none;
+      padding: 8px 20px;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      cursor: pointer;
+      transition: background 0.2s;
+      text-decoration: none;
+    }
+    .nav-cta:hover { background: var(--purple-hi); }
+
+    /* ── HERO SECTION ── */
+    .hero {
+      padding: 148px 48px 80px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--purple-lo);
+      border: 1px solid var(--purple);
+      border-radius: 100px;
+      padding: 5px 14px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      color: var(--purple-hi);
+      text-transform: uppercase;
+      margin-bottom: 28px;
+    }
+    .hero-eyebrow .dot {
+      width: 6px; height: 6px;
+      background: var(--purple-hi);
+      border-radius: 50%;
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.7); }
+    }
+
+    .hero h1 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(2.4rem, 5vw, 4rem);
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      color: var(--white);
+      max-width: 640px;
+      margin-bottom: 20px;
+    }
+    .hero h1 em {
+      font-style: normal;
+      color: var(--purple-hi);
+    }
+
+    .hero p {
+      color: var(--muted);
+      font-size: 1.05rem;
+      line-height: 1.7;
+      max-width: 520px;
+      margin-bottom: 40px;
+    }
+
+    /* ── FILTER BAR ── */
+    .filter-bar {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 56px;
+    }
+
+    .filter-btn {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      padding: 7px 18px;
+      border-radius: 100px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-family: 'Inter', sans-serif;
+    }
+    .filter-btn:hover { border-color: var(--purple); color: var(--white); }
+    .filter-btn.active {
+      background: var(--purple);
+      border-color: var(--purple);
+      color: var(--white);
+    }
+
+    /* ── FEATURED CARD (LARGE) ── */
+    .featured-grid {
+      max-width: 1200px;
+      margin: 0 auto 64px;
+      padding: 0 48px;
+    }
+
+    .featured-card {
+      position: relative;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 56px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: center;
+      overflow: hidden;
+      cursor: pointer;
+      transition: border-color 0.3s;
+    }
+    .featured-card:hover { border-color: var(--purple); }
+
+    .featured-card::before {
+      content: '';
+      position: absolute;
+      top: -80px; right: -80px;
+      width: 360px; height: 360px;
+      background: radial-gradient(circle, #7c3aed22 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .feat-tag {
+      display: inline-block;
+      background: var(--purple-lo);
+      border: 1px solid var(--purple);
+      color: var(--purple-hi);
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border-radius: 4px;
+      margin-bottom: 20px;
+    }
+
+    .featured-card h2 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.9rem;
+      font-weight: 700;
+      line-height: 1.2;
+      color: var(--white);
+      margin-bottom: 16px;
+      letter-spacing: -0.015em;
+    }
+
+    .featured-card .desc {
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.7;
+      margin-bottom: 28px;
+    }
+
+    .feat-meta {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+    .feat-meta .author {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .feat-meta .avatar {
+      width: 28px; height: 28px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--purple), #c084fc);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.65rem;
+      font-weight: 700;
+      color: white;
+    }
+    .feat-meta .sep { color: var(--border); }
+
+    .read-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--purple);
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-size: 0.875rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.2s;
+      font-family: 'Inter', sans-serif;
+      text-decoration: none;
+    }
+    .read-btn:hover { background: var(--purple-hi); transform: translateY(-1px); }
+    .read-btn svg { transition: transform 0.2s; }
+    .read-btn:hover svg { transform: translateX(3px); }
+
+    .feat-visual {
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f0e17 100%);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      height: 280px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .feat-visual-inner {
+      text-align: center;
+    }
+    .feat-visual-icon {
+      font-size: 3.5rem;
+      margin-bottom: 12px;
+    }
+    .feat-visual-label {
+      font-size: 0.75rem;
+      color: var(--muted);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .feat-visual::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 80px;
+      background: linear-gradient(to top, #1a1a2e40, transparent);
+    }
+
+    /* ── NEWS GRID ── */
+    .section-header {
+      max-width: 1200px;
+      margin: 0 auto 32px;
+      padding: 0 48px;
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+    }
+    .section-header h3 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--white);
+    }
+    .see-all {
+      color: var(--purple-hi);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      transition: gap 0.2s;
+    }
+    .see-all:hover { gap: 8px; }
+
+    .news-grid {
+      max-width: 1200px;
+      margin: 0 auto 80px;
+      padding: 0 48px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .news-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 28px;
+      cursor: pointer;
+      transition: border-color 0.25s, transform 0.25s;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      text-decoration: none;
+      color: inherit;
+    }
+    .news-card:hover {
+      border-color: var(--purple);
+      transform: translateY(-3px);
+    }
+
+    .card-tag {
+      display: inline-block;
+      background: var(--tag-bg);
+      color: var(--purple-hi);
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      border-radius: 3px;
+      align-self: flex-start;
+    }
+    .card-tag.green { color: #34d399; background: #34d39912; }
+    .card-tag.amber { color: #fbbf24; background: #fbbf2412; }
+    .card-tag.blue  { color: #60a5fa; background: #60a5fa12; }
+
+    .news-card h4 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 600;
+      line-height: 1.35;
+      color: var(--white);
+    }
+    .news-card p {
+      color: var(--muted);
+      font-size: 0.875rem;
+      line-height: 1.65;
+      flex: 1;
+    }
+
+    .card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 16px;
+      border-top: 1px solid var(--border);
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+    .card-footer .date { color: var(--muted); }
+    .card-arrow {
+      width: 28px; height: 28px;
+      background: var(--tag-bg);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+    }
+    .news-card:hover .card-arrow { background: var(--purple); }
+
+    /* ── TICKER ── */
+    .ticker-wrap {
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      background: var(--surface);
+      overflow: hidden;
+      padding: 14px 0;
+      margin-bottom: 80px;
+    }
+    .ticker-track {
+      display: flex;
+      gap: 64px;
+      width: max-content;
+      animation: ticker 28s linear infinite;
+    }
+    .ticker-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      white-space: nowrap;
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--muted);
+    }
+    .ticker-item .bullet {
+      width: 4px; height: 4px;
+      border-radius: 50%;
+      background: var(--purple);
+    }
+    @keyframes ticker {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+    /* ── NEWSLETTER ── */
+    .newsletter {
+      max-width: 1200px;
+      margin: 0 auto 80px;
+      padding: 0 48px;
+    }
+    .newsletter-inner {
+      background: linear-gradient(135deg, #1a0a3d 0%, #0d0d1a 100%);
+      border: 1px solid var(--purple);
+      border-radius: 16px;
+      padding: 56px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .newsletter-inner::before {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 600px; height: 300px;
+      background: radial-gradient(ellipse, #7c3aed28 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .newsletter-inner h3 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 12px;
+    }
+    .newsletter-inner p {
+      color: var(--muted);
+      font-size: 0.95rem;
+      margin-bottom: 32px;
+    }
+    .newsletter-form {
+      display: flex;
+      gap: 12px;
+      max-width: 440px;
+      margin: 0 auto;
+    }
+    .newsletter-form input {
+      flex: 1;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 12px 18px;
+      color: var(--white);
+      font-size: 0.875rem;
+      font-family: 'Inter', sans-serif;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .newsletter-form input:focus { border-color: var(--purple); }
+    .newsletter-form input::placeholder { color: var(--muted); }
+    .newsletter-form button {
+      background: var(--purple);
+      color: white;
+      border: none;
+      padding: 12px 22px;
+      border-radius: 8px;
+      font-size: 0.875rem;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
+      white-space: nowrap;
+      transition: background 0.2s;
+    }
+    .newsletter-form button:hover { background: var(--purple-hi); }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 32px 48px;
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+    footer a { color: var(--muted); text-decoration: none; transition: color 0.2s; }
+    footer a:hover { color: var(--white); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      nav { padding: 0 24px; }
+      .nav-links { display: none; }
+      .hero, .featured-grid, .news-grid, .section-header, .newsletter, footer {
+        padding-left: 24px;
+        padding-right: 24px;
+      }
+      .featured-card {
+        grid-template-columns: 1fr;
+        padding: 32px;
+      }
+      .feat-visual { height: 200px; }
+      .news-grid { grid-template-columns: 1fr; }
+      .newsletter-form { flex-direction: column; }
+      footer { flex-direction: column; gap: 12px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-logo">SCL<span> DA</span></div>
+    <ul class="nav-links">
+      <li><a href="#">Services</a></li>
+      <li><a href="#" class="active">News</a></li>
+      <li><a href="#">Work</a></li>
+      <li><a href="#">About</a></li>
+    </ul>
+    <a href="#" class="nav-cta">Get in Touch</a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-eyebrow">
+      <span class="dot"></span>
+      Live Updates
+    </div>
+    <h1>Latest from <em>SCL Digital Agency</em></h1>
+    <p>Stay informed about our newest milestones, strategic expansions, partnerships, and announcements from our offices in Cape Town and Kigali.</p>
+
+    <!-- FILTERS -->
+    <div class="filter-bar">
+      <button class="filter-btn active" onclick="filterCards('all', this)">All Updates</button>
+      <button class="filter-btn" onclick="filterCards('expansion', this)">Expansion</button>
+      <button class="filter-btn" onclick="filterCards('award', this)">Awards</button>
+      <button class="filter-btn" onclick="filterCards('partnership', this)">Partnerships</button>
+      <button class="filter-btn" onclick="filterCards('vision', this)">Vision</button>
+    </div>
+  </section>
+
+  <!-- FEATURED -->
+  <section class="featured-grid">
+    <div class="featured-card" data-category="expansion">
+      <div>
+        <span class="feat-tag">Featured · Expansion</span>
+        <h2>SCL Expands Into New Markets Across the African Continent</h2>
+        <p class="desc">Following strong demand from East and West African clients, SCL Digital Agency is extending its footprint beyond South Africa and Rwanda — opening direct service pipelines into Nigeria, Kenya, and Ghana.</p>
+        <div class="feat-meta" style="margin-bottom: 28px;">
+          <div class="author">
+            <div class="avatar">SL</div>
+            <span>Shinsa Lyonga Lomboto</span>
+          </div>
+          <span class="sep">·</span>
+          <span>June 2026</span>
+          <span class="sep">·</span>
+          <span>4 min read</span>
+        </div>
+        <a href="#" class="read-btn">
+          Read Full Story
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M7 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+      <div class="feat-visual">
+        <div class="feat-visual-inner">
+          <div class="feat-visual-icon">🌍</div>
+          <div class="feat-visual-label">African Expansion · 2026</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TICKER -->
+  <div class="ticker-wrap">
+    <div class="ticker-track">
+      <div class="ticker-item"><span class="bullet"></span> Annual Innovation Award 2025 — Winner</div>
+      <div class="ticker-item"><span class="bullet"></span> New Strategic Partnerships Signed · Q2 2026</div>
+      <div class="ticker-item"><span class="bullet"></span> CEO Vision Update — June 2026</div>
+      <div class="ticker-item"><span class="bullet"></span> Market Expansion: Nigeria · Kenya · Ghana</div>
+      <div class="ticker-item"><span class="bullet"></span> SCL Digital Agency — Cape Town · Kigali</div>
+      <div class="ticker-item"><span class="bullet"></span> Annual Innovation Award 2025 — Winner</div>
+      <div class="ticker-item"><span class="bullet"></span> New Strategic Partnerships Signed · Q2 2026</div>
+      <div class="ticker-item"><span class="bullet"></span> CEO Vision Update — June 2026</div>
+      <div class="ticker-item"><span class="bullet"></span> Market Expansion: Nigeria · Kenya · Ghana</div>
+      <div class="ticker-item"><span class="bullet"></span> SCL Digital Agency — Cape Town · Kigali</div>
+    </div>
+  </div>
+
+  <!-- NEWS GRID -->
+  <div class="section-header">
+    <h3>Recent Headlines</h3>
+    <a href="blog.html" class="see-all">
+      All News 
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M7 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+  </div>
+
+  <div class="news-grid">
+
+    <!-- Card 1 -->
+    <a href="#" class="news-card" data-category="expansion">
+      <span class="card-tag green">Expansion</span>
+      <h4>Expansion Into New Markets</h4>
+      <p>SCL Digital Agency is formally extending service operations into Nigeria, Kenya, and Ghana — positioning the agency as a pan-African digital solutions provider.</p>
+      <div class="card-footer">
+        <span class="date">June 10, 2026</span>
+        <div class="card-arrow">
+          <svg width="12" height="12" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M7 2l5 5-5 5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+      </div>
+    </a>
+
+    <!-- Card 2 -->
+    <a href="#" class="news-card" data-category="award">
+      <span class="card-tag amber">Award</span>
+      <h4>Annual Innovation Award 2025</h4>
+      <p>SCL Digital Agency was recognised at the 2025 African Digital Innovation Summit for outstanding technical excellence and transformative product delivery.</p>
+      <div class="card-footer">
+        <span class="date">December 18, 2025</span>
+        <div class="card-arrow">
+          <svg width="12" height="12" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M7 2l5 5-5 5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+      </div>
+    </a>
+
+    <!-- Card 3 -->
+    <a href="#" class="news-card" data-category="partnership">
+      <span class="card-tag blue">Partnership</span>
+      <h4>New Strategic Partnerships</h4>
+      <p>We've signed multi-year partnership agreements with two regional cloud infrastructure providers and a pan-African venture studio to accelerate client delivery.</p>
+      <div class="card-footer">
+        <span class="date">May 22, 2026</span>
+        <div class="card-arrow">
+          <svg width="12" height="12" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M7 2l5 5-5 5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+      </div>
+    </a>
+
+    <!-- Card 4 -->
+    <a href="#" class="news-card" data-category="vision">
+      <span class="card-tag">Vision</span>
+      <h4>CEO's Monthly Vision Update</h4>
+      <p>Founder Shinsa Lyonga Lomboto shares her monthly perspective on where SCL is heading — covering product roadmap decisions, team growth, and market strategy for H2 2026.</p>
+      <div class="card-footer">
+        <span class="date">June 1, 2026</span>
+        <div class="card-arrow">
+          <svg width="12" height="12" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M7 2l5 5-5 5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+      </div>
+    </a>
+
+    <!-- Card 5 -->
+    <a href="#" class="news-card" data-category="expansion">
+      <span class="card-tag green">Expansion</span>
+      <h4>Rwanda Hub Hits Full Operational Capacity</h4>
+      <p>Our Kigali office under the Rwanda Development Board framework is now fully staffed and processing international transactions through an optimised multi-currency banking setup.</p>
+      <div class="card-footer">
+        <span class="date">April 14, 2026</span>
+        <div class="card-arrow">
+          <svg width="12" height="12" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M7 2l5 5-5 5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+      </div>
+    </a>
+
+    <!-- Card 6 -->
+    <a href="#" class="news-card" data-category="partnership">
+      <span class="card-tag blue">Partnership</span>
+      <h4>Joining the African Tech Founders Network</h4>
+      <p>SCL Digital Agency officially joins ATFN, unlocking access to a curated network of 400+ African startup founders and enabling direct co-development and referral pipelines.</p>
+      <div class="card-footer">
+        <span class="date">March 30, 2026</span>
+        <div class="card-arrow">
+          <svg width="12" height="12" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M7 2l5 5-5 5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+      </div>
+    </a>
+
+  </div>
+
+  <!-- NEWSLETTER -->
+  <div class="newsletter">
+    <div class="newsletter-inner">
+      <h3>Stay in the loop</h3>
+      <p>Get SCL updates delivered directly to your inbox — no noise, only signal.</p>
+      <div class="newsletter-form">
+        <input type="email" placeholder="your@email.com" />
+        <button type="button">Subscribe</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div>© 2026 SCL Digital Agency (Pty) Ltd · Cape Town, South Africa</div>
+    <div style="display:flex;gap:24px;">
+      <a href="#">Privacy</a>
+      <a href="#">Terms</a>
+      <a href="#">Contact</a>
+    </div>
+  </footer>
+
+  <script>
+    function filterCards(category, btn) {
+      // Update active button
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      // Filter cards
+      const cards = document.querySelectorAll('.news-card, .featured-card');
+      cards.forEach(card => {
+        if (category === 'all' || card.dataset.category === category) {
+          card.style.display = '';
+          card.style.animation = 'fadeIn 0.3s ease';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    // Newsletter form
+    document.querySelector('.newsletter-form button').addEventListener('click', function() {
+      const input = document.querySelector('.newsletter-form input');
+      if (input.value && input.value.includes('@')) {
+        this.textContent = '✓ Subscribed';
+        this.style.background = '#059669';
+        input.value = '';
+        input.disabled = true;
+        this.disabled = true;
+      } else {
+        input.style.borderColor = '#ef4444';
+        setTimeout(() => input.style.borderColor = '', 1200);
+      }
+    });
+  </script>
+</body>
+</html>
