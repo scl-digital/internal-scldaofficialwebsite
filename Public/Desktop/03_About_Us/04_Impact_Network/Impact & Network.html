@@ -1343,6 +1343,44 @@
     });
   }, { threshold: 0.4 });
   statEls.forEach(el => statObserver.observe(el));
+
+	// Navbar Scripts
+	function toggleSidebar() {
+		const hamburger = document.querySelector('.navbar-hamburger');
+		hamburger.classList.toggle('active');
+		// Additional sidebar toggle logic here if needed
+	}
+
+	// Update navbar on scroll
+	let lastScrollTop = 0;
+	const navbar = document.querySelector('.modern-navbar');
+
+	window.addEventListener('scroll', function () {
+		let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+		// Add shadow on scroll
+		if (scrollTop > 0) {
+			navbar.classList.add('scrolled');
+		} else {
+			navbar.classList.remove('scrolled');
+		}
+
+		lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+	});
+
+	// Set active nav link based on current page
+	document.addEventListener('DOMContentLoaded', function () {
+		const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+		const navLinks = document.querySelectorAll('.nav-link');
+
+		navLinks.forEach(link => {
+			const href = link.getAttribute('href');
+			if (href === currentPage || (currentPage === '' && href === 'index.html')) {
+				link.classList.add('active');
+			}
+		});
+	});
 </script>
+<script src="../../00_Home/01_Assets/js/mega-menu.js"></script>
 </body>
 </html>
