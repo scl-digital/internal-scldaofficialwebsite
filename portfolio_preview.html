@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>MacBook Website Preview</title>
+<style>
+  :root{
+    --bezel:#1d1d1f;
+    --bezel-edge:#3a3a3c;
+    --notch:#0b0b0c;
+    --hinge:#cfd1d4;
+    --base:#e3e4e6;
+    --base-shadow:#b9bbbe;
+    --page-bg:#f4f1ea;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:var(--page-bg);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    padding:40px 20px;
+  }
+
+  .laptop{
+    width:min(900px,92vw);
+  }
+
+  /* SCREEN */
+  .screen{
+    background:var(--bezel);
+    border-radius:22px 22px 10px 10px;
+    padding:14px 14px 18px;
+    box-shadow:
+      0 30px 60px -20px rgba(0,0,0,.45),
+      inset 0 0 0 2px var(--bezel-edge);
+    position:relative;
+  }
+
+  .notch{
+    position:absolute;
+    top:14px;
+    left:50%;
+    transform:translateX(-50%);
+    width:120px;
+    height:14px;
+    background:var(--notch);
+    border-radius:0 0 10px 10px;
+    z-index:2;
+  }
+
+  .viewport{
+    background:#fff;
+    border-radius:8px;
+    overflow:hidden;
+    aspect-ratio:16/10;
+    position:relative;
+  }
+
+  .viewport iframe{
+    width:100%;
+    height:100%;
+    border:0;
+    display:block;
+  }
+
+  /* BASE / KEYBOARD DECK */
+  .base{
+    height:18px;
+    background:linear-gradient(var(--hinge),var(--base));
+    border-radius:0 0 6px 6px;
+    position:relative;
+  }
+  .base::after{
+    content:"";
+    position:absolute;
+    left:50%;
+    bottom:4px;
+    transform:translateX(-50%);
+    width:90px;
+    height:6px;
+    background:var(--base-shadow);
+    border-radius:4px;
+  }
+  .deck{
+    height:14px;
+    background:linear-gradient(var(--base),#cfd0d2);
+    border-radius:0 0 16px 16px;
+    box-shadow:0 18px 30px -10px rgba(0,0,0,.35);
+  }
+
+  figcaption{
+    text-align:center;
+    margin-top:22px;
+    color:#6b6b6b;
+    font-size:14px;
+    letter-spacing:.02em;
+  }
+</style>
+</head>
+<body>
+
+<figure class="laptop">
+  <div class="screen">
+    <div class="notch"></div>
+    <div class="viewport">
+      <iframe src="https://www.softwarecreativelabs.com" loading="lazy" referrerpolicy="no-referrer"></iframe>
+    </div>
+  </div>
+  <div class="base"></div>
+  <div class="deck"></div>
+  <figcaption>softwarecreativelabs.com, previewed inside a MacBook frame</figcaption>
+</figure>
+
+</body>
+</html>
