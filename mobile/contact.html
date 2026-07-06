@@ -16,7 +16,7 @@
     .contact-card{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:14px;padding:20px;margin-bottom:24px;backdrop-filter:blur(12px)}
     .contact-info{display:grid;gap:16px}
     .contact-item{display:flex;align-items:flex-start;gap:14px}
-    .contact-icon{width:44px;height:44px;border-radius:14px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:18px;flex-shrink:0}
+    .contact-icon{width:44px;height:44px;border-radius:90px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:18px;flex-shrink:0}
     .contact-item strong{display:block;font-size:15px;font-weight:700;color:#fff;margin-bottom:4px}
     .contact-item span,
     .contact-item a{font-size:13px;color:var(--text-muted);line-height:1.5;word-break:break-word}
@@ -25,13 +25,20 @@
     .form-group{margin-bottom:16px}
     .form-group label{display:block;font-size:13px;font-weight:700;color:#fff;margin-bottom:10px}
     .form-group input,
-    .form-group textarea{width:100%;padding:14px 16px;border-radius:12px;border:1px solid rgba(255,255,255,0.12);background:rgba(15,23,42,.92);color:#fff;font-size:14px}
+    .form-group textarea,
+    .form-group select{width:100%;padding:14px 16px;border-radius:12px;border:1px solid rgba(255,255,255,0.12);background:rgba(15,23,42,.92);color:#fff;font-size:14px;font-family:inherit}
     .form-group input::placeholder,
     .form-group textarea::placeholder{color:rgba(255,255,255,0.55)}
     .form-group textarea{min-height:120px;resize:vertical}
     .contact-submit{margin-top:4px}
     .contact-note{font-size:13px;color:var(--text-muted);margin-top:12px}
     .btn-secondary{background:rgba(255,255,255,.06);color:#fff;border:1px solid rgba(255,255,255,.12)}
+    
+    .service-pills{display:grid;grid-template-columns:1fr;gap:10px;margin-bottom:16px}
+    .service-pill{padding:12px 16px;border:1.5px solid rgba(255,255,255,0.12);border-radius:10px;background:rgba(15,23,42,.92);color:#fff;cursor:pointer;text-align:left;font-size:13px;font-weight:500;transition:all 0.2s;white-space:normal;line-height:1.4}
+    .service-pill:active,
+    .service-pill.selected{border-color:#fff;background:rgba(255,255,255,0.1)}
+    .service-pill input{display:none}
   </style>
 </head>
 <body>
@@ -49,16 +56,16 @@
     <section class="section animate-in delay-2 contact-card">
       <div class="contact-info">
         <div class="contact-item">
-          <div class="contact-icon" style="background: linear-gradient(135deg, #3b82f6, #1d4ed8)"><i class="fa-solid fa-envelope"></i></div>
+          <div class="contact-icon" style="background: #000000"><i class="fa-solid fa-envelope"></i></div>
           <div><strong>Email</strong><a href="mailto:Contact@softwarecreativelabs.com">Contact@softwarecreativelabs.com</a></div>
         </div>
         <div class="contact-item">
-          <div class="contact-icon" style="background: linear-gradient(135deg, #10b981, #059669)"><i class="fa-solid fa-phone"></i></div>
+          <div class="contact-icon" style="background: #000000"><i class="fa-solid fa-phone"></i></div>
           <div><strong>Phone</strong><a href="tel:+27740194690">+27 74 019 4690</a></div>
         </div>
         <div class="contact-item">
-          <div class="contact-icon" style="background: linear-gradient(135deg, #f472b6, #db2777)"><i class="fa-solid fa-map-marker-alt"></i></div>
-          <div><strong>Office</strong><span>Cape Town, South Africa</span></div>
+          <div class="contact-icon" style="background: #000000"><i class="fa-solid fa-map-marker-alt"></i></div>
+          <div><strong>Office</strong><span>Milnerton Mall, Cape Town, South Africa</span></div>
         </div>
       </div>
     </section>
@@ -69,20 +76,64 @@
       </div>
       <form action="mailto:Contact@softwarecreativelabs.com" method="post" enctype="text/plain">
         <div class="form-group">
-          <label for="name">Name</label>
-          <input id="name" type="text" name="name" placeholder="Your name" required>
+          <label for="name">Full Name</label>
+          <input id="name" type="text" name="name" placeholder="Your full name" required>
         </div>
         <div class="form-group">
-          <label for="email">Email</label>
+          <label for="company">Company / Project</label>
+          <input id="company" type="text" name="company" placeholder="Your company or project name" required>
+        </div>
+        <div class="form-group">
+          <label for="email">Work Email</label>
           <input id="email" type="email" name="email" placeholder="you@example.com" required>
         </div>
+
         <div class="form-group">
-          <label for="message">Message</label>
-          <textarea id="message" name="message" placeholder="Tell us about your project" required></textarea>
+          <label>How can we help scale your vision?</label>
+          <div class="service-pills">
+            <label class="service-pill">
+              <input type="checkbox" name="services" value="Custom Software Engineering / Web Apps / APIs">
+              Custom Software Engineering / Web Apps / APIs
+            </label>
+            <label class="service-pill">
+              <input type="checkbox" name="services" value="Product Design (UI/UX Systems & Prototyping)">
+              Product Design (UI/UX Systems & Prototyping)
+            </label>
+            <label class="service-pill">
+              <input type="checkbox" name="services" value="AI Integration & Automation (LLMs, RAG Pipelines)">
+              AI Integration & Automation (LLMs, RAG Pipelines)
+            </label>
+            <label class="service-pill">
+              <input type="checkbox" name="services" value="Digital Growth & Conversion Optimization (CRO, Analytics)">
+              Digital Growth & Conversion Optimization (CRO, Analytics)
+            </label>
+            <label class="service-pill">
+              <input type="checkbox" name="services" value="Cloud Architecture & DevOps (AWS/GCP, CI/CD)">
+              Cloud Architecture & DevOps (AWS/GCP, CI/CD)
+            </label>
+            <label class="service-pill">
+              <input type="checkbox" name="services" value="Digital Strategy & Tech Advisory (GTM, Roadmaps)">
+              Digital Strategy & Tech Advisory (GTM, Roadmaps)
+            </label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="budget">Estimated Project Budget</label>
+          <select id="budget" name="budget">
+            <option value="">Select a budget range...</option>
+            <option value="5k-10k">R5,000 – R10,000 (Small / Bootstrapped Project)</option>
+            <option value="10k-50k">R10,000 – R50,000 (Medium MVP / Core Architecture)</option>
+            <option value="50k-250k">R50,000 – R250,000+ (Enterprise / Deep Tech Integration)</option>
+            <option value="retainer">Looking for a monthly retainer partnership</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="message">Project Details</label>
+          <textarea id="message" name="message" placeholder="Tell us about your project, goals, or what you need help with" required></textarea>
         </div>
         <button type="submit" class="btn-primary contact-submit">Send Message</button>
-        <div class="contact-note">If email isn't available, use the project form below.</div>
-        <a href="sclda-application-form.html" class="btn-secondary" style="display:block;padding:14px 16px;margin-top:12px;border-radius:12px;text-align:center;font-weight:700;text-decoration:none">Start a Project</a>
       </form>
     </section>
   </div>
@@ -105,5 +156,16 @@
       <span>Events</span>
     </a>
   </nav>
+
+  <script>
+    // Pill button selection styling
+    document.querySelectorAll('.service-pill').forEach(pill => {
+      pill.addEventListener('click', function(e) {
+        e.preventDefault();
+        this.classList.toggle('selected');
+        this.querySelector('input').checked = !this.querySelector('input').checked;
+      });
+    });
+  </script>
 </body>
 </html>
