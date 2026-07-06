@@ -1738,10 +1738,13 @@ results that add real value to your business. Let's turn your vision into impact
 
   /* Dual engine cards */
   .dual-grid {
+	border-top-left-radius: 90px;
+	border-bottom-right-radius: 90px;
+	
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 2px;
-    background: var(--border);
+    gap: 10px;
+    
   }
 
 
@@ -2247,6 +2250,8 @@ results that add real value to your business. Let's turn your vision into impact
     transition: opacity 0.75s ease, transform 0.75s ease;
   }
   .reveal.visible {
+	border-top-left-radius: 90px;
+	border-bottom-right-radius: 90px;
     opacity: 1;
     transform: translateY(0);
   }
