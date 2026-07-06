@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SCL Digital Agency — Email Signature</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy:    #0A1628;
+  --navy2:   #0F2044;
+  --blue:    #4B2A75;
+  --blue-lt: #3B82F6;
+  --accent:  #60A5FA;
+  --white:   #FFFFFF;
+  --text:    #0A1628;
+  --muted:   #6B7280;
+  --light:   #F3F6FB;
+  --border:  #E2E8F4;
+  --font:    'Manrope', Helvetica, Arial, sans-serif;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+/* ── PAGE WRAPPER (preview only) ───────────────────────────── */
+body {
+  background: #EEF1F8;
+  font-family: var(--font);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 48px 20px 60px;
+  gap: 20px;
+}
+
+.preview-badge {
+  font-family: var(--font);
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #94A3B8;
+  background: #DDE3F0;
+  padding: 5px 14px;
+  border-radius: 20px;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   SIGNATURE SHELL  (copy .sig into Gmail / Outlook)
+───────────────────────────────────────────────────────────── */
+.sig {
+  width: 620px;
+  background: #ffffff;
+  font-family: var(--font);
+  border-radius: 3px;
+  overflow: hidden;
+  box-shadow: 0 8px 40px rgba(10,22,40,0.13);
+  border: 1px solid var(--border);
+}
+
+/* ── TOP ACCENT BAR ───────────────────────────────────────── */
+.sig-topbar {
+  height: 4px;
+    background: linear-gradient(110deg, var(--navy) 0%, #66318F 40%, #1C1550 70%, #1C1550 100%);
+}
+
+/* ── BANNER ───────────────────────────────────────────────── */
+.sig-banner {
+  width: 100%;
+  height: 110px;
+  background: linear-gradient(110deg, var(--navy) 0%, #66318F 40%, #1C1550 70%, #1C1550 100%);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 28px;
+}
+
+/* geometric shapes */
+.sig-banner::before {
+  content: '';
+  position: absolute;
+  right: -40px; top: -40px;
+  width: 180px; height: 180px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(59,130,246,0.25) 0%, transparent 70%);
+}
+.sig-banner::after {
+  content: '';
+  position: absolute;
+  left: 38%; bottom: -30px;
+  width: 120px; height: 120px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(96,165,250,0.12) 0%, transparent 70%);
+}
+.sig-banner-line {
+  position: absolute;
+  left: 0; right: 0;
+  bottom: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(96,165,250,0.4), transparent);
+}
+
+.sig-banner-left {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  z-index: 1;
+}
+
+.sig-banner-agency {
+  font-size: 19px;
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  font-family: var(--font);
+}
+
+.sig-banner-agency span {
+  color: #FFFFFF;
+}
+
+.sig-banner-tagline {
+  font-size: 10px;
+  font-weight: 400;
+  color: rgba(255,255,255,0.55);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-family: var(--font);
+}
+
+.sig-banner-right {
+  z-index: 1;
+  text-align: right;
+}
+
+/* Logo placeholder in banner */
+.sig-logo-placeholder {
+  width: 52px;
+  height: 52px;
+  border-radius: 8px;
+  background: rgba(255,255,255,0.08);
+  border: 1.5px dashed rgba(255,255,255,0.25);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.sig-logo-placeholder svg { opacity: 0.45; }
+.sig-logo-placeholder span {
+  font-size: 7px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: rgba(255,255,255,0.4);
+  text-transform: uppercase;
+  font-family: var(--font);
+}
+
+/* ── MAIN BODY ────────────────────────────────────────────── */
+.sig-body {
+  display: flex;
+  align-items: stretch;
+  padding: 22px 28px;
+  gap: 22px;
+  border-bottom: 1px solid var(--border);
+}
+
+/* Profile picture column */
+.sig-avatar-col {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.sig-avatar {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: var(--light);
+  border: 2.5px solid var(--border);
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sig-avatar-inner {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(145deg, #C7D4EE 0%, #E8EEF8 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+}
+
+.sig-avatar-inner svg { opacity: 0.35; }
+
+.sig-avatar-label {
+  font-size: 6.5px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: #8DA3C4;
+  text-transform: uppercase;
+  font-family: var(--font);
+}
+
+.sig-avatar-badge {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #22C55E;
+  border: 2px solid #fff;
+  position: absolute;
+  bottom: 3px; right: 3px;
+}
+
+/* Details column */
+.sig-details-col {
+  flex: 1;
+  min-width: 0;
+}
+
+.sig-name {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--navy);
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  font-family: var(--font);
+}
+
+.sig-role-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 3px;
+  margin-bottom: 14px;
+}
+
+.sig-title {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--blue);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-family: var(--font);
+}
+
+.sig-role-dot {
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: var(--muted);
+  flex-shrink: 0;
+}
+
+.sig-company {
+  font-size: 11px;
+  font-weight: 300;
+  color: var(--muted);
+  letter-spacing: 0.04em;
+  font-family: var(--font);
+}
+
+/* Contact list */
+.sig-contacts {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.sig-contact-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.sig-contact-icon-wrap {
+  width: 22px;
+  height: 22px;
+  border-radius: 5px;
+  background: var(--light);
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.sig-contact-text {
+  font-size: 12px;
+  font-weight: 400;
+  color: #374151;
+  font-family: var(--font);
+  line-height: 1;
+}
+
+.sig-contact-text a {
+  color: #374151;
+  text-decoration: none;
+}
+
+/* Divider column */
+.sig-divider-col {
+  width: 1px;
+  background: var(--border);
+  flex-shrink: 0;
+  margin: 4px 0;
+}
+
+/* Social + company col */
+.sig-right-col {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 14px;
+  width: 120px;
+}
+
+.sig-social-label {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-family: var(--font);
+  margin-bottom: 6px;
+}
+
+.sig-social-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+}
+
+.sig-social-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  background: var(--navy);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  transition: background 0.18s, transform 0.18s;
+  cursor: pointer;
+}
+
+.sig-social-btn:hover {
+  background: var(--blue);
+  transform: translateY(-1px);
+}
+
+.sig-social-btn.light {
+  background: var(--light);
+  border: 1px solid var(--border);
+}
+
+.sig-social-btn.light:hover {
+  background: var(--blue);
+  border-color: var(--blue);
+}
+
+.sig-social-btn.light svg path,
+.sig-social-btn.light svg rect,
+.sig-social-btn.light svg circle,
+.sig-social-btn.light svg polygon {
+  fill: var(--navy);
+}
+
+.sig-social-btn.light:hover svg path,
+.sig-social-btn.light:hover svg rect,
+.sig-social-btn.light:hover svg circle,
+.sig-social-btn.light:hover svg polygon {
+  fill: white;
+}
+
+/* Company micro-card */
+.sig-company-card {
+  background: var(--light);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 8px 10px;
+  text-align: center;
+}
+
+.sig-company-card-name {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--navy);
+  letter-spacing: 0.02em;
+  font-family: var(--font);
+}
+
+.sig-company-card-sub {
+  font-size: 8.5px;
+  font-weight: 300;
+  color: var(--muted);
+  margin-top: 2px;
+  letter-spacing: 0.06em;
+  font-family: var(--font);
+}
+
+/* ── DISCLAIMER ──────────────────────────────────────────── */
+.sig-disclaimer {
+  padding: 12px 28px;
+  background: #FAFBFD;
+  font-size: 9.5px;
+  font-weight: 300;
+  color: #9CA3AF;
+  line-height: 1.65;
+  font-family: var(--font);
+}
+
+.sig-disclaimer strong {
+  font-weight: 500;
+  color: #6B7280;
+}
+
+.sig-disclaimer a {
+  color: #9CA3AF;
+}
+
+/* ── BOTTOM ACCENT ───────────────────────────────────────── */
+.sig-bottom-bar {
+  height: 2px;
+  background: linear-gradient(90deg, var(--navy) 0%, var(--blue) 55%, var(--accent) 100%);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   INSTALL GUIDE (preview only — DO NOT COPY)
+═══════════════════════════════════════════════════════════ */
+.guide {
+  width: 620px;
+  background: #0F1923;
+  border-radius: 8px;
+  padding: 22px 26px;
+  font-family: 'Manrope', monospace;
+  font-size: 11.5px;
+  line-height: 1.75;
+  color: #64748B;
+}
+
+.guide h3 {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 14px;
+}
+
+.guide-step {
+  display: flex;
+  gap: 10px;
+}
+
+.guide-step-n { color: #4B2A75; min-width: 18px; font-weight: 600; }
+.guide-step-t { color: #CBD5E1; }
+.guide-step-t .hl { color: var(--accent); }
+.guide-step-t .dim { color: #475569; }
+</style>
+</head>
+<body>
+
+<p class="preview-badge">↓ &nbsp; SCL Digital Agency · Email Signature Preview &nbsp; ↓</p>
+
+<!-- ═══════════════════════════════════════════════════════
+     SIGNATURE — copy the .sig div into Gmail / Outlook
+═══════════════════════════════════════════════════════ -->
+<div class="sig">
+
+  <!-- Gradient top accent -->
+  <div class="sig-topbar"></div>
+
+  <!-- Banner -->
+  <div class="sig-banner">
+    <div class="sig-banner-left">
+      <div class="sig-banner-agency">SCL <span> Digital</span> Agency</div>
+      <div class="sig-banner-tagline">Design &nbsp;·&nbsp; Strategy &nbsp;·&nbsp; Technology</div>
+    </div>
+    <div class="sig-banner-right">
+      <!-- LOGO — replace with your hosted image URL if needed -->
+      <img src="https://i.postimg.cc/HnmsKp78/SCL-DA-White-Logo.png" width="102" height="20" alt="SCL Digital Agency logo" style="border-radius:8px; display:block;">
+    </div>
+    <div class="sig-banner-line"></div>
+  </div>
+
+  <!-- Body -->
+  <div class="sig-body">
+
+    <!-- Avatar column -->
+    <div class="sig-avatar-col">
+      <!-- PROFILE PICTURE — replace with your hosted image URL if needed -->
+      <img src="https://i.postimg.cc/K884xvpy/Profile-Picture.png" width="72" height="72" alt="Shinsa Lyonga Lomboto" style="border-radius:50%;border:2.5px solid #E2E8F4;display:block;">
+    </div>
+
+    <!-- Details column -->
+    <div class="sig-details-col">
+      <div class="sig-name">Shinsa Lyonga Lomboto</div>
+      <div class="sig-role-row">
+        <span class="sig-title">CEO & Founder</span>
+        <span class="sig-role-dot"></span>
+        <span class="sig-company">SCL Digital Agency</span>
+      </div>
+
+      <div class="sig-contacts">
+
+        <div class="sig-contact-row">
+          <div class="sig-contact-icon-wrap">
+            <svg width="11" height="11" viewBox="0 0 11 11" fill="none">
+              <rect x=".5" y="1.5" width="10" height="8" rx="1.5" stroke="#4B2A75" stroke-width="1"/>
+              <path d="M.5 3.5L5.5 6.5L10.5 3.5" stroke="#4B2A75" stroke-width="1"/>
+            </svg>
+          </div>
+          <div class="sig-contact-text"><a href="mailto:Shinsa@softwarecreativelabs.com">Shinsa@softwarecreativelabs.com</a></div>
+        </div>
+
+        <div class="sig-contact-row">
+          <div class="sig-contact-icon-wrap">
+            <svg width="11" height="11" viewBox="0 0 11 11" fill="none">
+              <path d="M1.5 1.5h1.5C3.3 1.5 3.6 2 3.7 2.4l.5 2.1c.1.35-.05.72-.37.87l-.88.5c.55 1.2 1.4 2.05 2.6 2.6l.5-.88c.15-.32.52-.48.87-.37l2.1.5c.4.1.53.4.53.7v1.5C9.5 10.3 9 10.5 8.5 10.5 3.7 10.5 1 7.8 1 3c0-.5.2-1.5 1.5-1.5z" stroke="#4B2A75" stroke-width="1" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="sig-contact-text"><a href="tel:+27740194690">+27 74 019 4690</a></div>
+        </div>
+
+        <div class="sig-contact-row">
+          <div class="sig-contact-icon-wrap">
+            <svg width="11" height="11" viewBox="0 0 11 11" fill="none">
+              <circle cx="5.5" cy="5.5" r="4" stroke="#4B2A75" stroke-width="1"/>
+              <path d="M5.5 1.5c0 0-1.5 1.8-1.5 4s1.5 4 1.5 4" stroke="#4B2A75" stroke-width="1"/>
+              <path d="M5.5 1.5c0 0 1.5 1.8 1.5 4s-1.5 4-1.5 4" stroke="#4B2A75" stroke-width="1"/>
+              <path d="M1.5 5.5h8" stroke="#4B2A75" stroke-width="1"/>
+            </svg>
+          </div>
+          <div class="sig-contact-text"><a href="https://www.softwarecreativelabs.com" target="_blank">www.softwarecreativelabs.com</a></div>
+        </div>
+
+        <div class="sig-contact-row">
+          <div class="sig-contact-icon-wrap">
+            <svg width="11" height="11" viewBox="0 0 11 11" fill="none">
+              <path d="M5.5 1C3.57 1 2 2.57 2 4.5C2 7.25 5.5 10 5.5 10C5.5 10 9 7.25 9 4.5C9 2.57 7.43 1 5.5 1Z" stroke="#4B2A75" stroke-width="1"/>
+              <circle cx="5.5" cy="4.5" r="1.25" stroke="#4B2A75" stroke-width="1"/>
+            </svg>
+          </div>
+          <div class="sig-contact-text">Cape Town, South Africa</div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Vertical divider -->
+    <div class="sig-divider-col"></div>
+
+    <!-- Social + company card -->
+    <div class="sig-right-col">
+      <div>
+        <div class="sig-social-label">Connect</div>
+        <div class="sig-social-grid">
+
+          <!-- LinkedIn -->
+          <a href="https://www.linkedin.com/company/softwarecreativelabs/?viewAsMember=true" class="sig-social-btn" title="LinkedIn" target="_blank">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+              <path d="M2.5 4.5H4.5V11.5H2.5V4.5Z" fill="white"/>
+              <circle cx="3.5" cy="2.5" r="1" fill="white"/>
+              <path d="M6 4.5H7.8V5.5C8.1 4.9 8.9 4.3 10 4.3C11.8 4.3 12 5.5 12 7V11.5H10V7.5C10 6.7 9.8 6 9 6C8.2 6 8 6.8 8 7.5V11.5H6V4.5Z" fill="white"/>
+            </svg>
+          </a>
+
+          <!-- Behance -->
+          <a href="https://www.behance.net/SCL-DIGITAL" class="sig-social-btn" title="Behance" target="_blank">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+              <path d="M2 3.5H6.5C8 3.5 9 4.2 9 5.5C9 6.3 8.6 6.9 7.9 7.25C8.9 7.55 9.5 8.25 9.5 9.4C9.5 10.9 8.4 11.5 6.8 11.5H2V3.5ZM3.6 6.8H6.1C6.9 6.8 7.4 6.4 7.4 5.7C7.4 5 6.9 4.7 6.1 4.7H3.6V6.8ZM3.6 10.3H6.4C7.3 10.3 7.9 9.85 7.9 9C7.9 8.15 7.3 7.8 6.4 7.8H3.6V10.3ZM10.2 4.5H13.5V5.4H10.2V4.5ZM11.7 6.4C13 6.4 14 7.3 14 8.7V9.2H10.4C10.5 10 11 10.5 11.9 10.5C12.5 10.5 12.9 10.25 13.1 9.8H14C13.7 10.7 12.9 11.2 11.9 11.2C10.5 11.2 9.6 10.3 9.6 8.8C9.6 7.3 10.5 6.4 11.7 6.4ZM11.65 7.1C10.9 7.1 10.45 7.55 10.35 8.5H13.1C13 7.6 12.45 7.1 11.65 7.1Z" fill="white"/>
+            </svg>
+          </a>
+
+          <!-- Instagram -->
+          <a href="https://www.instagram.com/softwarecreativelabs/" class="sig-social-btn" title="Instagram" target="_blank">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+              <rect x="1.5" y="1.5" width="11" height="11" rx="3" stroke="white" stroke-width="1.2"/>
+              <circle cx="7" cy="7" r="2.5" stroke="white" stroke-width="1.2"/>
+              <circle cx="10.5" cy="3.5" r="0.8" fill="white"/>
+            </svg>
+          </a>
+
+          <!-- Twitter / X -->
+          <a href="https://www.tiktok.com/@softwarecreativelabs" class="sig-social-btn light" title="X / Twitter" target="_blank">
+           <svg  width="13" height="13" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free v7.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2026 Fonticons, Inc.--><path d="M448.5 209.9c-44 .1-87-13.6-122.8-39.2l0 178.7c0 33.1-10.1 65.4-29 92.6s-45.6 48-76.6 59.6-64.8 13.5-96.9 5.3-60.9-25.9-82.7-50.8-35.3-56-39-88.9 2.9-66.1 18.6-95.2 40-52.7 69.6-67.7 62.9-20.5 95.7-16l0 89.9c-15-4.7-31.1-4.6-46 .4s-27.9 14.6-37 27.3-14 28.1-13.9 43.9 5.2 31 14.5 43.7 22.4 22.1 37.4 26.9 31.1 4.8 46-.1 28-14.4 37.2-27.1 14.2-28.1 14.2-43.8l0-349.4 88 0c-.1 7.4 .6 14.9 1.9 22.2 3.1 16.3 9.4 31.9 18.7 45.7s21.3 25.6 35.2 34.6c19.9 13.1 43.2 20.1 67 20.1l0 87.4z"/></svg>
+          </a>
+
+          <!-- YouTube -->
+          <a href="https://www.youtube.com/@softwarecreativelabs" class="sig-social-btn light" title="YouTube" target="_blank">
+           <svg width="13" height="13" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--!Font Awesome Free v7.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2026 Fonticons, Inc.--><path d="M549.7 124.1C543.5 100.4 524.9 81.8 501.4 75.5 458.9 64 288.1 64 288.1 64S117.3 64 74.7 75.5C51.2 81.8 32.7 100.4 26.4 124.1 15 167 15 256.4 15 256.4s0 89.4 11.4 132.3c6.3 23.6 24.8 41.5 48.3 47.8 42.6 11.5 213.4 11.5 213.4 11.5s170.8 0 213.4-11.5c23.5-6.3 42-24.2 48.3-47.8 11.4-42.9 11.4-132.3 11.4-132.3s0-89.4-11.4-132.3zM232.2 337.6l0-162.4 142.7 81.2-142.7 81.2z"/></svg>
+          </a>
+
+          <!-- GitHub -->
+          <a href="https://github.com/scl-digital" class="sig-social-btn light" title="GitHub" target="_blank">
+            <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
+              <path d="M6.5 1C3.46 1 1 3.46 1 6.5C1 8.91 2.57 10.96 4.76 11.69C5.04 11.74 5.14 11.57 5.14 11.42V10.41C3.64 10.74 3.31 9.7 3.31 9.7C3.06 9.07 2.7 8.9 2.7 8.9C2.2 8.56 2.74 8.57 2.74 8.57C3.3 8.61 3.6 9.15 3.6 9.15C4.1 10 4.87 9.76 5.16 9.61C5.21 9.25 5.36 9.01 5.52 8.87C4.35 8.73 3.12 8.28 3.12 6.3C3.12 5.71 3.33 5.23 3.61 4.86C3.55 4.72 3.37 4.17 3.67 3.43C3.67 3.43 4.14 3.28 5.14 3.97C5.56 3.85 6 3.79 6.5 3.79C7 3.79 7.44 3.85 7.86 3.97C8.86 3.28 9.33 3.43 9.33 3.43C9.63 4.17 9.45 4.72 9.39 4.86C9.67 5.23 9.88 5.71 9.88 6.3C9.88 8.29 8.65 8.73 7.47 8.87C7.67 9.04 7.86 9.38 7.86 9.9V11.42C7.86 11.58 7.96 11.75 8.24 11.69C10.43 10.96 12 8.91 12 6.5C12 3.46 9.54 1 6.5 1Z" fill="#0A1628"/>
+            </svg>
+          </a>
+
+        </div>
+      </div>
+
+      <div class="sig-company-card">
+        <div class="sig-company-card-name">SCL Digital Agency</div>
+        <div class="sig-company-card-sub">Cape Town · Est. 2024</div>
+      </div>
+    </div>
+
+  </div><!-- /sig-body -->
+
+  <!-- Disclaimer -->
+  <div class="sig-disclaimer">
+    This email and any attachments are confidential and intended solely for the use of the individual or entity to whom they are addressed. If you have received this email in error please notify the sender immediately and delete this message from your system. Unauthorised use, disclosure, or copying is prohibited.<br><br>
+    <strong>SCL Digital Agency</strong> — Design. Strategy. Technology. &nbsp;·&nbsp; Cape Town, South Africa &nbsp;·&nbsp; <a href="https://www.softwarecreativelabs.com">www.softwarecreativelabs.com</a>
+  </div>
+
+  <div class="sig-bottom-bar"></div>
+
+</div>
+<!-- ═══ SIGNATURE END ══════════════════════════════════════ -->
+
+
+<!-- Install guide (preview only) -->
+<div class="guide">
+  <h3>// Installation guide</h3>
+  <div class="guide-step"><span class="guide-step-n">1.</span><span class="guide-step-t">Open <span class="hl">scl_email_signature.html</span> in Chrome or Safari</span></div>
+  <div class="guide-step"><span class="guide-step-n">2.</span><span class="guide-step-t">Visually drag-select the signature card (banner → bottom bar) and <span class="hl">Copy</span></span></div>
+  <div class="guide-step"><span class="guide-step-n">3.</span><span class="guide-step-t"><span class="hl">Gmail:</span> Settings → See all settings → Signature → New → Paste</span></div>
+  <div class="guide-step"><span class="guide-step-n">4.</span><span class="guide-step-t"><span class="hl">Outlook:</span> Settings → View all → Compose &amp; reply → Signature → Paste</span></div>
+  <div class="guide-step"><span class="guide-step-n">5.</span><span class="guide-step-t">Replace placeholder values: <span class="hl">email · phone · website · all social URLs</span></span></div>
+  <div class="guide-step"><span class="guide-step-n">6.</span><span class="guide-step-t">Profile photo: replace avatar div with <span class="hl">&lt;img src="photo.jpg" width="72" height="72" style="border-radius:50%;"&gt;</span></span></div>
+  <div class="guide-step"><span class="guide-step-n">7.</span><span class="guide-step-t">Logo: replace logo-placeholder div with <span class="hl">&lt;img src="logo.png" width="52" height="52" style="border-radius:8px;"&gt;</span></span></div>
+</div>
+
+</body>
+</html>
