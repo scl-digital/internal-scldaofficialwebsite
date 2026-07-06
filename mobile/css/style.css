@@ -64,11 +64,11 @@ header {
 
 /* Hero Section */
 .hero {
-  background: var(--bg-card);
+  background: #000000;
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border: 1px solid var(--border-light);
-  border-radius: 4px;
+  border-radius: 9px;
   padding: 24px;
   margin-bottom: 24px;
   box-shadow: var(--glass-shadow);
