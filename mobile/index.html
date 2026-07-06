@@ -39,7 +39,7 @@
 
     <!-- Mobile banner: dynamically loaded -->
     <section class="section animate-in delay-2" style="margin-bottom:24px">
-      <div id="mobileBanner" style="position:relative;overflow:hidden;border-radius:4px;background:#000;min-height:180px;box-shadow:var(--glass-shadow)"> 
+      <div id="mobileBanner" style="position:relative;overflow:hidden;border-radius:4px;background:#000;min-height:180px;height:180px;box-shadow:var(--glass-shadow)"> 
         <div id="mobileBannerSlides" style="display:flex;transition:transform 500ms cubic-bezier(0.25, 1, 0.5, 1);will-change:transform;height:100%;">
           <!-- slides injected here -->
           <div style="min-width:100%;padding:20px;display:flex;align-items:center;justify-content:center;height:180px">
@@ -199,28 +199,37 @@
 
   function renderSlides(banners){
     if(!Array.isArray(banners) || banners.length===0){
-      banners = [{title:'Build Beyond Limits.',subtitle:'Web Development',description:'From sleek websites to powerful platforms.',image_url:'../images/Office2.webp',button_text:'Start',button_link:'about.html'}];
+      banners = [{title:'Digital Solutions for Modern Businesses',subtitle:'SCL Digital Agency',description:'From sleek websites to powerful platforms.',image_url:'./mobile_banner_video.mp4',button_text:'Get In Touch',button_link:'contactus.html'}];
     }
 
     slides = banners.map(b=>({
       title: sanitize(b.title),
       subtitle: sanitize(b.subtitle),
       description: sanitize(b.description),
-      image: b.image_url || '../images/Office2.webp',
+      image: b.image_url || './mobile_banner_video.mp4',
       button_text: sanitize(b.button_text),
       button_link: b.button_link || '#'
     }));
 
-    container.innerHTML = slides.map(s=>`
+    container.innerHTML = slides.map(s=>{
+      const isVideo = s.image.endsWith('.mp4') || s.image.endsWith('.webm') || s.image.endsWith('.mov');
+      return `
       <div style="min-width:100%;box-sizing:border-box;position:relative;display:flex;align-items:flex-end;height:100%;">
-        <div style="position:absolute;inset:0;background-size:cover;background-position:center;background-image:url('${s.image}');filter:brightness(.6);"></div>
+        ${isVideo?`
+          <video style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(.6)" autoplay muted loop playsinline>
+            <source src="${s.image}" type="video/${s.image.split('.').pop()}">
+            Your browser does not support the video tag.
+          </video>
+        `:`
+          <div style="position:absolute;inset:0;background-size:cover;background-position:center;background-image:url('${s.image}');filter:brightness(.6);"></div>
+        `}
         <div style="position:relative;padding:20px;color:#fff;width:100%;z-index:2">
           ${s.subtitle?`<div style="font-size:11px;text-transform:uppercase;letter-spacing:1px;opacity:.9;margin-bottom:4px;font-weight:600">${s.subtitle}</div>`:''}
           <div style="font-weight:800;font-size:22px;line-height:1.1;margin-bottom:6px;text-shadow:0 2px 10px rgba(0,0,0,0.3)">${s.title}</div>
           ${s.button_text?`<a href="${s.button_link}" style="display:inline-block;margin-top:8px;padding:6px 12px;background:rgba(255,255,255,0.2);backdrop-filter:blur(4px);color:#fff;border-radius:8px;text-decoration:none;font-weight:600;font-size:12px;border:1px solid rgba(255,255,255,0.3)">${s.button_text}</a>`:''}
         </div>
       </div>
-    `).join('');
+    `}).join('');
 
     dotsWrap.innerHTML = slides.map((_,i)=>`<div style="width:6px;height:6px;border-radius:50%;background:${i===0?'#fff':'rgba(255,255,255,0.4)'};transition:all 0.3s"></div>`).join('');
     
