@@ -1,0 +1,1873 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Complete Your Payment | SCL Digital Agency</title>
+<meta name="description" content="Securely complete your SCL Digital Agency invoice via card, Instant EFT, or manual bank transfer.">
+<link rel="stylesheet" href="Assets/css/mega-menu.css">
+<!-- Bootstrap 5 -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- Bootstrap Icons -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --deep:#1C1550;
+    --violet:#4B2A75;
+    --violet-soft:#6A3FA0;
+    --lilac:#C9B6FF;
+    --lilac-dim:#9E8AD6;
+    --ivory:#F6F3FF;
+    --white:#FFFFFF;
+    --glass:rgba(255,255,255,0.055);
+    --glass-strong:rgba(255,255,255,0.09);
+    --glass-border:rgba(255,255,255,0.12);
+    --success:#3FDDA0;
+    --warn:#F5C36B;
+    --danger:#FF7C7C;
+    --radius:16px;
+    --radius-lg:22px;
+    --font-display:'Space Grotesk', sans-serif;
+    --font-body:'Inter', sans-serif;
+    --font-mono:'IBM Plex Mono', monospace;
+  }
+
+  *{box-sizing:border-box;}
+
+  html{scroll-behavior:smooth;}
+
+  body{
+    font-family:var(--font-body);
+    color:var(--ivory);
+    background:
+      radial-gradient(circle at 12% 8%, rgba(201,182,255,0.14), transparent 42%),
+      radial-gradient(circle at 88% 18%, rgba(75,42,117,0.55), transparent 45%),
+      radial-gradient(circle at 50% 100%, rgba(75,42,117,0.35), transparent 55%),
+      linear-gradient(180deg, #150F3D 0%, #1C1550 38%, #241A5E 100%);
+    min-height:100vh;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important; scroll-behavior:auto !important;}
+  }
+
+  h1,h2,h3,h4,.font-display{font-family:var(--font-display); letter-spacing:-0.01em;}
+  .mono{font-family:var(--font-mono);}
+
+  a{color:var(--lilac); text-decoration:none;}
+  a:hover{color:var(--white);}
+
+  ::selection{background:var(--lilac); color:var(--deep);}
+
+  /* Focus visibility for accessibility */
+  a:focus-visible, button:focus-visible, input:focus-visible, [tabindex]:focus-visible{
+    outline:2px solid var(--lilac);
+    outline-offset:3px;
+    border-radius:6px;
+  }
+
+  .container-narrow{max-width:1080px;}
+
+  /* ---------- NAV ---------- */
+  .scl-nav{
+    padding:22px 0;
+    border-bottom:1px solid rgba(255,255,255,0.06);
+  }
+  .scl-brand{
+    display:flex; align-items:center; gap:10px;
+    font-family:var(--font-display); font-weight:700; font-size:1.15rem;
+    color:var(--white);
+  }
+  .scl-brand .mark{
+    width:34px; height:34px; border-radius:9px;
+    background:linear-gradient(135deg, var(--lilac), var(--violet-soft));
+    display:flex; align-items:center; justify-content:center;
+    font-size:0.9rem; color:var(--deep); font-weight:700;
+    box-shadow:0 0 0 1px rgba(255,255,255,0.25) inset;
+  }
+  .scl-brand small{
+    display:block; font-family:var(--font-body); font-weight:500; font-size:0.65rem;
+    color:var(--lilac-dim); letter-spacing:0.08em; text-transform:uppercase;
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{padding:64px 0 40px;}
+  .hero .eyebrow{
+    font-family:var(--font-mono);
+    font-size:0.72rem;
+    letter-spacing:0.16em;
+    text-transform:uppercase;
+    color:var(--lilac-dim);
+    display:inline-flex; align-items:center; gap:8px;
+    padding:6px 14px;
+    border:1px solid var(--glass-border);
+    border-radius:999px;
+    background:var(--glass);
+  }
+  .hero .eyebrow .dot{
+    width:6px;height:6px;border-radius:50%;background:var(--success);
+    box-shadow:0 0 0 3px rgba(63,221,160,0.18);
+  }
+  .hero h1{
+    font-size:clamp(2.1rem, 4.4vw, 3.4rem);
+    font-weight:700;
+    color:var(--white);
+    margin:20px 0 16px;
+  }
+  .hero p.lead{
+    color:var(--lilac-dim);
+    font-size:1.05rem;
+    max-width:640px;
+    line-height:1.65;
+  }
+
+  .trust-row{
+    display:flex; flex-wrap:wrap; gap:10px;
+    margin-top:28px;
+  }
+  .trust-chip{
+    display:flex; align-items:center; gap:8px;
+    padding:9px 15px;
+    background:var(--glass);
+    border:1px solid var(--glass-border);
+    border-radius:999px;
+    font-size:0.82rem;
+    color:var(--ivory);
+    backdrop-filter:blur(10px);
+  }
+  .trust-chip i{color:var(--lilac); font-size:0.95rem;}
+
+  /* ---------- GLASS CARD BASE ---------- */
+  .glass{
+    background:var(--glass);
+    border:1px solid var(--glass-border);
+    border-radius:var(--radius-lg);
+    backdrop-filter:blur(18px);
+    -webkit-backdrop-filter:blur(18px);
+  }
+  section{padding:46px 0;}
+  .section-head{margin-bottom:28px;}
+  .section-head .kicker{
+    font-family:var(--font-mono); font-size:0.72rem; letter-spacing:0.14em;
+    text-transform:uppercase; color:var(--lilac-dim);
+  }
+  .section-head h2{
+    color:var(--white); font-size:1.7rem; font-weight:600; margin-top:6px;
+  }
+
+  /* ---------- INVOICE TICKET CARD ---------- */
+  .ticket{
+    position:relative;
+    border-radius:var(--radius-lg);
+    background:linear-gradient(155deg, rgba(255,255,255,0.075), rgba(255,255,255,0.03));
+    border:1px solid var(--glass-border);
+    overflow:hidden;
+    backdrop-filter:blur(18px);
+  }
+  .ticket::before{
+    content:"";
+    position:absolute; inset:0;
+    padding:1px;
+    border-radius:var(--radius-lg);
+    background:linear-gradient(120deg, rgba(201,182,255,0.55), rgba(201,182,255,0) 30%, rgba(201,182,255,0) 70%, rgba(201,182,255,0.4));
+    -webkit-mask:linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite:xor;
+    mask-composite:exclude;
+    animation:scan-border 6s linear infinite;
+    pointer-events:none;
+  }
+  @keyframes scan-border{
+    0%{background-position:0% 0%;}
+    100%{background-position:200% 0%;}
+  }
+  .ticket-body{padding:32px;}
+  .ticket-row{
+    display:flex; justify-content:space-between; align-items:baseline;
+    padding:11px 0;
+    border-bottom:1px dashed rgba(255,255,255,0.1);
+  }
+  .ticket-row:last-child{border-bottom:none;}
+  .ticket-row .label{color:var(--lilac-dim); font-size:0.86rem;}
+  .ticket-row .value{color:var(--white); font-family:var(--font-mono); font-size:0.92rem; text-align:right;}
+
+  .ticket-perforation{
+    position:relative;
+    height:0;
+    border-top:1px dashed rgba(255,255,255,0.18);
+    margin:6px 0 0;
+  }
+  .ticket-perforation::before,
+  .ticket-perforation::after{
+    content:"";
+    position:absolute; top:-13px;
+    width:26px; height:26px; border-radius:50%;
+    background:#150F3D;
+    box-shadow:0 0 0 1px rgba(255,255,255,0.08) inset;
+  }
+  .ticket-perforation::before{left:-46px;}
+  .ticket-perforation::after{right:-46px;}
+
+  .ticket-total{
+    display:flex; justify-content:space-between; align-items:center;
+    padding:22px 32px;
+    background:linear-gradient(120deg, rgba(201,182,255,0.16), rgba(75,42,117,0.28));
+    border-top:1px solid var(--glass-border);
+  }
+  .ticket-total .label{
+    font-family:var(--font-display); color:var(--white); font-weight:600; font-size:1rem;
+  }
+  .ticket-total .amount{
+    font-family:var(--font-mono); font-weight:600; font-size:1.9rem; color:var(--white);
+  }
+  .ticket-total .amount sup{font-size:0.95rem; color:var(--lilac-dim); font-weight:500;}
+
+  .status-pill{
+    display:inline-flex; align-items:center; gap:6px;
+    padding:5px 12px; border-radius:999px;
+    font-size:0.72rem; font-weight:600; letter-spacing:0.03em;
+    background:rgba(245,195,107,0.14); color:var(--warn);
+    border:1px solid rgba(245,195,107,0.3);
+  }
+  .status-pill.paid{background:rgba(63,221,160,0.14); color:var(--success); border-color:rgba(63,221,160,0.3);}
+  .status-pill .dot{width:6px;height:6px;border-radius:50%; background:currentColor;}
+
+  /* ---------- PAYMENT METHOD CARDS ---------- */
+  .method-card{
+    cursor:pointer;
+    padding:26px;
+    height:100%;
+    position:relative;
+    transition:transform 0.25s ease, border-color 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
+  }
+  .method-card:hover{
+    transform:translateY(-4px);
+    border-color:rgba(201,182,255,0.4);
+    box-shadow:0 18px 40px -18px rgba(0,0,0,0.55);
+  }
+  .method-card.selected{
+    border-color:var(--lilac);
+    background:linear-gradient(160deg, rgba(201,182,255,0.14), rgba(255,255,255,0.04));
+    box-shadow:0 0 0 1px rgba(201,182,255,0.4), 0 18px 44px -16px rgba(75,42,117,0.7);
+  }
+  .method-card .check{
+    position:absolute; top:20px; right:20px;
+    width:22px; height:22px; border-radius:50%;
+    border:1.5px solid rgba(255,255,255,0.28);
+    display:flex; align-items:center; justify-content:center;
+    transition:all 0.2s ease;
+  }
+  .method-card.selected .check{
+    background:var(--lilac); border-color:var(--lilac);
+  }
+  .method-card.selected .check i{opacity:1; transform:scale(1);}
+  .method-card .check i{
+    font-size:0.7rem; color:var(--deep); opacity:0; transform:scale(0.5);
+    transition:all 0.2s ease;
+  }
+  .method-icon{
+    width:46px; height:46px; border-radius:12px;
+    display:flex; align-items:center; justify-content:center;
+    background:linear-gradient(135deg, rgba(201,182,255,0.22), rgba(75,42,117,0.4));
+    font-size:1.25rem; color:var(--lilac); margin-bottom:16px;
+  }
+  .method-card h3{color:var(--white); font-size:1.08rem; margin-bottom:6px;}
+  .method-card p{color:var(--lilac-dim); font-size:0.87rem; line-height:1.55; margin-bottom:14px;}
+  .method-card .feat-list{list-style:none; padding:0; margin:0 0 16px; font-size:0.82rem; color:var(--ivory);}
+  .method-card .feat-list li{display:flex; align-items:center; gap:8px; padding:3px 0;}
+  .method-card .feat-list i{color:var(--success); font-size:0.85rem;}
+  .brand-row{display:flex; gap:8px; flex-wrap:wrap; margin-bottom:16px;}
+  .brand-chip{
+    font-size:0.72rem; padding:5px 10px; border-radius:7px;
+    background:rgba(255,255,255,0.07); border:1px solid rgba(255,255,255,0.09);
+    color:var(--ivory); font-family:var(--font-mono);
+  }
+
+  .btn-scl-primary{
+    background:linear-gradient(120deg, var(--lilac), var(--violet-soft));
+    border:none; color:var(--deep); font-weight:600;
+    padding:12px 22px; border-radius:11px; font-size:0.92rem;
+    transition:filter 0.2s ease, transform 0.15s ease;
+    width:100%;
+  }
+  .btn-scl-primary:hover{filter:brightness(1.08); transform:translateY(-1px); color:var(--deep);}
+  .btn-scl-primary:disabled{opacity:0.55; cursor:not-allowed; transform:none;}
+  .btn-scl-outline{
+    background:transparent; border:1px solid var(--glass-border); color:var(--ivory);
+    padding:11px 20px; border-radius:11px; font-size:0.9rem; font-weight:500;
+    transition:all 0.2s ease;
+  }
+  .btn-scl-outline:hover{border-color:var(--lilac); color:var(--white); background:rgba(255,255,255,0.04);}
+
+  .spinner-scl{
+    width:16px; height:16px; border-radius:50%;
+    border:2px solid rgba(28,21,80,0.35); border-top-color:var(--deep);
+    animation:spin 0.7s linear infinite; display:inline-block; margin-right:8px;
+    vertical-align:-2px;
+  }
+  @keyframes spin{to{transform:rotate(360deg);}}
+
+  /* ---------- MANUAL EFT PANEL ---------- */
+  .bank-field{
+    display:flex; justify-content:space-between; align-items:center;
+    padding:14px 18px;
+    background:rgba(255,255,255,0.04);
+    border:1px solid rgba(255,255,255,0.08);
+    border-radius:12px;
+    margin-bottom:10px;
+  }
+  .bank-field .fl{display:flex; flex-direction:column; gap:2px;}
+  .bank-field .fl-label{font-size:0.72rem; color:var(--lilac-dim); text-transform:uppercase; letter-spacing:0.06em;}
+  .bank-field .fl-value{font-family:var(--font-mono); color:var(--white); font-size:0.95rem;}
+  .copy-btn{
+    background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.1);
+    color:var(--ivory); border-radius:8px; padding:7px 10px; font-size:0.8rem;
+    display:flex; align-items:center; gap:6px; transition:all 0.2s ease;
+  }
+  .copy-btn:hover{background:var(--lilac); color:var(--deep); border-color:var(--lilac);}
+  .copy-btn.copied{background:var(--success); color:var(--deep); border-color:var(--success);}
+
+  .ref-note{
+    display:flex; gap:12px; align-items:flex-start;
+    padding:16px 18px;
+    border-radius:12px;
+    background:rgba(245,195,107,0.09);
+    border:1px solid rgba(245,195,107,0.28);
+    color:#F5D89A;
+    font-size:0.87rem;
+    margin-top:16px;
+  }
+  .ref-note i{font-size:1.1rem; margin-top:1px;}
+
+  .upload-zone{
+    border:1.5px dashed rgba(255,255,255,0.2);
+    border-radius:14px;
+    padding:26px;
+    text-align:center;
+    margin-top:22px;
+    transition:border-color 0.2s ease, background 0.2s ease;
+  }
+  .upload-zone.drag{border-color:var(--lilac); background:rgba(201,182,255,0.06);}
+  .upload-zone i{font-size:1.6rem; color:var(--lilac); margin-bottom:10px; display:block;}
+  .file-name-chip{
+    display:inline-flex; align-items:center; gap:8px;
+    background:rgba(255,255,255,0.08); border-radius:999px;
+    padding:6px 14px; font-size:0.82rem; margin-top:12px;
+  }
+
+  /* ---------- STATUS INFO ---------- */
+  .status-card{padding:26px; height:100%;}
+  .status-card .num{
+    font-family:var(--font-mono); font-size:0.75rem; color:var(--lilac-dim);
+    letter-spacing:0.1em;
+  }
+  .status-card h4{color:var(--white); font-size:1.05rem; margin:8px 0 12px;}
+  .status-card ul{list-style:none; padding:0; margin:0; font-size:0.87rem; color:var(--ivory);}
+  .status-card ul li{display:flex; gap:9px; padding:5px 0; align-items:flex-start;}
+  .status-card ul li i{color:var(--lilac); margin-top:3px; font-size:0.8rem;}
+
+  /* ---------- FAQ ---------- */
+  .accordion-item{
+    background:transparent !important;
+    border:1px solid var(--glass-border) !important;
+    border-radius:14px !important;
+    margin-bottom:12px;
+    overflow:hidden;
+  }
+  .accordion-button{
+    background:var(--glass) !important;
+    color:var(--white) !important;
+    font-family:var(--font-display);
+    font-weight:500;
+    font-size:0.98rem;
+    padding:18px 22px;
+    box-shadow:none !important;
+  }
+  .accordion-button:not(.collapsed){color:var(--lilac) !important;}
+  .accordion-button::after{filter:invert(1) brightness(2);}
+  .accordion-body{
+    color:var(--lilac-dim);
+    font-size:0.9rem; line-height:1.65;
+    padding:4px 22px 22px;
+  }
+
+  /* ---------- SUPPORT ---------- */
+  .support-card{
+    padding:32px;
+    display:flex; justify-content:space-between; align-items:center; gap:24px;
+    flex-wrap:wrap;
+  }
+  .support-card .info-item{display:flex; align-items:center; gap:12px;}
+  .support-card .info-icon{
+    width:42px; height:42px; border-radius:11px;
+    background:linear-gradient(135deg, rgba(201,182,255,0.22), rgba(75,42,117,0.4));
+    display:flex; align-items:center; justify-content:center; color:var(--lilac); font-size:1.05rem; flex-shrink:0;
+  }
+  .support-card .info-label{font-size:0.72rem; color:var(--lilac-dim); text-transform:uppercase; letter-spacing:0.06em;}
+  .support-card .info-value{color:var(--white); font-size:0.95rem; font-weight:500;}
+
+  /* ---------- FOOTER ---------- */
+  footer{
+    border-top:1px solid rgba(255,255,255,0.07);
+    padding:30px 0;
+    font-size:0.85rem;
+    color:var(--lilac-dim);
+  }
+  footer a{color:var(--lilac-dim);}
+  footer a:hover{color:var(--white);}
+
+  /* ---------- MODAL / SUCCESS ---------- */
+  .success-check{
+    width:74px; height:74px; border-radius:50%;
+    background:rgba(63,221,160,0.14);
+    border:1px solid rgba(63,221,160,0.4);
+    display:flex; align-items:center; justify-content:center;
+    margin:0 auto 18px;
+    animation:pop-in 0.4s cubic-bezier(.2,1.4,.4,1);
+  }
+  .success-check i{font-size:2rem; color:var(--success);}
+  @keyframes pop-in{
+    0%{transform:scale(0.4); opacity:0;}
+    100%{transform:scale(1); opacity:1;}
+  }
+  .modal-content.glass{background:#1C1550; color:var(--ivory);}
+
+  .invalid-msg{color:var(--danger); font-size:0.8rem; margin-top:6px; display:none;}
+  .is-invalid ~ .invalid-msg{display:block;}
+
+  /* utility */
+  .text-lilac-dim{color:var(--lilac-dim);}
+  .text-white-soft{color:var(--ivory);}
+
+  @media (max-width:767px){
+    .ticket-perforation::before,.ticket-perforation::after{display:none;}
+    .support-card{flex-direction:column; align-items:flex-start;}
+  }
+</style>
+</head>
+<body>
+
+
+
+
+
+<!-- ================= NAV ================= -->
+
+
+	<!-- Modern Sticky Navbar -->
+	<nav class="modern-navbar">
+		<div class="navbar-container">
+			<!-- Logo / Home -->
+			<div class="navbar-logo">
+				<a href="index.html" title="Back to Home">
+					<img src="01_Assets/Images/SCL_Digital_Agency_Purple_Logo_softwarecreativelabs.png" alt="SCL Digital Agency">
+				</a>
+			</div>
+
+			<!-- Primary Navigation Links -->
+			<div class="navbar-primary">
+				<ul class="nav-items">
+
+					<li class="nav-dropdown" id="nav-solutions">
+						<a href="services-platform/our_services.html" class="nav-link">Solutions
+							<svg class="chevron" width="16" height="16" viewBox="0 0 24 24" fill="none"
+								stroke="currentColor" stroke-width="2">
+								<polyline points="6 9 12 15 18 9"></polyline>
+							</svg>
+						</a>
+						<div class="mega-menu" id="mega-menu-solutions">
+							<div class="mega-menu-content">
+								<!-- Sidebar: Categories (Column 1) -->
+								<div class="mega-menu-sidebar">
+									<div class="sidebar-item active" onmouseover="showCategory(this, 'digital')">
+										<span>Internal Product Lab</span>
+										<i class="fas fa-chevron-right"></i>
+									</div>
+									<div class="sidebar-item" onmouseover="showCategory(this, 'business')">
+										<span>Agency Services</span>
+										<i class="fas fa-chevron-right"></i>
+									</div>
+									<div class="sidebar-item" onmouseover="showCategory(this, 'products')">
+										<span>Featured Products</span>
+										<i class="fas fa-chevron-right"></i>
+									</div>
+									<div class="sidebar-item" onmouseover="showCategory(this, 'resources')">
+										<span>Resources Hub</span>
+										<i class="fas fa-chevron-right"></i>
+									</div>
+								</div>
+
+								<!-- Main Content Area (Columns 2 & 3) -->
+								<div class="mega-menu-main">
+									<!-- Digital Solutions -->
+									<div id="category-digital" class="category-content active">
+										<div class="mega-menu-column middle">
+											<h3>Internal Product Lab</h3>
+											<p>We generate ideas, validate them, build MVPs, and launch into real markets. Successful products become revenue assets — positioned for scale or acquisition.</p>
+											<a href="public/Desktop/01_Solutions/01_Internal_Product_Lab/scl_internal_product_lab.html" class="mega-menu-cta">Learn More <i class="fas fa-arrow-right"></i></a>
+										</div>
+
+	
+										
+									</div>
+									<!-- Featured Products -->
+									<div id="category-products" class="category-content">
+										<div class="mega-menu-column middle">
+											<h3>Featured Products</h3>
+											<p>Discover our signature software suite designed to solve specific business
+												problems and streamline your operations through automation and
+												advanced technology.</p>
+											<a href="public/Desktop/01_Solutions/03_Products/Products.html" class="mega-menu-cta">View All
+												Products <i class="fas fa-arrow-right"></i></a>
+										</div>
+										
+									</div>
+									<!-- Business Services -->
+									<div id="category-business" class="category-content">
+										<div class="mega-menu-column middle">
+											<h3>Agency Services</h3>
+											<p>We bring our proven systems to founders, startups, and visionaries — giving them the infrastructure and strategy to transform bold ideas into scalable businesses.</p>
+											<a href="public/Desktop/01_Solutions/02_Agency_Services/scl_agency_services.html" class="mega-menu-cta">Learn More <i class="fas fa-arrow-right"></i></a>
+										</div>
+										
+									</div>
+
+									<!-- Featured Products -->
+									<div id="category-products" class="category-content">
+										<div class="mega-menu-column middle">
+											<h3>Featured Products</h3>
+											<p>Discover our signature software suite designed to solve specific business
+												problems and streamline your operations through automation and
+												advanced technology.</p>
+											<a href="public/Desktop/01_Solutions/03_Products/Products.html" class="mega-menu-cta">View All
+												Products <i class="fas fa-arrow-right"></i></a>
+										</div>
+										
+									</div>
+
+									<!-- Resources -->
+									<div id="category-resources" class="category-content">
+										<div class="mega-menu-column middle">
+											<h3>Resources Hub</h3>
+											<p>Access our wealth of knowledge, from in-depth case studies and expert
+												blog posts to comprehensive documentation and reliable support
+												services.</p>
+											<a href="public/Desktop/01_Solutions/04_Resources_Hub/Resources_hub.html" class="mega-menu-cta">Visit Resource
+												Hub <i class="fas fa-arrow-right"></i></a>
+										</div>
+										
+									</div>
+								</div>
+							</div>
+						</div>
+					</li>
+
+
+
+							
+								
+
+					<li class="nav-dropdown" id="nav-news">
+						<a href="services-platform/our_services.html" class="nav-link">News & Events
+							<svg class="chevron" width="16" height="16" viewBox="0 0 24 24" fill="none"
+								stroke="currentColor" stroke-width="2">
+								<polyline points="6 9 12 15 18 9"></polyline>
+							</svg>
+						</a>
+						<div class="mega-menu" id="mega-menu-news">
+							<div class="mega-menu-content">
+								<!-- Sidebar: Categories (Column 1) -->
+								<div class="mega-menu-sidebar">
+									<div class="sidebar-item active" onmouseover="showCategory(this, 'latest-news')">
+										<span>Latest News</span>
+										<i class="fas fa-chevron-right"></i>
+									</div>
+									<div class="sidebar-item" onmouseover="showCategory(this, 'upcoming-events')">
+										<span>Upcoming Events</span>
+										<i class="fas fa-chevron-right"></i>
+									</div>
+									<div class="sidebar-item" onmouseover="showCategory(this, 'community')">
+										<span>Community Stories</span>
+										<i class="fas fa-chevron-right"></i>
+									</div>
+									<div class="sidebar-item" onmouseover="showCategory(this, 'press')">
+										<span>Press Releases</span>
+										<i class="fas fa-chevron-right"></i>
+									</div>
+								</div>
+
+								<!-- Main Content Area (Columns 2 & 3) -->
+								<div class="mega-menu-main">
+									<!-- Latest News -->
+									<div id="category-latest-news" class="category-content active">
+										<div class="mega-menu-column middle">
+											<h3>Latest Updates</h3>
+											<p>Stay informed about SCL Digital Agency's latest achievements,
+												major milestones, and company announcements from our global offices.</p>
+											<a href="public/Desktop/02_News_Events/01_Latest_News/Latest_News.html" class="mega-menu-cta">Read All
+												News <i class="fas fa-arrow-right"></i></a>
+										</div>
+										
+									</div>
+
+									<!-- Upcoming Events -->
+									<div id="category-upcoming-events" class="category-content">
+										<div class="mega-menu-column middle">
+											<h3>Events & Workshops</h3>
+											<p>Join us for our upcoming webinars, technology workshops,
+												and networking events designed to foster innovation and collaboration.
+											</p>
+											<a href="public/Desktop/02_News_Events/02_Upcoming_Events/eventspage.html" class="mega-menu-cta">View
+												Calendar <i class="fas fa-arrow-right"></i></a>
+										</div>
+										
+									</div>
+
+									<!-- Community -->
+									<div id="category-community" class="category-content">
+										<div class="mega-menu-column middle">
+											<h3>Community & Impact</h3>
+											<p>Discover the success stories of our clients and the positive
+												social impact projects SCL Digital Agency supports around the world.</p>
+											<a href="case_studies.html" class="mega-menu-cta">Impact
+												Reports <i class="fas fa-arrow-right"></i></a>
+										</div>
+										
+									</div>
+
+									<!-- Press Releases -->
+									<div id="category-press" class="category-content">
+										<div class="mega-menu-column middle">
+											<h3>Newsroom & Media</h3>
+											<p>Access our official press releases, high-resolution media
+												assets, and contact information for media inquiries.</p>
+											<a href="public/Desktop/02_News_Events/04_Press_Releases/newsroom.html" class="mega-menu-cta">Media
+												Inquiries <i class="fas fa-arrow-right"></i></a>
+										</div>
+										
+									</div>
+								</div>
+							</div>
+						</div>
+
+					</li>
+
+					<li class="nav-dropdown" id="nav-about">
+						<a href="about.html" class="nav-link">About us
+							<svg class="chevron" width="16" height="16" viewBox="0 0 24 24" fill="none"
+								stroke="currentColor" stroke-width="2">
+								<polyline points="6 9 12 15 18 9"></polyline>
+							</svg>
+						</a>
+						<div class="mega-menu" id="mega-menu-about">
+							<div class="mega-menu-content">
+								<!-- Sidebar: Categories (Column 1) -->
+								<div class="mega-menu-sidebar">
+									<div class="sidebar-item active" onmouseover="showCategory(this, 'company')">
+										<span>Company Profile</span>
+										<i class="fas fa-chevron-right"></i>
+									</div>
+									<div class="sidebar-item" onmouseover="showCategory(this, 'leadership')">
+										<span>Leadership</span>
+										<i class="fas fa-chevron-right"></i>
+									</div>
+									<div class="sidebar-item" onmouseover="showCategory(this, 'growth')">
+										<span>Growth & Careers</span>
+										<i class="fas fa-chevron-right"></i>
+									</div>
+									<div class="sidebar-item" onmouseover="showCategory(this, 'impact')">
+										<span>Impact & Network</span>
+										<i class="fas fa-chevron-right"></i>
+									</div>
+								</div>
+
+								<!-- Main Content Area (Columns 2 & 3) -->
+								<div class="mega-menu-main">
+									<!-- Company Profile -->
+									<div id="category-company" class="category-content active">
+										<div class="mega-menu-column middle">
+											<h3>Company Profile</h3>
+											<p>Discover the essence of SCL Digital Agency, where we empower visionaries
+												and
+												deliver transformative digital excellence across Africa.</p>
+											<a href="public/Desktop/03_About_Us/01_Company_Profile/company_profile.html" class="mega-menu-cta">Learn More <i
+													class="fas fa-arrow-right"></i></a>
+										</div>
+										
+									</div>
+
+									<!-- Leadership -->
+									<div id="category-leadership" class="category-content">
+										<div class="mega-menu-column middle">
+											<h3>Leadership</h3>
+											<p>Guided by purpose-led visionaries who blend innovation with integrity to
+												build world-class African brands.</p>
+											<a href="public/Desktop/03_About_Us/02_Leadership/Meet_the_team.html" class="mega-menu-cta">Meet the Team <i
+													class="fas fa-arrow-right"></i></a>
+										</div>
+										
+									</div>
+
+									<!-- Growth & Careers -->
+									<div id="category-growth" class="category-content">
+										<div class="mega-menu-column middle">
+											<h3>Growth & Careers</h3>
+											<p>Join a team of passionate innovators and creators. We're building the
+												future of digital excellence, one project at a time.</p>
+											<a href="public/Desktop/03_About_Us/03_Growth_and_Careers/Join_Us.html" class="mega-menu-cta">Join Us <i
+													class="fas fa-arrow-right"></i></a>
+										</div>
+										
+									</div>
+
+									<!-- Impact & Network -->
+									<div id="category-impact" class="category-content">
+										<div class="mega-menu-column middle">
+											<h3>Impact & Network</h3>
+											<p>Our success is measured by the growth of our partners and the positive
+												impact we create in the global digital landscape.</p>
+											<a href="public/Desktop/03_About_Us/04_Impact_and_Network/Our_Impact.html" class="mega-menu-cta">Our Impact <i
+													class="fas fa-arrow-right"></i></a>
+										</div>
+										
+									</div>
+								</div>
+							</div>
+						</div>
+					</li>
+
+
+
+				</ul>
+			</div>
+
+			<!-- Utility/Action Zone (Right) -->
+			<div class="navbar-utility">
+
+
+
+
+				<!-- Search Icon -->
+				<button class="navbar-icon-btn" title="Search" onclick="toggleSearchBar()">
+				<svg width="18" height="18" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640"><!--!Font Awesome Free v7.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2026 Fonticons, Inc.--><path fill="rgb(0, 0, 0)" d="M224.2 89C216.3 70.1 195.7 60.1 176.1 65.4L170.6 66.9C106 84.5 50.8 147.1 66.9 223.3C104 398.3 241.7 536 416.7 573.1C493 589.3 555.5 534 573.1 469.4L574.6 463.9C580 444.2 569.9 423.6 551.1 415.8L453.8 375.3C437.3 368.4 418.2 373.2 406.8 387.1L368.2 434.3C297.9 399.4 241.3 341 208.8 269.3L253 233.3C266.9 222 271.6 202.9 264.8 186.3L224.2 89z"/></svg>	
+				&#8203; &#8203; &#8203;
+				+27 74 019 4690
+				</button>
+
+			
+
+        <!-- Contact Us Button -->
+<button class="navbar-btn-primary" onclick="window.location.href='public/Desktop/04_Contact_Us/contactus.html'">
+    <span>Book a Free Consultation</span>
+</button>
+
+
+				<!-- Profile/Login -->
+				<a href="login-products.html" class="navbar-icon-btn" title="Client Portal">
+					<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+						<path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+						<circle cx="12" cy="7" r="4"></circle>
+					</svg>
+				</a>
+
+				<!-- Shopping Cart Icon -->
+				<button class="navbar-icon-btn navbar-cart-btn" title="Shopping Cart" onclick="toggleCart()">
+					<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+						<circle cx="9" cy="21" r="1"></circle>
+						<circle cx="20" cy="21" r="1"></circle>
+						<path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+					</svg>
+					<span class="navbar-cart-badge" id="navbar-cart-count">0</span>
+				</button>
+
+				<!-- Hamburger Menu (Mobile) -->
+				<button class="navbar-hamburger" onclick="toggleSidebar()">
+					<span></span>
+					<span></span>
+					<span></span>
+				</button>
+			</div>
+		</div>
+
+		<!-- Search Bar (Hidden by default) -->
+		<div class="navbar-search-bar" id="searchBar">
+			<input type="text" placeholder="Search our services, resources, and more..." class="search-input">
+			<button class="search-close" onclick="toggleSearchBar()">
+				<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+					<line x1="18" y1="6" x2="6" y2="18"></line>
+					<line x1="6" y1="6" x2="18" y2="18"></line>
+				</svg>
+			</button>
+		</div>
+	</nav>
+
+
+
+
+  <!-- Modern Navbar Styles -->
+	<style>
+		.modern-navbar {
+			position: fixed;
+			top: 0;
+			left: 0;
+			right: 0;
+			background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(250, 250, 250, 0.95) 100%);
+			backdrop-filter: blur(10px);
+			border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+			z-index: 1000;
+			box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+			transition: all 0.3s ease;
+		}
+
+		.modern-navbar.scrolled {
+			box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+		}
+
+		.navbar-container {
+			max-width: 1400px;
+			margin: 0 auto;
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			height: 70px;
+			padding: 0 40px;
+			position: relative;
+		}
+
+		/* Logo */
+		.navbar-logo a {
+			display: flex;
+			align-items: center;
+			height: 50px;
+			transition: transform 0.2s ease;
+		}
+
+		.navbar-logo img {
+			height: 40px;
+			width: auto;
+			object-fit: contain;
+		}
+
+		.navbar-logo a:hover {
+			transform: scale(1.05);
+		}
+
+		/* Primary Navigation */
+		.navbar-primary {
+			flex: 1;
+			display: flex;
+			justify-content: center;
+			margin: 0 30px;
+		}
+
+		.nav-items {
+			display: flex;
+			list-style: none;
+			gap: 30px;
+			margin: 0;
+			padding: 0;
+			height: 100%;
+			align-items: center;
+		}
+
+		.nav-link {
+			display: flex;
+			align-items: center;
+			gap: 6px;
+			color: #333;
+			text-decoration: none;
+			font-weight: 500;
+			font-size: 14px;
+			height: 100%;
+			position: relative;
+			transition: color 0.2s ease;
+		}
+
+		.nav-link:hover,
+		.nav-link.active {
+			color: #667eea;
+		}
+
+		/* Active state underline */
+		.nav-link.active::after {
+			content: '';
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			right: 0;
+			height: 3px;
+			background: linear-gradient(135deg, #667eea, #764ba2);
+			border-radius: 2px;
+		}
+
+		/* Dropdown */
+		.nav-dropdown {
+			position: static;
+			/* Let mega-menu be relative to navbar-container */
+			height: 100%;
+			display: flex;
+			align-items: center;
+		}
+
+		/* Dropdown Trigger */
+		.nav-dropdown:hover>.mega-menu {
+			visibility: visible !important;
+			opacity: 1 !important;
+			pointer-events: auto !important;
+			transform: translateY(0) !important;
+		}
+
+		.dropdown-menu {
+			position: absolute;
+			top: 100%;
+			left: 0;
+			background: white;
+			border: 1px solid rgba(0, 0, 0, 0.1);
+			border-radius: 8px;
+			margin-top: 8px;
+			padding: 8px 0;
+			min-width: 200px;
+			opacity: 0;
+			visibility: hidden;
+			transform: translateY(-8px);
+			transition: all 0.3s ease;
+			box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+		}
+
+		.dropdown-menu a {
+			display: block;
+			padding: 12px 16px;
+			color: #333;
+			text-decoration: none;
+			font-size: 14px;
+			transition: background 0.2s ease;
+		}
+
+		.dropdown-menu a:hover {
+			background: #f5f7ff;
+			color: #667eea;
+		}
+
+		.chevron {
+			transition: transform 0.3s ease;
+		}
+
+		.nav-dropdown:hover .chevron {
+			transform: rotate(180deg);
+		}
+
+		/* Utility Zone */
+		.navbar-utility {
+			display: flex;
+			align-items: center;
+			gap: 16px;
+		}
+
+		.navbar-icon-btn {
+			background: none;
+			border: none;
+			color: #333;
+			cursor: pointer;
+			padding: 8px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			transition: all 0.2s ease;
+			border-radius: 6px;
+		}
+
+		.navbar-icon-btn:hover {
+			color: #667eea;
+			background: rgba(102, 126, 234, 0.1);
+		}
+
+		/* Primary Button */
+		.navbar-btn-primary {
+			display: flex;
+			align-items: center;
+			gap: 8px;
+			padding: 10px 20px;
+			background: linear-gradient(135deg, #1C1550 0%, #1C1550 100%);
+			color: white;
+			border: none;
+			border-radius: 100px;
+			font-weight: 600;
+			font-size: 14px;
+			cursor: pointer;
+			transition: all 0.3s ease;
+			white-space: nowrap;
+		}
+
+		.navbar-btn-primary:hover {
+			transform: translateY(-2px);
+			box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+		}
+
+		/* Navbar Cart Button Styling */
+		.navbar-cart-btn {
+			position: relative;
+		}
+
+		.navbar-cart-badge {
+			position: absolute;
+			top: -8px;
+			right: -8px;
+			background: #ff4d4d;
+			color: white;
+			border-radius: 50%;
+			width: 18px;
+			height: 18px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			font-size: 11px;
+			font-weight: bold;
+			border: 2px solid white;
+		}
+
+		.navbar-cart-badge:empty,
+		.navbar-cart-badge[data-count="0"] {
+			display: none;
+		}
+
+		/* Cart Modal Styling */
+		.cart-modal {
+			display: none;
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background: rgba(0, 0, 0, 0.5);
+			z-index: 2000;
+			justify-content: center;
+			align-items: center;
+		}
+
+		.cart-modal.active {
+			display: flex;
+		}
+
+		.cart-modal-content {
+			background: white;
+			border-radius: 12px;
+			width: 90%;
+			max-width: 500px;
+			max-height: 80vh;
+			overflow: hidden;
+			box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+		}
+
+		.cart-modal-header {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			padding: 20px;
+			border-bottom: 1px solid #eee;
+		}
+
+		.cart-modal-header h3 {
+			margin: 0;
+			font-size: 20px;
+			font-weight: 600;
+		}
+
+		.cart-close {
+			background: none;
+			border: none;
+			font-size: 24px;
+			cursor: pointer;
+			color: #666;
+		}
+
+		.cart-modal-body {
+			padding: 20px;
+			max-height: 60vh;
+			overflow-y: auto;
+		}
+
+		.cart-total {
+			margin: 20px 0;
+			font-size: 18px;
+			text-align: right;
+		}
+
+		.cart-actions {
+			display: flex;
+			gap: 10px;
+			justify-content: flex-end;
+		}
+
+		.btn-secondary {
+			background: #f8f9fa;
+			color: #333;
+			border: 1px solid #ddd;
+			padding: 10px 20px;
+			border-radius: 6px;
+			cursor: pointer;
+		}
+
+		.btn-primary {
+			background: #1C1550;
+			color: white;
+			border: none;
+			padding: 10px 20px;
+			border-radius: 6px;
+			cursor: pointer;
+		}
+
+		/* Search Bar */
+		.navbar-search-bar {
+			display: none;
+			padding: 12px 20px;
+			background: rgba(255, 255, 255, 0.98);
+			border-top: 1px solid rgba(0, 0, 0, 0.08);
+		}
+
+		.navbar-search-bar.active {
+			display: flex;
+			gap: 12px;
+			align-items: center;
+		}
+
+		.search-input {
+			flex: 1;
+			padding: 10px 12px;
+			border: 1px solid rgba(0, 0, 0, 0.1);
+			border-radius: 6px;
+			font-size: 14px;
+			outline: none;
+			transition: border-color 0.2s ease;
+		}
+
+		.search-input:focus {
+			border-color: #667eea;
+			box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+		}
+
+		.search-close {
+			background: none;
+			border: none;
+			color: #666;
+			cursor: pointer;
+			padding: 8px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+
+		.search-close:hover {
+			color: #333;
+		}
+
+		/* Hamburger Menu */
+		.navbar-hamburger {
+			display: none;
+			flex-direction: column;
+			gap: 6px;
+			background: none;
+			border: none;
+			cursor: pointer;
+			padding: 8px;
+		}
+
+		.navbar-hamburger span {
+			width: 24px;
+			height: 2px;
+			background: #333;
+			border-radius: 2px;
+			transition: all 0.3s ease;
+		}
+
+		.navbar-hamburger.active span:nth-child(1) {
+			transform: rotate(45deg) translate(10px, 10px);
+		}
+
+		.navbar-hamburger.active span:nth-child(2) {
+			opacity: 0;
+		}
+
+		.navbar-hamburger.active span:nth-child(3) {
+			transform: rotate(-45deg) translate(7px, -7px);
+		}
+
+		/* Responsive */
+		@media (max-width: 768px) {
+			.navbar-container {
+				height: 60px;
+				padding: 0 15px;
+			}
+
+			.navbar-logo img {
+				height: 40px;
+			}
+
+			.navbar-primary {
+				display: none;
+				margin: 0;
+			}
+
+			.navbar-btn-primary span,
+			.navbar-login-fields {
+				display: none;
+			}
+
+			.navbar-hamburger {
+				display: flex;
+			}
+
+			.nav-items {
+				gap: 15px;
+			}
+		}
+
+		/* Ensure body has top padding for fixed navbar */
+		body {
+			padding-top: 70px;
+		}
+
+		@media (max-width: 768px) {
+			body {
+				padding-top: 60px;
+			}
+		}
+	</style>
+
+
+
+
+
+<!-- Navbar Scripts -->
+	<script src="Assets/js/mega-menu.js"></script>
+	<script>
+
+		function toggleSidebar() {
+			const hamburger = document.querySelector('.navbar-hamburger');
+			hamburger.classList.toggle('active');
+			// Additional sidebar toggle logic here if needed
+		}
+
+		// Update navbar on scroll
+		let lastScrollTop = 0;
+		const navbar = document.querySelector('.modern-navbar');
+
+		window.addEventListener('scroll', function () {
+			let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+			// Add shadow on scroll
+			if (scrollTop > 0) {
+				navbar.classList.add('scrolled');
+			} else {
+				navbar.classList.remove('scrolled');
+			}
+
+			lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+		});
+
+		// Set active nav link based on current page
+		document.addEventListener('DOMContentLoaded', function () {
+			const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+			const navLinks = document.querySelectorAll('.nav-link');
+
+			navLinks.forEach(link => {
+				const href = link.getAttribute('href');
+				if (href === currentPage || (currentPage === '' && href === 'index.html')) {
+					link.classList.add('active');
+				}
+			});
+
+			// Navbar Login Logic
+			const loginSubmit = document.getElementById('nav-login-submit');
+			const emailInput = document.getElementById('nav-login-email');
+			const passwordInput = document.getElementById('nav-login-password');
+			const errorSpan = document.getElementById('nav-login-error');
+
+			if (loginSubmit) {
+				loginSubmit.addEventListener('click', async function (e) {
+					const email = emailInput.value.trim();
+					const password = passwordInput.value.trim();
+
+					// If fields are empty, let the default link behavior (redirect to login-products.html) happen
+					if (!email && !password) return;
+
+					// Otherwise, prevent default and attempt login
+					e.preventDefault();
+
+					if (!email || !password) {
+						showLoginError('Email and password required');
+						return;
+					}
+
+					try {
+						loginSubmit.style.opacity = '0.7';
+						loginSubmit.style.pointerEvents = 'none';
+						errorSpan.style.display = 'none';
+
+						const response = await fetch('api/login.php', {
+							method: 'POST',
+							headers: { 'Content-Type': 'application/json' },
+							body: JSON.stringify({ email, password, user_type: 'client' })
+						});
+
+						const data = await response.json();
+
+						if (data.success) {
+							// Success: Store user data for seamless handoff to the portal
+							sessionStorage.setItem('scl_client_session', JSON.stringify(data.user));
+							// Redirect to Client Portal
+							window.location.href = 'ClientPortal/client-billing-portal.html';
+						} else {
+							// Failure: Show error
+							showLoginError(data.error || 'Invalid credentials');
+						}
+					} catch (err) {
+						showLoginError('Connection error');
+						console.error('Login error:', err);
+					} finally {
+						loginSubmit.style.opacity = '1';
+						loginSubmit.style.pointerEvents = 'auto';
+					}
+				});
+
+				// Allow pressing Enter to submit
+				[emailInput, passwordInput].forEach(input => {
+					input.addEventListener('keypress', (e) => {
+						if (e.key === 'Enter') loginSubmit.click();
+					});
+				});
+			}
+
+			function showLoginError(msg) {
+				errorSpan.textContent = msg;
+				errorSpan.style.display = 'block';
+				setTimeout(() => {
+					errorSpan.style.display = 'none';
+				}, 5000);
+			}
+		});
+	</script>
+
+
+<!-- ================= HERO ================= -->
+<header class="hero">
+  <div class="container container-narrow">
+   
+    <h1>Choose Payment Method</h1>
+    <p class="lead">Securely pay your invoice using your preferred payment method. All transactions are encrypted and processed securely.</p>
+
+    <div class="trust-row" role="list" aria-label="Security assurances">
+      <div class="trust-chip" role="listitem"><i class="bi bi-shield-lock-fill"></i> SSL Secured</div>
+      <div class="trust-chip" role="listitem"><i class="bi bi-key-fill"></i> Encrypted Payments</div>
+      <div class="trust-chip" role="listitem"><i class="bi bi-patch-check-fill"></i> PCI Compliant</div>
+      <div class="trust-chip" role="listitem"><i class="bi bi-award-fill"></i> Trusted Payment Processing</div>
+    </div>
+  </div>
+</header>
+
+<!-- ================= PAYMENT SUMMARY ================= -->
+<section id="summary">
+  <div class="container container-narrow">
+    <div class="section-head">
+  
+      <h2>Manual EFT / Bank Transfer</h2>
+    </div>
+
+    <div class="ticket">
+      <div class="ticket-body">
+        <div class="d-flex justify-content-between align-items-start flex-wrap gap-2 mb-2">
+          <div>
+            <div class="text-lilac-dim" style="font-size:0.78rem;">Invoice Number</div>
+            <div class="font-display text-white fs-5 mono">SCL Digital Agency Banking Details</div>
+          </div>
+          <span class="status-pill"><span class="dot"></span> EFT</span>
+        </div>
+
+        <div class="ticket-row"><span class="label">Bank Name:</span><span class="value">FNB / RMB</span></div>
+        <div class="ticket-row"><span class="label">Account Holder:</span><span class="value">SCL Digital Agency (Pty) Ltd</span></div>
+        <div class="ticket-row"><span class="label">Account Type:</span><span class="value">Business Account</span></div>
+        <div class="ticket-row"><span class="label">Account Number:</span><span class="value">63134146992</span></div>
+        <div class="ticket-row"><span class="label">Branch Code:</span><span class="value">250655</span></div>
+        <div class="ticket-row"><span class="label">Swift Code:</span><span class="value">FIRNZAJJ</span></div>
+        <div class="ticket-row"><span class="label">Reference:</span><span class="value">Your Invoice Number</span></div>
+        <div class="ticket-perforation"></div>
+      </div>
+      <div class="ticket-total">
+        <span class="label">Email Proof of Payment to</span>
+        <span class="amount">Payments@softwarecreativelabs.com</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PAYMENT METHODS ================= -->
+<section id="methods">
+  <div class="container container-narrow">
+    <div class="section-head">
+      <span class="kicker">Step 2</span>
+      <h2>Choose Payment Method</h2>
+    </div>
+
+    <div class="row g-4" role="radiogroup" aria-label="Payment method">
+
+      <!-- Card Payment -->
+      <div class="col-md-4">
+        <div class="glass method-card selected" tabindex="0" role="radio" aria-checked="true" data-method="card" id="method-card">
+          <span class="check"><i class="bi bi-check-lg"></i></span>
+          <div class="method-icon"><i class="bi bi-credit-card-fill"></i></div>
+          <h3>Card Payment</h3>
+          <p>Pay instantly using your debit or credit card.</p>
+          <div class="brand-row">
+            <span class="brand-chip">Visa</span>
+            <span class="brand-chip">Mastercard</span>
+            <span class="brand-chip">Amex</span>
+          </div>
+          <ul class="feat-list">
+            <li><i class="bi bi-check-circle-fill"></i> Instant confirmation</li>
+            <li><i class="bi bi-check-circle-fill"></i> Secure checkout</li>
+            <li><i class="bi bi-check-circle-fill"></i> Email receipt</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Instant EFT -->
+      <div class="col-md-4">
+        <div class="glass method-card" tabindex="0" role="radio" aria-checked="false" data-method="eft" id="method-eft">
+          <span class="check"><i class="bi bi-check-lg"></i></span>
+          <div class="method-icon"><i class="bi bi-bank2"></i></div>
+          <h3>Instant EFT</h3>
+          <p>Pay directly from your South African bank account.</p>
+          <div class="brand-row">
+            <span class="brand-chip">ABSA</span>
+            <span class="brand-chip">FNB</span>
+            <span class="brand-chip">Nedbank</span>
+            <span class="brand-chip">Standard Bank</span>
+            <span class="brand-chip">Capitec</span>
+            <span class="brand-chip">Investec</span>
+            <span class="brand-chip">Discovery Bank</span>
+            <span class="brand-chip">African Bank</span>
+            <span class="brand-chip">TymeBank</span>
+          </div>
+          <ul class="feat-list">
+            <li><i class="bi bi-check-circle-fill"></i> Confirmed within minutes</li>
+            <li><i class="bi bi-check-circle-fill"></i> No card required</li>
+            <li><i class="bi bi-check-circle-fill"></i> Bank-grade security</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Manual EFT -->
+      <div class="col-md-4">
+        <div class="glass method-card" tabindex="0" role="radio" aria-checked="false" data-method="manual" id="method-manual">
+          <span class="check"><i class="bi bi-check-lg"></i></span>
+          <div class="method-icon"><i class="bi bi-building-fill"></i></div>
+          <h3>Paypal</h3>
+          <p>Make a direct transfer using the banking details below.</p>
+          <ul class="feat-list">
+            <li><i class="bi bi-check-circle-fill"></i> No online checkout needed</li>
+            <li><i class="bi bi-check-circle-fill"></i> Ideal for business accounts</li>
+            <li><i class="bi bi-check-circle-fill"></i> Upload proof of payment</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- CTA area for card / instant eft -->
+    <div class="glass mt-4 p-4" id="cta-panel">
+      <div id="cta-card">
+        <div class="d-flex flex-column flex-sm-row justify-content-between align-items-sm-center gap-3">
+          <div>
+            <h4 class="text-white mb-1" style="font-size:1.05rem;">Ready to pay with card</h4>
+            <p class="text-lilac-dim mb-0" style="font-size:0.85rem;">You'll be redirected to a secure checkout to enter your card details.</p>
+          </div>
+          <button class="btn-scl-primary" style="max-width:220px;" id="btn-pay-card" onclick="simulatePayment('card')">
+            <i class="bi bi-credit-card"></i>&nbsp; Pay with Card
+          </button>
+        </div>
+      </div>
+
+      <div id="cta-eft" class="d-none">
+        <div class="d-flex flex-column flex-sm-row justify-content-between align-items-sm-center gap-3">
+          <div>
+            <h4 class="text-white mb-1" style="font-size:1.05rem;">Ready to pay via Instant EFT</h4>
+            <p class="text-lilac-dim mb-0" style="font-size:0.85rem;">You'll be redirected to authorise the payment with your bank.</p>
+          </div>
+          <button class="btn-scl-primary" style="max-width:240px;" id="btn-pay-eft" onclick="simulatePayment('eft')">
+            <i class="bi bi-bank2"></i>&nbsp; Pay via Instant EFT
+          </button>
+        </div>
+      </div>
+
+      <!-- Manual EFT full panel -->
+      <div id="cta-manual" class="d-none">
+        <h4 class="text-white mb-3" style="font-size:1.05rem;">Bank Transfer Details</h4>
+        <div class="row">
+          <div class="col-lg-7">
+            <div class="bank-field">
+              <div class="fl"><span class="fl-label">Account Name</span><span class="fl-value">SCL Digital Agency (Pty) Ltd</span></div>
+              <button class="copy-btn" data-copy="SCL Digital Agency (Pty) Ltd" aria-label="Copy account name"><i class="bi bi-clipboard"></i> Copy</button>
+            </div>
+            <div class="bank-field">
+              <div class="fl"><span class="fl-label">Bank</span><span class="fl-value">First National Bank (FNB)</span></div>
+              <button class="copy-btn" data-copy="First National Bank (FNB)" aria-label="Copy bank name"><i class="bi bi-clipboard"></i> Copy</button>
+            </div>
+            <div class="bank-field">
+              <div class="fl"><span class="fl-label">Account Number</span><span class="fl-value">62812345678</span></div>
+              <button class="copy-btn" data-copy="62812345678" aria-label="Copy account number"><i class="bi bi-clipboard"></i> Copy</button>
+            </div>
+            <div class="bank-field">
+              <div class="fl"><span class="fl-label">Branch Code</span><span class="fl-value">250655</span></div>
+              <button class="copy-btn" data-copy="250655" aria-label="Copy branch code"><i class="bi bi-clipboard"></i> Copy</button>
+            </div>
+            <div class="bank-field">
+              <div class="fl"><span class="fl-label">Account Type</span><span class="fl-value">Business Cheque</span></div>
+              <button class="copy-btn" data-copy="Business Cheque" aria-label="Copy account type"><i class="bi bi-clipboard"></i> Copy</button>
+            </div>
+            <div class="bank-field">
+              <div class="fl"><span class="fl-label">Reference</span><span class="fl-value">INV-20261142</span></div>
+              <button class="copy-btn" data-copy="INV-20261142" aria-label="Copy invoice reference"><i class="bi bi-clipboard"></i> Copy</button>
+            </div>
+
+            <div class="ref-note">
+              <i class="bi bi-exclamation-triangle-fill"></i>
+              <span>Please use your Invoice Number <strong>(INV-20261142)</strong> as the payment reference so we can match your transfer to your invoice.</span>
+            </div>
+          </div>
+
+          <div class="col-lg-5">
+            <div class="glass p-4 h-100 d-flex flex-column">
+              <h5 class="text-white mb-2" style="font-size:0.95rem;">Upload Proof of Payment</h5>
+              <p class="text-lilac-dim mb-0" style="font-size:0.83rem;">Once you've made your transfer, upload your proof of payment and we'll confirm it as soon as possible.</p>
+
+              <div class="upload-zone" id="upload-zone">
+                <i class="bi bi-cloud-arrow-up"></i>
+                <div class="text-white-soft" style="font-size:0.87rem;">Drag &amp; drop a file, or</div>
+                <label for="pop-file" class="btn-scl-outline d-inline-block mt-2" style="cursor:pointer;">Choose File</label>
+                <input type="file" id="pop-file" class="d-none" accept=".pdf,.png,.jpg,.jpeg" aria-describedby="pop-file-help">
+                <div id="pop-file-name"></div>
+                <div id="pop-file-help" class="text-lilac-dim mt-2" style="font-size:0.72rem;">PDF, PNG or JPG · Max 10MB</div>
+              </div>
+
+              <button class="btn-scl-primary mt-3" id="btn-submit-proof" onclick="submitProof()" disabled>
+                <i class="bi bi-send-fill"></i>&nbsp; Submit Proof
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PAYMENT STATUS INFO ================= -->
+<section id="status-info">
+  <div class="container container-narrow">
+    <div class="section-head">
+      <span class="kicker">Good to know</span>
+      <h2>What Happens After You Pay</h2>
+    </div>
+
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="glass status-card">
+          <span class="num">CARD PAYMENTS</span>
+          <h4><i class="bi bi-lightning-charge-fill text-lilac-dim"></i> Instant</h4>
+          <ul>
+            <li><i class="bi bi-check2"></i> Confirmed the moment your card is charged</li>
+            <li><i class="bi bi-check2"></i> Automatically confirmed on our system</li>
+            <li><i class="bi bi-check2"></i> Immediate project processing begins</li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="glass status-card">
+          <span class="num">INSTANT EFT</span>
+          <h4><i class="bi bi-clock-fill text-lilac-dim"></i> Minutes</h4>
+          <ul>
+            <li><i class="bi bi-check2"></i> Usually confirmed within minutes</li>
+            <li><i class="bi bi-check2"></i> Verified directly with your bank</li>
+            <li><i class="bi bi-check2"></i> Email confirmation once cleared</li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="glass status-card">
+          <span class="num">MANUAL EFT</span>
+          <h4><i class="bi bi-hourglass-split text-lilac-dim"></i> 1–2 Days</h4>
+          <ul>
+            <li><i class="bi bi-check2"></i> May take 1–2 business days to reflect</li>
+            <li><i class="bi bi-check2"></i> Matched using your invoice reference</li>
+            <li><i class="bi bi-check2"></i> Work begins after payment confirmation</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FAQ ================= -->
+<section id="faq">
+  <div class="container container-narrow">
+    <div class="section-head">
+      <span class="kicker">Support</span>
+      <h2>Frequently Asked Questions</h2>
+    </div>
+
+    <div class="accordion" id="faqAccordion">
+
+      <div class="accordion-item">
+        <h3 class="accordion-header">
+          <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+            How long does payment confirmation take?
+          </button>
+        </h3>
+        <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+          <div class="accordion-body">Card payments are confirmed instantly. Instant EFT is typically confirmed within a few minutes. Manual bank transfers can take 1–2 business days to reflect and be matched to your invoice.</div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <h3 class="accordion-header">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+            Can I pay from outside South Africa?
+          </button>
+        </h3>
+        <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+          <div class="accordion-body">Yes. International clients can pay using card payment. Instant EFT and manual EFT are only available for South African bank accounts.</div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <h3 class="accordion-header">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
+            Will I receive an invoice?
+          </button>
+        </h3>
+        <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+          <div class="accordion-body">Yes. A confirmed tax invoice and payment receipt will be emailed to you automatically once your payment has been successfully processed.</div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <h3 class="accordion-header">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4">
+            Is my payment secure?
+          </button>
+        </h3>
+        <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+          <div class="accordion-body">Yes. All transactions are encrypted end-to-end and processed through PCI-compliant, trusted payment infrastructure. SCL Digital Agency never stores your full card details.</div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <h3 class="accordion-header">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq5">
+            Can I request a payment plan?
+          </button>
+        </h3>
+        <div id="faq5" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+          <div class="accordion-body">Payment plans can be arranged for eligible projects. Please contact our Accounts Department to discuss instalment options for your invoice.</div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <h3 class="accordion-header">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq6">
+            Who do I contact if I experience payment issues?
+          </button>
+        </h3>
+        <div id="faq6" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+          <div class="accordion-body">Reach out to our Accounts Department at <a href="mailto:payments@sclda.com">payments@sclda.com</a> and we'll help resolve any issue as quickly as possible.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ================= SUPPORT ================= -->
+<section id="support">
+  <div class="container container-narrow">
+    <div class="section-head">
+      <span class="kicker">We're here to help</span>
+      <h2>Need Assistance?</h2>
+    </div>
+
+    <div class="glass support-card">
+      <div class="d-flex flex-wrap gap-4">
+        <div class="info-item">
+          <div class="info-icon"><i class="bi bi-envelope-fill"></i></div>
+          <div>
+            <div class="info-label">Email</div>
+            <div class="info-value">payments@sclda.com</div>
+          </div>
+        </div>
+        <div class="info-item">
+          <div class="info-icon"><i class="bi bi-person-badge-fill"></i></div>
+          <div>
+            <div class="info-label">Department</div>
+            <div class="info-value">Accounts Department</div>
+          </div>
+        </div>
+        <div class="info-item">
+          <div class="info-icon"><i class="bi bi-clock-fill"></i></div>
+          <div>
+            <div class="info-label">Hours</div>
+            <div class="info-value">Mon–Fri, 09:00–17:00 SAST</div>
+          </div>
+        </div>
+      </div>
+      <a href="mailto:payments@sclda.com" class="btn-scl-outline text-decoration-none flex-shrink-0">
+        <i class="bi bi-chat-dots-fill"></i>&nbsp; Contact Us
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer>
+  <div class="container container-narrow d-flex flex-column flex-md-row justify-content-between align-items-center gap-3 text-center text-md-start">
+    <div>&copy; <span id="year"></span> SCL Digital Agency. All rights reserved.</div>
+    <div class="d-flex gap-3 flex-wrap justify-content-center">
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms &amp; Conditions</a>
+      <a href="#">Refund Policy</a>
+    </div>
+    <div class="d-flex align-items-center gap-2"><i class="bi bi-shield-check"></i> Powered by secure payment technology</div>
+  </div>
+</footer>
+
+<!-- ================= SUCCESS MODAL ================= -->
+<div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content glass border-0 text-center p-4">
+      <div class="modal-body">
+        <div class="success-check"><i class="bi bi-check-lg"></i></div>
+        <h4 class="text-white mb-2" id="successModalLabel">Payment Successful</h4>
+        <p class="text-lilac-dim mb-0" id="successModalText">Your payment has been confirmed. A receipt has been sent to your email and your project will begin processing immediately.</p>
+        <button type="button" class="btn-scl-primary mt-4" data-bs-dismiss="modal">Done</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  /* ---------- Payment method selection ---------- */
+  const methodCards = document.querySelectorAll('.method-card');
+  const ctaCard = document.getElementById('cta-card');
+  const ctaEft = document.getElementById('cta-eft');
+  const ctaManual = document.getElementById('cta-manual');
+
+  function selectMethod(method){
+    methodCards.forEach(c => {
+      const isSelected = c.dataset.method === method;
+      c.classList.toggle('selected', isSelected);
+      c.setAttribute('aria-checked', isSelected);
+    });
+    ctaCard.classList.toggle('d-none', method !== 'card');
+    ctaEft.classList.toggle('d-none', method !== 'eft');
+    ctaManual.classList.toggle('d-none', method !== 'manual');
+  }
+
+  methodCards.forEach(card => {
+    card.addEventListener('click', () => selectMethod(card.dataset.method));
+    card.addEventListener('keydown', (e) => {
+      if(e.key === 'Enter' || e.key === ' '){
+        e.preventDefault();
+        selectMethod(card.dataset.method);
+      }
+    });
+  });
+
+  /* ---------- Copy to clipboard ---------- */
+  document.querySelectorAll('.copy-btn').forEach(btn => {
+    btn.addEventListener('click', async () => {
+      const text = btn.dataset.copy;
+      try{
+        await navigator.clipboard.writeText(text);
+      }catch(err){
+        const ta = document.createElement('textarea');
+        ta.value = text; document.body.appendChild(ta); ta.select();
+        document.execCommand('copy'); document.body.removeChild(ta);
+      }
+      const original = btn.innerHTML;
+      btn.classList.add('copied');
+      btn.innerHTML = '<i class="bi bi-check-lg"></i> Copied';
+      setTimeout(() => { btn.classList.remove('copied'); btn.innerHTML = original; }, 1600);
+    });
+  });
+
+  /* ---------- Proof of payment upload ---------- */
+  const popFile = document.getElementById('pop-file');
+  const popFileName = document.getElementById('pop-file-name');
+  const btnSubmitProof = document.getElementById('btn-submit-proof');
+  const uploadZone = document.getElementById('upload-zone');
+
+  function handleFile(file){
+    if(!file) return;
+    popFileName.innerHTML = `<span class="file-name-chip"><i class="bi bi-file-earmark-check-fill" style="color:var(--success);"></i> ${file.name}</span>`;
+    btnSubmitProof.disabled = false;
+  }
+
+  popFile.addEventListener('change', (e) => handleFile(e.target.files[0]));
+
+  ['dragover','dragenter'].forEach(evt => uploadZone.addEventListener(evt, (e) => {
+    e.preventDefault(); uploadZone.classList.add('drag');
+  }));
+  ['dragleave','drop'].forEach(evt => uploadZone.addEventListener(evt, (e) => {
+    e.preventDefault(); uploadZone.classList.remove('drag');
+  }));
+  uploadZone.addEventListener('drop', (e) => {
+    const file = e.dataTransfer.files[0];
+    if(file){ popFile.files = e.dataTransfer.files; handleFile(file); }
+  });
+
+  function submitProof(){
+    const btn = document.getElementById('btn-submit-proof');
+    const original = btn.innerHTML;
+    btn.disabled = true;
+    btn.innerHTML = '<span class="spinner-scl"></span> Submitting...';
+    setTimeout(() => {
+      btn.innerHTML = '<i class="bi bi-check-lg"></i> Submitted';
+      showSuccess(
+        'Proof of Payment Received',
+        'Thanks — our Accounts Department will verify your transfer and confirm your payment within 1–2 business days.'
+      );
+    }, 1400);
+  }
+
+  /* ---------- Simulated card / instant EFT payment ---------- */
+  function simulatePayment(type){
+    const btn = document.getElementById(type === 'card' ? 'btn-pay-card' : 'btn-pay-eft');
+    const original = btn.innerHTML;
+    btn.disabled = true;
+    btn.innerHTML = '<span class="spinner-scl"></span> Processing...';
+
+    setTimeout(() => {
+      btn.innerHTML = original;
+      btn.disabled = false;
+      if(type === 'card'){
+        showSuccess('Payment Successful', 'Your card payment has been confirmed. A receipt has been sent to your email and your project will begin processing immediately.');
+      } else {
+        showSuccess('Payment Initiated', 'Your Instant EFT is being confirmed with your bank. This is usually completed within a few minutes — we\\'ll email you once it clears.');
+      }
+    }, 1800);
+  }
+
+  function showSuccess(title, text){
+    document.getElementById('successModalLabel').textContent = title;
+    document.getElementById('successModalText').textContent = text;
+    const modal = new bootstrap.Modal(document.getElementById('successModal'));
+    modal.show();
+  }
+</script>
+</body>
+</html>
