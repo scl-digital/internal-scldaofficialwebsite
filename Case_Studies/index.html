@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Case Studies — SCL Digital Agency</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+</head>
+<body data-theme="light">
+
+  <!-- NAV -->
+  <header class="nav" id="nav">
+    <a href="#" class="nav__logo">SCL <span>DA</span></a>
+    <nav class="nav__links">
+      <a href="#">Services</a>
+      <a href="#">Work</a>
+      <a href="#">About</a>
+      <a href="#" class="btn btn--outline">Contact Us</a>
+    </nav>
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+      <span class="theme-toggle__icon">☀</span>
+    </button>
+    <button class="nav__hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero" id="hero">
+    <canvas class="hero__map" id="worldMap"></canvas>
+    <div class="hero__content">
+      <p class="hero__eyebrow fade-in" style="--delay:0.1s">Our Work</p>
+      <h1 class="hero__headline fade-in" style="--delay:0.25s">
+        What we've done<br/>for our customers
+      </h1>
+      <p class="hero__sub fade-in" style="--delay:0.45s">
+        Learn how we helped our clients build stronger relationships with customers
+        and change how they do business — from Africa to the world.
+      </p>
+      <div class="hero__cta fade-in" style="--delay:0.6s">
+        <a href="#case-studies" class="btn btn--primary">Browse Projects</a>
+        <a href="#" class="btn btn--ghost">Start a project ↗</a>
+      </div>
+    </div>
+    <div class="hero__scroll-hint fade-in" style="--delay:0.8s">
+      <span></span>
+      <p>Scroll to explore</p>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <section class="stats" id="stats">
+    <div class="container stats__grid">
+      <div class="stat-item fade-in-scroll">
+        <span class="stat-item__num" data-target="48">0</span>
+        <span class="stat-item__label">Projects Delivered</span>
+      </div>
+      <div class="stat-item fade-in-scroll">
+        <span class="stat-item__num" data-target="32">0</span>
+        <span class="stat-item__label">Happy Clients</span>
+      </div>
+      <div class="stat-item fade-in-scroll">
+        <span class="stat-item__num" data-target="6">0</span>
+        <span class="stat-item__label">Countries Served</span>
+      </div>
+      <div class="stat-item fade-in-scroll">
+        <span class="stat-item__num" data-target="98">0</span>
+        <span class="stat-item__label">% Client Satisfaction</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- LOGO RIBBON -->
+  <section class="ribbon-section">
+    <p class="ribbon-section__label">Trusted by innovative companies</p>
+    <div class="ribbon" aria-hidden="true">
+      <div class="ribbon__track" id="ribbonTrack">
+        <div class="ribbon__item">TechNova</div>
+        <div class="ribbon__item">FinEdge</div>
+        <div class="ribbon__item">PulseMedia</div>
+        <div class="ribbon__item">OrbisBank</div>
+        <div class="ribbon__item">BuildCo</div>
+        <div class="ribbon__item">NexaHealth</div>
+        <div class="ribbon__item">CloudAxis</div>
+        <div class="ribbon__item">UrbanGrid</div>
+        <div class="ribbon__item">KiwiSaaS</div>
+        <div class="ribbon__item">AfriPay</div>
+        <div class="ribbon__item">LaunchDark</div>
+        <div class="ribbon__item">ZeroPoint</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FILTERS -->
+  <section class="filters-section" id="filtersSection">
+    <div class="container filters-wrapper">
+      <div class="filters-group">
+        <span class="filters-label">Industries</span>
+        <div class="filters-pills" id="industryFilters">
+          <button class="pill" data-filter="industry" data-value="all">All</button>
+          <button class="pill" data-filter="industry" data-value="fintech">Fintech</button>
+          <button class="pill" data-filter="industry" data-value="health">Healthcare</button>
+          <button class="pill" data-filter="industry" data-value="ecommerce">E-Commerce</button>
+          <button class="pill" data-filter="industry" data-value="media">Media</button>
+          <button class="pill" data-filter="industry" data-value="realestate">Real Estate</button>
+          <button class="pill" data-filter="industry" data-value="ngo">NGO</button>
+        </div>
+      </div>
+      <div class="filters-group">
+        <span class="filters-label">Services</span>
+        <div class="filters-pills" id="serviceFilters">
+          <button class="pill" data-filter="service" data-value="all">All</button>
+          <button class="pill" data-filter="service" data-value="branding">Branding</button>
+          <button class="pill" data-filter="service" data-value="web">Web Dev</button>
+          <button class="pill" data-filter="service" data-value="mobile">Mobile App</button>
+          <button class="pill" data-filter="service" data-value="ai">AI Integration</button>
+          <button class="pill" data-filter="service" data-value="growth">Growth</button>
+          <button class="pill" data-filter="service" data-value="strategy">Strategy</button>
+        </div>
+      </div>
+      <button class="btn btn--clear" id="clearFilters">✕ Clear Filters</button>
+    </div>
+  </section>
+
+  <!-- CASE STUDIES GRID -->
+  <section class="case-studies" id="case-studies">
+    <div class="container">
+      <div class="case-studies__meta">
+        <span id="resultCount">Showing all projects</span>
+      </div>
+      <div class="case-studies__grid" id="caseGrid">
+        <!-- Cards injected by JS -->
+      </div>
+      <div class="no-results" id="noResults" hidden>
+        <p>No projects match your current filters.</p>
+        <button class="btn btn--primary" id="clearFilters2">Clear Filters</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA BANNER -->
+  <section class="cta-banner fade-in-scroll">
+    <div class="container cta-banner__inner">
+      <h2 class="cta-banner__headline">Ready to build something exceptional?</h2>
+      <p class="cta-banner__sub">Let's talk about your next project — no fluff, just results.</p>
+      <a href="#" class="btn btn--primary btn--lg">Start a Conversation ↗</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container footer__inner">
+      <div class="footer__brand">
+        <span class="footer__logo">SCL <span>DA</span></span>
+        <p>Building digital products that matter — from Cape Town to the world.</p>
+      </div>
+      <div class="footer__links">
+        <div>
+          <h4>Services</h4>
+          <a href="#">Web Development</a>
+          <a href="#">Brand Identity</a>
+          <a href="#">AI Integration</a>
+          <a href="#">Growth</a>
+        </div>
+        <div>
+          <h4>Company</h4>
+          <a href="#">About</a>
+          <a href="#">Case Studies</a>
+          <a href="#">Careers</a>
+          <a href="#">Contact</a>
+        </div>
+        <div>
+          <h4>Connect</h4>
+          <a href="#">LinkedIn</a>
+          <a href="#">Instagram</a>
+          <a href="#">GitHub</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer__bottom container">
+      <p>© 2026 SCL Digital Agency (Pty) Ltd. Cape Town, South Africa.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
