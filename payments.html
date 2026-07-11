@@ -464,7 +464,7 @@
 			<!-- Logo / Home -->
 			<div class="navbar-logo">
 				<a href="index.html" title="Back to Home">
-					<img src="01_Assets/Images/SCL_Digital_Agency_Purple_Logo_softwarecreativelabs.png" alt="SCL Digital Agency">
+					<img src="Assets/Images/SCL_Digital_Agency_Purple_Logo_softwarecreativelabs.png" alt="SCL Digital Agency">
 				</a>
 			</div>
 
@@ -1407,81 +1407,24 @@
 <section id="methods">
   <div class="container container-narrow">
     <div class="section-head">
-      <span class="kicker">Step 2</span>
-      <h2>Choose Payment Method</h2>
+      
+      <h2>Online Payment Options</h2>
     </div>
 
     <div class="row g-4" role="radiogroup" aria-label="Payment method">
 
-      <!-- Card Payment -->
-      <div class="col-md-4">
-        <div class="glass method-card selected" tabindex="0" role="radio" aria-checked="true" data-method="card" id="method-card">
-          <span class="check"><i class="bi bi-check-lg"></i></span>
-          <div class="method-icon"><i class="bi bi-credit-card-fill"></i></div>
-          <h3>Card Payment</h3>
-          <p>Pay instantly using your debit or credit card.</p>
-          <div class="brand-row">
-            <span class="brand-chip">Visa</span>
-            <span class="brand-chip">Mastercard</span>
-            <span class="brand-chip">Amex</span>
-          </div>
-          <ul class="feat-list">
-            <li><i class="bi bi-check-circle-fill"></i> Instant confirmation</li>
-            <li><i class="bi bi-check-circle-fill"></i> Secure checkout</li>
-            <li><i class="bi bi-check-circle-fill"></i> Email receipt</li>
-          </ul>
-        </div>
-      </div>
+  
 
-      <!-- Instant EFT -->
-      <div class="col-md-4">
-        <div class="glass method-card" tabindex="0" role="radio" aria-checked="false" data-method="eft" id="method-eft">
-          <span class="check"><i class="bi bi-check-lg"></i></span>
-          <div class="method-icon"><i class="bi bi-bank2"></i></div>
-          <h3>Instant EFT</h3>
-          <p>Pay directly from your South African bank account.</p>
-          <div class="brand-row">
-            <span class="brand-chip">ABSA</span>
-            <span class="brand-chip">FNB</span>
-            <span class="brand-chip">Nedbank</span>
-            <span class="brand-chip">Standard Bank</span>
-            <span class="brand-chip">Capitec</span>
-            <span class="brand-chip">Investec</span>
-            <span class="brand-chip">Discovery Bank</span>
-            <span class="brand-chip">African Bank</span>
-            <span class="brand-chip">TymeBank</span>
-          </div>
-          <ul class="feat-list">
-            <li><i class="bi bi-check-circle-fill"></i> Confirmed within minutes</li>
-            <li><i class="bi bi-check-circle-fill"></i> No card required</li>
-            <li><i class="bi bi-check-circle-fill"></i> Bank-grade security</li>
-          </ul>
-        </div>
-      </div>
 
-      <!-- Manual EFT -->
-      <div class="col-md-4">
-        <div class="glass method-card" tabindex="0" role="radio" aria-checked="false" data-method="manual" id="method-manual">
-          <span class="check"><i class="bi bi-check-lg"></i></span>
-          <div class="method-icon"><i class="bi bi-building-fill"></i></div>
-          <h3>Paypal</h3>
-          <p>Make a direct transfer using the banking details below.</p>
-          <ul class="feat-list">
-            <li><i class="bi bi-check-circle-fill"></i> No online checkout needed</li>
-            <li><i class="bi bi-check-circle-fill"></i> Ideal for business accounts</li>
-            <li><i class="bi bi-check-circle-fill"></i> Upload proof of payment</li>
-          </ul>
-        </div>
-      </div>
-    </div>
+     
 
     <!-- CTA area for card / instant eft -->
     <div class="glass mt-4 p-4" id="cta-panel">
       <div id="cta-card">
         <div class="d-flex flex-column flex-sm-row justify-content-between align-items-sm-center gap-3">
           <div>
-            <h4 class="text-white mb-1" style="font-size:1.05rem;">Ready to pay with card</h4>
-            <p class="text-lilac-dim mb-0" style="font-size:0.85rem;">You'll be redirected to a secure checkout to enter your card details.</p>
+            <h4 class="text-white mb-1" style="font-size:1.05rem;">Card Payment (Powered by Paystack)</h4>
+            <p class="text-lilac-dim mb-0" style="font-size:0.85rem;">Pay securely using your debit or credit card.</p>
           </div>
           <button class="btn-scl-primary" style="max-width:220px;" id="btn-pay-card" onclick="simulatePayment('card')">
             <i class="bi bi-credit-card"></i>&nbsp; Pay with Card
@@ -1489,17 +1432,7 @@
         </div>
       </div>
 
-      <div id="cta-eft" class="d-none">
-        <div class="d-flex flex-column flex-sm-row justify-content-between align-items-sm-center gap-3">
-          <div>
-            <h4 class="text-white mb-1" style="font-size:1.05rem;">Ready to pay via Instant EFT</h4>
-            <p class="text-lilac-dim mb-0" style="font-size:0.85rem;">You'll be redirected to authorise the payment with your bank.</p>
-          </div>
-          <button class="btn-scl-primary" style="max-width:240px;" id="btn-pay-eft" onclick="simulatePayment('eft')">
-            <i class="bi bi-bank2"></i>&nbsp; Pay via Instant EFT
-          </button>
-        </div>
-      </div>
+    
 
       <!-- Manual EFT full panel -->
       <div id="cta-manual" class="d-none">
@@ -1559,8 +1492,30 @@
         </div>
       </div>
     </div>
+
+    <!-- CTA area for card / instant eft -->
+    <div class="glass mt-4 p-4" id="cta-panel">
+      <div id="cta-card">
+        <div class="d-flex flex-column flex-sm-row justify-content-between align-items-sm-center gap-3">
+          <div>
+            <h4 class="text-white mb-1" style="font-size:1.05rem;">PayPal</h4>
+            <p class="text-lilac-dim mb-0" style="font-size:0.85rem;">Pay securely with your PayPal account or an eligible debit or credit card through PayPal.</p>
+          </div>
+          <button class="btn-scl-primary" style="max-width:220px;" id="btn-pay-card" onclick="simulatePayment('card')">
+            <i class="bi bi-credit-card"></i>&nbsp; Pay with PayPal
+          </button>
+        </div>
+      </div>
+
+
   </div>
+
+
+
+  
 </section>
+
+
 
 <!-- ================= PAYMENT STATUS INFO ================= -->
 <section id="status-info">
