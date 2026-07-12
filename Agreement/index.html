@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SCL Agreement Portal | Software Creative Labs</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="progress-container" role="progressbar" aria-valuemin="1" aria-valuemax="5" aria-valuenow="1">
+        <div class="progress-bar" id="topProgressBar"></div>
+    </div>
+
+    <header class="app-header">
+        <div class="header-container">
+            <div class="brand">
+                <div class="logo-mark">SCL</div>
+                <div class="brand-text">
+                    <span class="company-name">Software Creative Labs</span>
+                    <span class="tagline">Technology Consulting • Digital Agency</span>
+                </div>
+            </div>
+            <nav class="step-indicator" aria-label="Sign progress">
+                <div class="step active" data-step="1">
+                    <div class="step-number">1</div>
+                    <span class="step-label">Overview</span>
+                </div>
+                <div class="step" data-step="2">
+                    <div class="step-number">2</div>
+                    <span class="step-label">Agreement</span>
+                </div>
+                <div class="step" data-step="3">
+                    <div class="step-number">3</div>
+                    <span class="step-label">Terms</span>
+                </div>
+                <div class="step" id="navStepNDA" data-step="4">
+                    <div class="step-number">4</div>
+                    <span class="step-label">NDA</span>
+                </div>
+                <div class="step" id="navStepSignature" data-step="5">
+                    <div class="step-number">5</div>
+                    <span class="step-label">Signature</span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <div class="portal-layout container">
+        
+        <aside class="sidebar">
+            <div class="sidebar-card">
+                <div class="sidebar-header">
+                    <span class="badge badge-status">Reviewing</span>
+                    <h3 id="sideProjectName">Enterprise Cloud Core</h3>
+                </div>
+                <hr class="divider">
+                <div class="meta-list">
+                    <div class="meta-item">
+                        <span class="meta-label">Client</span>
+                        <span class="meta-value" id="sideClientName">Acme Corporation</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Proposal No.</span>
+                        <span class="meta-value">#SCL-2026-894</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Project Value</span>
+                        <span class="meta-value primary-text" id="sideProjectValue">$148,000.00</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Deposit (50%)</span>
+                        <span class="meta-value">$74,000.00</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Timeline</span>
+                        <span class="meta-value">6 Months</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Consultant</span>
+                        <span class="meta-value">Marcus Vance</span>
+                    </div>
+                </div>
+                <hr class="divider">
+                <div class="sidebar-footer">
+                    <p class="text-muted small"><i class="bi bi-shield-check"></i> Secured via SCL Trust Engine</p>
+                </div>
+            </div>
+        </aside>
+
+        <main class="content-area">
+            
+            <section id="page1" class="portal-page active">
+                <div class="page-card">
+                    <div class="page-card-header">
+                        <h1>Master Services Agreement Overview</h1>
+                        <p class="subtitle">Please review the structured summary of your upcoming engagement with Software Creative Labs.</p>
+                    </div>
+
+                    <div class="grid-2-col u-margin-top-md">
+                        <div class="info-group">
+                            <label>Contract Number</label>
+                            <p class="val-text">CT-2026-X992</p>
+                        </div>
+                        <div class="info-group">
+                            <label>Company / Organization</label>
+                            <p class="val-text">Acme Corporation Inc.</p>
+                        </div>
+                        <div class="info-group">
+                            <label>Issue Date</label>
+                            <p class="val-text">July 12, 2026</p>
+                        </div>
+                        <div class="info-group">
+                            <label>Valid Until</label>
+                            <p class="val-text">July 26, 2026</p>
+                        </div>
+                    </div>
+
+                    <div class="summary-highlight-card u-margin-top-md">
+                        <h3>Project Summary &amp; Milestone Roadmap</h3>
+                        <p class="text-muted small">A brief overview of financial configurations and processing expectations.</p>
+                        <div class="grid-3-col u-margin-top-sm">
+                            <div class="stat-box">
+                                <span class="stat-lbl">Total Value</span>
+                                <span class="stat-val">$148,000</span>
+                            </div>
+                            <div class="stat-box">
+                                <span class="stat-lbl">Upfront Deposit</span>
+                                <span class="stat-val">$74,000</span>
+                            </div>
+                            <div class="stat-box">
+                                <span class="stat-lbl">Duration</span>
+                                <span class="stat-val">24 Weeks</span>
+                            </div>
+                        </div>
+                        <div class="u-margin-top-sm">
+                            <label>Payment Schedule</label>
+                            <ul class="custom-list">
+                                <li><strong>Initial Retainer:</strong> 50% Due upon execution of agreement.</li>
+                                <li><strong>Milestone 1 (Architecture):</strong> 25% due upon sign-off of System Blueprint.</li>
+                                <li><strong>Milestone 2 (Delivery):</strong> 25% due upon User Acceptance Testing completion.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="action-footer u-margin-top-lg">
+                        <button class="btn btn-secondary" onclick="window.print()"><i class="bi bi-download"></i> Download Brief PDF</button>
+                        <button class="btn btn-primary btn-next">Continue to Agreement <i class="bi bi-arrow-right"></i></button>
+                    </div>
+                </div>
+            </section>
+
+            <section id="page2" class="portal-page">
+                <div class="page-card legal-document-container">
+                    <div class="page-card-header text-center">
+                        <h2>MASTER SERVICES AGREEMENT</h2>
+                        <p class="text-muted small">Document Ref: MSA-2026-SCL-0041</p>
+                    </div>
+                    
+                    <div class="legal-scroll-box">
+                        <h3>1. Introduction</h3>
+                        <p>This Master Services Agreement ("Agreement") is executed on this 12th day of July, 2026, by and between Software Creative Labs (SCL), hereafter referred to as the "Consultancy", and the client specified within the interactive summary, hereafter referred to as the "Client".</p>
+                        
+                        <h3>2. Definitions</h3>
+                        <p>Wherever referenced within this document, "Deliverables" implies the software artifacts, structural blueprints, source code iterations, and interface designs architected specifically for the Client under designated Statements of Work (SOW).</p>
+
+                        <h3>3. Services</h3>
+                        <p>The Consultancy agrees to perform technical architecture design, systems engineering, platform development, and operational consulting initiatives as mapped out explicitly inside operational project attachments.</p>
+
+                        <h3>4. Client Responsibilities</h3>
+                        <p>The Client guarantees timely authorization pipelines, uninterrupted access to infrastructure assets, functional environments, API specifications, and clear response loops within 72 hours of structural requests.</p>
+
+                        <h3>5. Payment Terms</h3>
+                        <p>Invoices emitted by the Consultancy carry Net-14 payment expectations. Payments shall be executed using modern wire architecture or verified institutional processing mechanisms. Late payments accrue interest tracking at 1.5% per month compounded daily.</p>
+
+                        <h3>6. Scope Changes</h3>
+                        <p>Any expansion, structural shift, or refinement within product features must be formalized explicitly utilizing an authenticated Change Order Request (COR) system approved by both engineering leads.</p>
+
+                        <h3>7. Communication</h3>
+                        <p>Formal status reports are executed synchronously on a bi-weekly cadence via secure telecommunication layers. Asynchronous daily engineering metrics remain permanently visible inside assigned corporate portals.</p>
+
+                        <h3>8. Timeline</h3>
+                        <p>Project milestones represent precise architectural projections based on contemporary information matrices. Adjustments might materialize relative to dependency blocks outside the immediate footprint of the engineering teams.</p>
+
+                        <h3>9. Intellectual Property</h3>
+                        <p>Upon total satisfaction and reconciliation of outstanding financial invoices, structural rights and exclusive code ownership of assigned engineering outputs shift entirely to the Client, except for pre-existing modular core libraries developed by SCL.</p>
+
+                        <h3>10. Confidentiality</h3>
+                        <p>Both operational bodies agree to treat technical schemas, internal roadmaps, financial realities, and strategic architectures with strict absolute confidentiality. This containment loop persists indefinitely beyond the death of this agreement.</p>
+
+                        <h3>11. Termination</h3>
+                        <p>Either organizational entity can sever this structural association by transmitting a clear 30-day written termination statement. In such events, all executed work hours up to the exact termination instance must be compensated fully.</p>
+
+                        <h3>12. Limitation of Liability</h3>
+                        <p>To the absolute threshold permissible under valid legal jurisdictions, SCL's cumulative structural liability concerning any structural framework degradation or commercial loss shall not exceed the financial totals paid under this agreement.</p>
+
+                        <h3>13. Warranty</h3>
+                        <p>The Consultancy provides an architectural functional warranty window spanning 90 days post-deployment to ensure programmatic anomalies matching specified execution requirements are remediated comprehensively.</p>
+
+                        <h3>14. Governing Law</h3>
+                        <p>This Agreement and all associated operational interactions shall be evaluated, construed, and enforced exclusively under the structural laws of the state of corporate jurisdiction of Software Creative Labs.</p>
+
+                        <h3>15. Dispute Resolution</h3>
+                        <p>Should operational conflicts materialize, both corporate entities agree to attempt resolution via structured executive mediation prior to triggering formal institutional arbitration frameworks.</p>
+
+                        <h3>16. Entire Agreement</h3>
+                        <p>This document completely replaces all prior technical discussions, drafts, or informal assertions, constituting the authoritative layout of structural intent between both parties.</p>
+
+                        <div class="legal-placeholder-sig">
+                            <p class="text-muted text-center italic">[Signature Elements Deferred to Section 5]</p>
+                        </div>
+                    </div>
+
+                    <div class="action-footer u-margin-top-lg">
+                        <button class="btn btn-secondary btn-prev"><i class="bi bi-arrow-left"></i> Back</button>
+                        <button class="btn btn-primary btn-next">Accept &amp; Continue <i class="bi bi-arrow-right"></i></button>
+                    </div>
+                </div>
+            </section>
+
+            <section id="page3" class="portal-page">
+                <div class="page-card">
+                    <div class="page-card-header">
+                        <h2>General Terms &amp; Conditions</h2>
+                        <p class="subtitle">Review the core operating regulations governing SCL platforms and resource utilization strategies.</p>
+                    </div>
+
+                    <div class="accordion u-margin-top-md">
+                        <div class="accordion-item">
+                            <button class="accordion-header" aria-expanded="false">
+                                <span>1. Acceptance of Operational Parameters</span>
+                                <i class="bi bi-chevron-down"></i>
+                            </button>
+                            <div class="accordion-content">
+                                <p>By executing this tracking workflow, the client agrees to be legally bound to modern operational cloud architectures, deployment pipelines, and access paradigms explicitly outlined across SCL structural networks.</p>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <button class="accordion-header" aria-expanded="false">
+                                <span>2. Fair Resource Utilization Policy</span>
+                                <i class="bi bi-chevron-down"></i>
+                            </button>
+                            <div class="accordion-content">
+                                <p>Automated computing clusters, continuous integration resources, staging infrastructures, and sandboxed processing matrices must be used ethically. Automated vector stressing or security perimeter probing without explicit permission is forbidden.</p>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <button class="accordion-header" aria-expanded="false">
+                                <span>3. SLA Adjustments &amp; System Maintenance</span>
+                                <i class="bi bi-chevron-down"></i>
+                            </button>
+                            <div class="accordion-content">
+                                <p>SCL maintains a target uptime criteria of 99.95% for target staging sandboxes. Scheduled infrastructural enhancements are conducted within low-impact time zones, accompanied by an early notice cycle of 48 hours minimum.</p>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <button class="accordion-header" aria-expanded="false">
+                                <span>4. Global Regulatory Compliance</span>
+                                <i class="bi bi-chevron-down"></i>
+                            </button>
+                            <div class="accordion-content">
+                                <p>Both networks affirm alignment with international legal parameters, data protection criteria including GDPR protocols, local encryption provisions, and secure cross-border identity processing frameworks.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="action-footer u-margin-top-lg">
+                        <button class="btn btn-secondary btn-prev"><i class="bi bi-arrow-left"></i> Back</button>
+                        <button class="btn btn-primary btn-next">Accept Terms &amp; Continue <i class="bi bi-arrow-right"></i></button>
+                    </div>
+                </div>
+            </section>
+
+            <section id="page4" class="portal-page">
+                <div class="page-card">
+                    <div class="page-card-header">
+                        <h2>Mutual Non-Disclosure Agreement (NDA)</h2>
+                        <p class="subtitle">Enhanced proprietary protection data layer required for advanced product innovation phases.</p>
+                    </div>
+
+                    <div class="legal-scroll-box u-margin-top-md">
+                        <p><strong>Proprietary Information Exchange Protection Protocol:</strong> This protocol secures the delivery of strategic system assets, proprietary algorithms, software frameworks, mathematical processes, and market innovations shared between the parties during the evaluation and implementation phase.</p>
+                        <p>All items explicitly marked as proprietary or reasonably inferred as internal structural intellectual property shall remain completely confidential. Neither organization may leak, reverse engineer, or visually expose these assets to external third parties without rigorous, formal authorization documents written by hand and countersigned by corporate executives.</p>
+                    </div>
+
+                    <div class="action-footer u-margin-top-lg">
+                        <button class="btn btn-secondary btn-prev"><i class="bi bi-arrow-left"></i> Back</button>
+                        <button class="btn btn-primary btn-next">Accept NDA &amp; Continue <i class="bi bi-arrow-right"></i></button>
+                    </div>
+                </div>
+            </section>
+
+            <section id="page5" class="portal-page">
+                <div class="page-card">
+                    <div class="page-card-header">
+                        <h2>Execute Electronic Signature</h2>
+                        <p class="subtitle">Review metadata parameters, generate an authorized signature trace, and finalize your agreement.</p>
+                    </div>
+
+                    <div class="summary-highlight-card u-margin-top-md bg-light-purple">
+                        <div class="grid-2-col">
+                            <div>
+                                <span class="meta-label">Authorized Signatory</span>
+                                <p class="val-text" id="summarySignee">Acme Representative</p>
+                            </div>
+                            <div>
+                                <span class="meta-label">Organization Context</span>
+                                <p class="val-text" id="summaryCompany">Acme Corporation Inc.</p>
+                            </div>
+                            <div>
+                                <span class="meta-label">Core Scope Target</span>
+                                <p class="val-text">Enterprise Cloud Core (MSA-2026-SCL-0041)</p>
+                            </div>
+                            <div>
+                                <span class="meta-label">Version Protocol</span>
+                                <p class="val-text">v2.4 LTS • Secured</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grid-2-col u-margin-top-md">
+                        <div class="form-group">
+                            <label for="inputName">Full Legal Name <span class="text-danger">*</span></label>
+                            <input type="text" id="inputName" placeholder="e.g. Jane Doe" autocomplete="off" required>
+                            <div class="counter-label" id="nameCounter">0 / 60 characters</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputPosition">Professional Position / Title <span class="text-danger">*</span></label>
+                            <input type="text" id="inputPosition" placeholder="e.g. Chief Technology Officer" autocomplete="off" required>
+                        </div>
+                    </div>
+
+                    <div class="signature-module u-margin-top-md">
+                        <div class="signature-module-header">
+                            <label><i class="bi bi-pencil-fill"></i> Draw Electronic Signature Pad <span class="text-danger">*</span></label>
+                            <span class="auto-date" id="liveSigningDate">Date: 2026-07-12</span>
+                        </div>
+                        <div class="canvas-wrapper">
+                            <canvas id="signatureCanvas" width="600" height="200" aria-label="Signature drawing canvas area"></canvas>
+                        </div>
+                        <div class="canvas-actions">
+                            <button type="button" class="btn btn-text text-danger" id="btnClearCanvas"><i class="bi bi-trash3"></i> Clear Canvas</button>
+                            <button type="button" class="btn btn-text" id="btnUndoCanvas"><i class="bi bi-arrow-counterclockwise"></i> Undo Stroke</button>
+                        </div>
+                    </div>
+
+                    <div class="compliance-checkboxes u-margin-top-md">
+                        <label class="checkbox-container">
+                            <input type="checkbox" class="compliance-check" id="chkAgreement">
+                            <span class="checkbox-custom"></span>
+                            <span class="checkbox-label">I have read, evaluated, and agree to the master clauses in the Service Agreement.</span>
+                        </label>
+                        <label class="checkbox-container">
+                            <input type="checkbox" class="compliance-check" id="chkTerms">
+                            <span class="checkbox-custom"></span>
+                            <span class="checkbox-label">I accept the institutional digital Terms &amp; Conditions Framework.</span>
+                        </label>
+                        <label class="checkbox-container">
+                            <input type="checkbox" class="compliance-check" id="chkBinding">
+                            <span class="checkbox-custom"></span>
+                            <span class="checkbox-label">I explicitly understand this electronic signature trace is legally binding under international protocols.</span>
+                        </label>
+                        <label class="checkbox-container">
+                            <input type="checkbox" class="compliance-check" id="chkAuthority">
+                            <span class="checkbox-custom"></span>
+                            <span class="checkbox-label">I confirm I maintain explicit structural authorization to sign on behalf of this organization.</span>
+                        </label>
+                    </div>
+
+                    <div class="action-footer u-margin-top-lg">
+                        <button class="btn btn-secondary btn-prev"><i class="bi bi-arrow-left"></i> Back</button>
+                        <button class="btn btn-success" id="btnFinalizeSignature" disabled>
+                            <span class="btn-text-el"><i class="bi bi-shield-check"></i> Sign Agreement Document</span>
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <section id="page6" class="portal-page">
+                <div class="page-card text-center success-card-layout">
+                    <div class="success-icon-wrapper animate-bounce">
+                        <i class="bi bi-check-circle-fill"></i>
+                    </div>
+                    <h1 class="u-margin-top-md">Agreement Signed Successfully</h1>
+                    <p class="subtitle max-width-center">The cryptographic signature trace has been successfully bound to the document. Copies have been distributed to all legal representatives.</p>
+
+                    <div class="receipt-box u-margin-top-md">
+                        <div class="receipt-row">
+                            <span class="receipt-lbl">Tracking Reference</span>
+                            <span class="receipt-val code-text" id="receiptRef">REF-9283-X84</span>
+                        </div>
+                        <div class="receipt-row">
+                            <span class="receipt-lbl">Timestamp</span>
+                            <span class="receipt-val" id="receiptTimestamp">2026-07-12 16:54:51 UTC</span>
+                        </div>
+                        <div class="receipt-row">
+                            <span class="receipt-lbl">Secure Verification Hash</span>
+                            <span class="receipt-val code-text small-hash">SHA-256: 8f4e2c...1a9b4d</span>
+                        </div>
+                    </div>
+
+                    <div class="success-actions u-margin-top-lg">
+                        <button class="btn btn-primary" id="btnDownloadSigned"><i class="bi bi-file-earmark-pdf"></i> Download Signed Document</button>
+                        <button class="btn btn-secondary" id="btnProceedPayment">Proceed to Secure Retainer Payment <i class="bi bi-credit-card-2-front"></i></button>
+                    </div>
+                    <div class="u-margin-top-md">
+                        <button class="btn btn-text" id="btnReturnDashboard">Return to Partner Dashboard</button>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <div class="loading-overlay" id="loadingOverlay" aria-hidden="true" role="dialog">
+        <div class="loading-modal">
+            <div class="spinner-quantum"></div>
+            <h3 id="loadingStatusHeading">Securing Transaction</h3>
+            <p id="loadingStatusSub">Initialising security frameworks...</p>
+            
+            <div class="processing-steps-list u-margin-top-md">
+                <div class="proc-step" id="pStep0"><i class="bi bi-circle"></i> Verifying identity credentials...</div>
+                <div class="proc-step" id="pStep1"><i class="bi bi-circle"></i> Encrypting agreement payload...</div>
+                <div class="proc-step" id="pStep2"><i class="bi bi-circle"></i> Applying cryptographic signature...</div>
+                <div class="proc-step" id="pStep3"><i class="bi bi-circle"></i> Generating signed PDF record...</div>
+                <div class="proc-step" id="pStep4"><i class="bi bi-circle"></i> Dispatching confirmation matrix...</div>
+                <div class="proc-step" id="pStep5"><i class="bi bi-circle"></i> Provisioning client workspace environment...</div>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
