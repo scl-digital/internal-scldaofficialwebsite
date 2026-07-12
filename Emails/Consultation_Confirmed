@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Consultation Confirmed</title>
+</head>
+
+<body style="margin:0;padding:0;background:#f5f7fb;font-family:Arial,Helvetica,sans-serif;">
+
+<table width="100%" cellpadding="0" cellspacing="0" style="background:#f5f7fb;padding:40px 0;">
+
+<tr>
+<td align="center">
+
+<table width="640" cellpadding="0" cellspacing="0" style="background:#ffffff;border-radius:16px;overflow:hidden;box-shadow:0 8px 30px rgba(0,0,0,.08);">
+
+<!-- Header -->
+
+<tr>
+<td style="background:#1C1550;padding:40px;text-align:center;">
+
+<img src="https://YOURDOMAIN.COM/assets/logo-white.png" width="170" alt="SCL">
+
+<h1 style="color:#ffffff;font-size:30px;margin:20px 0 10px;">
+Your Consultation is Confirmed
+</h1>
+
+<p style="color:#d7d8f5;font-size:16px;line-height:26px;margin:0;">
+Thank you for choosing Software Creative Labs.
+</p>
+
+</td>
+</tr>
+
+<!-- Body -->
+
+<tr>
+
+<td style="padding:45px;">
+
+<p style="font-size:16px;color:#555;line-height:30px;">
+
+Hi <strong>{{CLIENT_NAME}}</strong>,
+
+<br><br>
+
+Thank you for booking your complimentary consultation with
+<strong>Software Creative Labs</strong>.
+
+We're looking forward to learning more about your business,
+your goals, and how we can help bring your ideas to life.
+
+</p>
+
+<!-- Meeting Card -->
+
+<table width="100%" cellpadding="0" cellspacing="0"
+style="margin:35px 0;background:#f8f9ff;border-left:5px solid #1C1550;border-radius:10px;">
+
+<tr>
+
+<td style="padding:25px;">
+
+<h2 style="margin-top:0;color:#1C1550;font-size:20px;">
+Meeting Details
+</h2>
+
+<p style="margin:8px 0;">
+📅 <strong>Date:</strong> {{DATE}}
+</p>
+
+<p style="margin:8px 0;">
+🕒 <strong>Time:</strong> {{TIME}}
+</p>
+
+<p style="margin:8px 0;">
+💻 <strong>Platform:</strong> Google Meet
+</p>
+
+<p style="margin:8px 0;">
+🔗 <strong>Meeting Link:</strong>
+<a href="{{MEETING_LINK}}" style="color:#1C1550;">
+Join Meeting
+</a>
+</p>
+
+</td>
+
+</tr>
+
+</table>
+
+<!-- Calendar -->
+
+<div style="text-align:center;margin:40px 0;">
+
+<a href="{{CALENDAR_LINK}}"
+
+style="background:#1C1550;
+color:#ffffff;
+text-decoration:none;
+padding:16px 34px;
+display:inline-block;
+border-radius:8px;
+font-weight:bold;">
+
+📅 Add to Calendar
+
+</a>
+
+</div>
+
+<!-- What to Expect -->
+
+<h2 style="color:#1C1550;">
+What to Expect
+</h2>
+
+<table width="100%" cellpadding="10">
+
+<tr>
+<td width="36">✓</td>
+<td>Introduction to Software Creative Labs</td>
+</tr>
+
+<tr>
+<td>✓</td>
+<td>Discussion about your business goals</td>
+</tr>
+
+<tr>
+<td>✓</td>
+<td>Review of your current website or digital products</td>
+</tr>
+
+<tr>
+<td>✓</td>
+<td>Explore opportunities for growth and automation</td>
+</tr>
+
+<tr>
+<td>✓</td>
+<td>Discuss timeline, scope, and next steps</td>
+</tr>
+
+</table>
+
+<!-- Documents -->
+
+<div style="margin-top:35px;padding:25px;background:#fafafa;border-radius:10px;">
+
+<h3 style="margin-top:0;color:#1C1550;">
+Helpful Before the Meeting
+</h3>
+
+<p>
+
+If available, please have the following ready:
+
+</p>
+
+<ul style="line-height:30px;color:#555;">
+
+<li>Business goals</li>
+
+<li>Existing website</li>
+
+<li>Brand assets</li>
+
+<li>Project brief</li>
+
+<li>Questions you'd like answered</li>
+
+</ul>
+
+</div>
+
+<!-- Contact -->
+
+<p style="margin-top:45px;line-height:30px;color:#555;">
+
+Need to reschedule?
+
+Simply reply to this email or contact us at
+
+<strong>hello@sclagency.co.za</strong>
+
+</p>
+
+<p style="margin-top:35px;">
+
+We look forward to meeting you.
+
+<br><br>
+
+<strong>Software Creative Labs</strong><br>
+
+Technology Consulting • Digital Agency • Product Innovation
+
+</p>
+
+</td>
+
+</tr>
+
+<!-- Footer -->
+
+<tr>
+
+<td style="background:#10163a;padding:30px;text-align:center;">
+
+<p style="color:#b5bdd8;font-size:13px;line-height:24px;margin:0;">
+
+© 2026 Software Creative Labs (Pty) Ltd.<br>
+
+Building Digital Products. Driving Business Growth.
+
+</p>
+
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+
+</table>
+
+</body>
+
+</html>
