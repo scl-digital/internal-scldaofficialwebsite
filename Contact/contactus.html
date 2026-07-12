@@ -1073,47 +1073,144 @@
 
     <div class="container">
         <div class="form-card" id="enquiry-form">
-            <form id="contactForm" action="https://formsubmit.co/shinsalomboto45@gmail.com" method="POST">
-                <input type="hidden" name="_captcha" value="false">
-                <div class="form-section">
-                 
-         
-                    <h2 class="section-title">Your Details</h2>
-                    
-                    <div class="form-group">
-                        <label for="fullName">Full Name <span class="required">*</span></label>
-                        <input type="text" id="fullName" name="fullName" required>
+           <form id="contactForm" action="https://formsubmit.co/shinsalomboto45@gmail.com" method="POST" enctype="multipart/form-data">
+
+    <input type="hidden" name="_captcha" value="false">
+    <input type="hidden" name="_subject" value="New Discovery Consultation Booking">
+
+    <div class="form-section">
+
+        <h2 class="section-title">Book Your Free Consultation</h2>
+
+        <!-- Company -->
+        <div class="form-group">
+            <label for="companyName">Company Name <span class="required">*</span></label>
+            <input type="text" id="companyName" name="Company Name" required>
+        </div>
+
+        <!-- Full Name -->
+        <div class="form-group">
+            <label for="fullName">Full Name <span class="required">*</span></label>
+            <input type="text" id="fullName" name="Full Name" required>
+        </div>
+
+        <!-- Email -->
+        <div class="form-group">
+            <label for="email">Email Address <span class="required">*</span></label>
+            <input type="email" id="email" name="Email Address" required>
+        </div>
+
+        <!-- Phone -->
+        <div class="form-group">
+            <label for="phone">Phone Number <span class="required">*</span></label>
+            <input type="tel" id="phone" name="Phone Number" required>
+        </div>
+
+        <!-- Industry -->
+        <div class="form-group">
+            <label for="industry">Industry <span class="required">*</span></label>
+            <select id="industry" name="Industry" required>
+                <option value="">Select an Industry</option>
+                <option>Technology</option>
+                <option>Healthcare</option>
+                <option>Professional Services</option>
+                <option>Retail & E-Commerce</option>
+                <option>Real Estate</option>
+                <option>Education</option>
+                <option>Finance</option>
+                <option>Construction</option>
+                <option>Hospitality</option>
+                <option>Non-Profit</option>
+                <option>Other</option>
+            </select>
+        </div>
+
+        <!-- Budget -->
+        <div class="form-group">
+            <label for="budget">Estimated Budget <span class="optional">(Optional)</span></label>
+            <select id="budget" name="Estimated Budget">
+                <option value="">Prefer not to say</option>
+                <option>Under R10,000</option>
+                <option>R10,000 - R25,000</option>
+                <option>R25,000 - R50,000</option>
+                <option>R50,000 - R100,000</option>
+                <option>R100,000+</option>
+            </select>
+        </div>
+
+        <!-- Timeline -->
+        <div class="form-group">
+            <label for="timeline">Desired Timeline <span class="required">*</span></label>
+            <select id="timeline" name="Timeline" required>
+                <option value="">Select Timeline</option>
+                <option>ASAP</option>
+                <option>Within 2 Weeks</option>
+                <option>Within 1 Month</option>
+                <option>Within 2-3 Months</option>
+                <option>Flexible</option>
+            </select>
+        </div>
+
+        <!-- Website -->
+        <div class="form-group">
+            <label for="website">Current Website <span class="optional">(Optional)</span></label>
+            <input
+                type="url"
+                id="website"
+                name="Current Website"
+                placeholder="https://example.com">
+        </div>
+
+        <!-- Project Goals -->
+        <div class="form-group">
+            <label for="goals">Project Goals <span class="required">*</span></label>
+            <textarea
+                id="goals"
+                name="Project Goals"
+                rows="6"
+                placeholder="Tell us about your project, goals, challenges, and what success looks like..."
+                required></textarea>
+        </div>
+
+        <!-- File Upload -->
+        <div class="form-group">
+            <label>
+                Upload Files
+                <span class="optional">(Optional - briefs, PDFs, screenshots, brand guides, wireframes)</span>
+            </label>
+
+            <div class="file-upload">
+                <input
+                    type="file"
+                    id="files"
+                    name="attachment"
+                    multiple
+                    accept=".pdf,.doc,.docx,.ppt,.pptx,.png,.jpg,.jpeg,.zip">
+
+                <label for="files" class="file-upload-label">
+                    <div>📎 Click to upload or drag files here</div>
+                    <div style="font-size:0.9rem;color:var(--text-light);margin-top:8px;">
+                        PDF, DOCX, PPT, Images & ZIP files accepted
                     </div>
+                </label>
+            </div>
 
-                    <div class="form-group">
-                        <label for="email">Email Address <span class="required">*</span></label>
-                        <input type="email" id="email" name="email" required>
-                    </div>
+            <div id="fileList"
+                 style="margin-top:10px;font-size:0.9rem;color:var(--text-light);">
+            </div>
+        </div>
 
+    </div>
 
-                
+    <button type="submit" class="submit-btn">
+        Book Free Consultation
+    </button>
 
-             
+    <div class="success-message" id="successMessage">
+        ✓ Thank you! Your consultation request has been received. We'll contact you within one business day to schedule your discovery meeting.
+    </div>
 
-                    <div class="form-group">
-                        <label>Upload Files <span class="optional">(optional - briefs, PDFs, screenshots, brand guides)</span></label>
-                        <div class="file-upload">
-                            <input type="file" id="files" name="files" multiple accept=".pdf,.doc,.docx,.png,.jpg,.jpeg">
-                            <label for="files" class="file-upload-label">
-                                <div>📎 Click to upload or drag files here</div>
-                                <div style="font-size: 0.9rem; color: var(--text-light); margin-top: 8px;">PDF, DOC, Images accepted</div>
-                            </label>
-                        </div>
-                        <div id="fileList" style="margin-top: 10px; font-size: 0.9rem; color: var(--text-light);"></div>
-                    </div>
-                </div>
-
-                <button type="submit" class="submit-btn">Submit Enquiry</button>
-                
-                <div class="success-message" id="successMessage">
-                    ✓ Thank you! Our team has received your enquiry. We will respond within 24 hours.
-                </div>
-            </form>
+</form>
         </div>
     </div>
 
