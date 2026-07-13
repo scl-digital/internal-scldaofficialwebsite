@@ -89,12 +89,25 @@
   }
 
   .hero-content {
-    display: flex; flex-direction: column;
+    display: flex;
+    flex-direction: column;
     justify-content: center;
     padding: 80px 48px 0;
-    position: relative; z-index: 2;
-  }
 
+    position: relative;
+    z-index: 2;
+
+    background:
+        linear-gradient(
+            rgba(28, 21, 80, 0.75),
+            rgba(28, 21, 80, 0.75)
+        ),
+        url('../../Assets/images/118348.jpg');
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
   .engine-tag {
     display: inline-flex; align-items: center; gap: 12px;
     margin-bottom: 40px;
@@ -130,10 +143,10 @@
   .hero-title {
     font-family: 'Manrope', sans-serif;
     font-size: clamp(52px, 8vw, 110px);
-    font-weight: 800;
+    font-weight: 10;
     line-height: 0.9;
     letter-spacing: -3px;
-    color: var(--color-ink);
+    color: #FFFFFF;
     margin-bottom: 32px;
     max-width: 900px;
   }
@@ -147,7 +160,7 @@
 
   .hero-desc {
     font-size: 14px; line-height: 1.8;
-    color: var(--color-neutral);
+    color: #FFFFFF;
     max-width: 580px;
     font-family: 'Manrope', sans-serif;
     font-weight: 300;
@@ -1665,18 +1678,10 @@
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-grid"></div>
-  <div class="hero-stripes"></div>
-  <div class="hero-glow"></div>
-  <div class="hero-glow-2"></div>
 
   <div class="hero-content">
     <div class="engine-tag">
-      <span class="engine-label">SCL Digital Agency</span>
-      <div class="engine-badge">
-        <div class="engine-dot"></div>
-        
-      </div>
+     
     </div>
 
   
