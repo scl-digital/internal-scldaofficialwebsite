@@ -444,8 +444,9 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 /* ---- CARD ---- */
 .card {
   background: var(--c-card-bg);
-  border-radius: var(--r-card);
-  border: 1px solid var(--c-border);
+ border-top-left-radius: 25px;
+    border-bottom-right-radius: 25px;
+ border: 2px solid #4D4D4D;
   overflow: hidden;
   display: flex;
   flex-direction: column;
