@@ -509,6 +509,8 @@
     html{ scroll-behavior:auto; }
     *{ transition:none !important; }
   }
+
+
 </style>
 </head>
 <body>
@@ -535,7 +537,7 @@
   <section class="hero">
     <div class="wrap">
       <div class="hero-index mono">Service — 02 / Product Design</div>
-      <h1>Systems,<br>not <em>guesswork.</em></h1>
+      <h1>Product Design</h1>
       <div class="hero-grid">
         <p class="lede">UI and UX systems designed to convert, engage, and scale. We create intuitive digital experiences backed by research&mdash;not assumptions.</p>
       </div>
@@ -549,14 +551,177 @@
     </div>
   </section>
 
-  <section class="process">
-    <div class="wrap" style="grid-column:1/-1; padding-bottom:0;">
-      <div class="section-head" style="margin-bottom:0;">
-        <h2>How the system gets built</h2>
-        <span class="cap mono">Four stages, one continuous loop</span>
-      </div>
+
+<!-- ==========================
+     Product Design Video
+========================== -->
+<section class="video-section">
+
+    <div class="container">
+
+        <div class="section-heading">
+            <span class="section-label">Watch</span>
+
+            <h2>See Our Product Design Process in Action</h2>
+
+            <p>
+                Discover how SCL Digital Agency transforms research,
+                strategy, and design into scalable digital experiences.
+            </p>
+        </div>
+
+        <div class="video-wrapper">
+
+            <iframe
+                src="https://www.youtube.com/embed/9uOMectkCCs?si=Kuo7WAD2GdJA_gOF"
+                title="SCL Digital Agency Product Design"
+                loading="lazy"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen>
+            </iframe>
+
+        </div>
+
     </div>
-  </section>
+
+</section>
+
+
+<style>
+  /* ==========================
+   VIDEO SECTION
+========================== */
+
+.video-section{
+
+    padding:100px 0;
+
+    background:#FAFAFA;
+
+}
+
+.container{
+
+    width:min(1280px,90%);
+    margin:auto;
+
+}
+
+.section-heading{
+
+    text-align:center;
+    margin-bottom:60px;
+
+}
+
+.section-label{
+
+    display:inline-block;
+
+    padding:8px 18px;
+
+    border-radius:999px;
+
+    background:#F3F4F6;
+
+    color:#66318F;
+
+    font-weight:700;
+
+    letter-spacing:.08em;
+
+    text-transform:uppercase;
+
+    margin-bottom:18px;
+
+}
+
+.section-heading h2{
+
+    font-size:clamp(2.2rem,4vw,3.4rem);
+
+    color:#111827;
+
+    margin-bottom:18px;
+
+    line-height:1.1;
+
+}
+
+.section-heading p{
+
+    max-width:760px;
+
+    margin:auto;
+
+    color:#6B7280;
+
+    font-size:1.1rem;
+
+    line-height:1.8;
+
+}
+
+.video-wrapper{
+
+    position:relative;
+
+    width:100%;
+
+    aspect-ratio:16/9;
+
+    overflow:hidden;
+
+       border-top-left-radius: 95px;
+    border-bottom-right-radius: 95px;
+
+    background:#000;
+
+    border:1px solid #E5E7EB;
+
+    box-shadow:
+        0 25px 80px rgba(17,24,39,.08);
+
+}
+
+.video-wrapper iframe{
+
+    width:100%;
+    height:100%;
+    border:none;
+    display:block;
+
+}
+
+.video-wrapper:hover{
+
+    transform:translateY(-4px);
+
+    transition:.35s ease;
+
+    box-shadow:
+        0 40px 90px rgba(17,24,39,.12);
+
+}
+</style>
+
+<script>
+  document.addEventListener("visibilitychange", () => {
+
+    const iframe = document.querySelector(".video-wrapper iframe");
+
+    if (document.hidden && iframe) {
+
+        iframe.contentWindow.postMessage(
+            '{"event":"command","func":"pauseVideo","args":""}',
+            "*"
+        );
+
+    }
+
+});
+</script>
+
 
   <section style="padding-top:0; border-top:none;">
     <div class="process">
@@ -619,65 +784,7 @@
     </div>
   </section>
 
-  <section class="pricing">
-    <div class="wrap">
-      <div class="section-head">
-        <h2>Pricing</h2>
-        <span class="cap mono">Three ways to engage</span>
-      </div>
-
-      <div class="pricing-grid">
-        <div class="price-card">
-          <span class="num mono">01 / Foundation</span>
-          <h3>Foundation</h3>
-          <p class="tier-desc">A first, well-researched pass for early-stage products that need to prove the UX before scaling it.</p>
-          <span class="amount">$4,800</span>
-          <span class="cadence mono">One-time</span>
-          <ul>
-            <li>Research sprint &amp; UX audit</li>
-            <li>Up to 2 core flows redesigned</li>
-            <li>Component starter kit</li>
-            <li>1 round of usability testing</li>
-          </ul>
-          <a class="select-btn" href="#">Select Foundation</a>
-        </div>
-
-        <div class="price-card is-featured">
-          <span class="flag mono">Most selected</span>
-          <span class="num mono">02 / Systemized</span>
-          <h3>Systemized</h3>
-          <p class="tier-desc">A complete design system built from research, so every new screen ships consistent and fast.</p>
-          <span class="amount">$12,500</span>
-          <span class="cadence mono">One-time</span>
-          <ul>
-            <li>Full user research programme</li>
-            <li>Token-based design system</li>
-            <li>6&ndash;10 flows designed &amp; prototyped</li>
-            <li>2 rounds of usability testing</li>
-            <li>Brand identity alignment</li>
-          </ul>
-          <a class="select-btn" href="#">Select Systemized</a>
-        </div>
-
-        <div class="price-card">
-          <span class="num mono">03 / Scale</span>
-          <h3>Scale</h3>
-          <p class="tier-desc">An embedded design partner for teams shipping continuously across a growing surface area.</p>
-          <span class="amount">Custom</span>
-          <span class="cadence mono">Monthly retainer</span>
-          <ul>
-            <li>Embedded design &amp; research team</li>
-            <li>Ongoing system governance</li>
-            <li>Quarterly UX audits</li>
-            <li>Unlimited flows, prioritized weekly</li>
-          </ul>
-          <a class="select-btn" href="#">Talk to us</a>
-        </div>
-      </div>
-
-      <p class="pricing-note">All engagements begin with a paid research sprint &mdash; the system is scoped from evidence, not a guess at hours.</p>
-    </div>
-  </section>
+  
 
   <section class="cta">
     <div class="wrap cta-inner">
