@@ -105,7 +105,7 @@
 
   /* ── HERO ── */
   .hero {
-    padding-top: 64px;
+    padding-top: 0px;
     min-height: 100vh;
     display: grid;
     grid-template-rows: 1fr auto;
@@ -143,12 +143,26 @@
     pointer-events: none;
   }
 
-  .hero-content {
-    display: flex; flex-direction: column;
+ .hero-content {
+    display: flex;
+    flex-direction: column;
     justify-content: center;
     padding: 80px 48px 0;
-    position: relative; z-index: 2;
-  }
+
+    position: relative;
+    z-index: 2;
+
+    background:
+        linear-gradient(
+            rgba(28, 21, 80, 0.75),
+            rgba(28, 21, 80, 0.75)
+        ),
+        url('../../Assets/images/MicrosoftTeams-image-34.png');
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
 
   .engine-tag {
     display: inline-flex; align-items: center; gap: 12px;
@@ -184,7 +198,7 @@
 
   .hero-title {
     font-family: 'Syne', sans-serif;
-    font-size: clamp(52px, 8vw, 110px);
+    font-size: clamp(52px, 3vw, 110px);
     font-weight: 800;
     line-height: 0.9;
     letter-spacing: -3px;
@@ -1560,16 +1574,7 @@
   <div class="hero-glow-2"></div>
 
   <div class="hero-content">
-    <div class="engine-tag reveal">
-      <span class="engine-label">Engine</span>
-      <div class="engine-badge">
-        <span class="engine-dot"></span>
-        <span class="engine-text">01 / 02 — Active</span>
-      </div>
-    </div>
-
-    <p class="hero-eyebrow reveal reveal-delay-1">Internal Product Lab</p>
-
+    
     <h1 class="hero-title glitch reveal reveal-delay-2">
       Internal Product Lab</span>
     </h1>
@@ -1580,7 +1585,6 @@
 
     <div class="hero-actions reveal reveal-delay-4">
       <button class="btn-primary">View Our Products →</button>
-      <button class="btn-ghost">See the pipeline <span class="arrow">→</span></button>
     </div>
   </div>
 
