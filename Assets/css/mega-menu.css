@@ -1,3 +1,15 @@
+/* Enterprise Color Palette */
+:root {
+  --color-primary: #66318F;
+  --color-primary-dark: #1C1550;
+  --color-neutral: #4D4D4D;
+  --color-ink: #000000;
+  --color-surface: #F7F6FA;
+  --color-card: #FFFFFF;
+  --color-border: #E4E2EA;
+  --color-tint: #EDE7F3;
+}
+
 .mega-menu {
   position: absolute;
   left: 0;
@@ -5,11 +17,11 @@
   /* Perfectly flush with parent bottom */
   /* Synchronized with header height */
   width: 100%;
-  background: #ffffff;
-  color: #333;
+  background: var(--color-card);
+  color: var(--color-neutral);
   z-index: 1000;
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
-  border-top: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 0 1px 3px rgba(28,21,80,0.06);
+  border-top: 1px solid var(--color-border);
 
   /* Use visibility and opacity for smoother transition and hover persistence */
   visibility: hidden;
@@ -69,9 +81,9 @@
 /* Column 1: Sidebar */
 .mega-menu-sidebar {
   width: 300px;
-  background: #f8f9fa;
+  background: var(--color-tint);
   padding: 40px 0;
-  border-right: 1px solid rgba(0, 0, 0, 0.05);
+  border-right: 1px solid var(--color-border);
 }
 
 .sidebar-item {
@@ -82,15 +94,15 @@
   cursor: pointer;
   transition: all 0.2s ease;
   font-weight: 500;
-  color: #555;
+  color: var(--color-neutral);
   border-left: 4px solid transparent;
 }
 
 .sidebar-item:hover,
 .sidebar-item.active {
-  background: #ffffff;
-  color: #0755E9;
-  border-left-color: #0755E9;
+  background: var(--color-card);
+  color: var(--color-primary);
+  border-left-color: var(--color-primary);
 }
 
 .sidebar-item i {
@@ -125,7 +137,7 @@
 /* Column 2: Context */
 .mega-menu-column.middle h3 {
   font-size: 28px;
-  color: #111;
+  color: var(--color-ink);
   margin-bottom: 20px;
   font-weight: 700;
 }
@@ -133,7 +145,7 @@
 .mega-menu-column.middle p {
   font-size: 16px;
   line-height: 1.6;
-  color: #666;
+  color: var(--color-neutral);
   margin-bottom: 30px;
 }
 
@@ -141,7 +153,7 @@
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  color: #000000;
+  color: var(--color-primary);
   text-decoration: none;
   font-weight: 600;
   font-size: 16px;
@@ -156,7 +168,7 @@
 .mega-menu-column.right h4 {
   font-size: 14px;
   text-transform: uppercase;
-  color: #999;
+  color: var(--color-neutral);
   letter-spacing: 1px;
   margin-bottom: 20px;
 }
@@ -175,7 +187,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 8px 0;
-  color: #333;
+  color: var(--color-neutral);
   text-decoration: none;
   font-size: 16px;
   border-bottom: 1px solid transparent;
@@ -183,8 +195,8 @@
 }
 
 .mega-menu-column.right ul li a:hover {
-  color: #0755E9;
-  border-bottom-color: rgba(7, 85, 233, 0.1);
+  color: var(--color-primary);
+  border-bottom-color: var(--color-tint);
 }
 
 .mega-menu-column.right ul li a i {

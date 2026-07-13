@@ -1,3 +1,15 @@
+/* Enterprise Color Palette */
+:root {
+  --color-primary: #66318F;
+  --color-primary-dark: #1C1550;
+  --color-neutral: #4D4D4D;
+  --color-ink: #000000;
+  --color-surface: #F7F6FA;
+  --color-card: #FFFFFF;
+  --color-border: #E4E2EA;
+  --color-tint: #EDE7F3;
+}
+
 /* Fonts START */
 
 
@@ -51,14 +63,14 @@ body {
 
 body {
   font-family: 'OpenSans-Regular';
-  background: url(../images/background-image-sized.webp) no-repeat center center;
-  background-size: cover;
+  background: var(--color-surface);
   line-height: 1.5;
   margin: 0;
   padding: 0;
   min-width: 320px;
   position: relative;
   font-weight: 300;
+  color: var(--color-neutral);
 }
 
 input,
@@ -117,11 +129,13 @@ h1 {
   font-family: OpenSans-Regular;
   font-size: 60px;
   font-weight: 300;
+  color: var(--color-ink);
 }
 
 h2 {
   font-size: 24px;
   font-weight: 300;
+  color: var(--color-ink);
 }
 
 .title-wrapper {
@@ -146,13 +160,17 @@ div {
   font-weight: 300;
   line-height: 1.6;
   margin-bottom: 25px;
-  color: #bbb6b6;
+  color: var(--color-neutral);
   font-size: 18px;
 }
 
 a {
-  color: #fff;
+  color: var(--color-primary);
   text-decoration: none;
+}
+
+a:hover {
+  color: var(--color-primary-dark);
 }
 
 .uppercase {
@@ -902,7 +920,7 @@ a {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(65, 54, 54, 0.5);
+  background-color: rgba(28, 21, 80, 0.5);
   z-index: -1;
 }
 
@@ -921,7 +939,7 @@ a {
   display: inline-block;
   height: 1px;
   width: 30px;
-  background-color: #fff;
+  background-color: var(--color-primary);
   margin-right: 20px;
   vertical-align: middle;
 }
@@ -934,7 +952,7 @@ a {
 }
 
 .banner-desc {
-  color: #f0eded;
+  color: #fff;
   font-size: 16px;
   line-height: 24px;
   max-width: 550px;
@@ -982,7 +1000,7 @@ a {
 }
 
 .banner-nav-wrap {
-  background-color: var(--color-def);
+  background-color: var(--color-primary-dark);
   display: flex;
   align-items: center;
   column-gap: 20px;
@@ -1074,7 +1092,9 @@ a {
 .s-contact .left {
   padding: 60px 40px 40px 40px;
   border-radius: 15px;
-  background-color: #FFFFFF;
+  background-color: var(--color-card);
+  border: 1px solid var(--color-border);
+  box-shadow: 0 1px 3px rgba(28,21,80,0.06);
   width: 700px;
   font-weight: 300;
 }
@@ -1084,7 +1104,7 @@ a {
 .s-contact .left textarea {
   display: block;
   font-size: 16px;
-  color: #fff;
+  color: var(--color-neutral);
   font-weight: 300;
   transition: 0.35s ease;
 }
@@ -1092,7 +1112,7 @@ a {
 .s-contact .left input,
 .s-contact .left textarea {
   background-color: transparent;
-  border: 1px solid #330867;
+  border: 1px solid var(--color-border);
   border-radius: 1px;
   padding: 10px 20px;
   width: 100%;
@@ -1100,7 +1120,7 @@ a {
 }
 
 .s-contact .left label {
-  background-color: #fff;
+  background-color: var(--color-card);
   display: inline-block;
   position: absolute;
   top: -10px;
@@ -1108,7 +1128,7 @@ a {
   padding-left: 10px;
   padding-right: 10px;
   transition: 0.5s ease;
-  color: #330867;
+  color: var(--color-primary);
   font-size: 14px;
 }
 
@@ -1119,30 +1139,30 @@ a {
 
 .input-field:hover input,
 .input-field:hover textarea {
-  border-color: #330867;
+  border-color: var(--color-primary);
 }
 
 .input-field:hover label {
-  color: #330867;
+  color: var(--color-primary);
 }
 
 .input-field input:focus,
 .input-field textarea:focus {
-  border-color: #fff;
+  border-color: var(--color-primary);
 }
 
 .input-field input:focus~label,
 .input-field textarea:focus~label {
-  color: #fff;
+  color: var(--color-primary);
 }
 
 .input-field.is-active label {
-  color: #fff;
+  color: var(--color-primary);
 }
 
 .input-field.is-active input,
 .input-field.is-active textarea {
-  border-color: #fff;
+  border-color: var(--color-primary);
 }
 
 .s-contact .button-field {
@@ -1150,7 +1170,7 @@ a {
 }
 
 .s-contact .left button {
-  background-color: #330867;
+  background-color: var(--color-primary);
   color: #fff;
   border: none;
   display: inline-block;
@@ -1165,6 +1185,10 @@ a {
   z-index: 0;
   transition: 0.5s ease;
   border-radius: 50px;
+}
+
+.s-contact .left button:hover {
+  background-color: var(--color-primary-dark);
 }
 
 .s-contact .left button:hover::after {
@@ -1552,13 +1576,13 @@ a {
 /* Footer START */
 .site-footer {
   padding: 20px 20px 20px 110px;
-  background-color: var(--color-def);
-  filter: brightness(0.9)
+  background-color: var(--color-primary-dark);
+  color: #fff;
 }
 
 .footer-copyright {
   text-align: center;
-  color: #bab7b7;
+  color: #fff;
 }
 
 /* Footer END */
