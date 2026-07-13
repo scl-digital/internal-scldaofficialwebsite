@@ -6,10 +6,10 @@
   /* Synchronized with header height */
   width: 100%;
   background: #ffffff;
-  color: #333;
+  color: #000000;
   z-index: 1000;
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
-  border-top: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 0 1px 3px rgba(28,21,80,0.06);
+  border-top: 1px solid #E4E2EA;
 
   /* Use visibility and opacity for smoother transition and hover persistence */
   visibility: hidden;
@@ -69,9 +69,9 @@
 /* Column 1: Sidebar */
 .mega-menu-sidebar {
   width: 300px;
-  background: #f8f9fa;
+  background: #F7F6FA;
   padding: 40px 0;
-  border-right: 1px solid rgba(0, 0, 0, 0.05);
+  border-right: 1px solid #E4E2EA;
 }
 
 .sidebar-item {
@@ -82,15 +82,15 @@
   cursor: pointer;
   transition: all 0.2s ease;
   font-weight: 500;
-  color: #555;
+  color: #4D4D4D;
   border-left: 4px solid transparent;
 }
 
 .sidebar-item:hover,
 .sidebar-item.active {
   background: #ffffff;
-  color: #0755E9;
-  border-left-color: #0755E9;
+  color: #66318F;
+  border-left-color: #66318F;
 }
 
 .sidebar-item i {
@@ -125,7 +125,7 @@
 /* Column 2: Context */
 .mega-menu-column.middle h3 {
   font-size: 28px;
-  color: #111;
+  color: #000000;
   margin-bottom: 20px;
   font-weight: 700;
 }
@@ -133,7 +133,7 @@
 .mega-menu-column.middle p {
   font-size: 16px;
   line-height: 1.6;
-  color: #666;
+  color: #4D4D4D;
   margin-bottom: 30px;
 }
 
@@ -141,7 +141,7 @@
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  color: #0755E9;
+  color: #66318F;
   text-decoration: none;
   font-weight: 600;
   font-size: 16px;
@@ -156,7 +156,7 @@
 .mega-menu-column.right h4 {
   font-size: 14px;
   text-transform: uppercase;
-  color: #999;
+  color: #4D4D4D;
   letter-spacing: 1px;
   margin-bottom: 20px;
 }
@@ -175,7 +175,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 8px 0;
-  color: #333;
+  color: #000000;
   text-decoration: none;
   font-size: 16px;
   border-bottom: 1px solid transparent;
@@ -183,8 +183,8 @@
 }
 
 .mega-menu-column.right ul li a:hover {
-  color: #0755E9;
-  border-bottom-color: rgba(7, 85, 233, 0.1);
+  color: #66318F;
+  border-bottom-color: rgba(102, 49, 143, 0.1);
 }
 
 .mega-menu-column.right ul li a i {
