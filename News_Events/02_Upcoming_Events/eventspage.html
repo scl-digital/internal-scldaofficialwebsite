@@ -9,7 +9,7 @@
   <title>Events - SCL Digital Agency</title>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
   <link rel="stylesheet" href="../css/main.css">
-  <link rel="stylesheet" href="../css/mega-menu.css">
+  <link rel="stylesheet" href="../../Assets/css/mega-menu.css">
   <style>
     .events-hero {
       background: linear-gradient(135deg, rgba(22, 122, 198, 0.9), rgba(30, 52, 141, 0.287)), url('../images/Tech Event.jpg');
@@ -267,589 +267,1033 @@
 
 <body>
 
-  <!-- Modern Sticky Navbar -->
-  <nav class="modern-navbar">
-    <div class="navbar-container">
-      <!-- Logo / Home -->
-      <div class="navbar-logo">
-        <a href="../index.html" title="Back to Home">
-          <img src="../images/SCL_Blue.png" alt="SCL Digital Agency">
-        </a>
-      </div>
-
-      <!-- Primary Navigation Links -->
-      <div class="navbar-primary">
-        <ul class="nav-items">
-          <li><a href="../index.html" class="nav-link">Home</a></li>
-          <li class="nav-dropdown" id="nav-about">
-            <a href="../about.html" class="nav-link">About us
-              <svg class="chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                stroke-width="2">
-                <polyline points="6 9 12 15 18 9"></polyline>
-              </svg>
-            </a>
-            <div class="mega-menu" id="mega-menu-about">
-              <div class="mega-menu-content">
-                <!-- Sidebar: Categories (Column 1) -->
-                <div class="mega-menu-sidebar">
-                  <div class="sidebar-item active" onmouseover="showCategory(this, 'company')">
-                    <span>Company Profile</span>
-                    <i class="fas fa-chevron-right"></i>
-                  </div>
-                  <div class="sidebar-item" onmouseover="showCategory(this, 'leadership')">
-                    <span>Leadership</span>
-                    <i class="fas fa-chevron-right"></i>
-                  </div>
-                  <div class="sidebar-item" onmouseover="showCategory(this, 'growth')">
-                    <span>Growth & Careers</span>
-                    <i class="fas fa-chevron-right"></i>
-                  </div>
-                  <div class="sidebar-item" onmouseover="showCategory(this, 'impact')">
-                    <span>Impact & Network</span>
-                    <i class="fas fa-chevron-right"></i>
-                  </div>
-                </div>
-
-                <!-- Main Content Area: Content Sections (Column 2-3) -->
-                <div class="mega-menu-main">
-                  <!-- Company Profile Content -->
-                  <div class="category-content active" id="category-company">
-                    <div class="content-col">
-                      <h3>Our Story</h3>
-                      <p>Founded with a vision to empower African businesses through cutting-edge technology and
-                        creative innovation.</p>
-                      <a href="../about.html" class="mega-menu-cta">Learn More <i class="fas fa-arrow-right"></i></a>
-                    </div>
-                    <div class="links-col">
-                      <h4>Company Links</h4>
-                      <ul>
-                        <li><a href="../about.html#vision-mission-section">Vision & Mission <i
-                              class="fas fa-external-link-alt"></i></a></li>
-                        <li><a href="../about.html#core-values-section">Core Values <i
-                              class="fas fa-external-link-alt"></i></a></li>
-                        <li><a href="../about.html#approach-card">Our Approach <i
-                              class="fas fa-external-link-alt"></i></a></li>
-                      </ul>
-                    </div>
-                  </div>
-
-                  <!-- Leadership Content -->
-                  <div class="category-content" id="category-leadership">
-                    <div class="content-col">
-                      <h3>Leadership Team</h3>
-                      <p>Meet the visionaries behind SCL Digital Agency, led by our founder Shinsa Lyonga Lomboto.</p>
-                      <a href="../about.html#founder-section" class="mega-menu-cta">Meet the Team <i
-                          class="fas fa-arrow-right"></i></a>
-                    </div>
-                    <div class="links-col">
-                      <h4>Leadership Links</h4>
-                      <ul>
-                        <li><a href="../about.html#founder-section">Meet our Founder <i
-                              class="fas fa-external-link-alt"></i></a></li>
-                        <li><a href="../about.html#founder-bio">CEO's Message <i
-                              class="fas fa-external-link-alt"></i></a></li>
-                        <li><a href="../ClientPortal/client-billing-portal.html">Client Relations <i
-                              class="fas fa-external-link-alt"></i></a></li>
-                      </ul>
-                    </div>
-                  </div>
-
-                  <!-- Growth & Careers Content -->
-                  <div class="category-content" id="category-growth">
-                    <div class="content-col">
-                      <h3>Working at SCL</h3>
-                      <p>We are always looking for passionate creators and problem-solvers to join our fast-growing
-                        agency.</p>
-                      <a href="../about.html#approach-card" class="mega-menu-cta">Join Our Team <i
-                          class="fas fa-arrow-right"></i></a>
-                    </div>
-                    <div class="links-col">
-                      <h4>Growth Links</h4>
-                      <ul>
-                        <li><a href="../about.html#approach-card">Why Join Us? <i
-                              class="fas fa-external-link-alt"></i></a></li>
-                        <li><a href="../about.html#community">Culture & Impact <i
-                              class="fas fa-external-link-alt"></i></a></li>
-                        <li><a href="../events-platform/eventspage.html">Career Events <i
-                              class="fas fa-external-link-alt"></i></a></li>
-                      </ul>
-                    </div>
-                  </div>
-
-                  <!-- Impact & Network Content -->
-                  <div class="category-content" id="category-impact">
-                    <div class="content-col">
-                      <h3>Social Impact</h3>
-                      <p>We believe in technology as a force for good, supporting educational initiatives and digital
-                        empowerment across Africa.</p>
-                      <a href="../about.html#community" class="mega-menu-cta">Explore Impact <i
-                          class="fas fa-arrow-right"></i></a>
-                    </div>
-                    <div class="links-col">
-                      <h4>Impact Links</h4>
-                      <ul>
-                        <li><a href="../about.html#partners">Our Partners <i class="fas fa-external-link-alt"></i></a>
-                        </li>
-                        <li><a href="../about.html#community">CSR Initiatives <i
-                              class="fas fa-external-link-alt"></i></a></li>
-                        <li><a href="../about.html#stats">Global Network <i class="fas fa-external-link-alt"></i></a>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </li>
-          <li><a href="../services-platform/our_services.html" class="nav-link">Services</a></li>
-          <li><a href="../case_studies.html" class="nav-link">Customers</a></li>
-          <li><a href="../resources_hub_landing.html" class="nav-link">Resources</a></li>
-        </ul>
-      </div>
-
-      <!-- Utility/Action Zone (Right) -->
-      <div class="navbar-utility">
-        <!-- Search Icon -->
-        <button class="navbar-icon-btn" title="Search" onclick="toggleSearchBar()">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <circle cx="11" cy="11" r="8"></circle>
-            <path d="m21 21-4.35-4.35"></path>
-          </svg>
-        </button>
-
-        <!-- Create Account Button -->
-        <button class="navbar-btn-primary" onclick="openAccountModal()">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-            <circle cx="12" cy="7" r="4"></circle>
-          </svg>
-          <span>Create Account</span>
-        </button>
-
-        <!-- Profile/Login -->
-        <a href="../ClientPortal/client-billing-portal.html" class="navbar-icon-btn" title="Client Portal">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-            <circle cx="12" cy="7" r="4"></circle>
-          </svg>
-        </a>
-
-        <!-- Shopping Cart Icon -->
-        <button class="navbar-icon-btn navbar-cart-btn" title="Shopping Cart" onclick="toggleCart()">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <circle cx="9" cy="21" r="1"></circle>
-            <circle cx="20" cy="21" r="1"></circle>
-            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
-          </svg>
-          <span class="navbar-cart-badge" id="navbar-cart-count">0</span>
-        </button>
-
-        <!-- Hamburger Menu (Mobile) -->
-        <button class="navbar-hamburger" onclick="toggleSidebar()">
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
-      </div>
-    </div>
-
-    <!-- Search Bar (Hidden by default) -->
-    <div class="navbar-search-bar" id="searchBar">
-      <input type="text" placeholder="Search our services, resources, and more..." class="search-input">
-      <button class="search-close" onclick="toggleSearchBar()">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <line x1="18" y1="6" x2="6" y2="18"></line>
-          <line x1="6" y1="6" x2="18" y2="18"></line>
-        </svg>
-      </button>
-    </div>
-  </nav>
-
-  <!-- Modern Navbar Styles -->
-  <style>
-    .modern-navbar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(250, 250, 250, 0.95) 100%);
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid rgba(0, 0, 0, 0.08);
-      z-index: 1000;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-      transition: all 0.3s ease;
-    }
-
-    .modern-navbar.scrolled {
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
-    }
-
-    .navbar-container {
-      max-width: 1400px;
-      margin: 0 auto;
-      padding: 0 20px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      height: 70px;
-    }
-
-    /* Logo */
-    .navbar-logo a {
-      display: flex;
-      align-items: center;
-      height: 50px;
-      transition: transform 0.2s ease;
-    }
-
-    .navbar-logo img {
-      height: 50px;
-      width: auto;
-      object-fit: contain;
-    }
-
-    .navbar-logo a:hover {
-      transform: scale(1.05);
-    }
-
-    /* Primary Navigation */
-    .navbar-primary {
-      flex: 1;
-      display: flex;
-      justify-content: center;
-      margin: 0 30px;
-    }
-
-    .nav-items {
-      display: flex;
-      list-style: none;
-      gap: 30px;
-      margin: 0;
-      padding: 0;
-    }
-
-    .nav-link {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      color: #333;
-      text-decoration: none;
-      font-weight: 500;
-      font-size: 14px;
-      position: relative;
-      transition: color 0.2s ease;
-    }
-
-    .nav-link:hover,
-    .nav-link.active {
-      color: #667eea;
-    }
-
-    /* Active state underline */
-    .nav-link.active::after {
-      content: '';
-      position: absolute;
-      bottom: -8px;
-      left: 0;
-      right: 0;
-      height: 3px;
-      background: linear-gradient(135deg, #667eea, #764ba2);
-      border-radius: 2px;
-    }
-
-    /* Dropdown */
-    .nav-dropdown {
-      position: relative;
-    }
-
-    .nav-dropdown:hover .dropdown-menu {
-      opacity: 1;
-      visibility: visible;
-      transform: translateY(0);
-    }
-
-    .dropdown-menu {
-      position: absolute;
-      top: 100%;
-      left: 0;
-      background: white;
-      border: 1px solid rgba(0, 0, 0, 0.1);
-      border-radius: 8px;
-      margin-top: 8px;
-      padding: 8px 0;
-      min-width: 200px;
-      opacity: 0;
-      visibility: hidden;
-      transform: translateY(-8px);
-      transition: all 0.3s ease;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
-    }
-
-    .dropdown-menu a {
-      display: block;
-      padding: 12px 16px;
-      color: #333;
-      text-decoration: none;
-      font-size: 14px;
-      transition: background 0.2s ease;
-    }
-
-    .dropdown-menu a:hover {
-      background: #f5f7ff;
-      color: #667eea;
-    }
-
-    .chevron {
-      transition: transform 0.3s ease;
-    }
-
-    .nav-dropdown:hover .chevron {
-      transform: rotate(180deg);
-    }
-
-    /* Utility Zone */
-    .navbar-utility {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-    }
-
-    .navbar-icon-btn {
-      background: none;
-      border: none;
-      color: #333;
-      cursor: pointer;
-      padding: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all 0.2s ease;
-      border-radius: 6px;
-    }
-
-    .navbar-icon-btn:hover {
-      color: #667eea;
-      background: rgba(102, 126, 234, 0.1);
-    }
-
-    /* Primary Button */
-    .navbar-btn-primary {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      padding: 10px 20px;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      color: white;
-      border: none;
-      border-radius: 6px;
-      font-weight: 600;
-      font-size: 14px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      white-space: nowrap;
-    }
-
-    .navbar-btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
-    }
-
-    .navbar-btn-primary:active {
-      transform: translateY(0);
-    }
-
-    /* Search Bar */
-    .navbar-search-bar {
-      display: none;
-      padding: 12px 20px;
-      background: rgba(255, 255, 255, 0.98);
-      border-top: 1px solid rgba(0, 0, 0, 0.08);
-    }
-
-    .navbar-search-bar.active {
-      display: flex;
-      gap: 12px;
-      align-items: center;
-    }
-
-    .search-input {
-      flex: 1;
-      padding: 10px 12px;
-      border: 1px solid rgba(0, 0, 0, 0.1);
-      border-radius: 6px;
-      font-size: 14px;
-      outline: none;
-      transition: border-color 0.2s ease;
-    }
-
-    .search-input:focus {
-      border-color: #667eea;
-      box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
-    }
-
-    .search-close {
-      background: none;
-      border: none;
-      color: #666;
-      cursor: pointer;
-      padding: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .search-close:hover {
-      color: #333;
-    }
-
-    /* Hamburger Menu */
-    .navbar-hamburger {
-      display: none;
-      flex-direction: column;
-      gap: 6px;
-      background: none;
-      border: none;
-      cursor: pointer;
-      padding: 8px;
-    }
-
-    .navbar-hamburger span {
-      width: 24px;
-      height: 2px;
-      background: #333;
-      border-radius: 2px;
-      transition: all 0.3s ease;
-    }
-
-    .navbar-hamburger.active span:nth-child(1) {
-      transform: rotate(45deg) translate(10px, 10px);
-    }
-
-    .navbar-hamburger.active span:nth-child(2) {
-      opacity: 0;
-    }
-
-    .navbar-hamburger.active span:nth-child(3) {
-      transform: rotate(-45deg) translate(7px, -7px);
-    }
-
-    /* Responsive */
-    @media (max-width: 768px) {
-      .navbar-container {
-        height: 60px;
-        padding: 0 15px;
-      }
-
-      .navbar-logo img {
-        height: 40px;
-      }
-
-      .navbar-primary {
-        display: none;
-        margin: 0;
-      }
-
-      .navbar-btn-primary span {
-        display: none;
-      }
-
-      .navbar-hamburger {
-        display: flex;
-      }
-
-      .nav-items {
-        gap: 15px;
-      }
-    }
-
-    /* Ensure body has top padding for fixed navbar */
-    body {
-      padding-top: 70px;
-    }
-
-    @media (max-width: 768px) {
-      body {
-        padding-top: 60px;
-      }
-    }
-
-    /* Navbar Cart Button Styling */
-    .navbar-cart-btn {
-      position: relative;
-    }
-
-    .navbar-cart-badge {
-      position: absolute;
-      top: -8px;
-      right: -8px;
-      background: linear-gradient(135deg, #667eea, #764ba2);
-      color: white;
-      border-radius: 50%;
-      width: 20px;
-      height: 20px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 12px;
-      font-weight: 700;
-      min-width: 20px;
-      padding: 0;
-      border: 2px solid white;
-      box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
-    }
-
-    .navbar-cart-badge:empty,
-    .navbar-cart-badge[data-count="0"] {
-      display: none;
-    }
-  </style>
-
-  <!-- Navbar Scripts -->
-  <script>
-    function toggleSearchBar() {
-      const searchBar = document.getElementById('searchBar');
-      searchBar.classList.toggle('active');
-      if (searchBar.classList.contains('active')) {
-        searchBar.querySelector('.search-input').focus();
-      }
-    }
-
-    function toggleSidebar() {
-      const hamburger = document.querySelector('.navbar-hamburger');
-      hamburger.classList.toggle('active');
-      // Additional sidebar toggle logic here if needed
-    }
-
-    // Update navbar on scroll
-    let lastScrollTop = 0;
-    const navbar = document.querySelector('.modern-navbar');
-
-    window.addEventListener('scroll', function () {
-      let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-
-      // Add shadow on scroll
-      if (scrollTop > 0) {
-        navbar.classList.add('scrolled');
-      } else {
-        navbar.classList.remove('scrolled');
-      }
-
-      lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
-    });
-
-    // Set active nav link based on current page
-    document.addEventListener('DOMContentLoaded', function () {
-      const currentPage = window.location.pathname.split('/').pop() || 'index.html';
-      const navLinks = document.querySelectorAll('.nav-link');
-
-      navLinks.forEach(link => {
-        const href = link.getAttribute('href');
-        if (href === currentPage || (currentPage === '' && href === 'index.html')) {
-          link.classList.add('active');
-        }
-      });
-    });
-  </script>
+  
+
+	<!-- Modern Sticky Navbar -->
+	<nav class="modern-navbar">
+		<div class="navbar-container">
+			<!-- Logo / Home -->
+			<div class="navbar-logo">
+				<a href="index.html" title="Back to Home">
+					<img src="../../Assets/Images/SCL_Digital_Agency_Purple_Logo_softwarecreativelabs.png" alt="SCL Digital Agency">
+				</a>
+			</div>
+
+			<!-- Primary Navigation Links -->
+			<div class="navbar-primary">
+				<ul class="nav-items">
+
+					<li class="nav-dropdown" id="nav-solutions">
+						<a href="services-platform/our_services.html" class="nav-link">Solutions
+							<svg class="chevron" width="16" height="16" viewBox="0 0 24 24" fill="none"
+								stroke="currentColor" stroke-width="2">
+								<polyline points="6 9 12 15 18 9"></polyline>
+							</svg>
+						</a>
+						<div class="mega-menu" id="mega-menu-solutions">
+							<div class="mega-menu-content">
+								<!-- Sidebar: Categories (Column 1) -->
+								<div class="mega-menu-sidebar">
+									<div class="sidebar-item active" onmouseover="showCategory(this, 'digital')">
+										<span>Internal Product Lab</span>
+
+
+<svg xmlns="http://www.w3.org/2000/svg"  width="16"
+     height="16" viewBox="0 0 640 640"><!--!Font Awesome Free v7.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2026 Fonticons, Inc.--><path fill="rgb(0, 0, 0)" d="M471.1 297.4C483.6 309.9 483.6 330.2 471.1 342.7L279.1 534.7C266.6 547.2 246.3 547.2 233.8 534.7C221.3 522.2 221.3 501.9 233.8 489.4L403.2 320L233.9 150.6C221.4 138.1 221.4 117.8 233.9 105.3C246.4 92.8 266.7 92.8 279.2 105.3L471.2 297.3z"/></svg>
+
+									</div>
+
+
+									<div class="sidebar-item" onmouseover="showCategory(this, 'business')">
+										<span>Agency Services</span>
+
+<svg xmlns="http://www.w3.org/2000/svg"  width="16"
+     height="16" viewBox="0 0 640 640"><!--!Font Awesome Free v7.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2026 Fonticons, Inc.--><path fill="rgb(0, 0, 0)" d="M471.1 297.4C483.6 309.9 483.6 330.2 471.1 342.7L279.1 534.7C266.6 547.2 246.3 547.2 233.8 534.7C221.3 522.2 221.3 501.9 233.8 489.4L403.2 320L233.9 150.6C221.4 138.1 221.4 117.8 233.9 105.3C246.4 92.8 266.7 92.8 279.2 105.3L471.2 297.3z"/></svg>
+									</div>
+
+
+									<div class="sidebar-item" onmouseover="showCategory(this, 'products')">
+										<span>Featured Products</span>
+
+<svg xmlns="http://www.w3.org/2000/svg"  width="16"
+     height="16" viewBox="0 0 640 640"><!--!Font Awesome Free v7.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2026 Fonticons, Inc.--><path fill="rgb(0, 0, 0)" d="M471.1 297.4C483.6 309.9 483.6 330.2 471.1 342.7L279.1 534.7C266.6 547.2 246.3 547.2 233.8 534.7C221.3 522.2 221.3 501.9 233.8 489.4L403.2 320L233.9 150.6C221.4 138.1 221.4 117.8 233.9 105.3C246.4 92.8 266.7 92.8 279.2 105.3L471.2 297.3z"/></svg>
+
+
+
+
+
+									</div>
+									<div class="sidebar-item" onmouseover="showCategory(this, 'resources')">
+										<span>Resources Hub</span>
+
+<svg xmlns="http://www.w3.org/2000/svg"  width="16"
+     height="16" viewBox="0 0 640 640"><!--!Font Awesome Free v7.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2026 Fonticons, Inc.--><path fill="rgb(0, 0, 0)" d="M471.1 297.4C483.6 309.9 483.6 330.2 471.1 342.7L279.1 534.7C266.6 547.2 246.3 547.2 233.8 534.7C221.3 522.2 221.3 501.9 233.8 489.4L403.2 320L233.9 150.6C221.4 138.1 221.4 117.8 233.9 105.3C246.4 92.8 266.7 92.8 279.2 105.3L471.2 297.3z"/></svg>
+
+									</div>
+								</div>
+
+								<!-- Main Content Area (Columns 2 & 3) -->
+								<div class="mega-menu-main">
+									<!-- Digital Solutions -->
+									<div id="category-digital" class="category-content active">
+										<div class="mega-menu-column middle">
+											<h3>Internal Product Lab</h3>
+											<p>We generate ideas, validate them, build MVPs, and launch into real markets. Successful products become revenue assets — positioned for scale or acquisition.</p>
+											<a href="Solutions/01_Internal_Product_Lab/scl_internal_product_lab.html" class="mega-menu-cta">Learn More 
+
+<svg xmlns="http://www.w3.org/2000/svg"
+     width="16"
+     height="16"
+     viewBox="0 0 640 640"
+     fill="currentColor">
+    <path d="M566.6 342.6C579.1 330.1 579.1 309.8 566.6 297.3L406.6 137.3C394.1 124.8 373.8 124.8 361.3 137.3C348.8 149.8 348.8 170.1 361.3 182.6L466.7 288L96 288C78.3 288 64 302.3 64 320C64 337.7 78.3 352 96 352L466.7 352L361.3 457.4C348.8 469.9 348.8 490.2 361.3 502.7C373.8 515.2 394.1 515.2 406.6 502.7L566.6 342.7z"/>
+</svg>
+
+											
+											</a>
+										</div>
+
+	
+										
+									</div>
+									<!-- Featured Products -->
+									<div id="category-products" class="category-content">
+										<div class="mega-menu-column middle">
+											<h3>Featured Products</h3>
+											<p>Discover our signature software suite designed to solve specific business
+												problems and streamline your operations through automation and
+												advanced technology.</p>
+											<a href="Solutions/03_Products/Products.html" class="mega-menu-cta">View All
+												Products 												
+	<svg xmlns="http://www.w3.org/2000/svg"
+     width="16"
+     height="16"
+     viewBox="0 0 640 640"
+     fill="currentColor">
+    <path d="M566.6 342.6C579.1 330.1 579.1 309.8 566.6 297.3L406.6 137.3C394.1 124.8 373.8 124.8 361.3 137.3C348.8 149.8 348.8 170.1 361.3 182.6L466.7 288L96 288C78.3 288 64 302.3 64 320C64 337.7 78.3 352 96 352L466.7 352L361.3 457.4C348.8 469.9 348.8 490.2 361.3 502.7C373.8 515.2 394.1 515.2 406.6 502.7L566.6 342.7z"/>
+</svg></a>
+										</div>
+										
+									</div>
+									<!-- Business Services -->
+									<div id="category-business" class="category-content">
+										<div class="mega-menu-column middle">
+											<h3>Agency Services</h3>
+											<p>We bring our proven systems to founders, startups, and visionaries — giving them the infrastructure and strategy to transform bold ideas into scalable businesses.</p>
+											<a href="Solutions/02_Agency_Services/scl_agency_services.html" class="mega-menu-cta">Learn More
+												
+												
+	<svg xmlns="http://www.w3.org/2000/svg"
+     width="16"
+     height="16"
+     viewBox="0 0 640 640"
+     fill="currentColor">
+    <path d="M566.6 342.6C579.1 330.1 579.1 309.8 566.6 297.3L406.6 137.3C394.1 124.8 373.8 124.8 361.3 137.3C348.8 149.8 348.8 170.1 361.3 182.6L466.7 288L96 288C78.3 288 64 302.3 64 320C64 337.7 78.3 352 96 352L466.7 352L361.3 457.4C348.8 469.9 348.8 490.2 361.3 502.7C373.8 515.2 394.1 515.2 406.6 502.7L566.6 342.7z"/>
+</svg>
+											
+											
+											</a>
+										</div>
+										
+									</div>
+
+									<!-- Featured Products -->
+									<div id="category-products" class="category-content">
+										<div class="mega-menu-column middle">
+											<h3>Featured Products</h3>
+											<p>Discover our signature software suite designed to solve specific business
+												problems and streamline your operations through automation and
+												advanced technology.</p>
+											<a href="Solutions/03_Products/Products.html" class="mega-menu-cta">View All
+												Products 
+											
+															
+	<svg xmlns="http://www.w3.org/2000/svg"
+     width="16"
+     height="16"
+     viewBox="0 0 640 640"
+     fill="currentColor">
+    <path d="M566.6 342.6C579.1 330.1 579.1 309.8 566.6 297.3L406.6 137.3C394.1 124.8 373.8 124.8 361.3 137.3C348.8 149.8 348.8 170.1 361.3 182.6L466.7 288L96 288C78.3 288 64 302.3 64 320C64 337.7 78.3 352 96 352L466.7 352L361.3 457.4C348.8 469.9 348.8 490.2 361.3 502.7C373.8 515.2 394.1 515.2 406.6 502.7L566.6 342.7z"/>
+</svg>
+
+</a>
+										</div>
+										
+									</div>
+
+									<!-- Resources -->
+									<div id="category-resources" class="category-content">
+										<div class="mega-menu-column middle">
+											<h3>Resources Hub</h3>
+											<p>Access our wealth of knowledge, from in-depth case studies and expert
+												blog posts to comprehensive documentation and reliable support
+												services.</p>
+											<a href="Solutions/04_Resources_Hub/Resources_hub.html" class="mega-menu-cta">Visit Resource
+												Hub 
+											
+																							
+	<svg xmlns="http://www.w3.org/2000/svg"
+     width="16"
+     height="16"
+     viewBox="0 0 640 640"
+     fill="currentColor">
+    <path d="M566.6 342.6C579.1 330.1 579.1 309.8 566.6 297.3L406.6 137.3C394.1 124.8 373.8 124.8 361.3 137.3C348.8 149.8 348.8 170.1 361.3 182.6L466.7 288L96 288C78.3 288 64 302.3 64 320C64 337.7 78.3 352 96 352L466.7 352L361.3 457.4C348.8 469.9 348.8 490.2 361.3 502.7C373.8 515.2 394.1 515.2 406.6 502.7L566.6 342.7z"/>
+</svg>
+											
+											</a>
+										</div>
+										
+									</div>
+								</div>
+							</div>
+						</div>
+					</li>
+
+
+
+							
+								
+
+					<li class="nav-dropdown" id="nav-news">
+						<a href="services-platform/our_services.html" class="nav-link">News & Events
+							<svg class="chevron" width="16" height="16" viewBox="0 0 24 24" fill="none"
+								stroke="currentColor" stroke-width="2">
+								<polyline points="6 9 12 15 18 9"></polyline>
+							</svg>
+						</a>
+						<div class="mega-menu" id="mega-menu-news">
+							<div class="mega-menu-content">
+								<!-- Sidebar: Categories (Column 1) -->
+								<div class="mega-menu-sidebar">
+									<div class="sidebar-item active" onmouseover="showCategory(this, 'latest-news')">
+										<span>Latest News</span>
+										
+<svg xmlns="http://www.w3.org/2000/svg"  width="16"
+     height="16" viewBox="0 0 640 640"><!--!Font Awesome Free v7.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2026 Fonticons, Inc.--><path fill="rgb(0, 0, 0)" d="M471.1 297.4C483.6 309.9 483.6 330.2 471.1 342.7L279.1 534.7C266.6 547.2 246.3 547.2 233.8 534.7C221.3 522.2 221.3 501.9 233.8 489.4L403.2 320L233.9 150.6C221.4 138.1 221.4 117.8 233.9 105.3C246.4 92.8 266.7 92.8 279.2 105.3L471.2 297.3z"/></svg>
+									</div>
+									<div class="sidebar-item" onmouseover="showCategory(this, 'upcoming-events')">
+										<span>Upcoming Events</span>
+										
+<svg xmlns="http://www.w3.org/2000/svg"  width="16"
+     height="16" viewBox="0 0 640 640"><!--!Font Awesome Free v7.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2026 Fonticons, Inc.--><path fill="rgb(0, 0, 0)" d="M471.1 297.4C483.6 309.9 483.6 330.2 471.1 342.7L279.1 534.7C266.6 547.2 246.3 547.2 233.8 534.7C221.3 522.2 221.3 501.9 233.8 489.4L403.2 320L233.9 150.6C221.4 138.1 221.4 117.8 233.9 105.3C246.4 92.8 266.7 92.8 279.2 105.3L471.2 297.3z"/></svg>
+									</div>
+									<div class="sidebar-item" onmouseover="showCategory(this, 'community')">
+										<span>Community Stories</span>
+										
+<svg xmlns="http://www.w3.org/2000/svg"  width="16"
+     height="16" viewBox="0 0 640 640"><!--!Font Awesome Free v7.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2026 Fonticons, Inc.--><path fill="rgb(0, 0, 0)" d="M471.1 297.4C483.6 309.9 483.6 330.2 471.1 342.7L279.1 534.7C266.6 547.2 246.3 547.2 233.8 534.7C221.3 522.2 221.3 501.9 233.8 489.4L403.2 320L233.9 150.6C221.4 138.1 221.4 117.8 233.9 105.3C246.4 92.8 266.7 92.8 279.2 105.3L471.2 297.3z"/></svg>
+									</div>
+									<div class="sidebar-item" onmouseover="showCategory(this, 'press')">
+										<span>Press Releases</span>
+									
+<svg xmlns="http://www.w3.org/2000/svg"  width="16"
+     height="16" viewBox="0 0 640 640"><!--!Font Awesome Free v7.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2026 Fonticons, Inc.--><path fill="rgb(0, 0, 0)" d="M471.1 297.4C483.6 309.9 483.6 330.2 471.1 342.7L279.1 534.7C266.6 547.2 246.3 547.2 233.8 534.7C221.3 522.2 221.3 501.9 233.8 489.4L403.2 320L233.9 150.6C221.4 138.1 221.4 117.8 233.9 105.3C246.4 92.8 266.7 92.8 279.2 105.3L471.2 297.3z"/></svg>
+									</div>
+								</div>
+
+								<!-- Main Content Area (Columns 2 & 3) -->
+								<div class="mega-menu-main">
+									<!-- Latest News -->
+									<div id="category-latest-news" class="category-content active">
+										<div class="mega-menu-column middle">
+											<h3>Latest Updates</h3>
+											<p>Stay informed about SCL Digital Agency's latest achievements,
+												major milestones, and company announcements from our global offices.</p>
+											<a href="News_Events/01_Latest_News/Latest_News.html" class="mega-menu-cta">Read All
+												News 
+<svg xmlns="http://www.w3.org/2000/svg"
+     width="16"
+     height="16"
+     viewBox="0 0 640 640"
+     fill="currentColor">
+    <path d="M566.6 342.6C579.1 330.1 579.1 309.8 566.6 297.3L406.6 137.3C394.1 124.8 373.8 124.8 361.3 137.3C348.8 149.8 348.8 170.1 361.3 182.6L466.7 288L96 288C78.3 288 64 302.3 64 320C64 337.7 78.3 352 96 352L466.7 352L361.3 457.4C348.8 469.9 348.8 490.2 361.3 502.7C373.8 515.2 394.1 515.2 406.6 502.7L566.6 342.7z"/>
+</svg></a>
+										</div>
+										
+									</div>
+
+									<!-- Upcoming Events -->
+									<div id="category-upcoming-events" class="category-content">
+										<div class="mega-menu-column middle">
+											<h3>Events & Workshops</h3>
+											<p>Join us for our upcoming webinars, technology workshops,
+												and networking events designed to foster innovation and collaboration.
+											</p>
+											<a href="News_Events/02_Upcoming_Events/eventspage.html" class="mega-menu-cta">View
+												Calendar 
+<svg xmlns="http://www.w3.org/2000/svg"
+     width="16"
+     height="16"
+     viewBox="0 0 640 640"
+     fill="currentColor">
+    <path d="M566.6 342.6C579.1 330.1 579.1 309.8 566.6 297.3L406.6 137.3C394.1 124.8 373.8 124.8 361.3 137.3C348.8 149.8 348.8 170.1 361.3 182.6L466.7 288L96 288C78.3 288 64 302.3 64 320C64 337.7 78.3 352 96 352L466.7 352L361.3 457.4C348.8 469.9 348.8 490.2 361.3 502.7C373.8 515.2 394.1 515.2 406.6 502.7L566.6 342.7z"/>
+</svg></a>
+										</div>
+										
+									</div>
+
+									<!-- Community -->
+									<div id="category-community" class="category-content">
+										<div class="mega-menu-column middle">
+											<h3>Community & Impact</h3>
+											<p>Discover the success stories of our clients and the positive
+												social impact projects SCL Digital Agency supports around the world.</p>
+											<a href="case_studies.html" class="mega-menu-cta">Impact
+												Reports 
+<svg xmlns="http://www.w3.org/2000/svg"
+     width="16"
+     height="16"
+     viewBox="0 0 640 640"
+     fill="currentColor">
+    <path d="M566.6 342.6C579.1 330.1 579.1 309.8 566.6 297.3L406.6 137.3C394.1 124.8 373.8 124.8 361.3 137.3C348.8 149.8 348.8 170.1 361.3 182.6L466.7 288L96 288C78.3 288 64 302.3 64 320C64 337.7 78.3 352 96 352L466.7 352L361.3 457.4C348.8 469.9 348.8 490.2 361.3 502.7C373.8 515.2 394.1 515.2 406.6 502.7L566.6 342.7z"/>
+</svg></a>
+										</div>
+										
+									</div>
+
+									<!-- Press Releases -->
+									<div id="category-press" class="category-content">
+										<div class="mega-menu-column middle">
+											<h3>Newsroom & Media</h3>
+											<p>Access our official press releases, high-resolution media
+												assets, and contact information for media inquiries.</p>
+											<a href="News_Events/04_Press_Releases/newsroom.html" class="mega-menu-cta">Media
+												Inquiries 
+<svg xmlns="http://www.w3.org/2000/svg"
+     width="16"
+     height="16"
+     viewBox="0 0 640 640"
+     fill="currentColor">
+    <path d="M566.6 342.6C579.1 330.1 579.1 309.8 566.6 297.3L406.6 137.3C394.1 124.8 373.8 124.8 361.3 137.3C348.8 149.8 348.8 170.1 361.3 182.6L466.7 288L96 288C78.3 288 64 302.3 64 320C64 337.7 78.3 352 96 352L466.7 352L361.3 457.4C348.8 469.9 348.8 490.2 361.3 502.7C373.8 515.2 394.1 515.2 406.6 502.7L566.6 342.7z"/>
+</svg></a>
+										</div>
+										
+									</div>
+								</div>
+							</div>
+						</div>
+
+					</li>
+
+					<li class="nav-dropdown" id="nav-about">
+						<a href="about.html" class="nav-link">About us
+							<svg class="chevron" width="16" height="16" viewBox="0 0 24 24" fill="none"
+								stroke="currentColor" stroke-width="2">
+								<polyline points="6 9 12 15 18 9"></polyline>
+							</svg>
+						</a>
+						<div class="mega-menu" id="mega-menu-about">
+							<div class="mega-menu-content">
+								<!-- Sidebar: Categories (Column 1) -->
+								<div class="mega-menu-sidebar">
+									<div class="sidebar-item active" onmouseover="showCategory(this, 'company')">
+										<span>Company Profile</span>
+										
+<svg xmlns="http://www.w3.org/2000/svg"  width="16"
+     height="16" viewBox="0 0 640 640"><!--!Font Awesome Free v7.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2026 Fonticons, Inc.--><path fill="rgb(0, 0, 0)" d="M471.1 297.4C483.6 309.9 483.6 330.2 471.1 342.7L279.1 534.7C266.6 547.2 246.3 547.2 233.8 534.7C221.3 522.2 221.3 501.9 233.8 489.4L403.2 320L233.9 150.6C221.4 138.1 221.4 117.8 233.9 105.3C246.4 92.8 266.7 92.8 279.2 105.3L471.2 297.3z"/></svg>
+									</div>
+									<div class="sidebar-item" onmouseover="showCategory(this, 'leadership')">
+										<span>Leadership</span>
+										
+<svg xmlns="http://www.w3.org/2000/svg"  width="16"
+     height="16" viewBox="0 0 640 640"><!--!Font Awesome Free v7.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2026 Fonticons, Inc.--><path fill="rgb(0, 0, 0)" d="M471.1 297.4C483.6 309.9 483.6 330.2 471.1 342.7L279.1 534.7C266.6 547.2 246.3 547.2 233.8 534.7C221.3 522.2 221.3 501.9 233.8 489.4L403.2 320L233.9 150.6C221.4 138.1 221.4 117.8 233.9 105.3C246.4 92.8 266.7 92.8 279.2 105.3L471.2 297.3z"/></svg>
+									</div>
+									<div class="sidebar-item" onmouseover="showCategory(this, 'growth')">
+										<span>Growth & Careers</span>
+										
+<svg xmlns="http://www.w3.org/2000/svg"  width="16"
+     height="16" viewBox="0 0 640 640"><!--!Font Awesome Free v7.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2026 Fonticons, Inc.--><path fill="rgb(0, 0, 0)" d="M471.1 297.4C483.6 309.9 483.6 330.2 471.1 342.7L279.1 534.7C266.6 547.2 246.3 547.2 233.8 534.7C221.3 522.2 221.3 501.9 233.8 489.4L403.2 320L233.9 150.6C221.4 138.1 221.4 117.8 233.9 105.3C246.4 92.8 266.7 92.8 279.2 105.3L471.2 297.3z"/></svg>
+									</div>
+									<div class="sidebar-item" onmouseover="showCategory(this, 'impact')">
+										<span>Impact & Network</span>
+										
+<svg xmlns="http://www.w3.org/2000/svg"  width="16"
+     height="16" viewBox="0 0 640 640"><!--!Font Awesome Free v7.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2026 Fonticons, Inc.--><path fill="rgb(0, 0, 0)" d="M471.1 297.4C483.6 309.9 483.6 330.2 471.1 342.7L279.1 534.7C266.6 547.2 246.3 547.2 233.8 534.7C221.3 522.2 221.3 501.9 233.8 489.4L403.2 320L233.9 150.6C221.4 138.1 221.4 117.8 233.9 105.3C246.4 92.8 266.7 92.8 279.2 105.3L471.2 297.3z"/></svg>
+									</div>
+								</div>
+
+								<!-- Main Content Area (Columns 2 & 3) -->
+								<div class="mega-menu-main">
+									<!-- Company Profile -->
+									<div id="category-company" class="category-content active">
+										<div class="mega-menu-column middle">
+											<h3>Company Profile</h3>
+											<p>Discover the essence of SCL Digital Agency, where we empower visionaries
+												and
+												deliver transformative digital excellence across Africa.</p>
+											<a href="About/01_Company_Profile/company_profile.html" class="mega-menu-cta">Learn More 
+<svg xmlns="http://www.w3.org/2000/svg"
+     width="16"
+     height="16"
+     viewBox="0 0 640 640"
+     fill="currentColor">
+    <path d="M566.6 342.6C579.1 330.1 579.1 309.8 566.6 297.3L406.6 137.3C394.1 124.8 373.8 124.8 361.3 137.3C348.8 149.8 348.8 170.1 361.3 182.6L466.7 288L96 288C78.3 288 64 302.3 64 320C64 337.7 78.3 352 96 352L466.7 352L361.3 457.4C348.8 469.9 348.8 490.2 361.3 502.7C373.8 515.2 394.1 515.2 406.6 502.7L566.6 342.7z"/>
+</svg></a>
+										</div>
+										
+									</div>
+
+									<!-- Leadership -->
+									<div id="category-leadership" class="category-content">
+										<div class="mega-menu-column middle">
+											<h3>Leadership</h3>
+											<p>Guided by purpose-led visionaries who blend innovation with integrity to
+												build world-class African brands.</p>
+											<a href="About/02_Leadership/Meet_the_team.html" class="mega-menu-cta">Meet the Team 
+<svg xmlns="http://www.w3.org/2000/svg"
+     width="16"
+     height="16"
+     viewBox="0 0 640 640"
+     fill="currentColor">
+    <path d="M566.6 342.6C579.1 330.1 579.1 309.8 566.6 297.3L406.6 137.3C394.1 124.8 373.8 124.8 361.3 137.3C348.8 149.8 348.8 170.1 361.3 182.6L466.7 288L96 288C78.3 288 64 302.3 64 320C64 337.7 78.3 352 96 352L466.7 352L361.3 457.4C348.8 469.9 348.8 490.2 361.3 502.7C373.8 515.2 394.1 515.2 406.6 502.7L566.6 342.7z"/>
+</svg></a>
+										</div>
+										
+									</div>
+
+									<!-- Growth & Careers -->
+									<div id="category-growth" class="category-content">
+										<div class="mega-menu-column middle">
+											<h3>Growth & Careers</h3>
+											<p>Join a team of passionate innovators and creators. We're building the
+												future of digital excellence, one project at a time.</p>
+											<a href="About/03_Growth_Careers/careers.html" class="mega-menu-cta">Join Us 
+<svg xmlns="http://www.w3.org/2000/svg"
+     width="16"
+     height="16"
+     viewBox="0 0 640 640"
+     fill="currentColor">
+    <path d="M566.6 342.6C579.1 330.1 579.1 309.8 566.6 297.3L406.6 137.3C394.1 124.8 373.8 124.8 361.3 137.3C348.8 149.8 348.8 170.1 361.3 182.6L466.7 288L96 288C78.3 288 64 302.3 64 320C64 337.7 78.3 352 96 352L466.7 352L361.3 457.4C348.8 469.9 348.8 490.2 361.3 502.7C373.8 515.2 394.1 515.2 406.6 502.7L566.6 342.7z"/>
+</svg></a>
+										</div>
+										
+									</div>
+
+									<!-- Impact & Network -->
+									<div id="category-impact" class="category-content">
+										<div class="mega-menu-column middle">
+											<h3>Impact & Network</h3>
+											<p>Our success is measured by the growth of our partners and the positive
+												impact we create in the global digital landscape.</p>
+											<a href="About/04_Impact_Network/Our_Impact.html" class="mega-menu-cta">Our Impact 
+<svg xmlns="http://www.w3.org/2000/svg"
+     width="16"
+     height="16"
+     viewBox="0 0 640 640"
+     fill="currentColor">
+    <path d="M566.6 342.6C579.1 330.1 579.1 309.8 566.6 297.3L406.6 137.3C394.1 124.8 373.8 124.8 361.3 137.3C348.8 149.8 348.8 170.1 361.3 182.6L466.7 288L96 288C78.3 288 64 302.3 64 320C64 337.7 78.3 352 96 352L466.7 352L361.3 457.4C348.8 469.9 348.8 490.2 361.3 502.7C373.8 515.2 394.1 515.2 406.6 502.7L566.6 342.7z"/>
+</svg></a>
+										</div>
+										
+									</div>
+								</div>
+							</div>
+						</div>
+					</li>
+
+
+
+				</ul>
+			</div>
+
+			<!-- Utility/Action Zone (Right) -->
+			<div class="navbar-utility">
+
+
+
+
+				<!-- Search Icon -->
+				<button class="navbar-icon-btn" title="Search" onclick="toggleSearchBar()">
+				<svg width="18" height="18" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640"><!--!Font Awesome Free v7.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2026 Fonticons, Inc.--><path fill="rgb(0, 0, 0)" d="M224.2 89C216.3 70.1 195.7 60.1 176.1 65.4L170.6 66.9C106 84.5 50.8 147.1 66.9 223.3C104 398.3 241.7 536 416.7 573.1C493 589.3 555.5 534 573.1 469.4L574.6 463.9C580 444.2 569.9 423.6 551.1 415.8L453.8 375.3C437.3 368.4 418.2 373.2 406.8 387.1L368.2 434.3C297.9 399.4 241.3 341 208.8 269.3L253 233.3C266.9 222 271.6 202.9 264.8 186.3L224.2 89z"/></svg>	
+				&#8203; &#8203; &#8203;
+				+27 74 019 4690
+				</button>
+
+			
+
+        <!-- Contact Us Button -->
+<button class="navbar-btn-primary" onclick="window.location.href='Contact/contactus.html'">
+    <span>Book a Free Consultation</span>
+</button>
+
+
+				<!-- Profile/Login -->
+				<a href="/Solutions/03_Products/login_products.html" target="_blank" class="navbar-icon-btn" title="Client Portal">
+					<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+						<path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+						<circle cx="12" cy="7" r="4"></circle>
+					</svg>
+				</a>
+
+				
+
+				<!-- Hamburger Menu (Mobile) -->
+				<button class="navbar-hamburger" onclick="toggleSidebar()">
+					<span></span>
+					<span></span>
+					<span></span>
+				</button>
+			</div>
+		</div>
+
+		<!-- Search Bar (Hidden by default) -->
+		<div class="navbar-search-bar" id="searchBar">
+			<input type="text" placeholder="Search our services, resources, and more..." class="search-input">
+			<button class="search-close" onclick="toggleSearchBar()">
+				<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+					<line x1="18" y1="6" x2="6" y2="18"></line>
+					<line x1="6" y1="6" x2="18" y2="18"></line>
+				</svg>
+			</button>
+		</div>
+	</nav>
+
+
+
+
+
+
+
+
+
+<!-- Modern Navbar Styles -->
+	<style>
+		.modern-navbar {
+			position: fixed;
+			top: 0;
+			left: 0;
+			right: 0;
+			background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(250, 250, 250, 0.95) 100%);
+			backdrop-filter: blur(10px);
+			border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+			z-index: 1000;
+			box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+			transition: all 0.3s ease;
+		}
+
+		.modern-navbar.scrolled {
+			box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+		}
+
+		.navbar-container {
+			max-width: 1400px;
+			margin: 0 auto;
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			height: 70px;
+			padding: 0 40px;
+			position: relative;
+		}
+
+		/* Logo */
+		.navbar-logo a {
+			display: flex;
+			align-items: center;
+			height: 50px;
+			transition: transform 0.2s ease;
+		}
+
+		.navbar-logo img {
+			height: 40px;
+			width: auto;
+			object-fit: contain;
+		}
+
+		.navbar-logo a:hover {
+			transform: scale(1.05);
+		}
+
+		/* Primary Navigation */
+		.navbar-primary {
+			flex: 1;
+			display: flex;
+			justify-content: center;
+			margin: 0 30px;
+		}
+
+		.nav-items {
+			display: flex;
+			list-style: none;
+			gap: 30px;
+			margin: 0;
+			padding: 0;
+			height: 100%;
+			align-items: center;
+		}
+
+		.nav-link {
+			display: flex;
+			align-items: center;
+			gap: 6px;
+			color: #333;
+			text-decoration: none;
+			font-weight: 500;
+			font-size: 14px;
+			height: 100%;
+			position: relative;
+			transition: color 0.2s ease;
+		}
+
+		.nav-link:hover,
+		.nav-link.active {
+			color: #667eea;
+		}
+
+		/* Active state underline */
+		.nav-link.active::after {
+			content: '';
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			right: 0;
+			height: 3px;
+			background: linear-gradient(135deg, #667eea, #764ba2);
+			border-radius: 2px;
+		}
+
+		/* Dropdown */
+		.nav-dropdown {
+			position: static;
+			/* Let mega-menu be relative to navbar-container */
+			height: 100%;
+			display: flex;
+			align-items: center;
+		}
+
+		/* Dropdown Trigger */
+		.nav-dropdown:hover>.mega-menu {
+			visibility: visible !important;
+			opacity: 1 !important;
+			pointer-events: auto !important;
+			transform: translateY(0) !important;
+		}
+
+		.dropdown-menu {
+			position: absolute;
+			top: 100%;
+			left: 0;
+			background: white;
+			border: 1px solid rgba(0, 0, 0, 0.1);
+			border-radius: 8px;
+			margin-top: 8px;
+			padding: 8px 0;
+			min-width: 200px;
+			opacity: 0;
+			visibility: hidden;
+			transform: translateY(-8px);
+			transition: all 0.3s ease;
+			box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+		}
+
+		.dropdown-menu a {
+			display: block;
+			padding: 12px 16px;
+			color: #333;
+			text-decoration: none;
+			font-size: 14px;
+			transition: background 0.2s ease;
+		}
+
+		.dropdown-menu a:hover {
+			background: #f5f7ff;
+			color: #667eea;
+		}
+
+		.chevron {
+			transition: transform 0.3s ease;
+		}
+
+		.nav-dropdown:hover .chevron {
+			transform: rotate(180deg);
+		}
+
+		/* Utility Zone */
+		.navbar-utility {
+			display: flex;
+			align-items: center;
+			gap: 16px;
+		}
+
+		.navbar-icon-btn {
+			background: none;
+			border: none;
+			color: #333;
+			cursor: pointer;
+			padding: 8px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			transition: all 0.2s ease;
+			border-radius: 6px;
+		}
+
+		.navbar-icon-btn:hover {
+			color: #667eea;
+			background: rgba(102, 126, 234, 0.1);
+		}
+
+		/* Primary Button */
+		.navbar-btn-primary {
+			display: flex;
+			align-items: center;
+			gap: 8px;
+			padding: 10px 20px;
+			background: linear-gradient(135deg, #1C1550 0%, #1C1550 100%);
+			color: white;
+			border: none;
+			border-radius: 100px;
+			font-weight: 600;
+			font-size: 14px;
+			cursor: pointer;
+			transition: all 0.3s ease;
+			white-space: nowrap;
+		}
+
+		.navbar-btn-primary:hover {
+			transform: translateY(-2px);
+			box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+		}
+
+		/* Navbar Cart Button Styling */
+		.navbar-cart-btn {
+			position: relative;
+		}
+
+		.navbar-cart-badge {
+			position: absolute;
+			top: -8px;
+			right: -8px;
+			background: #ff4d4d;
+			color: white;
+			border-radius: 50%;
+			width: 18px;
+			height: 18px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			font-size: 11px;
+			font-weight: bold;
+			border: 2px solid white;
+		}
+
+		.navbar-cart-badge:empty,
+		.navbar-cart-badge[data-count="0"] {
+			display: none;
+		}
+
+		/* Cart Modal Styling */
+		.cart-modal {
+			display: none;
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background: rgba(0, 0, 0, 0.5);
+			z-index: 2000;
+			justify-content: center;
+			align-items: center;
+		}
+
+		.cart-modal.active {
+			display: flex;
+		}
+
+		.cart-modal-content {
+			background: white;
+			border-radius: 12px;
+			width: 90%;
+			max-width: 500px;
+			max-height: 80vh;
+			overflow: hidden;
+			box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+		}
+
+		.cart-modal-header {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			padding: 20px;
+			border-bottom: 1px solid #eee;
+		}
+
+		.cart-modal-header h3 {
+			margin: 0;
+			font-size: 20px;
+			font-weight: 600;
+		}
+
+		.cart-close {
+			background: none;
+			border: none;
+			font-size: 24px;
+			cursor: pointer;
+			color: #666;
+		}
+
+		.cart-modal-body {
+			padding: 20px;
+			max-height: 60vh;
+			overflow-y: auto;
+		}
+
+		.cart-total {
+			margin: 20px 0;
+			font-size: 18px;
+			text-align: right;
+		}
+
+		.cart-actions {
+			display: flex;
+			gap: 10px;
+			justify-content: flex-end;
+		}
+
+		.btn-secondary {
+			background: #f8f9fa;
+			color: #333;
+			border: 1px solid #ddd;
+			padding: 10px 20px;
+			border-radius: 6px;
+			cursor: pointer;
+		}
+
+		.btn-primary {
+			background: #1C1550;
+			color: white;
+			border: none;
+			padding: 10px 20px;
+			border-radius: 6px;
+			cursor: pointer;
+		}
+
+		/* Search Bar */
+		.navbar-search-bar {
+			display: none;
+			padding: 12px 20px;
+			background: rgba(255, 255, 255, 0.98);
+			border-top: 1px solid rgba(0, 0, 0, 0.08);
+		}
+
+		.navbar-search-bar.active {
+			display: flex;
+			gap: 12px;
+			align-items: center;
+		}
+
+		.search-input {
+			flex: 1;
+			padding: 10px 12px;
+			border: 1px solid rgba(0, 0, 0, 0.1);
+			border-radius: 6px;
+			font-size: 14px;
+			outline: none;
+			transition: border-color 0.2s ease;
+		}
+
+		.search-input:focus {
+			border-color: #667eea;
+			box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+		}
+
+		.search-close {
+			background: none;
+			border: none;
+			color: #666;
+			cursor: pointer;
+			padding: 8px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+
+		.search-close:hover {
+			color: #333;
+		}
+
+		/* Hamburger Menu */
+		.navbar-hamburger {
+			display: none;
+			flex-direction: column;
+			gap: 6px;
+			background: none;
+			border: none;
+			cursor: pointer;
+			padding: 8px;
+		}
+
+		.navbar-hamburger span {
+			width: 24px;
+			height: 2px;
+			background: #333;
+			border-radius: 2px;
+			transition: all 0.3s ease;
+		}
+
+		.navbar-hamburger.active span:nth-child(1) {
+			transform: rotate(45deg) translate(10px, 10px);
+		}
+
+		.navbar-hamburger.active span:nth-child(2) {
+			opacity: 0;
+		}
+
+		.navbar-hamburger.active span:nth-child(3) {
+			transform: rotate(-45deg) translate(7px, -7px);
+		}
+
+		/* Responsive */
+		@media (max-width: 768px) {
+			.navbar-container {
+				height: 60px;
+				padding: 0 15px;
+			}
+
+			.navbar-logo img {
+				height: 40px;
+			}
+
+			.navbar-primary {
+				display: none;
+				margin: 0;
+			}
+
+			.navbar-btn-primary span,
+			.navbar-login-fields {
+				display: none;
+			}
+
+			.navbar-hamburger {
+				display: flex;
+			}
+
+			.nav-items {
+				gap: 15px;
+			}
+		}
+
+		/* Ensure body has top padding for fixed navbar */
+		body {
+			padding-top: 70px;
+		}
+
+		@media (max-width: 768px) {
+			body {
+				padding-top: 60px;
+			}
+		}
+	</style>
+
+	<!-- Navbar Scripts -->
+	<script src="../../Assets/js/mega-menu.js"></script>
+	<script>
+
+		function toggleSidebar() {
+			const hamburger = document.querySelector('.navbar-hamburger');
+			hamburger.classList.toggle('active');
+			// Additional sidebar toggle logic here if needed
+		}
+
+		// Update navbar on scroll
+		let lastScrollTop = 0;
+		const navbar = document.querySelector('.modern-navbar');
+
+		window.addEventListener('scroll', function () {
+			let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+			// Add shadow on scroll
+			if (scrollTop > 0) {
+				navbar.classList.add('scrolled');
+			} else {
+				navbar.classList.remove('scrolled');
+			}
+
+			lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+		});
+
+		// Set active nav link based on current page
+		document.addEventListener('DOMContentLoaded', function () {
+			const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+			const navLinks = document.querySelectorAll('.nav-link');
+
+			navLinks.forEach(link => {
+				const href = link.getAttribute('href');
+				if (href === currentPage || (currentPage === '' && href === 'index.html')) {
+					link.classList.add('active');
+				}
+			});
+
+			// Navbar Login Logic
+			const loginSubmit = document.getElementById('nav-login-submit');
+			const emailInput = document.getElementById('nav-login-email');
+			const passwordInput = document.getElementById('nav-login-password');
+			const errorSpan = document.getElementById('nav-login-error');
+
+			if (loginSubmit) {
+				loginSubmit.addEventListener('click', async function (e) {
+					const email = emailInput.value.trim();
+					const password = passwordInput.value.trim();
+
+					// If fields are empty, let the default link behavior (redirect to login-products.html) happen
+					if (!email && !password) return;
+
+					// Otherwise, prevent default and attempt login
+					e.preventDefault();
+
+					if (!email || !password) {
+						showLoginError('Email and password required');
+						return;
+					}
+
+					try {
+						loginSubmit.style.opacity = '0.7';
+						loginSubmit.style.pointerEvents = 'none';
+						errorSpan.style.display = 'none';
+
+						const response = await fetch('api/login.php', {
+							method: 'POST',
+							headers: { 'Content-Type': 'application/json' },
+							body: JSON.stringify({ email, password, user_type: 'client' })
+						});
+
+						const data = await response.json();
+
+						if (data.success) {
+							// Success: Store user data for seamless handoff to the portal
+							sessionStorage.setItem('scl_client_session', JSON.stringify(data.user));
+							// Redirect to Client Portal
+							window.location.href = 'ClientPortal/client-billing-portal.html';
+						} else {
+							// Failure: Show error
+							showLoginError(data.error || 'Invalid credentials');
+						}
+					} catch (err) {
+						showLoginError('Connection error');
+						console.error('Login error:', err);
+					} finally {
+						loginSubmit.style.opacity = '1';
+						loginSubmit.style.pointerEvents = 'auto';
+					}
+				});
+
+				// Allow pressing Enter to submit
+				[emailInput, passwordInput].forEach(input => {
+					input.addEventListener('keypress', (e) => {
+						if (e.key === 'Enter') loginSubmit.click();
+					});
+				});
+			}
+
+			function showLoginError(msg) {
+				errorSpan.textContent = msg;
+				errorSpan.style.display = 'block';
+				setTimeout(() => {
+					errorSpan.style.display = 'none';
+				}, 5000);
+			}
+		});
+	</script>
 
   <div class="menu-overlay"></div>
   <main class="main">
@@ -1268,32 +1712,6 @@
     }
   </style>
 
-  <!-- Language Translator Widget -->
-  <div class="translator-widget">
-    <div class="translator-button" id="translatorBtn">
-      <i class="fa-solid fa-language"></i>
-      <span>Translate</span>
-    </div>
-
-    <div class="translator-dropdown" id="translatorDropdown">
-      <div class="translator-header">
-        <h4>Choose Language</h4>
-        <button class="close-translator" id="closeTranslator">
-          <i class="fa-solid fa-times"></i>
-        </button>
-      </div>
-
-      <!-- Google Translate Element -->
-      <div id="google_translate_element"></div>
-
-      <div class="translator-footer">
-        <button class="reset-btn" id="resetBtn">
-          <i class="fa-solid fa-undo"></i>
-          Reset to English
-        </button>
-      </div>
-    </div>
-  </div>
 
   <!-- Google Translate Widget JavaScript -->
   <script>
