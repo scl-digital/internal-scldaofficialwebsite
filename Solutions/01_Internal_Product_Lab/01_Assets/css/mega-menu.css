@@ -2,39 +2,32 @@
   position: absolute;
   left: 0;
   top: 100%;
-  /* Perfectly flush with parent bottom */
-  /* Synchronized with header height */
   width: 100%;
-  background: #ffffff;
-  color: #333;
+  background: var(--color-card);
+  color: var(--color-neutral);
   z-index: 1000;
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
-  border-top: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: var(--shadow-card);
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
 
-  /* Use visibility and opacity for smoother transition and hover persistence */
   visibility: hidden;
   opacity: 0;
   transition: opacity 0.3s ease, visibility 0s linear 0.1s;
-  /* Reduced delay */
   pointer-events: none;
 }
 
-/* Invisible bridge to prevent losing hover when moving mouse from link to menu */
 .mega-menu::before {
   content: '';
   position: absolute;
   top: -40px;
-  /* Even more overlap to be safe */
   left: 0;
   width: 100%;
   height: 40px;
   background: rgba(255, 255, 255, 0.01);
-  /* Not fully transparent to ensure hit testing in some browsers */
   display: block;
   z-index: -1;
 }
 
-/* Specific Triggers */
 #nav-solutions:hover #mega-menu-solutions,
 #nav-innovation:hover #mega-menu-innovation,
 #nav-news:hover #mega-menu-news,
@@ -66,12 +59,11 @@
   min-height: 450px;
 }
 
-/* Column 1: Sidebar */
 .mega-menu-sidebar {
   width: 300px;
-  background: #f8f9fa;
+  background: var(--color-surface);
   padding: 40px 0;
-  border-right: 1px solid rgba(0, 0, 0, 0.05);
+  border-right: 1px solid var(--color-border);
 }
 
 .sidebar-item {
@@ -82,15 +74,20 @@
   cursor: pointer;
   transition: all 0.2s ease;
   font-weight: 500;
-  color: #555;
+  color: var(--color-neutral);
   border-left: 4px solid transparent;
+  font-family: 'Manrope', sans-serif;
 }
 
 .sidebar-item:hover,
 .sidebar-item.active {
-  background: #ffffff;
-  color: #0755E9;
-  border-left-color: #0755E9;
+  background: var(--color-card);
+  color: var(--color-primary);
+  border-left-color: var(--color-primary);
+}
+
+.sidebar-item svg path {
+  fill: currentColor;
 }
 
 .sidebar-item i {
@@ -104,7 +101,6 @@
   opacity: 1;
 }
 
-/* Main Content Area */
 .mega-menu-main {
   flex: 1;
   padding: 40px;
@@ -122,41 +118,43 @@
   display: grid;
 }
 
-/* Column 2: Context */
 .mega-menu-column.middle h3 {
   font-size: 28px;
-  color: #111;
+  color: var(--color-ink);
   margin-bottom: 20px;
   font-weight: 700;
+  font-family: 'Manrope', sans-serif;
 }
 
 .mega-menu-column.middle p {
   font-size: 16px;
   line-height: 1.6;
-  color: #666;
+  color: var(--color-neutral);
   margin-bottom: 30px;
+  font-family: 'Manrope', sans-serif;
 }
 
 .mega-menu-cta {
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  color: #0755E9;
+  color: var(--color-primary);
   text-decoration: none;
   font-weight: 600;
   font-size: 16px;
-  transition: transform 0.2s ease;
+  transition: color 0.2s ease, transform 0.2s ease;
+  font-family: 'Manrope', sans-serif;
 }
 
 .mega-menu-cta:hover {
+  color: var(--color-primary-dark);
   transform: translateX(5px);
 }
 
-/* Column 3: Links */
 .mega-menu-column.right h4 {
   font-size: 14px;
   text-transform: uppercase;
-  color: #999;
+  color: var(--color-neutral);
   letter-spacing: 1px;
   margin-bottom: 20px;
 }
@@ -175,16 +173,17 @@
   justify-content: space-between;
   align-items: center;
   padding: 8px 0;
-  color: #333;
+  color: var(--color-ink);
   text-decoration: none;
   font-size: 16px;
   border-bottom: 1px solid transparent;
   transition: all 0.2s ease;
+  font-family: 'Manrope', sans-serif;
 }
 
 .mega-menu-column.right ul li a:hover {
-  color: #0755E9;
-  border-bottom-color: rgba(7, 85, 233, 0.1);
+  color: var(--color-primary-dark);
+  border-bottom-color: var(--color-border);
 }
 
 .mega-menu-column.right ul li a i {
@@ -192,7 +191,6 @@
   opacity: 0.3;
 }
 
-/* Responsive Hide for Mobile */
 @media (max-width: 991px) {
   .mega-menu {
     display: none !important;
