@@ -642,6 +642,8 @@
     overflow: hidden;
   }
   .cta-inner {
+    border-top-left-radius: 90px;
+    border-bottom-right-radius: 90px;
     border: 1px solid var(--color-border);
     padding: 80px;
     display: grid;
@@ -649,7 +651,7 @@
     gap: 80px;
     align-items: center;
     position: relative;
-    background: var(--color-card);
+    background: #4B2A75;
     box-shadow: 0 1px 3px rgba(28,21,80,0.06);
   }
   .cta-inner::before {
@@ -664,15 +666,17 @@
     font-size: clamp(36px, 4vw, 56px);
     font-weight: 300; letter-spacing: -2px; line-height: 1;
     margin-bottom: 20px;
-    color: var(--color-ink);
+    color: #ffffff;
   }
-  .cta-desc { font-size: 13px; color: var(--color-neutral); line-height: 1.8; font-weight: 200; }
+  .cta-desc { font-size: 13px; color: #ffffff; line-height: 1.8; font-weight: 200; }
   .cta-actions { display: flex; flex-direction: column; gap: 16px; align-items: flex-start; }
   .cta-actions .btn-primary { font-size: 12px; padding: 16px 40px; }
 
   .cta-readout {
-    border: 1px solid var(--color-border);
-    background: var(--color-card);
+    border-top-left-radius: 45px;
+    border-bottom-right-radius: 45px;
+    border: 1px solid #ffffff;
+    
     padding: 32px;
     font-family: 'Manrope', sans-serif;
     position: relative; z-index: 1;
@@ -1982,20 +1986,25 @@
 <section class="cta-section">
   <div class="cta-inner reveal">
     <div>
-      <h2 class="cta-title">Ready to Start Your Project?</h2>
+      <h2 class="cta-title">Explore Our Case Studies</h2>
       <p class="cta-desc" style="margin-bottom:40px;">
-        Tell us what you're building.
-
-We'll review your requirements and provide a recommended approach, estimated timeline, team structure, and project budget within 48 hours.
+      Our case studies showcase how we transform ambitious ideas into scalable digital products, helping organisations launch faster, grow smarter, and deliver better user experiences.
       </p>
       <div class="cta-actions">
-        <button class="btn-primary">Book a Free Consultation</button>
-        <button class="btn-ghost">View All Case Studies</button>
+         <div class="cta-actions">
+      <a href="Contact/contactus.html" target="_blank" class="btn-primary">
+       View all Case Studies
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+      
+    </div>
+    
       </div>
     </div>
     <div class="cta-readout">
      
-      <img src="Design.png" alt="Project Intake Status" style="max-width: 100%; height: auto; display: block;">
+      <img src="Design.png" alt="Project Intake Status" style="max-width: 100%; height: auto; display: block;     border-top-left-radius: 15px;
+    border-bottom-right-radius: 15px;">
     </div>
   </div>
 </section>
