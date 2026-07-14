@@ -10,7 +10,7 @@ const CASE_STUDIES = [
     client: "AfriPay",
     logo: "AP",
     logoColor: "#1A1A2E",
-    title: "Rebuilding a Pan-African Payments Platform from the Ground Up",
+    title: "Belgium Waffles By Hannah - Packaging Design",
     desc: "AfriPay needed a complete overhaul of their legacy fintech infrastructure. We architected a modern, micro-service payment engine supporting 14 African currencies with sub-200ms response times and PCI-DSS compliance.",
     industry: "fintech",
     service: "web",
@@ -23,7 +23,7 @@ const CASE_STUDIES = [
     client: "NexaHealth",
     logo: "NH",
     logoColor: "#0D7A4E",
-    title: "AI-Powered Patient Intake System",
+    title: "Family Physician Brochure",
     desc: "We integrated a custom LLM workflow into NexaHealth's clinic management suite, reducing patient intake time by 60% and automating appointment routing.",
     industry: "health",
     service: "ai",
@@ -36,7 +36,7 @@ const CASE_STUDIES = [
     client: "UrbanGrid",
     logo: "UG",
     logoColor: "#B5451B",
-    title: "Smart City E-Commerce Hub for Local Vendors",
+    title: "Wisdom Laundry",
     desc: "A marketplace platform connecting 400+ Cape Town micro-retailers with consumers. Features real-time inventory, mobile money integration, and multilingual support.",
     industry: "ecommerce",
     service: "web",
@@ -49,7 +49,7 @@ const CASE_STUDIES = [
     client: "PulseMedia",
     logo: "PM",
     logoColor: "#6D28D9",
-    title: "Brand Identity & Digital Strategy Overhaul",
+    title: "Tongil Medicare",
     desc: "End-to-end brand refresh for one of East Africa's fastest-growing media houses — from logo system and design tokens to a full social media playbook and editorial platform.",
     industry: "media",
     service: "branding",
@@ -62,7 +62,7 @@ const CASE_STUDIES = [
     client: "OrbisBank",
     logo: "OB",
     logoColor: "#0E4C96",
-    title: "Mobile Banking App for the Unbanked",
+    title: "iAfrika54 | Sports Company",
     desc: "A USSD-first mobile banking application designed for low-connectivity environments. We shipped an MVP in 9 weeks that secured Series A funding for OrbisBank.",
     industry: "fintech",
     service: "mobile",
@@ -75,7 +75,7 @@ const CASE_STUDIES = [
     client: "BuildCo",
     logo: "BC",
     logoColor: "#1C1C1C",
-    title: "Real Estate SaaS: Lease Management & Analytics",
+    title: "Jackpot BT",
     desc: "A cloud-based property management platform for mid-size commercial landlords. Automated rent collection, lease tracking, and built-in reporting dashboards.",
     industry: "realestate",
     service: "web",
@@ -88,7 +88,7 @@ const CASE_STUDIES = [
     client: "KiwiSaaS",
     logo: "KS",
     logoColor: "#047857",
-    title: "Growth Strategy & CRO for B2B Startup",
+    title: "Ace Pariston - Social Media | Instagram Feed & Story Post | Musician",
     desc: "We ran a 90-day growth sprint for KiwiSaaS: overhauling their funnel, running conversion rate optimisation experiments, and launching paid acquisition channels.",
     industry: "fintech",
     service: "growth",
@@ -101,7 +101,7 @@ const CASE_STUDIES = [
     client: "LaunchDark",
     logo: "LD",
     logoColor: "#5B4FE9",
-    title: "Go-to-Market Strategy for AI Dev Tool",
+    title: "Fashinge",
     desc: "Product positioning, ICP definition, and a phased launch roadmap for a developer-facing AI tool — from beta waitlist to public launch in 6 weeks.",
     industry: "media",
     service: "strategy",
@@ -109,12 +109,138 @@ const CASE_STUDIES = [
     result: { label: "Beta signups", value: "4,200" },
     gradient: "linear-gradient(135deg, #5B4FE9 0%, #3730A3 100%)"
   },
+
   {
     id: 9,
     client: "ZeroPoint NGO",
     logo: "ZP",
     logoColor: "#B45309",
-    title: "Digital Fundraising Platform & Donor Portal",
+    title: "SDS Marketing",
+    desc: "We built a secure donation platform and CRM integration for ZeroPoint, enabling recurring giving, campaign microsites, and real-time impact reporting.",
+    industry: "ngo",
+    service: "web",
+    badge: "NGO",
+    result: { label: "Fundraising increase", value: "↑ 190%" },
+    gradient: "linear-gradient(135deg, #B45309 0%, #92400E 100%)"
+  },
+
+  {
+    id: 10,
+    client: "LaunchDark",
+    logo: "LD",
+    logoColor: "#5B4FE9",
+    title: "FutaFunds",
+    desc: "Product positioning, ICP definition, and a phased launch roadmap for a developer-facing AI tool — from beta waitlist to public launch in 6 weeks.",
+    industry: "media",
+    service: "strategy",
+    badge: "Strategy",
+    result: { label: "Beta signups", value: "4,200" },
+    gradient: "linear-gradient(135deg, #5B4FE9 0%, #3730A3 100%)"
+  },
+
+
+
+  ,
+  {
+    id: 11,
+    client: "PulseMedia",
+    logo: "PM",
+    logoColor: "#6D28D9",
+    title: "Wilson Finance - Brand Identity",
+    desc: "End-to-end brand refresh for one of East Africa's fastest-growing media houses — from logo system and design tokens to a full social media playbook and editorial platform.",
+    industry: "media",
+    service: "branding",
+    badge: "Brand",
+    result: { label: "Audience growth", value: "↑ 88%" },
+    gradient: "linear-gradient(135deg, #6D28D9 0%, #4C1D95 100%)"
+  },
+  {
+    id: 12,
+    client: "OrbisBank",
+    logo: "OB",
+    logoColor: "#0E4C96",
+    title: "Safarifone @ Africa Tech Festival 2025",
+    desc: "A USSD-first mobile banking application designed for low-connectivity environments. We shipped an MVP in 9 weeks that secured Series A funding for OrbisBank.",
+    industry: "fintech",
+    service: "mobile",
+    badge: "Mobile",
+    result: { label: "Users in 3 months", value: "18,000+" },
+    gradient: "linear-gradient(135deg, #0E4C96 0%, #093070 100%)"
+  },
+  {
+    id: 13,
+    client: "BuildCo",
+    logo: "BC",
+    logoColor: "#1C1C1C",
+    title: "Safarifone @ Africa Tech Festival 2024",
+    desc: "A cloud-based property management platform for mid-size commercial landlords. Automated rent collection, lease tracking, and built-in reporting dashboards.",
+    industry: "realestate",
+    service: "web",
+    badge: "SaaS",
+    result: { label: "Admin hours cut", value: "75%" },
+    gradient: "linear-gradient(135deg, #2C2C2C 0%, #1C1C1C 100%)"
+  },
+  {
+    id: 14,
+    client: "KiwiSaaS",
+    logo: "KS",
+    logoColor: "#047857",
+    title: "RAPHA MEDICAL CLINIC - BILLBOARD DESIGN",
+    desc: "We ran a 90-day growth sprint for KiwiSaaS: overhauling their funnel, running conversion rate optimisation experiments, and launching paid acquisition channels.",
+    industry: "fintech",
+    service: "growth",
+    badge: "Growth",
+    result: { label: "Trial-to-paid rate", value: "↑ 2.4×" },
+    gradient: "linear-gradient(135deg, #047857 0%, #065F46 100%)"
+  },
+  {
+    id: 15,
+    client: "LaunchDark",
+    logo: "LD",
+    logoColor: "#5B4FE9",
+    title: "Onewayconnect.io : by Sine Shabalala - Shinsa L L",
+    desc: "Product positioning, ICP definition, and a phased launch roadmap for a developer-facing AI tool — from beta waitlist to public launch in 6 weeks.",
+    industry: "media",
+    service: "strategy",
+    badge: "Strategy",
+    result: { label: "Beta signups", value: "4,200" },
+    gradient: "linear-gradient(135deg, #5B4FE9 0%, #3730A3 100%)"
+  },
+
+  {
+    id: 16,
+    client: "ZeroPoint NGO",
+    logo: "ZP",
+    logoColor: "#B45309",
+    title: "Mela Coffee | Coffee Ordering App Prototype",
+    desc: "We built a secure donation platform and CRM integration for ZeroPoint, enabling recurring giving, campaign microsites, and real-time impact reporting.",
+    industry: "ngo",
+    service: "web",
+    badge: "NGO",
+    result: { label: "Fundraising increase", value: "↑ 190%" },
+    gradient: "linear-gradient(135deg, #B45309 0%, #92400E 100%)"
+  },
+
+  {
+    id: 17,
+    client: "LaunchDark",
+    logo: "LD",
+    logoColor: "#5B4FE9",
+    title: "Family Peace Association National Conference 2023",
+    desc: "Product positioning, ICP definition, and a phased launch roadmap for a developer-facing AI tool — from beta waitlist to public launch in 6 weeks.",
+    industry: "media",
+    service: "strategy",
+    badge: "Strategy",
+    result: { label: "Beta signups", value: "4,200" },
+    gradient: "linear-gradient(135deg, #5B4FE9 0%, #3730A3 100%)"
+  },
+
+  {
+    id: 18,
+    client: "ZeroPoint NGO",
+    logo: "ZP",
+    logoColor: "#B45309",
+    title: "Elydez™ | Brand Design & Web Development",
     desc: "We built a secure donation platform and CRM integration for ZeroPoint, enabling recurring giving, campaign microsites, and real-time impact reporting.",
     industry: "ngo",
     service: "web",
@@ -122,6 +248,15 @@ const CASE_STUDIES = [
     result: { label: "Fundraising increase", value: "↑ 190%" },
     gradient: "linear-gradient(135deg, #B45309 0%, #92400E 100%)"
   }
+
+
+
+
+
+
+
+
+
 ];
 
 // ---- STATE ----
